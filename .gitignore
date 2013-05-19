@@ -1,0 +1,8 @@
+﻿*.suo
+*.dll
+*.pdb
+*.exe
+*.vshost.exe
+*.manifest
+*.Cache
+*.cache

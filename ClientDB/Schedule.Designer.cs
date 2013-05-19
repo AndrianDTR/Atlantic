@@ -55,7 +55,5 @@
 		#endregion
 
 		private System.Windows.Forms.Panel panel1;
-		private Calendar.DayView dayView1;
-
 	}
 }

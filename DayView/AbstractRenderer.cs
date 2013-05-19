@@ -54,7 +54,33 @@ namespace CalendarTest
         }
         
         /******************************************/
-		//private Color bgColor = Color.FromArgb(0, 0, 0);
+        private Color[] monthColorMap = new Color[]{
+			  Color.FromArgb( 55,  55, 180) //1
+			, Color.FromArgb( 55, 110, 180) //2
+			, Color.FromArgb(110, 180,  55) //3
+			, Color.FromArgb( 55, 180,  55) //4
+			, Color.FromArgb( 55, 180, 110) //5
+			, Color.FromArgb(180, 110,  55) //6
+			, Color.FromArgb(180,  55,  55) //7
+			, Color.FromArgb(180,  55, 110) //8
+			, Color.FromArgb(180, 150,  55) //9
+			, Color.FromArgb(150, 150,  55) //10
+			, Color.FromArgb(150, 180,  55) //11
+			, Color.FromArgb(110,  55, 180) //12
+			};
+		public virtual Color[] MonthColorMap
+		{
+			get
+			{
+				return monthColorMap;
+			}
+			// TODO: Add set functional
+			//set
+			//{
+			//	monthColorMap = value;
+			//}
+		}
+		
 		private Color bgColor = Color.FromArgb(228, 236, 246);
 		public virtual Color BgColor
 		{
@@ -325,6 +351,19 @@ namespace CalendarTest
 			}
 		}
 		//==========================================
+		private bool drawNavBar = true;
+		public virtual bool bDrawNavBar
+		{
+			get
+			{
+				return drawNavBar;
+			}
+			set
+			{
+				drawNavBar = value;
+			}
+		}
+		
 		private int navBarHeight = 60;
 		public virtual int NavBarHeight
 		{
@@ -337,12 +376,155 @@ namespace CalendarTest
 				navBarHeight = value;
 			}
 		}
+		
+		private int navBarPrevBtnWidth = 60;
+		public virtual int NavBarPrevBtnWidth
+		{
+			get
+			{
+				return navBarPrevBtnWidth;
+			}
+			set
+			{
+				navBarPrevBtnWidth = value;
+			}
+		}
+		
+		private int navBarNextBtnWidth = 60;
+		public virtual int NavBarNextBtnWidth
+		{
+			get
+			{
+				return navBarNextBtnWidth;
+			}
+			set
+			{
+				navBarNextBtnWidth = value;
+			}
+		}
+		
+		private Color navBarBgColor = Color.FromArgb(200, 200, 255);
+		public virtual Color NavBarBgColor
+		{
+			get
+			{
+				return navBarBgColor;
+			}
+			set
+			{
+				navBarBgColor = value;
+			}
+		}
 
+		private Color navBarPrevBtnBgColor = Color.FromArgb(200, 200, 255);
+		public virtual Color NavBarPrevBtnBgColor
+		{
+			get
+			{
+				return navBarPrevBtnBgColor;
+			}
+			set
+			{
+				navBarPrevBtnBgColor = value;
+			}
+		}
+
+		private Color navBarNextBtnBgColor = Color.FromArgb(200, 200, 255);
+		public virtual Color NavBarNextBtnBgColor
+		{
+			get
+			{
+				return navBarNextBtnBgColor;
+			}
+			set
+			{
+				navBarNextBtnBgColor = value;
+			}
+		}
+
+		private Bitmap navBarNextBtnImage = null;
+		public virtual Bitmap NavBarNextBtnImage
+		{
+			get
+			{
+				return navBarNextBtnImage;
+			}
+			set
+			{
+				navBarNextBtnImage = value;
+			}
+		}
+
+		private Bitmap navBarPrevBtnImage = null;
+		public virtual Bitmap NavBarPrevBtnImage
+		{
+			get
+			{
+				return navBarPrevBtnImage;
+			}
+			set
+			{
+				navBarPrevBtnImage = value;
+			}
+		}
+
+		private Font navBarFont = new Font("Segoe UI", 8);
+		public virtual Font NavBarFont
+		{
+			get
+			{
+				return navBarFont;
+			}
+			set
+			{
+				navBarFont = value;
+			}
+		}
+
+		private String navBarPrevBtnText = "<<";
+		public virtual String NavBarPrevBtnText
+		{
+			get
+			{
+				return navBarPrevBtnText;
+			}
+			set
+			{
+				navBarPrevBtnText = value;
+			}
+		}
+
+		private String navBarNextBtnText = ">>";
+		public virtual String NavBarNextBtnText
+		{
+			get
+			{
+				return navBarNextBtnText;
+			}
+			set
+			{
+				navBarNextBtnText = value;
+			}
+		}
+
+		private String navBarTextFormat = "{0:d}, {1:s}";
+		public virtual String NavBarTextFormat
+		{
+			get
+			{
+				return navBarTextFormat;
+			}
+			set
+			{
+				navBarTextFormat = value;
+			}
+		}
 		/******************************************/
-		
-		
+				
 		public abstract void DrawBg(Graphics g, Rectangle rect, System.Drawing.Drawing2D.SmoothingMode smooth);
 		public abstract void DrawNavBarBg(Graphics g, Rectangle rect);
+		public abstract void DrawNavBarPrevBtnBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect);
+		public abstract void DrawNavBarNextBtnBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect);
 		public abstract void DrawColLabelBg(Graphics g, Rectangle rect);
 		public abstract void DrawRowLabelBg(Graphics g, Rectangle rect);
 		public abstract void DrawColBg(Graphics g, Rectangle rect);
@@ -350,6 +532,8 @@ namespace CalendarTest
 		public abstract void DrawCellBg(Graphics g, Rectangle rect, CellInfo ci);
 
 		public abstract void DrawNavBar(Graphics g, Rectangle rect);
+		public abstract void DrawNavBarPrevBtn(System.Drawing.Graphics g, System.Drawing.Rectangle rect);
+		public abstract void DrawNavBarNextBtn(System.Drawing.Graphics g, System.Drawing.Rectangle rect);
 		public abstract void DrawColLabel(Graphics g, Rectangle rect, string sDay);
 		public abstract void DrawRowLabel(Graphics g, Rectangle rect, string sLabel);
 		public abstract void DrawCell(Graphics g, Rectangle rect, CellInfo ci);

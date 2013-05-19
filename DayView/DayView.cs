@@ -855,12 +855,19 @@ namespace CalendarTest
             //OnResolveAppointments(args);
 			
 			renderer.DrawBg(e.Graphics, this.ClientRectangle, System.Drawing.Drawing2D.SmoothingMode.AntiAlias);
+			
+			if(renderer.bDrawNavBar)
+            {
+				Rectangle rNavBar = new Rectangle(0, 0, this.Width, renderer.NavBarHeight);
+				DrawNavBar(e, rNavBar);
+			}
 
-            Rectangle rNavBar = new Rectangle(0, 0, this.Width, renderer.NavBarHeight);
-			DrawNavBar(e, rNavBar);
-
-			Rectangle rCal = new Rectangle(0, renderer.NavBarHeight, this.Width, this.Height - renderer.NavBarHeight);
-
+			int nNavBarHeight = 0;
+			if (renderer.bDrawNavBar)
+				nNavBarHeight = renderer.NavBarHeight;
+			
+			Rectangle rCal = new Rectangle(0, nNavBarHeight, this.Width, this.Height - nNavBarHeight);
+					
 			DrawCalendarTable(e, rCal);
 			DrawHeaders(e, rCal);
 			DrawWeeks(e, rCal);

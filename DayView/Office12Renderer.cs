@@ -117,17 +117,33 @@ namespace CalendarTest
 
 		public override void DrawNavBarBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
 		{
-			using (SolidBrush backBrush = new SolidBrush(Color.Fuchsia))
+			using (SolidBrush backBrush = new SolidBrush(NavBarBgColor))
 				g.FillRectangle(backBrush, rect);
 		}
 
 		public override void DrawNavBar(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
 		{
-			if (HasVerticalLine)
-			{
-				using (Pen aPen = new Pen(VerticalLineColor))
-					g.DrawLine(aPen, rect.Right, rect.Top, rect.Right, rect.Bottom);
-			}
+			
+		}
+
+		public override void DrawNavBarPrevBtnBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
+		{
+
+		}
+
+		public override void DrawNavBarPrevBtn(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
+		{
+
+		}
+
+		public override void DrawNavBarNextBtnBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
+		{
+
+		}
+		
+		public override void DrawNavBarNextBtn(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
+		{
+
 		}
 		
 		public override void DrawColBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
@@ -219,10 +235,11 @@ namespace CalendarTest
 		{
 			if(ci.bOtherMonth)
 			{
-				Color bg = Color.FromArgb(BgColor.R - 20, BgColor.G - 20, BgColor.B - 20);
-				using (SolidBrush backBrush = new SolidBrush(bg))
-					g.FillRectangle(backBrush, rect);
 			}
+			
+			Color bg = MonthColorMap[ci.date.Month];
+			using (SolidBrush backBrush = new SolidBrush(bg))
+				g.FillRectangle(backBrush, rect);
 		}
 
 		public override void DrawCell(System.Drawing.Graphics g, System.Drawing.Rectangle rect, CellInfo ci)
