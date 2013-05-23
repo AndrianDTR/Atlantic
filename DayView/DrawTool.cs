@@ -11,8 +11,11 @@ namespace CalendarTest
     {
 		public event EventHandler Complete;
 		
-		DateTime m_SelectionStart;
-        bool m_SelectionStarted;
+		DateTime m_SelectionStartAt;
+        bool m_SelectionChanged;
+        
+        bool m_bPrevBtnPressed = false;
+        bool m_bNextBtnPressed = false;
 
 		private DayView m_DayView;
 
@@ -24,31 +27,16 @@ namespace CalendarTest
 		
         public void Reset()
         {
-            m_SelectionStarted = false;
+            m_SelectionChanged = false;
         }
 
 		public void MouseMove(MouseEventArgs e)
 		{
 			if (e.Button == MouseButtons.Left)
 			{
-				if (m_SelectionStarted)
+				if (m_SelectionChanged)
 				{
-					DateTime m_Time = m_DayView.GetDateAt(e.X, e.Y);
-					m_Time = m_Time.AddMinutes(30);
-
-					//if (m_Time.Day == m_SelectionStart.Day)
-					//{
-						if (m_Time < m_SelectionStart)
-						{
-							m_DayView.SelectionStart = m_Time;
-							//m_DayView.SelectionEnd = m_SelectionStart;
-						}
-						else
-						{
-							//m_DayView.SelectionEnd = m_Time;
-						}
-					//}
-
+					m_DayView.SelectedDate = m_DayView.GetDateAt(e.X, e.Y);
 					m_DayView.Invalidate();
 				}
 			}
@@ -59,7 +47,7 @@ namespace CalendarTest
             if (e.Button == MouseButtons.Left)
             {
                 m_DayView.Capture = false;
-                m_SelectionStarted = false;
+                m_SelectionChanged = false;
 
                 m_DayView.RaiseSelectionChanged(EventArgs.Empty);
 
@@ -72,15 +60,17 @@ namespace CalendarTest
         {
             if (e.Button == MouseButtons.Left)
             {
-                m_SelectionStart = m_DayView.GetDateAt(e.X, e.Y);
+				//if mouse in calendar rgn
+				if(RectType.Cell == m_DayView.IsInRect(e.X, e.Y))
+                {
+					m_SelectionStartAt = m_DayView.GetDateAt(e.X, e.Y);
 
-                m_DayView.SelectionStart = m_SelectionStart;
-                //m_DayView.SelectionEnd = m_SelectionStart.AddMinutes(30);
+					m_DayView.SelectedDate = m_SelectionStartAt;
+					m_SelectionChanged = true;
 
-                m_SelectionStarted = true;
-
-                m_DayView.Invalidate();
-                m_DayView.Capture = true;
+					m_DayView.Invalidate();
+					m_DayView.Capture = true;
+                }
             }
         }
     }

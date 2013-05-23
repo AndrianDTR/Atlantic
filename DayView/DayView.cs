@@ -12,47 +12,71 @@ namespace CalendarTest
     public class DayView : Control
     {
         #region Variables
-
+		
+		private TableLayoutPanel m_grid;
         private TextBox editbox;
+		private Button m_btnPrev;
+		private Button m_btnNext;
+		private Panel m_dataPanel;
         private VScrollBar scrollbar;
         private DrawTool drawTool;
-        private SelectionTool selectionTool;
-        private int allDayEventsHeaderHeight = 20;
-
-        private DateTime workStart;
-        private DateTime workEnd;
-
+        
         #endregion
-
+        
         #region Constants
-
-        private int weekLabelWidth = 50;
-        private int hourLabelIndent = 2;
-        private int dayHeadersHeight = 20;
-        private int appointmentGripWidth = 5;
-        private int horizontalAppointmentHeight = 20;
-
+        private int editGripWidth = 5;
         #endregion
 
         #region c.tor
 
         public DayView()
         {
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+			int height = base.Height;
+			SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             SetStyle(ControlStyles.ResizeRedraw, true);
             SetStyle(ControlStyles.Selectable, true);
 
-            /*
+			this.Renderer = new DefaultRenderer();
+			
+			m_grid = new TableLayoutPanel();
+			m_grid.SuspendLayout();
+			
+			m_grid.ColumnCount = 1;
+			m_grid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+			m_grid.Dock = DockStyle.Fill;
+			m_grid.Location = new System.Drawing.Point(0, 0);
+			m_grid.Name = "tableLayoutPanel0";
+			m_grid.RowCount = 3;
+			m_grid.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+			m_grid.RowStyles.Add(new RowStyle());
+			m_grid.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+						
+			m_btnPrev = new Button();
+			m_btnPrev.Visible = true;
+			//m_btnPrev.KeyUp += new KeyEventHandler(editbox_KeyUp);
+			m_btnPrev.Dock = DockStyle.Fill;
+			m_btnPrev.Height = 40;
+			m_btnPrev.Text = "Prev";
+			m_grid.Controls.Add(m_btnPrev, 0, 0);
+
+			
+			m_dataPanel = new Panel();
+			m_dataPanel.Visible = true;
+			//m_btnPrev.KeyUp += new KeyEventHandler(editbox_KeyUp);
+			m_dataPanel.Height = 240;
+			m_dataPanel.Dock = DockStyle.Fill;
+			this.Controls.Add(m_dataPanel);
+			
 			scrollbar = new VScrollBar();
-            scrollbar.SmallChange = weekLabelHeight;
-            scrollbar.LargeChange = weekLabelHeight * 2;
+            //scrollbar.SmallChange = weekLabelHeight;
+            //scrollbar.LargeChange = weekLabelHeight * 2;
             scrollbar.Dock = DockStyle.Right;
-            scrollbar.Visible = allowScroll;
-            scrollbar.Scroll += new ScrollEventHandler(scrollbar_Scroll);
-            AdjustScrollbar();
+            scrollbar.Visible = true;
+            //scrollbar.Scroll += new ScrollEventHandler(scrollbar_Scroll);
+            //AdjustScrollbar();
             //scrollbar.Value = (startHour * 2 * halfHourHeight);
 			
-            this.Controls.Add(scrollbar);
+            m_dataPanel.Controls.Add(scrollbar);
 			//*/
 
             editbox = new TextBox();
@@ -61,21 +85,28 @@ namespace CalendarTest
             editbox.BorderStyle = BorderStyle.None;
             editbox.KeyUp += new KeyEventHandler(editbox_KeyUp);
             editbox.Margin = Padding.Empty;
+			m_dataPanel.Controls.Add(editbox);
 
-            this.Controls.Add(editbox);
 
-            drawTool = new DrawTool();
+			m_grid.Controls.Add(m_dataPanel, 0, 1);
+			
+			m_btnNext = new Button();
+			m_btnNext.Visible = true;
+			m_btnNext.Dock = DockStyle.Fill;
+			m_btnNext.Height = 40;
+			m_btnNext.Text = "Next";
+			m_grid.Controls.Add(m_btnNext, 0, 2);
+
+			m_grid.ResumeLayout();
+			this.Controls.Add(m_grid);
+			
+			drawTool = new DrawTool();
             drawTool.DayView = this;
-
-            selectionTool = new SelectionTool();
-            selectionTool.DayView = this;
-            selectionTool.Complete += new EventHandler(selectionTool_Complete);
-
             activeTool = drawTool;
 
             //UpdateWorkingHours();
 
-            this.Renderer = new Office12Renderer();
+            
         }
 
         #endregion
@@ -140,18 +171,7 @@ namespace CalendarTest
             this.Invalidate();
         }
 
-        private SelectionType selection;
-
-        [System.ComponentModel.Browsable(false)]
-        public SelectionType Selection
-        {
-            get
-            {
-                return selection;
-            }
-        }
-
-		private DateTime startDate = DateTime.Now;
+        private DateTime startDate = DateTime.Now;
         public DateTime StartDate
         {
             get
@@ -169,27 +189,18 @@ namespace CalendarTest
         {
             startDate = startDate.Date;
 
-            selectedAppointment = null;
             selectedAppointmentIsNew = false;
-            selection = SelectionType.DateRange;
+            //selection = SelectionType.DateRange;
 
             Invalidate();
         }
 
-        private Appointment selectedAppointment;
+        private DateTime selectedDate;
 
-        [System.ComponentModel.Browsable(false)]
-        public Appointment SelectedAppointment
+        public DateTime SelectedDate
         {
-            get { return selectedAppointment; }
-        }
-
-        private DateTime selectionStart;
-
-        public DateTime SelectionStart
-        {
-            get { return selectionStart; }
-            set { selectionStart = value; }
+            get { return selectedDate; }
+            set { selectedDate = value; }
         }
 
         private ITool activeTool;
@@ -286,7 +297,7 @@ namespace CalendarTest
 
         void selectionTool_Complete(object sender, EventArgs e)
         {
-            if (selectedAppointment != null)
+            //if (selectedAppointment != null)
             {
                 //System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(EnterEditMode));
             }
@@ -331,48 +342,19 @@ namespace CalendarTest
             {
                 FinishEditing(false);
             }
-
-            if (selectedAppointmentIsNew)
+			
+			switch(IsInRect(e.X, e.Y))
             {
-                //RaiseNewAppointment();
-            }
-
-            ITool newTool = null;
-
-            Appointment appointment = GetAppointmentAt(e.X, e.Y);
-
-            if (appointment == null)
-            {
-                if (selectedAppointment != null)
-                {
-                    selectedAppointment = null;
-                    Invalidate();
-                }
-
-                newTool = drawTool;
-                selection = SelectionType.DateRange;
-            }
-            else
-            {
-                newTool = selectionTool;
-                selectedAppointment = appointment;
-                selection = SelectionType.Appointment;
-
-                Invalidate();
-            }
-
+				case RectType.Cell:
+					selectedDate = GetDateAt(e.X, e.Y);
+					break;
+			}
+			Invalidate();
+            
             if (activeTool != null)
             {
                 activeTool.MouseDown(e);
             }
-
-            if ((activeTool != newTool) && (newTool != null))
-            {
-                newTool.Reset();
-                newTool.MouseDown(e);
-            }
-
-            activeTool = newTool;
 
             base.OnMouseDown(e);
         }
@@ -528,13 +510,13 @@ namespace CalendarTest
 
 		public void StartEditing()
         {
-            if (!selectedAppointment.Locked && appointmentViews.ContainsKey(selectedAppointment))
+            /*if (!selectedAppointment.Locked && appointmentViews.ContainsKey(selectedAppointment))
             {
                 Rectangle editBounds = appointmentViews[selectedAppointment].Rectangle;
 
                 editBounds.Inflate(-3, -3);
-                editBounds.X += appointmentGripWidth - 2;
-                editBounds.Width -= appointmentGripWidth - 5;
+				editBounds.X += editGripWidth - 2;
+				editBounds.Width -= editGripWidth - 5;
 
                 editbox.Bounds = editBounds;
                 editbox.Text = selectedAppointment.Title;
@@ -543,7 +525,7 @@ namespace CalendarTest
                 editbox.SelectionLength = 0;
 
                 editbox.Focus();
-            }
+            }//*/
         }
 
         public void FinishEditing(bool cancel)
@@ -552,15 +534,15 @@ namespace CalendarTest
 
             if (!cancel)
             {
-                if (selectedAppointment != null)
-                    selectedAppointment.Title = editbox.Text;
+                //if (selectedAppointment != null)
+                //    selectedAppointment.Title = editbox.Text;
             }
             else
             {
                 if (selectedAppointmentIsNew)
                 {
-                    selectedAppointment = null;
-                    selectedAppointmentIsNew = false;
+                //   selectedAppointment = null;
+                //   selectedAppointmentIsNew = false;
                 }
             }
 
@@ -593,22 +575,10 @@ namespace CalendarTest
             return date;
         }
 
-        public Appointment GetAppointmentAt(int x, int y)
-        {
-            if (y < this.renderer.HeaderHeight)
-                return null;
-
-            foreach (AppointmentView view in appointmentViews.Values)
-                if (view.Rectangle.Contains(x, y))
-                    return view.Appointment;
-
-            return null;
-        }
-
         #endregion
 
 		#region Help methods
-
+		
 		public static T[] Shift<T>(T[] array, int positions)
 		{
 			T[] copy = new T[array.Length];
@@ -689,6 +659,34 @@ namespace CalendarTest
 			return widths;
 		}
 		
+		public RectType IsInRect(int x, int y)
+		{
+			if (new Rectangle(renderer.WeekLabelWidth
+				, renderer.NavBarHeight + renderer.HeaderHeight
+				, this.Width - renderer.WeekLabelWidth
+				, this.Height - renderer.NavBarHeight).Contains(x, y))
+				return RectType.Cell;
+			
+			if (new Rectangle(0
+				, renderer.NavBarHeight
+				, renderer.WeekLabelWidth
+				, this.Height - renderer.NavBarHeight).Contains(x, y))
+				return RectType.RowLabel;
+			
+			if (new Rectangle(renderer.WeekLabelWidth
+				, renderer.NavBarHeight + renderer.HeaderHeight
+				, this.Width - renderer.WeekLabelWidth
+				, renderer.HeaderHeight).Contains(x, y))
+				return RectType.ColLabel;
+
+			if (new Rectangle(0
+				, renderer.NavBarHeight + renderer.HeaderHeight
+				, this.Width - renderer.WeekLabelWidth
+				, renderer.HeaderHeight).Contains(x, y))
+				return RectType.NavBar;
+					
+			return RectType.None;
+		}
 		#endregion 
 		
 		#region Drawing Methods
@@ -714,9 +712,22 @@ namespace CalendarTest
 		private void DrawNavBar(PaintEventArgs e, Rectangle rect)
 		{
 			e.Graphics.SetClip(rect);
+			
+			Rectangle rPrevBtn = rect;
+			rPrevBtn.Width = renderer.NavBarPrevBtnWidth;
 
+			Rectangle rNextBtn = rect;
+			rNextBtn.X = rect.Right - renderer.NavBarNextBtnWidth;
+			rNextBtn.Width = renderer.NavBarNextBtnWidth;
+			
 			renderer.DrawNavBarBg(e.Graphics, rect);
-			renderer.DrawNavBar(e.Graphics, rect);
+			renderer.DrawNavBar(e.Graphics, rect, "Text");
+
+			renderer.DrawNavBarPrevBtnBg(e.Graphics, rPrevBtn, false);
+			renderer.DrawNavBarPrevBtn(e.Graphics, rPrevBtn, "Prev", false);
+
+			renderer.DrawNavBarNextBtnBg(e.Graphics, rNextBtn, false);
+			renderer.DrawNavBarNextBtn(e.Graphics, rNextBtn, "Next", false);
 
 			e.Graphics.ResetClip();
 		}
@@ -791,7 +802,10 @@ namespace CalendarTest
 				rDay.X = rCal.Left;
 				for (int nCol = 0; nCol < 7; nCol++)
 				{
-					weekInfo[nCol].bOtherMonth = weekInfo[nCol].date.Month == StartDate.Month ? false : true;
+					weekInfo[nCol].bSelected = weekInfo[nCol].date == SelectedDate ? true : false;
+					weekInfo[nCol].bCurMonth = weekInfo[nCol].date.Month == StartDate.Month ? true : false;
+					Rectangle rDraw = rDay;
+					rDraw.Inflate(-1, -1);
 					renderer.DrawCellBg(e.Graphics, rDay, weekInfo[nCol]);
 					renderer.DrawCell(e.Graphics, rDay, weekInfo[nCol]);
 					rDay.X += colW;
@@ -848,29 +862,24 @@ namespace CalendarTest
 		
         protected override void OnPaint(PaintEventArgs e)
         {
-            // resolve appointments on visible date range.
-			DateTime weekStartDate = GetFirstDateOfWeek(this.StartDate.Year, GetWeekOfYear(this.StartDate));
-			
-			ResolveAppointmentsEventArgs args = new ResolveAppointmentsEventArgs(weekStartDate, weekStartDate.AddDays(7 * ShowWeeks));
-            //OnResolveAppointments(args);
+			base.OnPaint(e);
+        
+            DateTime weekStartDate = GetFirstDateOfWeek(this.StartDate.Year, GetWeekOfYear(this.StartDate));
 			
 			renderer.DrawBg(e.Graphics, this.ClientRectangle, System.Drawing.Drawing2D.SmoothingMode.AntiAlias);
-			
-			if(renderer.bDrawNavBar)
+
+			if (renderer.NavBarHeight > 0)
             {
 				Rectangle rNavBar = new Rectangle(0, 0, this.Width, renderer.NavBarHeight);
 				DrawNavBar(e, rNavBar);
 			}
 
-			int nNavBarHeight = 0;
-			if (renderer.bDrawNavBar)
-				nNavBarHeight = renderer.NavBarHeight;
-			
-			Rectangle rCal = new Rectangle(0, nNavBarHeight, this.Width, this.Height - nNavBarHeight);
+			Rectangle rCal = new Rectangle(0, renderer.NavBarHeight, this.Width, this.Height - renderer.NavBarHeight);
 					
 			DrawCalendarTable(e, rCal);
 			DrawHeaders(e, rCal);
 			DrawWeeks(e, rCal);
+			//*/
         }
         
 		/*
@@ -930,20 +939,19 @@ namespace CalendarTest
             DrawAppointments(e, rect, time);
         }
 		//*/
-        internal Dictionary<Appointment, AppointmentView> appointmentViews = new Dictionary<Appointment, AppointmentView>();
-
+        
         private void DrawAppointments(PaintEventArgs e, Rectangle rect, DateTime time)
         {
             DateTime timeStart = time.Date;
             DateTime timeEnd = timeStart.AddHours(24);
             timeEnd = timeEnd.AddSeconds(-1);
 
+			/*
             AppointmentList appointments = null;//(AppointmentList)cachedAppointments[time.Day];
 
             if (appointments != null)
             {
-				/*
-                HalfHourLayout[] layout = GetMaxParalelAppointments(appointments);
+			    HalfHourLayout[] layout = GetMaxParalelAppointments(appointments);
                 List<Appointment> drawnItems = new List<Appointment>();
 
                 for (int halfHour = 0; halfHour < 24 * 2; halfHour++)
@@ -1004,73 +1012,7 @@ namespace CalendarTest
                         }
                     }
                 }
-				* */
-            }
-        }
-
-        private void DrawDays(PaintEventArgs e, Rectangle rect)
-        {
-            int dayWidth = rect.Width / 7;
-
-			/* ALL DAY EVENTS IS NOT COMPLETE
-			
-            AppointmentList longAppointments = (AppointmentList)cachedAppointments[-1];
-
-            int y = dayHeadersHeight;
-
-            if (longAppointments != null)
-            {
-                Rectangle backRectangle = rect;
-                backRectangle.Y = y;
-                backRectangle.Height = allDayEventsHeaderHeight;
-
-                renderer.DrawAllDayBackground(e.Graphics, backRectangle);
-
-                foreach (Appointment appointment in longAppointments)
-                {
-                    Rectangle appointmenRect = rect;
-
-                    appointmenRect.Width = (dayWidth * (appointment.EndDate.Day - appointment.StartDate.Day));
-                    appointmenRect.Height = horizontalAppointmentHeight;
-                    appointmenRect.X += (appointment.StartDate.Day - startDate.Day) * dayWidth;
-                    appointmenRect.Y = y;
-
-                    renderer.DrawAppointment(e.Graphics, appointmenRect, appointment, appointment == selectedAppointment, appointmentGripWidth);
-
-                    y += horizontalAppointmentHeight;
-                }
-            }
-            */
-
-            DateTime time = startDate;
-            
-            Rectangle rectangle = rect;
-            rectangle.Width = dayWidth;
-
-            appointmentViews.Clear();
-
-            for (int day = 0; day < 7; day++)
-            {
-                //DrawDay(e, rectangle, time);
-
-                rectangle.X += dayWidth;
-                time = time.AddDays(1);
-            }
-        }
-        
-
-        #endregion
-
-        #region Internal Utility Classes
-
-        internal class AppointmentView
-        {
-            public Appointment Appointment;
-            public Rectangle Rectangle;
-        }
-
-        class AppointmentList : List<Appointment>
-        {
+            }//*/
         }
 
         #endregion
@@ -1078,9 +1020,9 @@ namespace CalendarTest
         #region Events
 
         public event EventHandler SelectionChanged;
-        public event ResolveAppointmentsEventHandler ResolveAppointments;
-        public event NewAppointmentEventHandler NewAppointment;
-        public event EventHandler<AppointmentEventArgs> AppoinmentMove;
+        //public event ResolveAppointmentsEventHandler ResolveAppointments;
+        //public event NewAppointmentEventHandler NewAppointment;
+        //public event EventHandler<AppointmentEventArgs> AppoinmentMove;
 
         #endregion
     }

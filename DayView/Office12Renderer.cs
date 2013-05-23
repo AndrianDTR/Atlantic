@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace CalendarTest
 {
-    public class Office12Renderer : AbstractRenderer
+    public class DefaultRenderer : AbstractRenderer
     {
         public override Color SelectionColor
         {
@@ -18,7 +18,8 @@ namespace CalendarTest
             }
         }
 
-        public override void DrawAppointment(System.Drawing.Graphics g, System.Drawing.Rectangle rect, Appointment appointment, bool isSelected, int gripWidth)
+        /*
+		public override void DrawAppointment(System.Drawing.Graphics g, System.Drawing.Rectangle rect, Appointment appointment, bool isSelected, int gripWidth)
         {
             StringFormat m_Format = new StringFormat();
             m_Format.Alignment = StringAlignment.Near;
@@ -106,6 +107,7 @@ namespace CalendarTest
             g.TextRenderingHint = TextRenderingHint.SystemDefault;
 
         }
+		//*/
         /************************************************/
         public override void DrawBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect, System.Drawing.Drawing2D.SmoothingMode smooth)
 		{
@@ -115,35 +117,80 @@ namespace CalendarTest
 			g.SmoothingMode = smooth;
 		}
 
-		public override void DrawNavBarBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
+		public override void DrawNavBarBg(System.Drawing.Graphics g, System.Drawing.Rectangle rRect)
 		{
-			using (SolidBrush backBrush = new SolidBrush(NavBarBgColor))
-				g.FillRectangle(backBrush, rect);
+			using (LinearGradientBrush aGB = new LinearGradientBrush(rRect, NavBarNextBtnBgColor, BgColor, LinearGradientMode.Vertical))
+				g.FillRectangle(aGB, rRect);
 		}
 
-		public override void DrawNavBar(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
+		public override void DrawNavBar(System.Drawing.Graphics g, System.Drawing.Rectangle rRect, String sText)
 		{
+			StringFormat m_Format = new StringFormat();
+			m_Format.Alignment = StringAlignment.Center;
+			m_Format.FormatFlags = StringFormatFlags.FitBlackBox;
+			m_Format.LineAlignment = StringAlignment.Center;
+
+			g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+			rRect.Offset(2, 1);
+			g.DrawString(sText, NavBarFont, SystemBrushes.WindowText, rRect, m_Format);
+			g.TextRenderingHint = TextRenderingHint.SystemDefault;
+		}
+
+		public override void DrawNavBarPrevBtnBg(System.Drawing.Graphics g, System.Drawing.Rectangle rRect, bool bPressed)
+		{
+			if (bPressed)
+			{
+				using (SolidBrush backBrush = new SolidBrush(SelectionColor))
+					g.FillRectangle(backBrush, rRect);
+
+				using (Pen borderPen = new Pen(SelectionBorderColor))
+				{
+					rRect.Inflate(-2, -2);
+					g.DrawRectangle(borderPen, rRect);
+				}
+			}
+		}
+
+		public override void DrawNavBarPrevBtn(System.Drawing.Graphics g, System.Drawing.Rectangle rRect, String sText, bool bPressed)
+		{
+			StringFormat m_Format = new StringFormat();
+			m_Format.Alignment = StringAlignment.Center;
+			m_Format.FormatFlags = StringFormatFlags.FitBlackBox;
+			m_Format.LineAlignment = StringAlignment.Center;
+
+			g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+			rRect.Offset(2, 1);
+
+			if (bPressed)
+				g.DrawString(sText, NavBarFont, SystemBrushes.HighlightText, rRect, m_Format);
+			else
+				g.DrawString(sText, NavBarFont, SystemBrushes.WindowText, rRect, m_Format);
 			
+			g.TextRenderingHint = TextRenderingHint.SystemDefault;
 		}
 
-		public override void DrawNavBarPrevBtnBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
+		public override void DrawNavBarNextBtnBg(System.Drawing.Graphics g, System.Drawing.Rectangle rRect, bool bPressed)
 		{
-
-		}
-
-		public override void DrawNavBarPrevBtn(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
-		{
-
-		}
-
-		public override void DrawNavBarNextBtnBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
-		{
-
+			using (SolidBrush backBrush = new SolidBrush(NavBarNextBtnBgColor))
+				g.FillRectangle(backBrush, rRect);
 		}
 		
-		public override void DrawNavBarNextBtn(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
+		public override void DrawNavBarNextBtn(System.Drawing.Graphics g, System.Drawing.Rectangle rRect, String sText, bool bPressed)
 		{
+			StringFormat m_Format = new StringFormat();
+			m_Format.Alignment = StringAlignment.Center;
+			m_Format.FormatFlags = StringFormatFlags.FitBlackBox;
+			m_Format.LineAlignment = StringAlignment.Center;
 
+			g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+			rRect.Offset(2, 1);
+
+			if (bPressed)
+				g.DrawString(sText, NavBarFont, SystemBrushes.HighlightText, rRect, m_Format);
+			else
+				g.DrawString(sText, NavBarFont, SystemBrushes.WindowText, rRect, m_Format);
+
+			g.TextRenderingHint = TextRenderingHint.SystemDefault;
 		}
 		
 		public override void DrawColBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
@@ -233,13 +280,25 @@ namespace CalendarTest
 
 		public override void DrawCellBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect, CellInfo ci)
 		{
-			if(ci.bOtherMonth)
-			{
-			}
-			
 			Color bg = MonthColorMap[ci.date.Month];
+            if (ci.bCurMonth)
+            {
+				bg = MonthColorMap[0];
+			}
 			using (SolidBrush backBrush = new SolidBrush(bg))
 				g.FillRectangle(backBrush, rect);
+            
+            if (ci.bSelected)
+            {
+				using (SolidBrush backBrush = new SolidBrush(SelectionColor))
+					g.FillRectangle(backBrush, rect);
+					
+				using (Pen borderPen = new Pen(SelectionBorderColor))
+				{
+					rect.Inflate(-2, -2);
+					g.DrawRectangle(borderPen, rect);
+				}
+            }
 		}
 
 		public override void DrawCell(System.Drawing.Graphics g, System.Drawing.Rectangle rect, CellInfo ci)
@@ -253,7 +312,15 @@ namespace CalendarTest
 
 			rect.Offset(2, 1);
 
-			g.DrawString(ci.sTitle, CellDataBoldFont, SystemBrushes.WindowText, rect, m_Format);
+			if (ci.bSelected)
+			{
+				g.DrawString(ci.sTitle, CellDataBoldFont, SystemBrushes.HighlightText, rect, m_Format);
+			}
+			else
+			{
+				g.DrawString(ci.sTitle, CellDataBoldFont, SystemBrushes.WindowText, rect, m_Format);
+			}
+			
 			g.TextRenderingHint = TextRenderingHint.SystemDefault;
 		}
     }

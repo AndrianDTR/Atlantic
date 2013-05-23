@@ -21,4 +21,15 @@ namespace CalendarTest
         void MouseUp( MouseEventArgs e );
         void MouseDown( MouseEventArgs e );
     }
+    
+    public enum RectType
+    {
+		None = 0,
+		PrevBtn,
+		NextBtn,
+		NavBar,
+		Cell,
+		RowLabel,
+		ColLabel
+    }
 }

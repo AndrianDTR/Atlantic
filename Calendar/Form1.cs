@@ -10,13 +10,13 @@ namespace CalendarTest
 {
     public partial class Form1 : Form
     {
-        List<Appointment> m_Appointments;
+        //List<Appointment> m_Appointments;
 
         public Form1()
         {
             InitializeComponent();
 
-            m_Appointments = new List<Appointment>();
+           // m_Appointments = new List<Appointment>();
 
             DateTime m_Date = DateTime.Now;
 
@@ -25,7 +25,7 @@ namespace CalendarTest
 
             dayView1.StartDate = DateTime.Now;
             dayView1.SelectionChanged += new EventHandler(dayView1_SelectionChanged);
-            dayView1.ResolveAppointments += new CalendarTest.ResolveAppointmentsEventHandler(this.dayView1_ResolveAppointments);
+            //dayView1.ResolveAppointments += new CalendarTest.ResolveAppointmentsEventHandler(this.dayView1_ResolveAppointments);
 
             dayView1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dayView1_MouseMove);
 
@@ -34,13 +34,13 @@ namespace CalendarTest
 
         void dayView1_NewAppointment(object sender, NewAppointmentEventArgs args)
         {
-            Appointment m_Appointment = new Appointment();
+			//Appointment m_Appointment = new Appointment();
 
-            m_Appointment.StartDate = args.StartDate;
-            m_Appointment.EndDate = args.EndDate;
-            m_Appointment.Title = args.Title;
+			//m_Appointment.StartDate = args.StartDate;
+			//m_Appointment.EndDate = args.EndDate;
+			//m_Appointment.Title = args.Title;
 
-            m_Appointments.Add(m_Appointment);
+			//m_Appointments.Add(m_Appointment);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -55,29 +55,17 @@ namespace CalendarTest
 
         private void dayView1_SelectionChanged(object sender, EventArgs e)
         {
-            label3.Text = dayView1.SelectionStart.ToString();
-        }
-
-        private void dayView1_ResolveAppointments(object sender, ResolveAppointmentsEventArgs args)
-        {
-            List<Appointment> m_Apps = new List<Appointment>();
-
-            foreach (Appointment m_App in m_Appointments)
-                if ((m_App.StartDate >= args.StartDate) &&
-                    (m_App.StartDate <= args.EndDate))
-                    m_Apps.Add(m_App);
-
-            args.Appointments = m_Apps;
+            label3.Text = dayView1.SelectedDate.ToString();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Appointment m_App = new Appointment();
-            m_App.StartDate = dayView1.SelectionStart;
-            //m_App.EndDate = dayView1.SelectionEnd;
-            m_App.BorderColor = Color.Red;
+			//Appointment m_App = new Appointment();
+			//m_App.StartDate = dayView1.SelectionStart;
+			////m_App.EndDate = dayView1.SelectionEnd;
+			//m_App.BorderColor = Color.Red;
 
-            m_Appointments.Add(m_App);
+			//m_Appointments.Add(m_App);
 
             dayView1.Invalidate();
         }
@@ -109,7 +97,7 @@ namespace CalendarTest
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            dayView1.Renderer = new Office12Renderer();
+            dayView1.Renderer = new DefaultRenderer();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -127,13 +115,13 @@ namespace CalendarTest
 
         private void button7_Click(object sender, EventArgs e)
         {
-            if (dayView1.SelectedAppointment != null)
+            //if (dayView1.SelectedAppointment != null)
             {
-                colorDialog1.Color = dayView1.SelectedAppointment.BorderColor;
+                //colorDialog1.Color = dayView1.SelectedAppointment.BorderColor;
 
                 if (colorDialog1.ShowDialog(this) == DialogResult.OK)
                 {
-                    dayView1.SelectedAppointment.BorderColor = colorDialog1.Color;
+                    //dayView1.SelectedAppointment.BorderColor = colorDialog1.Color;
                 }
             }
         }

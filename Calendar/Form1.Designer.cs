@@ -60,7 +60,7 @@ namespace CalendarTest
             this.dayView1.Location = new System.Drawing.Point(0, 0);
             this.dayView1.Name = "dayView1";
             //this.dayView1.SelectionEnd = new System.DateTime(((long)(0)));
-            this.dayView1.SelectionStart = new System.DateTime(((long)(0)));
+            this.dayView1.SelectedDate = new System.DateTime(((long)(0)));
             this.dayView1.Size = new System.Drawing.Size(798, 328);
             this.dayView1.StartDate = new System.DateTime(((long)(0)));
             this.dayView1.TabIndex = 0;
