@@ -14,10 +14,7 @@ namespace CalendarTest
 		DateTime m_SelectionStartAt;
         bool m_SelectionChanged;
         
-        bool m_bPrevBtnPressed = false;
-        bool m_bNextBtnPressed = false;
-
-		private DayView m_DayView;
+        private DayView m_DayView;
 
 		public DayView DayView
 		{

@@ -18,7 +18,9 @@ namespace CalendarTest
 		private Button m_btnPrev;
 		private Button m_btnNext;
 		private Panel m_dataPanel;
-        private VScrollBar scrollbar;
+		private Panel m_headerPanel;
+        private VScrollBar m_Scrollbar;
+        
         private DrawTool drawTool;
         
         #endregion
@@ -47,55 +49,60 @@ namespace CalendarTest
 			m_grid.Location = new System.Drawing.Point(0, 0);
 			m_grid.Name = "tableLayoutPanel0";
 			m_grid.RowCount = 3;
-			m_grid.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
 			m_grid.RowStyles.Add(new RowStyle());
-			m_grid.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+			m_grid.RowStyles.Add(new RowStyle());
+			m_grid.RowStyles.Add(new RowStyle());
+			m_grid.RowStyles.Add(new RowStyle());
 						
 			m_btnPrev = new Button();
 			m_btnPrev.Visible = true;
-			//m_btnPrev.KeyUp += new KeyEventHandler(editbox_KeyUp);
 			m_btnPrev.Dock = DockStyle.Fill;
-			m_btnPrev.Height = 40;
+			m_btnPrev.Height = m_nNavButtonsHeight;
 			m_btnPrev.Text = "Prev";
+			m_btnPrev.Margin = Padding.Empty;
 			m_grid.Controls.Add(m_btnPrev, 0, 0);
-
+			
+			m_headerPanel = new Panel();
+			m_headerPanel.Visible = true;
+			m_headerPanel.Height = m_nNavButtonsHeight;
+			m_headerPanel.Dock = DockStyle.Fill;
+			m_headerPanel.Margin = Padding.Empty;
+			m_grid.Controls.Add(m_headerPanel, 0, 1);
 			
 			m_dataPanel = new Panel();
 			m_dataPanel.Visible = true;
-			//m_btnPrev.KeyUp += new KeyEventHandler(editbox_KeyUp);
-			m_dataPanel.Height = 240;
+			m_dataPanel.Height = m_nNavButtonsHeight;
 			m_dataPanel.Dock = DockStyle.Fill;
-			this.Controls.Add(m_dataPanel);
-			
-			scrollbar = new VScrollBar();
-            //scrollbar.SmallChange = weekLabelHeight;
-            //scrollbar.LargeChange = weekLabelHeight * 2;
-            scrollbar.Dock = DockStyle.Right;
-            scrollbar.Visible = true;
-            //scrollbar.Scroll += new ScrollEventHandler(scrollbar_Scroll);
-            //AdjustScrollbar();
+			m_dataPanel.Margin = Padding.Empty;
+						
+			m_Scrollbar = new VScrollBar();
+            m_Scrollbar.SmallChange = RowHeight;
+			m_Scrollbar.LargeChange = RowHeight * 5;
+            m_Scrollbar.Dock = DockStyle.Right;
+            m_Scrollbar.Visible = true;
+            m_Scrollbar.Scroll += new ScrollEventHandler(scrollbar_Scroll);
+            AdjustScrollbar();
             //scrollbar.Value = (startHour * 2 * halfHourHeight);
 			
-            m_dataPanel.Controls.Add(scrollbar);
-			//*/
-
+            m_dataPanel.Controls.Add(m_Scrollbar);
+			
             editbox = new TextBox();
             editbox.Multiline = true;
             editbox.Visible = false;
             editbox.BorderStyle = BorderStyle.None;
             editbox.KeyUp += new KeyEventHandler(editbox_KeyUp);
-            editbox.Margin = Padding.Empty;
+			editbox.Margin = Padding.Empty;
 			m_dataPanel.Controls.Add(editbox);
 
-
-			m_grid.Controls.Add(m_dataPanel, 0, 1);
+			m_grid.Controls.Add(m_dataPanel, 0, 2);
 			
 			m_btnNext = new Button();
 			m_btnNext.Visible = true;
 			m_btnNext.Dock = DockStyle.Fill;
-			m_btnNext.Height = 40;
+			m_btnNext.Height = m_nNavButtonsHeight;
 			m_btnNext.Text = "Next";
-			m_grid.Controls.Add(m_btnNext, 0, 2);
+			m_btnNext.Margin = Padding.Empty;
+			m_grid.Controls.Add(m_btnNext, 0, 3);
 
 			m_grid.ResumeLayout();
 			this.Controls.Add(m_grid);
@@ -105,13 +112,70 @@ namespace CalendarTest
             activeTool = drawTool;
 
             //UpdateWorkingHours();
-
-            
+			m_headerPanel.Paint += new PaintEventHandler(this.OnHeaderPaint);
+			m_dataPanel.Paint += new PaintEventHandler(this.OnDataPaint);
         }
 
         #endregion
 
         #region Properties
+		private int m_nHeaderHeight = 20;
+		[System.ComponentModel.DefaultValue(20)]
+		public int HeaderHeight
+		{
+			get
+			{
+				return m_nHeaderHeight;
+			}
+			set
+			{
+				m_nHeaderHeight = value;
+			}
+		}
+		
+        private int m_nNavButtonsHeight = 40;
+		[System.ComponentModel.DefaultValue(40)]
+		public int NavButtonsHeight
+		{
+			get
+			{
+				return m_nNavButtonsHeight;
+			}
+			set
+			{
+				m_nNavButtonsHeight = value;
+			}
+		}
+
+		private int m_nRowHeight = 40;
+		[System.ComponentModel.DefaultValue(40)]
+		public int RowHeight
+		{
+			get
+			{
+				return m_nRowHeight;
+			}
+			set
+			{
+				m_nRowHeight = value;
+			}
+		}
+		
+		private int m_nRowLabelWidth = 40;
+		[System.ComponentModel.DefaultValue(40)]
+		public int RowLabelWidth
+		{
+			get
+			{
+				return m_nRowLabelWidth;
+			}
+			set
+			{
+				m_nRowLabelWidth = value;
+			}
+		}
+		/********************************************************/
+		
 		private AbstractRenderer renderer;
 
 		private int m_showWeeks = 6;
@@ -126,7 +190,7 @@ namespace CalendarTest
 			set
 			{
 				m_showWeeks = value;
-				OnWeekLabelHeightChanged();
+				OnRowHeightChanged();
 			}
 		}
 
@@ -140,14 +204,13 @@ namespace CalendarTest
 			set
 			{
 				renderer.MinWeekHeight = value;
-				OnWeekLabelHeightChanged();
+				OnRowHeightChanged();
 			}
 		}
 		
-		private void OnWeekLabelHeightChanged()
+		private void OnRowHeightChanged()
         {
-
-            //AdjustScrollbar();
+            AdjustScrollbar();
             Invalidate();
         }
 
@@ -303,8 +366,7 @@ namespace CalendarTest
             }
         }
 		
-		/*
-        void scrollbar_Scroll(object sender, ScrollEventArgs e)
+		void scrollbar_Scroll(object sender, ScrollEventArgs e)
         {
             Invalidate();
 
@@ -312,22 +374,25 @@ namespace CalendarTest
                 //scroll text box too
                 editbox.Top += e.OldValue - e.NewValue;
         }
-		*/
 		
         protected override void SetBoundsCore(int x, int y, int width, int height, BoundsSpecified specified)
         {
             base.SetBoundsCore(x, y, width, height, specified);
-            //AdjustScrollbar();
+            
+            m_btnNext.Height = NavButtonsHeight;
+			m_btnPrev.Height = NavButtonsHeight;
+			m_headerPanel.Height = HeaderHeight;
+			m_dataPanel.Height = height - 2 * NavButtonsHeight - HeaderHeight;
+			
+            AdjustScrollbar();
         }
 
-        /*
-		private void AdjustScrollbar()
+        private void AdjustScrollbar()
         {
-            scrollbar.Maximum = (2 * weekLabelHeight * 25) - this.Height + this.HeaderHeight;
-            scrollbar.Minimum = 0;
+            m_Scrollbar.Maximum = (RowHeight * 52);
+            m_Scrollbar.Minimum = 0;
         }
-		//*/
-        
+		
         protected override void OnPaintBackground(PaintEventArgs pevent)
         {
             // Flicker free
@@ -736,20 +801,22 @@ namespace CalendarTest
 		{
 			e.Graphics.SetClip(rect);
 
-			int colW = (rect.Width - renderer.WeekLabelWidth) / 7;
-			int rowH = (rect.Height - renderer.HeaderHeight) / ShowWeeks;
+			int colW = (rect.Width - RowLabelWidth) / 7;
+			int rowH = RowHeight;
+			int nRows = rect.Height / RowHeight;
+			
 			string[] weekDays = GetWeekDayNames();
 
 			Rectangle rCol = rect;
-			rCol.Height = renderer.HeaderHeight;
+			rCol.Width = RowLabelWidth;
 			
 			for (int nCol = 0; nCol < 7 + 1; nCol++)
 			{
 				if(nCol == 0)
 				{
-					rCol.Width = renderer.WeekLabelWidth;
+					rCol.Width = RowLabelWidth;
 					renderer.DrawColLabel(e.Graphics, rCol, "");
-					rCol.X += renderer.WeekLabelWidth;
+					rCol.X += RowLabelWidth;
 				}
 				else
 				{
@@ -759,24 +826,24 @@ namespace CalendarTest
 				}
 			}
 			
-			Rectangle rRow = rect;
-			rRow.Width = renderer.WeekLabelWidth;
-			for (int nRow = 0; nRow < ShowWeeks + 1; nRow++)
-			{
-				if (nRow == 0)
-				{
-					rRow.Height = renderer.HeaderHeight;
-					renderer.DrawRowLabel(e.Graphics, rRow, "");
-					rRow.Y += renderer.HeaderHeight;
-				}
-				else
-				{
-					rRow.Height = rowH;
-					string weekNum = GetWeekOfYear(StartDate.AddDays((nRow-1) * 7)).ToString();
-					renderer.DrawRowLabel(e.Graphics, rRow, weekNum);
-					rRow.Y += rowH;
-				}
-			}
+			//Rectangle rRow = rect;
+			//rRow.Width = renderer.WeekLabelWidth;
+			//for (int nRow = 0; nRow < ShowWeeks + 1; nRow++)
+			//{
+			//    if (nRow == 0)
+			//    {
+			//        rRow.Height = renderer.HeaderHeight;
+			//        renderer.DrawRowLabel(e.Graphics, rRow, "");
+			//        rRow.Y += renderer.HeaderHeight;
+			//    }
+			//    else
+			//    {
+			//        rRow.Height = rowH;
+			//        string weekNum = GetWeekOfYear(StartDate.AddDays((nRow-1) * 7)).ToString();
+			//        renderer.DrawRowLabel(e.Graphics, rRow, weekNum);
+			//        rRow.Y += rowH;
+			//    }
+			//}
 			
 			e.Graphics.ResetClip();
 		}
@@ -859,7 +926,7 @@ namespace CalendarTest
 
 			e.Graphics.ResetClip();
 		}
-		
+		/*
         protected override void OnPaint(PaintEventArgs e)
         {
 			base.OnPaint(e);
@@ -879,7 +946,6 @@ namespace CalendarTest
 			DrawCalendarTable(e, rCal);
 			DrawHeaders(e, rCal);
 			DrawWeeks(e, rCal);
-			//*/
         }
         
 		/*
@@ -1015,6 +1081,30 @@ namespace CalendarTest
             }//*/
         }
 
+		private void OnHeaderPaint(object sender, PaintEventArgs e)
+		{
+			Panel p = (Panel)sender;
+			Graphics g = e.Graphics;
+
+			Rectangle rRect = new Rectangle(0, 0, p.Width - m_Scrollbar.Width, p.Height);
+
+			DrawHeaders(e, rRect);
+		}
+
+		private void OnDataPaint(object sender, PaintEventArgs e)
+		{
+			Panel p = (Panel)sender;
+			
+			DateTime weekStartDate = GetFirstDateOfWeek(this.StartDate.Year, GetWeekOfYear(this.StartDate));
+
+			renderer.DrawBg(e.Graphics, p.ClientRectangle, System.Drawing.Drawing2D.SmoothingMode.AntiAlias);
+
+			Rectangle rRect = new Rectangle(0, 0, p.Width, p.Height);
+
+			//DrawCalendarTable(e, rRect);
+			//DrawWeeks(e, rRect);
+		}
+		
         #endregion
 
         #region Events
