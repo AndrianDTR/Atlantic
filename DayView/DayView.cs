@@ -78,11 +78,12 @@ namespace CalendarTest
 			m_Scrollbar = new VScrollBar();
             m_Scrollbar.SmallChange = RowHeight;
 			m_Scrollbar.LargeChange = RowHeight * 5;
+			m_Scrollbar.Minimum = 0;
+			m_Scrollbar.Maximum = 52;
             m_Scrollbar.Dock = DockStyle.Right;
             m_Scrollbar.Visible = true;
             m_Scrollbar.Scroll += new ScrollEventHandler(scrollbar_Scroll);
-            AdjustScrollbar();
-            //scrollbar.Value = (startHour * 2 * halfHourHeight);
+			m_Scrollbar.Value = GetWeekOfYear(StartDate);
 			
             m_dataPanel.Controls.Add(m_Scrollbar);
 			
@@ -210,7 +211,6 @@ namespace CalendarTest
 		
 		private void OnRowHeightChanged()
         {
-            AdjustScrollbar();
             Invalidate();
         }
 
@@ -252,9 +252,7 @@ namespace CalendarTest
         {
             startDate = startDate.Date;
 
-            selectedAppointmentIsNew = false;
-            //selection = SelectionType.DateRange;
-
+            m_Scrollbar.Value = GetWeekOfYear(StartDate);
             Invalidate();
         }
 
@@ -383,20 +381,7 @@ namespace CalendarTest
 			m_btnPrev.Height = NavButtonsHeight;
 			m_headerPanel.Height = HeaderHeight;
 			m_dataPanel.Height = height - 2 * NavButtonsHeight - HeaderHeight;
-			
-            AdjustScrollbar();
-        }
-
-        private void AdjustScrollbar()
-        {
-            m_Scrollbar.Maximum = (RowHeight * 52);
-            m_Scrollbar.Minimum = 0;
-        }
-		
-        protected override void OnPaintBackground(PaintEventArgs pevent)
-        {
-            // Flicker free
-        }
+		}
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
@@ -619,12 +604,11 @@ namespace CalendarTest
         {
 			DateTime date = GetFirstDateOfWeek(StartDate.Year, GetWeekOfYear(StartDate));;
 			
-			int dayWidth = (this.Width - renderer.WeekLabelWidth) / 7;
-			int weekHeight = (this.Height - renderer.HeaderHeight - renderer.NavBarHeight) / ShowWeeks;
+			int dayWidth = (m_dataPanel.Width - RowLabelWidth) / 7;
+			int weekHeight = RowHeight;
+						
+			x -= RowLabelWidth;
 			
-			x -= renderer.WeekLabelWidth;
-			y -= renderer.HeaderHeight + renderer.NavBarHeight;
-      
             if (x > 0)
 			{
 				date = date.AddDays(x / dayWidth);
@@ -726,30 +710,24 @@ namespace CalendarTest
 		
 		public RectType IsInRect(int x, int y)
 		{
-			if (new Rectangle(renderer.WeekLabelWidth
-				, renderer.NavBarHeight + renderer.HeaderHeight
-				, this.Width - renderer.WeekLabelWidth
-				, this.Height - renderer.NavBarHeight).Contains(x, y))
+			if (new Rectangle(m_dataPanel.Left + RowLabelWidth
+				, m_dataPanel.Top
+				, m_dataPanel.Width - RowLabelWidth
+				, m_dataPanel.Height).Contains(x, y))
 				return RectType.Cell;
-			
-			if (new Rectangle(0
-				, renderer.NavBarHeight
-				, renderer.WeekLabelWidth
-				, this.Height - renderer.NavBarHeight).Contains(x, y))
+
+			if (new Rectangle(m_dataPanel.Left
+				, m_dataPanel.Top
+				, RowLabelWidth
+				, m_dataPanel.Height).Contains(x, y))
 				return RectType.RowLabel;
-			
-			if (new Rectangle(renderer.WeekLabelWidth
-				, renderer.NavBarHeight + renderer.HeaderHeight
-				, this.Width - renderer.WeekLabelWidth
-				, renderer.HeaderHeight).Contains(x, y))
+
+			if (new Rectangle(m_headerPanel.Left
+				, m_headerPanel.Top
+				, m_headerPanel.Width - m_Scrollbar.Width
+				, m_headerPanel.Height).Contains(x, y))
 				return RectType.ColLabel;
 
-			if (new Rectangle(0
-				, renderer.NavBarHeight + renderer.HeaderHeight
-				, this.Width - renderer.WeekLabelWidth
-				, renderer.HeaderHeight).Contains(x, y))
-				return RectType.NavBar;
-					
 			return RectType.None;
 		}
 		#endregion 
@@ -774,39 +752,18 @@ namespace CalendarTest
 			return infos;
 		}
 
-		private void DrawNavBar(PaintEventArgs e, Rectangle rect)
-		{
-			e.Graphics.SetClip(rect);
-			
-			Rectangle rPrevBtn = rect;
-			rPrevBtn.Width = renderer.NavBarPrevBtnWidth;
-
-			Rectangle rNextBtn = rect;
-			rNextBtn.X = rect.Right - renderer.NavBarNextBtnWidth;
-			rNextBtn.Width = renderer.NavBarNextBtnWidth;
-			
-			renderer.DrawNavBarBg(e.Graphics, rect);
-			renderer.DrawNavBar(e.Graphics, rect, "Text");
-
-			renderer.DrawNavBarPrevBtnBg(e.Graphics, rPrevBtn, false);
-			renderer.DrawNavBarPrevBtn(e.Graphics, rPrevBtn, "Prev", false);
-
-			renderer.DrawNavBarNextBtnBg(e.Graphics, rNextBtn, false);
-			renderer.DrawNavBarNextBtn(e.Graphics, rNextBtn, "Next", false);
-
-			e.Graphics.ResetClip();
-		}
-		
 		private void DrawHeaders(PaintEventArgs e, Rectangle rect)
 		{
 			e.Graphics.SetClip(rect);
 
-			int colW = (rect.Width - RowLabelWidth) / 7;
+			int colW = (rect.Width - RowLabelWidth - m_Scrollbar.Width) / 7;
 			int rowH = RowHeight;
 			int nRows = rect.Height / RowHeight;
 			
 			string[] weekDays = GetWeekDayNames();
 
+			renderer.DrawHeaderBg(e.Graphics, rect);
+			
 			Rectangle rCol = rect;
 			rCol.Width = RowLabelWidth;
 			
@@ -816,12 +773,12 @@ namespace CalendarTest
 				{
 					rCol.Width = RowLabelWidth;
 					renderer.DrawColLabel(e.Graphics, rCol, "");
+					rCol.Width = colW;
 					rCol.X += RowLabelWidth;
 				}
 				else
 				{
-					rCol.Width = colW;
-					renderer.DrawColLabel(e.Graphics, rCol, weekDays[nCol-1]);
+					renderer.DrawColLabel(e.Graphics, rCol, weekDays[nCol - 1]);
 					rCol.X += colW;
 				}
 			}
@@ -847,57 +804,24 @@ namespace CalendarTest
 			
 			e.Graphics.ResetClip();
 		}
-		
-		private void DrawWeeks(PaintEventArgs e, Rectangle rect)
-		{
-			e.Graphics.SetClip(rect);
-			
-			DateTime weekStartDate = GetFirstDateOfWeek(StartDate.Year, GetWeekOfYear(StartDate));
-			
-			Rectangle rCal = new Rectangle(renderer.WeekLabelWidth
-				, renderer.HeaderHeight + renderer.NavBarHeight
-				, rect.Width - renderer.WeekLabelWidth
-				, rect.Height - renderer.HeaderHeight);
-
-			int colW = (rect.Width - renderer.WeekLabelWidth) / 7;
-			int rowH = (rect.Height - renderer.HeaderHeight) / ShowWeeks;
-
-			Rectangle rDay = new Rectangle(rCal.Left, rCal.Top, colW, rowH);
-			for (int nRow = 0; nRow < ShowWeeks; nRow++)
-			{
-				CellInfo[] weekInfo = GetWeekDays(weekStartDate.AddDays(nRow * 7));
-				rDay.X = rCal.Left;
-				for (int nCol = 0; nCol < 7; nCol++)
-				{
-					weekInfo[nCol].bSelected = weekInfo[nCol].date == SelectedDate ? true : false;
-					weekInfo[nCol].bCurMonth = weekInfo[nCol].date.Month == StartDate.Month ? true : false;
-					Rectangle rDraw = rDay;
-					rDraw.Inflate(-1, -1);
-					renderer.DrawCellBg(e.Graphics, rDay, weekInfo[nCol]);
-					renderer.DrawCell(e.Graphics, rDay, weekInfo[nCol]);
-					rDay.X += colW;
-				}
-				rDay.Y += rowH;
-			}
-			
-			e.Graphics.ResetClip();
-		}
 
 		private void DrawCalendarTable(PaintEventArgs e, Rectangle rect)
 		{
 			e.Graphics.SetClip(rect);
-
-			int colW = (rect.Width - renderer.WeekLabelWidth) / 7;
-			int rowH = (rect.Height - renderer.HeaderHeight) / ShowWeeks;
+			int rows = rect.Height / RowHeight + 1;
+			rect.Height = rows * RowHeight;
+			
+			int colW = (rect.Width - RowLabelWidth) / 7;
+			int rowH = RowHeight;
 
 			Rectangle rCol = rect;
-			rCol.Width = renderer.WeekLabelWidth;
+			rCol.Width = RowLabelWidth;
 			for (int nCol = 0; nCol < 7 + 1; nCol++)
 			{
 				if (nCol == 0)
 				{
 					renderer.DrawRowLabelBg(e.Graphics, rCol);
-					rCol.X += renderer.WeekLabelWidth;
+					rCol.X += RowLabelWidth;
 				}
 				else
 				{
@@ -908,24 +832,66 @@ namespace CalendarTest
 			}
 			
 			Rectangle rRow = rect;
-			rRow.Height = renderer.HeaderHeight;
-			for(int nRow = 0; nRow < ShowWeeks + 1; nRow++)
+			rRow.Height = RowHeight;
+			for(int nRow = 0; nRow < rows; nRow++)
 			{
-				if(nRow == 0)
-				{
-					renderer.DrawColLabelBg(e.Graphics, rRow);
-					rRow.Y += renderer.HeaderHeight;
-				}
-				else
-				{
-					renderer.DrawRowBg(e.Graphics, rRow);
-					rRow.Y += rowH;
-				}
-				rRow.Height = rowH;
+				renderer.DrawRowBg(e.Graphics, rRow);
+				rRow.Y += rowH;
 			}
-
+			
 			e.Graphics.ResetClip();
 		}
+		
+		private void DrawWeeks(PaintEventArgs e, Rectangle rect)
+		{
+			e.Graphics.SetClip(rect);
+			int rows = rect.Height / RowHeight + 1;
+			rect.Height = rows * RowHeight;
+			
+			DateTime weekStartDate = GetFirstDateOfWeek(StartDate.Year, GetWeekOfYear(StartDate));
+			
+			int colW = (rect.Width - RowLabelWidth) / 7;
+			int rowH = RowHeight;
+			
+			for (int nRow = 0; nRow < rows; nRow++)
+			{
+				Rectangle rCell = new Rectangle(
+				  0
+				, nRow * RowHeight
+				, RowLabelWidth
+				, RowHeight);
+								
+				CellInfo[] weekInfo = GetWeekDays(weekStartDate.AddDays(nRow * 7));
+				
+				for (int nCol = 0; nCol < 7 + 1; nCol++)
+				{
+					Rectangle rDraw = rCell;
+					rDraw.Inflate(0, -1);
+					
+					if(nCol == 0)
+					{
+						string weekNum = GetWeekOfYear(StartDate.AddDays(nRow * 7)).ToString();
+						renderer.DrawRowLabelBg(e.Graphics, rDraw);
+						renderer.DrawRowLabel(e.Graphics, rDraw, weekNum);
+						rCell.Width = colW;
+						rCell.X += RowLabelWidth;
+					}
+					else
+					{
+						weekInfo[nCol-1].bSelected = weekInfo[nCol-1].date == SelectedDate ? true : false;
+						weekInfo[nCol-1].bCurMonth = weekInfo[nCol-1].date.Month == StartDate.Month ? true : false;
+						renderer.DrawCellBg(e.Graphics, rDraw, weekInfo[nCol-1]);
+						renderer.DrawCell(e.Graphics, rDraw, weekInfo[nCol-1]);
+						rCell.X += colW;
+					}
+				}
+				rCell.Y += RowHeight;
+			}
+			//*/
+			e.Graphics.ResetClip();
+		}
+
+		
 		/*
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -1086,7 +1052,7 @@ namespace CalendarTest
 			Panel p = (Panel)sender;
 			Graphics g = e.Graphics;
 
-			Rectangle rRect = new Rectangle(0, 0, p.Width - m_Scrollbar.Width, p.Height);
+			Rectangle rRect = new Rectangle(0, 0, p.Width, p.Height);
 
 			DrawHeaders(e, rRect);
 		}
@@ -1099,10 +1065,10 @@ namespace CalendarTest
 
 			renderer.DrawBg(e.Graphics, p.ClientRectangle, System.Drawing.Drawing2D.SmoothingMode.AntiAlias);
 
-			Rectangle rRect = new Rectangle(0, 0, p.Width, p.Height);
+			Rectangle rRect = new Rectangle(0, 0, p.Width - m_Scrollbar.Width, p.Height);
 
-			//DrawCalendarTable(e, rRect);
-			//DrawWeeks(e, rRect);
+			DrawCalendarTable(e, rRect);
+			DrawWeeks(e, rRect);
 		}
 		
         #endregion

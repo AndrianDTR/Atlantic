@@ -117,101 +117,7 @@ namespace CalendarTest
 			g.SmoothingMode = smooth;
 		}
 
-		public override void DrawNavBarBg(System.Drawing.Graphics g, System.Drawing.Rectangle rRect)
-		{
-			using (LinearGradientBrush aGB = new LinearGradientBrush(rRect, NavBarNextBtnBgColor, BgColor, LinearGradientMode.Vertical))
-				g.FillRectangle(aGB, rRect);
-		}
-
-		public override void DrawNavBar(System.Drawing.Graphics g, System.Drawing.Rectangle rRect, String sText)
-		{
-			StringFormat m_Format = new StringFormat();
-			m_Format.Alignment = StringAlignment.Center;
-			m_Format.FormatFlags = StringFormatFlags.FitBlackBox;
-			m_Format.LineAlignment = StringAlignment.Center;
-
-			g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-			rRect.Offset(2, 1);
-			g.DrawString(sText, NavBarFont, SystemBrushes.WindowText, rRect, m_Format);
-			g.TextRenderingHint = TextRenderingHint.SystemDefault;
-		}
-
-		public override void DrawNavBarPrevBtnBg(System.Drawing.Graphics g, System.Drawing.Rectangle rRect, bool bPressed)
-		{
-			if (bPressed)
-			{
-				using (SolidBrush backBrush = new SolidBrush(SelectionColor))
-					g.FillRectangle(backBrush, rRect);
-
-				using (Pen borderPen = new Pen(SelectionBorderColor))
-				{
-					rRect.Inflate(-2, -2);
-					g.DrawRectangle(borderPen, rRect);
-				}
-			}
-		}
-
-		public override void DrawNavBarPrevBtn(System.Drawing.Graphics g, System.Drawing.Rectangle rRect, String sText, bool bPressed)
-		{
-			StringFormat m_Format = new StringFormat();
-			m_Format.Alignment = StringAlignment.Center;
-			m_Format.FormatFlags = StringFormatFlags.FitBlackBox;
-			m_Format.LineAlignment = StringAlignment.Center;
-
-			g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-			rRect.Offset(2, 1);
-
-			if (bPressed)
-				g.DrawString(sText, NavBarFont, SystemBrushes.HighlightText, rRect, m_Format);
-			else
-				g.DrawString(sText, NavBarFont, SystemBrushes.WindowText, rRect, m_Format);
-			
-			g.TextRenderingHint = TextRenderingHint.SystemDefault;
-		}
-
-		public override void DrawNavBarNextBtnBg(System.Drawing.Graphics g, System.Drawing.Rectangle rRect, bool bPressed)
-		{
-			using (SolidBrush backBrush = new SolidBrush(NavBarNextBtnBgColor))
-				g.FillRectangle(backBrush, rRect);
-		}
-		
-		public override void DrawNavBarNextBtn(System.Drawing.Graphics g, System.Drawing.Rectangle rRect, String sText, bool bPressed)
-		{
-			StringFormat m_Format = new StringFormat();
-			m_Format.Alignment = StringAlignment.Center;
-			m_Format.FormatFlags = StringFormatFlags.FitBlackBox;
-			m_Format.LineAlignment = StringAlignment.Center;
-
-			g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-			rRect.Offset(2, 1);
-
-			if (bPressed)
-				g.DrawString(sText, NavBarFont, SystemBrushes.HighlightText, rRect, m_Format);
-			else
-				g.DrawString(sText, NavBarFont, SystemBrushes.WindowText, rRect, m_Format);
-
-			g.TextRenderingHint = TextRenderingHint.SystemDefault;
-		}
-		
-		public override void DrawColBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
-		{
-			if (HasVerticalLine)
-			{
-				using (Pen aPen = new Pen(VerticalLineColor))
-					g.DrawLine(aPen, rect.Right, rect.Top, rect.Right, rect.Bottom);
-			}
-		}
-
-		public override void DrawRowBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
-		{
-			if (HasHorizontalLine)
-			{
-				using (Pen aPen = new Pen(HorisontalLineColor))
-					g.DrawLine(aPen, rect.Left, rect.Bottom, rect.Right, rect.Bottom);
-			}
-		}
-		
-		public override void DrawColLabelBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
+		public override void DrawHeaderBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
 		{
 			if (HeaderBgGradient)
 			{
@@ -231,16 +137,37 @@ namespace CalendarTest
 			}
 		}
 
+		public override void DrawColBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
+		{
+			if (HasVerticalLine)
+			{
+				using (Pen aPen = new Pen(HorisontalLineColor))
+					g.DrawLine(aPen, rect.Right, rect.Top, rect.Right, rect.Bottom);
+			}
+		}
+		
+		public override void DrawRowBg(System.Drawing.Graphics g, System.Drawing.Rectangle rect)
+		{
+			if (HasHorizontalLine)
+			{
+				using (Pen aPen = new Pen(HorisontalLineColor))
+					g.DrawLine(aPen, rect.Left, rect.Bottom, rect.Right, rect.Bottom);
+			}
+		}
+		
 		public override void DrawColLabel(System.Drawing.Graphics g, System.Drawing.Rectangle rect, string sDay)
 		{
 			StringFormat m_Format = new StringFormat();
 			m_Format.Alignment = StringAlignment.Center;
 			m_Format.FormatFlags = StringFormatFlags.NoWrap;
 			m_Format.LineAlignment = StringAlignment.Center;
-
-			using (Pen aPen = new Pen(HeaderTitleSplitLineColor))
-				g.DrawLine(aPen, rect.Right, rect.Top, rect.Right, rect.Bottom);
-
+			
+			if(HasVerticalLine)
+			{
+				using (Pen aPen = new Pen(HeaderTitleSplitLineColor))
+					g.DrawLine(aPen, rect.Right, rect.Top, rect.Right, rect.Bottom);
+			}
+			
 			rect.Offset(2, 1);
 
 			g.DrawString(sDay, HeaderTitleFont, SystemBrushes.WindowText, rect, m_Format);
