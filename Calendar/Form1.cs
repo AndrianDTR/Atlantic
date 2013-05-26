@@ -77,22 +77,22 @@ namespace CalendarTest
 
         private void button6_Click(object sender, EventArgs e)
         {
-            dayView1.ShowWeeks = 1;
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            dayView1.ShowWeeks = 3;
+           
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-			dayView1.ShowWeeks = 6;
+			
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-			dayView1.ShowWeeks = 10;
+			
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -128,7 +128,7 @@ namespace CalendarTest
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            dayView1.WeekLabelHeight = trackBar1.Value;
+            dayView1.RowHeight = trackBar1.Value;
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)

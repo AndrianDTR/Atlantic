@@ -54,7 +54,6 @@ namespace CalendarTest
             // 
             drawTool4.DayView = this.dayView1;
             this.dayView1.ActiveTool = drawTool4;
-            this.dayView1.ShowWeeks = 6;
             this.dayView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dayView1.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.dayView1.Location = new System.Drawing.Point(0, 0);
