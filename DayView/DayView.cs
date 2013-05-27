@@ -19,6 +19,7 @@ namespace CalendarTest
 		private Button m_btnNext;
 		private Panel m_dataPanel;
 		private Panel m_headerPanel;
+		private Panel m_scrollPanel;
         private VScrollBar m_Scrollbar;
         
         private DrawTool drawTool;
@@ -66,22 +67,29 @@ namespace CalendarTest
 			m_headerPanel.Margin = Padding.Empty;
 			m_grid.Controls.Add(m_headerPanel, 0, 1);
 			
+			
 			m_dataPanel = new Panel();
 			m_dataPanel.Visible = true;
 			m_dataPanel.Height = m_nNavButtonsHeight;
 			m_dataPanel.Dock = DockStyle.Fill;
 			m_dataPanel.Margin = Padding.Empty;
-						
+
 			m_Scrollbar = new VScrollBar();
-            m_Scrollbar.SmallChange = RowHeight;
+			m_Scrollbar.SmallChange = RowHeight;
 			m_Scrollbar.LargeChange = RowHeight * 5;
 			m_Scrollbar.Minimum = RowHeight;
 			m_Scrollbar.Maximum = 53 * RowHeight;
-            m_Scrollbar.Dock = DockStyle.Right;
-            m_Scrollbar.Visible = true;
-            m_Scrollbar.Value = RowHeight;
+			m_Scrollbar.Visible = true;
+			m_Scrollbar.Value = RowHeight;
 			
-            m_dataPanel.Controls.Add(m_Scrollbar);
+			m_scrollPanel = new Panel();
+			m_scrollPanel.Visible = true;
+			m_scrollPanel.Width = m_Scrollbar.Width;
+			m_scrollPanel.Dock = DockStyle.Right;
+			m_scrollPanel.Margin = Padding.Empty;
+			m_scrollPanel.Controls.Add(m_Scrollbar);
+
+			m_dataPanel.Controls.Add(m_scrollPanel);
 			
             editbox = new TextBox();
             editbox.Multiline = true;
@@ -107,6 +115,8 @@ namespace CalendarTest
 			drawTool = new DrawTool();
             drawTool.DayView = this;
             activeTool = drawTool;
+			
+			m_Scrollbar.Dock = DockStyle.Fill;
 
 			this.Renderer = new DefaultRenderer();
 			
@@ -114,6 +124,14 @@ namespace CalendarTest
             m_Scrollbar.Scroll += new ScrollEventHandler(this.OnScroll);
 			m_headerPanel.Paint += new PaintEventHandler(this.OnHeaderPaint);
 			m_dataPanel.Paint += new PaintEventHandler(this.OnDataPaint);
+
+			m_scrollPanel.Paint += new PaintEventHandler(this.OnScrollPaint);
+			
+			m_btnPrev.Paint += new PaintEventHandler(this.OnPrevBtnPaint);
+			m_btnPrev.Click += new EventHandler(this.OnPrevBtnClick);
+			
+			m_btnNext.Paint += new PaintEventHandler(this.OnNextBtnPaint);
+			m_btnNext.Click += new EventHandler(this.OnNextBtnClick);
         }
 
         #endregion
@@ -225,6 +243,8 @@ namespace CalendarTest
 			int nWeeks = GetWeekOfYear(new DateTime(startDate.Year, 12, 31));
 			m_Scrollbar.Maximum = (nWeeks + 1) * RowHeight;
             m_Scrollbar.Value = GetWeekOfYear(StartDate) * RowHeight;
+            m_btnPrev.Text = (startDate.Year - 1).ToString();
+			m_btnNext.Text = (startDate.Year + 1).ToString();
 			Redraw();
         }
 
@@ -747,6 +767,7 @@ namespace CalendarTest
 				if(nCol == 0)
 				{
 					rCol.Width = RowLabelWidth;
+					renderer.DrawHeaderLabelBg(e.Graphics, rCol);
 					renderer.DrawColLabel(e.Graphics, rCol, "");
 					rCol.Width = colW;
 					rCol.X += RowLabelWidth;
@@ -757,29 +778,10 @@ namespace CalendarTest
 					rCol.X += colW;
 				}
 			}
-			
-			//Rectangle rRow = rect;
-			//rRow.Width = renderer.WeekLabelWidth;
-			//for (int nRow = 0; nRow < ShowWeeks + 1; nRow++)
-			//{
-			//    if (nRow == 0)
-			//    {
-			//        rRow.Height = renderer.HeaderHeight;
-			//        renderer.DrawRowLabel(e.Graphics, rRow, "");
-			//        rRow.Y += renderer.HeaderHeight;
-			//    }
-			//    else
-			//    {
-			//        rRow.Height = rowH;
-			//        string weekNum = GetWeekOfYear(StartDate.AddDays((nRow-1) * 7)).ToString();
-			//        renderer.DrawRowLabel(e.Graphics, rRow, weekNum);
-			//        rRow.Y += rowH;
-			//    }
-			//}
-			
 			e.Graphics.ResetClip();
 		}
-
+		
+		/*
 		private void DrawCalendarTable(PaintEventArgs e, Rectangle rect)
 		{
 			e.Graphics.SetClip(rect);
@@ -815,7 +817,7 @@ namespace CalendarTest
 			}
 			
 			e.Graphics.ResetClip();
-		}
+		}//*/
 		
 		private void DrawWeeks(PaintEventArgs e, Rectangle rect)
 		{
@@ -843,14 +845,14 @@ namespace CalendarTest
 				for (int nCol = 0; nCol < 7 + 1; nCol++)
 				{
 					Rectangle rDraw = rCell;
-					rDraw.Inflate(0, -1);
+					rDraw.Width -= 1;
+					rDraw.Height -= 1;
 					
 					if(nCol == 0)
 					{
 						int weekNum = (nWeek + nRow);
 						int overflow = weekNum % (nWeeks + 1);
 						weekNum = overflow == 0 ? 1 : overflow;
-						renderer.DrawRowLabelBg(e.Graphics, rDraw);
 						renderer.DrawRowLabel(e.Graphics, rDraw, weekNum.ToString());
 						rCell.Width = colW;
 						rCell.X += RowLabelWidth;
@@ -859,7 +861,6 @@ namespace CalendarTest
 					{
 						weekInfo[nCol-1].bSelected = weekInfo[nCol-1].date == SelectedDate ? true : false;
 						weekInfo[nCol-1].bCurMonth = weekInfo[nCol-1].date.Month == StartDate.Month ? true : false;
-						renderer.DrawCellBg(e.Graphics, rDraw, weekInfo[nCol-1]);
 						renderer.DrawCell(e.Graphics, rDraw, weekInfo[nCol-1]);
 						rCell.X += colW;
 					}
@@ -1030,9 +1031,43 @@ namespace CalendarTest
 
 			Rectangle rRect = new Rectangle(0, 0, p.Width - m_Scrollbar.Width, p.Height);
 
-			DrawCalendarTable(e, rRect);
+			//DrawCalendarTable(e, rRect);
 			DrawWeeks(e, rRect);
 		}
+
+		private void OnPrevBtnPaint(object sender, PaintEventArgs e)
+		{
+			Button p = (Button)sender;
+			Rectangle rRect = new Rectangle(0, 0, p.Width, p.Height);
+			renderer.DrawPrevBtn(e.Graphics, rRect, 0, p.Text);
+		}
+
+		private void OnNextBtnPaint(object sender, PaintEventArgs e)
+		{
+			Button p = (Button)sender;
+			Rectangle rRect = new Rectangle(0, 0, p.Width, p.Height);
+			renderer.DrawNextBtn(e.Graphics, rRect, 0, p.Text);
+		}
+
+		private void OnScrollPaint(object sender, PaintEventArgs e)
+		{
+			Panel p = (Panel)sender;
+			Rectangle rRect = new Rectangle(0, 0, p.Width, p.Height);
+			renderer.DrawScrollBar(e.Graphics, rRect, p);
+		}
+
+		private void OnPrevBtnClick(object sender, EventArgs e)
+		{
+			Button p = (Button)sender;
+			StartDate = StartDate.AddYears(-1);
+		}
+
+		private void OnNextBtnClick(object sender, EventArgs e)
+		{
+			Button p = (Button)sender;
+			StartDate = StartDate.AddYears(1);
+		}
+		
 		
         #endregion
 
@@ -1046,3 +1081,4 @@ namespace CalendarTest
         #endregion
     }
 }
+

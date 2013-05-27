@@ -142,7 +142,7 @@ namespace CalendarTest
 			}
 		}
 		private Color horisontalLineColor = Color.FromArgb(141, 174, 217);
-		public virtual Color HorisontalLineColor
+		public virtual Color GridColor
 		{
 			get
 			{
@@ -363,16 +363,21 @@ namespace CalendarTest
 		/******************************************/
 				
 		public abstract void DrawBg(Graphics g, Rectangle rect, System.Drawing.Drawing2D.SmoothingMode smooth);
+		public abstract void DrawHeaderLabelBg(Graphics g, Rectangle rect);
 		public abstract void DrawHeaderBg(Graphics g, Rectangle rect);
 		
-		public abstract void DrawRowLabelBg(Graphics g, Rectangle rect);
-		public abstract void DrawColBg(Graphics g, Rectangle rect);
-		public abstract void DrawRowBg(Graphics g, Rectangle rect);
-		public abstract void DrawCellBg(Graphics g, Rectangle rect, CellInfo ci);
+		//public abstract void DrawRowLabelBg(Graphics g, Rectangle rect);
+		//public abstract void DrawColBg(Graphics g, Rectangle rect);
+		//public abstract void DrawRowBg(Graphics g, Rectangle rect);
+		//public abstract void DrawCellBg(Graphics g, Rectangle rect, CellInfo ci);
 
 		public abstract void DrawColLabel(Graphics g, Rectangle rect, string sDay);
 		public abstract void DrawRowLabel(Graphics g, Rectangle rect, string sLabel);
 		public abstract void DrawCell(Graphics g, Rectangle rect, CellInfo ci);
+
+		public abstract void DrawPrevBtn(Graphics g, Rectangle rect, int state, String text);
+		public abstract void DrawNextBtn(Graphics g, Rectangle rect, int state, String text);
+		public abstract void DrawScrollBar(Graphics g, Rectangle rect, Panel obj);
 		
     }
 }

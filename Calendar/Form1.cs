@@ -135,5 +135,10 @@ namespace CalendarTest
         {
             dayView1.StartDate = monthCalendar1.SelectionStart;
         }
+
+		private void dayView1_Click(object sender, EventArgs e)
+		{
+
+		}
     }
 }
