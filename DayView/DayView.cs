@@ -688,20 +688,20 @@ namespace CalendarTest
 			return Shift(names, shift);
 		}
 
-		private int[] GetHeaderWidth(Rectangle rect)
-		{
-			// Week contain 7 days + weekLabel
-			int[] widths = new int[8];
+		//private int[] GetHeaderWidth(Rectangle rect)
+		//{
+		//    // Week contain 7 days + weekLabel
+		//    int[] widths = new int[8];
 
-			widths[0] = renderer.WeekLabelWidth;
-			int dayWidth = (rect.Width - renderer.WeekLabelWidth) / 7;
+		//    widths[0] = renderer.WeekLabelWidth;
+		//    int dayWidth = (rect.Width - renderer.WeekLabelWidth) / 7;
 
-			for (int n = 1; n < widths.Length; n++)
-			{
-				widths[n] = dayWidth;
-			}
-			return widths;
-		}
+		//    for (int n = 1; n < widths.Length; n++)
+		//    {
+		//        widths[n] = dayWidth;
+		//    }
+		//    return widths;
+		//}
 		
 		public RectType IsInRect(int x, int y)
 		{
@@ -780,45 +780,7 @@ namespace CalendarTest
 			}
 			e.Graphics.ResetClip();
 		}
-		
-		/*
-		private void DrawCalendarTable(PaintEventArgs e, Rectangle rect)
-		{
-			e.Graphics.SetClip(rect);
-			int rows = rect.Height / RowHeight + 1;
-			rect.Height = rows * RowHeight;
-			
-			int colW = (rect.Width - RowLabelWidth) / 7;
-			int rowH = RowHeight;
-
-			Rectangle rCol = rect;
-			rCol.Width = RowLabelWidth;
-			for (int nCol = 0; nCol < 7 + 1; nCol++)
-			{
-				if (nCol == 0)
-				{
-					renderer.DrawRowLabelBg(e.Graphics, rCol);
-					rCol.X += RowLabelWidth;
-				}
-				else
-				{
-					renderer.DrawColBg(e.Graphics, rCol);
-					rCol.X += colW;
-				}
-				rCol.Width = colW;
-			}
-			
-			Rectangle rRow = rect;
-			rRow.Height = RowHeight;
-			for(int nRow = 0; nRow < rows; nRow++)
-			{
-				renderer.DrawRowBg(e.Graphics, rRow);
-				rRow.Y += rowH;
-			}
-			
-			e.Graphics.ResetClip();
-		}//*/
-		
+	
 		private void DrawWeeks(PaintEventArgs e, Rectangle rect)
 		{
 			e.Graphics.SetClip(rect);
@@ -867,7 +829,7 @@ namespace CalendarTest
 				}
 				rCell.Y += RowHeight;
 			}
-			//*/
+			
 			e.Graphics.ResetClip();
 		}
 
@@ -879,22 +841,6 @@ namespace CalendarTest
         }
         
 		/*
-        private Rectangle GetHourRangeRectangle(DateTime start, DateTime end, Rectangle baseRectangle)
-        {
-            Rectangle rect = baseRectangle;
-
-            int startY;
-            int endY;
-
-            startY = (start.Hour * weekLabelHeight * 2) + ((start.Minute * weekLabelHeight) / 30);
-            endY = (end.Hour * weekLabelHeight * 2) + ((end.Minute * weekLabelHeight) / 30);
-
-            rect.Y = startY - scrollbar.Value + this.HeaderHeight;
-
-            rect.Height = endY - startY;
-
-            return rect;
-        }
 
         private void DrawDay(PaintEventArgs e, Rectangle rect, DateTime time)
         {
@@ -1031,7 +977,6 @@ namespace CalendarTest
 
 			Rectangle rRect = new Rectangle(0, 0, p.Width - m_Scrollbar.Width, p.Height);
 
-			//DrawCalendarTable(e, rRect);
 			DrawWeeks(e, rRect);
 		}
 
@@ -1067,8 +1012,7 @@ namespace CalendarTest
 			Button p = (Button)sender;
 			StartDate = StartDate.AddYears(1);
 		}
-		
-		
+				
         #endregion
 
         #region Events
