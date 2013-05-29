@@ -22,8 +22,12 @@ namespace CalendarTest
 		private Panel m_scrollPanel;
         private VScrollBar m_Scrollbar;
         
-        private DrawTool drawTool;
-        
+        //private DrawTool drawTool;
+
+		Rectangle m_rSelectionStartAt;
+		DateTime m_dSelectionStartAt;
+		bool m_bSelectionChanged;
+		
         #endregion
         
         #region Constants
@@ -66,12 +70,11 @@ namespace CalendarTest
 			m_headerPanel.Dock = DockStyle.Fill;
 			m_headerPanel.Margin = Padding.Empty;
 			m_grid.Controls.Add(m_headerPanel, 0, 1);
-			
-			
+						
 			m_dataPanel = new Panel();
 			m_dataPanel.Visible = true;
 			m_dataPanel.Height = m_nNavButtonsHeight;
-			m_dataPanel.Dock = DockStyle.Fill;
+			m_dataPanel.Dock = DockStyle.None;
 			m_dataPanel.Margin = Padding.Empty;
 
 			m_Scrollbar = new VScrollBar();
@@ -87,9 +90,9 @@ namespace CalendarTest
 			m_scrollPanel.Width = m_Scrollbar.Width;
 			m_scrollPanel.Dock = DockStyle.Right;
 			m_scrollPanel.Margin = Padding.Empty;
-			m_scrollPanel.Controls.Add(m_Scrollbar);
-
 			m_dataPanel.Controls.Add(m_scrollPanel);
+						
+			m_scrollPanel.Controls.Add(m_Scrollbar);
 			
             editbox = new TextBox();
             editbox.Multiline = true;
@@ -112,15 +115,10 @@ namespace CalendarTest
 			m_grid.ResumeLayout();
 			this.Controls.Add(m_grid);
 			
-			drawTool = new DrawTool();
-            drawTool.DayView = this;
-            activeTool = drawTool;
-			
 			m_Scrollbar.Dock = DockStyle.Fill;
 
 			this.Renderer = new DefaultRenderer();
-			
-            //UpdateWorkingHours();
+
             m_Scrollbar.Scroll += new ScrollEventHandler(this.OnScroll);
 			m_headerPanel.Paint += new PaintEventHandler(this.OnHeaderPaint);
 			m_dataPanel.Paint += new PaintEventHandler(this.OnDataPaint);
@@ -132,6 +130,10 @@ namespace CalendarTest
 			
 			m_btnNext.Paint += new PaintEventHandler(this.OnNextBtnPaint);
 			m_btnNext.Click += new EventHandler(this.OnNextBtnClick);
+			
+			m_dataPanel.MouseDown += new MouseEventHandler(this.OnDataMouseDown);
+			m_dataPanel.MouseUp += new MouseEventHandler(this.OnDataMouseUp);
+			m_dataPanel.MouseMove += new MouseEventHandler(this.OnDataMouseMove);
         }
 
         #endregion
@@ -333,7 +335,143 @@ namespace CalendarTest
         #endregion
 
         #region Event Handlers
+		private void OnHeaderPaint(object sender, PaintEventArgs e)
+		{
+			Panel p = (Panel)sender;
+			Graphics g = e.Graphics;
 
+			Rectangle rRect = new Rectangle(0, 0, p.Width, p.Height);
+
+			DrawHeaders(e, rRect);
+		}
+
+		private void OnDataPaint(object sender, PaintEventArgs e)
+		{
+			Panel p = (Panel)sender;
+
+			DateTime weekStartDate = GetFirstDateOfWeek(this.StartDate.Year, GetWeekOfYear(this.StartDate));
+
+			renderer.DrawBg(e.Graphics, p.ClientRectangle, System.Drawing.Drawing2D.SmoothingMode.AntiAlias);
+
+			Rectangle rRect = new Rectangle(0, 0, p.Width - m_Scrollbar.Width, p.Height);
+
+			DrawWeeks(e, rRect);
+		}
+
+		private void OnPrevBtnPaint(object sender, PaintEventArgs e)
+		{
+			Button p = (Button)sender;
+			Rectangle rRect = new Rectangle(0, 0, p.Width, p.Height);
+			renderer.DrawPrevBtn(e.Graphics, rRect, 0, p.Text);
+		}
+
+		private void OnNextBtnPaint(object sender, PaintEventArgs e)
+		{
+			Button p = (Button)sender;
+			Rectangle rRect = new Rectangle(0, 0, p.Width, p.Height);
+			renderer.DrawNextBtn(e.Graphics, rRect, 0, p.Text);
+		}
+
+		private void OnScrollPaint(object sender, PaintEventArgs e)
+		{
+			Panel p = (Panel)sender;
+			Rectangle rRect = new Rectangle(0, 0, p.Width, p.Height);
+			renderer.DrawScrollBar(e.Graphics, rRect, p);
+		}
+
+		private void OnPrevBtnClick(object sender, EventArgs e)
+		{
+			Button p = (Button)sender;
+			StartDate = StartDate.AddYears(-1);
+		}
+
+		private void OnNextBtnClick(object sender, EventArgs e)
+		{
+			Button p = (Button)sender;
+			StartDate = StartDate.AddYears(1);
+		}
+		
+		void OnScroll(object sender, ScrollEventArgs e)
+		{
+			m_dataPanel.SuspendLayout();
+			m_dataPanel.Invalidate();
+
+			if (editbox.Visible)
+				//scroll text box too
+				editbox.Top += e.OldValue - e.NewValue;
+			m_dataPanel.ResumeLayout();
+		}
+
+		protected override void SetBoundsCore(int x, int y, int width, int height, BoundsSpecified specified)
+		{
+			base.SetBoundsCore(x, y, width, height, specified);
+
+			m_btnNext.Height = NavButtonsHeight;
+			m_btnPrev.Height = NavButtonsHeight;
+			m_headerPanel.Height = HeaderHeight;
+			m_dataPanel.Location = new Point(0, NavButtonsHeight + HeaderHeight);
+			m_dataPanel.Width = this.Width;
+			m_dataPanel.Height = height - 2 * NavButtonsHeight - HeaderHeight;
+		}
+
+		protected void OnDataMouseDown(object sender, MouseEventArgs e)
+		{
+			// Capture focus
+			this.Focus();
+
+			if (CurrentlyEditing)
+			{
+				FinishEditing(false);
+			}
+
+			if (e.Button == MouseButtons.Left)
+			{
+				m_dSelectionStartAt = GetDateAt(e.X, e.Y);
+				SelectedDate = m_dSelectionStartAt;
+				
+				m_rSelectionStartAt = GetRectAt(e.X, e.Y);
+				m_bSelectionChanged = true;
+
+				m_dataPanel.Capture = true;
+				m_dataPanel.Invalidate();
+			}
+
+			base.OnMouseDown(e);
+		}
+
+		protected void OnDataMouseMove(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Left && m_bSelectionChanged)
+			{
+				m_dataPanel.Invalidate(m_rSelectionStartAt);
+				m_rSelectionStartAt = GetRectAt(e.X, e.Y);
+				m_dataPanel.Invalidate(m_rSelectionStartAt);
+				SelectedDate = GetDateAt(e.X, e.Y);
+			}
+			
+			base.OnMouseMove(e);
+		}
+
+		protected void OnDataMouseUp(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Left)
+			{
+				m_dataPanel.Capture = false;
+				m_bSelectionChanged = false;
+
+				RaiseSelectionChanged(EventArgs.Empty);
+
+				if (Complete != null)
+					Complete(this, EventArgs.Empty);
+			}
+
+			m_rSelectionStartAt = GetRectAt(e.X, e.Y);
+			m_dataPanel.Invalidate();
+			
+			base.OnMouseUp(e);
+		}
+		/*****************************************/
+		
         void editbox_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -350,74 +488,13 @@ namespace CalendarTest
 
         void selectionTool_Complete(object sender, EventArgs e)
         {
+			;
             //if (selectedAppointment != null)
-            {
-                //System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(EnterEditMode));
-            }
+            //{
+            //	System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(EnterEditMode));
+            //}
         }
-		
-		void OnScroll(object sender, ScrollEventArgs e)
-        {
-			m_dataPanel.SuspendLayout();
-			m_dataPanel.Invalidate();
-
-            if (editbox.Visible)
-                //scroll text box too
-                editbox.Top += e.OldValue - e.NewValue;
-            m_dataPanel.ResumeLayout();
-        }
-		
-        protected override void SetBoundsCore(int x, int y, int width, int height, BoundsSpecified specified)
-        {
-            base.SetBoundsCore(x, y, width, height, specified);
-            
-            m_btnNext.Height = NavButtonsHeight;
-			m_btnPrev.Height = NavButtonsHeight;
-			m_headerPanel.Height = HeaderHeight;
-			m_dataPanel.Height = height - 2 * NavButtonsHeight - HeaderHeight;
-		}
-
-        protected override void OnMouseDown(MouseEventArgs e)
-        {
-            // Capture focus
-            this.Focus();
-
-            if (CurrentlyEditing)
-            {
-                FinishEditing(false);
-            }
-			
-			switch(IsInRect(e.X, e.Y))
-            {
-				case RectType.Cell:
-					selectedDate = GetDateAt(e.X, e.Y);
-					break;
-			}
-			Redraw();
-            
-            if (activeTool != null)
-            {
-                activeTool.MouseDown(e);
-            }
-
-            base.OnMouseDown(e);
-        }
-
-        protected override void OnMouseMove(MouseEventArgs e)
-        {
-            if (activeTool != null)
-                activeTool.MouseMove(e);
-
-            base.OnMouseMove(e);
-        }
-
-        protected override void OnMouseUp(MouseEventArgs e)
-        {
-            if (activeTool != null)
-                activeTool.MouseUp(e);
-
-            base.OnMouseUp(e);
-        }
+				
 		
 		/*
         System.Collections.Hashtable cachedAppointments = new System.Collections.Hashtable();
@@ -596,9 +673,10 @@ namespace CalendarTest
 
         public DateTime GetDateAt(int x, int y)
         {
-			DateTime date = GetFirstDateOfWeek(StartDate.Year, GetWeekOfYear(StartDate));;
-			
-			int dayWidth = (m_dataPanel.Width - RowLabelWidth) / 7;
+			int nWeek = m_Scrollbar.Value / RowHeight;
+			DateTime date = GetFirstDateOfWeek(StartDate.Year, nWeek);
+
+			int dayWidth = (m_dataPanel.Width - RowLabelWidth - m_scrollPanel.Width) / 7;
 			int weekHeight = RowHeight;
 						
 			x -= RowLabelWidth;
@@ -617,6 +695,27 @@ namespace CalendarTest
 				
             return date;
         }
+
+		public Rectangle GetRectAt(int x, int y)
+		{
+			Rectangle rect = new Rectangle();
+
+			int colWidth = (m_dataPanel.Width - RowLabelWidth - m_scrollPanel.Width) / 7;
+			
+			rect.Width = colWidth;
+			rect.Height = RowHeight;
+			
+			if(x <= RowLabelWidth)
+			{
+				rect.X = 0;
+				rect.Width = RowLabelWidth;
+			}
+			else
+				rect.X = ((x - RowLabelWidth) / colWidth) * colWidth + RowLabelWidth;
+			rect.Y = (y / RowHeight) * RowHeight;
+			
+			return rect;
+		}
 
         #endregion
 
@@ -703,28 +802,6 @@ namespace CalendarTest
 		//    return widths;
 		//}
 		
-		public RectType IsInRect(int x, int y)
-		{
-			if (new Rectangle(m_dataPanel.Left + RowLabelWidth
-				, m_dataPanel.Top
-				, m_dataPanel.Width - RowLabelWidth
-				, m_dataPanel.Height).Contains(x, y))
-				return RectType.Cell;
-
-			if (new Rectangle(m_dataPanel.Left
-				, m_dataPanel.Top
-				, RowLabelWidth
-				, m_dataPanel.Height).Contains(x, y))
-				return RectType.RowLabel;
-
-			if (new Rectangle(m_headerPanel.Left
-				, m_headerPanel.Top
-				, m_headerPanel.Width - m_Scrollbar.Width
-				, m_headerPanel.Height).Contains(x, y))
-				return RectType.ColLabel;
-
-			return RectType.None;
-		}
 		#endregion 
 		
 		#region Drawing Methods
@@ -747,6 +824,13 @@ namespace CalendarTest
 			return infos;
 		}
 
+		protected void Redraw()
+		{
+			Invalidate();
+			m_headerPanel.Invalidate();
+			m_dataPanel.Invalidate();
+		}
+		
 		private void DrawHeaders(PaintEventArgs e, Rectangle rect)
 		{
 			e.Graphics.SetClip(rect);
@@ -833,13 +917,6 @@ namespace CalendarTest
 			e.Graphics.ResetClip();
 		}
 
-		protected void Redraw()
-        {
-			Invalidate();
-			m_headerPanel.Invalidate();
-			m_dataPanel.Invalidate();
-        }
-        
 		/*
 
         private void DrawDay(PaintEventArgs e, Rectangle rect, DateTime time)
@@ -957,67 +1034,12 @@ namespace CalendarTest
             }//*/
         }
 
-		private void OnHeaderPaint(object sender, PaintEventArgs e)
-		{
-			Panel p = (Panel)sender;
-			Graphics g = e.Graphics;
-
-			Rectangle rRect = new Rectangle(0, 0, p.Width, p.Height);
-
-			DrawHeaders(e, rRect);
-		}
-
-		private void OnDataPaint(object sender, PaintEventArgs e)
-		{
-			Panel p = (Panel)sender;
-			
-			DateTime weekStartDate = GetFirstDateOfWeek(this.StartDate.Year, GetWeekOfYear(this.StartDate));
-
-			renderer.DrawBg(e.Graphics, p.ClientRectangle, System.Drawing.Drawing2D.SmoothingMode.AntiAlias);
-
-			Rectangle rRect = new Rectangle(0, 0, p.Width - m_Scrollbar.Width, p.Height);
-
-			DrawWeeks(e, rRect);
-		}
-
-		private void OnPrevBtnPaint(object sender, PaintEventArgs e)
-		{
-			Button p = (Button)sender;
-			Rectangle rRect = new Rectangle(0, 0, p.Width, p.Height);
-			renderer.DrawPrevBtn(e.Graphics, rRect, 0, p.Text);
-		}
-
-		private void OnNextBtnPaint(object sender, PaintEventArgs e)
-		{
-			Button p = (Button)sender;
-			Rectangle rRect = new Rectangle(0, 0, p.Width, p.Height);
-			renderer.DrawNextBtn(e.Graphics, rRect, 0, p.Text);
-		}
-
-		private void OnScrollPaint(object sender, PaintEventArgs e)
-		{
-			Panel p = (Panel)sender;
-			Rectangle rRect = new Rectangle(0, 0, p.Width, p.Height);
-			renderer.DrawScrollBar(e.Graphics, rRect, p);
-		}
-
-		private void OnPrevBtnClick(object sender, EventArgs e)
-		{
-			Button p = (Button)sender;
-			StartDate = StartDate.AddYears(-1);
-		}
-
-		private void OnNextBtnClick(object sender, EventArgs e)
-		{
-			Button p = (Button)sender;
-			StartDate = StartDate.AddYears(1);
-		}
-				
-        #endregion
+		#endregion
 
         #region Events
 
         public event EventHandler SelectionChanged;
+		public event EventHandler Complete;
         //public event ResolveAppointmentsEventHandler ResolveAppointments;
         //public event NewAppointmentEventHandler NewAppointment;
         //public event EventHandler<AppointmentEventArgs> AppoinmentMove;

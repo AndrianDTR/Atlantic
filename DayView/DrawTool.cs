@@ -34,7 +34,6 @@ namespace CalendarTest
 				if (m_SelectionChanged)
 				{
 					m_DayView.SelectedDate = m_DayView.GetDateAt(e.X, e.Y);
-					m_DayView.Invalidate();
 				}
 			}
 		}
@@ -57,17 +56,12 @@ namespace CalendarTest
         {
             if (e.Button == MouseButtons.Left)
             {
-				//if mouse in calendar rgn
-				if(RectType.Cell == m_DayView.IsInRect(e.X, e.Y))
-                {
-					m_SelectionStartAt = m_DayView.GetDateAt(e.X, e.Y);
+				m_SelectionStartAt = m_DayView.GetDateAt(e.X, e.Y);
 
-					m_DayView.SelectedDate = m_SelectionStartAt;
-					m_SelectionChanged = true;
+				m_DayView.SelectedDate = m_SelectionStartAt;
+				m_SelectionChanged = true;
 
-					m_DayView.Invalidate();
-					m_DayView.Capture = true;
-                }
+				m_DayView.Capture = true;
             }
         }
     }

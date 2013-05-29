@@ -295,15 +295,24 @@ namespace CalendarTest
 				g.DrawLine(backBrush, rect.Left, rect.Bottom, rect.Right, rect.Bottom);
 			}
 			
-			rect.Offset(2, 1);
-
+			Rectangle rText = rect;
+			rText.Offset(2, 1);
+			rect.Inflate(1, 1);
+			rect.Offset(1, 0);
+			
 			if (ci.bSelected)
 			{
-				g.DrawString(ci.sTitle, CellDataBoldFont, SystemBrushes.HighlightText, rect, m_Format);
+				using (SolidBrush backBrush = new SolidBrush(SelectionColor))
+					g.FillRectangle(backBrush, rect);
+					
+				//using (Pen borderPen = new Pen(SelectionBorderColor))
+				//	g.DrawRectangle(borderPen, rect);
+			
+				g.DrawString(ci.sTitle, CellDataBoldFont, SystemBrushes.HighlightText, rText, m_Format);
 			}
 			else
 			{
-				g.DrawString(ci.sTitle, CellDataBoldFont, SystemBrushes.WindowText, rect, m_Format);
+				g.DrawString(ci.sTitle, CellDataBoldFont, SystemBrushes.WindowText, rText, m_Format);
 			}
 			
 			g.TextRenderingHint = TextRenderingHint.SystemDefault;
