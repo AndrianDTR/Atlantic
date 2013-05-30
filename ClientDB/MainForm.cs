@@ -18,12 +18,12 @@ namespace ClientDB
 		
 		private void OnShown(object sender, EventArgs e)
 		{
-			search.Focus();
+			m_Search.Focus();
 		}
 
 		private void clientByBarcodeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			search.Focus();
+			m_Search.Focus();
 		}
 
         private void OnLoad(object sender, EventArgs e)
@@ -57,6 +57,31 @@ namespace ClientDB
 			Schedule sc = new Schedule();
 			sc.ShowDialog(this);
 			
+		}
+
+		private void OnSearchKeyUp(object sender, KeyEventArgs e)
+		{
+			if ((e.KeyCode == Keys.Enter) || (e.KeyCode == Keys.Return))
+			{
+				SearchById(m_Search.Text);
+				m_Search.Clear();
+			}
+		}
+		
+		private void SearchById(String id)
+		{
+			;
+		}
+
+
+		private void OnKeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (!m_Search.Focused)
+			{
+				m_Search.Focus();
+				m_Search.Text = e.KeyChar.ToString();
+				m_Search.Select(1, 1);
+			}
 		}
     }
 }

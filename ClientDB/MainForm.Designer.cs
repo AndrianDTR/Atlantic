@@ -63,7 +63,7 @@
 			this.trainer = new System.Windows.Forms.ColumnHeader();
 			this.comment = new System.Windows.Forms.ColumnHeader();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.search = new System.Windows.Forms.TextBox();
+			this.m_Search = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.export = new System.Windows.Forms.Button();
 			this.shedule = new System.Windows.Forms.Button();
@@ -348,7 +348,7 @@
 			// 
 			// panel1
 			// 
-			this.panel1.Controls.Add(this.search);
+			this.panel1.Controls.Add(this.m_Search);
 			this.panel1.Controls.Add(this.label2);
 			this.panel1.Controls.Add(this.export);
 			this.panel1.Controls.Add(this.shedule);
@@ -362,14 +362,16 @@
 			this.panel1.Size = new System.Drawing.Size(905, 49);
 			this.panel1.TabIndex = 5;
 			// 
-			// search
+			// m_Search
 			// 
-			this.search.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.search.Location = new System.Drawing.Point(447, 2);
-			this.search.Name = "search";
-			this.search.Size = new System.Drawing.Size(454, 44);
-			this.search.TabIndex = 7;
-			this.search.TextChanged += new System.EventHandler(this.OnSearch);
+			this.m_Search.AcceptsReturn = true;
+			this.m_Search.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.m_Search.Location = new System.Drawing.Point(447, 2);
+			this.m_Search.Name = "m_Search";
+			this.m_Search.Size = new System.Drawing.Size(454, 44);
+			this.m_Search.TabIndex = 7;
+			this.m_Search.TextChanged += new System.EventHandler(this.OnSearch);
+			this.m_Search.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnSearchKeyUp);
 			// 
 			// label2
 			// 
@@ -444,12 +446,14 @@
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.menuStrip1);
+			this.KeyPreview = true;
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Clients";
 			this.Load += new System.EventHandler(this.OnLoad);
 			this.Shown += new System.EventHandler(this.OnShown);
+			this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnKeyPress);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.tableLayoutPanel1.ResumeLayout(false);
@@ -496,7 +500,7 @@
         private System.Windows.Forms.Button payments;
         private System.Windows.Forms.Button edit;
         private System.Windows.Forms.Button remove;
-        private System.Windows.Forms.TextBox search;
+        private System.Windows.Forms.TextBox m_Search;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usersAndPasswordsToolStripMenuItem;
