@@ -21,12 +21,15 @@ namespace CalendarTest
 		private Panel m_headerPanel;
 		private Panel m_scrollPanel;
         private VScrollBar m_Scrollbar;
-        
-        //private DrawTool drawTool;
+
+		private ToolTip m_ToolTip;
+
+		//private DrawTool drawTool;
 
 		Rectangle m_rSelectionStartAt;
 		DateTime m_dSelectionStartAt;
 		bool m_bSelectionChanged;
+		bool m_bMouseEnter = false;
 		
         #endregion
         
@@ -45,7 +48,7 @@ namespace CalendarTest
 
 			m_grid = new TableLayoutPanel();
 			m_grid.SuspendLayout();
-			
+				
 			m_grid.ColumnCount = 1;
 			m_grid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
 			m_grid.Dock = DockStyle.Fill;
@@ -71,18 +74,23 @@ namespace CalendarTest
 			m_headerPanel.Dock = DockStyle.Fill;
 			m_headerPanel.Margin = Padding.Empty;
 			m_grid.Controls.Add(m_headerPanel, 0, 1);
-						
+
+			m_ToolTip = new ToolTip();
+			m_ToolTip.AutoPopDelay = 5000;
+			m_ToolTip.InitialDelay = 100;
+			m_ToolTip.OwnerDraw = true;
+			m_ToolTip.ReshowDelay = 10;
+			m_ToolTip.IsBalloon = true;
+			m_ToolTip.Draw += new DrawToolTipEventHandler(this.OnDrawStats);
+			m_ToolTip.Popup += new PopupEventHandler(this.OnPopupStats);
+				
 			m_dataPanel = new Panel();
 			m_dataPanel.Visible = true;
 			m_dataPanel.Height = m_nNavButtonsHeight;
 			m_dataPanel.Dock = DockStyle.None;
 			m_dataPanel.Margin = Padding.Empty;
-
+						
 			m_Scrollbar = new VScrollBar();
-			m_Scrollbar.SmallChange = RowHeight;
-			m_Scrollbar.LargeChange = RowHeight * 5;
-			m_Scrollbar.Minimum = RowHeight;
-			m_Scrollbar.Maximum = 53 * RowHeight;
 			m_Scrollbar.Visible = true;
 			m_Scrollbar.Value = RowHeight;
 			
@@ -102,7 +110,7 @@ namespace CalendarTest
             editbox.KeyUp += new KeyEventHandler(editbox_KeyUp);
 			editbox.Margin = Padding.Empty;
 			m_dataPanel.Controls.Add(editbox);
-
+			
 			m_grid.Controls.Add(m_dataPanel, 0, 2);
 			
 			m_btnNext = new Button();
@@ -135,6 +143,9 @@ namespace CalendarTest
 			m_dataPanel.MouseDown += new MouseEventHandler(this.OnDataMouseDown);
 			m_dataPanel.MouseUp += new MouseEventHandler(this.OnDataMouseUp);
 			m_dataPanel.MouseMove += new MouseEventHandler(this.OnDataMouseMove);
+			m_dataPanel.MouseEnter += new EventHandler(this.OnDataMouseEnter);
+			m_dataPanel.MouseLeave += new EventHandler(this.OnDataMouseLeave);
+			this.MouseWheel += new MouseEventHandler(this.OnDataMouseWheel);
         }
 
         #endregion
@@ -426,12 +437,13 @@ namespace CalendarTest
 			{
 				m_dSelectionStartAt = GetDateAt(e.X, e.Y);
 				SelectedDate = m_dSelectionStartAt;
-				
+
+				m_dataPanel.Invalidate(m_rSelectionStartAt);
 				m_rSelectionStartAt = GetRectAt(e.X, e.Y);
 				m_bSelectionChanged = true;
 
 				m_dataPanel.Capture = true;
-				m_dataPanel.Invalidate();
+				m_dataPanel.Invalidate(m_rSelectionStartAt);				
 			}
 
 			base.OnMouseDown(e);
@@ -439,6 +451,8 @@ namespace CalendarTest
 
 		protected void OnDataMouseMove(object sender, MouseEventArgs e)
 		{
+			base.OnMouseMove(e);
+			
 			if (e.Button == MouseButtons.Left && m_bSelectionChanged)
 			{
 				m_dataPanel.Invalidate(m_rSelectionStartAt);
@@ -447,7 +461,14 @@ namespace CalendarTest
 				SelectedDate = GetDateAt(e.X, e.Y);
 			}
 			
-			base.OnMouseMove(e);
+			//Fill string with data
+			//String sTip = GetDateAt(e.X, e.Y).ToString();
+			//Rectangle rTip = GetRectAt(e.X, e.Y);
+			//if (m_ToolTip.GetToolTip(m_dataPanel) == sTip)
+			//{
+			//    return;
+			//}
+			//m_ToolTip.Show(sTip, m_dataPanel, rTip.Right - 5, rTip.Bottom - 5, int.MaxValue);
 		}
 
 		protected void OnDataMouseUp(object sender, MouseEventArgs e)
@@ -461,12 +482,44 @@ namespace CalendarTest
 
 				//if (Complete != null)
 				//	Complete(this, EventArgs.Empty);
+				SelectedDate = GetDateAt(e.X, e.Y);
 			}
 
+			m_dataPanel.Invalidate(m_rSelectionStartAt);
 			m_rSelectionStartAt = GetRectAt(e.X, e.Y);
-			m_dataPanel.Invalidate();
+			m_dataPanel.Invalidate(m_rSelectionStartAt);
 			
 			base.OnMouseUp(e);
+		}
+
+		private void OnDataMouseEnter(object sender, System.EventArgs e)
+		{
+			m_bMouseEnter = true;
+		}
+
+		private void OnDataMouseLeave(object sender, System.EventArgs e)
+		{
+			//m_ToolTip.Hide(m_dataPanel);
+			m_bMouseEnter = false;
+		}
+		
+		protected void OnDataMouseWheel(object sender, MouseEventArgs e)
+		{
+			if(m_bMouseEnter)
+			{
+				int numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / RowHeight;
+				int val = m_Scrollbar.Value;
+				if (numberOfTextLinesToMove != 0)
+				{
+					val -= numberOfTextLinesToMove * RowHeight;
+					val = val >= m_Scrollbar.Maximum ? m_Scrollbar.Maximum : val;
+					val = val <= m_Scrollbar.Minimum ? m_Scrollbar.Minimum : val;
+
+					m_Scrollbar.Value = val;
+				}
+				
+				m_dataPanel.Invalidate();
+			}
 		}
 		
 		protected override void OnResize(EventArgs e)
@@ -474,6 +527,82 @@ namespace CalendarTest
 			base.OnResize(e);
 			AdjustScrollbar();
 			Invalidate(true);
+		}
+
+		private void OnPopupStats(object sender, PopupEventArgs e)
+		{
+			if (e.AssociatedControl == m_dataPanel)
+			{
+				using (Font f = new Font("Tahoma", 9))
+				{
+					e.ToolTipSize = TextRenderer.MeasureText(
+						m_ToolTip.GetToolTip(e.AssociatedControl), f);
+				}
+			}
+		}
+
+		// Handles drawing the ToolTip.
+		private void OnDrawStats(System.Object sender, DrawToolTipEventArgs e)
+		{
+			// Draw the ToolTip differently depending on which 
+			// control this ToolTip is for.
+			// Draw a custom 3D border if the ToolTip is for button1.
+			//if (e.AssociatedControl == m_dataPanel)
+			//{
+			//    // Draw the standard background.
+			//    e.DrawBackground();
+
+			//    // Draw the custom border to appear 3-dimensional.
+			//    e.Graphics.DrawLines(SystemPens.ControlLightLight, new Point[] {
+			//        new Point (0, e.Bounds.Height - 1), 
+			//        new Point (0, 0), 
+			//        new Point (e.Bounds.Width - 1, 0)
+			//    });
+			//    e.Graphics.DrawLines(SystemPens.ControlDarkDark, new Point[] {
+			//        new Point (0, e.Bounds.Height - 1), 
+			//        new Point (e.Bounds.Width - 1, e.Bounds.Height - 1), 
+			//        new Point (e.Bounds.Width - 1, 0)
+			//    });
+
+			//    // Specify custom text formatting flags.
+			//    TextFormatFlags sf = TextFormatFlags.VerticalCenter |
+			//                         TextFormatFlags.HorizontalCenter |
+			//                         TextFormatFlags.NoFullWidthCharacterBreak;
+
+			//    // Draw the standard text with customized formatting options.
+			//    e.DrawText(sf);
+			//}
+			// Draw a custom background and text if the ToolTip is for button2.
+			//else if (e.AssociatedControl == button2)
+			//{
+			//    // Draw the custom background.
+			//    e.Graphics.FillRectangle(Brushes.Azure, e.Bounds);
+
+			//    // Draw the standard border.
+			//    e.DrawBorder();
+
+			//    // Draw the custom text.
+			//    // The using block will dispose the StringFormat automatically.
+			//    using (StringFormat sf = new StringFormat())
+			//    {
+			//        sf.Alignment = StringAlignment.Center;
+			//        sf.LineAlignment = StringAlignment.Center;
+			//        sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.None;
+			//        sf.FormatFlags = StringFormatFlags.NoWrap;
+			//        using (Font f = new Font("Tahoma", 9))
+			//        {
+			//            e.Graphics.DrawString(e.ToolTipText, f,
+			//                SystemBrushes.ActiveCaptionText, e.Bounds, sf);
+			//        }
+			//    }
+			//}
+			// Draw the ToolTip using default values if the ToolTip is for button3.
+			//else if (e.AssociatedControl == button3)
+			{
+				e.DrawBackground();
+				e.DrawBorder();
+				e.DrawText();
+			}
 		}
 		/*****************************************/
 		
@@ -668,7 +797,7 @@ namespace CalendarTest
 
         public DateTime GetDateAt(int x, int y)
         {
-			int nWeek = m_Scrollbar.Value / RowHeight;
+			int nWeek = m_Scrollbar.Value / m_nMult;
 			DateTime date = GetFirstDateOfWeek(StartDate.Year, nWeek);
 
 			int dayWidth = (m_dataPanel.Width - RowLabelWidth - m_scrollPanel.Width) / 7;
@@ -811,9 +940,9 @@ namespace CalendarTest
 				
 				// TODO: Add extra info here
 				if (n % 2 == 0)
-					infos[n].sTrainer = "AA ddddd d fgfdgfdgf fge df AA";
+					infos[n].extraInfo = date;
 
-				infos[n].sTip = "Tip:\n" + infos[n].sTitle + "\n" + infos[n].sTrainer + "\n";
+				infos[n].sTip = "Tip:\n" + infos[n].sTitle + "\n";
 			}
 
 			return infos;

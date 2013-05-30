@@ -13,7 +13,7 @@ namespace CalendarTest
 		public DateTime date;
 		public string sTitle = "";
 		public string sTip = "";
-		public string sTrainer = "";
+		public object extraInfo = null;
 		
 		
 		public CellInfo(DateTime date)
@@ -23,7 +23,7 @@ namespace CalendarTest
 			bSelected = false;
 			bCurMonth = false;
 			sTip = "";
-			sTrainer = "";
+			extraInfo = null;
 		}
 	};
 	
@@ -103,6 +103,19 @@ namespace CalendarTest
 			}
 		}
 
+		private Color markerColor = Color.FromArgb(255, 0, 0);
+		public virtual Color MarkerColor
+		{
+			get
+			{
+				return markerColor;
+			}
+			set
+			{
+				markerColor = value;
+			}
+		}
+		
 		private bool hasVerticalLine = true;
 		public virtual bool HasVerticalLine
 		{
@@ -366,11 +379,6 @@ namespace CalendarTest
 		public abstract void DrawHeaderLabelBg(Graphics g, Rectangle rect);
 		public abstract void DrawHeaderBg(Graphics g, Rectangle rect);
 		
-		//public abstract void DrawRowLabelBg(Graphics g, Rectangle rect);
-		//public abstract void DrawColBg(Graphics g, Rectangle rect);
-		//public abstract void DrawRowBg(Graphics g, Rectangle rect);
-		//public abstract void DrawCellBg(Graphics g, Rectangle rect, CellInfo ci);
-
 		public abstract void DrawColLabel(Graphics g, Rectangle rect, string sDay);
 		public abstract void DrawRowLabel(Graphics g, Rectangle rect, string sLabel);
 		public abstract void DrawCell(Graphics g, Rectangle rect, CellInfo ci);

@@ -305,8 +305,8 @@ namespace CalendarTest
 				using (SolidBrush backBrush = new SolidBrush(SelectionColor))
 					g.FillRectangle(backBrush, rect);
 					
-				//using (Pen borderPen = new Pen(SelectionBorderColor))
-				//	g.DrawRectangle(borderPen, rect);
+				using (Pen borderPen = new Pen(SelectionBorderColor))
+					g.DrawRectangle(borderPen, rect);
 			
 				g.DrawString(ci.sTitle, CellDataBoldFont, SystemBrushes.HighlightText, rText, m_Format);
 			}
@@ -315,6 +315,20 @@ namespace CalendarTest
 				g.DrawString(ci.sTitle, CellDataBoldFont, SystemBrushes.WindowText, rText, m_Format);
 			}
 			
+			if(ci.extraInfo != null)
+			{
+				int catet = (rect.Height < rect.Width ? rect.Height : rect.Width) / 2;
+				rect.Inflate(-1, -1);
+				
+				Point[] triangle = new Point[] { 
+					  new Point(rect.Right, rect.Bottom)
+					, new Point(rect.Right - catet, rect.Bottom)
+					, new Point(rect.Right, rect.Bottom - catet)
+					};
+				using (SolidBrush marker = new SolidBrush(MarkerColor))
+					g.FillPolygon(marker, triangle);
+				
+			}
 			g.TextRenderingHint = TextRenderingHint.SystemDefault;
 		}
 
