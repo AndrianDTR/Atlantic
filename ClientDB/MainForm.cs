@@ -76,7 +76,7 @@ namespace ClientDB
 
 		private void OnKeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (!m_Search.Focused)
+			if (!m_Search.Focused && e.KeyChar >= '0' && e.KeyChar <= '9')
 			{
 				m_Search.Focus();
 				m_Search.Text = e.KeyChar.ToString();
