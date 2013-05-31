@@ -16,6 +16,7 @@ namespace ClientDB
 		Create = 4,
 		Delete = 8	
 	};
+	
 	public class UserPrivilege
 	{
 		public UserRights clients = 0;
@@ -30,6 +31,8 @@ namespace ClientDB
 	
 	class DbAdapter
     {
+		private ClientDB.ClientDBAdapter dataSet = new ClientDB.ClientDBAdapter();
+		
 		// Constructor
 		private DbAdapter()
 		{
@@ -68,6 +71,7 @@ namespace ClientDB
 
 		private bool SetConnection()
 		{
+		dataSet.
 			Debug.WriteLine("SetConnection Enter");
 			bool res = true;
 			try

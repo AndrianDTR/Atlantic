@@ -71,10 +71,12 @@
 			this.edit = new System.Windows.Forms.Button();
 			this.remove = new System.Windows.Forms.Button();
 			this.add23 = new System.Windows.Forms.Button();
+			this.clientDataSet1 = new ClientDB.ClientDBAdapter();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel4.SuspendLayout();
 			this.panel1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.clientDataSet1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -439,6 +441,11 @@
 			this.add23.UseVisualStyleBackColor = true;
 			this.add23.Click += new System.EventHandler(this.add23_Click);
 			// 
+			// clientDataSet1
+			// 
+			this.clientDataSet1.DataSetName = "clientDataSet";
+			this.clientDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -461,6 +468,7 @@
 			this.panel4.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.clientDataSet1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -511,6 +519,7 @@
 		private System.Windows.Forms.ToolStripMenuItem sheduleToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+		private ClientDBAdapter clientDataSet1;
     }
 }
 
