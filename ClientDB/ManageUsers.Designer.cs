@@ -121,6 +121,7 @@
 			this.close.TabIndex = 5;
 			this.close.Text = "Close";
 			this.close.UseVisualStyleBackColor = true;
+			this.close.Click += new System.EventHandler(this.close_Click);
 			// 
 			// save
 			// 

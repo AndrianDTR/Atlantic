@@ -11,9 +11,12 @@ namespace ClientDB
 {
 	public partial class ManageUsers : Form
 	{
+		
+		
 		public ManageUsers()
 		{
 			InitializeComponent();
+			
 		}
 
 		private void save_Click(object sender, EventArgs e)
@@ -29,6 +32,11 @@ namespace ClientDB
 		private void userList_SelectedIndexChanged(object sender, EventArgs e)
 		{
 
+		}
+
+		private void close_Click(object sender, EventArgs e)
+		{
+			this.Close();
 		}
 	}
 }

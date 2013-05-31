@@ -8,17 +8,24 @@ using System.Security.Cryptography;
 
 namespace ClientDB
 {
+	public enum UserRights
+	{
+		None = 0,
+		Read = 1,
+		Write = 2,
+		Create = 4,
+		Delete = 8	
+	};
 	public class UserPrivilege
 	{
-		public int clients = 0;
-		public int schedule = 0;
-		public int trainers = 0;
-		public int payments = 0;
-		public int backup = 0;
-		public int statistics = 0;
-		public int users = 0;
-		public int privileges = 0;
-		
+		public UserRights clients = 0;
+		public UserRights schedule = 0;
+		public UserRights trainers = 0;
+		public UserRights payments = 0;
+		public UserRights backup = 0;
+		public UserRights statistics = 0;
+		public UserRights users = 0;
+		public UserRights privileges = 0;
 	};
 	
 	class DbAdapter
@@ -164,14 +171,14 @@ namespace ClientDB
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, name VarChar NOT NULL
-				, clients Integer NOT NULL Default(7)
-				, schedule Integer NOT NULL Default(7)
-				, trainers Integer NOT NULL Default(7)
-				, payments Integer NOT NULL Default(7)
-				, backup Integer NOT NULL Default(7)
-				, statistics Integer NOT NULL Default(7)
-				, users Integer NOT NULL Default(7)
-				, privileges Integer NOT NULL Default(7)
+				, clients Integer NOT NULL Default(15)
+				, schedule Integer NOT NULL Default(15)
+				, trainers Integer NOT NULL Default(15)
+				, payments Integer NOT NULL Default(15)
+				, backup Integer NOT NULL Default(15)
+				, statistics Integer NOT NULL Default(15)
+				, users Integer NOT NULL Default(15)
+				, privileges Integer NOT NULL Default(15)
 			);
 			INSERT INTO userPrivileges(name) VALUES('root')";
 			ExecuteNonQuery(tUserPrivileges);
@@ -281,14 +288,14 @@ namespace ClientDB
 			if (dataReader.HasRows)
 			{
 				dataReader.Read();
-				result.clients = dataReader.GetInt32(2);
-				result.schedule = dataReader.GetInt32(3);
-				result.trainers = dataReader.GetInt32(4);
-				result.payments = dataReader.GetInt32(5);
-				result.backup = dataReader.GetInt32(6);
-				result.statistics = dataReader.GetInt32(7);
-				result.users = dataReader.GetInt32(8);
-				result.privileges = dataReader.GetInt32(9);
+				result.clients = (UserRights)dataReader.GetInt32(2);
+				result.schedule = (UserRights)dataReader.GetInt32(3);
+				result.trainers = (UserRights)dataReader.GetInt32(4);
+				result.payments = (UserRights)dataReader.GetInt32(5);
+				result.backup = (UserRights)dataReader.GetInt32(6);
+				result.statistics = (UserRights)dataReader.GetInt32(7);
+				result.users = (UserRights)dataReader.GetInt32(8);
+				result.privileges = (UserRights)dataReader.GetInt32(9);
 			}
 			return result;
 		}

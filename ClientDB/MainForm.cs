@@ -33,6 +33,11 @@ namespace ClientDB
 			{
 				this.Close();
 			}
+			
+			if (m_login.m_userPriv.users == UserRights.None)
+			{
+				usersAndPasswordsToolStripMenuItem.Enabled = false;
+			}
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -82,6 +87,12 @@ namespace ClientDB
 				m_Search.Text = e.KeyChar.ToString();
 				m_Search.Select(1, 1);
 			}
+		}
+
+		private void usersAndPasswordsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ManageUsers users = new ManageUsers();
+			users.Show();
 		}
     }
 }

@@ -247,6 +247,7 @@
 			this.usersAndPasswordsToolStripMenuItem.Name = "usersAndPasswordsToolStripMenuItem";
 			this.usersAndPasswordsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
 			this.usersAndPasswordsToolStripMenuItem.Text = "Users and passwords";
+			this.usersAndPasswordsToolStripMenuItem.Click += new System.EventHandler(this.usersAndPasswordsToolStripMenuItem_Click);
 			// 
 			// optionsToolStripMenuItem
 			// 
