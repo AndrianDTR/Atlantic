@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.Data.SQLite;
+using System.Data.SqlClient;	
 using System.Diagnostics;
 using System.Security.Cryptography;
+using System.Data.Common;
 
 namespace ClientDB
 {
@@ -31,12 +33,15 @@ namespace ClientDB
 	
 	class DbAdapter
     {
-		private ClientDB.ClientDBAdapter dataSet = new ClientDB.ClientDBAdapter();
+		private ClientDBDataSet dataSet;
 		
 		// Constructor
 		private DbAdapter()
 		{
 			Debug.WriteLine("Constructor");
+
+			dataSet = new ClientDBDataSet();
+			((System.ComponentModel.ISupportInitialize)(dataSet)).BeginInit();
 			
 			if (!SetConnection())
 			{
@@ -47,6 +52,11 @@ namespace ClientDB
 			{
 				CreateTableStructure();
 			}
+
+			dataSet.DataSetName = "clientDataSet";
+			dataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+			((System.ComponentModel.ISupportInitialize)(dataSet)).EndInit();
+			
 		}
 
 		//Singleton implementation
@@ -64,6 +74,14 @@ namespace ClientDB
 			}
 		}
 		
+		public ClientDBDataSet ClientDataSet
+		{
+			get
+			{
+				return dataSet;
+			}
+		}
+		
 		// DB data
 		private SQLiteConnection m_SqlCon;
 		private SQLiteCommand m_SqlCmd;
@@ -71,13 +89,31 @@ namespace ClientDB
 
 		private bool SetConnection()
 		{
-		dataSet.
 			Debug.WriteLine("SetConnection Enter");
 			bool res = true;
 			try
 			{
+			
 				m_SqlCon = new SQLiteConnection("Data Source=client.db;Version=3;New=True;Compress=True;");
 				m_SqlCon.Open();
+				SQLiteDataAdapter da = new SQLiteDataAdapter(
+					"drop table if exists userPrivileges;" +
+					"CREATE TABLE userPrivileges(" +
+						"id Integer PRIMARY KEY AUTOINCREMENT NOT NULL" +
+						", name VarChar NOT NULL" +
+						", clients Integer NOT NULL Default(15)" +
+						", schedule Integer NOT NULL Default(15)" +
+						", trainers Integer NOT NULL Default(15)" +
+						", payments Integer NOT NULL Default(15)" +
+						", backup Integer NOT NULL Default(15)" +
+						", statistics Integer NOT NULL Default(15)" +
+						", users Integer NOT NULL Default(15)" +
+						", privileges Integer NOT NULL Default(15)" +
+					");" +
+					"INSERT INTO userPrivileges(name) VALUES('root')"
+					, "Data Source=client.db;Version=3;New=True;Compress=True;");
+				
+				da.Fill(dataSet);
 			}
 			catch (System.Exception)
 			{

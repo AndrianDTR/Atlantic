@@ -1,0 +1,15 @@
+D:\Projects\Atlantic\ClientDB\obj\Debug\ClientDB.exe
+D:\Projects\Atlantic\ClientDB\obj\Debug\ClientDB.pdb
+D:\Projects\Atlantic\ClientDB\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\Atlantic\ClientDB\obj\Debug\ClientDB.ChangePassword.resources
+D:\Projects\Atlantic\ClientDB\obj\Debug\ClientDB.MainForm.resources
+D:\Projects\Atlantic\ClientDB\obj\Debug\ClientDB.Login.resources
+D:\Projects\Atlantic\ClientDB\obj\Debug\ClientDB.ManagePrivileges.resources
+D:\Projects\Atlantic\ClientDB\obj\Debug\ClientDB.ManageTrainers.resources
+D:\Projects\Atlantic\ClientDB\obj\Debug\ClientDB.ManageUsers.resources
+D:\Projects\Atlantic\ClientDB\obj\Debug\ClientDB.Properties.Resources.resources
+D:\Projects\Atlantic\ClientDB\obj\Debug\ClientDB.Schedule.resources
+D:\Projects\Atlantic\ClientDB\obj\Debug\ClientDB.csproj.GenerateResource.Cache
+D:\Projects\Atlantic\ClientDB\bin\Debug\ClientDB.exe
+D:\Projects\Atlantic\ClientDB\bin\Debug\ClientDB.pdb
+D:\Projects\Atlantic\ClientDB\bin\Debug\ClientDB.exe.config

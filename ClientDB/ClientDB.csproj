@@ -61,6 +61,15 @@
     <Compile Include="ChangePassword.Designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClientDBDataSet.cs">
+      <DependentUpon>ClientDBDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ClientDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClientDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DbAdapter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -165,7 +174,6 @@
     <Compile Include="Statistics.Designer.cs">
       <DependentUpon>Statistics.cs</DependentUpon>
     </Compile>
-    <Compile Include="Users.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\1367373274_lock_locked.png" />
@@ -192,6 +200,18 @@
     <None Include="Resources\1367459833_lock.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ClientDBDataSet.xsc">
+      <DependentUpon>ClientDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ClientDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ClientDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ClientDBDataSet.xss">
+      <DependentUpon>ClientDBDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Resources\1367459833_lock1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

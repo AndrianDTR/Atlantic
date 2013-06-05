@@ -21,9 +21,9 @@ namespace ClientDB {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("clientDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("ClientDBDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class clientDataSet : global::System.Data.DataSet {
+    public partial class ClientDBDataSet : global::System.Data.DataSet {
         
         private clientsDataTable tableclients;
         
@@ -44,7 +44,7 @@ namespace ClientDB {
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public clientDataSet() {
+        public ClientDBDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -54,7 +54,7 @@ namespace ClientDB {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected clientDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected ClientDBDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -218,7 +218,7 @@ namespace ClientDB {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public override global::System.Data.DataSet Clone() {
-            clientDataSet cln = ((clientDataSet)(base.Clone()));
+            ClientDBDataSet cln = ((ClientDBDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -346,9 +346,9 @@ namespace ClientDB {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitClass() {
-            this.DataSetName = "clientDataSet";
+            this.DataSetName = "ClientDBDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/clientDataSet.xsd";
+            this.Namespace = "http://tempuri.org/ClientDBDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableclients = new clientsDataTable();
@@ -418,7 +418,7 @@ namespace ClientDB {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            clientDataSet ds = new clientDataSet();
+            ClientDBDataSet ds = new ClientDBDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -739,7 +739,7 @@ namespace ClientDB {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                ClientDBDataSet ds = new ClientDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1030,7 +1030,7 @@ namespace ClientDB {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                ClientDBDataSet ds = new ClientDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1281,7 +1281,7 @@ namespace ClientDB {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                ClientDBDataSet ds = new ClientDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1544,7 +1544,7 @@ namespace ClientDB {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                ClientDBDataSet ds = new ClientDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1795,7 +1795,7 @@ namespace ClientDB {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                ClientDBDataSet ds = new ClientDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2059,7 +2059,7 @@ namespace ClientDB {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                ClientDBDataSet ds = new ClientDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2422,7 +2422,7 @@ namespace ClientDB {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                ClientDBDataSet ds = new ClientDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2702,7 +2702,7 @@ namespace ClientDB {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                ClientDBDataSet ds = new ClientDBDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3595,7 +3595,7 @@ namespace ClientDB {
         }
     }
 }
-namespace ClientDB.clientDataSetTableAdapters {
+namespace ClientDB.ClientDBDataSetTableAdapters {
     
     
     /// <summary>
@@ -3954,7 +3954,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3970,7 +3970,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.clientsDataTable dataTable) {
+        public virtual int Fill(ClientDBDataSet.clientsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -3982,22 +3982,22 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.clientsDataTable GetData() {
+        public virtual ClientDBDataSet.clientsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.clientsDataTable dataTable = new clientDataSet.clientsDataTable();
+            ClientDBDataSet.clientsDataTable dataTable = new ClientDBDataSet.clientsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.clientsDataTable dataTable) {
+        public virtual int Update(ClientDBDataSet.clientsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(ClientDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "clients");
         }
         
@@ -4494,7 +4494,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4509,7 +4509,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.paymentsDataTable dataTable) {
+        public virtual int Fill(ClientDBDataSet.paymentsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -4521,22 +4521,22 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.paymentsDataTable GetData() {
+        public virtual ClientDBDataSet.paymentsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.paymentsDataTable dataTable = new clientDataSet.paymentsDataTable();
+            ClientDBDataSet.paymentsDataTable dataTable = new ClientDBDataSet.paymentsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.paymentsDataTable dataTable) {
+        public virtual int Update(ClientDBDataSet.paymentsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(ClientDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "payments");
         }
         
@@ -4881,7 +4881,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4896,7 +4896,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.scheduleDataTable dataTable) {
+        public virtual int Fill(ClientDBDataSet.scheduleDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -4908,22 +4908,22 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.scheduleDataTable GetData() {
+        public virtual ClientDBDataSet.scheduleDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.scheduleDataTable dataTable = new clientDataSet.scheduleDataTable();
+            ClientDBDataSet.scheduleDataTable dataTable = new ClientDBDataSet.scheduleDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.scheduleDataTable dataTable) {
+        public virtual int Update(ClientDBDataSet.scheduleDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(ClientDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "schedule");
         }
         
@@ -5250,7 +5250,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5265,7 +5265,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.statisticsDataTable dataTable) {
+        public virtual int Fill(ClientDBDataSet.statisticsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -5277,22 +5277,22 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.statisticsDataTable GetData() {
+        public virtual ClientDBDataSet.statisticsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.statisticsDataTable dataTable = new clientDataSet.statisticsDataTable();
+            ClientDBDataSet.statisticsDataTable dataTable = new ClientDBDataSet.statisticsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.statisticsDataTable dataTable) {
+        public virtual int Update(ClientDBDataSet.statisticsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(ClientDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "statistics");
         }
         
@@ -5581,7 +5581,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5596,7 +5596,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.trainersDataTable dataTable) {
+        public virtual int Fill(ClientDBDataSet.trainersDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -5608,22 +5608,22 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.trainersDataTable GetData() {
+        public virtual ClientDBDataSet.trainersDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.trainersDataTable dataTable = new clientDataSet.trainersDataTable();
+            ClientDBDataSet.trainersDataTable dataTable = new ClientDBDataSet.trainersDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.trainersDataTable dataTable) {
+        public virtual int Update(ClientDBDataSet.trainersDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(ClientDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "trainers");
         }
         
@@ -5933,7 +5933,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5948,7 +5948,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.trainersSheduleDataTable dataTable) {
+        public virtual int Fill(ClientDBDataSet.trainersSheduleDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -5960,22 +5960,22 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.trainersSheduleDataTable GetData() {
+        public virtual ClientDBDataSet.trainersSheduleDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.trainersSheduleDataTable dataTable = new clientDataSet.trainersSheduleDataTable();
+            ClientDBDataSet.trainersSheduleDataTable dataTable = new ClientDBDataSet.trainersSheduleDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.trainersSheduleDataTable dataTable) {
+        public virtual int Update(ClientDBDataSet.trainersSheduleDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(ClientDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "trainersShedule");
         }
         
@@ -6454,7 +6454,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6470,7 +6470,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.userPrivilegesDataTable dataTable) {
+        public virtual int Fill(ClientDBDataSet.userPrivilegesDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -6482,22 +6482,22 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.userPrivilegesDataTable GetData() {
+        public virtual ClientDBDataSet.userPrivilegesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.userPrivilegesDataTable dataTable = new clientDataSet.userPrivilegesDataTable();
+            ClientDBDataSet.userPrivilegesDataTable dataTable = new ClientDBDataSet.userPrivilegesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.userPrivilegesDataTable dataTable) {
+        public virtual int Update(ClientDBDataSet.userPrivilegesDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(ClientDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "userPrivileges");
         }
         
@@ -6886,7 +6886,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6901,7 +6901,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.usersDataTable dataTable) {
+        public virtual int Fill(ClientDBDataSet.usersDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -6913,22 +6913,22 @@ namespace ClientDB.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.usersDataTable GetData() {
+        public virtual ClientDBDataSet.usersDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.usersDataTable dataTable = new clientDataSet.usersDataTable();
+            ClientDBDataSet.usersDataTable dataTable = new ClientDBDataSet.usersDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.usersDataTable dataTable) {
+        public virtual int Update(ClientDBDataSet.usersDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(ClientDBDataSet dataSet) {
             return this.Adapter.Update(dataSet, "users");
         }
         
@@ -7300,7 +7300,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         ///Update rows in top-down order.
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private int UpdateUpdatedRows(clientDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(ClientDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._trainersSheduleTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.trainersShedule.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
@@ -7381,7 +7381,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         ///Insert rows in top-down order.
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private int UpdateInsertedRows(clientDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(ClientDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._trainersSheduleTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.trainersShedule.Select(null, null, global::System.Data.DataViewRowState.Added);
@@ -7454,7 +7454,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         ///Delete rows in bottom-up order.
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private int UpdateDeletedRows(clientDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(ClientDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             if ((this._scheduleTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.schedule.Select(null, null, global::System.Data.DataViewRowState.Deleted);
@@ -7550,7 +7550,7 @@ namespace ClientDB.clientDataSetTableAdapters {
         ///Update all changes to the dataset.
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public virtual int UpdateAll(clientDataSet dataSet) {
+        public virtual int UpdateAll(ClientDBDataSet dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }
