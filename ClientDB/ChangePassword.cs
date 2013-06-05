@@ -12,7 +12,7 @@ namespace ClientDB
 	public partial class ChangePassword : Form
 	{
 		private long uid = -1;
-		private DbAdapter m_db = null;
+		//private DbAdapter m_db = null;
 		
 		public long UserId
 		{
@@ -26,9 +26,10 @@ namespace ClientDB
 		{
 			InitializeComponent();
 		}
-
+		
 		private void change_Click(object sender, EventArgs e)
 		{
+		 	/*
 			if (password.Text != confirm.Text)
 			{
 				message.Text = "New password and confirm are different.";
@@ -51,6 +52,7 @@ namespace ClientDB
 			{
 				message.Text = "Password could not been changed.";
 			}
+			*/
 		}
 	}
 }

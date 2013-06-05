@@ -7,12 +7,12 @@ namespace ClientDB
 {
     public partial class MainForm : Form
     {
-		private DbAdapter m_db = null;
+		//private DbAdapter m_db = null;
 		private Login m_login = new Login();
 		
         public MainForm()
         {
-			m_db = DbAdapter.Instance;
+			//m_db = DbAdapter.Instance;
             InitializeComponent();
         }
 		

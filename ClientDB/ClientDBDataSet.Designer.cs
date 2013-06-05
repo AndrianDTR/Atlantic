@@ -3954,7 +3954,7 @@ namespace ClientDB.ClientDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4494,7 +4494,7 @@ namespace ClientDB.ClientDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4881,7 +4881,7 @@ namespace ClientDB.ClientDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5250,7 +5250,7 @@ namespace ClientDB.ClientDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5581,7 +5581,7 @@ namespace ClientDB.ClientDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5933,7 +5933,7 @@ namespace ClientDB.ClientDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6454,7 +6454,7 @@ namespace ClientDB.ClientDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6886,7 +6886,7 @@ namespace ClientDB.ClientDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString1;
+            this._connection.ConnectionString = global::ClientDB.Properties.Settings.Default.clientConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

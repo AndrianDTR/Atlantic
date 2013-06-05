@@ -26,20 +26,10 @@ namespace ClientDB.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=client.db")]
+        [global::System.Configuration.DefaultSettingValueAttribute("data source=D:\\Projects\\Atlantic\\ClientDB\\bin\\Debug\\client.db")]
         public string clientConnectionString {
             get {
                 return ((string)(this["clientConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=D:\\Projects\\Atlantic\\ClientDB\\bin\\Debug\\client.db")]
-        public string clientConnectionString1 {
-            get {
-                return ((string)(this["clientConnectionString1"]));
             }
         }
     }

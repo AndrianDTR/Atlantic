@@ -10,6 +10,7 @@ using System.Data.Common;
 
 namespace ClientDB
 {
+
 	public enum UserRights
 	{
 		None = 0,
@@ -30,7 +31,7 @@ namespace ClientDB
 		public UserRights users = 0;
 		public UserRights privileges = 0;
 	};
-	
+	/*
 	class DbAdapter
     {
 		private ClientDBDataSet dataSet;
@@ -93,27 +94,52 @@ namespace ClientDB
 			bool res = true;
 			try
 			{
-			
 				m_SqlCon = new SQLiteConnection("Data Source=client.db;Version=3;New=True;Compress=True;");
 				m_SqlCon.Open();
-				SQLiteDataAdapter da = new SQLiteDataAdapter(
-					"drop table if exists userPrivileges;" +
-					"CREATE TABLE userPrivileges(" +
-						"id Integer PRIMARY KEY AUTOINCREMENT NOT NULL" +
-						", name VarChar NOT NULL" +
-						", clients Integer NOT NULL Default(15)" +
-						", schedule Integer NOT NULL Default(15)" +
-						", trainers Integer NOT NULL Default(15)" +
-						", payments Integer NOT NULL Default(15)" +
-						", backup Integer NOT NULL Default(15)" +
-						", statistics Integer NOT NULL Default(15)" +
-						", users Integer NOT NULL Default(15)" +
-						", privileges Integer NOT NULL Default(15)" +
-					");" +
-					"INSERT INTO userPrivileges(name) VALUES('root')"
-					, "Data Source=client.db;Version=3;New=True;Compress=True;");
+
+				SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM users;" +
+				"select * from userPrivileges;" +
+				"select * from clients;" +
+				"select * from trainers;" +
+				"select * from trainersShedule;" +
+				"select * from payments;" +
+				"select * from schedule;" +
+				"select * from statistics;"
+				, m_SqlCon);	
+				cmd.CommandType = CommandType.Text;
 				
+				SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
 				da.Fill(dataSet);
+				
+				
+				//SQLiteDataAdapter da = new SQLiteDataAdapter(new SQLiteCommand("select * from users", m_SqlCon));
+				
+					//"drop table if exists userPrivileges;" +
+					//"CREATE TABLE userPrivileges(" +
+					//    "id Integer PRIMARY KEY AUTOINCREMENT NOT NULL" +
+					//    ", name VarChar NOT NULL" +
+					//    ", clients Integer NOT NULL Default(15)" +
+					//    ", schedule Integer NOT NULL Default(15)" +
+					//    ", trainers Integer NOT NULL Default(15)" +
+					//    ", payments Integer NOT NULL Default(15)" +
+					//    ", backup Integer NOT NULL Default(15)" +
+					//    ", statistics Integer NOT NULL Default(15)" +
+					//    ", users Integer NOT NULL Default(15)" +
+					//    ", privileges Integer NOT NULL Default(15)" +
+					//");" +
+					//"INSERT INTO userPrivileges(name) VALUES('root');" +
+					//" " +
+					//"drop table if exists users;" +
+					//    "CREATE TABLE users(" +
+					//    "id Integer PRIMARY KEY AUTOINCREMENT NOT NULL" +
+					//    ", name VarChar NOT NULL" +
+					//    ", pass VarChar NOT NULL" +
+					//    ", privilege Integer NOT NULL" +
+					//");" +
+					//String.Format("INSERT INTO users(name, pass, privilege) VALUES('admin', '{0}', 1)", md5("root"))
+			
+					//, "Data Source=client.db;Version=3;New=True;Compress=True;");
+				//da.Fill(dataSet);
 			}
 			catch (System.Exception)
 			{
@@ -349,4 +375,5 @@ namespace ClientDB
 			return result;
 		}
 	}
+	//*/
 }

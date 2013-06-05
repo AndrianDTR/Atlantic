@@ -71,6 +71,7 @@
       <DependentUpon>ClientDBDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="DbAdapter.cs" />
+    <Compile Include="dbHelper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
