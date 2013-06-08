@@ -39,13 +39,21 @@ namespace ClientDB
 				return;
 			}
 
-			if (password.Text.Length < 8)
+			if (password.Text.Length < Properties.Settings.Default.PassLen)
 			{
-				message.Text = "Password must be at least 8 characters length.";
+				message.Text = String.Format("Password must be at least {0} characters length.", Properties.Settings.Default.PassLen);
 				return;
 			}
 			
-			m_user.ChangePassword(current.Text, password.Text);
+			if(!m_user.ChangePassword(current.Text, password.Text))
+			{
+				message.Text = "Password has not been changed.";
+				return;
+			}
+			
+			MessageBox.Show("Password has been changed successfully.");
+			this.DialogResult = DialogResult.OK;
+			this.Close();
 		}
 	}
 }

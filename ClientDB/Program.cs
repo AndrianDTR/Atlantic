@@ -16,7 +16,7 @@ namespace ClientDB
 			DbAdapter ad = new DbAdapter();
 			if( !ad.CheckTables())
 			{
-				DialogResult res = MessageBox.Show("Database is corrupt.", "Error!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+				DialogResult res = UIMessages.Error("Database is corrupt.", MessageBoxButtons.YesNo);
 				if(res == DialogResult.Yes)
 				{
 					DbAdapter.ClearDB();

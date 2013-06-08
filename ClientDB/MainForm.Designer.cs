@@ -71,6 +71,11 @@
 			this.edit = new System.Windows.Forms.Button();
 			this.remove = new System.Windows.Forms.Button();
 			this.add23 = new System.Windows.Forms.Button();
+			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.scheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.trainersScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.userRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel4.SuspendLayout();
@@ -82,6 +87,7 @@
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.searchToolStripMenuItem,
+            this.viewToolStripMenuItem,
             this.clientToolStripMenuItem,
             this.trainersToolStripMenuItem,
             this.settingsToolStripMenuItem,
@@ -226,7 +232,8 @@
             this.changePasswordToolStripMenuItem,
             this.toolStripMenuItem2,
             this.usersAndPasswordsToolStripMenuItem,
-            this.optionsToolStripMenuItem});
+            this.optionsToolStripMenuItem,
+            this.userRolesToolStripMenuItem});
 			this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
 			this.settingsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
 			this.settingsToolStripMenuItem.Text = "Settings";
@@ -440,6 +447,41 @@
 			this.add23.UseVisualStyleBackColor = true;
 			this.add23.Click += new System.EventHandler(this.add23_Click);
 			// 
+			// viewToolStripMenuItem
+			// 
+			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.paymentsToolStripMenuItem,
+            this.scheduleToolStripMenuItem,
+            this.trainersScheduleToolStripMenuItem});
+			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+			this.viewToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+			this.viewToolStripMenuItem.Text = "View";
+			// 
+			// paymentsToolStripMenuItem
+			// 
+			this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
+			this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.paymentsToolStripMenuItem.Text = "Payments";
+			// 
+			// scheduleToolStripMenuItem
+			// 
+			this.scheduleToolStripMenuItem.Name = "scheduleToolStripMenuItem";
+			this.scheduleToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.scheduleToolStripMenuItem.Text = "Schedule";
+			// 
+			// trainersScheduleToolStripMenuItem
+			// 
+			this.trainersScheduleToolStripMenuItem.Name = "trainersScheduleToolStripMenuItem";
+			this.trainersScheduleToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.trainersScheduleToolStripMenuItem.Text = "Trainers schedule";
+			// 
+			// userRolesToolStripMenuItem
+			// 
+			this.userRolesToolStripMenuItem.Name = "userRolesToolStripMenuItem";
+			this.userRolesToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+			this.userRolesToolStripMenuItem.Text = "User roles";
+			this.userRolesToolStripMenuItem.Click += new System.EventHandler(this.userRolesToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -512,6 +554,11 @@
 		private System.Windows.Forms.ToolStripMenuItem sheduleToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem paymentsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem scheduleToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem trainersScheduleToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem userRolesToolStripMenuItem;
     }
 }
 

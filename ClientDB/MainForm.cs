@@ -27,16 +27,21 @@ namespace ClientDB
         private void OnLoad(object sender, EventArgs e)
         {
 			Session session = Session.Instance;
+			
 			DialogResult res = m_login.ShowDialog();
 			if (res != DialogResult.OK)
 			{
 				this.Close();
 			}
 			
-			if (session.UserPrivileges.users == UserRights.None)
-			{
-				usersAndPasswordsToolStripMenuItem.Enabled = false;
-			}
+			UserPrivileges priv = session.UserPrivileges;
+
+			userRolesToolStripMenuItem.Enabled = priv.IsSet(priv.users, UserRights.Read);
+			usersAndPasswordsToolStripMenuItem.Enabled = priv.IsSet(priv.users, UserRights.Read);
+			
+			exportToolStripMenuItem.Enabled = priv.IsSet(priv.backup, UserRights.Create);
+			importToolStripMenuItem.Enabled = priv.IsSet(priv.backup, UserRights.Write);
+								
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -90,12 +95,19 @@ namespace ClientDB
 		private void usersAndPasswordsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			ManageUsers users = new ManageUsers();
-			users.Show();
+			users.ShowDialog(this);
 		}
-
+		
+		private void userRolesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ManagePrivileges pm = new ManagePrivileges();
+			pm.ShowDialog(this);
+		}
+		
 		private void importToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			DbAdapter.ClearDB();
 		}
+
+		
     }
 }

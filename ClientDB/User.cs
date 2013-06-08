@@ -74,6 +74,27 @@ namespace ClientDB
 				return new UserPrivileges(m_userPrivilegesId);
 			}
 		}
+
+		public String Password
+		{
+			set
+			{
+				if (m_userId <= 0)
+				{
+					return;
+				}
+
+				string newHash = DbUtils.md5(value);
+				DbAdapter ad = new DbAdapter();
+				Dictionary<string, string> fields = new Dictionary<string, string>();
+				fields["pass"] = String.Format("'{0}'", newHash);
+				if(!ad.Update(DbTable.Users, fields, String.Format("id={0:d}", m_userId)))
+				{
+					throw new Exception("Password could not been changed.");
+				}
+
+			}
+		}
 		
 		public Boolean ChangePassword(String oldPass, String newPass)
 		{
@@ -86,8 +107,8 @@ namespace ClientDB
 			string newHash = DbUtils.md5(newPass);
 			DbAdapter ad = new DbAdapter();
 			Dictionary<string,string> fields = new Dictionary<string,string>();
-			fields["pass"] = newHash;
-			ad.Update(DbTable.Users, fields, String.Format("where id={0:d} and pass = {1}", m_userId, oldHash));
+			fields["pass"] = String.Format("'{0}'", newHash);
+			ad.Update(DbTable.Users, fields, String.Format("id={0:d} and pass = '{1}'", m_userId, oldHash));
 			
 			return true;
 		}
@@ -123,16 +144,19 @@ namespace ClientDB
 			}
 		}
 		
-		public UInt64 Add(String name, UInt64 priv)
+		public Boolean Add(String name, UInt64 priv)
 		{
 			DbAdapter da = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
-			fields["name"] = name;
+			fields["name"] = String.Format("'{0}'", name);
 			fields["privilege"] = priv.ToString();
-			da.Insert(DbTable.Users, fields);
+			
+			if(!da.Insert(DbTable.Users, fields))
+				return false;
+				
 			User user = new User(name);
 			Items.Add(user);
-			return user.Id;
+			return true;
 		}
 
 		public bool Remove(User item)
@@ -150,12 +174,12 @@ namespace ClientDB
 		
 		public List<User> Search(String name, Boolean contains)
 		{
-			List<User> collection = Items;
+			List<User> collection = new List<User>();
 			foreach(User user in collection)
 			{
-				if((contains && !user.Name.Contains(name)) || !user.Name.StartsWith(name))
+				if((contains && user.Name.Contains(name)) || user.Name.StartsWith(name))
 				{
-					collection.Remove(user);
+					collection.Add(user);
 				}
 			}
 			return collection;

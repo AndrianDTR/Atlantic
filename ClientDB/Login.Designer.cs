@@ -47,6 +47,7 @@
 			this.pictureBox1.Size = new System.Drawing.Size(146, 137);
 			this.pictureBox1.TabIndex = 0;
 			this.pictureBox1.TabStop = false;
+			this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
 			// 
 			// label1
 			// 
@@ -82,7 +83,7 @@
 			this.password.Name = "password";
 			this.password.Size = new System.Drawing.Size(222, 20);
 			this.password.TabIndex = 4;
-			this.password.Text = "root";
+			this.password.Text = "administrator";
 			this.password.UseSystemPasswordChar = true;
 			// 
 			// loginBtn

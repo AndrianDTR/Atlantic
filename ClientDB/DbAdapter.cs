@@ -147,11 +147,13 @@ namespace ClientDB
 			DataTable dt = new DataTable();
 			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
 			SQLiteDataReader reader = null;
+			SQLiteCommand cmd = null;
 			
 			try
 			{
 				cnn.Open();
-				reader = new SQLiteCommand(sql, cnn).ExecuteReader();
+				cmd = new SQLiteCommand(sql, cnn);
+				reader = cmd.ExecuteReader();
 				dt.Load(reader);
 			}
 			catch (Exception e)
@@ -160,6 +162,9 @@ namespace ClientDB
 			}
 			finally
 			{
+				if(cmd.Transaction != null)
+					cmd.Transaction.Commit();
+				
 				cnn.Close();
 				
 				if(reader != null)
@@ -177,12 +182,14 @@ namespace ClientDB
 		public int ExecuteNonQuery(string sql)
 		{
 			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
+			SQLiteCommand cmd = null;
 			int rowsUpdated = -1;
 			
 			try
 			{
 				cnn.Open();
-				rowsUpdated = new SQLiteCommand(sql, cnn).ExecuteNonQuery();
+				cmd = new SQLiteCommand(sql, cnn);
+				rowsUpdated = cmd.ExecuteNonQuery();
 			}
 			catch (SQLiteException e)
 			{
@@ -190,6 +197,9 @@ namespace ClientDB
 			}
 			finally
 			{
+				if (cmd.Transaction != null)
+					cmd.Transaction.Commit();
+				
 				cnn.Close();
 			}
 			
@@ -204,12 +214,14 @@ namespace ClientDB
 		public string ExecuteScalar(string sql)
 		{
 			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
+			SQLiteCommand cmd = null;
 			object value = null;
 			
 			try
 			{
 				cnn.Open();
-				value = new SQLiteCommand(sql, cnn).ExecuteScalar();
+				cmd = new SQLiteCommand(sql, cnn);
+				value = cmd.ExecuteScalar();
 			}
 			catch(SQLiteException ex)
 			{
@@ -217,6 +229,9 @@ namespace ClientDB
 			}
 			finally
 			{
+				if (cmd.Transaction != null)
+					cmd.Transaction.Commit();
+				
 				cnn.Close();
 			}
 			
@@ -273,15 +288,16 @@ namespace ClientDB
 			{
 				foreach (KeyValuePair<String, String> val in data)
 				{
-					vals += String.Format(" {0} = '{1}',", val.Key.ToString(), val.Value.ToString());
+					vals += String.Format(" {0} = {1},", val.Key.ToString(), val.Value.ToString());
 				}
 				vals = vals.Substring(0, vals.Length - 1);
 			}
 			try
 			{
-				this.ExecuteNonQuery(String.Format("update {0} set {1} where {2};", DbUtils.GetTableName(table), vals, where));
+				String query = String.Format("update {0} set {1} where {2};", DbUtils.GetTableName(table), vals, where);
+				this.ExecuteNonQuery(query);
 			}
-			catch
+			catch(Exception ex)
 			{
 				returnCode = false;
 			}
@@ -324,13 +340,14 @@ namespace ClientDB
 			foreach (KeyValuePair<String, String> val in data)
 			{
 				columns += String.Format(" {0},", val.Key.ToString());
-				values += String.Format(" '{0}',", val.Value);
+				values += String.Format(" {0},", val.Value);
 			}
 			columns = columns.Substring(0, columns.Length - 1);
 			values = values.Substring(0, values.Length - 1);
 			try
 			{
-				ExecuteNonQuery(String.Format("insert into {0}({1}) values({2});", DbUtils.GetTableName(table), columns, values));
+				String query = String.Format("insert into {0}({1}) values({2});", DbUtils.GetTableName(table), columns, values);
+				ExecuteNonQuery(query);
 			}
 			catch (Exception fail)
 			{
@@ -377,17 +394,17 @@ namespace ClientDB
 				, users Integer NOT NULL Default(15)
 				, privileges Integer NOT NULL Default(15)
 			);
-			INSERT INTO userPrivileges(name) VALUES('root')";
+			INSERT INTO userPrivileges(name) VALUES('Administrator')";
 			
 			string tUsers = String.Format(@"drop table if exists users;
 			CREATE TABLE users
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, name VarChar NOT NULL
-				, pass VarChar NOT NULL
+				, pass VarChar
 				, privilege Integer NOT NULL
 			);
-			INSERT INTO users(name, pass, privilege) VALUES('admin', '{0}', 1)", DbUtils.md5("root"));
+			INSERT INTO users(name, pass, privilege) VALUES('admin', '{0}', 1)", DbUtils.md5("administrator"));
 			
 			string tTrainers = @"drop table if exists trainers;
 			CREATE TABLE trainers
@@ -431,6 +448,7 @@ namespace ClientDB
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, name VarChar NOT NULL
+				, rule VarChar NOT NULL
 			)";
 			
 			string tStatistics = @"drop table if exists statistics;

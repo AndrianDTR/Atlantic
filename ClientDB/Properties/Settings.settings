@@ -10,5 +10,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">data source=D:\Projects\Atlantic\ClientDB\bin\Debug\client.db</Value>
     </Setting>
+    <Setting Name="PassLen" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -31,8 +31,9 @@ namespace ClientDB
 			}
 		}
 		
-		private User m_user = null;
-		private UserPrivileges m_userPrivileges = null;
+		private int m_passLen = 8;
+		private User m_user = new User();
+		private UserPrivileges m_userPrivileges = new UserPrivileges();
 		
 		public User User
 		{
@@ -43,6 +44,12 @@ namespace ClientDB
 		public UserPrivileges UserPrivileges
 		{
 			get { return m_userPrivileges; }
+		}
+		
+		public int PassLen
+		{
+			get{ return m_passLen; }
+			set{ m_passLen = value; }
 		}
 	}
 }

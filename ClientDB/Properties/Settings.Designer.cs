@@ -32,5 +32,14 @@ namespace ClientDB.Properties {
                 return ((string)(this["clientConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8")]
+        public int PassLen {
+            get {
+                return ((int)(this["PassLen"]));
+            }
+        }
     }
 }

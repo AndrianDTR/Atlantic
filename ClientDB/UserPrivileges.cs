@@ -31,6 +31,11 @@ namespace ClientDB
 		public UserRights users = 0;
 		public UserRights privileges = 0;
 	
+		public UserPrivileges()
+		{
+		
+		}
+		
 		public UserPrivileges(UInt64 id)
 		{
 			String where = String.Format("id = {0}", id);
@@ -74,6 +79,11 @@ namespace ClientDB
 		public override String ToString()
 		{
 			return m_Name;
+		}
+
+		public bool IsSet(UserRights var, UserRights flag)
+		{
+			return flag == (var & flag);
 		}
 	}
 

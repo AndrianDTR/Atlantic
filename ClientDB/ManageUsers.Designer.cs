@@ -38,13 +38,23 @@
 			this.m_userRole = new System.Windows.Forms.ComboBox();
 			this.m_showPass = new System.Windows.Forms.CheckBox();
 			this.close = new System.Windows.Forms.Button();
-			this.save = new System.Windows.Forms.Button();
 			this.remove = new System.Windows.Forms.Button();
 			this.add = new System.Windows.Forms.Button();
 			this.userList = new System.Windows.Forms.ListView();
+			this.changePass = new System.Windows.Forms.Button();
 			userName = new System.Windows.Forms.ColumnHeader();
 			Role = new System.Windows.Forms.ColumnHeader();
 			this.SuspendLayout();
+			// 
+			// userName
+			// 
+			userName.Text = "Name";
+			userName.Width = 200;
+			// 
+			// Role
+			// 
+			Role.Text = "Role";
+			Role.Width = 100;
 			// 
 			// label1
 			// 
@@ -90,6 +100,7 @@
 			// 
 			// m_userRole
 			// 
+			this.m_userRole.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.m_userRole.FormattingEnabled = true;
 			this.m_userRole.Location = new System.Drawing.Point(394, 98);
 			this.m_userRole.Name = "m_userRole";
@@ -118,16 +129,6 @@
 			this.close.UseVisualStyleBackColor = true;
 			this.close.Click += new System.EventHandler(this.close_Click);
 			// 
-			// save
-			// 
-			this.save.Location = new System.Drawing.Point(552, 229);
-			this.save.Name = "save";
-			this.save.Size = new System.Drawing.Size(75, 23);
-			this.save.TabIndex = 4;
-			this.save.Text = "Save";
-			this.save.UseVisualStyleBackColor = true;
-			this.save.Click += new System.EventHandler(this.save_Click);
-			// 
 			// remove
 			// 
 			this.remove.Location = new System.Drawing.Point(420, 229);
@@ -136,6 +137,7 @@
 			this.remove.TabIndex = 7;
 			this.remove.Text = "Remove";
 			this.remove.UseVisualStyleBackColor = true;
+			this.remove.Click += new System.EventHandler(this.remove_Click);
 			// 
 			// add
 			// 
@@ -145,6 +147,7 @@
 			this.add.TabIndex = 6;
 			this.add.Text = "Add new";
 			this.add.UseVisualStyleBackColor = true;
+			this.add.Click += new System.EventHandler(this.add_Click);
 			// 
 			// userList
 			// 
@@ -163,25 +166,26 @@
 			this.userList.View = System.Windows.Forms.View.Details;
 			this.userList.SelectedIndexChanged += new System.EventHandler(this.ChangeUser);
 			// 
-			// userName
+			// changePass
 			// 
-			userName.Text = "Name";
-			userName.Width = 200;
-			// 
-			// Role
-			// 
-			Role.Text = "Role";
-			Role.Width = 100;
+			this.changePass.Location = new System.Drawing.Point(501, 229);
+			this.changePass.Name = "changePass";
+			this.changePass.Size = new System.Drawing.Size(126, 23);
+			this.changePass.TabIndex = 12;
+			this.changePass.Text = "Change password";
+			this.changePass.UseVisualStyleBackColor = true;
+			this.changePass.Click += new System.EventHandler(this.ChangePass);
 			// 
 			// ManageUsers
 			// 
+			this.AcceptButton = this.close;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(717, 260);
+			this.Controls.Add(this.changePass);
 			this.Controls.Add(this.userList);
 			this.Controls.Add(this.remove);
 			this.Controls.Add(this.add);
-			this.Controls.Add(this.save);
 			this.Controls.Add(this.close);
 			this.Controls.Add(this.m_showPass);
 			this.Controls.Add(this.m_userRole);
@@ -190,6 +194,7 @@
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.m_userName);
 			this.Controls.Add(this.label1);
+			this.Cursor = System.Windows.Forms.Cursors.Default;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -216,10 +221,10 @@
 		private System.Windows.Forms.ComboBox m_userRole;
 		private System.Windows.Forms.CheckBox m_showPass;
 		private System.Windows.Forms.Button close;
-		private System.Windows.Forms.Button save;
 		private System.Windows.Forms.Button remove;
 		private System.Windows.Forms.Button add;
 		private System.Windows.Forms.ListView userList;
+		private System.Windows.Forms.Button changePass;
 
 	}
 }
