@@ -11,26 +11,23 @@ namespace ClientDB
 {
 	public partial class ChangePassword : Form
 	{
-		private long uid = -1;
-		//private DbAdapter m_db = null;
-		
-		public long UserId
-		{
-			set
-			{
-				uid = value;
-			}
-		}
+		private User m_user = null;
 		
 		public ChangePassword()
 		{
 			InitializeComponent();
+			m_user = Session.Instance.User;
+		}
+
+		public ChangePassword(UInt64 userId)
+		{
+			InitializeComponent();
+			m_user = new User(userId);
 		}
 		
 		private void change_Click(object sender, EventArgs e)
 		{
-		 	/*
-			if (password.Text != confirm.Text)
+		 	if (password.Text != confirm.Text)
 			{
 				message.Text = "New password and confirm are different.";
 				return;
@@ -48,11 +45,7 @@ namespace ClientDB
 				return;
 			}
 			
-			if(!DbAdapter.Instance.SetUserPassword(uid, current.Text, password.Text))
-			{
-				message.Text = "Password could not been changed.";
-			}
-			*/
+			m_user.ChangePassword(current.Text, password.Text);
 		}
 	}
 }

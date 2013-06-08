@@ -7,12 +7,10 @@ namespace ClientDB
 {
     public partial class MainForm : Form
     {
-		//private DbAdapter m_db = null;
 		private Login m_login = new Login();
 		
         public MainForm()
         {
-			//m_db = DbAdapter.Instance;
             InitializeComponent();
         }
 		
@@ -28,13 +26,14 @@ namespace ClientDB
 
         private void OnLoad(object sender, EventArgs e)
         {
+			Session session = Session.Instance;
 			DialogResult res = m_login.ShowDialog();
 			if (res != DialogResult.OK)
 			{
 				this.Close();
 			}
 			
-			if (m_login.m_userPriv.users == UserRights.None)
+			if (session.UserPrivileges.users == UserRights.None)
 			{
 				usersAndPasswordsToolStripMenuItem.Enabled = false;
 			}
@@ -53,7 +52,6 @@ namespace ClientDB
 		private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			ChangePassword cp = new ChangePassword();
-			cp.UserId = m_login.m_userId;
 			cp.ShowDialog(this);
 		}
 
@@ -93,6 +91,11 @@ namespace ClientDB
 		{
 			ManageUsers users = new ManageUsers();
 			users.Show();
+		}
+
+		private void importToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DbAdapter.ClearDB();
 		}
     }
 }

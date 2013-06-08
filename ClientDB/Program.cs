@@ -13,6 +13,15 @@ namespace ClientDB
         [STAThread]
         static void Main()
         {
+			DbAdapter ad = new DbAdapter();
+			if( !ad.CheckTables())
+			{
+				DialogResult res = MessageBox.Show("Database is corrupt.", "Error!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+				if(res == DialogResult.Yes)
+				{
+					DbAdapter.ClearDB();
+				}
+			}
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

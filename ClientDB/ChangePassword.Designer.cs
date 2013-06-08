@@ -42,6 +42,16 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
+			// change
+			// 
+			change.Location = new System.Drawing.Point(278, 196);
+			change.Name = "change";
+			change.Size = new System.Drawing.Size(89, 23);
+			change.TabIndex = 9;
+			change.Text = "Change";
+			change.UseVisualStyleBackColor = true;
+			change.Click += new System.EventHandler(this.change_Click);
+			// 
 			// pictureBox1
 			// 
 			this.pictureBox1.Image = global::ClientDB.Properties.Resources._1367459833_lock1;
@@ -75,6 +85,7 @@
 			this.current.Name = "current";
 			this.current.Size = new System.Drawing.Size(207, 20);
 			this.current.TabIndex = 3;
+			this.current.UseSystemPasswordChar = true;
 			// 
 			// password
 			// 
@@ -82,6 +93,7 @@
 			this.password.Name = "password";
 			this.password.Size = new System.Drawing.Size(207, 20);
 			this.password.TabIndex = 5;
+			this.password.UseSystemPasswordChar = true;
 			// 
 			// label3
 			// 
@@ -98,6 +110,7 @@
 			this.confirm.Name = "confirm";
 			this.confirm.Size = new System.Drawing.Size(207, 20);
 			this.confirm.TabIndex = 7;
+			this.confirm.UseSystemPasswordChar = true;
 			// 
 			// label4
 			// 
@@ -117,16 +130,6 @@
 			this.cancel.TabIndex = 8;
 			this.cancel.Text = "Cancel";
 			this.cancel.UseVisualStyleBackColor = true;
-			// 
-			// change
-			// 
-			change.Location = new System.Drawing.Point(278, 196);
-			change.Name = "change";
-			change.Size = new System.Drawing.Size(89, 23);
-			change.TabIndex = 9;
-			change.Text = "Change";
-			change.UseVisualStyleBackColor = true;
-			change.Click += new System.EventHandler(this.change_Click);
 			// 
 			// ChangePassword
 			// 

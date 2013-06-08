@@ -3,159 +3,29 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.Data.SQLite;
-using System.Data.SqlClient;	
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Data.Common;
 
 namespace ClientDB
 {
-
-	public enum UserRights
+	public enum DbTable
 	{
-		None = 0,
-		Read = 1,
-		Write = 2,
-		Create = 4,
-		Delete = 8	
+		_min = 0,
+		UserPrivileges = 0,
+		Clients,
+		Users,
+		Trainers,
+		Payments,
+		Schedule,
+		Statistics,
+		TrainersSchedule,
+		_max,
 	};
 	
-	public class UserPrivilege
+	class DbUtils
 	{
-		public UserRights clients = 0;
-		public UserRights schedule = 0;
-		public UserRights trainers = 0;
-		public UserRights payments = 0;
-		public UserRights backup = 0;
-		public UserRights statistics = 0;
-		public UserRights users = 0;
-		public UserRights privileges = 0;
-	};
-	/*
-	class DbAdapter
-    {
-		private ClientDBDataSet dataSet;
-		
-		// Constructor
-		private DbAdapter()
-		{
-			Debug.WriteLine("Constructor");
-
-			dataSet = new ClientDBDataSet();
-			((System.ComponentModel.ISupportInitialize)(dataSet)).BeginInit();
-			
-			if (!SetConnection())
-			{
-				throw new System.Exception("Connection cannot be initialized.");
-			}
-
-			if (!CheckTables())
-			{
-				CreateTableStructure();
-			}
-
-			dataSet.DataSetName = "clientDataSet";
-			dataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-			((System.ComponentModel.ISupportInitialize)(dataSet)).EndInit();
-			
-		}
-
-		//Singleton implementation
-        private static DbAdapter instance;
-
-		public static DbAdapter Instance
-		{
-			get 
-			{
-				if (instance == null)
-				{
-					instance = new DbAdapter();
-				}
-				return instance;
-			}
-		}
-		
-		public ClientDBDataSet ClientDataSet
-		{
-			get
-			{
-				return dataSet;
-			}
-		}
-		
-		// DB data
-		private SQLiteConnection m_SqlCon;
-		private SQLiteCommand m_SqlCmd;
-		string m_tableNames = "clients, payments, schedule, statistics, trainers, trainersShedule, users, userPrivileges";
-
-		private bool SetConnection()
-		{
-			Debug.WriteLine("SetConnection Enter");
-			bool res = true;
-			try
-			{
-				m_SqlCon = new SQLiteConnection("Data Source=client.db;Version=3;New=True;Compress=True;");
-				m_SqlCon.Open();
-
-				SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM users;" +
-				"select * from userPrivileges;" +
-				"select * from clients;" +
-				"select * from trainers;" +
-				"select * from trainersShedule;" +
-				"select * from payments;" +
-				"select * from schedule;" +
-				"select * from statistics;"
-				, m_SqlCon);	
-				cmd.CommandType = CommandType.Text;
-				
-				SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
-				da.Fill(dataSet);
-				
-				
-				//SQLiteDataAdapter da = new SQLiteDataAdapter(new SQLiteCommand("select * from users", m_SqlCon));
-				
-					//"drop table if exists userPrivileges;" +
-					//"CREATE TABLE userPrivileges(" +
-					//    "id Integer PRIMARY KEY AUTOINCREMENT NOT NULL" +
-					//    ", name VarChar NOT NULL" +
-					//    ", clients Integer NOT NULL Default(15)" +
-					//    ", schedule Integer NOT NULL Default(15)" +
-					//    ", trainers Integer NOT NULL Default(15)" +
-					//    ", payments Integer NOT NULL Default(15)" +
-					//    ", backup Integer NOT NULL Default(15)" +
-					//    ", statistics Integer NOT NULL Default(15)" +
-					//    ", users Integer NOT NULL Default(15)" +
-					//    ", privileges Integer NOT NULL Default(15)" +
-					//");" +
-					//"INSERT INTO userPrivileges(name) VALUES('root');" +
-					//" " +
-					//"drop table if exists users;" +
-					//    "CREATE TABLE users(" +
-					//    "id Integer PRIMARY KEY AUTOINCREMENT NOT NULL" +
-					//    ", name VarChar NOT NULL" +
-					//    ", pass VarChar NOT NULL" +
-					//    ", privilege Integer NOT NULL" +
-					//");" +
-					//String.Format("INSERT INTO users(name, pass, privilege) VALUES('admin', '{0}', 1)", md5("root"))
-			
-					//, "Data Source=client.db;Version=3;New=True;Compress=True;");
-				//da.Fill(dataSet);
-			}
-			catch (System.Exception)
-			{
-				res = false;
-			}
-
-			Debug.WriteLine("SetConnection Leave");
-			return res;
-		}
-		
-		private void CloseConnection()
-		{
-			m_SqlCon.Close();
-		}
-
-		public string md5(string input)
+		public static string md5(string input)
 		{
 			// step 1, calculate MD5 hash from input
 			MD5 md5 = MD5.Create();
@@ -168,66 +38,327 @@ namespace ClientDB
 			{
 				sb.Append(hash[i].ToString("X2"));
 			}
-			
+
 			return sb.ToString();
 		}
 
-		private int ExecuteNonQuery(string query)
+		public static String GetTableName(DbTable table)
 		{
-			Debug.WriteLine("ExecuteNonQuery Enter");
-			Debug.WriteLine("Query: "+ query);
-			m_SqlCmd = m_SqlCon.CreateCommand();
-			m_SqlCmd.CommandText = query;
-			int res = m_SqlCmd.ExecuteNonQuery();
+			switch (table)
+			{
+				case DbTable.UserPrivileges:
+					return "userPrivileges";
 
-			Debug.WriteLine("ExecuteNonQuery Leave");
-			return res;
+				case DbTable.Users:
+					return "users";
+
+				case DbTable.Clients:
+					return "clients";
+
+				case DbTable.Payments:
+					return "payments";
+
+				case DbTable.Schedule:
+					return "schedule";
+
+				case DbTable.Statistics:
+					return "statistics";
+
+				case DbTable.Trainers:
+					return "trainers";
+
+				case DbTable.TrainersSchedule:
+					return "trainersSchedule";
+
+				default:
+					return String.Empty;
+			}
+		}
+	}
+	
+	class DbAdapter
+    {
+		// Constructor
+		public DbAdapter()
+		{
+			Debug.WriteLine("Constructor enter");
+
+			Debug.WriteLine("Constructor leave");
 		}
 
-		public SQLiteDataReader ExecuteQuery(string query)
+		public DataTable GetTable(DbTable table)
 		{
-			SQLiteCommand command = new SQLiteCommand(m_SqlCon);
-			command.CommandText = query;
-			command.CommandType = CommandType.Text;
-			SQLiteDataReader reader = command.ExecuteReader();
-			return reader;
+			String query = String.Format("select * from {0}", DbUtils.GetTableName(table));
+			return new DbAdapter().ExecuteQuery(query);
 		}
 		
-		private bool CheckTableExists(string name)
+		private bool CheckTableExists(DbTable table)
 		{
-			bool res = true;
+			bool res = false;
 			Debug.WriteLine("CheckTable Enter");
+			
+			String name = DbUtils.GetTableName(table);
 			Debug.WriteLine("Table: " + name);
+
+			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
+			
 			try
 			{
-				string query = String.Format("SELECT count(id) from {0}", name);
-				ExecuteNonQuery(query);
+				cnn.Open();
+				object value = new SQLiteCommand(String.Format("select count(*) from {0}", name), cnn).ExecuteScalar();
+				res = true;
 			}
-			catch (SQLiteException)
+			catch (Exception e)
 			{
-				res = false;
+			}
+			finally
+			{
+				cnn.Close();
 			}
 			
 			Debug.WriteLine("CheckTable Leave");
 			return res;
 		}
 		
-		private bool CheckTables()
+		public bool CheckTables()
 		{
 			Debug.WriteLine("CheckTables Enter");
 			bool res = true;
 			
-			string[] tables = m_tableNames.Split(',');
-			foreach (string table in tables)
+			for(DbTable tbl = DbTable._min; tbl < DbTable._max; tbl++ )
 			{
-				if(table.Trim().Length > 0 && !CheckTableExists(table.Trim()))
+				if(!CheckTableExists(tbl))
+				{	
 					res = false;
+					break;
+				}
 			}
 			Debug.WriteLine("CheckTables Leave");
 			return res;
 		}
+
+		/// <summary>
+		///     Allows the programmer to run a query against the Database.
+		/// </summary>
+		/// <param name="sql">The SQL to run</param>
+		/// <returns>A DataTable containing the result set.</returns>
+		public DataTable ExecuteQuery(string sql)
+		{
+			DataTable dt = new DataTable();
+			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
+			SQLiteDataReader reader = null;
+			
+			try
+			{
+				cnn.Open();
+				reader = new SQLiteCommand(sql, cnn).ExecuteReader();
+				dt.Load(reader);
+			}
+			catch (Exception e)
+			{
+				throw new Exception(e.Message);
+			}
+			finally
+			{
+				cnn.Close();
+				
+				if(reader != null)
+					reader.Close();
+			}
+			
+			return dt;
+		}
 		
-		private bool CreateTableStructure()
+		/// <summary>
+		///     Allows the programmer to interact with the database for purposes other than a query.
+		/// </summary>
+		/// <param name="sql">The SQL to be run.</param>
+		/// <returns>An Integer containing the number of rows updated.</returns>
+		public int ExecuteNonQuery(string sql)
+		{
+			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
+			int rowsUpdated = -1;
+			
+			try
+			{
+				cnn.Open();
+				rowsUpdated = new SQLiteCommand(sql, cnn).ExecuteNonQuery();
+			}
+			catch (SQLiteException e)
+			{
+				throw new Exception(e.Message);
+			}
+			finally
+			{
+				cnn.Close();
+			}
+			
+			return rowsUpdated;
+		}
+
+		/// <summary>
+		///     Allows the programmer to retrieve single items from the DB.
+		/// </summary>
+		/// <param name="sql">The query to run.</param>
+		/// <returns>A string.</returns>
+		public string ExecuteScalar(string sql)
+		{
+			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
+			object value = null;
+			
+			try
+			{
+				cnn.Open();
+				value = new SQLiteCommand(sql, cnn).ExecuteScalar();
+			}
+			catch(SQLiteException ex)
+			{
+				throw new Exception(ex.Message);
+			}
+			finally
+			{
+				cnn.Close();
+			}
+			
+			if (value != null)
+			{
+				return value.ToString();
+			}
+			return "";
+		}
+
+		/// <summary>
+		///     Allows the programmer to easily select row fields from the table.
+		/// </summary>
+		/// <param name="table">The source table.</param>
+		/// <param name="data">A list of Column to get.</param>
+		/// <param name="where">The where clause for query.</param>
+		/// <returns>Returns the first DataRow from querru results.</returns>
+		public DataRow GetFirstRow(DbTable table, String where, List<String> fields)
+		{
+			SQLiteConnection conn = new SQLiteConnection(Properties.Settings.Default.clientConnectionString);
+			DataRow row = null;
+			String query = String.Format("select * from {0} where {1};", DbUtils.GetTableName(table), where);
+			
+			if (fields.Count > 0)
+			{
+				String vals = "";
+				foreach (String field in fields)
+				{
+					vals += String.Format(" {0},", field);
+				}
+				vals = vals.Substring(0, vals.Length - 1);
+				query = String.Format("select {0} from {1} where {2} limit 1;", vals, DbUtils.GetTableName(table), where);
+			}
+
+			DataTable dt = ExecuteQuery(query);
+			if (dt.Rows.Count > 0)
+				row = dt.Rows[0];
+			
+			return row;
+		}
+		
+		/// <summary>
+		///     Allows the programmer to easily update rows in the DB.
+		/// </summary>
+		/// <param name="tableName">The table to update.</param>
+		/// <param name="data">A dictionary containing Column names and their new values.</param>
+		/// <param name="where">The where clause for the update statement.</param>
+		/// <returns>A boolean true or false to signify success or failure.</returns>
+		public bool Update(DbTable table, Dictionary<String, String> data, String where)
+		{
+			String vals = "";
+			Boolean returnCode = true;
+			if (data.Count >= 1)
+			{
+				foreach (KeyValuePair<String, String> val in data)
+				{
+					vals += String.Format(" {0} = '{1}',", val.Key.ToString(), val.Value.ToString());
+				}
+				vals = vals.Substring(0, vals.Length - 1);
+			}
+			try
+			{
+				this.ExecuteNonQuery(String.Format("update {0} set {1} where {2};", DbUtils.GetTableName(table), vals, where));
+			}
+			catch
+			{
+				returnCode = false;
+			}
+			return returnCode;
+		}
+
+		/// <summary>
+		///     Allows the programmer to easily delete rows from the DB.
+		/// </summary>
+		/// <param name="tableName">The table from which to delete.</param>
+		/// <param name="where">The where clause for the delete.</param>
+		/// <returns>A boolean true or false to signify success or failure.</returns>
+		public bool Delete(DbTable table, String where)
+		{
+			Boolean returnCode = true;
+			try
+			{
+				this.ExecuteNonQuery(String.Format("delete from {0} where {1};", DbUtils.GetTableName(table), where));
+			}
+			catch (Exception fail)
+			{
+				//MessageBox.Show(fail.Message);
+				returnCode = false;
+			}
+			return returnCode;
+		}
+
+		/// <summary>
+		///     Allows the programmer to easily insert into the DB
+		/// </summary>
+		/// <param name="tableName">The table into which we insert the data.</param>
+		/// <param name="data">A dictionary containing the column names and data for the insert.</param>
+		/// <returns>A boolean true or false to signify success or failure.</returns>
+		public bool Insert(DbTable table, Dictionary<String, String> data)
+		{
+			String columns = "";
+			String values = "";
+			Boolean returnCode = true;
+			
+			foreach (KeyValuePair<String, String> val in data)
+			{
+				columns += String.Format(" {0},", val.Key.ToString());
+				values += String.Format(" '{0}',", val.Value);
+			}
+			columns = columns.Substring(0, columns.Length - 1);
+			values = values.Substring(0, values.Length - 1);
+			try
+			{
+				ExecuteNonQuery(String.Format("insert into {0}({1}) values({2});", DbUtils.GetTableName(table), columns, values));
+			}
+			catch (Exception fail)
+			{
+				//MessageBox.Show(fail.Message);
+				returnCode = false;
+			}
+			return returnCode;
+		}
+		
+		/// <summary>
+		///     Allows the user to easily clear all data from a specific table.
+		/// </summary>
+		/// <param name="table">The name of the table to clear.</param>
+		/// <returns>A boolean true or false to signify success or failure.</returns>
+		public bool ClearTable(DbTable table)
+		{
+			try
+			{
+				this.ExecuteNonQuery(String.Format("delete from {0};", DbUtils.GetTableName(table)));
+				return true;
+			}
+			catch
+			{
+				return false;
+			}
+		}
+		
+		public static bool ClearDB()
 		{
 			bool res = true;
 			Debug.WriteLine("CreateTableStructure Enter");
@@ -247,19 +378,16 @@ namespace ClientDB
 				, privileges Integer NOT NULL Default(15)
 			);
 			INSERT INTO userPrivileges(name) VALUES('root')";
-			ExecuteNonQuery(tUserPrivileges);
 			
-			string tUsers = @"drop table if exists users;
+			string tUsers = String.Format(@"drop table if exists users;
 			CREATE TABLE users
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, name VarChar NOT NULL
 				, pass VarChar NOT NULL
 				, privilege Integer NOT NULL
-			);";
-			string addRoot = String.Format("INSERT INTO users(name, pass, privilege) VALUES('admin', '{0}', 1)", md5("root"));
-			ExecuteNonQuery(tUsers);
-			ExecuteNonQuery(addRoot);
+			);
+			INSERT INTO users(name, pass, privilege) VALUES('admin', '{0}', 1)", DbUtils.md5("root"));
 			
 			string tTrainers = @"drop table if exists trainers;
 			CREATE TABLE trainers
@@ -267,16 +395,14 @@ namespace ClientDB
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, name VarChar NOT NULL
 			)";
-			ExecuteNonQuery(tTrainers);
-
-			string tTarinersShedule = @"drop table if exists trainersShedule;
-			CREATE TABLE trainersShedule
+			
+			string tTarinersSchedule = @"drop table if exists trainersSchedule;
+			CREATE TABLE trainersSchedule
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, trainerId Integer NOT NULL
 				, date Date NOT NULL
 			)";
-			ExecuteNonQuery(tTarinersShedule);
 			
 			string tClients = @"drop table if exists clients; 
 			CREATE TABLE clients
@@ -289,8 +415,7 @@ namespace ClientDB
 				, comment Text NULL
 				, trainer Integer NULL
 			)";
-			ExecuteNonQuery(tClients);
-
+			
 			string tPayments = @"drop table if exists payments;
 			CREATE TABLE payments
 			(
@@ -300,16 +425,14 @@ namespace ClientDB
 				, sum VarChar NULL
 				, comment Text NULL
 			)";
-			ExecuteNonQuery(tPayments);
-
+			
 			string tSchedule = @"drop table if exists schedule;
 			CREATE TABLE schedule
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, name VarChar NOT NULL
 			)";
-			ExecuteNonQuery(tSchedule);
-
+			
 			string tStatistics = @"drop table if exists statistics;
 			CREATE TABLE statistics
 			(
@@ -317,8 +440,30 @@ namespace ClientDB
 				, clientId Integer NOT NULL
 				, date TimeStamp NULL
 			)";
-			ExecuteNonQuery(tStatistics);
 
+			SQLiteConnection conn = new SQLiteConnection(Properties.Settings.Default.clientConnectionString);
+			
+			try
+			{
+				conn.Open();
+				new SQLiteCommand(tUserPrivileges, conn).ExecuteNonQuery();
+				new SQLiteCommand(tUsers, conn).ExecuteNonQuery();
+				new SQLiteCommand(tTrainers, conn).ExecuteNonQuery();
+				new SQLiteCommand(tClients, conn).ExecuteNonQuery();
+				new SQLiteCommand(tPayments, conn).ExecuteNonQuery();
+				new SQLiteCommand(tStatistics, conn).ExecuteNonQuery();
+				new SQLiteCommand(tTarinersSchedule, conn).ExecuteNonQuery();
+				new SQLiteCommand(tSchedule, conn).ExecuteNonQuery();
+			}
+			catch (SQLiteException ex)
+			{
+				throw new Exception("Error! DB clear failed.\r\n", ex);
+			}
+			finally
+			{
+				conn.Close();
+			}
+			
 			Debug.WriteLine("CreateTableStructure Leave");
 			return res;
 		}
@@ -332,48 +477,5 @@ namespace ClientDB
 		{
 			return true;
 		}
-		
-		public KeyValuePair<long, int>  CheckUser(String user, String passwd)
-		{
-			KeyValuePair<long, int> result = new KeyValuePair<long, int>(-1, -1);
-			
-			SQLiteDataReader dataReader = ExecuteQuery(String.Format("select id, privilege from users where name='{0}' and pass='{1}'", user, md5(passwd)));
-			if(dataReader.HasRows)
-			{
-				dataReader.Read();
-				result = new KeyValuePair<long, int>(dataReader.GetInt64(0),dataReader.GetInt32(1));
-			}
-			return result;
-		}
-		
-		public UserPrivilege GetUserPrivilegeById(long uid)
-		{
-			UserPrivilege result = new UserPrivilege();
-
-			SQLiteDataReader dataReader = ExecuteQuery(String.Format("select * from userPrivileges where id={0}", uid));
-			if (dataReader.HasRows)
-			{
-				dataReader.Read();
-				result.clients = (UserRights)dataReader.GetInt32(2);
-				result.schedule = (UserRights)dataReader.GetInt32(3);
-				result.trainers = (UserRights)dataReader.GetInt32(4);
-				result.payments = (UserRights)dataReader.GetInt32(5);
-				result.backup = (UserRights)dataReader.GetInt32(6);
-				result.statistics = (UserRights)dataReader.GetInt32(7);
-				result.users = (UserRights)dataReader.GetInt32(8);
-				result.privileges = (UserRights)dataReader.GetInt32(9);
-			}
-			return result;
-		}
-
-		public bool SetUserPassword(long uid, string oldPasswd, string passwd)
-		{
-			bool result = false;
-
-			Debug.WriteLine(ExecuteNonQuery(String.Format("update users set pass='{0}' where id={1} and pass='{2}'", md5(passwd), uid, md5(oldPasswd))));
-			
-			return result;
-		}
 	}
-	//*/
 }
