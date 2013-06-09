@@ -18,25 +18,25 @@ namespace ClientDB
 		Delete = 8
 	};
 	
-	public class UserPrivileges
+	public class UserRole
 	{
-		public UInt64 m_id = 0;
-		public String m_Name = String.Empty;
-		public UserRights clients = 0;
-		public UserRights schedule = 0;
-		public UserRights trainers = 0;
-		public UserRights payments = 0;
-		public UserRights backup = 0;
-		public UserRights statistics = 0;
-		public UserRights users = 0;
-		public UserRights privileges = 0;
+		private UInt64 m_id = 0;
+		private String m_Name = String.Empty;
+		private UserRights m_clients = 0;
+		private UserRights m_schedule = 0;
+		private UserRights m_trainers = 0;
+		private UserRights m_payments = 0;
+		private UserRights m_backup = 0;
+		private UserRights m_statistics = 0;
+		private UserRights m_users = 0;
+		private UserRights m_privileges = 0;
 	
-		public UserPrivileges()
+		public UserRole()
 		{
 		
 		}
 		
-		public UserPrivileges(UInt64 id)
+		public UserRole(UInt64 id)
 		{
 			String where = String.Format("id = {0}", id);
 			DataRow privs = new DbAdapter().GetFirstRow(DbTable.UserPrivileges, where, new List<String>());
@@ -45,18 +45,18 @@ namespace ClientDB
 			{
 				m_id = UInt64.Parse(privs["id"].ToString());
 				m_Name = privs["name"].ToString();
-				clients = (UserRights)int.Parse(privs["clients"].ToString());
-				schedule = (UserRights)int.Parse(privs["schedule"].ToString());
-				trainers = (UserRights)int.Parse(privs["trainers"].ToString());
-				payments = (UserRights)int.Parse(privs["payments"].ToString());
-				backup = (UserRights)int.Parse(privs["backup"].ToString());
-				statistics = (UserRights)int.Parse(privs["statistics"].ToString());
-				users = (UserRights)int.Parse(privs["users"].ToString());
-				privileges = (UserRights)int.Parse(privs["privileges"].ToString());
+				m_clients = (UserRights)int.Parse(privs["clients"].ToString());
+				m_schedule = (UserRights)int.Parse(privs["schedule"].ToString());
+				m_trainers = (UserRights)int.Parse(privs["trainers"].ToString());
+				m_payments = (UserRights)int.Parse(privs["payments"].ToString());
+				m_backup = (UserRights)int.Parse(privs["backup"].ToString());
+				m_statistics = (UserRights)int.Parse(privs["statistics"].ToString());
+				m_users = (UserRights)int.Parse(privs["users"].ToString());
+				m_privileges = (UserRights)int.Parse(privs["privileges"].ToString());
 			}
 		}
 
-		public UserPrivileges(String name)
+		public UserRole(String name)
 		{
 			String where = String.Format("name = '{0}'", name);
 			DataRow privs = new DbAdapter().GetFirstRow(DbTable.UserPrivileges, where, new List<String>());
@@ -65,14 +65,14 @@ namespace ClientDB
 			{
 				m_id = UInt64.Parse(privs["id"].ToString());
 				m_Name = privs["name"].ToString();
-				clients = (UserRights)int.Parse(privs["clients"].ToString());
-				schedule = (UserRights)int.Parse(privs["schedule"].ToString());
-				trainers = (UserRights)int.Parse(privs["trainers"].ToString());
-				payments = (UserRights)int.Parse(privs["payments"].ToString());
-				backup = (UserRights)int.Parse(privs["backup"].ToString());
-				statistics = (UserRights)int.Parse(privs["statistics"].ToString());
-				users = (UserRights)int.Parse(privs["users"].ToString());
-				privileges = (UserRights)int.Parse(privs["privileges"].ToString());
+				m_clients = (UserRights)int.Parse(privs["clients"].ToString());
+				m_schedule = (UserRights)int.Parse(privs["schedule"].ToString());
+				m_trainers = (UserRights)int.Parse(privs["trainers"].ToString());
+				m_payments = (UserRights)int.Parse(privs["payments"].ToString());
+				m_backup = (UserRights)int.Parse(privs["backup"].ToString());
+				m_statistics = (UserRights)int.Parse(privs["statistics"].ToString());
+				m_users = (UserRights)int.Parse(privs["users"].ToString());
+				m_privileges = (UserRights)int.Parse(privs["privileges"].ToString());
 			}
 		}
 		
@@ -85,55 +85,281 @@ namespace ClientDB
 		{
 			return flag == (var & flag);
 		}
+
+		public UInt64 Id
+		{
+			get
+			{
+				return m_id;
+			}
+		}
+		
+		public String Name
+		{
+			get
+			{ 
+				return m_Name;
+			}
+			set
+			{
+				Debug.WriteLine(String.Format("Change role name from '{0}' to '{1}'", m_Name, value));
+				if (m_id <= 0)
+				{
+					return;
+				}
+
+				DbAdapter ad = new DbAdapter();
+				Dictionary<string, string> fields = new Dictionary<string, string>();
+				fields["name"] = String.Format("'{0}'", value);
+				if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
+				{
+					throw new Exception("Name could not been changed.");
+				}
+			}
+		}
+
+		public UserRights Statistics
+		{
+			get
+			{
+				return m_statistics;
+			}
+			set
+			{
+				if (m_id <= 0)
+				{
+					return;
+				}
+
+				DbAdapter ad = new DbAdapter();
+				Dictionary<string, string> fields = new Dictionary<string, string>();
+				fields["statistics"] = ((int)value).ToString();
+				if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
+				{
+					throw new Exception("Manage statistics rights could not been changed.");
+				}
+				m_statistics = value;
+			}
+		}
+
+		public UserRights Users
+		{
+			get
+			{
+				return m_users;
+			}
+			set
+			{
+				if (m_id <= 0)
+				{
+					return;
+				}
+
+				DbAdapter ad = new DbAdapter();
+				Dictionary<string, string> fields = new Dictionary<string, string>();
+				fields["users"] = ((int)value).ToString();
+				if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
+				{
+					throw new Exception("Manage user rights could not been changed.");
+				}
+				m_users = value;
+			}
+		}
+
+		public UserRights Clients
+		{
+			get
+			{
+				return m_clients;
+			}
+			set
+			{
+				if (m_id <= 0)
+				{
+					return;
+				}
+
+				DbAdapter ad = new DbAdapter();
+				Dictionary<string, string> fields = new Dictionary<string, string>();
+				fields["clients"] = ((int)value).ToString();
+				if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
+				{
+					throw new Exception("Manage user rights could not been changed.");
+				}
+				m_clients = value;
+			}
+		}
+
+		public UserRights Payments
+		{
+			get
+			{
+				return m_payments;
+			}
+			set
+			{
+				if (m_id <= 0)
+				{
+					return;
+				}
+
+				DbAdapter ad = new DbAdapter();
+				Dictionary<string, string> fields = new Dictionary<string, string>();
+				fields["payments"] = ((int)value).ToString();
+				if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
+				{
+					throw new Exception("Manage user rights could not been changed.");
+				}
+				m_payments = value;
+			}
+		}
+
+		public UserRights Trainers
+		{
+			get
+			{
+				return m_trainers;
+			}
+			set
+			{
+				if (m_id <= 0)
+				{
+					return;
+				}
+
+				DbAdapter ad = new DbAdapter();
+				Dictionary<string, string> fields = new Dictionary<string, string>();
+				fields["trainers"] = ((int)value).ToString();
+				if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
+				{
+					throw new Exception("Manage user rights could not been changed.");
+				}
+				m_trainers = value;
+			}
+		}
+
+		public UserRights Schedule
+		{
+			get
+			{
+				return m_schedule;
+			}
+			set
+			{
+				if (m_id <= 0)
+				{
+					return;
+				}
+
+				DbAdapter ad = new DbAdapter();
+				Dictionary<string, string> fields = new Dictionary<string, string>();
+				fields["schedule"] = ((int)value).ToString();
+				if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
+				{
+					throw new Exception("Manage user rights could not been changed.");
+				}
+				m_schedule = value;
+			}
+		}
+
+		public UserRights Backup
+		{
+			get
+			{
+				return m_backup;
+			}
+			set
+			{
+				if (m_id <= 0)
+				{
+					return;
+				}
+
+				DbAdapter ad = new DbAdapter();
+				Dictionary<string, string> fields = new Dictionary<string, string>();
+				fields["backup"] = ((int)value).ToString();
+				if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
+				{
+					throw new Exception("Manage user rights could not been changed.");
+				}
+				m_backup = value;
+			}
+		}
+		
+		public UserRights Privileges
+		{
+			get
+			{
+				return m_privileges;
+			}
+			set
+			{
+				if (m_id <= 0)
+				{
+					return;
+				}
+
+				DbAdapter ad = new DbAdapter();
+				Dictionary<string, string> fields = new Dictionary<string, string>();
+				fields["privileges"] = ((int)value).ToString();
+				if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
+				{
+					throw new Exception("Manage user rights could not been changed.");
+				}
+				m_privileges = value;
+			}
+		}
 	}
 
-	class UserPrivilegesCollection : IEnumerable<UserPrivileges>
+	class UserRolesCollection : IEnumerable<UserRole>
 	{
-		List<UserPrivileges> Items = new List<UserPrivileges>();
+		List<UserRole> Items = new List<UserRole>();
 
-		public UserPrivilegesCollection()
+		public UserRolesCollection()
 		{
 			DbAdapter da = new DbAdapter();
 			DataTable dt = da.ExecuteQuery(String.Format("select id from {0};", DbUtils.GetTableName(DbTable.UserPrivileges)));
 			foreach (DataRow dr in dt.Rows)
 			{
-				UserPrivileges priv = new UserPrivileges(UInt64.Parse(dr["id"].ToString()));
+				UserRole priv = new UserRole(UInt64.Parse(dr["id"].ToString()));
 				Items.Add(priv);
 			}
 		}
 
-		public UInt64 Add(String name)
+		public Boolean Add(String name)
 		{
 			DbAdapter da = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
-			fields["name"] = name;
-			da.Insert(DbTable.UserPrivileges, fields);
-			UserPrivileges priv = new UserPrivileges(name);
+			fields["name"] = String.Format("'{0}'", name);
+			if(!da.Insert(DbTable.UserPrivileges, fields))
+				return false;
+				
+			UserRole priv = new UserRole(name);
 			Items.Add(priv);
-			return priv.m_id;
+			return true;
 		}
 
-		public bool Remove(UserPrivileges item)
+		public bool Remove(UserRole item)
 		{
 			DbAdapter da = new DbAdapter();
-			String where = String.Format("id = {0}", item.m_id);
+			String where = String.Format("id = {0}", item.Id);
 			da.Delete(DbTable.UserPrivileges, where);
 			return Items.Remove(item);
 		}
 
-		public List<UserPrivileges> Search(String name)
+		public List<UserRole> Search(String name)
 		{
 			return Search(name, false);
 		}
 
-		public List<UserPrivileges> Search(String name, Boolean contains)
+		public List<UserRole> Search(String name, Boolean contains)
 		{
-			List<UserPrivileges> collection = Items;
-			foreach (UserPrivileges priv in collection)
+			List<UserRole> collection = new List<UserRole>();
+			foreach (UserRole priv in Items)
 			{
-				if ((contains && !priv.m_Name.Contains(name)) || !priv.m_Name.StartsWith(name))
+				if ((contains && priv.Name.Contains(name)) || priv.Name.StartsWith(name))
 				{
-					collection.Remove(priv);
+					collection.Add(priv);
 				}
 			}
 			return collection;
@@ -144,7 +370,7 @@ namespace ClientDB
 			get { return Items.Count; }
 		}
 
-		public IEnumerator<UserPrivileges> GetEnumerator()
+		public IEnumerator<UserRole> GetEnumerator()
 		{
 			return Items.GetEnumerator();
 		}

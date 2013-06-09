@@ -67,11 +67,11 @@ namespace ClientDB
 			}
 		}
 
-		public UserPrivileges Privileges
+		public UserRole Role
 		{
 			get
 			{
-				return new UserPrivileges(m_userPrivilegesId);
+				return new UserRole(m_userPrivilegesId);
 			}
 		}
 
@@ -79,6 +79,7 @@ namespace ClientDB
 		{
 			set
 			{
+				Debug.WriteLine(String.Format("Change '{0}' password  to: '{1}'", m_userName, value));
 				if (m_userId <= 0)
 				{
 					return;
@@ -92,7 +93,6 @@ namespace ClientDB
 				{
 					throw new Exception("Password could not been changed.");
 				}
-
 			}
 		}
 		
@@ -175,7 +175,7 @@ namespace ClientDB
 		public List<User> Search(String name, Boolean contains)
 		{
 			List<User> collection = new List<User>();
-			foreach(User user in collection)
+			foreach (User user in Items)
 			{
 				if((contains && user.Name.Contains(name)) || user.Name.StartsWith(name))
 				{

@@ -88,35 +88,30 @@ namespace ClientDB
 
 		public DataTable GetTable(DbTable table)
 		{
-			String query = String.Format("select * from {0}", DbUtils.GetTableName(table));
+			String name = DbUtils.GetTableName(table);
+			Debug.WriteLine("Get table '{0}'", name);
+			String query = String.Format("select * from {0}", name);
 			return new DbAdapter().ExecuteQuery(query);
 		}
 		
 		private bool CheckTableExists(DbTable table)
 		{
 			bool res = false;
-			Debug.WriteLine("CheckTable Enter");
 			
 			String name = DbUtils.GetTableName(table);
-			Debug.WriteLine("Table: " + name);
-
-			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
+			Debug.WriteLine(String.Format("Check table '{0}' exists.", name));
 			
 			try
 			{
-				cnn.Open();
-				object value = new SQLiteCommand(String.Format("select count(*) from {0}", name), cnn).ExecuteScalar();
+				String query = String.Format("select count(*) from {0}", name);
+				ExecuteScalar(query);
 				res = true;
 			}
-			catch (Exception e)
+			catch(Exception fail)
 			{
-			}
-			finally
-			{
-				cnn.Close();
+				Debug.WriteLine(String.Format("CheckTableExist exception: {0}.", fail.Message));
 			}
 			
-			Debug.WriteLine("CheckTable Leave");
 			return res;
 		}
 		
@@ -148,6 +143,8 @@ namespace ClientDB
 			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
 			SQLiteDataReader reader = null;
 			SQLiteCommand cmd = null;
+
+			Debug.WriteLine(String.Format("Execute query: {0}.", sql));
 			
 			try
 			{
@@ -156,9 +153,9 @@ namespace ClientDB
 				reader = cmd.ExecuteReader();
 				dt.Load(reader);
 			}
-			catch (Exception e)
+			catch (SQLiteException ex)
 			{
-				throw new Exception(e.Message);
+				throw new Exception(ex.Message);
 			}
 			finally
 			{
@@ -184,6 +181,8 @@ namespace ClientDB
 			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
 			SQLiteCommand cmd = null;
 			int rowsUpdated = -1;
+
+			Debug.WriteLine(String.Format("Execute NON query: {0}.", sql));
 			
 			try
 			{
@@ -216,6 +215,8 @@ namespace ClientDB
 			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
 			SQLiteCommand cmd = null;
 			object value = null;
+
+			Debug.WriteLine(String.Format("Execute scalar: {0}.", sql));
 			
 			try
 			{
@@ -266,6 +267,8 @@ namespace ClientDB
 				query = String.Format("select {0} from {1} where {2} limit 1;", vals, DbUtils.GetTableName(table), where);
 			}
 
+			Debug.WriteLine(String.Format("GetFirstRow, query: {0}.", query));
+			
 			DataTable dt = ExecuteQuery(query);
 			if (dt.Rows.Count > 0)
 				row = dt.Rows[0];
@@ -294,11 +297,14 @@ namespace ClientDB
 			}
 			try
 			{
-				String query = String.Format("update {0} set {1} where {2};", DbUtils.GetTableName(table), vals, where);
-				this.ExecuteNonQuery(query);
+				String tableName = DbUtils.GetTableName(table);
+				String query = String.Format("update {0} set {1} where {2};", tableName, vals, where);
+				Debug.WriteLine(String.Format("Update {0}, query: {1}.", tableName, query));
+				ExecuteNonQuery(query);
 			}
-			catch(Exception ex)
+			catch(Exception fail)
 			{
+				Debug.WriteLine(String.Format("Update exception: {0}.", fail.Message));
 				returnCode = false;
 			}
 			return returnCode;
@@ -315,11 +321,14 @@ namespace ClientDB
 			Boolean returnCode = true;
 			try
 			{
-				this.ExecuteNonQuery(String.Format("delete from {0} where {1};", DbUtils.GetTableName(table), where));
+				String tableName = DbUtils.GetTableName(table);
+				String query = String.Format("delete from {0} where {1};", tableName, where);
+				Debug.WriteLine(String.Format("Delete from {0}, query: {1}.", tableName, query));
+				ExecuteNonQuery(query);
 			}
 			catch (Exception fail)
 			{
-				//MessageBox.Show(fail.Message);
+				Debug.WriteLine(String.Format("Delete exception: {0}.", fail.Message));
 				returnCode = false;
 			}
 			return returnCode;
@@ -346,12 +355,14 @@ namespace ClientDB
 			values = values.Substring(0, values.Length - 1);
 			try
 			{
-				String query = String.Format("insert into {0}({1}) values({2});", DbUtils.GetTableName(table), columns, values);
+				String tableName = DbUtils.GetTableName(table);
+				String query = String.Format("insert into {0}({1}) values({2});", tableName, columns, values);
+				Debug.WriteLine(String.Format("Insert to {0}, query: {1}.", tableName, query));
 				ExecuteNonQuery(query);
 			}
 			catch (Exception fail)
 			{
-				//MessageBox.Show(fail.Message);
+				Debug.WriteLine(String.Format("Insert exception: {0}.", fail.Message));
 				returnCode = false;
 			}
 			return returnCode;
@@ -369,8 +380,9 @@ namespace ClientDB
 				this.ExecuteNonQuery(String.Format("delete from {0};", DbUtils.GetTableName(table)));
 				return true;
 			}
-			catch
+			catch (Exception fail)
 			{
+				Debug.WriteLine("ClearTable exception: {0}.", fail.Message);
 				return false;
 			}
 		}
@@ -463,6 +475,17 @@ namespace ClientDB
 			
 			try
 			{
+				String[] conStr = Properties.Settings.Default.clientConnectionString.Split(';');
+				foreach (String opt in conStr)
+				{
+					String[] keyVal = opt.Split('=');
+					if(keyVal.Length == 2 && keyVal[0] == "data source")
+					{
+						if(!System.IO.File.Exists(keyVal[1]))
+							SQLiteConnection.CreateFile(keyVal[1]);
+					}
+				}
+				
 				conn.Open();
 				new SQLiteCommand(tUserPrivileges, conn).ExecuteNonQuery();
 				new SQLiteCommand(tUsers, conn).ExecuteNonQuery();
@@ -475,6 +498,7 @@ namespace ClientDB
 			}
 			catch (SQLiteException ex)
 			{
+				Debug.WriteLine(String.Format("ClearDB exception: {0}.", ex.Message));
 				throw new Exception("Error! DB clear failed.\r\n", ex);
 			}
 			finally

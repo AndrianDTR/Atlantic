@@ -12,7 +12,7 @@ namespace ClientDB
 	public partial class ManageUsers : Form
 	{
 		UserCollection userCollection = new UserCollection();
-		UserPrivilegesCollection privCollection = new UserPrivilegesCollection();
+		UserRolesCollection privCollection = new UserRolesCollection();
 		
 		public ManageUsers()
 		{
@@ -39,7 +39,7 @@ namespace ClientDB
 		{
 			m_userRole.Items.Clear();
 			
-			foreach (UserPrivileges priv in privCollection)
+			foreach (UserRole priv in privCollection)
 			{
 				int nItem = m_userRole.Items.Add(priv);
 			}
@@ -54,7 +54,7 @@ namespace ClientDB
 			foreach (User user in userCollection)
 			{
 				ListViewItem it = userList.Items.Add(user.Name);
-				it.SubItems.Add(user.Privileges.m_Name);
+				it.SubItems.Add(user.Role.Name);
 				it.Tag = user;
 			}
 		}
@@ -70,7 +70,7 @@ namespace ClientDB
 			User curItem = (User)userList.SelectedItems[0].Tag;
 
 			m_userName.Text = curItem.Name;
-			List<UserPrivileges> priv = privCollection.Search(curItem.Privileges.ToString());
+			List<UserRole> priv = privCollection.Search(curItem.Role.ToString());
 			if(priv.Count > 0)
 				m_userRole.SelectedItem = priv[0];
 		}
@@ -83,9 +83,9 @@ namespace ClientDB
 				UIMessages.Error("User with specified name already exists.");
 				return;
 			}
-			UserPrivileges role = (UserPrivileges)m_userRole.SelectedItem;
+			UserRole role = (UserRole)m_userRole.SelectedItem;
 			
-			if(!userCollection.Add(m_userName.Text, role.m_id))
+			if(!userCollection.Add(m_userName.Text, role.Id))
 			{
 				UIMessages.Error("User could not been added.");
 				return;

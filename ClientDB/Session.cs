@@ -33,17 +33,17 @@ namespace ClientDB
 		
 		private int m_passLen = 8;
 		private User m_user = new User();
-		private UserPrivileges m_userPrivileges = new UserPrivileges();
+		private UserRole m_userRole = new UserRole();
 		
 		public User User
 		{
 			get{ return m_user;}
-			set{ m_user = value; m_userPrivileges = m_user.Privileges;}
+			set{ m_user = value; m_userRole = m_user.Role;}
 		}
 
-		public UserPrivileges UserPrivileges
+		public UserRole UserRole
 		{
-			get { return m_userPrivileges; }
+			get { return m_userRole; }
 		}
 		
 		public int PassLen

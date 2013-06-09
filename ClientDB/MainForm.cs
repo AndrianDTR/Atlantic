@@ -34,13 +34,13 @@ namespace ClientDB
 				this.Close();
 			}
 			
-			UserPrivileges priv = session.UserPrivileges;
+			UserRole priv = session.UserRole;
 
-			userRolesToolStripMenuItem.Enabled = priv.IsSet(priv.users, UserRights.Read);
-			usersAndPasswordsToolStripMenuItem.Enabled = priv.IsSet(priv.users, UserRights.Read);
+			userRolesToolStripMenuItem.Enabled = priv.IsSet(priv.Users, UserRights.Read);
+			usersAndPasswordsToolStripMenuItem.Enabled = priv.IsSet(priv.Users, UserRights.Read);
 			
-			exportToolStripMenuItem.Enabled = priv.IsSet(priv.backup, UserRights.Create);
-			importToolStripMenuItem.Enabled = priv.IsSet(priv.backup, UserRights.Write);
+			exportToolStripMenuItem.Enabled = priv.IsSet(priv.Backup, UserRights.Create);
+			importToolStripMenuItem.Enabled = priv.IsSet(priv.Backup, UserRights.Write);
 								
         }
 

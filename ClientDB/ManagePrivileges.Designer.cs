@@ -29,7 +29,11 @@
 		private void InitializeComponent()
 		{
 			System.Windows.Forms.ColumnHeader roleName;
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.delButton = new System.Windows.Forms.Button();
@@ -38,10 +42,10 @@
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.privilegesGrid = new System.Windows.Forms.DataGridView();
 			this.accType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.read = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.write = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.create = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.remove = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.read = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.write = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.create = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.remove = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			roleName = new System.Windows.Forms.ColumnHeader();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -67,7 +71,7 @@
 			this.tableLayoutPanel1.RowCount = 1;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(676, 354);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(676, 203);
 			this.tableLayoutPanel1.TabIndex = 3;
 			// 
 			// panel1
@@ -78,12 +82,12 @@
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(3, 3);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(230, 348);
+			this.panel1.Size = new System.Drawing.Size(230, 197);
 			this.panel1.TabIndex = 6;
 			// 
 			// delButton
 			// 
-			this.delButton.Location = new System.Drawing.Point(118, 319);
+			this.delButton.Location = new System.Drawing.Point(118, 168);
 			this.delButton.Name = "delButton";
 			this.delButton.Size = new System.Drawing.Size(105, 23);
 			this.delButton.TabIndex = 9;
@@ -93,7 +97,7 @@
 			// 
 			// addButton
 			// 
-			this.addButton.Location = new System.Drawing.Point(7, 319);
+			this.addButton.Location = new System.Drawing.Point(7, 168);
 			this.addButton.Name = "addButton";
 			this.addButton.Size = new System.Drawing.Size(105, 23);
 			this.addButton.TabIndex = 8;
@@ -111,7 +115,7 @@
 			this.listRoles.Location = new System.Drawing.Point(0, 0);
 			this.listRoles.MultiSelect = false;
 			this.listRoles.Name = "listRoles";
-			this.listRoles.Size = new System.Drawing.Size(230, 313);
+			this.listRoles.Size = new System.Drawing.Size(230, 162);
 			this.listRoles.TabIndex = 7;
 			this.listRoles.UseCompatibleStateImageBehavior = false;
 			this.listRoles.View = System.Windows.Forms.View.Details;
@@ -124,7 +128,7 @@
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(239, 3);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(434, 348);
+			this.panel2.Size = new System.Drawing.Size(434, 197);
 			this.panel2.TabIndex = 7;
 			// 
 			// privilegesGrid
@@ -140,53 +144,72 @@
             this.remove});
 			this.privilegesGrid.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.privilegesGrid.Location = new System.Drawing.Point(0, 0);
+			this.privilegesGrid.MultiSelect = false;
 			this.privilegesGrid.Name = "privilegesGrid";
-			this.privilegesGrid.Size = new System.Drawing.Size(434, 348);
+			this.privilegesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+			this.privilegesGrid.Size = new System.Drawing.Size(434, 197);
 			this.privilegesGrid.TabIndex = 6;
-			this.privilegesGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellValChanged);
+			this.privilegesGrid.Click += new System.EventHandler(this.OnClick);
 			// 
 			// accType
 			// 
 			this.accType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			this.accType.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			this.accType.DefaultCellStyle = dataGridViewCellStyle16;
 			this.accType.HeaderText = "Access type";
 			this.accType.Name = "accType";
+			this.accType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.accType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// read
 			// 
+			dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle17.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.read.DefaultCellStyle = dataGridViewCellStyle17;
 			this.read.HeaderText = "Read";
 			this.read.Name = "read";
 			this.read.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.read.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.read.Width = 40;
 			// 
 			// write
 			// 
+			dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle18.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+			this.write.DefaultCellStyle = dataGridViewCellStyle18;
 			this.write.HeaderText = "Write";
 			this.write.Name = "write";
 			this.write.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.write.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.write.Width = 40;
 			// 
 			// create
 			// 
+			dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle19.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+			this.create.DefaultCellStyle = dataGridViewCellStyle19;
 			this.create.HeaderText = "Create";
 			this.create.Name = "create";
 			this.create.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.create.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.create.Width = 45;
 			// 
 			// remove
 			// 
+			dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle20.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+			this.remove.DefaultCellStyle = dataGridViewCellStyle20;
 			this.remove.HeaderText = "Delete";
 			this.remove.Name = "remove";
 			this.remove.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.remove.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.remove.Width = 45;
 			// 
 			// ManagePrivileges
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(676, 354);
+			this.ClientSize = new System.Drawing.Size(676, 203);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
@@ -216,10 +239,10 @@
 		private System.Windows.Forms.Panel panel2;
 		private System.Windows.Forms.DataGridView privilegesGrid;
 		private System.Windows.Forms.DataGridViewTextBoxColumn accType;
-		private System.Windows.Forms.DataGridViewCheckBoxColumn read;
-		private System.Windows.Forms.DataGridViewCheckBoxColumn write;
-		private System.Windows.Forms.DataGridViewCheckBoxColumn create;
-		private System.Windows.Forms.DataGridViewCheckBoxColumn remove;
+		private System.Windows.Forms.DataGridViewTextBoxColumn read;
+		private System.Windows.Forms.DataGridViewTextBoxColumn write;
+		private System.Windows.Forms.DataGridViewTextBoxColumn create;
+		private System.Windows.Forms.DataGridViewTextBoxColumn remove;
 
 	}
 }
