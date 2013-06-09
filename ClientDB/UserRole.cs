@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Data.SQLite;
 using System.Diagnostics;
 
 namespace ClientDB
@@ -39,41 +36,45 @@ namespace ClientDB
 		public UserRole(Int64 id)
 		{
 			String where = String.Format("id = {0}", id);
-			DataRow privs = new DbAdapter().GetFirstRow(DbTable.UserPrivileges, where, new List<String>());
+			DataRow data = new DbAdapter().GetFirstRow(DbTable.UserPrivileges, where, new List<String>());
 
-			if (privs != null)
+			if (data == null)
 			{
-				m_id = id;
-				m_Name = privs["name"].ToString();
-				m_clients = (UserRights)int.Parse(privs["clients"].ToString());
-				m_schedule = (UserRights)int.Parse(privs["schedule"].ToString());
-				m_trainers = (UserRights)int.Parse(privs["trainers"].ToString());
-				m_payments = (UserRights)int.Parse(privs["payments"].ToString());
-				m_backup = (UserRights)int.Parse(privs["backup"].ToString());
-				m_statistics = (UserRights)int.Parse(privs["statistics"].ToString());
-				m_users = (UserRights)int.Parse(privs["users"].ToString());
-				m_privileges = (UserRights)int.Parse(privs["privileges"].ToString());
+				throw new Exception("Error! No such role.");
 			}
+		
+			m_id = id;
+			m_Name = data["name"].ToString();
+			m_clients = (UserRights)int.Parse(data["clients"].ToString());
+			m_schedule = (UserRights)int.Parse(data["schedule"].ToString());
+			m_trainers = (UserRights)int.Parse(data["trainers"].ToString());
+			m_payments = (UserRights)int.Parse(data["payments"].ToString());
+			m_backup = (UserRights)int.Parse(data["backup"].ToString());
+			m_statistics = (UserRights)int.Parse(data["statistics"].ToString());
+			m_users = (UserRights)int.Parse(data["users"].ToString());
+			m_privileges = (UserRights)int.Parse(data["privileges"].ToString());
 		}
 
 		public UserRole(String name)
 		{
 			String where = String.Format("name = '{0}'", name);
-			DataRow privs = new DbAdapter().GetFirstRow(DbTable.UserPrivileges, where, new List<String>());
+			DataRow data = new DbAdapter().GetFirstRow(DbTable.UserPrivileges, where, new List<String>());
 
-			if (privs != null)
+			if (data == null)
 			{
-				m_id = Int64.Parse(privs["id"].ToString());
-				m_Name = privs["name"].ToString();
-				m_clients = (UserRights)int.Parse(privs["clients"].ToString());
-				m_schedule = (UserRights)int.Parse(privs["schedule"].ToString());
-				m_trainers = (UserRights)int.Parse(privs["trainers"].ToString());
-				m_payments = (UserRights)int.Parse(privs["payments"].ToString());
-				m_backup = (UserRights)int.Parse(privs["backup"].ToString());
-				m_statistics = (UserRights)int.Parse(privs["statistics"].ToString());
-				m_users = (UserRights)int.Parse(privs["users"].ToString());
-				m_privileges = (UserRights)int.Parse(privs["privileges"].ToString());
+				throw new Exception("Error! No such role.");
 			}
+
+			m_id = Int64.Parse(data["id"].ToString());
+			m_Name = data["name"].ToString();
+			m_clients = (UserRights)int.Parse(data["clients"].ToString());
+			m_schedule = (UserRights)int.Parse(data["schedule"].ToString());
+			m_trainers = (UserRights)int.Parse(data["trainers"].ToString());
+			m_payments = (UserRights)int.Parse(data["payments"].ToString());
+			m_backup = (UserRights)int.Parse(data["backup"].ToString());
+			m_statistics = (UserRights)int.Parse(data["statistics"].ToString());
+			m_users = (UserRights)int.Parse(data["users"].ToString());
+			m_privileges = (UserRights)int.Parse(data["privileges"].ToString());
 		}
 		
 		public override String ToString()

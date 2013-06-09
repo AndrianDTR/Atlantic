@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Data.SQLite;
 using System.Diagnostics;
 
 namespace ClientDB

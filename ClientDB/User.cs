@@ -27,8 +27,8 @@ namespace ClientDB
 			}
 
 			m_userId = id;
-			m_userName = (String)userData["name"];
-			m_userPrivilegesId = (Int64)long.Parse(userData["privilege"].ToString());
+			m_userName = userData["name"].ToString();
+			m_userPrivilegesId = Int64.Parse(userData["privilege"].ToString());
 		}
 
 		public User(String name)
@@ -41,9 +41,9 @@ namespace ClientDB
 				throw new Exception("Error! No such user.");
 			}
 
-			m_userId = (Int64)long.Parse(userData["id"].ToString());
-			m_userName = (String)userData["name"];
-			m_userPrivilegesId = (Int64)long.Parse(userData["privilege"].ToString());
+			m_userId = Int64.Parse(userData["id"].ToString());
+			m_userName = userData["name"].ToString();
+			m_userPrivilegesId = Int64.Parse(userData["privilege"].ToString());
 		}
 		
 		public void SetUserPrivileges(Int64 privId)
@@ -121,9 +121,9 @@ namespace ClientDB
 			if(userData != null)
 			{
 				user = new User();
-				user.m_userId = (Int64)long.Parse(userData["id"].ToString());
+				user.m_userId = Int64.Parse(userData["id"].ToString());
 				user.m_userName = (String)userData["name"];
-				user.m_userPrivilegesId = (Int64)long.Parse(userData["privilege"].ToString());
+				user.m_userPrivilegesId = Int64.Parse(userData["privilege"].ToString());
 			}
 			return user;
 		}
