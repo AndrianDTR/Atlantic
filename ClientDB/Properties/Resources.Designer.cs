@@ -122,12 +122,5 @@ namespace ClientDB.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap add_icon {
-            get {
-                object obj = ResourceManager.GetObject("add-icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

@@ -26,7 +26,7 @@ namespace ClientDB
 				throw new Exception("Error! No such trainer.");
 			}
 
-			m_id = (Int64)long.Parse(userData["id"].ToString());
+			m_id = id;
 			m_name = userData["name"].ToString();
 			m_phone = userData["phone"].ToString();
 		}

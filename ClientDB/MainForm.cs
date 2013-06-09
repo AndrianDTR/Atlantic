@@ -60,9 +60,9 @@ namespace ClientDB
 			cp.ShowDialog(this);
 		}
 
-		private void add23_Click(object sender, EventArgs e)
+		private void add_Click(object sender, EventArgs e)
 		{
-			Schedule sc = new Schedule();
+			ManageScheduleRules sc = new ManageScheduleRules();
 			sc.ShowDialog(this);
 			
 		}
@@ -108,12 +108,10 @@ namespace ClientDB
 		{
 		}
 
-		private void manageToolStripMenuItem_Click(object sender, EventArgs e)
+		private void manageTrainersToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			ManageTrainers mt = new ManageTrainers();
 			mt.ShowDialog(this);
 		}
-
-		
     }
 }

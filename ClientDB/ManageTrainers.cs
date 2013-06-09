@@ -19,10 +19,10 @@ namespace ClientDB
 		private void OnLoad(object sender, EventArgs e)
 		{
 			TrainerCollection collection = new TrainerCollection();
-			trainerList.Items.Clear();
+			trainersList.Items.Clear();
 			foreach (Trainer trainer in collection)
 			{
-				trainerList.Items.Add(trainer);
+				trainersList.Items.Add(trainer);
 			}
 		}
 
@@ -49,27 +49,27 @@ namespace ClientDB
 				return;
 			}
 			
-			trainerList.Items.Add(new Trainer(id));
+			trainersList.Items.Add(new Trainer(id));
 		}
 
 		private void remove_Click(object sender, EventArgs e)
 		{
-			if (trainerList.SelectedItem == null)
+			if (trainersList.SelectedItem == null)
 				return;
 			
-			Trainer trainer = (Trainer)trainerList.SelectedItem;
+			Trainer trainer = (Trainer)trainersList.SelectedItem;
 			if(!TrainerCollection.RemoveById(trainer.Id))
 			{
-				UIMessages.Error("Selected ctariner could not been removed.");
+				UIMessages.Error("Selected trainer could not been removed.");
 				return;
 			}
 			
-			trainerList.Items.Remove(trainer);
+			trainersList.Items.Remove(trainer);
 		}
 
 		private void save_Click(object sender, EventArgs e)
 		{
-			if (trainerList.SelectedItem == null)
+			if (trainersList.SelectedItem == null)
 				return;
 			
 			String szName = name.Text.Trim();
@@ -86,17 +86,17 @@ namespace ClientDB
 			if (szName.Length < 1)
 				return;
 				
-			Trainer selected = (Trainer)trainerList.SelectedItem;
+			Trainer selected = (Trainer)trainersList.SelectedItem;
 			selected.SetData(szName, szPhone);
-			trainerList.Items[trainerList.SelectedIndex] = selected;
+			trainersList.Items[trainersList.SelectedIndex] = selected;
 		}
 
 		private void trainerList_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (trainerList.SelectedItem == null)
+			if (trainersList.SelectedItem == null)
 				return;
 
-			Trainer selected = (Trainer)trainerList.SelectedItem;
+			Trainer selected = (Trainer)trainersList.SelectedItem;
 
 			name.Text = selected.Name;
 			phone.Text = selected.Phone;
