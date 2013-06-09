@@ -11,18 +11,12 @@ namespace ClientDB
 {
 	public partial class ManageUsers : Form
 	{
-		UserCollection userCollection = new UserCollection();
 		UserRolesCollection privCollection = new UserRolesCollection();
 		
 		public ManageUsers()
 		{
 			InitializeComponent();
 			
-		}
-
-		private void save_Click(object sender, EventArgs e)
-		{
-
 		}
 
 		private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -49,13 +43,13 @@ namespace ClientDB
 		
 		private void ReloadUsers()
 		{
-			userCollection = new UserCollection();
+			UserCollection userCollection = new UserCollection();
 			userList.Items.Clear();
 			foreach (User user in userCollection)
 			{
 				ListViewItem it = userList.Items.Add(user.Name);
 				it.SubItems.Add(user.Role.Name);
-				it.Tag = user;
+				it.Tag = user.Id;
 			}
 		}
 		
@@ -67,45 +61,55 @@ namespace ClientDB
 			if(userList.SelectedItems.Count <= 0)
 				return;
 				
-			User curItem = (User)userList.SelectedItems[0].Tag;
+			User curItem = new User((Int64)userList.SelectedItems[0].Tag);
 
 			m_userName.Text = curItem.Name;
-			List<UserRole> priv = privCollection.Search(curItem.Role.ToString());
-			if(priv.Count > 0)
-				m_userRole.SelectedItem = priv[0];
+			UserRole priv = privCollection.Search(curItem.Role.Id);
+			if(priv == null)
+			{
+				UIMessages.Error("Invalid user role has been specified.");
+				return;
+			}
+			
+			m_userRole.SelectedItem = priv;
 		}
 
 		private void add_Click(object sender, EventArgs e)
 		{
-			List<User> users = userCollection.Search(m_userName.Text);
+			UserCollection collection = new UserCollection();
+			List<User> users = collection.Search(m_userName.Text);
 			if(users.Count > 0)
 			{
 				UIMessages.Error("User with specified name already exists.");
 				return;
 			}
-			UserRole role = (UserRole)m_userRole.SelectedItem;
 			
-			if(!userCollection.Add(m_userName.Text, role.Id))
+			UserRole role = (UserRole)m_userRole.SelectedItem;
+			Int64 id = 0;
+			if (!collection.Add(m_userName.Text, role.Id, out id))
 			{
 				UIMessages.Error("User could not been added.");
 				return;
 			}
-			ReloadUsers();
+			ListViewItem it = userList.Items.Add(m_userName.Text);
+			it.SubItems.Add(role.Name);
+			it.Tag = id;
 		}
 
 		private void remove_Click(object sender, EventArgs e)
 		{
 			if(userList.SelectedItems.Count < 1)
 				return;
-				
-			User user = (User)userList.SelectedItems[0].Tag;
 
-			if (!userCollection.Remove(user))
+			Int64 userId = (Int64)userList.SelectedItems[0].Tag;
+			if (!UserCollection.RemoveById(userId))
 			{
 				UIMessages.Error("User could not been removed.");
 				return;
 			}
-			ReloadUsers();
+			int ndx = userList.SelectedItems[0].Index;
+			userList.Items.Remove(userList.SelectedItems[0]);
+			userList.Items[ndx].Selected = true;
 		}
 
 		private void ChangePass(object sender, EventArgs e)
@@ -120,8 +124,8 @@ namespace ClientDB
 				return;
 			}
 			
-			User curUser = (User)userList.SelectedItems[0].Tag;
-			curUser.Password = m_password.Text;
+			User user =  new User((Int64)userList.SelectedItems[0].Tag);
+			user.Password = m_password.Text;
 			
 		}
 	}

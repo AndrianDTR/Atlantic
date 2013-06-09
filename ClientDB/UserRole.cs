@@ -20,7 +20,7 @@ namespace ClientDB
 	
 	public class UserRole
 	{
-		private UInt64 m_id = 0;
+		private Int64 m_id = 0;
 		private String m_Name = String.Empty;
 		private UserRights m_clients = 0;
 		private UserRights m_schedule = 0;
@@ -36,14 +36,14 @@ namespace ClientDB
 		
 		}
 		
-		public UserRole(UInt64 id)
+		public UserRole(Int64 id)
 		{
 			String where = String.Format("id = {0}", id);
 			DataRow privs = new DbAdapter().GetFirstRow(DbTable.UserPrivileges, where, new List<String>());
 
 			if (privs != null)
 			{
-				m_id = UInt64.Parse(privs["id"].ToString());
+				m_id = id;
 				m_Name = privs["name"].ToString();
 				m_clients = (UserRights)int.Parse(privs["clients"].ToString());
 				m_schedule = (UserRights)int.Parse(privs["schedule"].ToString());
@@ -63,7 +63,7 @@ namespace ClientDB
 
 			if (privs != null)
 			{
-				m_id = UInt64.Parse(privs["id"].ToString());
+				m_id = Int64.Parse(privs["id"].ToString());
 				m_Name = privs["name"].ToString();
 				m_clients = (UserRights)int.Parse(privs["clients"].ToString());
 				m_schedule = (UserRights)int.Parse(privs["schedule"].ToString());
@@ -86,7 +86,7 @@ namespace ClientDB
 			return flag == (var & flag);
 		}
 
-		public UInt64 Id
+		public Int64 Id
 		{
 			get
 			{
@@ -313,7 +313,7 @@ namespace ClientDB
 
 	class UserRolesCollection : IEnumerable<UserRole>
 	{
-		List<UserRole> Items = new List<UserRole>();
+		Dictionary<Int64, UserRole> Items = new Dictionary<Int64, UserRole>();
 
 		public UserRolesCollection()
 		{
@@ -321,32 +321,60 @@ namespace ClientDB
 			DataTable dt = da.ExecuteQuery(String.Format("select id from {0};", DbUtils.GetTableName(DbTable.UserPrivileges)));
 			foreach (DataRow dr in dt.Rows)
 			{
-				UserRole priv = new UserRole(UInt64.Parse(dr["id"].ToString()));
-				Items.Add(priv);
+				UserRole priv = new UserRole(Int64.Parse(dr["id"].ToString()));
+				Items[priv.Id] = priv;
 			}
 		}
 
 		public Boolean Add(String name)
 		{
+			Int64 id = 0;
+			return Add(name, out id);
+		}
+		
+		public Boolean Add(String name, out Int64 id)
+		{
 			DbAdapter da = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
 			fields["name"] = String.Format("'{0}'", name);
-			if(!da.Insert(DbTable.UserPrivileges, fields))
+			id = 0;
+			
+			if(!da.Insert(DbTable.UserPrivileges, fields, out id))
 				return false;
 				
-			UserRole priv = new UserRole(name);
-			Items.Add(priv);
+			Items[id] = new UserRole(id);
 			return true;
 		}
 
+		public static bool RemoveById(Int64 id)
+		{
+			DbAdapter da = new DbAdapter();
+			String where = String.Format("id = {0}", id);
+			return da.Delete(DbTable.UserPrivileges, where);
+		}
+
+		public bool Remove(Int64 id)
+		{
+			if (!RemoveById(id))
+				return false;
+			return Items.Remove(id);
+		}
+		
 		public bool Remove(UserRole item)
 		{
 			DbAdapter da = new DbAdapter();
 			String where = String.Format("id = {0}", item.Id);
 			da.Delete(DbTable.UserPrivileges, where);
-			return Items.Remove(item);
+			return Items.Remove(item.Id);
 		}
 
+		public UserRole Search(Int64 id)
+		{
+			if(Items.ContainsKey(id))
+				return Items[id];
+			return null;
+		}
+		
 		public List<UserRole> Search(String name)
 		{
 			return Search(name, false);
@@ -355,11 +383,11 @@ namespace ClientDB
 		public List<UserRole> Search(String name, Boolean contains)
 		{
 			List<UserRole> collection = new List<UserRole>();
-			foreach (UserRole priv in Items)
+			foreach (KeyValuePair<Int64, UserRole> priv in Items)
 			{
-				if ((contains && priv.Name.Contains(name)) || priv.Name.StartsWith(name))
+				if ((contains && priv.Value.Name.Contains(name)) || priv.Value.Name.StartsWith(name))
 				{
-					collection.Add(priv);
+					collection.Add(priv.Value);
 				}
 			}
 			return collection;
@@ -372,12 +400,12 @@ namespace ClientDB
 
 		public IEnumerator<UserRole> GetEnumerator()
 		{
-			return Items.GetEnumerator();
+			return Items.Values.GetEnumerator();
 		}
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
-			return Items.GetEnumerator();
+			return Items.Values.GetEnumerator();
 		}
 	}	
 }

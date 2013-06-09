@@ -30,40 +30,41 @@
 		{
 			this.save = new System.Windows.Forms.Button();
 			this.close = new System.Windows.Forms.Button();
-			this.textBox3 = new System.Windows.Forms.TextBox();
+			this.phone = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.userList = new System.Windows.Forms.CheckedListBox();
+			this.name = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.add = new System.Windows.Forms.Button();
 			this.remove = new System.Windows.Forms.Button();
+			this.trainerList = new System.Windows.Forms.ListBox();
 			this.SuspendLayout();
 			// 
 			// save
 			// 
-			this.save.Location = new System.Drawing.Point(440, 185);
+			this.save.Location = new System.Drawing.Point(440, 195);
 			this.save.Name = "save";
 			this.save.Size = new System.Drawing.Size(75, 23);
-			this.save.TabIndex = 3;
+			this.save.TabIndex = 5;
 			this.save.Text = "Save";
 			this.save.UseVisualStyleBackColor = true;
+			this.save.Click += new System.EventHandler(this.save_Click);
 			// 
 			// close
 			// 
 			this.close.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.close.Location = new System.Drawing.Point(521, 185);
+			this.close.Location = new System.Drawing.Point(521, 195);
 			this.close.Name = "close";
 			this.close.Size = new System.Drawing.Size(75, 23);
-			this.close.TabIndex = 4;
+			this.close.TabIndex = 6;
 			this.close.Text = "Close";
 			this.close.UseVisualStyleBackColor = true;
 			// 
-			// textBox3
+			// phone
 			// 
-			this.textBox3.Location = new System.Drawing.Point(282, 99);
-			this.textBox3.Name = "textBox3";
-			this.textBox3.Size = new System.Drawing.Size(314, 20);
-			this.textBox3.TabIndex = 2;
+			this.phone.Location = new System.Drawing.Point(282, 99);
+			this.phone.Name = "phone";
+			this.phone.Size = new System.Drawing.Size(314, 20);
+			this.phone.TabIndex = 2;
 			// 
 			// label3
 			// 
@@ -74,21 +75,12 @@
 			this.label3.TabIndex = 17;
 			this.label3.Text = "Phone";
 			// 
-			// textBox1
+			// name
 			// 
-			this.textBox1.Location = new System.Drawing.Point(282, 61);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(314, 20);
-			this.textBox1.TabIndex = 1;
-			// 
-			// userList
-			// 
-			this.userList.Dock = System.Windows.Forms.DockStyle.Left;
-			this.userList.FormattingEnabled = true;
-			this.userList.Location = new System.Drawing.Point(0, 0);
-			this.userList.Name = "userList";
-			this.userList.Size = new System.Drawing.Size(202, 214);
-			this.userList.TabIndex = 0;
+			this.name.Location = new System.Drawing.Point(282, 61);
+			this.name.Name = "name";
+			this.name.Size = new System.Drawing.Size(314, 20);
+			this.name.TabIndex = 1;
 			// 
 			// label1
 			// 
@@ -101,44 +93,58 @@
 			// 
 			// add
 			// 
-			this.add.Location = new System.Drawing.Point(227, 185);
+			this.add.Location = new System.Drawing.Point(227, 195);
 			this.add.Name = "add";
 			this.add.Size = new System.Drawing.Size(75, 23);
-			this.add.TabIndex = 5;
+			this.add.TabIndex = 3;
 			this.add.Text = "Add new";
 			this.add.UseVisualStyleBackColor = true;
+			this.add.Click += new System.EventHandler(this.add_Click);
 			// 
 			// remove
 			// 
-			this.remove.Location = new System.Drawing.Point(308, 185);
+			this.remove.Location = new System.Drawing.Point(308, 195);
 			this.remove.Name = "remove";
 			this.remove.Size = new System.Drawing.Size(75, 23);
-			this.remove.TabIndex = 6;
+			this.remove.TabIndex = 4;
 			this.remove.Text = "Remove";
 			this.remove.UseVisualStyleBackColor = true;
+			this.remove.Click += new System.EventHandler(this.remove_Click);
+			// 
+			// trainerList
+			// 
+			this.trainerList.Dock = System.Windows.Forms.DockStyle.Left;
+			this.trainerList.FormattingEnabled = true;
+			this.trainerList.Location = new System.Drawing.Point(0, 0);
+			this.trainerList.Name = "trainerList";
+			this.trainerList.Size = new System.Drawing.Size(218, 225);
+			this.trainerList.TabIndex = 0;
+			this.trainerList.SelectedIndexChanged += new System.EventHandler(this.trainerList_SelectedIndexChanged);
 			// 
 			// ManageTrainers
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(611, 220);
+			this.ClientSize = new System.Drawing.Size(611, 225);
+			this.Controls.Add(this.trainerList);
 			this.Controls.Add(this.remove);
 			this.Controls.Add(this.add);
 			this.Controls.Add(this.save);
 			this.Controls.Add(this.close);
-			this.Controls.Add(this.textBox3);
+			this.Controls.Add(this.phone);
 			this.Controls.Add(this.label3);
-			this.Controls.Add(this.textBox1);
-			this.Controls.Add(this.userList);
+			this.Controls.Add(this.name);
 			this.Controls.Add(this.label1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "ManageTrainers";
+			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "ManageTrainers";
-			this.TopMost = true;
+			this.Text = "Manage trainers";
+			this.Load += new System.EventHandler(this.OnLoad);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -148,12 +154,12 @@
 
 		private System.Windows.Forms.Button save;
 		private System.Windows.Forms.Button close;
-		private System.Windows.Forms.TextBox textBox3;
+		private System.Windows.Forms.TextBox phone;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.TextBox textBox1;
-		private System.Windows.Forms.CheckedListBox userList;
+		private System.Windows.Forms.TextBox name;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button add;
 		private System.Windows.Forms.Button remove;
+		private System.Windows.Forms.ListBox trainerList;
 	}
 }

@@ -113,7 +113,7 @@
 			this.m_showPass.Location = new System.Drawing.Point(394, 175);
 			this.m_showPass.Name = "m_showPass";
 			this.m_showPass.Size = new System.Drawing.Size(96, 17);
-			this.m_showPass.TabIndex = 10;
+			this.m_showPass.TabIndex = 4;
 			this.m_showPass.Text = "Show pasword";
 			this.m_showPass.UseVisualStyleBackColor = true;
 			this.m_showPass.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
@@ -124,7 +124,7 @@
 			this.close.Location = new System.Drawing.Point(633, 229);
 			this.close.Name = "close";
 			this.close.Size = new System.Drawing.Size(75, 23);
-			this.close.TabIndex = 5;
+			this.close.TabIndex = 8;
 			this.close.Text = "Close";
 			this.close.UseVisualStyleBackColor = true;
 			this.close.Click += new System.EventHandler(this.close_Click);
@@ -134,7 +134,7 @@
 			this.remove.Location = new System.Drawing.Point(420, 229);
 			this.remove.Name = "remove";
 			this.remove.Size = new System.Drawing.Size(75, 23);
-			this.remove.TabIndex = 7;
+			this.remove.TabIndex = 6;
 			this.remove.Text = "Remove";
 			this.remove.UseVisualStyleBackColor = true;
 			this.remove.Click += new System.EventHandler(this.remove_Click);
@@ -144,7 +144,7 @@
 			this.add.Location = new System.Drawing.Point(339, 229);
 			this.add.Name = "add";
 			this.add.Size = new System.Drawing.Size(75, 23);
-			this.add.TabIndex = 6;
+			this.add.TabIndex = 5;
 			this.add.Text = "Add new";
 			this.add.UseVisualStyleBackColor = true;
 			this.add.Click += new System.EventHandler(this.add_Click);
@@ -161,7 +161,7 @@
 			this.userList.MultiSelect = false;
 			this.userList.Name = "userList";
 			this.userList.Size = new System.Drawing.Size(330, 260);
-			this.userList.TabIndex = 11;
+			this.userList.TabIndex = 0;
 			this.userList.UseCompatibleStateImageBehavior = false;
 			this.userList.View = System.Windows.Forms.View.Details;
 			this.userList.SelectedIndexChanged += new System.EventHandler(this.ChangeUser);
@@ -171,7 +171,7 @@
 			this.changePass.Location = new System.Drawing.Point(501, 229);
 			this.changePass.Name = "changePass";
 			this.changePass.Size = new System.Drawing.Size(126, 23);
-			this.changePass.TabIndex = 12;
+			this.changePass.TabIndex = 7;
 			this.changePass.Text = "Change password";
 			this.changePass.UseVisualStyleBackColor = true;
 			this.changePass.Click += new System.EventHandler(this.ChangePass);
@@ -204,7 +204,6 @@
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Manage Users";
-			this.TopMost = true;
 			this.Load += new System.EventHandler(this.OnLoad);
 			this.ResumeLayout(false);
 			this.PerformLayout();

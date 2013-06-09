@@ -8,15 +8,15 @@ namespace ClientDB
 {
 	class User
 	{
-		private UInt64 m_userId = 0;
+		private Int64 m_userId = 0;
 		public String m_userName = String.Empty;
-		public UInt64 m_userPrivilegesId = 0;
+		public Int64 m_userPrivilegesId = 0;
 		
 		public User()
 		{
 		}
 		
-		public User(UInt64 id)
+		public User(Int64 id)
 		{	
 			String where = String.Format("id = {0}", id);
 			DataRow userData = new DbAdapter().GetFirstRow(DbTable.Users, where, new List<string>{"id","name","privilege"});
@@ -26,9 +26,9 @@ namespace ClientDB
 				throw new Exception("Error! No such user.");
 			}
 
-			m_userId = (UInt64)long.Parse(userData["id"].ToString());
+			m_userId = id;
 			m_userName = (String)userData["name"];
-			m_userPrivilegesId = (UInt64)long.Parse(userData["privilege"].ToString());
+			m_userPrivilegesId = (Int64)long.Parse(userData["privilege"].ToString());
 		}
 
 		public User(String name)
@@ -41,17 +41,17 @@ namespace ClientDB
 				throw new Exception("Error! No such user.");
 			}
 
-			m_userId = (UInt64)long.Parse(userData["id"].ToString());
+			m_userId = (Int64)long.Parse(userData["id"].ToString());
 			m_userName = (String)userData["name"];
-			m_userPrivilegesId = (UInt64)long.Parse(userData["privilege"].ToString());
+			m_userPrivilegesId = (Int64)long.Parse(userData["privilege"].ToString());
 		}
 		
-		public void SetUserPrivileges(UInt64 privId)
+		public void SetUserPrivileges(Int64 privId)
 		{
 			m_userPrivilegesId = privId;
 		}
 		
-		public UInt64 Id
+		public Int64 Id
 		{
 			get
 			{
@@ -121,9 +121,9 @@ namespace ClientDB
 			if(userData != null)
 			{
 				user = new User();
-				user.m_userId = (UInt64)long.Parse(userData["id"].ToString());
+				user.m_userId = (Int64)long.Parse(userData["id"].ToString());
 				user.m_userName = (String)userData["name"];
-				user.m_userPrivilegesId = (UInt64)long.Parse(userData["privilege"].ToString());
+				user.m_userPrivilegesId = (Int64)long.Parse(userData["privilege"].ToString());
 			}
 			return user;
 		}
@@ -131,7 +131,7 @@ namespace ClientDB
 
 	class UserCollection : IEnumerable<User>
 	{
-		List<User> Items = new List<User>();
+		Dictionary<Int64, User> Items = new Dictionary<Int64, User>();
 		
 		public UserCollection()
 		{
@@ -139,32 +139,59 @@ namespace ClientDB
 			DataTable dt = da.ExecuteQuery(String.Format("select id from {0};", DbUtils.GetTableName(DbTable.Users)));
 			foreach(DataRow dr in dt.Rows)
 			{
-				User user = new User(UInt64.Parse(dr["id"].ToString()));
-				Items.Add(user);
+				User user = new User(Int64.Parse(dr["id"].ToString()));
+				Items[user.Id] = user;
 			}
 		}
 		
-		public Boolean Add(String name, UInt64 priv)
+		public Boolean Add(String name, Int64 priv)
+		{
+			Int64 id = 0;
+			return Add(name, priv, out id);
+		}
+		
+		public Boolean Add(String name, Int64 priv, out Int64 id)
 		{
 			DbAdapter da = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
 			fields["name"] = String.Format("'{0}'", name);
 			fields["privilege"] = priv.ToString();
+			id = 0;
 			
-			if(!da.Insert(DbTable.Users, fields))
+			if(!da.Insert(DbTable.Users, fields, out id))
 				return false;
 				
-			User user = new User(name);
-			Items.Add(user);
+			Items[id] = new User(id);
 			return true;
 		}
 
+		public static bool RemoveById(Int64 id)
+		{
+			DbAdapter da = new DbAdapter();
+			String where = String.Format("id = {0}", id);
+			return da.Delete(DbTable.Users, where);
+		}
+		
+		public bool Remove(Int64 id)
+		{
+			if(!RemoveById(id))
+				return false;
+			return Items.Remove(id);
+		}
+		
 		public bool Remove(User item)
 		{
 			DbAdapter da = new DbAdapter();
 			String where = String.Format("id = {0}", item.Id);
 			da.Delete(DbTable.Users, where);
-			return Items.Remove(item);
+			return Items.Remove(item.Id);
+		}
+		
+		public User Search(Int64 id)
+		{
+			if(Items.ContainsKey(id))
+				return Items[id];
+			return null;
 		}
 		
 		public List<User> Search(String name)
@@ -175,11 +202,11 @@ namespace ClientDB
 		public List<User> Search(String name, Boolean contains)
 		{
 			List<User> collection = new List<User>();
-			foreach (User user in Items)
+			foreach (KeyValuePair<Int64, User> user in Items)
 			{
-				if((contains && user.Name.Contains(name)) || user.Name.StartsWith(name))
+				if((contains && user.Value.Name.Contains(name)) || user.Value.Name.StartsWith(name))
 				{
-					collection.Add(user);
+					collection.Add(user.Value);
 				}
 			}
 			return collection;
@@ -192,12 +219,12 @@ namespace ClientDB
 
 		public IEnumerator<User> GetEnumerator()
 		{
-			return Items.GetEnumerator();
+			return Items.Values.GetEnumerator();
 		}
 
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
-			return Items.GetEnumerator();
+			return Items.Values.GetEnumerator();
 		}
 	}	
 }

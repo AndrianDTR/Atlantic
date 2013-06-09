@@ -19,7 +19,7 @@ namespace ClientDB
 			m_user = Session.Instance.User;
 		}
 
-		public ChangePassword(UInt64 userId)
+		public ChangePassword(Int64 userId)
 		{
 			InitializeComponent();
 			m_user = new User(userId);

@@ -64,7 +64,7 @@
 			this.userName.Location = new System.Drawing.Point(267, 67);
 			this.userName.Name = "userName";
 			this.userName.Size = new System.Drawing.Size(222, 20);
-			this.userName.TabIndex = 2;
+			this.userName.TabIndex = 0;
 			this.userName.Text = "admin";
 			// 
 			// label2
@@ -82,7 +82,7 @@
 			this.password.Location = new System.Drawing.Point(267, 103);
 			this.password.Name = "password";
 			this.password.Size = new System.Drawing.Size(222, 20);
-			this.password.TabIndex = 4;
+			this.password.TabIndex = 1;
 			this.password.Text = "administrator";
 			this.password.UseSystemPasswordChar = true;
 			// 
@@ -91,7 +91,7 @@
 			this.loginBtn.Location = new System.Drawing.Point(267, 156);
 			this.loginBtn.Name = "loginBtn";
 			this.loginBtn.Size = new System.Drawing.Size(98, 23);
-			this.loginBtn.TabIndex = 5;
+			this.loginBtn.TabIndex = 2;
 			this.loginBtn.Text = "Login";
 			this.loginBtn.UseVisualStyleBackColor = true;
 			this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
@@ -102,7 +102,7 @@
 			this.Cancel.Location = new System.Drawing.Point(391, 156);
 			this.Cancel.Name = "Cancel";
 			this.Cancel.Size = new System.Drawing.Size(98, 23);
-			this.Cancel.TabIndex = 6;
+			this.Cancel.TabIndex = 3;
 			this.Cancel.Text = "Cancel";
 			this.Cancel.UseVisualStyleBackColor = true;
 			// 

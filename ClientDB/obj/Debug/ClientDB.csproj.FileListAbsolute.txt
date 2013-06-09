@@ -20,7 +20,6 @@ D:\Cpp\Atlantic\ClientDB\obj\Debug\ResolveAssemblyReference.cache
 D:\Cpp\Atlantic\ClientDB\obj\Debug\ClientDB.ChangePassword.resources
 D:\Cpp\Atlantic\ClientDB\obj\Debug\ClientDB.MainForm.resources
 D:\Cpp\Atlantic\ClientDB\obj\Debug\ClientDB.Login.resources
-D:\Cpp\Atlantic\ClientDB\obj\Debug\ClientDB.ManagePrivileges.resources
 D:\Cpp\Atlantic\ClientDB\obj\Debug\ClientDB.ManageTrainers.resources
 D:\Cpp\Atlantic\ClientDB\obj\Debug\ClientDB.ManageUsers.resources
 D:\Cpp\Atlantic\ClientDB\obj\Debug\ClientDB.Properties.Resources.resources
@@ -28,3 +27,4 @@ D:\Cpp\Atlantic\ClientDB\obj\Debug\ClientDB.Schedule.resources
 D:\Cpp\Atlantic\ClientDB\obj\Debug\ClientDB.csproj.GenerateResource.Cache
 D:\Cpp\Atlantic\ClientDB\obj\Debug\ClientDB.exe
 D:\Cpp\Atlantic\ClientDB\obj\Debug\ClientDB.pdb
+D:\Cpp\Atlantic\ClientDB\obj\Debug\ClientDB.ManageUserRoles.resources

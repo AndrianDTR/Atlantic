@@ -47,7 +47,7 @@
 			change.Location = new System.Drawing.Point(278, 196);
 			change.Name = "change";
 			change.Size = new System.Drawing.Size(89, 23);
-			change.TabIndex = 9;
+			change.TabIndex = 3;
 			change.Text = "Change";
 			change.UseVisualStyleBackColor = true;
 			change.Click += new System.EventHandler(this.change_Click);
@@ -84,7 +84,7 @@
 			this.current.Location = new System.Drawing.Point(278, 65);
 			this.current.Name = "current";
 			this.current.Size = new System.Drawing.Size(207, 20);
-			this.current.TabIndex = 3;
+			this.current.TabIndex = 0;
 			this.current.UseSystemPasswordChar = true;
 			// 
 			// password
@@ -92,7 +92,7 @@
 			this.password.Location = new System.Drawing.Point(278, 103);
 			this.password.Name = "password";
 			this.password.Size = new System.Drawing.Size(207, 20);
-			this.password.TabIndex = 5;
+			this.password.TabIndex = 1;
 			this.password.UseSystemPasswordChar = true;
 			// 
 			// label3
@@ -109,7 +109,7 @@
 			this.confirm.Location = new System.Drawing.Point(278, 141);
 			this.confirm.Name = "confirm";
 			this.confirm.Size = new System.Drawing.Size(207, 20);
-			this.confirm.TabIndex = 7;
+			this.confirm.TabIndex = 2;
 			this.confirm.UseSystemPasswordChar = true;
 			// 
 			// label4
@@ -127,7 +127,7 @@
 			this.cancel.Location = new System.Drawing.Point(396, 196);
 			this.cancel.Name = "cancel";
 			this.cancel.Size = new System.Drawing.Size(89, 23);
-			this.cancel.TabIndex = 8;
+			this.cancel.TabIndex = 4;
 			this.cancel.Text = "Cancel";
 			this.cancel.UseVisualStyleBackColor = true;
 			// 
@@ -156,7 +156,6 @@
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Change user password";
-			this.TopMost = true;
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();

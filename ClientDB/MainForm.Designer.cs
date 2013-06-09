@@ -37,6 +37,10 @@
 			this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clientByBarcodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.paymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.scheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.trainersScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +55,7 @@
 			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
 			this.usersAndPasswordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.userRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel2 = new System.Windows.Forms.Panel();
@@ -70,12 +75,7 @@
 			this.payments = new System.Windows.Forms.Button();
 			this.edit = new System.Windows.Forms.Button();
 			this.remove = new System.Windows.Forms.Button();
-			this.add23 = new System.Windows.Forms.Button();
-			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.scheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.trainersScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.userRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.add = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel4.SuspendLayout();
@@ -95,7 +95,7 @@
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(921, 24);
-			this.menuStrip1.TabIndex = 9;
+			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
 			// fileToolStripMenuItem
@@ -112,26 +112,26 @@
 			// importToolStripMenuItem
 			// 
 			this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-			this.importToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.importToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
 			this.importToolStripMenuItem.Text = "Import";
 			this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
 			// 
 			// exportToolStripMenuItem
 			// 
 			this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-			this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.exportToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
 			this.exportToolStripMenuItem.Text = "Export";
 			// 
 			// toolStripMenuItem1
 			// 
 			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-			this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(140, 6);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
 			this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
@@ -157,6 +157,34 @@
 			this.paymentToolStripMenuItem.Name = "paymentToolStripMenuItem";
 			this.paymentToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
 			this.paymentToolStripMenuItem.Text = "Payment";
+			// 
+			// viewToolStripMenuItem
+			// 
+			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.paymentsToolStripMenuItem,
+            this.scheduleToolStripMenuItem,
+            this.trainersScheduleToolStripMenuItem});
+			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+			this.viewToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+			this.viewToolStripMenuItem.Text = "View";
+			// 
+			// paymentsToolStripMenuItem
+			// 
+			this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
+			this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.paymentsToolStripMenuItem.Text = "Payments";
+			// 
+			// scheduleToolStripMenuItem
+			// 
+			this.scheduleToolStripMenuItem.Name = "scheduleToolStripMenuItem";
+			this.scheduleToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.scheduleToolStripMenuItem.Text = "Schedule";
+			// 
+			// trainersScheduleToolStripMenuItem
+			// 
+			this.trainersScheduleToolStripMenuItem.Name = "trainersScheduleToolStripMenuItem";
+			this.trainersScheduleToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.trainersScheduleToolStripMenuItem.Text = "Trainers schedule";
 			// 
 			// clientToolStripMenuItem
 			// 
@@ -219,6 +247,7 @@
 			this.manageToolStripMenuItem.Name = "manageToolStripMenuItem";
 			this.manageToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
 			this.manageToolStripMenuItem.Text = "Manage";
+			this.manageToolStripMenuItem.Click += new System.EventHandler(this.manageToolStripMenuItem_Click);
 			// 
 			// sheduleToolStripMenuItem
 			// 
@@ -262,6 +291,13 @@
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
 			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
 			this.optionsToolStripMenuItem.Text = "Options";
+			// 
+			// userRolesToolStripMenuItem
+			// 
+			this.userRolesToolStripMenuItem.Name = "userRolesToolStripMenuItem";
+			this.userRolesToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+			this.userRolesToolStripMenuItem.Text = "User roles";
+			this.userRolesToolStripMenuItem.Click += new System.EventHandler(this.userRolesToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -326,7 +362,7 @@
 			this.clientList.MultiSelect = false;
 			this.clientList.Name = "clientList";
 			this.clientList.Size = new System.Drawing.Size(905, 366);
-			this.clientList.TabIndex = 2;
+			this.clientList.TabIndex = 0;
 			this.clientList.UseCompatibleStateImageBehavior = false;
 			this.clientList.View = System.Windows.Forms.View.Details;
 			// 
@@ -364,7 +400,7 @@
 			this.panel1.Controls.Add(this.payments);
 			this.panel1.Controls.Add(this.edit);
 			this.panel1.Controls.Add(this.remove);
-			this.panel1.Controls.Add(this.add23);
+			this.panel1.Controls.Add(this.add);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(8, 8);
 			this.panel1.Name = "panel1";
@@ -378,7 +414,7 @@
 			this.m_Search.Location = new System.Drawing.Point(447, 2);
 			this.m_Search.Name = "m_Search";
 			this.m_Search.Size = new System.Drawing.Size(454, 44);
-			this.m_Search.TabIndex = 7;
+			this.m_Search.TabIndex = 0;
 			this.m_Search.TextChanged += new System.EventHandler(this.OnSearch);
 			this.m_Search.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnSearchKeyUp);
 			// 
@@ -398,7 +434,7 @@
 			this.export.Location = new System.Drawing.Point(270, 0);
 			this.export.Name = "export";
 			this.export.Size = new System.Drawing.Size(48, 48);
-			this.export.TabIndex = 5;
+			this.export.TabIndex = 6;
 			this.export.UseVisualStyleBackColor = true;
 			// 
 			// shedule
@@ -407,7 +443,7 @@
 			this.shedule.Location = new System.Drawing.Point(216, 0);
 			this.shedule.Name = "shedule";
 			this.shedule.Size = new System.Drawing.Size(48, 48);
-			this.shedule.TabIndex = 4;
+			this.shedule.TabIndex = 5;
 			this.shedule.UseVisualStyleBackColor = true;
 			// 
 			// payments
@@ -416,7 +452,7 @@
 			this.payments.Location = new System.Drawing.Point(162, 0);
 			this.payments.Name = "payments";
 			this.payments.Size = new System.Drawing.Size(48, 48);
-			this.payments.TabIndex = 3;
+			this.payments.TabIndex = 4;
 			this.payments.UseVisualStyleBackColor = true;
 			// 
 			// edit
@@ -425,7 +461,7 @@
 			this.edit.Location = new System.Drawing.Point(108, 0);
 			this.edit.Name = "edit";
 			this.edit.Size = new System.Drawing.Size(48, 48);
-			this.edit.TabIndex = 2;
+			this.edit.TabIndex = 3;
 			this.edit.UseVisualStyleBackColor = true;
 			// 
 			// remove
@@ -434,53 +470,18 @@
 			this.remove.Location = new System.Drawing.Point(54, 0);
 			this.remove.Name = "remove";
 			this.remove.Size = new System.Drawing.Size(48, 48);
-			this.remove.TabIndex = 1;
+			this.remove.TabIndex = 2;
 			this.remove.UseVisualStyleBackColor = true;
 			// 
-			// add23
+			// add
 			// 
-			this.add23.Image = global::ClientDB.Properties.Resources._1367374740_edit_add;
-			this.add23.Location = new System.Drawing.Point(0, 0);
-			this.add23.Name = "add23";
-			this.add23.Size = new System.Drawing.Size(48, 48);
-			this.add23.TabIndex = 0;
-			this.add23.UseVisualStyleBackColor = true;
-			this.add23.Click += new System.EventHandler(this.add23_Click);
-			// 
-			// viewToolStripMenuItem
-			// 
-			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.paymentsToolStripMenuItem,
-            this.scheduleToolStripMenuItem,
-            this.trainersScheduleToolStripMenuItem});
-			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-			this.viewToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
-			this.viewToolStripMenuItem.Text = "View";
-			// 
-			// paymentsToolStripMenuItem
-			// 
-			this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
-			this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-			this.paymentsToolStripMenuItem.Text = "Payments";
-			// 
-			// scheduleToolStripMenuItem
-			// 
-			this.scheduleToolStripMenuItem.Name = "scheduleToolStripMenuItem";
-			this.scheduleToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-			this.scheduleToolStripMenuItem.Text = "Schedule";
-			// 
-			// trainersScheduleToolStripMenuItem
-			// 
-			this.trainersScheduleToolStripMenuItem.Name = "trainersScheduleToolStripMenuItem";
-			this.trainersScheduleToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-			this.trainersScheduleToolStripMenuItem.Text = "Trainers schedule";
-			// 
-			// userRolesToolStripMenuItem
-			// 
-			this.userRolesToolStripMenuItem.Name = "userRolesToolStripMenuItem";
-			this.userRolesToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-			this.userRolesToolStripMenuItem.Text = "User roles";
-			this.userRolesToolStripMenuItem.Click += new System.EventHandler(this.userRolesToolStripMenuItem_Click);
+			this.add.Image = global::ClientDB.Properties.Resources._1367374740_edit_add;
+			this.add.Location = new System.Drawing.Point(0, 0);
+			this.add.Name = "add";
+			this.add.Size = new System.Drawing.Size(48, 48);
+			this.add.TabIndex = 1;
+			this.add.UseVisualStyleBackColor = true;
+			this.add.Click += new System.EventHandler(this.add23_Click);
 			// 
 			// MainForm
 			// 
@@ -538,7 +539,7 @@
         private System.Windows.Forms.ColumnHeader trainer;
         private System.Windows.Forms.ColumnHeader comment;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button add23;
+        private System.Windows.Forms.Button add;
         private System.Windows.Forms.Button export;
         private System.Windows.Forms.Button shedule;
         private System.Windows.Forms.Button payments;

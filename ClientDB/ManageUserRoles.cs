@@ -9,12 +9,11 @@ using System.Windows.Forms;
 
 namespace ClientDB
 {
-	public partial class ManagePrivileges : Form
+	public partial class ManageUserRoles : Form
 	{
-		UserRolesCollection collection = null;
 		UserRole edit = null;
 		
-		public ManagePrivileges()
+		public ManageUserRoles()
 		{
 			InitializeComponent();
 		}
@@ -26,7 +25,7 @@ namespace ClientDB
 		
 		private void ReloadRoles()
 		{
-			collection = new UserRolesCollection();
+			UserRolesCollection collection = new UserRolesCollection();
 			privilegesGrid.Rows.Clear();
 
 			foreach (UserRole priv in collection)
@@ -93,30 +92,43 @@ namespace ClientDB
 
 		private void AfterEdit(object sender, LabelEditEventArgs e)
 		{
-			if(edit != null && e.Label != null)
+			if (edit == null && listRoles.SelectedItems.Count > 0)
+			{
+				edit = (UserRole)listRoles.SelectedItems[0].Tag;
+			}
+			
+			if(e.Label != null)
 			{
 				edit.Name = e.Label;
 				listRoles.SelectedItems[0].Text = e.Label;
+				edit = null;
 			}
 		}
 
 		private void addButton_Click(object sender, EventArgs e)
 		{
 			String name = "New role";
-			if(!collection.Add(name))
+			UserRolesCollection collection = new UserRolesCollection();
+			List<UserRole> roles = collection.Search(name);
+			if (roles.Count > 0)
+			{
+				UIMessages.Error("Role with specified name already exists.");
+				return;
+			}
+			
+			Int64 id = 0;
+			if(!collection.Add(name, out id))
 			{	
 				UIMessages.Error("New role could not been added.");
 				return;
 			}
 			
+			UserRole role = new UserRole(id);
+			
 			ListViewItem it = listRoles.Items.Add(name);
-			List<UserRole> privList = collection.Search(name);
-			if(privList.Count > 0)
-			{
-				it.Tag = privList[0];
-				edit = privList[0];
-				it.BeginEdit();
-			}
+			edit = role;
+			it.Tag = role;
+			it.BeginEdit();
 		}
 
 		private void delButton_Click(object sender, EventArgs e)
@@ -124,7 +136,7 @@ namespace ClientDB
 			if (listRoles.SelectedItems.Count > 0)
 			{
 				UserRole priv = (UserRole)listRoles.SelectedItems[0].Tag;
-				if(!collection.Remove(priv))
+				if(!UserRolesCollection.RemoveById(priv.Id))
 				{
 					UIMessages.Error("Role could not been removed.");
 					return;

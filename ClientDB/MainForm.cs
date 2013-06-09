@@ -100,12 +100,18 @@ namespace ClientDB
 		
 		private void userRolesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			ManagePrivileges pm = new ManagePrivileges();
+			ManageUserRoles pm = new ManageUserRoles();
 			pm.ShowDialog(this);
 		}
 		
 		private void importToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+		}
+
+		private void manageToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ManageTrainers mt = new ManageTrainers();
+			mt.ShowDialog(this);
 		}
 
 		

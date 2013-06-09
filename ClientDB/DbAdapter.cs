@@ -170,13 +170,24 @@ namespace ClientDB
 			
 			return dt;
 		}
-		
+
 		/// <summary>
 		///     Allows the programmer to interact with the database for purposes other than a query.
 		/// </summary>
 		/// <param name="sql">The SQL to be run.</param>
 		/// <returns>An Integer containing the number of rows updated.</returns>
 		public int ExecuteNonQuery(string sql)
+		{
+			Int64 insertId = 0;
+			return ExecuteNonQuery(sql, out insertId);
+		}
+		
+		/// <summary>
+		///     Allows the programmer to interact with the database for purposes other than a query.
+		/// </summary>
+		/// <param name="sql">The SQL to be run.</param>
+		/// <returns>An Integer containing the number of rows updated.</returns>
+		public int ExecuteNonQuery(string sql, out Int64 insertId)
 		{
 			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
 			SQLiteCommand cmd = null;
@@ -199,18 +210,31 @@ namespace ClientDB
 				if (cmd.Transaction != null)
 					cmd.Transaction.Commit();
 				
+				insertId = cnn.LastInsertRowId;
 				cnn.Close();
 			}
 			
 			return rowsUpdated;
 		}
-
+		
 		/// <summary>
 		///     Allows the programmer to retrieve single items from the DB.
 		/// </summary>
 		/// <param name="sql">The query to run.</param>
 		/// <returns>A string.</returns>
 		public string ExecuteScalar(string sql)
+		{
+			Int64 insertId = 0;
+			return ExecuteScalar(sql, out insertId);
+		}
+		
+		/// <summary>
+		///     Allows the programmer to retrieve single items from the DB.
+		/// </summary>
+		/// <param name="sql">The query to run.</param>
+		/// <param name="insertId">Last insert row id.</param>
+		/// <returns>A string.</returns>
+		public string ExecuteScalar(string sql, out Int64 insertId)
 		{
 			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
 			SQLiteCommand cmd = null;
@@ -232,7 +256,8 @@ namespace ClientDB
 			{
 				if (cmd.Transaction != null)
 					cmd.Transaction.Commit();
-				
+
+				insertId = cnn.LastInsertRowId;
 				cnn.Close();
 			}
 			
@@ -342,9 +367,23 @@ namespace ClientDB
 		/// <returns>A boolean true or false to signify success or failure.</returns>
 		public bool Insert(DbTable table, Dictionary<String, String> data)
 		{
+			Int64 insertId = 0;
+			return Insert(table, data, out insertId);
+		}
+		
+		/// <summary>
+		///     Allows the programmer to easily insert into the DB
+		/// </summary>
+		/// <param name="tableName">The table into which we insert the data.</param>
+		/// <param name="data">A dictionary containing the column names and data for the insert.</param>
+		/// <param name="inserId">Represent ID of the row that has been inserted.</param>
+		/// <returns>A boolean true or false to signify success or failure.</returns>
+		public bool Insert(DbTable table, Dictionary<String, String> data, out Int64 insertId)
+		{
 			String columns = "";
 			String values = "";
 			Boolean returnCode = true;
+			insertId = 0;
 			
 			foreach (KeyValuePair<String, String> val in data)
 			{
@@ -358,7 +397,8 @@ namespace ClientDB
 				String tableName = DbUtils.GetTableName(table);
 				String query = String.Format("insert into {0}({1}) values({2});", tableName, columns, values);
 				Debug.WriteLine(String.Format("Insert to {0}, query: {1}.", tableName, query));
-				ExecuteNonQuery(query);
+				ExecuteNonQuery(query, out insertId);
+				Debug.WriteLine(String.Format("Insert ID is: {0}.", insertId));
 			}
 			catch (Exception fail)
 			{
@@ -423,6 +463,8 @@ namespace ClientDB
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, name VarChar NOT NULL
+				, phone VarChar NOT NULL
+				, extraInfo VarChar DEFAULT('')
 			)";
 			
 			string tTarinersSchedule = @"drop table if exists trainersSchedule;
@@ -437,12 +479,12 @@ namespace ClientDB
 			CREATE TABLE clients
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
-				, name VarChar NOT NULL
 				, code Integer NOT NULL
-				, plan Integer NOT NULL
-				, phone VarChar NULL
-				, comment Text NULL
-				, trainer Integer NULL
+				, name VarChar NOT NULL
+				, phone VarChar DEFAULT('')
+				, schedule Integer NOT NULL
+				, trainer Integer DEFAULT('')
+				, comment Text DEFAULT('')
 			)";
 			
 			string tPayments = @"drop table if exists payments;
@@ -450,13 +492,13 @@ namespace ClientDB
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, clientId Integer NOT NULL
-				, date TimeStamp NULL
-				, sum VarChar NULL
-				, comment Text NULL
+				, date TimeStamp Default(NOW())
+				, sum money NOT NULL
+				, comment Text Default('')
 			)";
 			
-			string tSchedule = @"drop table if exists schedule;
-			CREATE TABLE schedule
+			string tScheduleRules = @"drop table if exists scheduleRules;
+			CREATE TABLE scheduleRules
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, name VarChar NOT NULL
@@ -468,7 +510,7 @@ namespace ClientDB
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, clientId Integer NOT NULL
-				, date TimeStamp NULL
+				, date TimeStamp Default(NOW())
 			)";
 
 			SQLiteConnection conn = new SQLiteConnection(Properties.Settings.Default.clientConnectionString);
@@ -494,7 +536,7 @@ namespace ClientDB
 				new SQLiteCommand(tPayments, conn).ExecuteNonQuery();
 				new SQLiteCommand(tStatistics, conn).ExecuteNonQuery();
 				new SQLiteCommand(tTarinersSchedule, conn).ExecuteNonQuery();
-				new SQLiteCommand(tSchedule, conn).ExecuteNonQuery();
+				new SQLiteCommand(tScheduleRules, conn).ExecuteNonQuery();
 			}
 			catch (SQLiteException ex)
 			{
