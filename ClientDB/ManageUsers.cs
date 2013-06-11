@@ -109,7 +109,8 @@ namespace ClientDB
 			}
 			int ndx = userList.SelectedItems[0].Index;
 			userList.Items.Remove(userList.SelectedItems[0]);
-			userList.Items[ndx].Selected = true;
+			if((ndx--) >= 0)
+				userList.Items[ndx].Selected = true;
 		}
 
 		private void ChangePass(object sender, EventArgs e)
