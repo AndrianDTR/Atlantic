@@ -15,5 +15,30 @@ namespace ClientDB
 		{
 			InitializeComponent();
 		}
+
+		private void btnClose_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
+
+		private void OnLoad(object sender, QueryAccessibilityHelpEventArgs e)
+		{
+
+		}
+		
+		private void btnAdd_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void btnEdit_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void btnRemove_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

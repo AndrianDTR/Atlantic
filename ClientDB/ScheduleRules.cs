@@ -82,8 +82,8 @@ namespace ClientDB
 
 			DbAdapter ad = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
-			fields["name"] = String.Format("'{0}'", name);
-			fields["rule"] = String.Format("'{0}'", rule);
+			fields["name"] = name;
+			fields["rule"] = rule;
 			if (!ad.Update(DbTable.Schedule, fields, String.Format("id={0:d}", m_id)))
 			{
 				throw new Exception("Data could not been changed.");
@@ -118,8 +118,8 @@ namespace ClientDB
 		{
 			DbAdapter da = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
-			fields["name"] = String.Format("'{0}'", name);
-			fields["rule"] = String.Format("'{0}'", rule);
+			fields["name"] = name;
+			fields["rule"] = rule;
 			id = 0;
 
 			if (!da.Insert(DbTable.Schedule, fields, out id))

@@ -32,17 +32,10 @@ namespace ClientDB
 			String szPhone = phone.Text.Trim();
 			Int64 id = 0;
 
-			TrainerCollection collection = new TrainerCollection();
-			List<Trainer> trainers = collection.Search(szName);
-			if (trainers.Count > 0)
-			{
-				UIMessages.Error("Trainer with specified name already exists.");
-				return;
-			}
-			
 			if(szName.Length < 1)
 				return;
-			
+
+			TrainerCollection collection = new TrainerCollection();
 			if(!collection.Add(szName, szPhone, out id))
 			{
 				UIMessages.Error("Trainer could not been added.");
@@ -74,18 +67,10 @@ namespace ClientDB
 			
 			String szName = name.Text.Trim();
 			String szPhone = phone.Text.Trim();
-
-			TrainerCollection collection = new TrainerCollection();
-			List<Trainer> trainers = collection.Search(szName);
-			if (trainers.Count > 0)
-			{
-				UIMessages.Error("Trainer with specified name already exists.");
-				return;
-			}
 			
 			if (szName.Length < 1)
 				return;
-				
+
 			Trainer selected = (Trainer)trainersList.SelectedItem;
 			selected.SetData(szName, szPhone);
 			trainersList.Items[trainersList.SelectedIndex] = selected;

@@ -43,7 +43,6 @@
 			this.trainersScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.editPersonalDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.paymentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,6 +75,8 @@
 			this.edit = new System.Windows.Forms.Button();
 			this.remove = new System.Windows.Forms.Button();
 			this.add = new System.Windows.Forms.Button();
+			this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+			this.manageClientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel4.SuspendLayout();
@@ -189,9 +190,10 @@
 			// 
 			this.clientToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addToolStripMenuItem,
-            this.removeToolStripMenuItem,
             this.editPersonalDataToolStripMenuItem,
-            this.paymentToolStripMenuItem1});
+            this.paymentToolStripMenuItem1,
+            this.toolStripMenuItem5,
+            this.manageClientsToolStripMenuItem});
 			this.clientToolStripMenuItem.Name = "clientToolStripMenuItem";
 			this.clientToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
 			this.clientToolStripMenuItem.Text = "Client";
@@ -202,13 +204,6 @@
 			this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
 			this.addToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
 			this.addToolStripMenuItem.Text = "Add";
-			// 
-			// removeToolStripMenuItem
-			// 
-			this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-			this.removeToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F8;
-			this.removeToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-			this.removeToolStripMenuItem.Text = "Remove";
 			// 
 			// editPersonalDataToolStripMenuItem
 			// 
@@ -479,6 +474,18 @@
 			this.add.UseVisualStyleBackColor = true;
 			this.add.Click += new System.EventHandler(this.add_Click);
 			// 
+			// toolStripMenuItem5
+			// 
+			this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+			this.toolStripMenuItem5.Size = new System.Drawing.Size(188, 6);
+			// 
+			// manageClientsToolStripMenuItem
+			// 
+			this.manageClientsToolStripMenuItem.Name = "manageClientsToolStripMenuItem";
+			this.manageClientsToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+			this.manageClientsToolStripMenuItem.Text = "Manage clients";
+			this.manageClientsToolStripMenuItem.Click += new System.EventHandler(this.manageClientsToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -518,8 +525,7 @@
 		private System.Windows.Forms.ToolStripMenuItem clientByBarcodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem paymentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clientToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editPersonalDataToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem paymentToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
@@ -556,6 +562,8 @@
 		private System.Windows.Forms.ToolStripMenuItem manageTrainersToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem manageScheduleRulesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+		private System.Windows.Forms.ToolStripMenuItem manageClientsToolStripMenuItem;
     }
 }
 

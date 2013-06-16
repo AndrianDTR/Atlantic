@@ -74,6 +74,16 @@ namespace ClientDB
 					return String.Empty;
 			}
 		}
+		
+		public static String Quote(String value)
+		{
+			return value;
+		}
+		
+		public static String Dequote(String value)
+		{
+			return value;
+		}
 	}
 	
 	class DbAdapter
@@ -189,16 +199,28 @@ namespace ClientDB
 		/// <returns>An Integer containing the number of rows updated.</returns>
 		public int ExecuteNonQuery(string sql, out Int64 insertId)
 		{
-			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
-			SQLiteCommand cmd = null;
-			int rowsUpdated = -1;
-
 			Debug.WriteLine(String.Format("Execute NON query: {0}.", sql));
 			
+			SQLiteCommand cmd = new SQLiteCommand(sql);
+			return ExecuteNonQuery(cmd, out insertId);
+		}
+
+		/// <summary>
+		///     Allows the programmer to interact with the database for purposes other than a query.
+		/// </summary>
+		/// <param name="sql">The SQL to be run.</param>
+		/// <returns>An Integer containing the number of rows updated.</returns>
+		public int ExecuteNonQuery(SQLiteCommand cmd, out Int64 insertId)
+		{
+			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
+			int rowsUpdated = -1;
+
+			Debug.WriteLine(String.Format("Execute NON query: {0}.", cmd.CommandText));
+
 			try
 			{
 				cnn.Open();
-				cmd = new SQLiteCommand(sql, cnn);
+				cmd.Connection = cnn;
 				rowsUpdated = cmd.ExecuteNonQuery();
 			}
 			catch (SQLiteException e)
@@ -209,11 +231,11 @@ namespace ClientDB
 			{
 				if (cmd.Transaction != null)
 					cmd.Transaction.Commit();
-				
+
 				insertId = cnn.LastInsertRowId;
 				cnn.Close();
 			}
-			
+
 			return rowsUpdated;
 		}
 		
@@ -312,20 +334,32 @@ namespace ClientDB
 		{
 			String vals = "";
 			Boolean returnCode = true;
-			if (data.Count >= 1)
+			SQLiteCommand cmd = new SQLiteCommand();
+			cmd.CommandType = CommandType.Text;
+			
+			if (data.Count < 1)
 			{
-				foreach (KeyValuePair<String, String> val in data)
-				{
-					vals += String.Format(" {0} = {1},", val.Key.ToString(), val.Value.ToString());
-				}
-				vals = vals.Substring(0, vals.Length - 1);
+				return false;
 			}
+			
+			foreach (KeyValuePair<String, String> val in data)
+			{
+				vals += String.Format(" `{0}` = @{0},", val.Key.ToString());
+			}
+			vals = vals.Substring(0, vals.Length - 1);
+			
 			try
 			{
 				String tableName = DbUtils.GetTableName(table);
-				String query = String.Format("update {0} set {1} where {2};", tableName, vals, where);
+				String query = String.Format("update `{0}` set {1} where {2};", tableName, vals, where);
 				Debug.WriteLine(String.Format("Update {0}, query: {1}.", tableName, query));
-				ExecuteNonQuery(query);
+				cmd.CommandText = query;
+				foreach (KeyValuePair<String, String> val in data)
+				{
+					cmd.Parameters.AddWithValue(String.Format("@{0}", val.Key.ToString()), val.Value.ToString());
+				}
+				Int64 id = 0;			
+				ExecuteNonQuery(cmd, out id);
 			}
 			catch(Exception fail)
 			{
@@ -384,11 +418,18 @@ namespace ClientDB
 			String values = "";
 			Boolean returnCode = true;
 			insertId = 0;
-			
-			foreach (KeyValuePair<String, String> val in data)
+			SQLiteCommand cmd = new SQLiteCommand();
+			cmd.CommandType = CommandType.Text;
+
+			if (data.Count < 1)
 			{
-				columns += String.Format(" {0},", val.Key.ToString());
-				values += String.Format(" {0},", val.Value);
+				return false;
+			}
+			
+			foreach (String val in data.Keys)
+			{
+				columns += String.Format(" {0},", val);
+				values += String.Format(" @{0},", val);
 			}
 			columns = columns.Substring(0, columns.Length - 1);
 			values = values.Substring(0, values.Length - 1);
@@ -397,7 +438,14 @@ namespace ClientDB
 				String tableName = DbUtils.GetTableName(table);
 				String query = String.Format("insert into {0}({1}) values({2});", tableName, columns, values);
 				Debug.WriteLine(String.Format("Insert to {0}, query: {1}.", tableName, query));
-				ExecuteNonQuery(query, out insertId);
+				cmd.CommandText = query;
+
+				foreach (KeyValuePair<String, String> val in data)
+				{
+					cmd.Parameters.AddWithValue(val.Key, val.Value);
+				}
+			
+				ExecuteNonQuery(cmd, out insertId);
 				Debug.WriteLine(String.Format("Insert ID is: {0}.", insertId));
 			}
 			catch (Exception fail)

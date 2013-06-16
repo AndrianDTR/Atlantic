@@ -30,8 +30,8 @@ namespace ClientDB
 
 			foreach (UserRole priv in collection)
 			{
-				ListViewItem it = listRoles.Items.Add(priv.ToString());
-				it.Tag = priv;
+				ListViewItem it = listRoles.Items.Add(priv.Name);
+				it.Tag = priv.Id;
 			}
 		}
 		
@@ -75,7 +75,7 @@ namespace ClientDB
 			if(listRoles.SelectedItems.Count < 1)
 				return;
 
-			UserRole priv = (UserRole)listRoles.SelectedItems[0].Tag;
+			UserRole priv = new UserRole((Int64)listRoles.SelectedItems[0].Tag);
 			FillPrivileges(priv);
 		}
 		
@@ -94,7 +94,7 @@ namespace ClientDB
 		{
 			if (edit == null && listRoles.SelectedItems.Count > 0)
 			{
-				edit = (UserRole)listRoles.SelectedItems[0].Tag;
+				edit = new UserRole((Int64)listRoles.SelectedItems[0].Tag);
 			}
 			
 			if(e.Label != null)
@@ -108,15 +108,9 @@ namespace ClientDB
 		private void addButton_Click(object sender, EventArgs e)
 		{
 			String name = "New role";
-			UserRolesCollection collection = new UserRolesCollection();
-			List<UserRole> roles = collection.Search(name);
-			if (roles.Count > 0)
-			{
-				UIMessages.Error("Role with specified name already exists.");
-				return;
-			}
-			
 			Int64 id = 0;
+
+			UserRolesCollection collection = new UserRolesCollection();
 			if(!collection.Add(name, out id))
 			{	
 				UIMessages.Error("New role could not been added.");
@@ -127,7 +121,7 @@ namespace ClientDB
 			
 			ListViewItem it = listRoles.Items.Add(name);
 			edit = role;
-			it.Tag = role;
+			it.Tag = id;
 			it.BeginEdit();
 		}
 
@@ -135,8 +129,8 @@ namespace ClientDB
 		{
 			if (listRoles.SelectedItems.Count > 0)
 			{
-				UserRole priv = (UserRole)listRoles.SelectedItems[0].Tag;
-				if(!UserRolesCollection.RemoveById(priv.Id))
+				Int64 id = (Int64)listRoles.SelectedItems[0].Tag;
+				if(!UserRolesCollection.RemoveById(id))
 				{
 					UIMessages.Error("Role could not been removed.");
 					return;
@@ -154,7 +148,7 @@ namespace ClientDB
 			if (privilegesGrid.CurrentCell != null 
 			&& privilegesGrid.CurrentCell.ColumnIndex > 0)
 			{
-				UserRole role = (UserRole)listRoles.SelectedItems[0].Tag;
+				UserRole role = new UserRole((Int64)listRoles.SelectedItems[0].Tag);
 				
 				UserRights rights = (UserRights)privilegesGrid.CurrentRow.Tag;
 				String val = privilegesGrid.CurrentCell.Value.ToString();
@@ -194,7 +188,6 @@ namespace ClientDB
 						break;
 				}
 				privilegesGrid.CurrentRow.Tag = rights;
-				listRoles.SelectedItems[0].Tag = role;
 			}
 		}
 	}

@@ -113,5 +113,11 @@ namespace ClientDB
 			ManageTrainers mt = new ManageTrainers();
 			mt.ShowDialog(this);
 		}
+
+		private void manageClientsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ManageClients mc = new ManageClients();
+			mc.ShowDialog(this);
+		}
     }
 }

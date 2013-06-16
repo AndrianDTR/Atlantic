@@ -63,7 +63,7 @@ namespace ClientDB
 		{
 			get
 			{
-				return m_userName;
+				return DbUtils.Dequote(m_userName);
 			}
 		}
 
@@ -154,7 +154,7 @@ namespace ClientDB
 		{
 			DbAdapter da = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
-			fields["name"] = String.Format("'{0}'", name);
+			fields["name"] = name;
 			fields["privilege"] = priv.ToString();
 			id = 0;
 			

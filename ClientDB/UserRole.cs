@@ -99,7 +99,7 @@ namespace ClientDB
 		{
 			get
 			{ 
-				return m_Name;
+				return DbUtils.Dequote(m_Name);
 			}
 			set
 			{
@@ -111,7 +111,7 @@ namespace ClientDB
 
 				DbAdapter ad = new DbAdapter();
 				Dictionary<string, string> fields = new Dictionary<string, string>();
-				fields["name"] = String.Format("'{0}'", value);
+				fields["name"] = value;
 				if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
 				{
 					throw new Exception("Name could not been changed.");

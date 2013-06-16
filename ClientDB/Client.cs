@@ -70,7 +70,7 @@ namespace ClientDB
 		{
 			get
 			{
-				return m_name;
+				return DbUtils.Dequote(m_name);
 			}
 		}
 
@@ -78,12 +78,40 @@ namespace ClientDB
 		{
 			get
 			{
-				return m_phone;
+				return DbUtils.Dequote(m_phone);
 			}
 		}
 
-		public String Password
+		public String Comment
 		{
+			get
+			{
+				return DbUtils.Dequote(m_comment);
+			}
+			set
+			{
+				Debug.WriteLine(String.Format("Client '{0}' comment has been changed to: '{1}'", m_name, value));
+				if (m_id <= 0)
+				{
+					return;
+				}
+
+				DbAdapter ad = new DbAdapter();
+				Dictionary<string, string> fields = new Dictionary<string, string>();
+				fields["comment"] = DbUtils.Quote(value);
+				if (!ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
+				{
+					throw new Exception("Comment could not been changed.");
+				}
+			}
+		}
+		
+		public Trainer Trainer
+		{
+			get
+			{
+				return new Trainer(m_trainer);
+			}
 			set
 			{
 				Debug.WriteLine(String.Format("Change '{0}' password  to: '{1}'", m_name, value));
@@ -92,10 +120,35 @@ namespace ClientDB
 					return;
 				}
 
-				string newHash = DbUtils.md5(value);
+				Trainer tr = (Trainer)value;
 				DbAdapter ad = new DbAdapter();
 				Dictionary<string, string> fields = new Dictionary<string, string>();
-				fields["pass"] = String.Format("'{0}'", newHash);
+				fields["trainer"] = tr.Id.ToString();
+				if (!ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
+				{
+					throw new Exception("Password could not been changed.");
+				}
+			}
+		}
+		
+		public ScheduleRule Schedule
+		{
+			get
+			{
+				return new ScheduleRule(m_scheduleRule);
+			}
+			set
+			{
+				Debug.WriteLine(String.Format("Change '{0}' password  to: '{1}'", m_name, value));
+				if (m_id <= 0)
+				{
+					return;
+				}
+
+				ScheduleRule rule = (ScheduleRule)value;
+				DbAdapter ad = new DbAdapter();
+				Dictionary<string, string> fields = new Dictionary<string, string>();
+				fields["rule"] = rule.Id.ToString();
 				if (!ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
 				{
 					throw new Exception("Password could not been changed.");
@@ -129,7 +182,7 @@ namespace ClientDB
 		{
 			DbAdapter da = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
-			fields["name"] = String.Format("'{0}'", name);
+			fields["name"] = name;
 			fields["privilege"] = priv.ToString();
 			id = 0;
 

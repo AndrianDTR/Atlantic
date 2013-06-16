@@ -107,9 +107,10 @@ namespace ClientDB
 				UIMessages.Error("User could not been removed.");
 				return;
 			}
-			int ndx = userList.SelectedItems[0].Index;
+			int ndx = userList.SelectedItems[0].Index - 1;
 			userList.Items.Remove(userList.SelectedItems[0]);
-			userList.Items[ndx].Selected = true;
+			if(ndx >= 0)
+				userList.Items[ndx].Selected = true;
 		}
 
 		private void ChangePass(object sender, EventArgs e)

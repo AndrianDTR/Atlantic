@@ -126,6 +126,9 @@
       <DependentUpon>ChangePassword.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ManageClients.resx">
+      <DependentUpon>ManageClients.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ManageScheduleRules.resx">
       <DependentUpon>ManageScheduleRules.cs</DependentUpon>
       <SubType>Designer</SubType>

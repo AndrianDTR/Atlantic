@@ -58,7 +58,7 @@ namespace ClientDB
 		{
 			get
 			{
-				return m_name;
+				return DbUtils.Dequote(m_name);
 			}
 		}
 
@@ -85,8 +85,8 @@ namespace ClientDB
 
 			DbAdapter ad = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
-			fields["name"] = String.Format("'{0}'", name);
-			fields["phone"] = String.Format("'{0}'", phone);
+			fields["name"] = name;
+			fields["phone"] = phone;
 			if (!ad.Update(DbTable.Trainers, fields, String.Format("id={0:d}", m_id)))
 			{
 				throw new Exception("Data could not been changed.");
@@ -121,8 +121,8 @@ namespace ClientDB
 		{
 			DbAdapter da = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
-			fields["name"] = String.Format("'{0}'", name);
-			fields["phone"] = String.Format("'{0}'", phone);
+			fields["name"] = name;
+			fields["phone"] = phone;
 			id = 0;
 			
 			if (!da.Insert(DbTable.Trainers, fields, out id))
