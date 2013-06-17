@@ -108,6 +108,7 @@
 			this.btnSearch.TabIndex = 2;
 			this.btnSearch.Text = "Search";
 			this.btnSearch.UseVisualStyleBackColor = true;
+			this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
 			// 
 			// textToSearch
 			// 
@@ -115,6 +116,7 @@
 			this.textToSearch.Name = "textToSearch";
 			this.textToSearch.Size = new System.Drawing.Size(299, 20);
 			this.textToSearch.TabIndex = 1;
+			this.textToSearch.TextChanged += new System.EventHandler(this.OnSearch);
 			// 
 			// label1
 			// 
@@ -127,6 +129,9 @@
 			// 
 			// gridClients
 			// 
+			this.gridClients.AllowUserToAddRows = false;
+			this.gridClients.AllowUserToDeleteRows = false;
+			this.gridClients.AllowUserToResizeRows = false;
 			this.gridClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridClients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -139,7 +144,6 @@
 			this.gridClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridClients.Size = new System.Drawing.Size(784, 306);
 			this.gridClients.TabIndex = 0;
-			this.gridClients.VirtualMode = true;
 			// 
 			// id
 			// 
@@ -251,7 +255,7 @@
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Clients manager";
-			this.QueryAccessibilityHelp += new System.Windows.Forms.QueryAccessibilityHelpEventHandler(this.OnLoad);
+			this.Load += new System.EventHandler(this.OnLoad);
 			groupBox1.ResumeLayout(false);
 			groupBox1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridClients)).EndInit();

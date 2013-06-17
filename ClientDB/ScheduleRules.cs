@@ -20,7 +20,7 @@ namespace ClientDB
 		public ScheduleRule(Int64 id)
 		{
 			String where = String.Format("id = {0}", id);
-			DataRow data = new DbAdapter().GetFirstRow(DbTable.Schedule, where, new List<String>());
+			DataRow data = new DbAdapter().GetFirstRow(DbTable.ScheduleRules, where, new List<String>());
 
 			if (data != null)
 			{
@@ -33,7 +33,7 @@ namespace ClientDB
 		public ScheduleRule(String name)
 		{
 			String where = String.Format("name = '{0}'", name);
-			DataRow data = new DbAdapter().GetFirstRow(DbTable.Schedule, where, new List<String>());
+			DataRow data = new DbAdapter().GetFirstRow(DbTable.ScheduleRules, where, new List<String>());
 
 			if (data != null)
 			{
@@ -84,7 +84,7 @@ namespace ClientDB
 			Dictionary<string, string> fields = new Dictionary<string, string>();
 			fields["name"] = name;
 			fields["rule"] = rule;
-			if (!ad.Update(DbTable.Schedule, fields, String.Format("id={0:d}", m_id)))
+			if (!ad.Update(DbTable.ScheduleRules, fields, String.Format("id={0:d}", m_id)))
 			{
 				throw new Exception("Data could not been changed.");
 			}
@@ -100,7 +100,7 @@ namespace ClientDB
 		public ScheduleRulesCollection()
 		{
 			DbAdapter da = new DbAdapter();
-			DataTable dt = da.ExecuteQuery(String.Format("select id from {0};", DbUtils.GetTableName(DbTable.Schedule)));
+			DataTable dt = da.ExecuteQuery(String.Format("select id from {0};", DbUtils.GetTableName(DbTable.ScheduleRules)));
 			foreach (DataRow dr in dt.Rows)
 			{
 				ScheduleRule rule = new ScheduleRule(Int64.Parse(dr["id"].ToString()));
@@ -122,7 +122,7 @@ namespace ClientDB
 			fields["rule"] = rule;
 			id = 0;
 
-			if (!da.Insert(DbTable.Schedule, fields, out id))
+			if (!da.Insert(DbTable.ScheduleRules, fields, out id))
 				return false;
 				
 			Items[id] = new ScheduleRule(id);
@@ -133,7 +133,7 @@ namespace ClientDB
 		{
 			DbAdapter da = new DbAdapter();
 			String where = String.Format("id = {0}", id);
-			return da.Delete(DbTable.Schedule, where);
+			return da.Delete(DbTable.ScheduleRules, where);
 		}
 
 		public bool Remove(Int64 id)
@@ -147,7 +147,7 @@ namespace ClientDB
 		{
 			DbAdapter da = new DbAdapter();
 			String where = String.Format("id = {0}", item.Id);
-			da.Delete(DbTable.Schedule, where);
+			da.Delete(DbTable.ScheduleRules, where);
 			return Items.Remove(item.Id);
 		}
 

@@ -9,7 +9,7 @@ namespace ClientDB
 	class Client
 	{
 		private Int64 m_id = 0;
-		private UInt64 m_code = 0;
+		private String m_code = String.Empty;
 		public String m_name = String.Empty;
 		public String m_phone = String.Empty;
 		public String m_comment = String.Empty;
@@ -31,11 +31,11 @@ namespace ClientDB
 			}
 
 			m_id = id;
-			m_code = UInt64.Parse(data["code"].ToString());
+			m_code = data["code"].ToString();
 			m_name = data["name"].ToString();
 			m_phone = data["phone"].ToString();
 			m_comment = data["comment"].ToString();
-			m_scheduleRule = Int64.Parse(data["rule"].ToString());
+			m_scheduleRule = Int64.Parse(data["schedule"].ToString());
 			m_trainer = Int64.Parse(data["trainer"].ToString());
 		}
 
@@ -50,11 +50,11 @@ namespace ClientDB
 			}
 
 			m_id = Int64.Parse(data["id"].ToString());
-			m_code = UInt64.Parse(data["code"].ToString());
+			m_code = data["code"].ToString();
 			m_name = data["name"].ToString();
 			m_phone = data["phone"].ToString();
 			m_comment = data["comment"].ToString();
-			m_scheduleRule = Int64.Parse(data["rule"].ToString());
+			m_scheduleRule = Int64.Parse(data["schedule"].ToString());
 			m_trainer = Int64.Parse(data["trainer"].ToString());
 		}
 		
@@ -66,6 +66,14 @@ namespace ClientDB
 			}
 		}
 
+		public String Code
+		{
+			get
+			{
+				return DbUtils.Dequote(m_code);
+			}
+		}
+		
 		public String Name
 		{
 			get
@@ -88,22 +96,6 @@ namespace ClientDB
 			{
 				return DbUtils.Dequote(m_comment);
 			}
-			set
-			{
-				Debug.WriteLine(String.Format("Client '{0}' comment has been changed to: '{1}'", m_name, value));
-				if (m_id <= 0)
-				{
-					return;
-				}
-
-				DbAdapter ad = new DbAdapter();
-				Dictionary<string, string> fields = new Dictionary<string, string>();
-				fields["comment"] = DbUtils.Quote(value);
-				if (!ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
-				{
-					throw new Exception("Comment could not been changed.");
-				}
-			}
 		}
 		
 		public Trainer Trainer
@@ -111,23 +103,6 @@ namespace ClientDB
 			get
 			{
 				return new Trainer(m_trainer);
-			}
-			set
-			{
-				Debug.WriteLine(String.Format("Change '{0}' password  to: '{1}'", m_name, value));
-				if (m_id <= 0)
-				{
-					return;
-				}
-
-				Trainer tr = (Trainer)value;
-				DbAdapter ad = new DbAdapter();
-				Dictionary<string, string> fields = new Dictionary<string, string>();
-				fields["trainer"] = tr.Id.ToString();
-				if (!ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
-				{
-					throw new Exception("Password could not been changed.");
-				}
 			}
 		}
 		
@@ -137,22 +112,42 @@ namespace ClientDB
 			{
 				return new ScheduleRule(m_scheduleRule);
 			}
-			set
-			{
-				Debug.WriteLine(String.Format("Change '{0}' password  to: '{1}'", m_name, value));
-				if (m_id <= 0)
-				{
-					return;
-				}
+		}
 
-				ScheduleRule rule = (ScheduleRule)value;
-				DbAdapter ad = new DbAdapter();
-				Dictionary<string, string> fields = new Dictionary<string, string>();
-				fields["rule"] = rule.Id.ToString();
-				if (!ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
-				{
-					throw new Exception("Password could not been changed.");
-				}
+		public Int64 TrainerId
+		{
+			get
+			{
+				return m_trainer;
+			}
+		}
+
+		public Int64 ScheduleId
+		{
+			get
+			{
+				return m_scheduleRule;
+			}
+		}
+		
+		public void SetData(String name, String phone, String code, ScheduleRule schedule, Trainer trainer)
+		{
+			Debug.WriteLine(String.Format("Set data for client '{0}'", m_name));
+			if (m_id <= 0)
+			{
+				return;
+			}
+
+			DbAdapter ad = new DbAdapter();
+			Dictionary<string, string> fields = new Dictionary<string, string>();
+			fields["name"] = DbUtils.Quote(name);
+			fields["phone"] = DbUtils.Quote(phone);
+			fields["code"] = DbUtils.Quote(code);
+			fields["schedule"] = schedule.Id.ToString();
+			fields["trainer"] = trainer.Id.ToString();
+			if (!ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
+			{
+				throw new Exception("Data could not been changed.");
 			}
 		}
 	}
@@ -172,18 +167,21 @@ namespace ClientDB
 			}
 		}
 		
-		public Boolean Add(String name, Int64 priv)
+		public Boolean Add(String name, String phone, String code, Int64 schedule, Int64 trainer)
 		{
 			Int64 id = 0;
-			return Add(name, priv, out id);
+			return Add(name, phone, code, schedule, trainer, out id);
 		}
 		
-		public Boolean Add(String name, Int64 priv, out Int64 id)
+		public Boolean Add(String name, String phone, String code, Int64 schedule, Int64 trainer, out Int64 id)
 		{
 			DbAdapter da = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
-			fields["name"] = name;
-			fields["privilege"] = priv.ToString();
+			fields["name"] = DbUtils.Quote(name);
+			fields["phone"] = DbUtils.Quote(phone);
+			fields["code"] = DbUtils.Quote(code);
+			fields["schedule"] = schedule.ToString();
+			fields["trainer"] = trainer.ToString();
 			id = 0;
 
 			if (!da.Insert(DbTable.Clients, fields, out id))

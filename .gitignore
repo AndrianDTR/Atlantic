@@ -10,3 +10,4 @@ Calendar/obj/Debug/Calendar.csproj.FileListAbsolute.txt
 DayView/obj/Debug/DayView.csproj.FileListAbsolute.txt
 ClientDB.suo
 *.config
+ClientDB/bin/Debug/client.db

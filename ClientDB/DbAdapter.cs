@@ -17,7 +17,7 @@ namespace ClientDB
 		Users,
 		Trainers,
 		Payments,
-		Schedule,
+		ScheduleRules,
 		Statistics,
 		TrainersSchedule,
 		_max,
@@ -58,8 +58,8 @@ namespace ClientDB
 				case DbTable.Payments:
 					return "payments";
 
-				case DbTable.Schedule:
-					return "schedule";
+				case DbTable.ScheduleRules:
+					return "scheduleRules";
 
 				case DbTable.Statistics:
 					return "statistics";
@@ -527,7 +527,7 @@ namespace ClientDB
 			CREATE TABLE clients
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
-				, code Integer NOT NULL
+				, code VarChar NOT NULL
 				, name VarChar NOT NULL
 				, phone VarChar DEFAULT('')
 				, schedule Integer NOT NULL
