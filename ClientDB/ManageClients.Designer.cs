@@ -223,6 +223,7 @@
 			this.btnPaymentsHistory.TabIndex = 6;
 			this.btnPaymentsHistory.Text = "Payments history";
 			this.btnPaymentsHistory.UseVisualStyleBackColor = true;
+			this.btnPaymentsHistory.Click += new System.EventHandler(this.btnPayments_Click);
 			// 
 			// btnStatistics
 			// 
@@ -232,6 +233,7 @@
 			this.btnStatistics.TabIndex = 7;
 			this.btnStatistics.Text = "Statistics";
 			this.btnStatistics.UseVisualStyleBackColor = true;
+			this.btnStatistics.Click += new System.EventHandler(this.btnHistory_Click);
 			// 
 			// ManageClients
 			// 

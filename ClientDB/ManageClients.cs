@@ -109,18 +109,46 @@ namespace ClientDB
 			
 			if (DialogResult.OK == ci.ShowDialog(this))
 			{
-				Int64 id = 0;
-				if (!m_collection.Add(ci.ClientName, ci.ClientPhone, ci.ClientCode, ci.Schedule, ci.Trainer, out id))
+				if(!client.SetData(ci.ClientName, ci.ClientPhone, ci.ClientCode, ci.Schedule, ci.Trainer))
 				{
-					UIMessages.Error("Client could not been added.");
+					UIMessages.Error("Client data could not been changed.");
 					return;
 				}
+
 			}
 		}
 
 		private void btnRemove_Click(object sender, EventArgs e)
 		{
+			if(gridClients.SelectedRows.Count < 1)
+				return;
 
+			Int64 clientId = (Int64)gridClients.SelectedRows[0].Tag;
+			if (!UserCollection.RemoveById(clientId))
+			{
+				UIMessages.Error("Client could not been removed.");
+				return;
+			}
+			int ndx = gridClients.SelectedItems[0].Index;
+			gridClients.Rows.Remove(nxd--);
+			if(ndx >= 0)
+				userList.Items[ndx].Selected = true;
+		}
+
+		private void btnHistory_Click(object sender, EventArgs e)
+		{
+			if(gridClients.SelectedRows.Count < 1)
+				return;
+
+			Int64 clientId = (Int64)gridClients.SelectedRows[0].Tag;
+		}
+
+		private void btnPayments_Click(object sender, EventArgs e)
+		{
+			if(gridClients.SelectedRows.Count < 1)
+				return;
+
+			Int64 clientId = (Int64)gridClients.SelectedRows[0].Tag;
 		}
 	}
 }

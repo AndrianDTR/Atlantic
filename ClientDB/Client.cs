@@ -130,12 +130,12 @@ namespace ClientDB
 			}
 		}
 		
-		public void SetData(String name, String phone, String code, ScheduleRule schedule, Trainer trainer)
+		public bool SetData(String name, String phone, String code, Int64 scheduleId, Int64 trainerId)
 		{
 			Debug.WriteLine(String.Format("Set data for client '{0}'", m_name));
 			if (m_id <= 0)
 			{
-				return;
+				return false;
 			}
 
 			DbAdapter ad = new DbAdapter();
@@ -143,12 +143,15 @@ namespace ClientDB
 			fields["name"] = DbUtils.Quote(name);
 			fields["phone"] = DbUtils.Quote(phone);
 			fields["code"] = DbUtils.Quote(code);
-			fields["schedule"] = schedule.Id.ToString();
-			fields["trainer"] = trainer.Id.ToString();
+			fields["schedule"] = schedule.ToString();
+			fields["trainer"] = trainer.ToString();
+
 			if (!ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
 			{
-				throw new Exception("Data could not been changed.");
+				return false;
 			}
+
+			return true;
 		}
 	}
 
