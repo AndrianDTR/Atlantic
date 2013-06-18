@@ -43,8 +43,9 @@
 			this.trainersScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.editPersonalDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.paymentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+			this.manageClientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
@@ -75,8 +76,6 @@
 			this.edit = new System.Windows.Forms.Button();
 			this.remove = new System.Windows.Forms.Button();
 			this.add = new System.Windows.Forms.Button();
-			this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
-			this.manageClientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel4.SuspendLayout();
@@ -190,7 +189,6 @@
 			// 
 			this.clientToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addToolStripMenuItem,
-            this.editPersonalDataToolStripMenuItem,
             this.paymentToolStripMenuItem1,
             this.toolStripMenuItem5,
             this.manageClientsToolStripMenuItem});
@@ -204,13 +202,7 @@
 			this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
 			this.addToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
 			this.addToolStripMenuItem.Text = "Add";
-			// 
-			// editPersonalDataToolStripMenuItem
-			// 
-			this.editPersonalDataToolStripMenuItem.Name = "editPersonalDataToolStripMenuItem";
-			this.editPersonalDataToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6;
-			this.editPersonalDataToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-			this.editPersonalDataToolStripMenuItem.Text = "Edit personal data";
+			this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
 			// 
 			// paymentToolStripMenuItem1
 			// 
@@ -218,6 +210,18 @@
 			this.paymentToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F7;
 			this.paymentToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
 			this.paymentToolStripMenuItem1.Text = "Payment";
+			// 
+			// toolStripMenuItem5
+			// 
+			this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+			this.toolStripMenuItem5.Size = new System.Drawing.Size(188, 6);
+			// 
+			// manageClientsToolStripMenuItem
+			// 
+			this.manageClientsToolStripMenuItem.Name = "manageClientsToolStripMenuItem";
+			this.manageClientsToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+			this.manageClientsToolStripMenuItem.Text = "Manage clients";
+			this.manageClientsToolStripMenuItem.Click += new System.EventHandler(this.manageClientsToolStripMenuItem_Click);
 			// 
 			// settingsToolStripMenuItem
 			// 
@@ -278,6 +282,7 @@
 			this.manageScheduleRulesToolStripMenuItem.Name = "manageScheduleRulesToolStripMenuItem";
 			this.manageScheduleRulesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
 			this.manageScheduleRulesToolStripMenuItem.Text = "Manage schedule rules";
+			this.manageScheduleRulesToolStripMenuItem.Click += new System.EventHandler(this.manageScheduleRulesToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem4
 			// 
@@ -474,18 +479,6 @@
 			this.add.UseVisualStyleBackColor = true;
 			this.add.Click += new System.EventHandler(this.add_Click);
 			// 
-			// toolStripMenuItem5
-			// 
-			this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-			this.toolStripMenuItem5.Size = new System.Drawing.Size(188, 6);
-			// 
-			// manageClientsToolStripMenuItem
-			// 
-			this.manageClientsToolStripMenuItem.Name = "manageClientsToolStripMenuItem";
-			this.manageClientsToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-			this.manageClientsToolStripMenuItem.Text = "Manage clients";
-			this.manageClientsToolStripMenuItem.Click += new System.EventHandler(this.manageClientsToolStripMenuItem_Click);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -526,7 +519,6 @@
         private System.Windows.Forms.ToolStripMenuItem paymentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clientToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editPersonalDataToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem paymentToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;

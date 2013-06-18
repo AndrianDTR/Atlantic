@@ -11,9 +11,6 @@ namespace ClientDB
 {
 	public partial class ClientInfo : Form
 	{
-		private Int64 m_trainer = 0;
-		private Int64 m_schedule = 0;
-
 		public ClientInfo()
 		{
 			InitializeComponent();
@@ -55,16 +52,38 @@ namespace ClientDB
 			set { textCode.Text = value; }
 		}
 
-		public Int64 Trainer
+		public Trainer Trainer
 		{
-			get { return m_trainer; }
-			set { m_trainer = value; }
+			get { return (Trainer)comboTrainer.SelectedItem; }
+			set { comboTrainer.SelectedItem = value; }
 		}
 
-		public Int64 Schedule
+		public ScheduleRule Schedule
 		{
-			get { return m_schedule; }
-			set { m_schedule = value; }
+			get { return (ScheduleRule)comboSchedule.SelectedItem; }
+			set { comboSchedule.SelectedItem = value; }
+		}
+
+		private void btnOk_Click(object sender, EventArgs e)
+		{
+			this.DialogResult = DialogResult.OK;
+			this.Close();
+		}
+
+		private void OnLoad(object sender, EventArgs e)
+		{
+			comboSchedule.Items.Clear();
+			comboTrainer.Items.Clear();
+			
+			foreach (ScheduleRule sr in new ScheduleRulesCollection())
+			{
+				comboSchedule.Items.Add(sr);
+			}
+
+			foreach (Trainer tr in new TrainerCollection())
+			{
+				comboTrainer.Items.Add(tr);
+			}
 		}
 	}
 }

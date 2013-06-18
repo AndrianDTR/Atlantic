@@ -143,8 +143,8 @@ namespace ClientDB
 			fields["name"] = DbUtils.Quote(name);
 			fields["phone"] = DbUtils.Quote(phone);
 			fields["code"] = DbUtils.Quote(code);
-			fields["schedule"] = schedule.ToString();
-			fields["trainer"] = trainer.ToString();
+			fields["schedule"] = scheduleId.ToString();
+			fields["trainer"] = trainerId.ToString();
 
 			if (!ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
 			{

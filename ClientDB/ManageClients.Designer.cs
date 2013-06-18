@@ -144,6 +144,7 @@
 			this.gridClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridClients.Size = new System.Drawing.Size(784, 306);
 			this.gridClients.TabIndex = 0;
+			this.gridClients.DoubleClick += new System.EventHandler(this.OnEdit);
 			// 
 			// id
 			// 

@@ -27,7 +27,7 @@ namespace ClientDB
 		{
 			object[] row = new object[4];
 			
-			row[0] = client.Id;
+			row[0] = client.Code;
 			row[1] = client.Name;
 			row[2] = client.Phone;
 			row[3] = client.Schedule.ToString();
@@ -82,40 +82,18 @@ namespace ClientDB
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
 			ClientInfo ci = new ClientInfo(true);
-			if(DialogResult.OK == ci.ShowDialog(this))
-			{
-				Int64 id = 0;
-				if(!m_collection.Add(ci.ClientName, ci.ClientPhone, ci.ClientCode, ci.Schedule, ci.Trainer, out id))
-				{
-					UIMessages.Error("Client could not been added.");
-					return;
-				}
-			}
-		}
-
-		private void btnEdit_Click(object sender, EventArgs e)
-		{
-			if(gridClients.SelectedRows.Count < 1)
+			if(DialogResult.OK != ci.ShowDialog(this))
 				return;
-
-			Client client = new Client((Int64)gridClients.SelectedRows[0].Tag);
-
-			ClientInfo ci = new ClientInfo();
-			ci.ClientCode = client.Code;
-			ci.ClientName = client.Name;
-			ci.ClientPhone = client.Phone;
-			ci.Trainer = client.TrainerId;
-			ci.Schedule = client.ScheduleId;
 			
-			if (DialogResult.OK == ci.ShowDialog(this))
+			Int64 id = 0;
+			if(!m_collection.Add(ci.ClientName, ci.ClientPhone, ci.ClientCode, ci.Schedule.Id, ci.Trainer.Id, out id))
 			{
-				if(!client.SetData(ci.ClientName, ci.ClientPhone, ci.ClientCode, ci.Schedule, ci.Trainer))
-				{
-					UIMessages.Error("Client data could not been changed.");
-					return;
-				}
-
+				UIMessages.Error("Client could not been added.");
+				return;
 			}
+
+			int nRow = gridClients.Rows.Add(parseClient(new Client(id)));
+			gridClients.Rows[nRow].Tag = id;
 		}
 
 		private void btnRemove_Click(object sender, EventArgs e)
@@ -129,10 +107,10 @@ namespace ClientDB
 				UIMessages.Error("Client could not been removed.");
 				return;
 			}
-			int ndx = gridClients.SelectedItems[0].Index;
-			gridClients.Rows.Remove(nxd--);
+			int ndx = gridClients.SelectedRows[0].Index - 1;
+			gridClients.Rows.Remove(gridClients.SelectedRows[0]);
 			if(ndx >= 0)
-				userList.Items[ndx].Selected = true;
+				gridClients.Rows[ndx].Selected = true;
 		}
 
 		private void btnHistory_Click(object sender, EventArgs e)
@@ -149,6 +127,41 @@ namespace ClientDB
 				return;
 
 			Int64 clientId = (Int64)gridClients.SelectedRows[0].Tag;
+		}
+
+		private void btnEdit_Click(object sender, EventArgs e)
+		{
+			EditClient();
+		}
+		
+		private void OnEdit(object sender, EventArgs e)
+		{
+			EditClient();
+		}
+		
+		private void EditClient()
+		{
+			if (gridClients.SelectedRows.Count < 1)
+				return;
+
+			Client client = new Client((Int64)gridClients.SelectedRows[0].Tag);
+
+			ClientInfo ci = new ClientInfo();
+			ci.ClientCode = client.Code;
+			ci.ClientName = client.Name;
+			ci.ClientPhone = client.Phone;
+			ci.Trainer = client.Trainer;
+			ci.Schedule = client.Schedule;
+
+			if (DialogResult.OK != ci.ShowDialog(this))
+				return;
+
+			if (!client.SetData(ci.ClientName, ci.ClientPhone, ci.ClientCode, ci.Schedule.Id, ci.Trainer.Id))
+			{
+				UIMessages.Error("Client data could not been changed.");
+				return;
+			}
+			gridClients.SelectedRows[0].SetValues(parseClient(client));
 		}
 	}
 }

@@ -8,6 +8,7 @@ namespace ClientDB
     public partial class MainForm : Form
     {
 		private Login m_login = new Login();
+		private ClientCollection m_collection = new ClientCollection();
 		
         public MainForm()
         {
@@ -41,7 +42,15 @@ namespace ClientDB
 			
 			exportToolStripMenuItem.Enabled = priv.IsSet(priv.Backup, UserRights.Create);
 			importToolStripMenuItem.Enabled = priv.IsSet(priv.Backup, UserRights.Write);
-								
+			
+			foreach (Client ci in m_collection)
+			{
+				ListViewItem it = clientList.Items.Add(ci.Name);
+				it.SubItems.Add("");
+				it.SubItems.Add(ci.Schedule.Name);
+				it.SubItems.Add(ci.Trainer.Name);
+				it.Tag = ci.Code;
+			}				
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -60,13 +69,6 @@ namespace ClientDB
 			cp.ShowDialog(this);
 		}
 
-		private void add_Click(object sender, EventArgs e)
-		{
-			ManageScheduleRules sc = new ManageScheduleRules();
-			sc.ShowDialog(this);
-			
-		}
-
 		private void OnSearchKeyUp(object sender, KeyEventArgs e)
 		{
 			if ((e.KeyCode == Keys.Enter) || (e.KeyCode == Keys.Return))
@@ -78,13 +80,25 @@ namespace ClientDB
 		
 		private void SearchById(String id)
 		{
-			;
+			foreach (ListViewItem lvi in clientList.Items)
+			{
+				lvi.Selected = false;
+				if (lvi.Text.ToUpper().Contains(id.ToUpper())
+				|| ((String)lvi.Tag).ToUpper().Contains(id.ToUpper()))
+				{
+					lvi.Selected = true;
+				}
+			}
 		}
-
 
 		private void OnKeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (!m_Search.Focused && e.KeyChar >= '0' && e.KeyChar <= '9')
+			if (!m_Search.Focused 
+			&& (
+				(e.KeyChar >= '0' && e.KeyChar <= '9')
+				|| (e.KeyChar >= 'a' && e.KeyChar <= 'z')
+				|| (e.KeyChar >= 'A' && e.KeyChar <= 'Z')
+			))
 			{
 				m_Search.Focus();
 				m_Search.Text = e.KeyChar.ToString();
@@ -118,6 +132,42 @@ namespace ClientDB
 		{
 			ManageClients mc = new ManageClients();
 			mc.ShowDialog(this);
+			m_collection = new ClientCollection();
+		}
+
+		private void AddClient()
+		{
+			ClientInfo ci = new ClientInfo(true);
+			if (DialogResult.OK != ci.ShowDialog(this))
+				return;
+
+			Int64 id = 0;
+			
+			if (!m_collection.Add(ci.ClientName, ci.ClientPhone, ci.ClientCode, ci.Schedule.Id, ci.Trainer.Id, out id))
+			{
+				UIMessages.Error("Client could not been added.");
+				return;
+			}
+			ListViewItem it = clientList.Items.Add(ci.ClientName);
+			it.SubItems.Add("");
+			it.SubItems.Add(ci.Schedule.Name);
+			it.SubItems.Add(ci.Trainer.Name);
+		}
+		
+		private void add_Click(object sender, EventArgs e)
+		{
+			AddClient();
+		}
+		
+		private void addToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			AddClient();
+		}
+
+		private void manageScheduleRulesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ManageScheduleRules sc = new ManageScheduleRules();
+			sc.ShowDialog(this);
 		}
     }
 }

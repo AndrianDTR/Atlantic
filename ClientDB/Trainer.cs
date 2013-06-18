@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace ClientDB
 {
-	class Trainer
+	public class Trainer
 	{
 		private Int64 m_id = 0;
 		public String m_name = String.Empty;

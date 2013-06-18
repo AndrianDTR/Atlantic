@@ -26,7 +26,7 @@ namespace ClientDB
 			{
 				m_id = id;
 				m_Name = data["name"].ToString();
-				m_Name = data["rule"].ToString();
+				m_Rule = data["rule"].ToString();
 			}
 		}
 
@@ -39,7 +39,7 @@ namespace ClientDB
 			{
 				m_id = Int64.Parse(data["id"].ToString());
 				m_Name = data["name"].ToString();
-				m_Name = data["rule"].ToString();
+				m_Rule = data["rule"].ToString();
 			}
 		}
 		
