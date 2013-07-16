@@ -6,8 +6,9 @@
 *.manifest
 *.Cache
 *.cache
-Calendar/obj/Debug/Calendar.csproj.FileListAbsolute.txt
-DayView/obj/Debug/DayView.csproj.FileListAbsolute.txt
+Calendar/obj/*
+ClientDB/obj/*
+Calendar/obj/*
 ClientDB.suo
 *.config
 ClientDB/bin/Debug/client.db
