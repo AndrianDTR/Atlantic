@@ -60,25 +60,16 @@
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.panel4 = new System.Windows.Forms.Panel();
-			this.clientList = new System.Windows.Forms.ListView();
-			this.client = new System.Windows.Forms.ColumnHeader();
-			this.lastPayment = new System.Windows.Forms.ColumnHeader();
-			this.plan = new System.Windows.Forms.ColumnHeader();
-			this.trainer = new System.Windows.Forms.ColumnHeader();
-			this.comment = new System.Windows.Forms.ColumnHeader();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.m_Search = new System.Windows.Forms.TextBox();
-			this.label2 = new System.Windows.Forms.Label();
-			this.export = new System.Windows.Forms.Button();
-			this.shedule = new System.Windows.Forms.Button();
-			this.payments = new System.Windows.Forms.Button();
-			this.edit = new System.Windows.Forms.Button();
-			this.remove = new System.Windows.Forms.Button();
+			this.btnBackUp = new System.Windows.Forms.Button();
+			this.btnTrainersShedule = new System.Windows.Forms.Button();
+			this.btnPayments = new System.Windows.Forms.Button();
+			this.btnClientManager = new System.Windows.Forms.Button();
 			this.add = new System.Windows.Forms.Button();
+			this.log = new System.Windows.Forms.TextBox();
+			this.dayView1 = new CalendarTest.DayView();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
-			this.panel4.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -200,7 +191,7 @@
 			// 
 			this.addToolStripMenuItem.Name = "addToolStripMenuItem";
 			this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-			this.addToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+			this.addToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
 			this.addToolStripMenuItem.Text = "Add";
 			this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
 			// 
@@ -208,18 +199,18 @@
 			// 
 			this.paymentToolStripMenuItem1.Name = "paymentToolStripMenuItem1";
 			this.paymentToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F7;
-			this.paymentToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
+			this.paymentToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
 			this.paymentToolStripMenuItem1.Text = "Payment";
 			// 
 			// toolStripMenuItem5
 			// 
 			this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-			this.toolStripMenuItem5.Size = new System.Drawing.Size(188, 6);
+			this.toolStripMenuItem5.Size = new System.Drawing.Size(153, 6);
 			// 
 			// manageClientsToolStripMenuItem
 			// 
 			this.manageClientsToolStripMenuItem.Name = "manageClientsToolStripMenuItem";
-			this.manageClientsToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+			this.manageClientsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
 			this.manageClientsToolStripMenuItem.Text = "Manage clients";
 			this.manageClientsToolStripMenuItem.Click += new System.EventHandler(this.manageClientsToolStripMenuItem_Click);
 			// 
@@ -320,82 +311,30 @@
 			// 
 			// tableLayoutPanel1
 			// 
+			this.tableLayoutPanel1.AutoSize = true;
 			this.tableLayoutPanel1.ColumnCount = 1;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Controls.Add(this.panel4, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.log, 0, 2);
+			this.tableLayoutPanel1.Controls.Add(this.dayView1, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
-			this.tableLayoutPanel1.RowCount = 2;
+			this.tableLayoutPanel1.RowCount = 3;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(921, 437);
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(921, 511);
 			this.tableLayoutPanel1.TabIndex = 12;
-			// 
-			// panel4
-			// 
-			this.panel4.Controls.Add(this.clientList);
-			this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel4.Location = new System.Drawing.Point(8, 63);
-			this.panel4.Name = "panel4";
-			this.panel4.Size = new System.Drawing.Size(905, 366);
-			this.panel4.TabIndex = 2;
-			// 
-			// clientList
-			// 
-			this.clientList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.client,
-            this.lastPayment,
-            this.plan,
-            this.trainer,
-            this.comment});
-			this.clientList.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.clientList.FullRowSelect = true;
-			this.clientList.Location = new System.Drawing.Point(0, 0);
-			this.clientList.MultiSelect = false;
-			this.clientList.Name = "clientList";
-			this.clientList.Size = new System.Drawing.Size(905, 366);
-			this.clientList.TabIndex = 0;
-			this.clientList.UseCompatibleStateImageBehavior = false;
-			this.clientList.View = System.Windows.Forms.View.Details;
-			// 
-			// client
-			// 
-			this.client.Text = "Client";
-			this.client.Width = 250;
-			// 
-			// lastPayment
-			// 
-			this.lastPayment.Text = "Last payment";
-			this.lastPayment.Width = 160;
-			// 
-			// plan
-			// 
-			this.plan.Text = "Plan";
-			this.plan.Width = 100;
-			// 
-			// trainer
-			// 
-			this.trainer.Text = "Trainer";
-			this.trainer.Width = 140;
-			// 
-			// comment
-			// 
-			this.comment.Text = "Comment";
-			this.comment.Width = 220;
 			// 
 			// panel1
 			// 
-			this.panel1.Controls.Add(this.m_Search);
-			this.panel1.Controls.Add(this.label2);
-			this.panel1.Controls.Add(this.export);
-			this.panel1.Controls.Add(this.shedule);
-			this.panel1.Controls.Add(this.payments);
-			this.panel1.Controls.Add(this.edit);
-			this.panel1.Controls.Add(this.remove);
+			this.panel1.Controls.Add(this.btnBackUp);
+			this.panel1.Controls.Add(this.btnTrainersShedule);
+			this.panel1.Controls.Add(this.btnPayments);
+			this.panel1.Controls.Add(this.btnClientManager);
 			this.panel1.Controls.Add(this.add);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(8, 8);
@@ -403,71 +342,41 @@
 			this.panel1.Size = new System.Drawing.Size(905, 49);
 			this.panel1.TabIndex = 5;
 			// 
-			// m_Search
+			// btnBackUp
 			// 
-			this.m_Search.AcceptsReturn = true;
-			this.m_Search.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.m_Search.Location = new System.Drawing.Point(447, 2);
-			this.m_Search.Name = "m_Search";
-			this.m_Search.Size = new System.Drawing.Size(454, 44);
-			this.m_Search.TabIndex = 0;
-			this.m_Search.TextChanged += new System.EventHandler(this.OnSearch);
-			this.m_Search.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnSearchKeyUp);
+			this.btnBackUp.Image = global::ClientDB.Properties.Resources._1367375035_filesave;
+			this.btnBackUp.Location = new System.Drawing.Point(216, 0);
+			this.btnBackUp.Name = "btnBackUp";
+			this.btnBackUp.Size = new System.Drawing.Size(48, 48);
+			this.btnBackUp.TabIndex = 6;
+			this.btnBackUp.UseVisualStyleBackColor = true;
 			// 
-			// label2
+			// btnTrainersShedule
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label2.Location = new System.Drawing.Point(324, 6);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(124, 37);
-			this.label2.TabIndex = 6;
-			this.label2.Text = "Search";
+			this.btnTrainersShedule.Image = global::ClientDB.Properties.Resources._1367375242_schedule;
+			this.btnTrainersShedule.Location = new System.Drawing.Point(162, 0);
+			this.btnTrainersShedule.Name = "btnTrainersShedule";
+			this.btnTrainersShedule.Size = new System.Drawing.Size(48, 48);
+			this.btnTrainersShedule.TabIndex = 5;
+			this.btnTrainersShedule.UseVisualStyleBackColor = true;
 			// 
-			// export
+			// btnPayments
 			// 
-			this.export.Image = global::ClientDB.Properties.Resources._1367375035_filesave;
-			this.export.Location = new System.Drawing.Point(270, 0);
-			this.export.Name = "export";
-			this.export.Size = new System.Drawing.Size(48, 48);
-			this.export.TabIndex = 6;
-			this.export.UseVisualStyleBackColor = true;
+			this.btnPayments.Image = global::ClientDB.Properties.Resources._1367375158_coins;
+			this.btnPayments.Location = new System.Drawing.Point(108, 0);
+			this.btnPayments.Name = "btnPayments";
+			this.btnPayments.Size = new System.Drawing.Size(48, 48);
+			this.btnPayments.TabIndex = 4;
+			this.btnPayments.UseVisualStyleBackColor = true;
 			// 
-			// shedule
+			// btnClientManager
 			// 
-			this.shedule.Image = global::ClientDB.Properties.Resources._1367375242_schedule;
-			this.shedule.Location = new System.Drawing.Point(216, 0);
-			this.shedule.Name = "shedule";
-			this.shedule.Size = new System.Drawing.Size(48, 48);
-			this.shedule.TabIndex = 5;
-			this.shedule.UseVisualStyleBackColor = true;
-			// 
-			// payments
-			// 
-			this.payments.Image = global::ClientDB.Properties.Resources._1367375158_coins;
-			this.payments.Location = new System.Drawing.Point(162, 0);
-			this.payments.Name = "payments";
-			this.payments.Size = new System.Drawing.Size(48, 48);
-			this.payments.TabIndex = 4;
-			this.payments.UseVisualStyleBackColor = true;
-			// 
-			// edit
-			// 
-			this.edit.Image = global::ClientDB.Properties.Resources._1367375688_27_Edit_Text;
-			this.edit.Location = new System.Drawing.Point(108, 0);
-			this.edit.Name = "edit";
-			this.edit.Size = new System.Drawing.Size(48, 48);
-			this.edit.TabIndex = 3;
-			this.edit.UseVisualStyleBackColor = true;
-			// 
-			// remove
-			// 
-			this.remove.Image = global::ClientDB.Properties.Resources._1367374751_edit_remove;
-			this.remove.Location = new System.Drawing.Point(54, 0);
-			this.remove.Name = "remove";
-			this.remove.Size = new System.Drawing.Size(48, 48);
-			this.remove.TabIndex = 2;
-			this.remove.UseVisualStyleBackColor = true;
+			this.btnClientManager.Image = global::ClientDB.Properties.Resources._1367375688_27_Edit_Text;
+			this.btnClientManager.Location = new System.Drawing.Point(54, 0);
+			this.btnClientManager.Name = "btnClientManager";
+			this.btnClientManager.Size = new System.Drawing.Size(48, 48);
+			this.btnClientManager.TabIndex = 3;
+			this.btnClientManager.UseVisualStyleBackColor = true;
 			// 
 			// add
 			// 
@@ -479,11 +388,35 @@
 			this.add.UseVisualStyleBackColor = true;
 			this.add.Click += new System.EventHandler(this.add_Click);
 			// 
+			// log
+			// 
+			this.log.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.log.Location = new System.Drawing.Point(8, 409);
+			this.log.Multiline = true;
+			this.log.Name = "log";
+			this.log.ReadOnly = true;
+			this.log.Size = new System.Drawing.Size(905, 94);
+			this.log.TabIndex = 8;
+			// 
+			// dayView1
+			// 
+			this.dayView1.ActiveTool = null;
+			this.dayView1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dayView1.Location = new System.Drawing.Point(8, 63);
+			this.dayView1.Name = "dayView1";
+			this.dayView1.NavButtonsHeight = 30;
+			this.dayView1.RowHeight = 80;
+			this.dayView1.SelectedDate = new System.DateTime(((long)(0)));
+			this.dayView1.Size = new System.Drawing.Size(905, 340);
+			this.dayView1.StartDate = new System.DateTime(2013, 7, 25, 0, 0, 0, 0);
+			this.dayView1.TabIndex = 7;
+			this.dayView1.Text = "dayView1";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(921, 461);
+			this.ClientSize = new System.Drawing.Size(921, 535);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.menuStrip1);
@@ -493,14 +426,11 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Clients";
 			this.Load += new System.EventHandler(this.OnLoad);
-			this.Shown += new System.EventHandler(this.OnShown);
-			this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnKeyPress);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.tableLayoutPanel1.ResumeLayout(false);
-			this.panel4.ResumeLayout(false);
+			this.tableLayoutPanel1.PerformLayout();
 			this.panel1.ResumeLayout(false);
-			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -522,24 +452,12 @@
 		private System.Windows.Forms.ToolStripMenuItem paymentToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.ListView clientList;
-        private System.Windows.Forms.ColumnHeader client;
-        private System.Windows.Forms.ColumnHeader lastPayment;
-        private System.Windows.Forms.ColumnHeader plan;
-        private System.Windows.Forms.ColumnHeader trainer;
-        private System.Windows.Forms.ColumnHeader comment;
+		private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button add;
-        private System.Windows.Forms.Button export;
-        private System.Windows.Forms.Button shedule;
-        private System.Windows.Forms.Button payments;
-        private System.Windows.Forms.Button edit;
-        private System.Windows.Forms.Button remove;
-        private System.Windows.Forms.TextBox m_Search;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnBackUp;
+        private System.Windows.Forms.Button btnTrainersShedule;
+		private System.Windows.Forms.Button btnPayments;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usersAndPasswordsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
@@ -556,6 +474,10 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
 		private System.Windows.Forms.ToolStripMenuItem manageClientsToolStripMenuItem;
+		private System.Windows.Forms.Button btnClientManager;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+		private CalendarTest.DayView dayView1;
+		private System.Windows.Forms.TextBox log;
     }
 }
 

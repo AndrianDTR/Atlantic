@@ -14,15 +14,22 @@ namespace ClientDB
         {
             InitializeComponent();
         }
-		
-		private void OnShown(object sender, EventArgs e)
-		{
-			m_Search.Focus();
-		}
 
 		private void clientByBarcodeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			m_Search.Focus();
+			Prompt dlg = new Prompt();
+			dlg.Text = "Search client by code";
+			while(DialogResult.OK == dlg.ShowDialog())
+			{
+				if(dlg.Value.Length == 0)
+					continue;
+				
+				Client client = m_collection.SearchCode(dlg.Value);
+				UIMessages.Info(client.Name);
+				dlg.Clear();
+				log.Text += "\n\r Get info for " + client.Name;
+			};
+			
 		}
 
         private void OnLoad(object sender, EventArgs e)
@@ -37,20 +44,11 @@ namespace ClientDB
 			
 			UserRole priv = session.UserRole;
 
-			userRolesToolStripMenuItem.Enabled = priv.IsSet(priv.Users, UserRights.Read);
-			usersAndPasswordsToolStripMenuItem.Enabled = priv.IsSet(priv.Users, UserRights.Read);
-			
-			exportToolStripMenuItem.Enabled = priv.IsSet(priv.Backup, UserRights.Create);
-			importToolStripMenuItem.Enabled = priv.IsSet(priv.Backup, UserRights.Write);
-			
-			foreach (Client ci in m_collection)
-			{
-				ListViewItem it = clientList.Items.Add(ci.Name);
-				it.SubItems.Add("");
-				it.SubItems.Add(ci.Schedule.Name);
-				it.SubItems.Add(ci.Trainer.Name);
-				it.Tag = ci.Code;
-			}				
+			userRolesToolStripMenuItem.Enabled = UserRole.IsSet(priv.Users, UserRights.Read);
+			usersAndPasswordsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Users, UserRights.Read);
+
+			exportToolStripMenuItem.Enabled = UserRole.IsSet(priv.Backup, UserRights.Create);
+			importToolStripMenuItem.Enabled = UserRole.IsSet(priv.Backup, UserRights.Write);		
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -67,43 +65,6 @@ namespace ClientDB
 		{
 			ChangePassword cp = new ChangePassword();
 			cp.ShowDialog(this);
-		}
-
-		private void OnSearchKeyUp(object sender, KeyEventArgs e)
-		{
-			if ((e.KeyCode == Keys.Enter) || (e.KeyCode == Keys.Return))
-			{
-				SearchById(m_Search.Text);
-				m_Search.Clear();
-			}
-		}
-		
-		private void SearchById(String id)
-		{
-			foreach (ListViewItem lvi in clientList.Items)
-			{
-				lvi.Selected = false;
-				if (lvi.Text.ToUpper().Contains(id.ToUpper())
-				|| ((String)lvi.Tag).ToUpper().Contains(id.ToUpper()))
-				{
-					lvi.Selected = true;
-				}
-			}
-		}
-
-		private void OnKeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (!m_Search.Focused 
-			&& (
-				(e.KeyChar >= '0' && e.KeyChar <= '9')
-				|| (e.KeyChar >= 'a' && e.KeyChar <= 'z')
-				|| (e.KeyChar >= 'A' && e.KeyChar <= 'Z')
-			))
-			{
-				m_Search.Focus();
-				m_Search.Text = e.KeyChar.ToString();
-				m_Search.Select(1, 1);
-			}
 		}
 
 		private void usersAndPasswordsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -148,10 +109,6 @@ namespace ClientDB
 				UIMessages.Error("Client could not been added.");
 				return;
 			}
-			ListViewItem it = clientList.Items.Add(ci.ClientName);
-			it.SubItems.Add("");
-			it.SubItems.Add(ci.Schedule.Name);
-			it.SubItems.Add(ci.Trainer.Name);
 		}
 		
 		private void add_Click(object sender, EventArgs e)

@@ -1034,6 +1034,7 @@ namespace CalendarTest
 					{
 						weekInfo[nCol-1].bSelected = weekInfo[nCol-1].date == SelectedDate ? true : false;
 						weekInfo[nCol-1].bCurMonth = weekInfo[nCol-1].date.Month == StartDate.Month ? true : false;
+						weekInfo[nCol-1].sTitle = weekInfo[nCol-1].date.ToShortDateString();
 						renderer.DrawCell(e.Graphics, rDraw, weekInfo[nCol-1]);
 						rCell.X += colW;
 					}

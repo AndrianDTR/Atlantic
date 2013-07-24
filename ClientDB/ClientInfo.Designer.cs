@@ -40,6 +40,8 @@
 			this.btnClose = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
 			this.textCode = new System.Windows.Forms.TextBox();
+			this.btnScan = new System.Windows.Forms.Button();
+			this.btnPayment = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -158,6 +160,31 @@
 			this.textCode.TabIndex = 9;
 			this.textCode.TabStop = false;
 			// 
+			// btnScan
+			// 
+			this.btnScan.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.btnScan.Location = new System.Drawing.Point(143, 266);
+			this.btnScan.Margin = new System.Windows.Forms.Padding(6);
+			this.btnScan.Name = "btnScan";
+			this.btnScan.Size = new System.Drawing.Size(133, 42);
+			this.btnScan.TabIndex = 10;
+			this.btnScan.Text = "Attach card";
+			this.btnScan.UseVisualStyleBackColor = true;
+			this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
+			// 
+			// btnPayment
+			// 
+			this.btnPayment.Enabled = false;
+			this.btnPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.btnPayment.Location = new System.Drawing.Point(288, 266);
+			this.btnPayment.Margin = new System.Windows.Forms.Padding(6);
+			this.btnPayment.Name = "btnPayment";
+			this.btnPayment.Size = new System.Drawing.Size(162, 42);
+			this.btnPayment.TabIndex = 11;
+			this.btnPayment.Text = "Make payment";
+			this.btnPayment.UseVisualStyleBackColor = true;
+			this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
+			// 
 			// ClientInfo
 			// 
 			this.AcceptButton = this.btnOk;
@@ -165,6 +192,8 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnClose;
 			this.ClientSize = new System.Drawing.Size(776, 330);
+			this.Controls.Add(this.btnPayment);
+			this.Controls.Add(this.btnScan);
 			this.Controls.Add(this.textCode);
 			this.Controls.Add(this.btnOk);
 			this.Controls.Add(this.btnClose);
@@ -207,5 +236,7 @@
 		private System.Windows.Forms.Button btnClose;
 		private System.Windows.Forms.Button btnOk;
 		private System.Windows.Forms.TextBox textCode;
+		private System.Windows.Forms.Button btnScan;
+		private System.Windows.Forms.Button btnPayment;
 	}
 }

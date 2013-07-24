@@ -82,7 +82,7 @@ namespace ClientDB
 			return m_Name;
 		}
 
-		public bool IsSet(UserRights var, UserRights flag)
+		public static bool IsSet(UserRights var, UserRights flag)
 		{
 			return flag == (var & flag);
 		}

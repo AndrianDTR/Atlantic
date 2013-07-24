@@ -41,11 +41,11 @@
 			// 
 			// save
 			// 
-			this.save.Location = new System.Drawing.Point(440, 195);
+			this.save.Location = new System.Drawing.Point(389, 195);
 			this.save.Name = "save";
 			this.save.Size = new System.Drawing.Size(75, 23);
 			this.save.TabIndex = 5;
-			this.save.Text = "Save";
+			this.save.Text = "Apply";
 			this.save.UseVisualStyleBackColor = true;
 			this.save.Click += new System.EventHandler(this.save_Click);
 			// 
@@ -111,12 +111,12 @@
 			this.remove.UseVisualStyleBackColor = true;
 			this.remove.Click += new System.EventHandler(this.remove_Click);
 			// 
-			// trainerList
+			// trainersList
 			// 
 			this.trainersList.Dock = System.Windows.Forms.DockStyle.Left;
 			this.trainersList.FormattingEnabled = true;
 			this.trainersList.Location = new System.Drawing.Point(0, 0);
-			this.trainersList.Name = "trainerList";
+			this.trainersList.Name = "trainersList";
 			this.trainersList.Size = new System.Drawing.Size(218, 225);
 			this.trainersList.TabIndex = 0;
 			this.trainersList.SelectedIndexChanged += new System.EventHandler(this.trainerList_SelectedIndexChanged);

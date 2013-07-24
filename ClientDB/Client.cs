@@ -222,7 +222,19 @@ namespace ClientDB
 				return Items[id];
 			return null;
 		}
-
+		
+		public Client SearchCode(String code)
+		{
+			foreach (KeyValuePair<Int64, Client> client in Items)
+			{
+				if (client.Value.Code == code)
+				{
+					return client.Value;
+				}
+			}
+			return null;
+		}
+		
 		public List<Client> Search(String name)
 		{
 			return Search(name, false);
@@ -231,11 +243,11 @@ namespace ClientDB
 		public List<Client> Search(String name, Boolean contains)
 		{
 			List<Client> collection = new List<Client>();
-			foreach (KeyValuePair<Int64, Client> user in Items)
+			foreach (KeyValuePair<Int64, Client> client in Items)
 			{
-				if((contains && user.Value.Name.Contains(name)) || user.Value.Name.StartsWith(name))
+				if((contains && client.Value.Name.Contains(name)) || client.Value.Name.StartsWith(name))
 				{
-					collection.Add(user.Value);
+					collection.Add(client.Value);
 				}
 			}
 			return collection;

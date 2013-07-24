@@ -73,21 +73,13 @@ namespace ClientDB
 				return;
 			
 			String szName = name.Text.Trim();
-			String szPhone = rule.Text.Trim();
+			String szRule = rule.Text.Trim();
 
-			ScheduleRulesCollection collection = new ScheduleRulesCollection();
-			List<ScheduleRule> trainers = collection.Search(szName);
-			if (trainers.Count > 0)
-			{
-				UIMessages.Error("Rule with specified name already exists.");
-				return;
-			}
-			
 			if (szName.Length < 1)
 				return;
 
 			ScheduleRule selected = (ScheduleRule)rulesList.SelectedItem;
-			selected.SetData(szName, szPhone);
+			selected.SetData(szName, szRule);
 			rulesList.Items[rulesList.SelectedIndex] = selected;
 		}
 

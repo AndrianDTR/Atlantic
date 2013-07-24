@@ -14,16 +14,25 @@ namespace ClientDB
 		public ClientInfo()
 		{
 			InitializeComponent();
+			Init();
 		}
 		
 		public ClientInfo(Boolean newClient)
 		{
 			InitializeComponent();
-			
-			if (newClient)
-				GenerateCode();
+			Init();
 		}
-		private void GenerateCode()
+		
+		private void Init()
+		{
+			Session session = Session.Instance;
+			if (UserRole.IsSet(session.UserRole.Payments, UserRights.Create))
+			{
+				btnPayment.Enabled = true;
+			}
+		}
+		
+		public static String GenerateCode()
 		{
 			var chars = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789";
 			var random = new Random();
@@ -31,7 +40,7 @@ namespace ClientDB
 				Enumerable.Repeat(chars, 14)
 					.Select(s => s[random.Next(s.Length)])
 					.ToArray());
-			textCode.Text = result;
+			return result;
 		}
 		
 		public String ClientName
@@ -63,27 +72,81 @@ namespace ClientDB
 			get { return (ScheduleRule)comboSchedule.SelectedItem; }
 			set { comboSchedule.SelectedItem = value; }
 		}
+		
+		private bool ValidateForm()
+		{
+			bool res = false;
+			
+			do
+			{
+				if (0 == textCode.Text.Length)
+				{
+					UIMessages.Error("Card is not attached. Please attach card first.");
+					break;
+				}
 
+				if (0 == textName.Text.Length)
+				{
+					UIMessages.Error("Field 'Name' should not be an empty. Please fill it first.");
+					break;
+				}
+
+				if (0 == textPhone.Text.Length)
+				{
+					UIMessages.Error("Field 'Phone' should not be an empty. Please fill it first.");
+					break;
+				}
+				
+				res = true;
+			}while (false);
+			
+			return res;			
+		}
+		
 		private void btnOk_Click(object sender, EventArgs e)
 		{
-			this.DialogResult = DialogResult.OK;
-			this.Close();
+			if(ValidateForm())
+			{
+				this.DialogResult = DialogResult.OK;
+				this.Close();
+			}
 		}
 
 		private void OnLoad(object sender, EventArgs e)
 		{
 			comboSchedule.Items.Clear();
+			comboSchedule.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+			comboSchedule.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
 			comboTrainer.Items.Clear();
+			comboTrainer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+			comboTrainer.AutoCompleteSource = AutoCompleteSource.CustomSource;
 			
 			foreach (ScheduleRule sr in new ScheduleRulesCollection())
 			{
 				comboSchedule.Items.Add(sr);
+				comboSchedule.AutoCompleteCustomSource.Add(sr.ToString());	
 			}
 
 			foreach (Trainer tr in new TrainerCollection())
 			{
 				comboTrainer.Items.Add(tr);
+				comboTrainer.AutoCompleteCustomSource.Add(tr.ToString());	
 			}
+		}
+
+		private void btnScan_Click(object sender, EventArgs e)
+		{
+			Prompt dlg = new Prompt();
+			if(DialogResult.OK == dlg.ShowDialog())
+			{
+				textCode.Text = dlg.Value;
+			}
+		}
+
+		private void btnPayment_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }
