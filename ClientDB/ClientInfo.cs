@@ -10,20 +10,46 @@ using System.Windows.Forms;
 namespace ClientDB
 {
 	public partial class ClientInfo : Form
-	{
+	{	
 		public ClientInfo()
 		{
 			InitializeComponent();
 			Init();
+			CheckPermissions();
+			textName.ReadOnly = true;
 		}
 		
 		public ClientInfo(Boolean newClient)
 		{
 			InitializeComponent();
 			Init();
+			CheckPermissions();
 		}
 		
 		private void Init()
+		{
+			comboSchedule.Items.Clear();
+			comboSchedule.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+			comboSchedule.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+			comboTrainer.Items.Clear();
+			comboTrainer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+			comboTrainer.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+			foreach (ScheduleRule sr in new ScheduleRulesCollection())
+			{
+				comboSchedule.Items.Add(sr);
+				comboSchedule.AutoCompleteCustomSource.Add(sr.ToString());
+			}
+
+			foreach (Trainer tr in new TrainerCollection())
+			{
+				comboTrainer.Items.Add(tr);
+				comboTrainer.AutoCompleteCustomSource.Add(tr.ToString());
+			}
+		}
+		
+		private void CheckPermissions()
 		{
 			Session session = Session.Instance;
 			if (UserRole.IsSet(session.UserRole.Payments, UserRights.Create))
@@ -69,13 +95,34 @@ namespace ClientDB
 		public Trainer Trainer
 		{
 			get { return (Trainer)comboTrainer.SelectedItem; }
-			set { comboTrainer.SelectedItem = value; }
+			set
+			{
+				foreach (Trainer it in comboTrainer.Items)
+				{
+					if (it == value)
+					{
+						comboTrainer.SelectedItem = it;
+						break;
+					}
+				}
+			}
 		}
 
 		public ScheduleRule Schedule
 		{
 			get { return (ScheduleRule)comboSchedule.SelectedItem; }
-			set { comboSchedule.SelectedItem = value; }
+			set 
+			{
+				foreach (ScheduleRule it in comboSchedule.Items)
+				{
+					if(it == value)
+					{
+						comboSchedule.SelectedItem = it;
+						break;
+					}
+						
+				}
+			}
 		}
 		
 		private bool ValidateForm()
@@ -114,29 +161,6 @@ namespace ClientDB
 			{
 				this.DialogResult = DialogResult.OK;
 				this.Close();
-			}
-		}
-
-		private void OnLoad(object sender, EventArgs e)
-		{
-			comboSchedule.Items.Clear();
-			comboSchedule.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-			comboSchedule.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-			comboTrainer.Items.Clear();
-			comboTrainer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-			comboTrainer.AutoCompleteSource = AutoCompleteSource.CustomSource;
-			
-			foreach (ScheduleRule sr in new ScheduleRulesCollection())
-			{
-				comboSchedule.Items.Add(sr);
-				comboSchedule.AutoCompleteCustomSource.Add(sr.ToString());	
-			}
-
-			foreach (Trainer tr in new TrainerCollection())
-			{
-				comboTrainer.Items.Add(tr);
-				comboTrainer.AutoCompleteCustomSource.Add(tr.ToString());	
 			}
 		}
 

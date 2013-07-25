@@ -551,6 +551,7 @@ namespace ClientDB
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, name VarChar NOT NULL
 				, rule VarChar NOT NULL
+				, price Float NOT NULL
 			)";
 			
 			string tStatistics = @"drop table if exists statistics;

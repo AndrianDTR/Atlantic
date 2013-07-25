@@ -11,7 +11,17 @@ namespace ClientDB
 		private Int64 m_id = 0;
 		public String m_name = String.Empty;
 		public String m_phone = String.Empty;
+		
+		public static bool operator ==(Trainer p1, Trainer p2)
+		{
+			return p1.Id == p2.Id;
+		}
 
+		public static bool operator !=(Trainer p1, Trainer p2)
+		{
+			return !(p1.Id == p2.Id);
+		}
+		
 		public Trainer()
 		{
 		}

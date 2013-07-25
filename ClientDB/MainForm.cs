@@ -25,9 +25,18 @@ namespace ClientDB
 					continue;
 				
 				Client client = m_collection.SearchCode(dlg.Value);
-				UIMessages.Info(client.Name);
+				ClientInfo ci = new ClientInfo();
+				ci.ClientCode = client.Code;
+				ci.ClientName = client.Name;
+				ci.ClientPhone = client.Phone;
+				ci.Schedule = client.Schedule;
+				ci.Trainer = client.Trainer;
+				if (DialogResult.OK != ci.ShowDialog(this))
+					return;
+				
+				client.SetData(ci.ClientName, ci.ClientPhone, ci.ClientCode, ci.Schedule.Id, ci.Trainer.Id);
 				dlg.Clear();
-				log.Text += "\n\r Get info for " + client.Name;
+				Logger.Debug("Client data changed for: " + ci.ClientName + " " + ci.ClientCode);
 			};
 			
 		}
@@ -44,11 +53,22 @@ namespace ClientDB
 			
 			UserRole priv = session.UserRole;
 
+			// File menu
+			exportToolStripMenuItem.Enabled = UserRole.IsSet(priv.Backup, UserRights.Create);
+			importToolStripMenuItem.Enabled = UserRole.IsSet(priv.Backup, UserRights.Write);
+
+			// Search menu
+			clientByBarcodeToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
+
+			// View menu
+
+			// Clients menu
+			manageClientsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
+			manageClientsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
+			
+			// Settings menu
 			userRolesToolStripMenuItem.Enabled = UserRole.IsSet(priv.Users, UserRights.Read);
 			usersAndPasswordsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Users, UserRights.Read);
-
-			exportToolStripMenuItem.Enabled = UserRole.IsSet(priv.Backup, UserRights.Create);
-			importToolStripMenuItem.Enabled = UserRole.IsSet(priv.Backup, UserRights.Write);		
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

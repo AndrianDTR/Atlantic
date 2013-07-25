@@ -11,7 +11,17 @@ namespace ClientDB
 		private Int64 m_id = 0;
 		private String m_Name = String.Empty;
 		private String m_Rule = String.Empty;
-	
+
+		public static bool operator ==(ScheduleRule p1, ScheduleRule p2)
+		{
+			return p1.Id == p2.Id;
+		}
+
+		public static bool operator !=(ScheduleRule p1, ScheduleRule p2)
+		{
+			return !(p1.Id == p2.Id);
+		}
+		
 		public ScheduleRule()
 		{
 		
