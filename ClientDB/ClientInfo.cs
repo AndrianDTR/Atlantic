@@ -148,6 +148,18 @@ namespace ClientDB
 					UIMessages.Error("Field 'Phone' should not be an empty. Please fill it first.");
 					break;
 				}
+
+				if (null == comboSchedule.SelectedItem)
+				{
+					UIMessages.Error("Schedule must be selected from the list.");
+					break;
+				}
+
+				if (null == comboTrainer.SelectedItem)
+				{
+					UIMessages.Error("Trainer must be selected from the list.");
+					break;
+				}
 				
 				res = true;
 			}while (false);

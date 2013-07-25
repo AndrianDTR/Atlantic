@@ -25,18 +25,27 @@ namespace ClientDB
 					continue;
 				
 				Client client = m_collection.SearchCode(dlg.Value);
-				ClientInfo ci = new ClientInfo();
-				ci.ClientCode = client.Code;
-				ci.ClientName = client.Name;
-				ci.ClientPhone = client.Phone;
-				ci.Schedule = client.Schedule;
-				ci.Trainer = client.Trainer;
-				if (DialogResult.OK != ci.ShowDialog(this))
-					return;
+				if(null != client)
+				{
+					ClientInfo ci = new ClientInfo();
+					ci.ClientCode = client.Code;
+					ci.ClientName = client.Name;
+					ci.ClientPhone = client.Phone;
+					ci.Schedule = client.Schedule;
+					ci.Trainer = client.Trainer;
+					if (DialogResult.OK == ci.ShowDialog(this))
+					{
+						client.SetData(ci.ClientName, ci.ClientPhone, ci.ClientCode, ci.Schedule.Id, ci.Trainer.Id);
+						m_collection = new ClientCollection();
+						Logger.Debug("Client data changed for: " + ci.ClientName + " " + ci.ClientCode);
+					}
+				}
+				else
+				{
+					UIMessages.Warning("Specified card does not exist.");
+				}
 				
-				client.SetData(ci.ClientName, ci.ClientPhone, ci.ClientCode, ci.Schedule.Id, ci.Trainer.Id);
 				dlg.Clear();
-				Logger.Debug("Client data changed for: " + ci.ClientName + " " + ci.ClientCode);
 			};
 			
 		}

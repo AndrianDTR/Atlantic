@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace ClientDB
 {
@@ -25,11 +26,35 @@ namespace ClientDB
 				rulesList.Items.Add(trainer);
 			}
 		}
-
+		
+		private bool ValidateForm()
+		{
+			float res;
+			String szPrice = price.Text.Trim();
+			
+			if(!float.TryParse(szPrice, out res))
+			{
+				UIMessages.Error(String.Format("Please specify price in the 'XX{0}YY' format.", CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator));
+				return false;
+			}
+			
+			return true;
+		}
+		
+		private float GetPrice()
+		{
+			String szPrice = price.Text.Trim();
+			return float.Parse(szPrice);
+		}
+		
 		private void add_Click(object sender, EventArgs e)
 		{
+			if(!ValidateForm())
+				return;
+				
 			String szName = name.Text.Trim();
 			String szPhone = rule.Text.Trim();
+			float fPrice = GetPrice();
 			Int64 id = 0;
 
 			ScheduleRulesCollection collection = new ScheduleRulesCollection();
@@ -43,7 +68,7 @@ namespace ClientDB
 			if(szName.Length < 1)
 				return;
 			
-			if(!collection.Add(szName, szPhone, out id))
+			if(!collection.Add(szName, szPhone, fPrice, out id))
 			{
 				UIMessages.Error("Trainer could not been added.");
 				return;
@@ -60,7 +85,7 @@ namespace ClientDB
 			ScheduleRule trainer = (ScheduleRule)rulesList.SelectedItem;
 			if (!ScheduleRulesCollection.RemoveById(trainer.Id))
 			{
-				UIMessages.Error("Selected ctariner could not been removed.");
+				UIMessages.Error("Selected schedule rule could not been removed.");
 				return;
 			}
 			
@@ -69,17 +94,21 @@ namespace ClientDB
 
 		private void save_Click(object sender, EventArgs e)
 		{
+			if (!ValidateForm())
+				return;
+			
 			if (rulesList.SelectedItem == null)
 				return;
 			
 			String szName = name.Text.Trim();
 			String szRule = rule.Text.Trim();
+			float fPrice = GetPrice();
 
 			if (szName.Length < 1)
 				return;
 
 			ScheduleRule selected = (ScheduleRule)rulesList.SelectedItem;
-			selected.SetData(szName, szRule);
+			selected.SetData(szName, szRule, fPrice);
 			rulesList.Items[rulesList.SelectedIndex] = selected;
 		}
 
@@ -92,6 +121,7 @@ namespace ClientDB
 
 			name.Text = selected.Name;
 			rule.Text = selected.Rule;
+			price.Text = selected.Price.ToString();
 		}
 	}
 }

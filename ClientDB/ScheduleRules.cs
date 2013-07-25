@@ -11,6 +11,7 @@ namespace ClientDB
 		private Int64 m_id = 0;
 		private String m_Name = String.Empty;
 		private String m_Rule = String.Empty;
+		private float m_Price = 0.0F;
 
 		public static bool operator ==(ScheduleRule p1, ScheduleRule p2)
 		{
@@ -37,6 +38,7 @@ namespace ClientDB
 				m_id = id;
 				m_Name = data["name"].ToString();
 				m_Rule = data["rule"].ToString();
+				m_Price = float.Parse(data["price"].ToString());
 			}
 		}
 
@@ -50,6 +52,7 @@ namespace ClientDB
 				m_id = Int64.Parse(data["id"].ToString());
 				m_Name = data["name"].ToString();
 				m_Rule = data["rule"].ToString();
+				m_Price = float.Parse(data["price"].ToString());
 			}
 		}
 		
@@ -82,9 +85,18 @@ namespace ClientDB
 			}
 		}
 		
-		public void SetData(String name, String rule)
+		public float Price
 		{
-			Debug.WriteLine(String.Format("Set data for SheduleRules '{0}': name='{0}', phone='{1}'", m_Name, name, rule));
+			get
+			{
+				return m_Price;
+			}
+		}
+		
+		
+		public void SetData(String name, String rule, float price)
+		{
+			Debug.WriteLine(String.Format("Set data for SheduleRules '{0}': name='{1}', phone='{2}', price={3}", m_Name, name, rule, price));
 			if (m_id <= 0)
 			{
 				return;
@@ -94,12 +106,14 @@ namespace ClientDB
 			Dictionary<string, string> fields = new Dictionary<string, string>();
 			fields["name"] = name;
 			fields["rule"] = rule;
+			fields["price"] = price.ToString();
 			if (!ad.Update(DbTable.ScheduleRules, fields, String.Format("id={0:d}", m_id)))
 			{
 				throw new Exception("Data could not been changed.");
 			}
 			m_Rule = rule;
 			m_Name = name;
+			m_Price = price;
 		}
 	}
 
@@ -118,18 +132,19 @@ namespace ClientDB
 			}
 		}
 
-		public Boolean Add(String name, String rule)
+		public Boolean Add(String name, String rule, float price)
 		{
 			Int64 id = 0;
-			return Add(name, rule, out id);
+			return Add(name, rule, price, out id);
 		}
 		
-		public Boolean Add(String name, String rule, out Int64 id)
+		public Boolean Add(String name, String rule, float price, out Int64 id)
 		{
 			DbAdapter da = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
 			fields["name"] = name;
 			fields["rule"] = rule;
+			fields["price"] = price.ToString();
 			id = 0;
 
 			if (!da.Insert(DbTable.ScheduleRules, fields, out id))
