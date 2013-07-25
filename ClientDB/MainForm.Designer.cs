@@ -60,14 +60,15 @@
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.log = new System.Windows.Forms.TextBox();
+			this.dayView1 = new CalendarTest.DayView();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnBackUp = new System.Windows.Forms.Button();
 			this.btnTrainersShedule = new System.Windows.Forms.Button();
 			this.btnPayments = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.add = new System.Windows.Forms.Button();
-			this.log = new System.Windows.Forms.TextBox();
-			this.dayView1 = new CalendarTest.DayView();
+			this.sendLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -289,7 +290,8 @@
 			// helpToolStripMenuItem
 			// 
 			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
+            this.aboutToolStripMenuItem,
+            this.sendLogToolStripMenuItem});
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
 			this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
 			this.helpToolStripMenuItem.Text = "Help";
@@ -297,7 +299,7 @@
 			// aboutToolStripMenuItem
 			// 
 			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.aboutToolStripMenuItem.Text = "About";
 			// 
 			// panel2
@@ -328,6 +330,30 @@
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(921, 511);
 			this.tableLayoutPanel1.TabIndex = 12;
+			// 
+			// log
+			// 
+			this.log.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.log.Location = new System.Drawing.Point(8, 409);
+			this.log.Multiline = true;
+			this.log.Name = "log";
+			this.log.ReadOnly = true;
+			this.log.Size = new System.Drawing.Size(905, 94);
+			this.log.TabIndex = 8;
+			// 
+			// dayView1
+			// 
+			this.dayView1.ActiveTool = null;
+			this.dayView1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dayView1.Location = new System.Drawing.Point(8, 63);
+			this.dayView1.Name = "dayView1";
+			this.dayView1.NavButtonsHeight = 30;
+			this.dayView1.RowHeight = 80;
+			this.dayView1.SelectedDate = new System.DateTime(((long)(0)));
+			this.dayView1.Size = new System.Drawing.Size(905, 340);
+			this.dayView1.StartDate = new System.DateTime(2013, 7, 25, 0, 0, 0, 0);
+			this.dayView1.TabIndex = 7;
+			this.dayView1.Text = "dayView1";
 			// 
 			// panel1
 			// 
@@ -388,29 +414,11 @@
 			this.add.UseVisualStyleBackColor = true;
 			this.add.Click += new System.EventHandler(this.add_Click);
 			// 
-			// log
+			// sendLogToolStripMenuItem
 			// 
-			this.log.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.log.Location = new System.Drawing.Point(8, 409);
-			this.log.Multiline = true;
-			this.log.Name = "log";
-			this.log.ReadOnly = true;
-			this.log.Size = new System.Drawing.Size(905, 94);
-			this.log.TabIndex = 8;
-			// 
-			// dayView1
-			// 
-			this.dayView1.ActiveTool = null;
-			this.dayView1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dayView1.Location = new System.Drawing.Point(8, 63);
-			this.dayView1.Name = "dayView1";
-			this.dayView1.NavButtonsHeight = 30;
-			this.dayView1.RowHeight = 80;
-			this.dayView1.SelectedDate = new System.DateTime(((long)(0)));
-			this.dayView1.Size = new System.Drawing.Size(905, 340);
-			this.dayView1.StartDate = new System.DateTime(2013, 7, 25, 0, 0, 0, 0);
-			this.dayView1.TabIndex = 7;
-			this.dayView1.Text = "dayView1";
+			this.sendLogToolStripMenuItem.Name = "sendLogToolStripMenuItem";
+			this.sendLogToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.sendLogToolStripMenuItem.Text = "Send log ...";
 			// 
 			// MainForm
 			// 
@@ -478,6 +486,7 @@
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private CalendarTest.DayView dayView1;
 		private System.Windows.Forms.TextBox log;
+		private System.Windows.Forms.ToolStripMenuItem sendLogToolStripMenuItem;
     }
 }
 

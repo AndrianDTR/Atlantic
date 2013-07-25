@@ -17,38 +17,42 @@ namespace ClientDB
 		public Login()
         {
             InitializeComponent();
+            m_loginAttempt = 3;
         }
 		
 		private void loginBtn_Click(object sender, EventArgs e)
 		{
 			if (m_loginAttempt == 0)
-				m_loginAttempt = 3;
-
+			{
+				Logger.Error("Login failed, no attempt left");
+				this.DialogResult = DialogResult.Cancel;
+				this.Close();
+			}
+			
+			Logger.Debug("Try login, attempt left: "+ m_loginAttempt.ToString());
+			
 			User user = User.Authenticate(userName.Text, password.Text);
 			
 			if(user != null)
 			{
 				Session.Instance.User = user;
+				Logger.Debug("Login ok, user: " + userName.Text);
 				this.DialogResult = DialogResult.OK;
 				this.Close();
 			}
 			else
 			{
+				Logger.Warning("Login failed, user: " + userName.Text + " password: " + password.Text);
 				message.Text = "Login failed.\nPlease check username and password.";
 				password.Text = "";
 			}
 
 			m_loginAttempt--;
-
-			if (m_loginAttempt == 0)
-			{
-				this.DialogResult = DialogResult.Cancel;
-				this.Close();
-			}
 		}
 
 		private void pictureBox1_Click(object sender, EventArgs e)
 		{
+			Logger.Warning("Clear DB by user request.");
 			DbAdapter.ClearDB();
 		}
     }

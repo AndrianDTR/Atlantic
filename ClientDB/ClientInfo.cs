@@ -30,6 +30,11 @@ namespace ClientDB
 			{
 				btnPayment.Enabled = true;
 			}
+
+			if (UserRole.IsSet(session.UserRole.Clients, UserRights.Create))
+			{
+				btnOk.Enabled = true;
+			}
 		}
 		
 		public static String GenerateCode()

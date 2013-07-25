@@ -69,6 +69,7 @@
     <Compile Include="ClientInfo.Designer.cs">
       <DependentUpon>ClientInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logger.cs" />
     <Compile Include="ManageScheduleRules.cs">
       <SubType>Form</SubType>
     </Compile>
