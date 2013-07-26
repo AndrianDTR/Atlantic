@@ -63,15 +63,24 @@ namespace ClientDB
 			}
 		}
 		
-		public static String GenerateCode()
+		private static String GetGroupValue(String str2parse, String grp)
 		{
-			var chars = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789";
-			var random = new Random();
-			var result = new String(
-				Enumerable.Repeat(chars, 14)
-					.Select(s => s[random.Next(s.Length)])
-					.ToArray());
-			return result;
+			String res = "";
+			foreach (Char s in str2parse)
+			{
+				int ndx = int.Parse(s.ToString());
+				res += grp[ndx];
+			}
+			return res;
+		}
+		
+		public static String GenerateEan13Code(String val)
+		{
+			String grp1 = GetGroupValue(val.Substring(0, 1), "0123456789");
+			String grp2 = GetGroupValue(val.Substring(1, 6), "ABCDEFGHIJ");
+			String grp3 = GetGroupValue(val.Substring(7, 6), "abcdefghij");
+								
+			return String.Format("{0}{1}*{2}+",grp1,grp2,grp3);
 		}
 		
 		public String ClientName
@@ -181,7 +190,7 @@ namespace ClientDB
 			Prompt dlg = new Prompt();
 			if(DialogResult.OK == dlg.ShowDialog())
 			{
-				textCode.Text = dlg.Value;
+				textCode.Text = dlg.Value + " | " + GenerateEan13Code(dlg.Value);
 			}
 		}
 
