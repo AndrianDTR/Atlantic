@@ -76,6 +76,10 @@ namespace ClientDB
 		
 		public static String GenerateEan13Code(String val)
 		{
+			if(val.Length < 13)
+			{
+				val = val.PadLeft(13, '0');
+			}
 			String grp1 = GetGroupValue(val.Substring(0, 1), "0123456789");
 			String grp2 = GetGroupValue(val.Substring(1, 6), "ABCDEFGHIJ");
 			String grp3 = GetGroupValue(val.Substring(7, 6), "abcdefghij");
@@ -190,7 +194,7 @@ namespace ClientDB
 			Prompt dlg = new Prompt();
 			if(DialogResult.OK == dlg.ShowDialog())
 			{
-				textCode.Text = dlg.Value + " | " + GenerateEan13Code(dlg.Value);
+				textCode.Text = dlg.Value;
 			}
 		}
 
