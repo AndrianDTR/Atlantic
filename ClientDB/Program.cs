@@ -38,6 +38,7 @@ namespace ClientDB
 			catch(Exception ex)
 			{
 				Logger.Critical(ex.ToString());
+				Logger.Trace(ex.StackTrace);
 				if(DialogResult.Yes == UIMessages.Error("Program exited abnormally. Would you like to send report about this?", MessageBoxButtons.YesNo))
 				{
 					sendReport = true;

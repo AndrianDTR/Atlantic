@@ -526,13 +526,13 @@ namespace ClientDB
 			string tClients = @"drop table if exists clients; 
 			CREATE TABLE clients
 			(
-				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
-				, code VarChar NOT NULL
+				id Integer PRIMARY KEY NOT NULL
 				, name VarChar NOT NULL
 				, phone VarChar DEFAULT('')
 				, schedule Integer NOT NULL
 				, trainer Integer DEFAULT('')
 				, comment Text DEFAULT('')
+				, extraInfo Text DEFAULT('')
 			)";
 			
 			string tPayments = @"drop table if exists payments;

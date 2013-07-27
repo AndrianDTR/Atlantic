@@ -11,6 +11,7 @@ namespace ClientDB
 		public enum LogLevel
 		{
 			All = 0,
+			Trace,
 			Debug,
 			Info,
 			Warning,
@@ -19,7 +20,7 @@ namespace ClientDB
 			Emergency,
 			None,
 		}
-		private static String[] m_szLogLevels = {"","Debug","Info","Warning","Error","Critical","Emergency"};
+		private static String[] m_szLogLevels = {"","Trace","Debug","Info","Warning","Error","Critical","Emergency"};
 		private LogLevel m_level = LogLevel.None;
 		private String m_szFile = null;
 		private FileStream m_fs = null;
@@ -133,7 +134,20 @@ namespace ClientDB
 				m_hInstance.m_messages.Enqueue(message);
 			}	
 		}
-		
+
+		public static void Trace(String msg)
+		{
+			if (null == m_hInstance)
+				return;
+
+			DateTime dt = DateTime.UtcNow;
+			String message = String.Format("{0} [{1}]: {2}\n"
+				, dt.ToString()
+				, m_szLogLevels[(int)LogLevel.Trace]
+				, msg);
+			m_hInstance.m_messages.Enqueue(message);
+		}
+
 		public static void Debug(String msg){ Logger.AddMsg(msg, LogLevel.Debug); }
 		public static void Info(String msg) { Logger.AddMsg(msg, LogLevel.Info); }
 		public static void Warning(String msg) { Logger.AddMsg(msg, LogLevel.Warning); }

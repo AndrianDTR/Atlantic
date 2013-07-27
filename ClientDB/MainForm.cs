@@ -21,28 +21,29 @@ namespace ClientDB
 			dlg.Text = "Search client by code";
 			while(DialogResult.OK == dlg.ShowDialog())
 			{
+				Int64 id = 0;
 				if(dlg.Value.Length == 0)
 					continue;
 				
-				Client client = m_collection.SearchCode(dlg.Value);
-				if(null != client)
+				if(!Int64.TryParse(dlg.Value, out id))
 				{
-					ClientInfo ci = new ClientInfo();
-					ci.ClientCode = client.Code;
-					ci.ClientName = client.Name;
-					ci.ClientPhone = client.Phone;
-					ci.Schedule = client.Schedule;
-					ci.Trainer = client.Trainer;
+					UIMessages.Error("Invalid card number has been specified. Please use only digits and input no more 13 characters.");
+					dlg.Clear();
+					continue;
+				}
+				
+				if (Client.CodeExists(id))
+				{
+					ClientInfo ci = new ClientInfo(id);
 					if (DialogResult.OK == ci.ShowDialog(this))
 					{
-						client.SetData(ci.ClientName, ci.ClientPhone, ci.ClientCode, ci.Schedule.Id, ci.Trainer.Id);
 						m_collection = new ClientCollection();
 						Logger.Debug("Client data changed for: " + ci.ClientName + " " + ci.ClientCode);
 					}
 				}
 				else
 				{
-					UIMessages.Warning("Specified card does not exist.");
+					UIMessages.Warning("Specified card is unregistered.");
 				}
 				
 				dlg.Clear();
@@ -127,17 +128,11 @@ namespace ClientDB
 
 		private void AddClient()
 		{
-			ClientInfo ci = new ClientInfo(true);
+			ClientInfo ci = new ClientInfo(0);
 			if (DialogResult.OK != ci.ShowDialog(this))
 				return;
 
-			Int64 id = 0;
-			
-			if (!m_collection.Add(ci.ClientName, ci.ClientPhone, ci.ClientCode, ci.Schedule.Id, ci.Trainer.Id, out id))
-			{
-				UIMessages.Error("Client could not been added.");
-				return;
-			}
+			m_collection = new ClientCollection();
 		}
 		
 		private void add_Click(object sender, EventArgs e)

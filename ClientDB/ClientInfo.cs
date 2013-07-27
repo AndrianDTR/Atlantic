@@ -11,19 +11,52 @@ namespace ClientDB
 {
 	public partial class ClientInfo : Form
 	{	
-		public ClientInfo()
+		private Int64 m_clienId = 0;
+		
+		private ClientInfo()
 		{
-			InitializeComponent();
-			Init();
-			CheckPermissions();
-			textName.ReadOnly = true;
 		}
 		
-		public ClientInfo(Boolean newClient)
+		public ClientInfo(Int64 id)
 		{
 			InitializeComponent();
 			Init();
 			CheckPermissions();
+			
+			m_clienId = id;
+			
+			if(id == 0)
+			{
+				return;
+			}
+			
+			textName.ReadOnly = !(m_clienId == 0);
+
+			Client client = new Client(m_clienId);
+			
+			textCode.Text = id.ToString().PadLeft(13, '0');
+			textName.Text = client.Name;
+			textPhone.Text = client.Phone;
+
+			foreach (Trainer it in comboTrainer.Items)
+			{
+				if (it == client.Trainer)
+				{
+					comboTrainer.SelectedItem = it;
+					break;
+				}
+			}
+
+			foreach (ScheduleRule it in comboSchedule.Items)
+			{
+				if (it == client.Schedule)
+				{
+					comboSchedule.SelectedItem = it;
+					break;
+				}
+			}
+
+			textComment.Text = client.Comment;
 		}
 		
 		private void Init()
@@ -52,11 +85,23 @@ namespace ClientDB
 		private void CheckPermissions()
 		{
 			Session session = Session.Instance;
+			if (UserRole.IsSet(session.UserRole.Payments, UserRights.Read))
+			{
+				btnPaymentHistory.Enabled = true;
+			}
+			
 			if (UserRole.IsSet(session.UserRole.Payments, UserRights.Create))
 			{
-				btnPayment.Enabled = true;
+				btnPaymentAdd.Enabled = true;
 			}
 
+			if (UserRole.IsSet(session.UserRole.Clients, UserRights.Write))
+			{
+				btnEnter.Enabled = true;
+				btnLeave.Enabled = true;
+				btnChangeCode.Enabled = true;
+			}
+			
 			if (UserRole.IsSet(session.UserRole.Clients, UserRights.Create))
 			{
 				btnOk.Enabled = true;
@@ -80,62 +125,42 @@ namespace ClientDB
 			{
 				val = val.PadLeft(13, '0');
 			}
+			
 			String grp1 = GetGroupValue(val.Substring(0, 1), "0123456789");
 			String grp2 = GetGroupValue(val.Substring(1, 6), "ABCDEFGHIJ");
 			String grp3 = GetGroupValue(val.Substring(7, 6), "abcdefghij");
 								
-			return String.Format("{0}{1}*{2}+",grp1,grp2,grp3);
+			return String.Format("{0}{1}*{2}+", grp1, grp2, grp3);
+		}
+
+		public Int64 Id
+		{
+			get { return m_clienId; }
 		}
 		
 		public String ClientName
 		{
 			get { return textName.Text; }
-			set { textName.Text = value; }
 		}
 
 		public String ClientPhone
 		{
 			get { return textPhone.Text; }
-			set { textPhone.Text = value; }
 		}
 
 		public String ClientCode
 		{
 			get { return textCode.Text; }
-			set { textCode.Text = value; }
 		}
 
 		public Trainer Trainer
 		{
 			get { return (Trainer)comboTrainer.SelectedItem; }
-			set
-			{
-				foreach (Trainer it in comboTrainer.Items)
-				{
-					if (it == value)
-					{
-						comboTrainer.SelectedItem = it;
-						break;
-					}
-				}
-			}
 		}
 
 		public ScheduleRule Schedule
 		{
 			get { return (ScheduleRule)comboSchedule.SelectedItem; }
-			set 
-			{
-				foreach (ScheduleRule it in comboSchedule.Items)
-				{
-					if(it == value)
-					{
-						comboSchedule.SelectedItem = it;
-						break;
-					}
-						
-				}
-			}
 		}
 		
 		private bool ValidateForm()
@@ -149,7 +174,7 @@ namespace ClientDB
 					UIMessages.Error("Card is not attached. Please attach card first.");
 					break;
 				}
-
+				
 				if (0 == textName.Text.Length)
 				{
 					UIMessages.Error("Field 'Name' should not be an empty. Please fill it first.");
@@ -180,22 +205,85 @@ namespace ClientDB
 			return res;			
 		}
 		
+		private Int64 GetClientId(String val)
+		{
+			Int64 id = 0;
+			try
+			{
+				if (val.Length > 13)
+					throw new InvalidExpressionException();
+
+				id = Int64.Parse(val);
+			}
+			catch
+			{
+				UIMessages.Error("Invalid card number has been specified. Please use only digits and no more 13 characters.");
+				id = 0;
+			}
+			return id;
+		}
+		
+		private Boolean ChangeClientCode()
+		{
+			Boolean res = false;
+			
+			Prompt dlg = new Prompt();
+			while (DialogResult.OK == dlg.ShowDialog())
+			{
+				if(Client.CodeExists(dlg.Value))
+				{
+					UIMessages.Error("This card already attached. Please use another one.");
+					dlg.Clear();
+					continue;
+				}
+				
+				if(0 == GetClientId(textCode.Text))
+				{
+					dlg.Clear();
+					continue;
+				}
+				
+				textCode.Text = dlg.Value;
+				res = true;
+				break;
+			}
+			return res;
+		}
+		
+		private void btnChangeCode_Click(object sender, EventArgs e)
+		{
+			ChangeClientCode();
+		}
+		
 		private void btnOk_Click(object sender, EventArgs e)
 		{
+			if(m_clienId == 0)
+			{
+				ChangeClientCode();
+			}
+			
 			if(ValidateForm())
 			{
-				this.DialogResult = DialogResult.OK;
-				this.Close();
+				Int64 id = GetClientId(textCode.Text);
+				
+				if(m_clienId == 0)
+				{
+					ClientCollection cc = new ClientCollection();
+					cc.Add(id, textName.Text, textPhone.Text, Schedule.Id, Trainer.Id, textComment.Text, out m_clienId);
+				}
+				else
+				{
+					Client client = new Client(m_clienId);
+					client.SetData(id, textName.Text, textPhone.Text, Schedule.Id, Trainer.Id, textComment.Text);
+					this.DialogResult = DialogResult.OK;
+					this.Close();
+				}
 			}
 		}
 
 		private void btnScan_Click(object sender, EventArgs e)
 		{
-			Prompt dlg = new Prompt();
-			if(DialogResult.OK == dlg.ShowDialog())
-			{
-				textCode.Text = dlg.Value;
-			}
+			
 		}
 
 		private void btnPayment_Click(object sender, EventArgs e)

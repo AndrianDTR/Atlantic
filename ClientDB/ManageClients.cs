@@ -81,19 +81,12 @@ namespace ClientDB
 		
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
-			ClientInfo ci = new ClientInfo(true);
-			if(DialogResult.OK != ci.ShowDialog(this))
+			ClientInfo ci = new ClientInfo(0);
+			if (DialogResult.OK != ci.ShowDialog(this))
 				return;
-			
-			Int64 id = 0;
-			if(!m_collection.Add(ci.ClientName, ci.ClientPhone, ci.ClientCode, ci.Schedule.Id, ci.Trainer.Id, out id))
-			{
-				UIMessages.Error("Client could not been added.");
-				return;
-			}
 
-			int nRow = gridClients.Rows.Add(parseClient(new Client(id)));
-			gridClients.Rows[nRow].Tag = id;
+			int nRow = gridClients.Rows.Add(parseClient(new Client(ci.Id)));
+			gridClients.Rows[nRow].Tag = ci.Id;	
 		}
 
 		private void btnRemove_Click(object sender, EventArgs e)
@@ -143,25 +136,14 @@ namespace ClientDB
 		{
 			if (gridClients.SelectedRows.Count < 1)
 				return;
-
-			Client client = new Client((Int64)gridClients.SelectedRows[0].Tag);
-
-			ClientInfo ci = new ClientInfo();
-			ci.ClientCode = client.Code;
-			ci.ClientName = client.Name;
-			ci.ClientPhone = client.Phone;
-			ci.Trainer = client.Trainer;
-			ci.Schedule = client.Schedule;
-
-			if (DialogResult.OK != ci.ShowDialog(this))
+			
+			Int64 id = (Int64)gridClients.SelectedRows[0].Tag;
+			ClientInfo ci = new ClientInfo(id);
+			
+			if (DialogResult.OK != ci.ShowDialog())
 				return;
 
-			if (!client.SetData(ci.ClientName, ci.ClientPhone, ci.ClientCode, ci.Schedule.Id, ci.Trainer.Id))
-			{
-				UIMessages.Error("Client data could not been changed.");
-				return;
-			}
-			gridClients.SelectedRows[0].SetValues(parseClient(client));
+			gridClients.SelectedRows[0].SetValues(parseClient(new Client(id)));
 		}
 	}
 }

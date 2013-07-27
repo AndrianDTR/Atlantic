@@ -9,14 +9,30 @@ namespace ClientDB
 	class Client
 	{
 		private Int64 m_id = 0;
-		private String m_code = String.Empty;
 		public String m_name = String.Empty;
 		public String m_phone = String.Empty;
 		public String m_comment = String.Empty;
 		private Int64 m_scheduleRule = 0;
 		private Int64 m_trainer = 0;
 		
-		public Client()
+		public static bool CodeExists(Int64 id)
+		{
+			return CodeExists(id.ToString());
+		}
+
+		public static bool CodeExists(String id)
+		{
+			String where = String.Format("id = '{0}'", id);
+			DataRow data = new DbAdapter().GetFirstRow(DbTable.Clients, where, new List<string>());
+
+			if (data == null)
+			{
+				return false;
+			}
+			return true;
+		}
+		
+		private Client()
 		{
 		}
 		
@@ -31,7 +47,6 @@ namespace ClientDB
 			}
 
 			m_id = id;
-			m_code = data["code"].ToString();
 			m_name = data["name"].ToString();
 			m_phone = data["phone"].ToString();
 			m_comment = data["comment"].ToString();
@@ -50,7 +65,6 @@ namespace ClientDB
 			}
 
 			m_id = Int64.Parse(data["id"].ToString());
-			m_code = data["code"].ToString();
 			m_name = data["name"].ToString();
 			m_phone = data["phone"].ToString();
 			m_comment = data["comment"].ToString();
@@ -70,7 +84,7 @@ namespace ClientDB
 		{
 			get
 			{
-				return DbUtils.Dequote(m_code);
+				return m_id.ToString().PadLeft(13, '0');
 			}
 		}
 		
@@ -129,8 +143,8 @@ namespace ClientDB
 				return m_scheduleRule;
 			}
 		}
-		
-		public bool SetData(String name, String phone, String code, Int64 scheduleId, Int64 trainerId)
+
+		public bool SetData(Int64 code, String name, String phone, Int64 scheduleId, Int64 trainerId, String comment)
 		{
 			Debug.WriteLine(String.Format("Set data for client '{0}'", m_name));
 			if (m_id <= 0)
@@ -140,11 +154,12 @@ namespace ClientDB
 
 			DbAdapter ad = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
+			fields["id"] = code.ToString();
 			fields["name"] = DbUtils.Quote(name);
 			fields["phone"] = DbUtils.Quote(phone);
-			fields["code"] = DbUtils.Quote(code);
 			fields["schedule"] = scheduleId.ToString();
 			fields["trainer"] = trainerId.ToString();
+			fields["comment"] = DbUtils.Quote(comment);
 
 			if (!ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
 			{
@@ -169,22 +184,23 @@ namespace ClientDB
 				Items[user.Id] = user;
 			}
 		}
-		
-		public Boolean Add(String name, String phone, String code, Int64 schedule, Int64 trainer)
+
+		public Boolean Add(Int64 code, String name, String phone, Int64 schedule, String comment, Int64 trainer)
 		{
 			Int64 id = 0;
-			return Add(name, phone, code, schedule, trainer, out id);
+			return Add(code, name, phone, schedule, trainer, comment, out id);
 		}
 		
-		public Boolean Add(String name, String phone, String code, Int64 schedule, Int64 trainer, out Int64 id)
+		public Boolean Add(Int64 code, String name, String phone, Int64 schedule, Int64 trainer, String comment, out Int64 id)
 		{
 			DbAdapter da = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
+			fields["id"] = code.ToString();
 			fields["name"] = DbUtils.Quote(name);
 			fields["phone"] = DbUtils.Quote(phone);
-			fields["code"] = DbUtils.Quote(code);
 			fields["schedule"] = schedule.ToString();
 			fields["trainer"] = trainer.ToString();
+			fields["comment"] = DbUtils.Quote(comment);
 			id = 0;
 
 			if (!da.Insert(DbTable.Clients, fields, out id))
@@ -220,18 +236,6 @@ namespace ClientDB
 		{
 			if(Items.ContainsKey(id))
 				return Items[id];
-			return null;
-		}
-		
-		public Client SearchCode(String code)
-		{
-			foreach (KeyValuePair<Int64, Client> client in Items)
-			{
-				if (client.Value.Code == code)
-				{
-					return client.Value;
-				}
-			}
 			return null;
 		}
 		
