@@ -58,6 +58,7 @@
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.sendLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.log = new System.Windows.Forms.TextBox();
@@ -68,7 +69,6 @@
 			this.btnPayments = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.add = new System.Windows.Forms.Button();
-			this.sendLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -299,8 +299,14 @@
 			// aboutToolStripMenuItem
 			// 
 			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
 			this.aboutToolStripMenuItem.Text = "About";
+			// 
+			// sendLogToolStripMenuItem
+			// 
+			this.sendLogToolStripMenuItem.Name = "sendLogToolStripMenuItem";
+			this.sendLogToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+			this.sendLogToolStripMenuItem.Text = "Send log ...";
 			// 
 			// panel2
 			// 
@@ -413,12 +419,6 @@
 			this.add.TabIndex = 1;
 			this.add.UseVisualStyleBackColor = true;
 			this.add.Click += new System.EventHandler(this.add_Click);
-			// 
-			// sendLogToolStripMenuItem
-			// 
-			this.sendLogToolStripMenuItem.Name = "sendLogToolStripMenuItem";
-			this.sendLogToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.sendLogToolStripMenuItem.Text = "Send log ...";
 			// 
 			// MainForm
 			// 

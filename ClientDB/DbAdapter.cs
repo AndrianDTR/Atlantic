@@ -172,10 +172,10 @@ namespace ClientDB
 				if(cmd.Transaction != null)
 					cmd.Transaction.Commit();
 				
-				cnn.Close();
-				
 				if(reader != null)
 					reader.Close();
+				
+				cnn.Close();
 			}
 			
 			return dt;
@@ -540,7 +540,8 @@ namespace ClientDB
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, clientId Integer NOT NULL
-				, date TimeStamp Default(NOW())
+				, scheduleId Integer NOT NULL
+				, date TimeStamp Default(CURRENT_TIMESTAMP())
 				, sum money NOT NULL
 				, comment Text Default('')
 			)";
@@ -559,7 +560,7 @@ namespace ClientDB
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, clientId Integer NOT NULL
-				, date TimeStamp Default(NOW())
+				, date TimeStamp Default(CURRENT_TIMESTAMP())
 			)";
 
 			SQLiteConnection conn = new SQLiteConnection(Properties.Settings.Default.clientConnectionString);

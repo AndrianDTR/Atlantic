@@ -281,14 +281,13 @@ namespace ClientDB
 			}
 		}
 
-		private void btnScan_Click(object sender, EventArgs e)
-		{
-			
-		}
-
 		private void btnPayment_Click(object sender, EventArgs e)
 		{
-
+			if (0 == m_clienId)
+				return;
+			
+			AddPayment addPaymDlg = new AddPayment(m_clienId);
+			addPaymDlg.ShowDialog();
 		}
 	}
 }

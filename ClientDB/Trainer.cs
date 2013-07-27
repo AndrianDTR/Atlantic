@@ -9,8 +9,8 @@ namespace ClientDB
 	public class Trainer
 	{
 		private Int64 m_id = 0;
-		public String m_name = String.Empty;
-		public String m_phone = String.Empty;
+		private String m_name = String.Empty;
+		private String m_phone = String.Empty;
 		
 		public static bool operator ==(Trainer p1, Trainer p2)
 		{
@@ -22,7 +22,7 @@ namespace ClientDB
 			return !(p1.Id == p2.Id);
 		}
 		
-		public Trainer()
+		private Trainer()
 		{
 		}
 

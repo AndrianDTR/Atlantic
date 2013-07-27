@@ -29,12 +29,14 @@ namespace ClientDB
 		
 		private bool ValidateForm()
 		{
-			float res;
-			String szPrice = price.Text.Trim();
-			
-			if(!float.TryParse(szPrice, out res))
+			try
 			{
-				UIMessages.Error(String.Format("Please specify price in the 'XX{0}YY' format.", CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator));
+				float.Parse(price.Text.Trim());
+			}
+			catch
+			{
+				UIMessages.Error(String.Format("Please specify price in the 'XX{0}YY' format."
+					, CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator));
 				return false;
 			}
 			
