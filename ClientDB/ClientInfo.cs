@@ -210,10 +210,13 @@ namespace ClientDB
 			Int64 id = 0;
 			try
 			{
+				Logger.Debug("000:" + val);
 				if (val.Length > 13)
 					throw new InvalidExpressionException();
 
+				Logger.Debug("AAA");
 				id = Int64.Parse(val);
+				Logger.Debug("BBB" + id.ToString());
 			}
 			catch
 			{
@@ -236,8 +239,8 @@ namespace ClientDB
 					dlg.Clear();
 					continue;
 				}
-				
-				if(0 == GetClientId(textCode.Text))
+
+				if (0 == GetClientId(dlg.Value))
 				{
 					dlg.Clear();
 					continue;
@@ -259,7 +262,8 @@ namespace ClientDB
 		{
 			if(m_clienId == 0)
 			{
-				ChangeClientCode();
+				if(!ChangeClientCode())
+					return;
 			}
 			
 			if(ValidateForm())

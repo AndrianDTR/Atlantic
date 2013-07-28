@@ -80,6 +80,7 @@ namespace ClientDB
 			
 			if(!new PaymentsCollection().Add(m_ClientId
 				, sc.Id
+				, Session.Instance.User.Id
 				, float.Parse(textSum.Text.Trim())
 				, textComment.Text))
 			{

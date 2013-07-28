@@ -11,6 +11,7 @@ namespace ClientDB
 		private Int64 m_id = 0;
 		private Int64 m_client = 0;
 		private Int64 m_schedule = 0;
+		private Int64 m_creator = 0;
 		private DateTime m_date = new DateTime();
 		private float m_sum = 0.0F;
 		private String m_comment = String.Empty;
@@ -20,7 +21,7 @@ namespace ClientDB
 			String where = String.Format("id = {0}", id);
 			DataRow dataRow = new DbAdapter().GetFirstRow(DbTable.Payments
 				, where
-				, new List<string> { "id", "clientId", "scheduleId", "date", "sum", "comment" });
+				, new List<string> { "id", "clientId", "scheduleId", "creatorId", "date", "sum", "comment" });
 
 			if (dataRow == null)
 			{
@@ -30,6 +31,7 @@ namespace ClientDB
 			m_id = id;
 			m_client = Int64.Parse(dataRow["clientId"].ToString());
 			m_schedule = Int64.Parse(dataRow["scheduleId"].ToString());
+			m_creator = Int64.Parse(dataRow["creatorId"].ToString());
 			m_date = DateTime.Parse(dataRow["date"].ToString());
 			m_sum = float.Parse(dataRow["sum"].ToString());
 			m_comment = dataRow["comment"].ToString();
@@ -58,7 +60,15 @@ namespace ClientDB
 				return m_client;
 			}
 		}
-
+		
+		public Int64 CreatorId
+		{
+			get
+			{
+				return m_creator;
+			}
+		}
+		
 		public DateTime Date
 		{
 			get
@@ -99,18 +109,19 @@ namespace ClientDB
 			}
 		}
 
-		public Boolean Add(Int64 client, Int64 service, float sum, String comment)
+		public Boolean Add(Int64 client, Int64 service, Int64 creator, float sum, String comment)
 		{
 			Int64 id = 0;
-			return Add(client, service, sum, comment, out id);
+			return Add(client, service, creator, sum, comment, out id);
 		}
 
-		public Boolean Add(Int64 client, Int64 service, float sum, String comment, out Int64 id)
+		public Boolean Add(Int64 client, Int64 service, Int64 creator, float sum, String comment, out Int64 id)
 		{
 			DbAdapter da = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
 			fields["clientId"] = client.ToString();
 			fields["scheduleId"] = service.ToString();
+			fields["creatorId"] = creator.ToString();
 			fields["sum"] = sum.ToString();
 			fields["comment"] = DbUtils.Quote(comment);
 			

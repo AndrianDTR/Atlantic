@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Threading;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace ClientDB
 {
@@ -127,8 +129,9 @@ namespace ClientDB
 				if (msg.Length > 1024)
 					msg = msg.Substring(0, 1024);
 				DateTime dt = DateTime.UtcNow;
-				String message = String.Format("{0} [{1}]: {2}\n"
+				String message = String.Format("{0} ({1}) [{2}]: {3}\n"
 					, dt.ToString()
+					, Session.Instance.User.Name
 					, m_szLogLevels[(int)level]
 					, msg);
 				m_hInstance.m_messages.Enqueue(message);
@@ -148,7 +151,21 @@ namespace ClientDB
 			m_hInstance.m_messages.Enqueue(message);
 		}
 
-		public static void Debug(String msg){ Logger.AddMsg(msg, LogLevel.Debug); }
+		public static void Enter() 
+		{
+			StackTrace stackTrace = new StackTrace();
+			Logger.AddMsg(String.Format("Enter {0}", stackTrace.GetFrame(1).GetMethod().Name)
+			, LogLevel.Debug); 
+		}
+		
+		public static void Leave()
+		{
+			StackTrace stackTrace = new StackTrace();
+			Logger.AddMsg(String.Format("Leave {0}", stackTrace.GetFrame(1).GetMethod().Name)
+			, LogLevel.Debug); 
+		}
+
+		public static void Debug(String msg) { Logger.AddMsg(msg, LogLevel.Debug); }
 		public static void Info(String msg) { Logger.AddMsg(msg, LogLevel.Info); }
 		public static void Warning(String msg) { Logger.AddMsg(msg, LogLevel.Warning); }
 		public static void Error(String msg) { Logger.AddMsg(msg, LogLevel.Error); }

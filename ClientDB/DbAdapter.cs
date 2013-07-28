@@ -127,7 +127,7 @@ namespace ClientDB
 		
 		public bool CheckTables()
 		{
-			Debug.WriteLine("CheckTables Enter");
+			Logger.Enter();
 			bool res = true;
 			
 			for(DbTable tbl = DbTable._min; tbl < DbTable._max; tbl++ )
@@ -138,7 +138,7 @@ namespace ClientDB
 					break;
 				}
 			}
-			Debug.WriteLine("CheckTables Leave");
+			Logger.Leave();
 			return res;
 		}
 
@@ -154,7 +154,7 @@ namespace ClientDB
 			SQLiteDataReader reader = null;
 			SQLiteCommand cmd = null;
 
-			Debug.WriteLine(String.Format("Execute query: {0}.", sql));
+			Logger.Debug(String.Format("Execute query: {0}.", sql));
 			
 			try
 			{
@@ -215,8 +215,8 @@ namespace ClientDB
 			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
 			int rowsUpdated = -1;
 
-			Debug.WriteLine(String.Format("Execute NON query: {0}.", cmd.CommandText));
-
+			Logger.Debug(String.Format("Execute NON query: {0}.", cmd.CommandText));
+			
 			try
 			{
 				cnn.Open();
@@ -262,7 +262,7 @@ namespace ClientDB
 			SQLiteCommand cmd = null;
 			object value = null;
 
-			Debug.WriteLine(String.Format("Execute scalar: {0}.", sql));
+			Logger.Debug(String.Format("Execute scalar: {0}.", sql));
 			
 			try
 			{
@@ -541,7 +541,8 @@ namespace ClientDB
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, clientId Integer NOT NULL
 				, scheduleId Integer NOT NULL
-				, date TimeStamp Default(CURRENT_TIMESTAMP())
+				, creatorId Integer NOT NULL
+				, date TimeStamp Default(CURRENT_TIMESTAMP)
 				, sum money NOT NULL
 				, comment Text Default('')
 			)";
@@ -560,7 +561,7 @@ namespace ClientDB
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, clientId Integer NOT NULL
-				, date TimeStamp Default(CURRENT_TIMESTAMP())
+				, date TimeStamp Default(CURRENT_TIMESTAMP)
 			)";
 
 			SQLiteConnection conn = new SQLiteConnection(Properties.Settings.Default.clientConnectionString);
