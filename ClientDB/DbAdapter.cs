@@ -12,7 +12,8 @@ namespace GAssistant
 	public enum DbTable
 	{
 		_min = 0,
-		UserPrivileges = 0,
+		Settings = 0,
+		UserPrivileges,
 		Clients,
 		Users,
 		Trainers,
@@ -46,6 +47,9 @@ namespace GAssistant
 		{
 			switch (table)
 			{
+				case DbTable.Settings:
+					return "settings";
+				
 				case DbTable.UserPrivileges:
 					return "userPrivileges";
 
@@ -480,7 +484,7 @@ namespace GAssistant
 			bool res = true;
 			Debug.WriteLine("CreateTableStructure Enter");
 
-			string tUserPrivileges = @"drop table if exists settings;
+			string tSettings = @"drop table if exists settings;
 			CREATE TABLE settings
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
@@ -591,6 +595,7 @@ namespace GAssistant
 				}
 				
 				conn.Open();
+				new SQLiteCommand(tSettings, conn).ExecuteNonQuery();
 				new SQLiteCommand(tUserPrivileges, conn).ExecuteNonQuery();
 				new SQLiteCommand(tUsers, conn).ExecuteNonQuery();
 				new SQLiteCommand(tTrainers, conn).ExecuteNonQuery();
