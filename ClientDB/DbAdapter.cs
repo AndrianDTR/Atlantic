@@ -480,6 +480,17 @@ namespace GAssistant
 			bool res = true;
 			Debug.WriteLine("CreateTableStructure Enter");
 
+			string tUserPrivileges = @"drop table if exists settings;
+			CREATE TABLE settings
+			(
+				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
+				, minPassLen Integer NOT NULL Default(8)
+				, language VarChar NOT NULL Default('English')
+				, showTrainer Integer NOT NULL Default(1)
+				, showClientCount Integer NOT NULL Default(1)
+			);
+			INSERT INTO settings() VALUES()";
+			
 			string tUserPrivileges = @"drop table if exists userPrivileges;
 			CREATE TABLE userPrivileges
 			(

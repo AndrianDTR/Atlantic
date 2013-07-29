@@ -44,8 +44,6 @@
 			this.btnEdit = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
 			this.btnClose = new System.Windows.Forms.Button();
-			this.btnPaymentsHistory = new System.Windows.Forms.Button();
-			this.btnStatistics = new System.Windows.Forms.Button();
 			groupBox1 = new System.Windows.Forms.GroupBox();
 			groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridClients)).BeginInit();
@@ -216,34 +214,12 @@
 			this.btnClose.UseVisualStyleBackColor = true;
 			this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
 			// 
-			// btnPaymentsHistory
-			// 
-			this.btnPaymentsHistory.Location = new System.Drawing.Point(283, 387);
-			this.btnPaymentsHistory.Name = "btnPaymentsHistory";
-			this.btnPaymentsHistory.Size = new System.Drawing.Size(111, 23);
-			this.btnPaymentsHistory.TabIndex = 6;
-			this.btnPaymentsHistory.Text = "Payments history";
-			this.btnPaymentsHistory.UseVisualStyleBackColor = true;
-			this.btnPaymentsHistory.Click += new System.EventHandler(this.btnPayments_Click);
-			// 
-			// btnStatistics
-			// 
-			this.btnStatistics.Location = new System.Drawing.Point(400, 387);
-			this.btnStatistics.Name = "btnStatistics";
-			this.btnStatistics.Size = new System.Drawing.Size(111, 23);
-			this.btnStatistics.TabIndex = 7;
-			this.btnStatistics.Text = "Statistics";
-			this.btnStatistics.UseVisualStyleBackColor = true;
-			this.btnStatistics.Click += new System.EventHandler(this.btnHistory_Click);
-			// 
 			// ManageClients
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnClose;
 			this.ClientSize = new System.Drawing.Size(808, 422);
-			this.Controls.Add(this.btnStatistics);
-			this.Controls.Add(this.btnPaymentsHistory);
 			this.Controls.Add(this.btnClose);
 			this.Controls.Add(this.btnRemove);
 			this.Controls.Add(this.btnEdit);
@@ -279,8 +255,6 @@
 		private System.Windows.Forms.Button btnEdit;
 		private System.Windows.Forms.Button btnRemove;
 		private System.Windows.Forms.Button btnClose;
-		private System.Windows.Forms.Button btnPaymentsHistory;
-		private System.Windows.Forms.Button btnStatistics;
 		private System.Windows.Forms.DataGridViewTextBoxColumn id;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colName;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;

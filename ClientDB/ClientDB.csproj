@@ -91,6 +91,12 @@
     <Compile Include="ClientInfo.Designer.cs">
       <DependentUpon>ClientInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Options.Designer.cs">
+      <DependentUpon>Options.cs</DependentUpon>
+    </Compile>
     <Compile Include="Payment.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="ManageScheduleRules.cs">
@@ -198,6 +204,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ManageUsers.resx">
       <DependentUpon>ManageUsers.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Options.resx">
+      <DependentUpon>Options.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PaymentDetail.resx">

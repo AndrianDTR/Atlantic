@@ -94,6 +94,9 @@ namespace GAssistant
 			if(gridClients.SelectedRows.Count < 1)
 				return;
 
+			if(DialogResult.Yes != UIMessages.Warning("Client will be removed. Do you agree?", MessageBoxButtons.YesNo))
+				return;
+				
 			Int64 clientId = (Int64)gridClients.SelectedRows[0].Tag;
 			if (!UserCollection.RemoveById(clientId))
 			{

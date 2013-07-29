@@ -184,5 +184,11 @@ namespace GAssistant
 			PaymentsHistory his = new PaymentsHistory();
 			his.ShowDialog();
 		}
+
+		private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Options opt = new Options();
+			opt.ShowDialog();
+		}
     }
 }
