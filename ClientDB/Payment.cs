@@ -4,7 +4,7 @@ using System.Text;
 using System.Data;
 using System.Diagnostics;
 
-namespace ClientDB
+namespace GAssistant
 {
 	public class Payment
 	{
@@ -57,7 +57,7 @@ namespace ClientDB
 		{
 			get
 			{
-				return m_client;
+				return m_schedule;
 			}
 		}
 		

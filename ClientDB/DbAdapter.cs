@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Data.Common;
 
-namespace ClientDB
+namespace GAssistant
 {
 	public enum DbTable
 	{
@@ -150,7 +150,7 @@ namespace ClientDB
 		public DataTable ExecuteQuery(string sql)
 		{
 			DataTable dt = new DataTable();
-			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
+			SQLiteConnection cnn = new SQLiteConnection(GAssistant.Properties.Settings.Default.clientConnectionString);
 			SQLiteDataReader reader = null;
 			SQLiteCommand cmd = null;
 
@@ -212,7 +212,7 @@ namespace ClientDB
 		/// <returns>An Integer containing the number of rows updated.</returns>
 		public int ExecuteNonQuery(SQLiteCommand cmd, out Int64 insertId)
 		{
-			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
+			SQLiteConnection cnn = new SQLiteConnection(GAssistant.Properties.Settings.Default.clientConnectionString);
 			int rowsUpdated = -1;
 
 			Logger.Debug(String.Format("Execute NON query: {0}.", cmd.CommandText));
@@ -258,7 +258,7 @@ namespace ClientDB
 		/// <returns>A string.</returns>
 		public string ExecuteScalar(string sql, out Int64 insertId)
 		{
-			SQLiteConnection cnn = new SQLiteConnection(ClientDB.Properties.Settings.Default.clientConnectionString);
+			SQLiteConnection cnn = new SQLiteConnection(GAssistant.Properties.Settings.Default.clientConnectionString);
 			SQLiteCommand cmd = null;
 			object value = null;
 

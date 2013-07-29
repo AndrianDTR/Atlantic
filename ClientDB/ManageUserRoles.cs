@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ClientDB
+namespace GAssistant
 {
 	public partial class ManageUserRoles : Form
 	{

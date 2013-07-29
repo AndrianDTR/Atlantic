@@ -8,7 +8,7 @@ using System.Data.SQLite;
 using System.Windows.Forms;
 using System.Diagnostics;
 
-namespace ClientDB
+namespace GAssistant
 {
     public partial class Login : Form
     {

@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
 
-namespace ClientDB
+namespace GAssistant
 {
 	public partial class ManageScheduleRules : Form
 	{

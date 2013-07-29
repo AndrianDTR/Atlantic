@@ -1,4 +1,4 @@
-﻿namespace ClientDB
+﻿namespace GAssistant
 {
 	partial class Prompt
 	{

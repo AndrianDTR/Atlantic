@@ -1,4 +1,4 @@
-﻿namespace ClientDB
+﻿namespace GAssistant
 {
     partial class MainForm
     {
@@ -43,7 +43,6 @@
 			this.trainersScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.paymentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
 			this.manageClientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,9 +65,9 @@
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnBackUp = new System.Windows.Forms.Button();
 			this.btnTrainersShedule = new System.Windows.Forms.Button();
-			this.btnPayments = new System.Windows.Forms.Button();
+			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
-			this.add = new System.Windows.Forms.Button();
+			this.btnAddClient = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -148,6 +147,7 @@
 			this.paymentToolStripMenuItem.Name = "paymentToolStripMenuItem";
 			this.paymentToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
 			this.paymentToolStripMenuItem.Text = "Payment";
+			this.paymentToolStripMenuItem.Visible = false;
 			// 
 			// viewToolStripMenuItem
 			// 
@@ -164,24 +164,26 @@
 			this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
 			this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
 			this.paymentsToolStripMenuItem.Text = "Payments";
+			this.paymentsToolStripMenuItem.Click += new System.EventHandler(this.paymentsToolStripMenuItem_Click);
 			// 
 			// scheduleToolStripMenuItem
 			// 
 			this.scheduleToolStripMenuItem.Name = "scheduleToolStripMenuItem";
 			this.scheduleToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
 			this.scheduleToolStripMenuItem.Text = "Schedule";
+			this.scheduleToolStripMenuItem.Visible = false;
 			// 
 			// trainersScheduleToolStripMenuItem
 			// 
 			this.trainersScheduleToolStripMenuItem.Name = "trainersScheduleToolStripMenuItem";
 			this.trainersScheduleToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
 			this.trainersScheduleToolStripMenuItem.Text = "Trainers schedule";
+			this.trainersScheduleToolStripMenuItem.Visible = false;
 			// 
 			// clientToolStripMenuItem
 			// 
 			this.clientToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addToolStripMenuItem,
-            this.paymentToolStripMenuItem1,
             this.toolStripMenuItem5,
             this.manageClientsToolStripMenuItem});
 			this.clientToolStripMenuItem.Name = "clientToolStripMenuItem";
@@ -195,13 +197,6 @@
 			this.addToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
 			this.addToolStripMenuItem.Text = "Add";
 			this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
-			// 
-			// paymentToolStripMenuItem1
-			// 
-			this.paymentToolStripMenuItem1.Name = "paymentToolStripMenuItem1";
-			this.paymentToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F7;
-			this.paymentToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
-			this.paymentToolStripMenuItem1.Text = "Payment";
 			// 
 			// toolStripMenuItem5
 			// 
@@ -301,6 +296,7 @@
 			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
 			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
 			this.aboutToolStripMenuItem.Text = "About";
+			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
 			// sendLogToolStripMenuItem
 			// 
@@ -333,18 +329,18 @@
 			this.tableLayoutPanel1.RowCount = 3;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(921, 511);
 			this.tableLayoutPanel1.TabIndex = 12;
 			// 
 			// log
 			// 
 			this.log.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.log.Location = new System.Drawing.Point(8, 409);
+			this.log.Location = new System.Drawing.Point(8, 359);
 			this.log.Multiline = true;
 			this.log.Name = "log";
 			this.log.ReadOnly = true;
-			this.log.Size = new System.Drawing.Size(905, 94);
+			this.log.Size = new System.Drawing.Size(905, 144);
 			this.log.TabIndex = 8;
 			// 
 			// dayView1
@@ -356,7 +352,7 @@
 			this.dayView1.NavButtonsHeight = 30;
 			this.dayView1.RowHeight = 80;
 			this.dayView1.SelectedDate = new System.DateTime(((long)(0)));
-			this.dayView1.Size = new System.Drawing.Size(905, 340);
+			this.dayView1.Size = new System.Drawing.Size(905, 290);
 			this.dayView1.StartDate = new System.DateTime(2013, 7, 25, 0, 0, 0, 0);
 			this.dayView1.TabIndex = 7;
 			this.dayView1.Text = "dayView1";
@@ -365,9 +361,9 @@
 			// 
 			this.panel1.Controls.Add(this.btnBackUp);
 			this.panel1.Controls.Add(this.btnTrainersShedule);
-			this.panel1.Controls.Add(this.btnPayments);
+			this.panel1.Controls.Add(this.btnPaymentsHistory);
 			this.panel1.Controls.Add(this.btnClientManager);
-			this.panel1.Controls.Add(this.add);
+			this.panel1.Controls.Add(this.btnAddClient);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(8, 8);
 			this.panel1.Name = "panel1";
@@ -376,7 +372,7 @@
 			// 
 			// btnBackUp
 			// 
-			this.btnBackUp.Image = global::ClientDB.Properties.Resources._1367375035_filesave;
+			this.btnBackUp.Image = global::GAssistant.Properties.Resources._1367375035_filesave;
 			this.btnBackUp.Location = new System.Drawing.Point(216, 0);
 			this.btnBackUp.Name = "btnBackUp";
 			this.btnBackUp.Size = new System.Drawing.Size(48, 48);
@@ -385,40 +381,42 @@
 			// 
 			// btnTrainersShedule
 			// 
-			this.btnTrainersShedule.Image = global::ClientDB.Properties.Resources._1367375242_schedule;
+			this.btnTrainersShedule.Image = global::GAssistant.Properties.Resources._1367375242_schedule;
 			this.btnTrainersShedule.Location = new System.Drawing.Point(162, 0);
 			this.btnTrainersShedule.Name = "btnTrainersShedule";
 			this.btnTrainersShedule.Size = new System.Drawing.Size(48, 48);
 			this.btnTrainersShedule.TabIndex = 5;
 			this.btnTrainersShedule.UseVisualStyleBackColor = true;
 			// 
-			// btnPayments
+			// btnPaymentsHistory
 			// 
-			this.btnPayments.Image = global::ClientDB.Properties.Resources._1367375158_coins;
-			this.btnPayments.Location = new System.Drawing.Point(108, 0);
-			this.btnPayments.Name = "btnPayments";
-			this.btnPayments.Size = new System.Drawing.Size(48, 48);
-			this.btnPayments.TabIndex = 4;
-			this.btnPayments.UseVisualStyleBackColor = true;
+			this.btnPaymentsHistory.Image = global::GAssistant.Properties.Resources._1367375158_coins;
+			this.btnPaymentsHistory.Location = new System.Drawing.Point(108, 0);
+			this.btnPaymentsHistory.Name = "btnPaymentsHistory";
+			this.btnPaymentsHistory.Size = new System.Drawing.Size(48, 48);
+			this.btnPaymentsHistory.TabIndex = 4;
+			this.btnPaymentsHistory.UseVisualStyleBackColor = true;
+			this.btnPaymentsHistory.Click += new System.EventHandler(this.btnPaymentsHistory_Click);
 			// 
 			// btnClientManager
 			// 
-			this.btnClientManager.Image = global::ClientDB.Properties.Resources._1367375688_27_Edit_Text;
+			this.btnClientManager.Image = global::GAssistant.Properties.Resources._1367375688_27_Edit_Text;
 			this.btnClientManager.Location = new System.Drawing.Point(54, 0);
 			this.btnClientManager.Name = "btnClientManager";
 			this.btnClientManager.Size = new System.Drawing.Size(48, 48);
 			this.btnClientManager.TabIndex = 3;
 			this.btnClientManager.UseVisualStyleBackColor = true;
+			this.btnClientManager.Click += new System.EventHandler(this.btnClientManager_Click);
 			// 
-			// add
+			// btnAddClient
 			// 
-			this.add.Image = global::ClientDB.Properties.Resources._1367374740_edit_add;
-			this.add.Location = new System.Drawing.Point(0, 0);
-			this.add.Name = "add";
-			this.add.Size = new System.Drawing.Size(48, 48);
-			this.add.TabIndex = 1;
-			this.add.UseVisualStyleBackColor = true;
-			this.add.Click += new System.EventHandler(this.add_Click);
+			this.btnAddClient.Image = global::GAssistant.Properties.Resources._1367374740_edit_add;
+			this.btnAddClient.Location = new System.Drawing.Point(0, 0);
+			this.btnAddClient.Name = "btnAddClient";
+			this.btnAddClient.Size = new System.Drawing.Size(48, 48);
+			this.btnAddClient.TabIndex = 1;
+			this.btnAddClient.UseVisualStyleBackColor = true;
+			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
 			// 
 			// MainForm
 			// 
@@ -432,7 +430,7 @@
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Clients";
+			this.Text = "G-Assistant";
 			this.Load += new System.EventHandler(this.OnLoad);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
@@ -457,15 +455,14 @@
         private System.Windows.Forms.ToolStripMenuItem paymentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clientToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem paymentToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 		private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button add;
+        private System.Windows.Forms.Button btnAddClient;
         private System.Windows.Forms.Button btnBackUp;
         private System.Windows.Forms.Button btnTrainersShedule;
-		private System.Windows.Forms.Button btnPayments;
+		private System.Windows.Forms.Button btnPaymentsHistory;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usersAndPasswordsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;

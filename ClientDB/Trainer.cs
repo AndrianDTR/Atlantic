@@ -4,7 +4,7 @@ using System.Text;
 using System.Data;
 using System.Diagnostics;
 
-namespace ClientDB
+namespace GAssistant
 {
 	public class Trainer
 	{

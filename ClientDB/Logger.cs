@@ -6,7 +6,7 @@ using System.Threading;
 using System.Reflection;
 using System.Diagnostics;
 
-namespace ClientDB
+namespace GAssistant
 {
 	class Logger
 	{

@@ -1,4 +1,4 @@
-﻿namespace ClientDB
+﻿namespace GAssistant
 {
 	partial class ClientInfo
 	{
@@ -351,7 +351,7 @@
 			this.btnChangeCode.Location = new System.Drawing.Point(485, 14);
 			this.btnChangeCode.Name = "btnChangeCode";
 			this.btnChangeCode.Size = new System.Drawing.Size(118, 29);
-			this.btnChangeCode.TabIndex = 16;
+			this.btnChangeCode.TabIndex = 7;
 			this.btnChangeCode.Text = "Change";
 			this.btnChangeCode.UseVisualStyleBackColor = true;
 			this.btnChangeCode.Click += new System.EventHandler(this.btnChangeCode_Click);

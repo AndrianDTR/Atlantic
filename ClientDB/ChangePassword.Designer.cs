@@ -1,4 +1,4 @@
-﻿namespace ClientDB
+﻿namespace GAssistant
 {
 	partial class ChangePassword
 	{
@@ -54,7 +54,6 @@
 			// 
 			// pictureBox1
 			// 
-			this.pictureBox1.Image = global::ClientDB.Properties.Resources._1367459833_lock1;
 			this.pictureBox1.Location = new System.Drawing.Point(12, 42);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(136, 139);
