@@ -11,9 +11,9 @@ namespace GAssistant
 		// Constructor
 		public Session()
 		{
-			Debug.WriteLine("Constructor enter");
+			//Logger.Enter();
 
-			Debug.WriteLine("Constructor leave");
+			//Logger.Leave();
 		}
 
 		//Singleton implementation

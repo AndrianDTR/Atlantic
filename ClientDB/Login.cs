@@ -36,7 +36,7 @@ namespace GAssistant
 			if(user != null)
 			{
 				Session.Instance.User = user;
-				Logger.Debug("Login ok, user: " + userName.Text);
+				Logger.Info(String.Format("User {0} login.", userName.Text));
 				this.DialogResult = DialogResult.OK;
 				this.Close();
 			}

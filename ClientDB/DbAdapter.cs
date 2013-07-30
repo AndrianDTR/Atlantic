@@ -95,25 +95,32 @@ namespace GAssistant
 		// Constructor
 		public DbAdapter()
 		{
-			Debug.WriteLine("Constructor enter");
+			Logger.Enter();
 
-			Debug.WriteLine("Constructor leave");
+			Logger.Leave();
 		}
 
 		public DataTable GetTable(DbTable table)
 		{
+			Logger.Enter();
 			String name = DbUtils.GetTableName(table);
-			Debug.WriteLine("Get table '{0}'", name);
+			
+			Logger.Debug(String.Format("Get table '{0}'", name));
 			String query = String.Format("select * from {0}", name);
-			return new DbAdapter().ExecuteQuery(query);
+			
+			DataTable res = new DbAdapter().ExecuteQuery(query);
+			
+			Logger.Leave();
+			return res;
 		}
 		
 		private bool CheckTableExists(DbTable table)
 		{
+			Logger.Enter();
 			bool res = false;
 			
 			String name = DbUtils.GetTableName(table);
-			Debug.WriteLine(String.Format("Check table '{0}' exists.", name));
+			Logger.Debug(String.Format("Check table '{0}' exists.", name));
 			
 			try
 			{
@@ -123,9 +130,10 @@ namespace GAssistant
 			}
 			catch(Exception fail)
 			{
-				Debug.WriteLine(String.Format("CheckTableExist exception: {0}.", fail.Message));
+				Logger.Debug(String.Format("CheckTableExist exception: {0}.", fail.Message));
 			}
-			
+
+			Logger.Leave();
 			return res;
 		}
 		
@@ -153,6 +161,8 @@ namespace GAssistant
 		/// <returns>A DataTable containing the result set.</returns>
 		public DataTable ExecuteQuery(string sql)
 		{
+			Logger.Enter();
+			
 			DataTable dt = new DataTable();
 			SQLiteConnection cnn = new SQLiteConnection(GAssistant.Properties.Settings.Default.clientConnectionString);
 			SQLiteDataReader reader = null;
@@ -169,6 +179,7 @@ namespace GAssistant
 			}
 			catch (SQLiteException ex)
 			{
+				Logger.Error(ex.Message);
 				throw new Exception(ex.Message);
 			}
 			finally
@@ -182,6 +193,7 @@ namespace GAssistant
 				cnn.Close();
 			}
 			
+			Logger.Leave();
 			return dt;
 		}
 
@@ -203,10 +215,15 @@ namespace GAssistant
 		/// <returns>An Integer containing the number of rows updated.</returns>
 		public int ExecuteNonQuery(string sql, out Int64 insertId)
 		{
-			Debug.WriteLine(String.Format("Execute NON query: {0}.", sql));
+			Logger.Enter();
+			int res = 0;
+			Logger.Debug(String.Format("Execute NON query: {0}.", sql));
 			
 			SQLiteCommand cmd = new SQLiteCommand(sql);
-			return ExecuteNonQuery(cmd, out insertId);
+			res = ExecuteNonQuery(cmd, out insertId);
+			
+			Logger.Enter();
+			return res;
 		}
 
 		/// <summary>
@@ -216,6 +233,7 @@ namespace GAssistant
 		/// <returns>An Integer containing the number of rows updated.</returns>
 		public int ExecuteNonQuery(SQLiteCommand cmd, out Int64 insertId)
 		{
+			Logger.Enter();
 			SQLiteConnection cnn = new SQLiteConnection(GAssistant.Properties.Settings.Default.clientConnectionString);
 			int rowsUpdated = -1;
 
@@ -229,6 +247,7 @@ namespace GAssistant
 			}
 			catch (SQLiteException e)
 			{
+				Logger.Error(e.Message);
 				throw new Exception(e.Message);
 			}
 			finally
@@ -239,7 +258,7 @@ namespace GAssistant
 				insertId = cnn.LastInsertRowId;
 				cnn.Close();
 			}
-
+			Logger.Leave();
 			return rowsUpdated;
 		}
 		
@@ -262,6 +281,8 @@ namespace GAssistant
 		/// <returns>A string.</returns>
 		public string ExecuteScalar(string sql, out Int64 insertId)
 		{
+			Logger.Enter();
+			String res = "";
 			SQLiteConnection cnn = new SQLiteConnection(GAssistant.Properties.Settings.Default.clientConnectionString);
 			SQLiteCommand cmd = null;
 			object value = null;
@@ -276,6 +297,7 @@ namespace GAssistant
 			}
 			catch(SQLiteException ex)
 			{
+				Logger.Error(ex.Message);
 				throw new Exception(ex.Message);
 			}
 			finally
@@ -289,9 +311,10 @@ namespace GAssistant
 			
 			if (value != null)
 			{
-				return value.ToString();
+				res = value.ToString();
 			}
-			return "";
+			Logger.Leave();
+			return res;
 		}
 
 		/// <summary>
@@ -303,6 +326,7 @@ namespace GAssistant
 		/// <returns>Returns the first DataRow from querru results.</returns>
 		public DataRow GetFirstRow(DbTable table, String where, List<String> fields)
 		{
+			Logger.Enter();
 			SQLiteConnection conn = new SQLiteConnection(Properties.Settings.Default.clientConnectionString);
 			DataRow row = null;
 			String query = String.Format("select * from {0} where {1};", DbUtils.GetTableName(table), where);
@@ -318,12 +342,13 @@ namespace GAssistant
 				query = String.Format("select {0} from {1} where {2} limit 1;", vals, DbUtils.GetTableName(table), where);
 			}
 
-			Debug.WriteLine(String.Format("GetFirstRow, query: {0}.", query));
+			Logger.Debug(String.Format("GetFirstRow, query: {0}.", query));
 			
 			DataTable dt = ExecuteQuery(query);
 			if (dt.Rows.Count > 0)
 				row = dt.Rows[0];
-			
+
+			Logger.Leave();
 			return row;
 		}
 		
@@ -336,40 +361,47 @@ namespace GAssistant
 		/// <returns>A boolean true or false to signify success or failure.</returns>
 		public bool Update(DbTable table, Dictionary<String, String> data, String where)
 		{
-			String vals = "";
-			Boolean returnCode = true;
-			SQLiteCommand cmd = new SQLiteCommand();
-			cmd.CommandType = CommandType.Text;
-			
-			if (data.Count < 1)
+			Logger.Enter();
+			Boolean returnCode = false;
+			do
 			{
-				return false;
-			}
-			
-			foreach (KeyValuePair<String, String> val in data)
-			{
-				vals += String.Format(" `{0}` = @{0},", val.Key.ToString());
-			}
-			vals = vals.Substring(0, vals.Length - 1);
-			
-			try
-			{
-				String tableName = DbUtils.GetTableName(table);
-				String query = String.Format("update `{0}` set {1} where {2};", tableName, vals, where);
-				Debug.WriteLine(String.Format("Update {0}, query: {1}.", tableName, query));
-				cmd.CommandText = query;
+				String vals = "";
+				SQLiteCommand cmd = new SQLiteCommand();
+				cmd.CommandType = CommandType.Text;
+				
+				if (data.Count < 1)
+				{
+					Logger.Debug("Nothing to update.");
+					break;
+				}
+				
 				foreach (KeyValuePair<String, String> val in data)
 				{
-					cmd.Parameters.AddWithValue(String.Format("@{0}", val.Key.ToString()), val.Value.ToString());
+					vals += String.Format(" `{0}` = @{0},", val.Key.ToString());
 				}
-				Int64 id = 0;			
-				ExecuteNonQuery(cmd, out id);
-			}
-			catch(Exception fail)
-			{
-				Debug.WriteLine(String.Format("Update exception: {0}.", fail.Message));
-				returnCode = false;
-			}
+				vals = vals.Substring(0, vals.Length - 1);
+				
+				try
+				{
+					String tableName = DbUtils.GetTableName(table);
+					String query = String.Format("update `{0}` set {1} where {2};", tableName, vals, where);
+
+					Logger.Debug(String.Format("Update {0}, query: {1}.", tableName, query));
+					cmd.CommandText = query;
+					foreach (KeyValuePair<String, String> val in data)
+					{
+						cmd.Parameters.AddWithValue(String.Format("@{0}", val.Key.ToString()), val.Value.ToString());
+					}
+					Int64 id = 0;			
+					ExecuteNonQuery(cmd, out id);
+					returnCode = true;
+				}
+				catch(Exception fail)
+				{
+					Logger.Debug(String.Format("Update exception: {0}.", fail.Message));
+				}
+			}while(false);
+			Logger.Leave();
 			return returnCode;
 		}
 
@@ -381,19 +413,26 @@ namespace GAssistant
 		/// <returns>A boolean true or false to signify success or failure.</returns>
 		public bool Delete(DbTable table, String where)
 		{
-			Boolean returnCode = true;
-			try
+			Logger.Enter();
+			Boolean returnCode = false;
+			do
 			{
-				String tableName = DbUtils.GetTableName(table);
-				String query = String.Format("delete from {0} where {1};", tableName, where);
-				Debug.WriteLine(String.Format("Delete from {0}, query: {1}.", tableName, query));
-				ExecuteNonQuery(query);
-			}
-			catch (Exception fail)
-			{
-				Debug.WriteLine(String.Format("Delete exception: {0}.", fail.Message));
-				returnCode = false;
-			}
+				try
+				{
+					String tableName = DbUtils.GetTableName(table);
+					String query = String.Format("delete from {0} where {1};", tableName, where);
+					
+					Logger.Debug(String.Format("Delete from {0}, query: {1}.", tableName, query));
+					ExecuteNonQuery(query);
+					returnCode = true;
+				}
+				catch (Exception fail)
+				{
+					Logger.Debug(String.Format("Delete exception: {0}.", fail.Message));
+				}
+			}while(false);
+			
+			Logger.Leave();
 			return returnCode;
 		}
 
@@ -418,45 +457,55 @@ namespace GAssistant
 		/// <returns>A boolean true or false to signify success or failure.</returns>
 		public bool Insert(DbTable table, Dictionary<String, String> data, out Int64 insertId)
 		{
+			Logger.Enter();
+			
 			String columns = "";
 			String values = "";
-			Boolean returnCode = true;
+			Boolean returnCode = false;
 			insertId = 0;
 			SQLiteCommand cmd = new SQLiteCommand();
 			cmd.CommandType = CommandType.Text;
-
-			if (data.Count < 1)
-			{
-				return false;
-			}
 			
-			foreach (String val in data.Keys)
+			do
 			{
-				columns += String.Format(" {0},", val);
-				values += String.Format(" @{0},", val);
-			}
-			columns = columns.Substring(0, columns.Length - 1);
-			values = values.Substring(0, values.Length - 1);
-			try
-			{
-				String tableName = DbUtils.GetTableName(table);
-				String query = String.Format("insert into {0}({1}) values({2});", tableName, columns, values);
-				Debug.WriteLine(String.Format("Insert to {0}, query: {1}.", tableName, query));
-				cmd.CommandText = query;
-
-				foreach (KeyValuePair<String, String> val in data)
+				if (data.Count < 1)
 				{
-					cmd.Parameters.AddWithValue(val.Key, val.Value);
+					Logger.Debug("Nothing to insert.");
+					break;
 				}
+				
+				foreach (String val in data.Keys)
+				{
+					columns += String.Format(" {0},", val);
+					values += String.Format(" @{0},", val);
+				}
+				
+				columns = columns.Substring(0, columns.Length - 1);
+				values = values.Substring(0, values.Length - 1);
+				try
+				{
+					String tableName = DbUtils.GetTableName(table);
+					String query = String.Format("insert into {0}({1}) values({2});", tableName, columns, values);
+					
+					Logger.Debug(String.Format("Insert to {0}, query: {1}.", tableName, query));
+					cmd.CommandText = query;
+
+					foreach (KeyValuePair<String, String> val in data)
+					{
+						cmd.Parameters.AddWithValue(val.Key, val.Value);
+					}
+				
+					ExecuteNonQuery(cmd, out insertId);
+					Logger.Debug(String.Format("Insert ID is: {0}.", insertId)); 
+					returnCode = true;
+				}
+				catch (Exception fail)
+				{
+					Debug.WriteLine(String.Format("Insert exception: {0}.", fail.Message));
+				}
+			} while (false);
 			
-				ExecuteNonQuery(cmd, out insertId);
-				Debug.WriteLine(String.Format("Insert ID is: {0}.", insertId));
-			}
-			catch (Exception fail)
-			{
-				Debug.WriteLine(String.Format("Insert exception: {0}.", fail.Message));
-				returnCode = false;
-			}
+			Logger.Leave();
 			return returnCode;
 		}
 		
@@ -467,33 +516,41 @@ namespace GAssistant
 		/// <returns>A boolean true or false to signify success or failure.</returns>
 		public bool ClearTable(DbTable table)
 		{
-			try
+			bool res = false;
+			Logger.Enter();
+			do 
 			{
-				this.ExecuteNonQuery(String.Format("delete from {0};", DbUtils.GetTableName(table)));
-				return true;
-			}
-			catch (Exception fail)
-			{
-				Debug.WriteLine("ClearTable exception: {0}.", fail.Message);
-				return false;
-			}
+				try
+				{
+					this.ExecuteNonQuery(String.Format("delete from {0};", DbUtils.GetTableName(table)));
+					res = true;
+				}
+				catch (Exception fail)
+				{
+					Debug.WriteLine("ClearTable exception: {0}.", fail.Message);
+				}
+			} while (false);
+			
+			Logger.Leave();
+			return res;
 		}
 		
 		public static bool ClearDB()
 		{
 			bool res = true;
-			Debug.WriteLine("CreateTableStructure Enter");
-
+			Logger.Enter();
+			
 			string tSettings = @"drop table if exists settings;
 			CREATE TABLE settings
 			(
 				id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 				, minPassLen Integer NOT NULL Default(8)
 				, language VarChar NOT NULL Default('English')
+				, calRowHeight Integer NOT NULL Default(100)
 				, showTrainer Integer NOT NULL Default(1)
 				, showClientCount Integer NOT NULL Default(1)
 			);
-			INSERT INTO settings() VALUES()";
+			INSERT INTO settings(minPassLen) VALUES(8)";
 			
 			string tUserPrivileges = @"drop table if exists userPrivileges;
 			CREATE TABLE userPrivileges
@@ -615,7 +672,7 @@ namespace GAssistant
 				conn.Close();
 			}
 			
-			Debug.WriteLine("CreateTableStructure Leave");
+			Logger.Leave();
 			return res;
 		}
 		

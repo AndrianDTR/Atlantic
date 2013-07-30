@@ -91,6 +91,7 @@
     <Compile Include="ClientInfo.Designer.cs">
       <DependentUpon>ClientInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Opts.cs" />
     <Compile Include="Options.cs">
       <SubType>Form</SubType>
     </Compile>
