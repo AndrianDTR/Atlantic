@@ -39,6 +39,7 @@
 			this.checkShowTrainer = new System.Windows.Forms.CheckBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.numericMinPassLen = new System.Windows.Forms.NumericUpDown();
+			this.checkSaveMainWindowState = new System.Windows.Forms.CheckBox();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericCalRowHeight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericMinPassLen)).BeginInit();
@@ -47,7 +48,7 @@
 			// btnClose
 			// 
 			this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnClose.Location = new System.Drawing.Point(298, 159);
+			this.btnClose.Location = new System.Drawing.Point(298, 194);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(75, 23);
 			this.btnClose.TabIndex = 0;
@@ -56,7 +57,7 @@
 			// 
 			// btnOk
 			// 
-			this.btnOk.Location = new System.Drawing.Point(217, 159);
+			this.btnOk.Location = new System.Drawing.Point(217, 194);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
 			this.btnOk.TabIndex = 1;
@@ -97,7 +98,7 @@
 			this.groupBox1.Controls.Add(this.checkShowClientCount);
 			this.groupBox1.Controls.Add(this.checkShowTrainer);
 			this.groupBox1.Controls.Add(this.label3);
-			this.groupBox1.Location = new System.Drawing.Point(15, 62);
+			this.groupBox1.Location = new System.Drawing.Point(15, 97);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(358, 91);
 			this.groupBox1.TabIndex = 6;
@@ -177,13 +178,24 @@
             0,
             0});
 			// 
+			// checkSaveMainWindowState
+			// 
+			this.checkSaveMainWindowState.AutoSize = true;
+			this.checkSaveMainWindowState.Location = new System.Drawing.Point(15, 66);
+			this.checkSaveMainWindowState.Name = "checkSaveMainWindowState";
+			this.checkSaveMainWindowState.Size = new System.Drawing.Size(141, 17);
+			this.checkSaveMainWindowState.TabIndex = 16;
+			this.checkSaveMainWindowState.Text = "Save main window state";
+			this.checkSaveMainWindowState.UseVisualStyleBackColor = true;
+			// 
 			// Options
 			// 
 			this.AcceptButton = this.btnOk;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnClose;
-			this.ClientSize = new System.Drawing.Size(385, 193);
+			this.ClientSize = new System.Drawing.Size(385, 231);
+			this.Controls.Add(this.checkSaveMainWindowState);
 			this.Controls.Add(this.numericMinPassLen);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.comboLang);
@@ -221,5 +233,6 @@
 		private System.Windows.Forms.CheckBox checkShowTrainer;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.NumericUpDown numericMinPassLen;
+		private System.Windows.Forms.CheckBox checkSaveMainWindowState;
 	}
 }

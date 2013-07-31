@@ -9,6 +9,7 @@ namespace GAssistant
     {
 		private Login m_login = new Login();
 		private ClientCollection m_collection = new ClientCollection();
+		private Opts m_opt = new Opts();
 		
         public MainForm()
         {
@@ -29,14 +30,13 @@ namespace GAssistant
 		
 		private void Reinit()
 		{
-			Opts opt = new Opts();
 			Session session = Session.Instance;
-						
-			dayView1.RowHeight = opt.CalRowHeight;
-			session.PassLen = opt.MinPassLen;
+
+			dayView1.RowHeight = m_opt.CalRowHeight;
+			session.PassLen = m_opt.MinPassLen;
 			
 			UserRole priv = session.UserRole;
-
+			
 			// File menu
 			exportToolStripMenuItem.Enabled = UserRole.IsSet(priv.Backup, UserRights.Create);
 			importToolStripMenuItem.Enabled = UserRole.IsSet(priv.Backup, UserRights.Write);
@@ -63,6 +63,17 @@ namespace GAssistant
 			manageTrainersToolStripMenuItem.Enabled = UserRole.IsSet(priv.Trainers, UserRights.Read);
 
 			manageScheduleRulesToolStripMenuItem.Enabled = UserRole.IsSet(priv.Schedule, UserRights.Read);
+
+			if (m_opt.StoreMainWindowState)
+			{
+				this.WindowState = m_opt.MainWindowState;
+			}
+		}
+
+		private void OnClose(object sender, FormClosedEventArgs e)
+		{
+			m_opt.MainWindowState = this.WindowState;
+			m_opt.StoreData();
 		}
 		
 		private void clientByBarcodeToolStripMenuItem_Click(object sender, EventArgs e)

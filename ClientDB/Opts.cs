@@ -31,8 +31,8 @@ namespace GAssistant
 			m_calRowHeight = int.Parse(data["calRowHeight"].ToString());
 			m_showTrainer = int.Parse(data["showTrainer"].ToString());
 			m_showClientCount = int.Parse(data["showClientCount"].ToString());
-			m_storeMainWindowSatate = int.Parse(data["storeMainWindowSatate"].ToString());
-			m_mainWindowSatate = int.Parse(data["mainWindowSatate"].ToString());
+			m_storeMainWindowSatate = int.Parse(data["storeMainWindowState"].ToString());
+			m_mainWindowSatate = int.Parse(data["mainWindowState"].ToString());
 			
 			m_language = data["language"].ToString();
 		}

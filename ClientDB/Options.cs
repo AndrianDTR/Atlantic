@@ -22,6 +22,7 @@ namespace GAssistant
 			numericCalRowHeight.Value = m_opts.CalRowHeight;
 			checkShowTrainer.Checked = m_opts.ShowTrainer;
 			checkShowClientCount.Checked = m_opts.ShowClientCount;
+			checkSaveMainWindowState.Checked = m_opts.StoreMainWindowState;
 			
 			comboLang.Items.Add("English");
 			comboLang.SelectedIndex = 0;
@@ -34,6 +35,7 @@ namespace GAssistant
 			m_opts.CalRowHeight = (int)numericCalRowHeight.Value;
 			m_opts.ShowTrainer = checkShowTrainer.Checked;
 			m_opts.ShowClientCount = checkShowClientCount.Checked;
+			m_opts.StoreMainWindowState = checkSaveMainWindowState.Checked;
 
 			//opts.Language = comboLang.SelectedItem;
 			
