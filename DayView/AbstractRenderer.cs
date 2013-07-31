@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace CalendarTest
+namespace Calendar
 {
 	public class CellInfo
 	{
@@ -45,8 +45,6 @@ namespace CalendarTest
 			}
 		}
 		
-        //public abstract void DrawAppointment(Graphics g, Rectangle rect, Appointment appointment, bool isSelected, int gripWidth);
-
         public static Color InterpolateColors(Color color1, Color color2, float percentage)
         {
             int num1 = ((int)color1.R);
@@ -61,7 +59,6 @@ namespace CalendarTest
             return Color.FromArgb(num7, num8, num9);
         }
         
-        /******************************************/
         private Color[] monthColorMap = new Color[]{
               Color.FromArgb(245, 245, 245) //current
 			, Color.FromArgb(230, 230, 255) //1
@@ -154,6 +151,7 @@ namespace CalendarTest
 				hasHorizontalLine = value;
 			}
 		}
+		
 		private Color horisontalLineColor = Color.FromArgb(141, 174, 217);
 		public virtual Color GridColor
 		{
@@ -167,8 +165,7 @@ namespace CalendarTest
 			}
 		}
 			
-		//======================================
-		
+		//Fonts
 		private Font headerTitleFont = new Font("Segoe UI", 8, FontStyle.Bold);
 		public virtual Font HeaderTitleFont
 		{
@@ -261,7 +258,6 @@ namespace CalendarTest
 		}
 		
 		//======================================
-			
 		private Font weekLabelFont = new Font("Segoe UI", 8, FontStyle.Bold);
 		public virtual Font WeekLabelFont
 		{
@@ -275,32 +271,6 @@ namespace CalendarTest
 			}
 		}
 		
-		private int weekLabelWidth = 60;
-		public virtual int WeekLabelWidth
-		{
-			get
-			{
-				return weekLabelWidth;
-			}
-			set
-			{
-				weekLabelWidth = value;
-			}
-		}
-
-		private int minWeekHeight = 20;
-		public virtual int MinWeekHeight
-		{
-			get
-			{
-				return minWeekHeight;
-			}
-			set
-			{
-				minWeekHeight = value;
-			}
-		}
-		//=======================================
 		private Font cellDataFont = new Font("Segoe UI", 8);
 		public virtual Font CellDataFont
 		{
@@ -374,7 +344,6 @@ namespace CalendarTest
 		}
 		
 		/******************************************/
-				
 		public abstract void DrawBg(Graphics g, Rectangle rect, System.Drawing.Drawing2D.SmoothingMode smooth);
 		public abstract void DrawHeaderLabelBg(Graphics g, Rectangle rect);
 		public abstract void DrawHeaderBg(Graphics g, Rectangle rect);
@@ -389,31 +358,3 @@ namespace CalendarTest
 		
     }
 }
-
-
-/*
- * RowHeight
- * RowLabelWidth
- * NavBtnHeight
- * 
- * PrevBtn
- * NextBth
- * Calendar
- * ScrollBar
- * 
- * OnChangeSelection
- * OnYearChange
- * 
- * ---------------------
- * |       2012        |
- * ---------------------
- * | W |M|T|W|T|F|S|S|^|
- * | 1 |1|2|3|4|5|6|7| |
- * | 2 |8|9| | | | | |X|
- * | 3 | | | | | | | | |
- * | 4 | | | | | | | |_|
- * ---------------------
- * |       2014        |
- * ---------------------
- 
-*/

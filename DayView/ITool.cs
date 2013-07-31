@@ -1,15 +1,13 @@
-/* Developed by Ertan Tike (ertan.tike@moreum.com) */
-
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace CalendarTest
+namespace Calendar
 {
     public interface ITool
     {
-        DayView DayView
+        Calendar DayView
         {
             get;
             set;

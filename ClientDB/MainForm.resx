@@ -403,7 +403,7 @@
     <value>dayView1</value>
   </data>
   <data name="&gt;&gt;dayView1.Type" xml:space="preserve">
-    <value>CalendarTest.DayView, Calendar.DayView, Version=1.0.4958.2994, Culture=neutral, PublicKeyToken=null</value>
+    <value>Calendar.DayView, Calendar.DayView, Version=1.0.4960.40921, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dayView1.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>

@@ -7,9 +7,9 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Globalization;
 
-namespace CalendarTest
+namespace Calendar
 {
-    public class DayView : Control
+    public class Calendar : Control
     {
         #region Variables
 		
@@ -24,14 +24,15 @@ namespace CalendarTest
 
 		private ToolTip m_ToolTip;
 
-		//private DrawTool drawTool;
-
 		Rectangle m_rSelectionStartAt;
 		DateTime m_dSelectionStartAt;
 		bool m_bSelectionChanged;
 		bool m_bMouseEnter = false;
-		
-        #endregion
+
+		public delegate CellInfo __CellInfo(DateTime date);
+		private __CellInfo m_fpDefCellInfo = GetCellInfo;
+
+		#endregion
         
         #region Constants
         int m_nMult = 100;
@@ -39,7 +40,7 @@ namespace CalendarTest
 
         #region c.tor
 
-        public DayView()
+        public Calendar()
         {
 			int height = base.Height;
 			SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -151,6 +152,19 @@ namespace CalendarTest
         #endregion
 
         #region Properties
+		//[System.ComponentModel.DefaultValue(GetCellInfo)]
+		public __CellInfo CellInfoDeledate
+		{
+			get
+			{
+				return m_fpDefCellInfo;
+			}
+			set
+			{
+				m_fpDefCellInfo = value;
+			}
+		}
+		
 		private int m_nHeaderHeight = 20;
 		[System.ComponentModel.DefaultValue(20)]
 		public int HeaderHeight
@@ -460,15 +474,6 @@ namespace CalendarTest
 				m_dataPanel.Invalidate(m_rSelectionStartAt);
 				SelectedDate = GetDateAt(e.X, e.Y);
 			}
-			
-			//Fill string with data
-			//String sTip = GetDateAt(e.X, e.Y).ToString();
-			//Rectangle rTip = GetRectAt(e.X, e.Y);
-			//if (m_ToolTip.GetToolTip(m_dataPanel) == sTip)
-			//{
-			//    return;
-			//}
-			//m_ToolTip.Show(sTip, m_dataPanel, rTip.Right - 5, rTip.Bottom - 5, int.MaxValue);
 		}
 
 		protected void OnDataMouseUp(object sender, MouseEventArgs e)
@@ -480,8 +485,6 @@ namespace CalendarTest
 
 				RaiseSelectionChanged(EventArgs.Empty);
 
-				//if (Complete != null)
-				//	Complete(this, EventArgs.Empty);
 				SelectedDate = GetDateAt(e.X, e.Y);
 			}
 
@@ -499,7 +502,6 @@ namespace CalendarTest
 
 		private void OnDataMouseLeave(object sender, System.EventArgs e)
 		{
-			//m_ToolTip.Hide(m_dataPanel);
 			m_bMouseEnter = false;
 		}
 		
@@ -544,68 +546,11 @@ namespace CalendarTest
 		// Handles drawing the ToolTip.
 		private void OnDrawStats(System.Object sender, DrawToolTipEventArgs e)
 		{
-			// Draw the ToolTip differently depending on which 
-			// control this ToolTip is for.
-			// Draw a custom 3D border if the ToolTip is for button1.
-			//if (e.AssociatedControl == m_dataPanel)
-			//{
-			//    // Draw the standard background.
-			//    e.DrawBackground();
-
-			//    // Draw the custom border to appear 3-dimensional.
-			//    e.Graphics.DrawLines(SystemPens.ControlLightLight, new Point[] {
-			//        new Point (0, e.Bounds.Height - 1), 
-			//        new Point (0, 0), 
-			//        new Point (e.Bounds.Width - 1, 0)
-			//    });
-			//    e.Graphics.DrawLines(SystemPens.ControlDarkDark, new Point[] {
-			//        new Point (0, e.Bounds.Height - 1), 
-			//        new Point (e.Bounds.Width - 1, e.Bounds.Height - 1), 
-			//        new Point (e.Bounds.Width - 1, 0)
-			//    });
-
-			//    // Specify custom text formatting flags.
-			//    TextFormatFlags sf = TextFormatFlags.VerticalCenter |
-			//                         TextFormatFlags.HorizontalCenter |
-			//                         TextFormatFlags.NoFullWidthCharacterBreak;
-
-			//    // Draw the standard text with customized formatting options.
-			//    e.DrawText(sf);
-			//}
-			// Draw a custom background and text if the ToolTip is for button2.
-			//else if (e.AssociatedControl == button2)
-			//{
-			//    // Draw the custom background.
-			//    e.Graphics.FillRectangle(Brushes.Azure, e.Bounds);
-
-			//    // Draw the standard border.
-			//    e.DrawBorder();
-
-			//    // Draw the custom text.
-			//    // The using block will dispose the StringFormat automatically.
-			//    using (StringFormat sf = new StringFormat())
-			//    {
-			//        sf.Alignment = StringAlignment.Center;
-			//        sf.LineAlignment = StringAlignment.Center;
-			//        sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.None;
-			//        sf.FormatFlags = StringFormatFlags.NoWrap;
-			//        using (Font f = new Font("Tahoma", 9))
-			//        {
-			//            e.Graphics.DrawString(e.ToolTipText, f,
-			//                SystemBrushes.ActiveCaptionText, e.Bounds, sf);
-			//        }
-			//    }
-			//}
-			// Draw the ToolTip using default values if the ToolTip is for button3.
-			//else if (e.AssociatedControl == button3)
-			{
-				e.DrawBackground();
-				e.DrawBorder();
-				e.DrawText();
-			}
+			e.DrawBackground();
+			e.DrawBorder();
+			e.DrawText();
 		}
-		/*****************************************/
-		
+				
         void editbox_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -620,139 +565,22 @@ namespace CalendarTest
             }
         }
 
-        /*
-        System.Collections.Hashtable cachedAppointments = new System.Collections.Hashtable();
-
-        protected virtual void OnResolveAppointments(ResolveAppointmentsEventArgs args)
-        {
-			if (ResolveAppointments != null)
-                ResolveAppointments(this, args);
-
-            this.allDayEventsHeaderHeight = 0;
-
-            // cache resolved appointments in hashtable by days.
-            cachedAppointments.Clear();
-
-            if ((selectedAppointmentIsNew) && (selectedAppointment != null))
-            {
-                if ((selectedAppointment.StartDate > args.StartDate) && (selectedAppointment.StartDate < args.EndDate))
-                {
-                    args.Appointments.Add(selectedAppointment);
-                }
-            }
-
-            foreach (Appointment appointment in args.Appointments)
-            {
-                int key = -1;
-                AppointmentList list;
-
-                if (appointment.StartDate.Day == appointment.EndDate.Day)
-                {
-                    key = appointment.StartDate.Day;
-                }
-                else
-                {
-                    // use -1 for exceeding one more than day
-                    key = -1;
-
-                    //ALL DAY EVENTS IS NOT COMPLETE
-                    //this.allDayEventsHeaderHeight += horizontalAppointmentHeight;
-                }
-
-                list = (AppointmentList)cachedAppointments[key];
-
-                if (list == null)
-                {
-                    list = new AppointmentList();
-                    cachedAppointments[key] = list;
-                }
-
-                list.Add(appointment);
-            }
-        }
-		//*/
+        
         internal void RaiseSelectionChanged(EventArgs e)
         {
             if (SelectionChanged != null)
                 SelectionChanged(this, e);
         }
-		/*
-        internal void RaiseAppointmentMove(AppointmentEventArgs e)
-        {
-            if (AppoinmentMove != null)
-                AppoinmentMove(this, e);
-        }
-
-        protected override void OnKeyPress(KeyPressEventArgs e)
-        {
-            if ((allowNew) && char.IsLetterOrDigit(e.KeyChar))
-            {
-                if ((this.Selection == SelectionType.DateRange))
-                {
-                    if (!selectedAppointmentIsNew)
-                        EnterNewAppointmentMode(e.KeyChar);
-                }
-            }
-        }
-
-        private void EnterNewAppointmentMode(char key)
-        {
-            Appointment appointment = new Appointment();
-            appointment.StartDate = selectionStart;
-            appointment.EndDate = selectionEnd;
-            appointment.Title = key.ToString();
-
-            selectedAppointment = appointment;
-            selectedAppointmentIsNew = true;
-
-            activeTool = selectionTool;
-
-            Refresh();
-
-            System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(EnterEditMode));
-        }
-
-        private delegate void StartEditModeDelegate(object state);
-
-        private void EnterEditMode(object state)
-        {
-            if (!allowInplaceEditing)
-                return;
-
-            if (this.InvokeRequired)
-            {
-                Appointment selectedApp = selectedAppointment;
-
-                System.Threading.Thread.Sleep(200);
-
-                if (selectedApp == selectedAppointment)
-                    this.Invoke(new StartEditModeDelegate(EnterEditMode), state);
-            }
-            else
-            {
-                StartEditing();
-            }
-        }
-
-        internal void RaiseNewAppointment()
-        {
-            NewAppointmentEventArgs args = new NewAppointmentEventArgs(selectedAppointment.Title, selectedAppointment.StartDate, selectedAppointment.EndDate);
-
-            if (NewAppointment != null)
-            {
-                NewAppointment(this, args);
-            }
-
-            selectedAppointment = null;
-            selectedAppointmentIsNew = false;
-
-            Refresh();
-        }
-		//*/
+		
 		#endregion
 
 		#region Public Methods
-
+		private static CellInfo GetCellInfo(DateTime date)
+		{
+			CellInfo ci = new CellInfo(date);
+			return ci;
+		}
+		
 		public void StartEditing()
         {
             /*if (!selectedAppointment.Locked && appointmentViews.ContainsKey(selectedAppointment))
@@ -911,38 +739,17 @@ namespace CalendarTest
 			return Shift(names, shift);
 		}
 
-		//private int[] GetHeaderWidth(Rectangle rect)
-		//{
-		//    // Week contain 7 days + weekLabel
-		//    int[] widths = new int[8];
-
-		//    widths[0] = renderer.WeekLabelWidth;
-		//    int dayWidth = (rect.Width - renderer.WeekLabelWidth) / 7;
-
-		//    for (int n = 1; n < widths.Length; n++)
-		//    {
-		//        widths[n] = dayWidth;
-		//    }
-		//    return widths;
-		//}
-		
 		#endregion 
 		
 		#region Drawing Methods
-
+			
 		private CellInfo[] GetWeekDays(DateTime date)
 		{
 			CellInfo[] infos = new CellInfo[7];
 
 			for (int n = 0; n < infos.Length; n++)
 			{
-				infos[n] = new CellInfo(date.AddDays(n));
-				
-				// TODO: Add extra info here
-				if (n % 2 == 0)
-					infos[n].extraInfo = date;
-
-				infos[n].sTip = "Tip:\n" + infos[n].sTitle + "\n";
+				infos[n] = m_fpDefCellInfo(date.AddDays(n));
 			}
 
 			return infos;
@@ -1168,9 +975,17 @@ namespace CalendarTest
 
         public event EventHandler SelectionChanged;
 		public event EventHandler Complete;
-        //public event ResolveAppointmentsEventHandler ResolveAppointments;
-        //public event NewAppointmentEventHandler NewAppointment;
-        //public event EventHandler<AppointmentEventArgs> AppoinmentMove;
+
+		private void InitializeComponent()
+		{
+			this.SuspendLayout();
+			// 
+			// Calendar
+			// 
+			this.Name = "Calendar";
+			this.ResumeLayout(false);
+
+		}
 
         #endregion
     }

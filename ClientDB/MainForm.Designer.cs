@@ -62,7 +62,7 @@
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.log = new System.Windows.Forms.TextBox();
-			this.dayView1 = new CalendarTest.DayView();
+			this.calendar = new Calendar.Calendar();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnBackUp = new System.Windows.Forms.Button();
 			this.btnTrainersShedule = new System.Windows.Forms.Button();
@@ -282,7 +282,7 @@
 			// 
 			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
 			this.tableLayoutPanel1.Controls.Add(this.log, 0, 2);
-			this.tableLayoutPanel1.Controls.Add(this.dayView1, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.calendar, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
 			this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -295,13 +295,13 @@
 			// 
 			// dayView1
 			// 
-			this.dayView1.ActiveTool = null;
-			resources.ApplyResources(this.dayView1, "dayView1");
-			this.dayView1.Name = "dayView1";
-			this.dayView1.NavButtonsHeight = 30;
-			this.dayView1.RowHeight = 80;
-			this.dayView1.SelectedDate = new System.DateTime(((long)(0)));
-			this.dayView1.StartDate = new System.DateTime(2013, 7, 25, 0, 0, 0, 0);
+			this.calendar.ActiveTool = null;
+			resources.ApplyResources(this.calendar, "dayView1");
+			this.calendar.Name = "dayView1";
+			this.calendar.NavButtonsHeight = 30;
+			this.calendar.RowHeight = 80;
+			this.calendar.SelectedDate = new System.DateTime(((long)(0)));
+			this.calendar.StartDate = new System.DateTime(2013, 7, 25, 0, 0, 0, 0);
 			// 
 			// panel1
 			// 
@@ -411,7 +411,7 @@
 		private System.Windows.Forms.ToolStripMenuItem manageClientsToolStripMenuItem;
 		private System.Windows.Forms.Button btnClientManager;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-		private CalendarTest.DayView dayView1;
+		private Calendar.Calendar calendar;
 		private System.Windows.Forms.TextBox log;
 		private System.Windows.Forms.ToolStripMenuItem sendLogToolStripMenuItem;
     }

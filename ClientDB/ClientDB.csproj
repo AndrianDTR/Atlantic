@@ -288,9 +288,9 @@
     <None Include="Resources\1367459833_lock1.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DayView\DayView.csproj">
+    <ProjectReference Include="..\DayView\Calendar.csproj">
       <Project>{D17A4D6A-4CAA-4470-8A19-F42463C021FD}</Project>
-      <Name>DayView</Name>
+      <Name>Calendar</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

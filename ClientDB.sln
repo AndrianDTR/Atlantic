@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientDB", "ClientDB\Client
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Clients", "Clients\Clients.vdproj", "{5CCD8F8A-4432-4793-A2AF-DF8C4A9BD3B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayView", "DayView\DayView.csproj", "{D17A4D6A-4CAA-4470-8A19-F42463C021FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calendar", "DayView\Calendar.csproj", "{D17A4D6A-4CAA-4470-8A19-F42463C021FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

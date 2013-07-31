@@ -1,11 +1,9 @@
-/* Developed by Ertan Tike (ertan.tike@moreum.com) */
-
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 
-namespace CalendarTest
+namespace Calendar
 {
     public class DrawTool : ITool
     {
@@ -14,9 +12,9 @@ namespace CalendarTest
 		DateTime m_SelectionStartAt;
         bool m_SelectionChanged;
         
-        private DayView m_DayView;
+        private Calendar m_DayView;
 
-		public DayView DayView
+		public Calendar DayView
 		{
 			get { return m_DayView; }
 			set { m_DayView = value; }
