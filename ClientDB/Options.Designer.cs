@@ -34,14 +34,14 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.comboLang = new System.Windows.Forms.ComboBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.checkBox2 = new System.Windows.Forms.CheckBox();
-			this.checkBox1 = new System.Windows.Forms.CheckBox();
+			this.numericCalRowHeight = new System.Windows.Forms.NumericUpDown();
+			this.checkShowClientCount = new System.Windows.Forms.CheckBox();
+			this.checkShowTrainer = new System.Windows.Forms.CheckBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-			this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+			this.numericMinPassLen = new System.Windows.Forms.NumericUpDown();
 			this.groupBox1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericCalRowHeight)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericMinPassLen)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// btnClose
@@ -62,6 +62,7 @@
 			this.btnOk.TabIndex = 1;
 			this.btnOk.Text = "Ok";
 			this.btnOk.UseVisualStyleBackColor = true;
+			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
 			// 
 			// label1
 			// 
@@ -83,6 +84,7 @@
 			// 
 			// comboLang
 			// 
+			this.comboLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboLang.FormattingEnabled = true;
 			this.comboLang.Location = new System.Drawing.Point(161, 35);
 			this.comboLang.Name = "comboLang";
@@ -91,9 +93,9 @@
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.numericUpDown1);
-			this.groupBox1.Controls.Add(this.checkBox2);
-			this.groupBox1.Controls.Add(this.checkBox1);
+			this.groupBox1.Controls.Add(this.numericCalRowHeight);
+			this.groupBox1.Controls.Add(this.checkShowClientCount);
+			this.groupBox1.Controls.Add(this.checkShowTrainer);
 			this.groupBox1.Controls.Add(this.label3);
 			this.groupBox1.Location = new System.Drawing.Point(15, 62);
 			this.groupBox1.Name = "groupBox1";
@@ -102,25 +104,47 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Calendar options";
 			// 
-			// checkBox2
+			// numericCalRowHeight
 			// 
-			this.checkBox2.AutoSize = true;
-			this.checkBox2.Location = new System.Drawing.Point(13, 65);
-			this.checkBox2.Name = "checkBox2";
-			this.checkBox2.Size = new System.Drawing.Size(111, 17);
-			this.checkBox2.TabIndex = 13;
-			this.checkBox2.Text = "Show client count";
-			this.checkBox2.UseVisualStyleBackColor = true;
+			this.numericCalRowHeight.Location = new System.Drawing.Point(143, 16);
+			this.numericCalRowHeight.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+			this.numericCalRowHeight.Minimum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+			this.numericCalRowHeight.Name = "numericCalRowHeight";
+			this.numericCalRowHeight.Size = new System.Drawing.Size(59, 20);
+			this.numericCalRowHeight.TabIndex = 14;
+			this.numericCalRowHeight.Value = new decimal(new int[] {
+            80,
+            0,
+            0,
+            0});
 			// 
-			// checkBox1
+			// checkShowClientCount
 			// 
-			this.checkBox1.AutoSize = true;
-			this.checkBox1.Location = new System.Drawing.Point(13, 42);
-			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(189, 17);
-			this.checkBox1.TabIndex = 12;
-			this.checkBox1.Text = "Show tariner name in calendar day";
-			this.checkBox1.UseVisualStyleBackColor = true;
+			this.checkShowClientCount.AutoSize = true;
+			this.checkShowClientCount.Location = new System.Drawing.Point(13, 65);
+			this.checkShowClientCount.Name = "checkShowClientCount";
+			this.checkShowClientCount.Size = new System.Drawing.Size(111, 17);
+			this.checkShowClientCount.TabIndex = 13;
+			this.checkShowClientCount.Text = "Show client count";
+			this.checkShowClientCount.UseVisualStyleBackColor = true;
+			// 
+			// checkShowTrainer
+			// 
+			this.checkShowTrainer.AutoSize = true;
+			this.checkShowTrainer.Location = new System.Drawing.Point(13, 42);
+			this.checkShowTrainer.Name = "checkShowTrainer";
+			this.checkShowTrainer.Size = new System.Drawing.Size(189, 17);
+			this.checkShowTrainer.TabIndex = 12;
+			this.checkShowTrainer.Text = "Show tariner name in calendar day";
+			this.checkShowTrainer.UseVisualStyleBackColor = true;
 			// 
 			// label3
 			// 
@@ -131,45 +155,23 @@
 			this.label3.TabIndex = 10;
 			this.label3.Text = "Row height";
 			// 
-			// numericUpDown1
+			// numericMinPassLen
 			// 
-			this.numericUpDown1.Location = new System.Drawing.Point(143, 16);
-			this.numericUpDown1.Maximum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-			this.numericUpDown1.Minimum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-			this.numericUpDown1.Name = "numericUpDown1";
-			this.numericUpDown1.Size = new System.Drawing.Size(59, 20);
-			this.numericUpDown1.TabIndex = 14;
-			this.numericUpDown1.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-			// 
-			// numericUpDown2
-			// 
-			this.numericUpDown2.Location = new System.Drawing.Point(161, 7);
-			this.numericUpDown2.Maximum = new decimal(new int[] {
+			this.numericMinPassLen.Location = new System.Drawing.Point(161, 7);
+			this.numericMinPassLen.Maximum = new decimal(new int[] {
             20,
             0,
             0,
             0});
-			this.numericUpDown2.Minimum = new decimal(new int[] {
+			this.numericMinPassLen.Minimum = new decimal(new int[] {
             6,
             0,
             0,
             0});
-			this.numericUpDown2.Name = "numericUpDown2";
-			this.numericUpDown2.Size = new System.Drawing.Size(59, 20);
-			this.numericUpDown2.TabIndex = 15;
-			this.numericUpDown2.Value = new decimal(new int[] {
+			this.numericMinPassLen.Name = "numericMinPassLen";
+			this.numericMinPassLen.Size = new System.Drawing.Size(59, 20);
+			this.numericMinPassLen.TabIndex = 15;
+			this.numericMinPassLen.Value = new decimal(new int[] {
             8,
             0,
             0,
@@ -182,7 +184,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnClose;
 			this.ClientSize = new System.Drawing.Size(385, 193);
-			this.Controls.Add(this.numericUpDown2);
+			this.Controls.Add(this.numericMinPassLen);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.comboLang);
 			this.Controls.Add(this.label2);
@@ -199,8 +201,8 @@
 			this.Text = "Options";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericCalRowHeight)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericMinPassLen)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -214,10 +216,10 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ComboBox comboLang;
 		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.NumericUpDown numericUpDown1;
-		private System.Windows.Forms.CheckBox checkBox2;
-		private System.Windows.Forms.CheckBox checkBox1;
+		private System.Windows.Forms.NumericUpDown numericCalRowHeight;
+		private System.Windows.Forms.CheckBox checkShowClientCount;
+		private System.Windows.Forms.CheckBox checkShowTrainer;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.NumericUpDown numericUpDown2;
+		private System.Windows.Forms.NumericUpDown numericMinPassLen;
 	}
 }

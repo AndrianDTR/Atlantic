@@ -3,58 +3,145 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace GAssistant
 {
 	public class Opts
 	{
-		private String m_name = String.Empty;
-		private String m_phone = String.Empty;
+		private int m_minPassLen = -1;
+		private String m_language = String.Empty;
+		private int m_calRowHeight = -1;
+		private int m_showTrainer = -1;
+		private int m_showClientCount = -1;
+		private int m_storeMainWindowSatate = -1;
+		private int m_mainWindowSatate = -1;
 		
 		public Opts()
 		{
 			String where = String.Format("1 = 1");
-			DataRow userData = new DbAdapter().GetFirstRow(DbTable.Trainers, where, new List<string> { "id", "name", "phone" });
+			DataRow data = new DbAdapter().GetFirstRow(DbTable.Settings, where, new List<string> {});
 
-			if (userData == null)
+			if (data == null)
 			{
-				throw new Exception("Error! No such trainer.");
+				throw new Exception("Error! No such option.");
 			}
 
-			m_name = userData["name"].ToString();
-			m_phone = userData["phone"].ToString();
+			m_minPassLen = int.Parse(data["minPassLen"].ToString());
+			m_calRowHeight = int.Parse(data["calRowHeight"].ToString());
+			m_showTrainer = int.Parse(data["showTrainer"].ToString());
+			m_showClientCount = int.Parse(data["showClientCount"].ToString());
+			m_storeMainWindowSatate = int.Parse(data["storeMainWindowSatate"].ToString());
+			m_mainWindowSatate = int.Parse(data["mainWindowSatate"].ToString());
+			
+			m_language = data["language"].ToString();
 		}
 
-		public String Name
+		public String Language
 		{
 			get
 			{
-				return DbUtils.Dequote(m_name);
+				return DbUtils.Dequote(m_language);
+			}
+			set
+			{
+				m_language = DbUtils.Quote(value);
 			}
 		}
 
-		public String Phone
+		public int MinPassLen
 		{
 			get
 			{
-				return m_phone;
+				return m_minPassLen;
+			}
+			set
+			{
+				m_minPassLen = value;
 			}
 		}
 
-		public void SetData(String name, String phone)
+		public int CalRowHeight
 		{
-			Debug.WriteLine(String.Format("Set data for trainer '{0}': name='{0}', phone='{1}'", m_name, name, phone));
+			get
+			{
+				return m_calRowHeight;
+			}
+			set
+			{
+				m_calRowHeight = value;
+			}
+		}
+
+		public Boolean ShowTrainer
+		{
+			get
+			{
+				return (m_showTrainer == 1);
+			}
+			set
+			{
+				m_showTrainer = value ? 1 : 0;
+			}
+		}
+
+		public Boolean ShowClientCount
+		{
+			get
+			{
+				return (m_showClientCount == 1);
+			}
+			set
+			{
+				m_showClientCount = value ? 1 : 0;
+			}
+		}
+
+		public Boolean StoreMainWindowState
+		{
+			get
+			{
+				return (m_storeMainWindowSatate == 1);
+			}
+			set
+			{
+				m_storeMainWindowSatate = value ? 1 : 0;
+			}
+		}
+
+		public FormWindowState MainWindowState
+		{
+			get
+			{
+				return (FormWindowState)m_mainWindowSatate;
+			}
+			set
+			{
+				m_mainWindowSatate = (int)value;
+			}
+		}
+		
+		public void StoreData()
+		{
+			Logger.Enter();
 			
 			DbAdapter ad = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
-			fields["name"] = name;
-			fields["phone"] = phone;
-			if (!ad.Update(DbTable.Trainers, fields, String.Format("id=1")))
+			fields["language"] = m_language;
+			fields["minPassLen"] = m_minPassLen.ToString();
+			fields["calRowHeight"] = m_calRowHeight.ToString();
+			fields["showTrainer"] = m_showTrainer.ToString();
+			fields["showClientCount"] = m_showClientCount.ToString();
+			fields["storeMainWindowState"] = m_storeMainWindowSatate.ToString();
+			fields["mainWindowState"] = m_mainWindowSatate.ToString();
+			
+			if (!ad.Update(DbTable.Settings, fields, String.Format("id=1")))
 			{
-				throw new Exception("Data could not been changed.");
+				Logger.Error("Store option error.");
+				throw new Exception("Data could not been stored.");
 			}
-			m_phone = phone;
-			m_name = name;
+			
+			Logger.Leave();
 		}
 	}
 }

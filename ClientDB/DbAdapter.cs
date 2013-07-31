@@ -549,6 +549,8 @@ namespace GAssistant
 				, calRowHeight Integer NOT NULL Default(100)
 				, showTrainer Integer NOT NULL Default(1)
 				, showClientCount Integer NOT NULL Default(1)
+				, storeMainWindowState Integer NOT NULL Default(1)
+				, mainWindowState Integer NOT NULL Default(1)
 			);
 			INSERT INTO settings(minPassLen) VALUES(8)";
 			

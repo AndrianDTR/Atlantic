@@ -135,6 +135,9 @@
   <data name="&gt;&gt;aboutToolStripMenuItem.Name" xml:space="preserve">
     <value>aboutToolStripMenuItem</value>
   </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;btnPaymentsHistory.Name" xml:space="preserve">
     <value>btnPaymentsHistory</value>
   </data>
@@ -144,8 +147,8 @@
   <data name="scheduleToolStripMenuItem.Text" xml:space="preserve">
     <value>Schedule</value>
   </data>
-  <data name="trainersScheduleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 22</value>
+  <data name="btnClientManager.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 48</value>
   </data>
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -158,6 +161,9 @@
   </data>
   <data name="dayView1.Size" type="System.Drawing.Size, System.Drawing">
     <value>905, 290</value>
+  </data>
+  <data name="calendarView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 63</value>
   </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>921, 24</value>
@@ -203,9 +209,6 @@
   </data>
   <data name="sendLogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 22</value>
-  </data>
-  <data name="&gt;&gt;trainersScheduleToolStripMenuItem.Name" xml:space="preserve">
-    <value>trainersScheduleToolStripMenuItem</value>
   </data>
   <data name="searchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 20</value>
@@ -313,7 +316,7 @@
     <value>194, 22</value>
   </data>
   <data name="&gt;&gt;dayView1.Type" xml:space="preserve">
-    <value>CalendarTest.DayView, Calendar.DayView, Version=1.0.4958.2994, Culture=neutral, PublicKeyToken=null</value>
+    <value>CalendarTest.DayView, Calendar.DayView, Version=1.0.4955.37569, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Options</value>
@@ -402,8 +405,8 @@
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;clientToolStripMenuItem.Name" xml:space="preserve">
-    <value>clientToolStripMenuItem</value>
+  <data name="trainersScheduleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 22</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -443,6 +446,9 @@
   </data>
   <data name="&gt;&gt;trainersScheduleToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;calendarView.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="usersAndPasswordsToolStripMenuItem.Text" xml:space="preserve">
     <value>Users and passwords</value>
@@ -624,6 +630,9 @@
   <data name="&gt;&gt;btnClientManager.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;calendarView.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 8</value>
   </data>
@@ -632,6 +641,12 @@
   </data>
   <data name="&gt;&gt;toolStripMenuItem2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="calendarView.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;clientToolStripMenuItem.Name" xml:space="preserve">
+    <value>clientToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -644,6 +659,9 @@
   </data>
   <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 20</value>
+  </data>
+  <data name="&gt;&gt;calendarView.Type" xml:space="preserve">
+    <value>CalendarTest.DayView, Calendar.DayView, Version=1.0.4955.37569, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="log.Size" type="System.Drawing.Size, System.Drawing">
     <value>905, 144</value>
@@ -681,8 +699,8 @@
   <data name="&gt;&gt;toolStripMenuItem4.Name" xml:space="preserve">
     <value>toolStripMenuItem4</value>
   </data>
-  <data name="btnClientManager.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 48</value>
+  <data name="&gt;&gt;trainersScheduleToolStripMenuItem.Name" xml:space="preserve">
+    <value>trainersScheduleToolStripMenuItem</value>
   </data>
   <data name="paymentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 22</value>
@@ -735,8 +753,8 @@
   <data name="btnTrainersShedule.Location" type="System.Drawing.Point, System.Drawing">
     <value>162, 0</value>
   </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;calendarView.Name" xml:space="preserve">
+    <value>calendarView</value>
   </data>
   <data name="&gt;&gt;btnAddClient.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -767,5 +785,8 @@
   </metadata>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>Ukrainian (Ukraine)</value>
   </metadata>
 </root>

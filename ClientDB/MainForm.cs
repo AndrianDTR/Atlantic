@@ -12,9 +12,59 @@ namespace GAssistant
 		
         public MainForm()
         {
-            InitializeComponent();
+			InitializeComponent();
+			UserLogin();
+			Reinit();
         }
+		
+		private void UserLogin()
+		{
+			DialogResult res = m_login.ShowDialog();
 
+			if (res != DialogResult.OK)
+			{
+				this.Close();
+			}
+		}
+		
+		private void Reinit()
+		{
+			Opts opt = new Opts();
+			Session session = Session.Instance;
+						
+			dayView1.RowHeight = opt.CalRowHeight;
+			session.PassLen = opt.MinPassLen;
+			
+			UserRole priv = session.UserRole;
+
+			// File menu
+			exportToolStripMenuItem.Enabled = UserRole.IsSet(priv.Backup, UserRights.Create);
+			importToolStripMenuItem.Enabled = UserRole.IsSet(priv.Backup, UserRights.Write);
+			btnBackUp.Enabled = UserRole.IsSet(priv.Backup, UserRights.Write);
+
+			// Search menu
+			clientByBarcodeToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
+
+			// View menu
+			paymentsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Payments, UserRights.Read);
+			btnPaymentsHistory.Enabled = UserRole.IsSet(priv.Payments, UserRights.Read);
+
+			// Clients menu
+			addToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Create);
+			btnAddClient.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
+			manageClientsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
+			btnClientManager.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
+
+			// Settings menu
+			userRolesToolStripMenuItem.Enabled = UserRole.IsSet(priv.Users, UserRights.Read);
+			usersAndPasswordsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Users, UserRights.Read);
+
+			btnTrainersShedule.Enabled = UserRole.IsSet(priv.Trainers, UserRights.Read);
+			manageTrainersToolStripMenuItem.Enabled = UserRole.IsSet(priv.Trainers, UserRights.Read);
+
+			manageScheduleRulesToolStripMenuItem.Enabled = UserRole.IsSet(priv.Schedule, UserRights.Read);
+		}
+		
 		private void clientByBarcodeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Prompt dlg = new Prompt();
@@ -50,45 +100,6 @@ namespace GAssistant
 			};
 			
 		}
-
-        private void OnLoad(object sender, EventArgs e)
-        {
-			Session session = Session.Instance;
-			
-			DialogResult res = m_login.ShowDialog();
-			if (res != DialogResult.OK)
-			{
-				this.Close();
-			}
-			
-			UserRole priv = session.UserRole;
-
-			// File menu
-			exportToolStripMenuItem.Enabled = UserRole.IsSet(priv.Backup, UserRights.Create);
-			importToolStripMenuItem.Enabled = UserRole.IsSet(priv.Backup, UserRights.Write);
-			btnBackUp.Enabled = UserRole.IsSet(priv.Backup, UserRights.Write);
-
-			// Search menu
-			clientByBarcodeToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
-
-			// View menu
-			paymentsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Payments, UserRights.Read);
-
-			// Clients menu
-			addToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Create);
-			btnAddClient.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
-			manageClientsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
-			btnClientManager.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
-			
-			// Settings menu
-			userRolesToolStripMenuItem.Enabled = UserRole.IsSet(priv.Users, UserRights.Read);
-			usersAndPasswordsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Users, UserRights.Read);
-			
-			btnTrainersShedule.Enabled = UserRole.IsSet(priv.Trainers, UserRights.Read);
-			manageTrainersToolStripMenuItem.Enabled = UserRole.IsSet(priv.Trainers, UserRights.Read);
-
-			manageScheduleRulesToolStripMenuItem.Enabled = UserRole.IsSet(priv.Schedule, UserRights.Read);
-        }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -188,7 +199,8 @@ namespace GAssistant
 		private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Options opt = new Options();
-			opt.ShowDialog();
+			if(DialogResult.OK == opt.ShowDialog())
+				Reinit();
 		}
     }
 }
