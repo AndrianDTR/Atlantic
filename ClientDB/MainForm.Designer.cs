@@ -293,11 +293,12 @@
 			this.log.Name = "log";
 			this.log.ReadOnly = true;
 			// 
-			// dayView1
+			// calendar
 			// 
 			this.calendar.ActiveTool = null;
-			resources.ApplyResources(this.calendar, "dayView1");
-			this.calendar.Name = "dayView1";
+			this.calendar.CellInfoDeledate = ((Calendar.Calendar.@__CellInfo)(resources.GetObject("calendar.CellInfoDeledate")));
+			resources.ApplyResources(this.calendar, "calendar");
+			this.calendar.Name = "calendar";
 			this.calendar.NavButtonsHeight = 30;
 			this.calendar.RowHeight = 80;
 			this.calendar.SelectedDate = new System.DateTime(((long)(0)));
@@ -319,6 +320,7 @@
 			resources.ApplyResources(this.btnBackUp, "btnBackUp");
 			this.btnBackUp.Name = "btnBackUp";
 			this.btnBackUp.UseVisualStyleBackColor = true;
+			this.btnBackUp.Click += new System.EventHandler(this.btnBackUp_Click);
 			// 
 			// btnTrainersShedule
 			// 

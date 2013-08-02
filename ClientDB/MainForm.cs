@@ -72,7 +72,8 @@ namespace GAssistant
 
 			manageScheduleRulesToolStripMenuItem.Enabled = UserRole.IsSet(priv.Schedule, UserRights.Read);
 
-			calendar.SelectedDate = DateTime.Now;
+			calendar.StartDate = DateTime.Now;
+			calendar.SelectedDate = calendar.StartDate;
 			
 			if (m_opt.StoreMainWindowState)
 			{
@@ -222,6 +223,11 @@ namespace GAssistant
 			Options opt = new Options();
 			if(DialogResult.OK == opt.ShowDialog())
 				Reinit();
+		}
+
+		private void btnBackUp_Click(object sender, EventArgs e)
+		{
+			new DbAdapter().ExportData();
 		}
     }
 }

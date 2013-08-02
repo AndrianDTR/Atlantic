@@ -263,6 +263,7 @@ namespace Calendar
         protected virtual void OnStartDateChanged()
         {
             startDate = startDate.Date;
+            
 			int nWeeks = GetWeekOfYear(new DateTime(startDate.Year, 12, 31));
 			AdjustScrollbar();
             m_Scrollbar.Value = GetWeekOfYear(StartDate) * m_nMult;
@@ -278,8 +279,16 @@ namespace Calendar
         public DateTime SelectedDate
         {
             get { return selectedDate; }
-            set { selectedDate = value; }
+            set 
+            { 
+				selectedDate = value;
+				OnSelectedDateChanged();
+			}
         }
+		protected virtual void OnSelectedDateChanged()
+		{
+			Invalidate(true);
+		}
 
         private ITool activeTool;
 
@@ -852,121 +861,11 @@ namespace Calendar
 			e.Graphics.ResetClip();
 		}
 
-		/*
-
-        private void DrawDay(PaintEventArgs e, Rectangle rect, DateTime time)
-        {
-            //renderer.DrawDayBackground(e.Graphics, rect);
-
-            Rectangle workingHoursRectangle = GetHourRangeRectangle(workStart, workEnd, rect);
-
-            if (workingHoursRectangle.Y < this.HeaderHeight)
-                workingHoursRectangle.Y = this.HeaderHeight;
-
-            if (!((time.DayOfWeek == DayOfWeek.Saturday) || (time.DayOfWeek == DayOfWeek.Sunday))) //weekends off -> no working hours
-                renderer.DrawHourRange(e.Graphics, workingHoursRectangle, false, false);
-
-            if ((selection == SelectionType.DateRange) && (time.Day == selectionStart.Day))
-            {
-                Rectangle selectionRectangle = GetHourRangeRectangle(selectionStart, selectionEnd, rect);
-
-                renderer.DrawHourRange(e.Graphics, selectionRectangle, false, true);
-            }
-
-            e.Graphics.SetClip(rect);
-			
-            for (int week = 0; week < ShowWeeks; week++)
-            {
-                int y = rect.Top + (week * weekLabelHeight) - scrollbar.Value;
-
-                Pen pen = new Pen(renderer.WeekSeperatorColor);
-                e.Graphics.DrawLine(pen, rect.Left, y, rect.Right, y);
-
-                if (y > rect.Bottom)
-                    break;
-            }
-
-            renderer.DrawDayGripper(e.Graphics, rect, appointmentGripWidth);
-
-            e.Graphics.ResetClip();
-			
-            DrawAppointments(e, rect, time);
-        }
-		//*/
-        
-        private void DrawAppointments(PaintEventArgs e, Rectangle rect, DateTime time)
+		private void DrawAppointments(PaintEventArgs e, Rectangle rect, DateTime time)
         {
             DateTime timeStart = time.Date;
             DateTime timeEnd = timeStart.AddHours(24);
             timeEnd = timeEnd.AddSeconds(-1);
-
-			/*
-            AppointmentList appointments = null;//(AppointmentList)cachedAppointments[time.Day];
-
-            if (appointments != null)
-            {
-			    HalfHourLayout[] layout = GetMaxParalelAppointments(appointments);
-                List<Appointment> drawnItems = new List<Appointment>();
-
-                for (int halfHour = 0; halfHour < 24 * 2; halfHour++)
-                {
-                    HalfHourLayout hourLayout = layout[halfHour];
-
-                    if ((hourLayout != null) && (hourLayout.Count > 0))
-                    {
-                        for (int appIndex = 0; appIndex < hourLayout.Count; appIndex++)
-                        {
-                            Appointment appointment = hourLayout.Appointments[appIndex];
-
-                            if (drawnItems.IndexOf(appointment) < 0)
-                            {
-                                Rectangle appRect = rect;
-                                int appointmentWidth;
-                                AppointmentView view;
-
-                                appointmentWidth = rect.Width / appointment.m_ConflictCount;
-
-                                int lastX = 0;
-
-                                foreach (Appointment app in hourLayout.Appointments)
-                                {
-                                    if ((app != null) && (appointmentViews.ContainsKey(app)))
-                                    {
-                                        view = appointmentViews[app];
-
-                                        if (lastX < view.Rectangle.X)
-                                            lastX = view.Rectangle.X;
-                                    }
-                                }
-
-                                if ((lastX + (appointmentWidth * 2)) > (rect.X + rect.Width))
-                                    lastX = 0;
-
-                                appRect.Width = appointmentWidth - 5;
-
-                                if (lastX > 0)
-                                    appRect.X = lastX + appointmentWidth;
-
-                                appRect = GetHourRangeRectangle(appointment.StartDate, appointment.EndDate, appRect);
-
-                                view = new AppointmentView();
-                                view.Rectangle = appRect;
-                                view.Appointment = appointment;
-
-                                appointmentViews[appointment] = view;
-
-                                e.Graphics.SetClip(rect);
-
-                                renderer.DrawAppointment(e.Graphics, appRect, appointment, appointment == selectedAppointment, appointmentGripWidth);
-
-                                e.Graphics.ResetClip();
-
-                                drawnItems.Add(appointment);
-                            }
-                        }
-                    }
-                }
-            }//*/
         }
 
 		#endregion

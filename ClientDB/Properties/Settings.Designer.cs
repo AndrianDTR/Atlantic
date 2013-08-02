@@ -25,20 +25,19 @@ namespace GAssistant.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8")]
-        public int PassLen {
+        [global::System.Configuration.DefaultSettingValueAttribute("client.db")]
+        public string clientDbFile {
             get {
-                return ((int)(this["PassLen"]));
+                return ((string)(this["clientDbFile"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("data source=client.db")]
-        public string clientConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("data source=")]
+        public string clientDataSrc {
             get {
-                return ((string)(this["clientConnectionString"]));
+                return ((string)(this["clientDataSrc"]));
             }
         }
     }

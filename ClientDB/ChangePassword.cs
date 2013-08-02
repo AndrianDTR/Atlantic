@@ -39,9 +39,9 @@ namespace GAssistant
 				return;
 			}
 
-			if (password.Text.Length < Properties.Settings.Default.PassLen)
+			if (password.Text.Length < Session.Instance.PassLen)
 			{
-				message.Text = String.Format("Password must be at least {0} characters length.", Properties.Settings.Default.PassLen);
+				message.Text = String.Format("Password must be at least {0} characters length.", Session.Instance.PassLen);
 				return;
 			}
 			

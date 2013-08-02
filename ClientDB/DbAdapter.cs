@@ -6,6 +6,8 @@ using System.Data.SQLite;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Data.Common;
+using System.IO;
+using System.IO.Compression;
 
 namespace GAssistant
 {
@@ -92,6 +94,16 @@ namespace GAssistant
 	
 	class DbAdapter
     {
+		private static object m_lock = new object();
+		
+		private static String ClientDbSrc
+		{
+			get
+			{
+				return GAssistant.Properties.Settings.Default.clientDataSrc + 
+					GAssistant.Properties.Settings.Default.clientDbFile;
+			}
+		}
 		// Constructor
 		public DbAdapter()
 		{
@@ -164,7 +176,7 @@ namespace GAssistant
 			Logger.Enter();
 			
 			DataTable dt = new DataTable();
-			SQLiteConnection cnn = new SQLiteConnection(GAssistant.Properties.Settings.Default.clientConnectionString);
+			SQLiteConnection cnn = new SQLiteConnection(ClientDbSrc);
 			SQLiteDataReader reader = null;
 			SQLiteCommand cmd = null;
 
@@ -234,7 +246,7 @@ namespace GAssistant
 		public int ExecuteNonQuery(SQLiteCommand cmd, out Int64 insertId)
 		{
 			Logger.Enter();
-			SQLiteConnection cnn = new SQLiteConnection(GAssistant.Properties.Settings.Default.clientConnectionString);
+			SQLiteConnection cnn = new SQLiteConnection(ClientDbSrc);
 			int rowsUpdated = -1;
 
 			Logger.Debug(String.Format("Execute NON query: {0}.", cmd.CommandText));
@@ -283,7 +295,7 @@ namespace GAssistant
 		{
 			Logger.Enter();
 			String res = "";
-			SQLiteConnection cnn = new SQLiteConnection(GAssistant.Properties.Settings.Default.clientConnectionString);
+			SQLiteConnection cnn = new SQLiteConnection(ClientDbSrc);
 			SQLiteCommand cmd = null;
 			object value = null;
 
@@ -327,7 +339,7 @@ namespace GAssistant
 		public DataRow GetFirstRow(DbTable table, String where, List<String> fields)
 		{
 			Logger.Enter();
-			SQLiteConnection conn = new SQLiteConnection(Properties.Settings.Default.clientConnectionString);
+			SQLiteConnection conn = new SQLiteConnection(ClientDbSrc);
 			DataRow row = null;
 			String query = String.Format("select * from {0} where {1};", DbUtils.GetTableName(table), where);
 			
@@ -638,11 +650,11 @@ namespace GAssistant
 				, date TimeStamp Default(CURRENT_TIMESTAMP)
 			)";
 
-			SQLiteConnection conn = new SQLiteConnection(Properties.Settings.Default.clientConnectionString);
+			SQLiteConnection conn = new SQLiteConnection(ClientDbSrc);
 			
 			try
 			{
-				String[] conStr = Properties.Settings.Default.clientConnectionString.Split(';');
+				String[] conStr = ClientDbSrc.Split(';');
 				foreach (String opt in conStr)
 				{
 					String[] keyVal = opt.Split('=');
@@ -677,15 +689,127 @@ namespace GAssistant
 			Logger.Leave();
 			return res;
 		}
+
+		private void Compress(FileInfo fileToCompress)
+		{
+			using (FileStream originalFileStream = fileToCompress.OpenRead())
+			{
+				string outFile = fileToCompress.FullName + "_" + DateTime.Now.ToShortDateString() + ".gz";
+				if ((File.GetAttributes(fileToCompress.FullName) & FileAttributes.Hidden) != FileAttributes.Hidden & fileToCompress.Extension != ".gz")
+				{
+					using (FileStream compressedFileStream = File.Create(outFile))
+					{
+						using (GZipStream compressionStream = new GZipStream(compressedFileStream, CompressionMode.Compress))
+						{
+							byte[] buffer = new byte[1024];
+							int nRead;
+							while ((nRead = originalFileStream.Read(buffer, 0, buffer.Length)) > 0)
+							{
+								compressionStream.Write(buffer, 0, nRead);
+							}
+							
+							Console.WriteLine("Compressed {0} from {1} to {2} bytes.",
+								fileToCompress.Name, fileToCompress.Length.ToString(), compressedFileStream.Length.ToString());
+						}
+					}
+				}
+			}
+		}
+
+		private void Decompress(FileInfo fileToDecompress)
+		{
+			using (FileStream originalFileStream = fileToDecompress.OpenRead())
+			{
+				string currentFileName = fileToDecompress.FullName;
+				string newFileName = currentFileName.Remove(currentFileName.Length - fileToDecompress.Extension.Length);
+
+				using (FileStream decompressedFileStream = File.Create(newFileName))
+				{
+					using (GZipStream decompressionStream = new GZipStream(originalFileStream, CompressionMode.Decompress))
+					{
+						//decompressionStream.CopyTo(decompressedFileStream);
+						Console.WriteLine("Decompressed: {0}", fileToDecompress.Name);
+					}
+				}
+			}
+		}
 		
 		public bool ImportData()
 		{
-			return true;
+			bool res = false;
+			Logger.Enter();
+			
+			do 
+			{
+				lock (m_lock)
+				{
+					SQLiteConnection dbMain = new SQLiteConnection(ClientDbSrc);
+					SQLiteConnection dbBackup = new SQLiteConnection(ClientDbSrc);
+
+					try
+					{
+						dbMain.Open();
+						dbBackup.Open();
+						dbMain.BackupDatabase(dbBackup, "backup", "client", -1, null, -1);
+					}
+					catch (SQLiteException ex)
+					{
+						Debug.WriteLine(String.Format("ClearDB exception: {0}.", ex.Message));
+						throw new Exception("Error! DB clear failed.\r\n", ex);
+					}
+					finally
+					{
+						dbMain.Close();
+						dbBackup.Close();
+					}
+				}	
+				res = true;
+			} while (false);
+			
+			Logger.Leave();
+			return res;
 		}
 		
 		public bool ExportData()
 		{
-			return true;
+			bool res = false;
+			Logger.Enter();
+
+			do
+			{
+				string Backup = GAssistant.Properties.Settings.Default.clientDataSrc +
+					"backup.db";
+				lock (m_lock)
+				{
+					SQLiteConnection dbMain = new SQLiteConnection(ClientDbSrc);
+					SQLiteConnection dbBackup = new SQLiteConnection(Backup);
+
+					try
+					{
+						dbMain.Open();
+						dbBackup.Open();
+						dbMain.BackupDatabase(dbBackup, "main", "main", -1, null, -1);
+					}
+					catch (SQLiteException ex)
+					{
+						Debug.WriteLine(String.Format("DB backup exception: {0}.", ex.Message));
+						throw new Exception("Error! DB backup failed.\r\n", ex);
+					}
+					finally
+					{
+						dbMain.Close();
+						dbBackup.Close();
+					}
+					
+					
+					FileInfo f = new FileInfo("backup.db");
+					Compress(f);
+				}
+				res = true;
+			} while (false);
+
+			Logger.Leave();
+			return res;
 		}
 	}
 }

@@ -117,9 +117,9 @@ namespace GAssistant
 			if (userList.SelectedItems.Count <= 0)
 				return;
 
-			if (m_password.Text.Length < Properties.Settings.Default.PassLen)
+			if (m_password.Text.Length < Session.Instance.PassLen)
 			{
-				String msg = String.Format("Password must be at least {0} characters length.", Properties.Settings.Default.PassLen);
+				String msg = String.Format("Password must be at least {0} characters length.", Session.Instance.PassLen);
 				UIMessages.Warning(msg);
 				return;
 			}
