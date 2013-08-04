@@ -39,8 +39,8 @@ namespace GAssistant
 		{
 			Session session = Session.Instance;
 
-			calendar.RowHeight = m_opt.CalRowHeight;
-			calendar.CellInfoDeledate = GetCellInfo0;
+			m_calendar.RowHeight = m_opt.CalRowHeight;
+			m_calendar.CellInfoDeledate = GetCellInfo0;
 			session.PassLen = m_opt.MinPassLen;
 			
 			UserRole priv = session.UserRole;
@@ -72,8 +72,8 @@ namespace GAssistant
 
 			manageScheduleRulesToolStripMenuItem.Enabled = UserRole.IsSet(priv.Schedule, UserRights.Read);
 
-			calendar.StartDate = DateTime.Now;
-			calendar.SelectedDate = calendar.StartDate;
+			m_calendar.StartDate = DateTime.Now;
+			m_calendar.SelectedDate = m_calendar.StartDate;
 			
 			if (m_opt.StoreMainWindowState)
 			{

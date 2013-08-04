@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DayView")]
+[assembly: AssemblyTitle("Calendar")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Moreum")]
-[assembly: AssemblyProduct("DayView")]
-[assembly: AssemblyCopyright("Copyright © Moreum 2005")]
+[assembly: AssemblyCompany("Andrian Yablonskyy")]
+[assembly: AssemblyProduct("Calendar")]
+[assembly: AssemblyCopyright("Copyright © Andrian Yablonskyy 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
