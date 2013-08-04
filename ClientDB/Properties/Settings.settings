@@ -2,11 +2,14 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GAssistant.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="clientDbFile" Type="System.String" Scope="Application">
+    <Setting Name="szClientDbFile" Type="System.String" Scope="Application">
       <Value Profile="(Default)">client.db</Value>
     </Setting>
-    <Setting Name="clientDataSrc" Type="System.String" Scope="Application">
+    <Setting Name="szClientDataSrc" Type="System.String" Scope="Application">
       <Value Profile="(Default)">data source=</Value>
+    </Setting>
+    <Setting Name="szBackUpFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

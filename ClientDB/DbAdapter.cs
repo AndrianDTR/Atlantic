@@ -100,10 +100,11 @@ namespace GAssistant
 		{
 			get
 			{
-				return GAssistant.Properties.Settings.Default.clientDataSrc + 
-					GAssistant.Properties.Settings.Default.clientDbFile;
+				return GAssistant.Properties.Settings.Default.szClientDataSrc + 
+					GAssistant.Properties.Settings.Default.szClientDbFile;
 			}
 		}
+		
 		// Constructor
 		public DbAdapter()
 		{
@@ -690,77 +691,92 @@ namespace GAssistant
 			return res;
 		}
 
-		private void Compress(FileInfo fileToCompress)
+		private void Compress(FileInfo fileToCompress, String szOutFile)
 		{
 			using (FileStream originalFileStream = fileToCompress.OpenRead())
 			{
-				string outFile = fileToCompress.FullName + "_" + DateTime.Now.ToShortDateString() + ".gz";
-				if ((File.GetAttributes(fileToCompress.FullName) & FileAttributes.Hidden) != FileAttributes.Hidden & fileToCompress.Extension != ".gz")
+				FileAttributes attrib = File.GetAttributes(fileToCompress.FullName);
+				if ((attrib & FileAttributes.Hidden) != FileAttributes.Hidden 
+					&& fileToCompress.Extension != ".gz")
 				{
-					using (FileStream compressedFileStream = File.Create(outFile))
+					using (FileStream archFileStream = File.Create(szOutFile))
 					{
-						using (GZipStream compressionStream = new GZipStream(compressedFileStream, CompressionMode.Compress))
+						using (GZipStream archStream = new GZipStream(archFileStream, CompressionMode.Compress))
 						{
 							byte[] buffer = new byte[1024];
 							int nRead;
 							while ((nRead = originalFileStream.Read(buffer, 0, buffer.Length)) > 0)
 							{
-								compressionStream.Write(buffer, 0, nRead);
+								archStream.Write(buffer, 0, nRead);
 							}
-							
-							Console.WriteLine("Compressed {0} from {1} to {2} bytes.",
-								fileToCompress.Name, fileToCompress.Length.ToString(), compressedFileStream.Length.ToString());
+							Logger.Info(string.Format("Compressed {0} from {1} to {2} bytes.",
+								  fileToCompress.Name
+								, fileToCompress.Length.ToString()
+								, archFileStream.Length.ToString()
+							));
 						}
 					}
 				}
 			}
 		}
 
-		private void Decompress(FileInfo fileToDecompress)
+		private void Decompress(FileInfo archFile, out String szOutFile)
 		{
-			using (FileStream originalFileStream = fileToDecompress.OpenRead())
+			using (FileStream archFileStream = archFile.OpenRead())
 			{
-				string currentFileName = fileToDecompress.FullName;
-				string newFileName = currentFileName.Remove(currentFileName.Length - fileToDecompress.Extension.Length);
+				String currentFileName = archFile.FullName;
+				String newFileName = currentFileName.Remove(
+					currentFileName.Length - archFile.Extension.Length);
 
-				using (FileStream decompressedFileStream = File.Create(newFileName))
+				using (FileStream normalFileStream = File.Create(newFileName))
 				{
-					using (GZipStream decompressionStream = new GZipStream(originalFileStream, CompressionMode.Decompress))
+					using (GZipStream decompressionStream = new GZipStream(archFileStream, CompressionMode.Decompress))
 					{
-						//decompressionStream.CopyTo(decompressedFileStream);
-						Console.WriteLine("Decompressed: {0}", fileToDecompress.Name);
+						byte[] buffer = new byte[1024];
+						int nRead;
+						while ((nRead = decompressionStream.Read(buffer, 0, buffer.Length)) > 0)
+						{
+							normalFileStream.Write(buffer, 0, nRead);
+						}
+						
+						szOutFile = newFileName;
+						Console.WriteLine("Decompressed: {0}", archFile.Name);
 					}
 				}
 			}
 		}
 		
-		public bool ImportData()
+		public bool ImportData(String szImportFile)
 		{
 			bool res = false;
 			Logger.Enter();
 			
 			do 
 			{
+				String szBackupFile;
+				Decompress(new FileInfo(szImportFile), out szBackupFile);
+				String BackupSrc = GAssistant.Properties.Settings.Default.szClientDataSrc + szBackupFile;
+				
 				lock (m_lock)
 				{
 					SQLiteConnection dbMain = new SQLiteConnection(ClientDbSrc);
-					SQLiteConnection dbBackup = new SQLiteConnection(ClientDbSrc);
+					SQLiteConnection dbBackup = new SQLiteConnection(BackupSrc);
 
 					try
 					{
-						dbMain.Open();
 						dbBackup.Open();
-						dbMain.BackupDatabase(dbBackup, "backup", "client", -1, null, -1);
+						dbMain.Open();
+						dbBackup.BackupDatabase(dbMain, "client", "backup", -1, null, -1);
 					}
 					catch (SQLiteException ex)
 					{
-						Debug.WriteLine(String.Format("ClearDB exception: {0}.", ex.Message));
-						throw new Exception("Error! DB clear failed.\r\n", ex);
+						Logger.Error(String.Format("Import DB exception: {0}.", ex.Message));
+						throw new Exception("Error! Import DB failed.\r\n", ex);
 					}
 					finally
 					{
-						dbMain.Close();
 						dbBackup.Close();
+						dbMain.Close();
 					}
 				}	
 				res = true;
@@ -770,19 +786,19 @@ namespace GAssistant
 			return res;
 		}
 		
-		public bool ExportData()
+		public bool ExportData(out String szOutFile)
 		{
 			bool res = false;
 			Logger.Enter();
 
 			do
 			{
-				string Backup = GAssistant.Properties.Settings.Default.clientDataSrc +
-					"backup.db";
+				String szBackupFile = Properties.Settings.Default.szBackUpFileName;
+				String BackupSrc = GAssistant.Properties.Settings.Default.szClientDataSrc + szBackupFile;
 				lock (m_lock)
 				{
 					SQLiteConnection dbMain = new SQLiteConnection(ClientDbSrc);
-					SQLiteConnection dbBackup = new SQLiteConnection(Backup);
+					SQLiteConnection dbBackup = new SQLiteConnection(BackupSrc);
 
 					try
 					{
@@ -800,11 +816,14 @@ namespace GAssistant
 						dbMain.Close();
 						dbBackup.Close();
 					}
-					
-					
-					FileInfo f = new FileInfo("backup.db");
-					Compress(f);
+
+
+					FileInfo f = new FileInfo(szBackupFile);
+					String outFileName = DateTime.Now.ToShortDateString() + "_" + szBackupFile + ".gz";
+					Compress(f, outFileName);
+					szOutFile = outFileName;
 				}
+				
 				res = true;
 			} while (false);
 

@@ -26,18 +26,30 @@ namespace GAssistant.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("client.db")]
-        public string clientDbFile {
+        public string szClientDbFile {
             get {
-                return ((string)(this["clientDbFile"]));
+                return ((string)(this["szClientDbFile"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("data source=")]
-        public string clientDataSrc {
+        public string szClientDataSrc {
             get {
-                return ((string)(this["clientDataSrc"]));
+                return ((string)(this["szClientDataSrc"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string szBackUpFileName {
+            get {
+                return ((string)(this["szBackUpFileName"]));
+            }
+            set {
+                this["szBackUpFileName"] = value;
             }
         }
     }

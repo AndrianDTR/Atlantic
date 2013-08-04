@@ -227,7 +227,8 @@ namespace GAssistant
 
 		private void btnBackUp_Click(object sender, EventArgs e)
 		{
-			new DbAdapter().ExportData();
+			String szBackUpFile;
+			new DbAdapter().ExportData(out szBackUpFile);
 		}
     }
 }
