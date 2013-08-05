@@ -68,7 +68,7 @@
 			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
-			this.m_calendar = new Calendar.Calendar();
+			this.calendar1 = new Calendar.Calendar();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -283,7 +283,7 @@
 			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
 			this.tableLayoutPanel1.Controls.Add(this.log, 0, 2);
 			this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.m_calendar, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.calendar1, 0, 1);
 			this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			// 
@@ -342,14 +342,13 @@
 			this.btnAddClient.UseVisualStyleBackColor = true;
 			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
 			// 
-			// m_calendar
+			// calendar1
 			// 
-			this.m_calendar.ActiveTool = null;
-			this.m_calendar.CellInfoDeledate = ((Calendar.Calendar.@__CellInfo)(resources.GetObject("m_calendar.CellInfoDeledate")));
-			resources.ApplyResources(this.m_calendar, "m_calendar");
-			this.m_calendar.Name = "m_calendar";
-			this.m_calendar.SelectedDate = new System.DateTime(((long)(0)));
-			this.m_calendar.StartDate = new System.DateTime(2013, 8, 5, 0, 52, 12, 921);
+			this.calendar1.ActiveTool = null;
+			resources.ApplyResources(this.calendar1, "calendar1");
+			this.calendar1.Name = "calendar1";
+			this.calendar1.SelectedDate = new System.DateTime(((long)(0)));
+			this.calendar1.StartDate = new System.DateTime(2013, 8, 6, 0, 48, 47, 843);
 			// 
 			// MainForm
 			// 
@@ -413,7 +412,7 @@
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.TextBox log;
 		private System.Windows.Forms.ToolStripMenuItem sendLogToolStripMenuItem;
-		private Calendar.Calendar m_calendar;
+		private Calendar.Calendar calendar1;
     }
 }
 
