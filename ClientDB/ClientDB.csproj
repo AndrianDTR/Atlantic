@@ -95,6 +95,9 @@
     <Compile Include="ClientInfo.Designer.cs">
       <DependentUpon>ClientInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="DayView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DrawTool.cs" />
     <Compile Include="ITool.cs" />
     <Compile Include="NewAppointmentEvent.cs" />

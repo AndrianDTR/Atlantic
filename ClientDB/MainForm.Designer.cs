@@ -61,14 +61,13 @@
 			this.sendLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.log = new System.Windows.Forms.TextBox();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnBackUp = new System.Windows.Forms.Button();
 			this.btnTrainersShedule = new System.Windows.Forms.Button();
 			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
-			this.calendar1 = new Calendar.Calendar();
+			this.m_calendar = new GAssistant.DayView();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -281,17 +280,10 @@
 			// tableLayoutPanel1
 			// 
 			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-			this.tableLayoutPanel1.Controls.Add(this.log, 0, 2);
 			this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.calendar1, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.m_calendar, 0, 1);
 			this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			// 
-			// log
-			// 
-			resources.ApplyResources(this.log, "log");
-			this.log.Name = "log";
-			this.log.ReadOnly = true;
 			// 
 			// panel1
 			// 
@@ -342,13 +334,14 @@
 			this.btnAddClient.UseVisualStyleBackColor = true;
 			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
 			// 
-			// calendar1
+			// m_calendar
 			// 
-			this.calendar1.ActiveTool = null;
-			resources.ApplyResources(this.calendar1, "calendar1");
-			this.calendar1.Name = "calendar1";
-			this.calendar1.SelectedDate = new System.DateTime(((long)(0)));
-			this.calendar1.StartDate = new System.DateTime(2013, 8, 6, 0, 48, 47, 843);
+			this.m_calendar.ActiveTool = null;
+			resources.ApplyResources(this.m_calendar, "m_calendar");
+			this.m_calendar.Name = "m_calendar";
+			this.m_calendar.RowHeight = 80;
+			this.m_calendar.SelectedDate = new System.DateTime(((long)(0)));
+			this.m_calendar.StartDate = new System.DateTime(2013, 8, 7, 0, 0, 0, 0);
 			// 
 			// MainForm
 			// 
@@ -364,7 +357,6 @@
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.tableLayoutPanel1.ResumeLayout(false);
-			this.tableLayoutPanel1.PerformLayout();
 			this.panel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -410,9 +402,8 @@
 		private System.Windows.Forms.ToolStripMenuItem manageClientsToolStripMenuItem;
 		private System.Windows.Forms.Button btnClientManager;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-		private System.Windows.Forms.TextBox log;
 		private System.Windows.Forms.ToolStripMenuItem sendLogToolStripMenuItem;
-		private Calendar.Calendar calendar1;
+		private DayView m_calendar;
     }
 }
 

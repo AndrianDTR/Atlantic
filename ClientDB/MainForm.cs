@@ -14,6 +14,9 @@ namespace GAssistant
         public MainForm()
         {
 			InitializeComponent();
+			
+			
+			
 			UserLogin();
 			Reinit();
         }
@@ -28,19 +31,11 @@ namespace GAssistant
 			}
 		}
 		
-		private static Calendar.CellInfo GetCellInfo0(DateTime dt)
-		{
-			Calendar.CellInfo ci = new Calendar.CellInfo(dt);
-			
-			return ci;
-		}
-		
 		private void Reinit()
 		{
 			Session session = Session.Instance;
 
-			//m_calendar.RowHeight = m_opt.CalRowHeight;
-			//m_calendar.CellInfoDeledate = GetCellInfo0;
+			m_calendar.RowHeight = m_opt.CalRowHeight;
 			session.PassLen = m_opt.MinPassLen;
 			
 			UserRole priv = session.UserRole;
@@ -72,8 +67,8 @@ namespace GAssistant
 
 			manageScheduleRulesToolStripMenuItem.Enabled = UserRole.IsSet(priv.Schedule, UserRights.Read);
 
-			//m_calendar.StartDate = DateTime.Now;
-			//m_calendar.SelectedDate = m_calendar.StartDate;
+			m_calendar.StartDate = DateTime.Now;
+			m_calendar.SelectedDate = m_calendar.StartDate;
 			
 			if (m_opt.StoreMainWindowState)
 			{
