@@ -105,6 +105,7 @@
 			// 
 			this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
 			resources.ApplyResources(this.exportToolStripMenuItem, "exportToolStripMenuItem");
+			this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem1
 			// 

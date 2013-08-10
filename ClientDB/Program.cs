@@ -16,7 +16,7 @@ namespace GAssistant
         {
 			bool sendReport = false;
 			String szLogFile = "SessionLog.txt";
-			Logger.Create(szLogFile, Logger.LogLevel.Info);
+			Logger.Create(szLogFile, Logger.LogLevel.Debug);
 			Logger.Info("App start.");
 			try
 			{

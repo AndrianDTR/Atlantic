@@ -88,35 +88,35 @@ namespace GAssistant
 				string newHash = DbUtils.md5(value);
 				DbAdapter ad = new DbAdapter();
 				Dictionary<string, string> fields = new Dictionary<string, string>();
-				fields["pass"] = String.Format("'{0}'", newHash);
+				fields["pass"] = newHash;
 				if(!ad.Update(DbTable.Users, fields, String.Format("id={0:d}", m_userId)))
 				{
 					throw new Exception("Password could not been changed.");
 				}
 			}
 		}
-		
+
 		public Boolean ChangePassword(String oldPass, String newPass)
 		{
-			if(m_userId <= 0)
-			{	
+			if (m_userId <= 0)
+			{
 				return false;
 			}
-						
+
 			string oldHash = DbUtils.md5(oldPass);
 			string newHash = DbUtils.md5(newPass);
 			DbAdapter ad = new DbAdapter();
-			Dictionary<string,string> fields = new Dictionary<string,string>();
-			fields["pass"] = String.Format("'{0}'", newHash);
+			Dictionary<string, string> fields = new Dictionary<string, string>();
+			fields["pass"] = newHash;
 			ad.Update(DbTable.Users, fields, String.Format("id={0:d} and pass = '{1}'", m_userId, oldHash));
-			
+
 			return true;
 		}
 		
 		public static User Authenticate(String name, String pass)
 		{
 			User user = null;
-			String where = String.Format("name = '{0}' and pass = '{1}'", name, DbUtils.md5(pass));
+			String where = String.Format("name = '{0}' and pass = '{1}'", DbUtils.Quote(name), DbUtils.md5(pass));
 			DataRow userData = new DbAdapter().GetFirstRow(DbTable.Users, where, new List<string> { "id", "name", "privilege" });
 			if(userData != null)
 			{
@@ -126,6 +126,17 @@ namespace GAssistant
 				user.m_userPrivilegesId = Int64.Parse(userData["privilege"].ToString());
 			}
 			return user;
+		}
+
+		public static bool UserExist(Int64 id)
+		{
+			String where = String.Format("id = {0}", id);
+			DataRow userData = new DbAdapter().GetFirstRow(DbTable.Users, where, new List<string> { "id" });
+			if (userData != null)
+			{
+				return true;
+			}
+			return false;
 		}
 	}
 
@@ -154,7 +165,7 @@ namespace GAssistant
 		{
 			DbAdapter da = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
-			fields["name"] = name;
+			fields["name"] = DbUtils.Quote(name);
 			fields["privilege"] = priv.ToString();
 			id = 0;
 			

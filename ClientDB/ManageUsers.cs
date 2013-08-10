@@ -83,6 +83,13 @@ namespace GAssistant
 				return;
 			}
 			
+			int minPassLen = Session.Instance.PassLen;
+			if(m_password.Text.Length < minPassLen)
+			{
+				UIMessages.Error(String.Format("Password length should be at least {0} characters.", minPassLen));
+				return;
+			}
+			
 			UserRole role = (UserRole)m_userRole.SelectedItem;
 			Int64 id = 0;
 			if (!collection.Add(m_userName.Text, role.Id, out id))
@@ -93,6 +100,8 @@ namespace GAssistant
 			ListViewItem it = userList.Items.Add(m_userName.Text);
 			it.SubItems.Add(role.Name);
 			it.Tag = id;
+			new User(id).Password = m_password.Text;
+			
 		}
 
 		private void remove_Click(object sender, EventArgs e)

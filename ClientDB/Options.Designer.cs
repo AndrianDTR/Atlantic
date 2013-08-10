@@ -40,6 +40,9 @@
 			this.label3 = new System.Windows.Forms.Label();
 			this.numericMinPassLen = new System.Windows.Forms.NumericUpDown();
 			this.checkSaveMainWindowState = new System.Windows.Forms.CheckBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.textPathBackUp = new System.Windows.Forms.TextBox();
+			this.btnBackUpPath = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericCalRowHeight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericMinPassLen)).BeginInit();
@@ -48,7 +51,7 @@
 			// btnClose
 			// 
 			this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnClose.Location = new System.Drawing.Point(298, 194);
+			this.btnClose.Location = new System.Drawing.Point(298, 226);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(75, 23);
 			this.btnClose.TabIndex = 0;
@@ -57,7 +60,7 @@
 			// 
 			// btnOk
 			// 
-			this.btnOk.Location = new System.Drawing.Point(217, 194);
+			this.btnOk.Location = new System.Drawing.Point(217, 226);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
 			this.btnOk.TabIndex = 1;
@@ -98,7 +101,7 @@
 			this.groupBox1.Controls.Add(this.checkShowClientCount);
 			this.groupBox1.Controls.Add(this.checkShowTrainer);
 			this.groupBox1.Controls.Add(this.label3);
-			this.groupBox1.Location = new System.Drawing.Point(15, 97);
+			this.groupBox1.Location = new System.Drawing.Point(15, 129);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(358, 91);
 			this.groupBox1.TabIndex = 6;
@@ -181,12 +184,38 @@
 			// checkSaveMainWindowState
 			// 
 			this.checkSaveMainWindowState.AutoSize = true;
-			this.checkSaveMainWindowState.Location = new System.Drawing.Point(15, 66);
+			this.checkSaveMainWindowState.Location = new System.Drawing.Point(15, 98);
 			this.checkSaveMainWindowState.Name = "checkSaveMainWindowState";
 			this.checkSaveMainWindowState.Size = new System.Drawing.Size(141, 17);
 			this.checkSaveMainWindowState.TabIndex = 16;
 			this.checkSaveMainWindowState.Text = "Save main window state";
 			this.checkSaveMainWindowState.UseVisualStyleBackColor = true;
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(12, 65);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(109, 13);
+			this.label4.TabIndex = 17;
+			this.label4.Text = "Save DB BackUps to";
+			// 
+			// textPathBackUp
+			// 
+			this.textPathBackUp.Location = new System.Drawing.Point(161, 65);
+			this.textPathBackUp.Name = "textPathBackUp";
+			this.textPathBackUp.Size = new System.Drawing.Size(176, 20);
+			this.textPathBackUp.TabIndex = 18;
+			// 
+			// btnBackUpPath
+			// 
+			this.btnBackUpPath.Location = new System.Drawing.Point(343, 65);
+			this.btnBackUpPath.Name = "btnBackUpPath";
+			this.btnBackUpPath.Size = new System.Drawing.Size(30, 20);
+			this.btnBackUpPath.TabIndex = 19;
+			this.btnBackUpPath.Text = "...";
+			this.btnBackUpPath.UseVisualStyleBackColor = true;
+			this.btnBackUpPath.Click += new System.EventHandler(this.btnBackUpPath_Click);
 			// 
 			// Options
 			// 
@@ -194,7 +223,10 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnClose;
-			this.ClientSize = new System.Drawing.Size(385, 231);
+			this.ClientSize = new System.Drawing.Size(385, 260);
+			this.Controls.Add(this.btnBackUpPath);
+			this.Controls.Add(this.textPathBackUp);
+			this.Controls.Add(this.label4);
 			this.Controls.Add(this.checkSaveMainWindowState);
 			this.Controls.Add(this.numericMinPassLen);
 			this.Controls.Add(this.groupBox1);
@@ -234,5 +266,8 @@
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.NumericUpDown numericMinPassLen;
 		private System.Windows.Forms.CheckBox checkSaveMainWindowState;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.TextBox textPathBackUp;
+		private System.Windows.Forms.Button btnBackUpPath;
 	}
 }

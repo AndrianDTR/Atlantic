@@ -100,8 +100,19 @@ namespace GAssistant
 		{
 			get
 			{
-				return GAssistant.Properties.Settings.Default.szClientDataSrc + 
-					GAssistant.Properties.Settings.Default.szClientDbFile;
+				return GAssistant.Properties.Settings.Default.szClientDataSrc 
+					+ ClientDbFile;
+			}
+		}
+
+		private static String ClientDbFile
+		{
+			get
+			{
+				String app = System.Reflection.Assembly.GetExecutingAssembly().Location;
+				return System.IO.Path.GetDirectoryName(app)
+					+ "\\"
+					+ GAssistant.Properties.Settings.Default.szClientDbFile;
 			}
 		}
 		
@@ -563,7 +574,8 @@ namespace GAssistant
 				, showTrainer Integer NOT NULL Default(1)
 				, showClientCount Integer NOT NULL Default(1)
 				, storeMainWindowState Integer NOT NULL Default(1)
-				, mainWindowState Integer NOT NULL Default(1)
+				, mainWindowState Integer NOT NULL Default(0)
+				, pathBackUp VarChar NOT NULL Default('BackUp')
 			);
 			INSERT INTO settings(minPassLen) VALUES(8)";
 			
@@ -655,16 +667,7 @@ namespace GAssistant
 			
 			try
 			{
-				String[] conStr = ClientDbSrc.Split(';');
-				foreach (String opt in conStr)
-				{
-					String[] keyVal = opt.Split('=');
-					if(keyVal.Length == 2 && keyVal[0] == "data source")
-					{
-						if(!System.IO.File.Exists(keyVal[1]))
-							SQLiteConnection.CreateFile(keyVal[1]);
-					}
-				}
+				CheckDbFile(GAssistant.Properties.Settings.Default.szClientDbFile);
 				
 				conn.Open();
 				new SQLiteCommand(tSettings, conn).ExecuteNonQuery();
@@ -691,30 +694,33 @@ namespace GAssistant
 			return res;
 		}
 
+		private static void CheckDbFile(String dbFile)
+		{
+			if (!System.IO.File.Exists(dbFile))
+			{
+				SQLiteConnection.CreateFile(dbFile);
+			}
+		}
+
 		private void Compress(FileInfo fileToCompress, String szOutFile)
 		{
 			using (FileStream originalFileStream = fileToCompress.OpenRead())
 			{
-				FileAttributes attrib = File.GetAttributes(fileToCompress.FullName);
-				if ((attrib & FileAttributes.Hidden) != FileAttributes.Hidden 
-					&& fileToCompress.Extension != ".gz")
+				using (FileStream archFileStream = File.Create(szOutFile))
 				{
-					using (FileStream archFileStream = File.Create(szOutFile))
+					using (GZipStream archStream = new GZipStream(archFileStream, CompressionMode.Compress))
 					{
-						using (GZipStream archStream = new GZipStream(archFileStream, CompressionMode.Compress))
+						byte[] buffer = new byte[1024];
+						int nRead;
+						while ((nRead = originalFileStream.Read(buffer, 0, buffer.Length)) > 0)
 						{
-							byte[] buffer = new byte[1024];
-							int nRead;
-							while ((nRead = originalFileStream.Read(buffer, 0, buffer.Length)) > 0)
-							{
-								archStream.Write(buffer, 0, nRead);
-							}
-							Logger.Info(string.Format("Compressed {0} from {1} to {2} bytes.",
-								  fileToCompress.Name
-								, fileToCompress.Length.ToString()
-								, archFileStream.Length.ToString()
-							));
+							archStream.Write(buffer, 0, nRead);
 						}
+						Logger.Info(string.Format("Compressed {0} from {1} to {2} bytes.",
+							  fileToCompress.Name
+							, fileToCompress.Length.ToString()
+							, archFileStream.Length.ToString()
+						));
 					}
 				}
 			}
@@ -753,8 +759,14 @@ namespace GAssistant
 			
 			do 
 			{
+				Opts op = new Opts();
+				
 				String szBackupFile;
 				Decompress(new FileInfo(szImportFile), out szBackupFile);
+
+				CheckDbFile(ClientDbFile);
+				CheckDbFile(szBackupFile);
+				
 				String BackupSrc = GAssistant.Properties.Settings.Default.szClientDataSrc + szBackupFile;
 				
 				lock (m_lock)
@@ -766,7 +778,7 @@ namespace GAssistant
 					{
 						dbBackup.Open();
 						dbMain.Open();
-						dbBackup.BackupDatabase(dbMain, "client", "backup", -1, null, -1);
+						dbBackup.BackupDatabase(dbMain, "main", "main", -1, null, -1);
 					}
 					catch (SQLiteException ex)
 					{
@@ -785,16 +797,20 @@ namespace GAssistant
 			Logger.Leave();
 			return res;
 		}
-		
-		public bool ExportData(out String szOutFile)
+
+		public bool ExportData(String archName)
 		{
 			bool res = false;
 			Logger.Enter();
 
 			do
 			{
-				String szBackupFile = Properties.Settings.Default.szBackUpFileName;
-				String BackupSrc = GAssistant.Properties.Settings.Default.szClientDataSrc + szBackupFile;
+				String tmpFile = DateTime.Now.ToString("yyyyMMddHHmmss") + ".tmp";
+				String BackupSrc = GAssistant.Properties.Settings.Default.szClientDataSrc + tmpFile;
+
+				CheckDbFile(ClientDbFile);
+				CheckDbFile(tmpFile);
+				
 				lock (m_lock)
 				{
 					SQLiteConnection dbMain = new SQLiteConnection(ClientDbSrc);
@@ -818,10 +834,9 @@ namespace GAssistant
 					}
 
 
-					FileInfo f = new FileInfo(szBackupFile);
-					String outFileName = DateTime.Now.ToShortDateString() + "_" + szBackupFile + ".gz";
-					Compress(f, outFileName);
-					szOutFile = outFileName;
+					FileInfo f = new FileInfo(tmpFile);
+					Compress(f, archName);
+					f.Delete();
 				}
 				
 				res = true;

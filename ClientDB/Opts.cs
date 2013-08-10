@@ -16,6 +16,7 @@ namespace GAssistant
 		private int m_showClientCount = -1;
 		private int m_storeMainWindowSatate = -1;
 		private int m_mainWindowSatate = -1;
+		private String m_pathBackUp = String.Empty;
 		
 		public Opts()
 		{
@@ -35,6 +36,7 @@ namespace GAssistant
 			m_mainWindowSatate = int.Parse(data["mainWindowState"].ToString());
 			
 			m_language = data["language"].ToString();
+			m_pathBackUp = data["pathBackUp"].ToString();
 		}
 
 		public String Language
@@ -49,6 +51,18 @@ namespace GAssistant
 			}
 		}
 
+		public String PathBackUp
+		{
+			get
+			{
+				return DbUtils.Dequote(m_pathBackUp);
+			}
+			set
+			{
+				m_pathBackUp = DbUtils.Quote(value);
+			}
+		}
+		
 		public int MinPassLen
 		{
 			get
@@ -128,6 +142,7 @@ namespace GAssistant
 			DbAdapter ad = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
 			fields["language"] = m_language;
+			fields["pathBackUp"] = m_pathBackUp;
 			fields["minPassLen"] = m_minPassLen.ToString();
 			fields["calRowHeight"] = m_calRowHeight.ToString();
 			fields["showTrainer"] = m_showTrainer.ToString();

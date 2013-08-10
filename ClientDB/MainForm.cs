@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace GAssistant
 {
@@ -14,8 +15,6 @@ namespace GAssistant
         public MainForm()
         {
 			InitializeComponent();
-			
-			
 			
 			UserLogin();
 			Reinit();
@@ -146,10 +145,6 @@ namespace GAssistant
 			pm.ShowDialog(this);
 		}
 		
-		private void importToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-		}
-
 		private void manageTrainersToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			ManageTrainers mt = new ManageTrainers();
@@ -222,8 +217,52 @@ namespace GAssistant
 
 		private void btnBackUp_Click(object sender, EventArgs e)
 		{
-			String szBackUpFile;
-			new DbAdapter().ExportData(out szBackUpFile);
+			BackUpDB();
 		}
+		
+		private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			BackUpDB();
+		}
+
+		private void BackUpDB()
+		{
+			
+			String prefix = DateTime.Now.ToString("yyyyMMdd");
+			String ext = "dbu";
+			String archName = String.Format("{0}\\{1}.{2}"
+				, m_opt.PathBackUp
+				, prefix
+				, ext);
+			if (!Directory.Exists(m_opt.PathBackUp))
+			{
+				Directory.CreateDirectory(m_opt.PathBackUp);
+			}
+			new DbAdapter().ExportData(archName);
+		}
+		
+		private void importToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if(DialogResult.Yes != UIMessages.Warning(
+				"Data base will be reverted and all data stored after " +
+				"BackUp will be lost. Do you really want to restore " +
+				"database from BackUp file?", MessageBoxButtons.YesNo))
+			{
+				return;
+			}
+			
+			OpenFileDialog opd = new OpenFileDialog();
+			opd.InitialDirectory = m_opt.PathBackUp;
+			opd.Filter = "Database BackUp files (*.dbu)|*.dbu";
+			if(DialogResult.OK == opd.ShowDialog())
+			{
+				new DbAdapter().ImportData(opd.FileName);
+				if(!User.UserExist(Session.Instance.User.Id))
+				{
+					UserLogin();
+				}
+				Reinit();
+			}
+		}		
     }
 }

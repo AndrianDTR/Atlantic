@@ -23,6 +23,7 @@ namespace GAssistant
 			checkShowTrainer.Checked = m_opts.ShowTrainer;
 			checkShowClientCount.Checked = m_opts.ShowClientCount;
 			checkSaveMainWindowState.Checked = m_opts.StoreMainWindowState;
+			textPathBackUp.Text = m_opts.PathBackUp;
 			
 			comboLang.Items.Add("English");
 			comboLang.SelectedIndex = 0;
@@ -36,13 +37,24 @@ namespace GAssistant
 			m_opts.ShowTrainer = checkShowTrainer.Checked;
 			m_opts.ShowClientCount = checkShowClientCount.Checked;
 			m_opts.StoreMainWindowState = checkSaveMainWindowState.Checked;
-
+			m_opts.PathBackUp = textPathBackUp.Text;
+			
 			//opts.Language = comboLang.SelectedItem;
 			
 			m_opts.StoreData();
 			
 			this.DialogResult = DialogResult.OK;
 			Close();
+		}
+
+		private void btnBackUpPath_Click(object sender, EventArgs e)
+		{
+			FolderBrowserDialog fbd = new FolderBrowserDialog();
+			fbd.SelectedPath = m_opts.PathBackUp;
+			if (fbd.ShowDialog() == DialogResult.OK)
+			{
+				textPathBackUp.Text = fbd.SelectedPath;
+			}
 		}
 	}
 }
