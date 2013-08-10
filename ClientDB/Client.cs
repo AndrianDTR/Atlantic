@@ -12,7 +12,7 @@ namespace GAssistant
 		public String m_name = String.Empty;
 		public String m_phone = String.Empty;
 		public String m_comment = String.Empty;
-		private Int64 m_scheduleRule = 0;
+		private DateTime m_scheduleTime;
 		private Int64 m_trainer = 0;
 		
 		public static bool CodeExists(Int64 id)
@@ -50,7 +50,7 @@ namespace GAssistant
 			m_name = data["name"].ToString();
 			m_phone = data["phone"].ToString();
 			m_comment = data["comment"].ToString();
-			m_scheduleRule = Int64.Parse(data["schedule"].ToString());
+			m_scheduleTime = DateTime.Parse(data["scheduleTime"].ToString());
 			m_trainer = Int64.Parse(data["trainer"].ToString());
 		}
 
@@ -68,7 +68,7 @@ namespace GAssistant
 			m_name = data["name"].ToString();
 			m_phone = data["phone"].ToString();
 			m_comment = data["comment"].ToString();
-			m_scheduleRule = Int64.Parse(data["schedule"].ToString());
+			m_scheduleTime = DateTime.Parse(data["scheduleTime"].ToString());
 			m_trainer = Int64.Parse(data["trainer"].ToString());
 		}
 		
@@ -119,14 +119,6 @@ namespace GAssistant
 				return new Trainer(m_trainer);
 			}
 		}
-		
-		public ScheduleRule Schedule
-		{
-			get
-			{
-				return new ScheduleRule(m_scheduleRule);
-			}
-		}
 
 		public Int64 TrainerId
 		{
@@ -136,15 +128,15 @@ namespace GAssistant
 			}
 		}
 
-		public Int64 ScheduleId
+		public DateTime ScheduleTime
 		{
 			get
 			{
-				return m_scheduleRule;
+				return m_scheduleTime;
 			}
 		}
 
-		public bool SetData(Int64 code, String name, String phone, Int64 scheduleId, Int64 trainerId, String comment)
+		public bool SetData(Int64 code, String name, String phone, DateTime scheduleTime, Int64 trainerId, String comment)
 		{
 			Debug.WriteLine(String.Format("Set data for client '{0}'", m_name));
 			if (m_id <= 0)
@@ -157,7 +149,7 @@ namespace GAssistant
 			fields["id"] = code.ToString();
 			fields["name"] = DbUtils.Quote(name);
 			fields["phone"] = DbUtils.Quote(phone);
-			fields["schedule"] = scheduleId.ToString();
+			fields["scheduleTime"] = scheduleTime.ToString("HH:mm:ss");
 			fields["trainer"] = trainerId.ToString();
 			fields["comment"] = DbUtils.Quote(comment);
 
@@ -185,20 +177,20 @@ namespace GAssistant
 			}
 		}
 
-		public Boolean Add(Int64 code, String name, String phone, Int64 schedule, String comment, Int64 trainer)
+		public Boolean Add(Int64 code, String name, String phone, DateTime scheduleTime, String comment, Int64 trainer)
 		{
 			Int64 id = 0;
-			return Add(code, name, phone, schedule, trainer, comment, out id);
+			return Add(code, name, phone, scheduleTime, trainer, comment, out id);
 		}
-		
-		public Boolean Add(Int64 code, String name, String phone, Int64 schedule, Int64 trainer, String comment, out Int64 id)
+
+		public Boolean Add(Int64 code, String name, String phone, DateTime scheduleTime, Int64 trainer, String comment, out Int64 id)
 		{
 			DbAdapter da = new DbAdapter();
 			Dictionary<string, string> fields = new Dictionary<string, string>();
 			fields["id"] = code.ToString();
 			fields["name"] = DbUtils.Quote(name);
 			fields["phone"] = DbUtils.Quote(phone);
-			fields["schedule"] = schedule.ToString();
+			fields["scheduleTime"] = scheduleTime.ToString("HH:mm:ss");
 			fields["trainer"] = trainer.ToString();
 			fields["comment"] = DbUtils.Quote(comment);
 			id = 0;

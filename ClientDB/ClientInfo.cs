@@ -37,6 +37,7 @@ namespace GAssistant
 			textCode.Text = id.ToString().PadLeft(13, '0');
 			textName.Text = client.Name;
 			textPhone.Text = client.Phone;
+			dateSchedTime.Text = client.ScheduleTime.ToLongTimeString();
 
 			foreach (Trainer it in comboTrainer.Items)
 			{
@@ -47,33 +48,14 @@ namespace GAssistant
 				}
 			}
 
-			foreach (ScheduleRule it in comboSchedule.Items)
-			{
-				if (it == client.Schedule)
-				{
-					comboSchedule.SelectedItem = it;
-					break;
-				}
-			}
-
 			textComment.Text = client.Comment;
 		}
 		
 		private void Init()
 		{
-			comboSchedule.Items.Clear();
-			comboSchedule.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-			comboSchedule.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
 			comboTrainer.Items.Clear();
 			comboTrainer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
 			comboTrainer.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-			foreach (ScheduleRule sr in new ScheduleRulesCollection())
-			{
-				comboSchedule.Items.Add(sr);
-				comboSchedule.AutoCompleteCustomSource.Add(sr.ToString());
-			}
 
 			foreach (Trainer tr in new TrainerCollection())
 			{
@@ -157,11 +139,6 @@ namespace GAssistant
 		{
 			get { return (Trainer)comboTrainer.SelectedItem; }
 		}
-
-		public ScheduleRule Schedule
-		{
-			get { return (ScheduleRule)comboSchedule.SelectedItem; }
-		}
 		
 		private bool ValidateForm()
 		{
@@ -184,12 +161,6 @@ namespace GAssistant
 				if (0 == textPhone.Text.Length)
 				{
 					UIMessages.Error("Field 'Phone' should not be an empty. Please fill it first.");
-					break;
-				}
-
-				if (null == comboSchedule.SelectedItem)
-				{
-					UIMessages.Error("Schedule must be selected from the list.");
 					break;
 				}
 
@@ -273,12 +244,23 @@ namespace GAssistant
 				if(m_clienId == 0)
 				{
 					ClientCollection cc = new ClientCollection();
-					cc.Add(id, textName.Text, textPhone.Text, Schedule.Id, Trainer.Id, textComment.Text, out m_clienId);
+					cc.Add(id
+						, textName.Text
+						, textPhone.Text
+						, DateTime.Parse(dateSchedTime.Text)
+						, Trainer.Id
+						, textComment.Text
+						, out m_clienId);
 				}
 				else
 				{
 					Client client = new Client(m_clienId);
-					client.SetData(id, textName.Text, textPhone.Text, Schedule.Id, Trainer.Id, textComment.Text);
+					client.SetData(id
+						, textName.Text
+						, textPhone.Text
+						, DateTime.Parse(dateSchedTime.Text)
+						, Trainer.Id
+						, textComment.Text);
 					this.DialogResult = DialogResult.OK;
 					this.Close();
 				}

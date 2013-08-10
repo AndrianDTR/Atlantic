@@ -97,7 +97,7 @@ namespace GAssistant
 					return new String[]{"id", "name", "pass", "privilege"};
 
 				case DbTable.Clients:
-					return new String[]{"id", "name", "phone", "schedule", "trainer"
+					return new String[]{"id", "name", "phone", "scheduleTime", "trainer"
 						, "comment", "extraInfo"};
 
 				case DbTable.Payments:
@@ -696,7 +696,7 @@ namespace GAssistant
 				id Integer PRIMARY KEY NOT NULL
 				, name VarChar NOT NULL
 				, phone VarChar DEFAULT('')
-				, schedule Integer NOT NULL
+				, scheduleTime Time NOT NULL
 				, trainer Integer DEFAULT('')
 				, comment Text DEFAULT('')
 				, extraInfo Text DEFAULT('')

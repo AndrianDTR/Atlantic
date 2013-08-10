@@ -35,7 +35,6 @@
 			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
-			this.comboSchedule = new System.Windows.Forms.ComboBox();
 			this.comboTrainer = new System.Windows.Forms.ComboBox();
 			this.btnClose = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
@@ -57,6 +56,7 @@
 			this.textLastEnter = new System.Windows.Forms.TextBox();
 			this.label10 = new System.Windows.Forms.Label();
 			this.btnChangeCode = new System.Windows.Forms.Button();
+			this.dateSchedTime = new System.Windows.Forms.DateTimePicker();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -73,10 +73,10 @@
 			// 
 			// textName
 			// 
-			this.textName.Location = new System.Drawing.Point(143, 59);
+			this.textName.Location = new System.Drawing.Point(168, 59);
 			this.textName.Margin = new System.Windows.Forms.Padding(6);
 			this.textName.Name = "textName";
-			this.textName.Size = new System.Drawing.Size(460, 29);
+			this.textName.Size = new System.Drawing.Size(435, 29);
 			this.textName.TabIndex = 0;
 			// 
 			// label2
@@ -91,16 +91,16 @@
 			// 
 			// textPhone
 			// 
-			this.textPhone.Location = new System.Drawing.Point(143, 107);
+			this.textPhone.Location = new System.Drawing.Point(168, 104);
 			this.textPhone.Margin = new System.Windows.Forms.Padding(6);
 			this.textPhone.Name = "textPhone";
-			this.textPhone.Size = new System.Drawing.Size(460, 29);
+			this.textPhone.Size = new System.Drawing.Size(435, 29);
 			this.textPhone.TabIndex = 1;
 			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(22, 113);
+			this.label3.Location = new System.Drawing.Point(22, 107);
 			this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(66, 24);
@@ -110,39 +110,30 @@
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(22, 161);
+			this.label4.Location = new System.Drawing.Point(22, 152);
 			this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(91, 24);
+			this.label4.Size = new System.Drawing.Size(131, 24);
 			this.label4.TabIndex = 6;
-			this.label4.Text = "Schedule";
+			this.label4.Text = "Schedule time";
 			// 
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(22, 209);
+			this.label5.Location = new System.Drawing.Point(22, 197);
 			this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(70, 24);
 			this.label5.TabIndex = 8;
 			this.label5.Text = "Trainer";
 			// 
-			// comboSchedule
-			// 
-			this.comboSchedule.FormattingEnabled = true;
-			this.comboSchedule.Location = new System.Drawing.Point(143, 155);
-			this.comboSchedule.Margin = new System.Windows.Forms.Padding(6);
-			this.comboSchedule.Name = "comboSchedule";
-			this.comboSchedule.Size = new System.Drawing.Size(460, 32);
-			this.comboSchedule.TabIndex = 2;
-			// 
 			// comboTrainer
 			// 
 			this.comboTrainer.FormattingEnabled = true;
-			this.comboTrainer.Location = new System.Drawing.Point(143, 203);
+			this.comboTrainer.Location = new System.Drawing.Point(168, 194);
 			this.comboTrainer.Margin = new System.Windows.Forms.Padding(6);
 			this.comboTrainer.Name = "comboTrainer";
-			this.comboTrainer.Size = new System.Drawing.Size(460, 32);
+			this.comboTrainer.Size = new System.Drawing.Size(435, 32);
 			this.comboTrainer.TabIndex = 3;
 			// 
 			// btnClose
@@ -170,11 +161,11 @@
 			// 
 			// textCode
 			// 
-			this.textCode.Location = new System.Drawing.Point(143, 14);
+			this.textCode.Location = new System.Drawing.Point(168, 14);
 			this.textCode.Margin = new System.Windows.Forms.Padding(6);
 			this.textCode.Name = "textCode";
 			this.textCode.ReadOnly = true;
-			this.textCode.Size = new System.Drawing.Size(333, 29);
+			this.textCode.Size = new System.Drawing.Size(308, 29);
 			this.textCode.TabIndex = 9;
 			this.textCode.TabStop = false;
 			// 
@@ -193,17 +184,17 @@
 			// 
 			// textComment
 			// 
-			this.textComment.Location = new System.Drawing.Point(143, 247);
+			this.textComment.Location = new System.Drawing.Point(168, 243);
 			this.textComment.Margin = new System.Windows.Forms.Padding(6);
 			this.textComment.Multiline = true;
 			this.textComment.Name = "textComment";
-			this.textComment.Size = new System.Drawing.Size(460, 124);
+			this.textComment.Size = new System.Drawing.Size(435, 126);
 			this.textComment.TabIndex = 4;
 			// 
 			// label6
 			// 
 			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(22, 250);
+			this.label6.Location = new System.Drawing.Point(22, 246);
 			this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(92, 24);
@@ -356,6 +347,16 @@
 			this.btnChangeCode.UseVisualStyleBackColor = true;
 			this.btnChangeCode.Click += new System.EventHandler(this.btnChangeCode_Click);
 			// 
+			// dateSchedTime
+			// 
+			this.dateSchedTime.CustomFormat = "HH:mm";
+			this.dateSchedTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.dateSchedTime.Location = new System.Drawing.Point(168, 150);
+			this.dateSchedTime.Name = "dateSchedTime";
+			this.dateSchedTime.ShowUpDown = true;
+			this.dateSchedTime.Size = new System.Drawing.Size(143, 29);
+			this.dateSchedTime.TabIndex = 2;
+			// 
 			// ClientInfo
 			// 
 			this.AcceptButton = this.btnOk;
@@ -363,6 +364,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnClose;
 			this.ClientSize = new System.Drawing.Size(881, 438);
+			this.Controls.Add(this.dateSchedTime);
 			this.Controls.Add(this.btnChangeCode);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
@@ -372,7 +374,6 @@
 			this.Controls.Add(this.btnOk);
 			this.Controls.Add(this.btnClose);
 			this.Controls.Add(this.comboTrainer);
-			this.Controls.Add(this.comboSchedule);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.textPhone);
@@ -408,7 +409,6 @@
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.ComboBox comboSchedule;
 		private System.Windows.Forms.ComboBox comboTrainer;
 		private System.Windows.Forms.Button btnClose;
 		private System.Windows.Forms.Button btnOk;
@@ -430,5 +430,6 @@
 		private System.Windows.Forms.Button btnLeave;
 		private System.Windows.Forms.Button btnEnter;
 		private System.Windows.Forms.Button btnChangeCode;
+		private System.Windows.Forms.DateTimePicker dateSchedTime;
 	}
 }

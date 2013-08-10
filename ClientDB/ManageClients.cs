@@ -30,7 +30,7 @@ namespace GAssistant
 			row[0] = client.Code;
 			row[1] = client.Name;
 			row[2] = client.Phone;
-			row[3] = client.Schedule.ToString();
+			row[3] = client.ScheduleTime.ToString("HH:mm");
 			
 			return row;
 		}
