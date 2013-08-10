@@ -80,6 +80,46 @@ namespace GAssistant
 					return String.Empty;
 			}
 		}
+
+		public static String[] GetTableFieldList(DbTable table)
+		{
+			switch (table)
+			{
+				case DbTable.Settings:
+					return new String[]{"id", "minPassLen", "language", "calRowHeight", "showTrainer"
+						, "showClientCount", "storeMainWindowState", "mainWindowState", "pathBackUp"};
+
+				case DbTable.UserPrivileges:
+					return new String[]{"id", "name", "clients", "schedule", "trainers"
+						, "payments", "backup", "statistics", "users", "privileges"};
+					
+				case DbTable.Users:
+					return new String[]{"id", "name", "pass", "privilege"};
+
+				case DbTable.Clients:
+					return new String[]{"id", "name", "phone", "schedule", "trainer"
+						, "comment", "extraInfo"};
+
+				case DbTable.Payments:
+					return new String[]{"id", "clientId", "scheduleId", "creatorId", "date"
+						, "sum", "comment"};
+
+				case DbTable.ScheduleRules:
+					return new String[] { "id", "name", "rule", "price" };
+
+				case DbTable.Statistics:
+					return new String[]{"id", "clientId", "date"};
+
+				case DbTable.Trainers:
+					return new String[] { "id", "name", "phone", "extraInfo" };
+
+				case DbTable.TrainersSchedule:
+					return new String[] { "id", "trainerId", "date" };
+
+				default:
+					return new String[]{};
+			}
+		}
 		
 		public static String Quote(String value)
 		{
@@ -150,6 +190,7 @@ namespace GAssistant
 			{
 				String query = String.Format("select count(*) from {0}", name);
 				ExecuteScalar(query);
+				
 				res = true;
 			}
 			catch(Exception fail)
@@ -170,10 +211,39 @@ namespace GAssistant
 			{
 				if(!CheckTableExists(tbl))
 				{	
+				    res = false;
+				    break;
+				}
+				
+				if (!CheckTableFields(tbl))
+				{
 					res = false;
 					break;
 				}
 			}
+			Logger.Leave();
+			return res;
+		}
+
+		private bool CheckTableFields(DbTable table)
+		{
+			Logger.Enter();
+			bool res = false;
+
+			String name = DbUtils.GetTableName(table);
+			Logger.Debug(String.Format("Check table '{0}' structure.", name));
+
+			List<String> tblCols = new List<String>(DbUtils.GetTableFieldList(table));
+			try
+			{
+				GetFirstRow(table, "1=1", tblCols);
+				res = true;
+			}
+			catch(Exception ex)
+			{
+				Logger.Critical(String.Format("Table {0} is corrupt. Exception: {1}", name, ex.Message));
+			}
+			
 			Logger.Leave();
 			return res;
 		}
@@ -200,21 +270,19 @@ namespace GAssistant
 				cmd = new SQLiteCommand(sql, cnn);
 				reader = cmd.ExecuteReader();
 				dt.Load(reader);
+				
+				if (cmd.Transaction != null)
+					cmd.Transaction.Commit();
+
+				if (reader != null)
+					reader.Close();
+
+				cnn.Close();
 			}
 			catch (SQLiteException ex)
 			{
 				Logger.Error(ex.Message);
 				throw new Exception(ex.Message);
-			}
-			finally
-			{
-				if(cmd.Transaction != null)
-					cmd.Transaction.Commit();
-				
-				if(reader != null)
-					reader.Close();
-				
-				cnn.Close();
 			}
 			
 			Logger.Leave();
@@ -347,7 +415,7 @@ namespace GAssistant
 		/// <param name="table">The source table.</param>
 		/// <param name="data">A list of Column to get.</param>
 		/// <param name="where">The where clause for query.</param>
-		/// <returns>Returns the first DataRow from querru results.</returns>
+		/// <returns>Returns the first DataRow from query results.</returns>
 		public DataRow GetFirstRow(DbTable table, String where, List<String> fields)
 		{
 			Logger.Enter();
