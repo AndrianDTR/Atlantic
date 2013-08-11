@@ -12,10 +12,10 @@ namespace GAssistant
 		public PaymentsHistory()
 		{
 			InitializeComponent();
-			Refresh();
+			Reinit();
 		}
 
-		private void Refresh()
+		private void Reinit()
 		{
 			m_payments = new PaymentsCollection();
 
