@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Data.SQLite;
 using System.Windows.Forms;
-using System.Diagnostics;
+using AY.Log;
+using AY.db;
 
 namespace GAssistant
 {

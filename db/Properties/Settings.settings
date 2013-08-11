@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AY.db.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="szDbSrcFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">client.db</Value>
+    </Setting>
+    <Setting Name="szClientDataSrc" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">data source=</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

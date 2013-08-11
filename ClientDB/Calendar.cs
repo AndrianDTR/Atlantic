@@ -14,7 +14,6 @@ namespace Calendar
         #region Variables
 		
 		private TableLayoutPanel m_grid;
-        private TextBox editbox;
 		private Button m_btnPrev;
 		private Button m_btnNext;
 		private Panel m_dataPanel;
@@ -101,15 +100,7 @@ namespace Calendar
 						
 			m_scrollPanel.Controls.Add(m_Scrollbar);
 			
-            editbox = new TextBox();
-            editbox.Multiline = true;
-            editbox.Visible = false;
-            editbox.BorderStyle = BorderStyle.None;
-            editbox.KeyUp += new KeyEventHandler(editbox_KeyUp);
-			editbox.Margin = Padding.Empty;
-			m_dataPanel.Controls.Add(editbox);
-			
-			m_grid.Controls.Add(m_dataPanel, 0, 2);
+            m_grid.Controls.Add(m_dataPanel, 0, 2);
 			
 			m_btnNext = new Button();
 			m_btnNext.Visible = true;
@@ -282,72 +273,6 @@ namespace Calendar
             get { return activeTool; }
             set { activeTool = value; }
         }
-
-        [System.ComponentModel.Browsable(false)]
-        public bool CurrentlyEditing
-        {
-            get
-            {
-                return editbox.Visible;
-            }
-        }
-
-        bool selectedAppointmentIsNew;
-
-        public bool SelectedAppointmentIsNew
-        {
-            get
-            {
-                return selectedAppointmentIsNew;
-            }
-        }
-
-        /*
-		private bool allowScroll = true;
-
-        [System.ComponentModel.DefaultValue(true)]
-        public bool AllowScroll
-        {
-            get
-            {
-                return allowScroll;
-            }
-            set
-            {
-                allowScroll = value;
-            }
-        }
-		*/
-        private bool allowInplaceEditing = true;
-
-        [System.ComponentModel.DefaultValue(true)]
-        public bool AllowInplaceEditing
-        {
-            get
-            {
-                return allowInplaceEditing;
-            }
-            set
-            {
-                allowInplaceEditing = value;
-            }
-        }
-
-        private bool allowNew = true;
-
-        [System.ComponentModel.DefaultValue(true)]
-        public bool AllowNew
-        {
-            get
-            {
-                return allowNew;
-            }
-            set
-            {
-                allowNew = value;
-            }
-        }
-
         #endregion
 
         #region Event Handlers
@@ -411,10 +336,6 @@ namespace Calendar
 		{
 			m_dataPanel.SuspendLayout();
 			m_dataPanel.Invalidate();
-
-			if (editbox.Visible)
-				//scroll text box too
-				editbox.Top += e.OldValue - e.NewValue;
 			m_dataPanel.ResumeLayout();
 		}
 
@@ -434,11 +355,6 @@ namespace Calendar
 		{
 			// Capture focus
 			this.Focus();
-
-			if (CurrentlyEditing)
-			{
-				FinishEditing(false);
-			}
 
 			if (e.Button == MouseButtons.Left)
 			{
@@ -549,12 +465,10 @@ namespace Calendar
             if (e.KeyCode == Keys.Escape)
             {
                 e.Handled = true;
-                FinishEditing(true);
             }
             else if (e.KeyCode == Keys.Enter)
             {
                 e.Handled = true;
-                FinishEditing(false);
             }
         }
 
@@ -573,49 +487,7 @@ namespace Calendar
 			return new CellInfo(date);
 		}
 		
-		public void StartEditing()
-        {
-            /*if (!selectedAppointment.Locked && appointmentViews.ContainsKey(selectedAppointment))
-            {
-                Rectangle editBounds = appointmentViews[selectedAppointment].Rectangle;
-
-                editBounds.Inflate(-3, -3);
-				editBounds.X += editGripWidth - 2;
-				editBounds.Width -= editGripWidth - 5;
-
-                editbox.Bounds = editBounds;
-                editbox.Text = selectedAppointment.Title;
-                editbox.Visible = true;
-                editbox.SelectionStart = editbox.Text.Length;
-                editbox.SelectionLength = 0;
-
-                editbox.Focus();
-            }//*/
-        }
-
-        public void FinishEditing(bool cancel)
-        {
-            editbox.Visible = false;
-
-            if (!cancel)
-            {
-                //if (selectedAppointment != null)
-                //    selectedAppointment.Title = editbox.Text;
-            }
-            else
-            {
-                if (selectedAppointmentIsNew)
-                {
-                //   selectedAppointment = null;
-                //   selectedAppointmentIsNew = false;
-                }
-            }
-
-			Invalidate(true);
-            this.Focus();
-        }
-
-        public DateTime GetDateAt(int x, int y)
+		public DateTime GetDateAt(int x, int y)
         {
 			int nWeek = m_Scrollbar.Value / m_nMult;
 			DateTime date = GetFirstDateOfWeek(StartDate.Year, nWeek);
@@ -856,8 +728,7 @@ namespace Calendar
         #region Events
 
         public event EventHandler SelectionChanged;
-		public event EventHandler Complete;
-
+		
 		private void InitializeComponent()
 		{
 			this.SuspendLayout();
