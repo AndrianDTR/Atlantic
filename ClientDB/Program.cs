@@ -20,8 +20,6 @@ namespace GAssistant
 			Logger.Info("App start.");
 			try
 			{
-				new PaymentTrigger(1);
-				
 				DbAdapter ad = new DbAdapter();
 				if( !ad.CheckTables())
 				{

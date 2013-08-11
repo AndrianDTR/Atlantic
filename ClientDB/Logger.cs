@@ -153,15 +153,21 @@ namespace GAssistant
 
 		public static void Enter() 
 		{
-			StackTrace stackTrace = new StackTrace();
-			Logger.AddMsg(String.Format("Enter {0}", stackTrace.GetFrame(1).GetMethod().Name)
+			StackFrame stack = new StackFrame(1, true);
+			Logger.AddMsg(String.Format("Enter {0}, {1}:{2}"
+				, stack.GetMethod().Name
+				, stack.GetFileName()
+				, stack.GetFileLineNumber())
 			, LogLevel.Debug); 
 		}
 		
 		public static void Leave()
 		{
-			StackTrace stackTrace = new StackTrace();
-			Logger.AddMsg(String.Format("Leave {0}", stackTrace.GetFrame(1).GetMethod().Name)
+			StackFrame stack = new StackFrame(1, true);
+			Logger.AddMsg(String.Format("Leave {0}, {1}:{2}"
+				, stack.GetMethod().Name
+				, stack.GetFileName()
+				, stack.GetFileLineNumber())
 			, LogLevel.Debug); 
 		}
 

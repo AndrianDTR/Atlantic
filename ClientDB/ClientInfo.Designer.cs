@@ -110,7 +110,7 @@
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(22, 152);
+			this.label4.Location = new System.Drawing.Point(22, 151);
 			this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(131, 24);
@@ -278,7 +278,7 @@
 			this.groupBox2.Controls.Add(this.label9);
 			this.groupBox2.Controls.Add(this.textLastEnter);
 			this.groupBox2.Controls.Add(this.label10);
-			this.groupBox2.Location = new System.Drawing.Point(612, 203);
+			this.groupBox2.Location = new System.Drawing.Point(612, 201);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(258, 168);
 			this.groupBox2.TabIndex = 15;
@@ -351,7 +351,7 @@
 			// 
 			this.dateSchedTime.CustomFormat = "HH:mm";
 			this.dateSchedTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateSchedTime.Location = new System.Drawing.Point(168, 150);
+			this.dateSchedTime.Location = new System.Drawing.Point(168, 149);
 			this.dateSchedTime.Name = "dateSchedTime";
 			this.dateSchedTime.ShowUpDown = true;
 			this.dateSchedTime.Size = new System.Drawing.Size(143, 29);
