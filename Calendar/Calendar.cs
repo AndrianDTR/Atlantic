@@ -24,7 +24,7 @@ namespace AY
 				this.m_dataPanel.SuspendLayout();
 				this.SuspendLayout();
 				// 
-				// _grid
+				// m_grid
 				// 
 				this.m_grid.ColumnCount = 1;
 				this.m_grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -34,7 +34,7 @@ namespace AY
 				this.m_grid.Controls.Add(this.m_dataPanel, 0, 2);
 				this.m_grid.Dock = System.Windows.Forms.DockStyle.Fill;
 				this.m_grid.Location = new System.Drawing.Point(0, 0);
-				this.m_grid.Name = "_grid";
+				this.m_grid.Name = "m_grid";
 				this.m_grid.RowCount = 4;
 				this.m_grid.RowStyles.Add(new System.Windows.Forms.RowStyle());
 				this.m_grid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
@@ -43,57 +43,60 @@ namespace AY
 				this.m_grid.Size = new System.Drawing.Size(534, 430);
 				this.m_grid.TabIndex = 0;
 				// 
-				// _btnPrev
+				// m_btnPrev
 				// 
 				this.m_btnPrev.Location = new System.Drawing.Point(3, 3);
-				this.m_btnPrev.Name = "_btnPrev";
+				this.m_btnPrev.Name = "m_btnPrev";
 				this.m_btnPrev.Size = new System.Drawing.Size(528, 23);
 				this.m_btnPrev.TabIndex = 0;
 				this.m_btnPrev.Text = "button1";
 				this.m_btnPrev.UseVisualStyleBackColor = true;
 				// 
-				// _btnNext
+				// m_btnNext
 				// 
 				this.m_btnNext.Location = new System.Drawing.Point(3, 404);
-				this.m_btnNext.Name = "_btnNext";
+				this.m_btnNext.Name = "m_btnNext";
 				this.m_btnNext.Size = new System.Drawing.Size(528, 23);
 				this.m_btnNext.TabIndex = 1;
 				this.m_btnNext.Text = "button2";
 				this.m_btnNext.UseVisualStyleBackColor = true;
 				// 
-				// _headerPanel
+				// m_headerPanel
 				// 
 				this.m_headerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 				this.m_headerPanel.Location = new System.Drawing.Point(3, 32);
-				this.m_headerPanel.Name = "_headerPanel";
+				this.m_headerPanel.Name = "m_headerPanel";
 				this.m_headerPanel.Size = new System.Drawing.Size(528, 34);
 				this.m_headerPanel.TabIndex = 2;
 				// 
-				// _dataPanel
+				// m_dataPanel
 				// 
 				this.m_dataPanel.Controls.Add(this.m_scrollPanel);
 				this.m_dataPanel.Controls.Add(this.m_Scrollbar);
 				this.m_dataPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 				this.m_dataPanel.Location = new System.Drawing.Point(3, 72);
-				this.m_dataPanel.Name = "_dataPanel";
+				this.m_dataPanel.Name = "m_dataPanel";
 				this.m_dataPanel.Size = new System.Drawing.Size(528, 326);
 				this.m_dataPanel.TabIndex = 3;
 				// 
-				// _scrollPanel
+				// m_scrollPanel
 				// 
 				this.m_scrollPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 				this.m_scrollPanel.Location = new System.Drawing.Point(0, 0);
-				this.m_scrollPanel.Name = "_scrollPanel";
+				this.m_scrollPanel.Name = "m_scrollPanel";
 				this.m_scrollPanel.Size = new System.Drawing.Size(509, 326);
 				this.m_scrollPanel.TabIndex = 5;
 				// 
-				// _Scrollbar
+				// m_Scrollbar
 				// 
 				this.m_Scrollbar.Dock = System.Windows.Forms.DockStyle.Right;
 				this.m_Scrollbar.Location = new System.Drawing.Point(509, 0);
-				this.m_Scrollbar.Name = "_Scrollbar";
+				this.m_Scrollbar.Maximum = 1000;
+				this.m_Scrollbar.Minimum = 1;
+				this.m_Scrollbar.Name = "m_Scrollbar";
 				this.m_Scrollbar.Size = new System.Drawing.Size(19, 326);
 				this.m_Scrollbar.TabIndex = 4;
+				this.m_Scrollbar.Value = 1;
 				// 
 				// Calendar
 				// 
@@ -137,19 +140,17 @@ namespace AY
 				SetStyle(ControlStyles.ResizeRedraw, true);
 				SetStyle(ControlStyles.Selectable, true);
 				
-				m_grid.SuspendLayout();
-				
 				InitializeComponent();
+				
+				this.SuspendLayout();
 				
 				m_btnPrev.Height = m_nNavButtonsHeight;
 				m_btnNext.Height = m_nNavButtonsHeight;
 				m_headerPanel.Height = m_nNavButtonsHeight;
 				m_dataPanel.Height = m_nNavButtonsHeight;
-				m_Scrollbar.Value = RowHeight;
+				//m_Scrollbar.Value = RowHeight;
 				m_scrollPanel.Width = m_Scrollbar.Width;
 				
-				m_grid.ResumeLayout();
-
 				this.Renderer = new DefaultRenderer();
 
 				m_Scrollbar.Scroll += new ScrollEventHandler(this.OnScroll);
@@ -170,6 +171,8 @@ namespace AY
 				m_dataPanel.MouseEnter += new EventHandler(this.OnDataMouseEnter);
 				m_dataPanel.MouseLeave += new EventHandler(this.OnDataMouseLeave);
 				this.MouseWheel += new MouseEventHandler(this.OnDataMouseWheel);
+				
+				this.ResumeLayout();
 			}
 
 			#endregion
