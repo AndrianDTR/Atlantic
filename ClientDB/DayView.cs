@@ -2,20 +2,21 @@
 using System.Text;
 using AY.Log;
 using AY.db;
+using AY.Calendar;
 
 namespace GAssistant
 {
-	class DayView : Calendar.Calendar
+	class DayView : Calendar
 	{
 		public DayView()
 		{
 		
 		}
 
-		public override Calendar.CellInfo GetCellInfo(DateTime dt)
+		public override CellInfo GetCellInfo(DateTime dt)
 		{
 			Logger.Enter();
-			Calendar.CellInfo ci = new Calendar.CellInfo(dt);
+			CellInfo ci = new CellInfo(dt);
 			
 			Logger.Leave();
 			return ci;

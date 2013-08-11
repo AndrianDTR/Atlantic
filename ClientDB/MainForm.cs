@@ -73,6 +73,7 @@ namespace GAssistant
 			{
 				this.WindowState = m_opt.MainWindowState;
 			}
+			session.PassLen = m_opt.MinPassLen;
 		}
 
 		private void OnClose(object sender, FormClosedEventArgs e)
@@ -120,11 +121,6 @@ namespace GAssistant
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
-		}
-
-		private void OnSearch(object sender, EventArgs e)
-		{
-
 		}
 
 		private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
@@ -212,7 +208,10 @@ namespace GAssistant
 		{
 			Options opt = new Options();
 			if(DialogResult.OK == opt.ShowDialog())
+			{
+				m_opt.Update();
 				Reinit();
+			}
 		}
 
 		private void btnBackUp_Click(object sender, EventArgs e)

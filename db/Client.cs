@@ -10,9 +10,10 @@ namespace AY
 		public class Client
 		{
 			private Int64 m_id = 0;
-			public String m_name = String.Empty;
-			public String m_phone = String.Empty;
-			public String m_comment = String.Empty;
+			private String m_name = String.Empty;
+			private String m_phone = String.Empty;
+			private String m_comment = String.Empty;
+			private String m_scheduleDays = String.Empty;
 			private DateTime m_scheduleTime;
 			private Int64 m_trainer = 0;
 			
@@ -51,6 +52,7 @@ namespace AY
 				m_name = data["name"].ToString();
 				m_phone = data["phone"].ToString();
 				m_comment = data["comment"].ToString();
+				m_scheduleDays = data["scheduleDays"].ToString();
 				m_scheduleTime = DateTime.Parse(data["scheduleTime"].ToString());
 				m_trainer = Int64.Parse(data["trainer"].ToString());
 			}
@@ -69,6 +71,7 @@ namespace AY
 				m_name = data["name"].ToString();
 				m_phone = data["phone"].ToString();
 				m_comment = data["comment"].ToString();
+				m_scheduleDays = data["scheduleDays"].ToString();
 				m_scheduleTime = DateTime.Parse(data["scheduleTime"].ToString());
 				m_trainer = Int64.Parse(data["trainer"].ToString());
 			}
@@ -112,6 +115,14 @@ namespace AY
 					return DbUtils.Dequote(m_comment);
 				}
 			}
+
+			public String ScheduleDays
+			{
+				get
+				{
+					return DbUtils.Dequote(m_scheduleDays);
+				}
+			}
 			
 			public Trainer Trainer
 			{
@@ -137,7 +148,7 @@ namespace AY
 				}
 			}
 
-			public bool SetData(Int64 code, String name, String phone, DateTime scheduleTime, Int64 trainerId, String comment)
+			public bool SetData(Int64 code, String name, String phone, String scheduleDays, DateTime scheduleTime, Int64 trainerId, String comment)
 			{
 				Logger.Debug(String.Format("Set data for client '{0}'", m_name));
 				if (m_id <= 0)
@@ -150,6 +161,7 @@ namespace AY
 				fields["id"] = code.ToString();
 				fields["name"] = DbUtils.Quote(name);
 				fields["phone"] = DbUtils.Quote(phone);
+				fields["scheduleDays"] = DbUtils.Quote(scheduleDays);
 				fields["scheduleTime"] = scheduleTime.ToString("HH:mm:ss");
 				fields["trainer"] = trainerId.ToString();
 				fields["comment"] = DbUtils.Quote(comment);
@@ -178,19 +190,20 @@ namespace AY
 				}
 			}
 
-			public Boolean Add(Int64 code, String name, String phone, DateTime scheduleTime, String comment, Int64 trainer)
+			public Boolean Add(Int64 code, String name, String phone, String scheduleDays, DateTime scheduleTime, String comment, Int64 trainer)
 			{
 				Int64 id = 0;
-				return Add(code, name, phone, scheduleTime, trainer, comment, out id);
+				return Add(code, name, phone, scheduleDays, scheduleTime, trainer, comment, out id);
 			}
 
-			public Boolean Add(Int64 code, String name, String phone, DateTime scheduleTime, Int64 trainer, String comment, out Int64 id)
+			public Boolean Add(Int64 code, String name, String phone, String scheduleDays, DateTime scheduleTime, Int64 trainer, String comment, out Int64 id)
 			{
 				DbAdapter da = new DbAdapter();
 				Dictionary<string, string> fields = new Dictionary<string, string>();
 				fields["id"] = code.ToString();
 				fields["name"] = DbUtils.Quote(name);
 				fields["phone"] = DbUtils.Quote(phone);
+				fields["scheduleDays"] = DbUtils.Quote(scheduleDays);
 				fields["scheduleTime"] = scheduleTime.ToString("HH:mm:ss");
 				fields["trainer"] = trainer.ToString();
 				fields["comment"] = DbUtils.Quote(comment);

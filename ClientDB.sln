@@ -1,8 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientDB", "ClientDB\ClientDB.csproj", "{3A3F8E0E-BB13-4EB6-88C1-2492AE2DACCC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAssistant", "ClientDB\GAssistant.csproj", "{3A3F8E0E-BB13-4EB6-88C1-2492AE2DACCC}"
 	ProjectSection(ProjectDependencies) = postProject
+		{C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F} = {C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F}
 		{A143DC21-278F-4D35-848E-0EA98AC8A330} = {A143DC21-278F-4D35-848E-0EA98AC8A330}
 		{A4463B91-8424-4040-89D6-5449DA9F46F6} = {A4463B91-8424-4040-89D6-5449DA9F46F6}
 		{3B65D397-4C3D-44BC-8E69-7AE6A16581F8} = {3B65D397-4C3D-44BC-8E69-7AE6A16581F8}
@@ -30,6 +31,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Packer", "Packer\Packer.csp
 	ProjectSection(ProjectDependencies) = postProject
 		{A4463B91-8424-4040-89D6-5449DA9F46F6} = {A4463B91-8424-4040-89D6-5449DA9F46F6}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriggerTest", "TriggerTest\TriggerTest.csproj", "{C733AF2B-630B-4CFF-88CE-216CA19A7474}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calendar", "Calendar\Calendar.csproj", "{5FFEA274-1B57-457F-942C-5077FAC98D80}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F} = {C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +69,18 @@ Global
 		{3B65D397-4C3D-44BC-8E69-7AE6A16581F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B65D397-4C3D-44BC-8E69-7AE6A16581F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B65D397-4C3D-44BC-8E69-7AE6A16581F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C733AF2B-630B-4CFF-88CE-216CA19A7474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C733AF2B-630B-4CFF-88CE-216CA19A7474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C733AF2B-630B-4CFF-88CE-216CA19A7474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C733AF2B-630B-4CFF-88CE-216CA19A7474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FFEA274-1B57-457F-942C-5077FAC98D80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FFEA274-1B57-457F-942C-5077FAC98D80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FFEA274-1B57-457F-942C-5077FAC98D80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FFEA274-1B57-457F-942C-5077FAC98D80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

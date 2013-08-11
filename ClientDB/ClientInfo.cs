@@ -4,6 +4,7 @@ using System.Data;
 using System.Windows.Forms;
 using AY.db;
 using AY.Log;
+using AY.Utils;
 
 namespace GAssistant
 {
@@ -48,7 +49,7 @@ namespace GAssistant
 
 			textComment.Text = client.Comment;
 		}
-		
+
 		private void Init()
 		{
 			comboTrainer.Items.Clear();
@@ -60,6 +61,15 @@ namespace GAssistant
 				comboTrainer.Items.Add(tr);
 				comboTrainer.AutoCompleteCustomSource.Add(tr.ToString());
 			}
+
+			string[] names = CultureInfoUtils.GetWeekDayNames();
+			checkDay1.Text = names[0];
+			checkDay2.Text = names[1];
+			checkDay3.Text = names[2];
+			checkDay4.Text = names[3];
+			checkDay5.Text = names[4];
+			checkDay6.Text = names[5];
+			checkDay7.Text = names[6];
 		}
 		
 		private void CheckPermissions()
@@ -227,6 +237,42 @@ namespace GAssistant
 			ChangeClientCode();
 		}
 		
+		private String GetScheduleDays()
+		{
+			String data = "";
+			
+			data += checkDay1.Checked ? "X" : "_";
+			data += checkDay2.Checked ? "X" : "_";
+			data += checkDay3.Checked ? "X" : "_";
+			data += checkDay4.Checked ? "X" : "_";
+			data += checkDay5.Checked ? "X" : "_";
+			data += checkDay6.Checked ? "X" : "_";
+			data += checkDay7.Checked ? "X" : "_";
+			
+			return data;
+		}
+
+		private bool IsDaySet(int nDay, String data)
+		{
+			bool res = false;
+			
+			if (data.Length > nDay && data[nDay - 1] != '_')
+				res = true;
+			
+			return res;
+		}
+		
+		private void SetScheduleDays(String data)
+		{
+			checkDay1.Checked = IsDaySet(1, data);
+			checkDay2.Checked = IsDaySet(2, data);
+			checkDay3.Checked = IsDaySet(3, data);
+			checkDay4.Checked = IsDaySet(4, data);
+			checkDay5.Checked = IsDaySet(5, data);
+			checkDay6.Checked = IsDaySet(6, data);
+			checkDay7.Checked = IsDaySet(7, data);
+		}
+		
 		private void btnOk_Click(object sender, EventArgs e)
 		{
 			if(m_clienId == 0)
@@ -245,6 +291,7 @@ namespace GAssistant
 					cc.Add(id
 						, textName.Text
 						, textPhone.Text
+						, GetScheduleDays()
 						, DateTime.Parse(dateSchedTime.Text)
 						, Trainer.Id
 						, textComment.Text
@@ -256,6 +303,7 @@ namespace GAssistant
 					client.SetData(id
 						, textName.Text
 						, textPhone.Text
+						, GetScheduleDays()
 						, DateTime.Parse(dateSchedTime.Text)
 						, Trainer.Id
 						, textComment.Text);

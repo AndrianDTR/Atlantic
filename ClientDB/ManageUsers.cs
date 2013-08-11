@@ -98,7 +98,7 @@ namespace GAssistant
 			it.SubItems.Add(role.Name);
 			it.Tag = id;
 			new User(id).Password = m_password.Text;
-			
+			m_password.Text = "";
 		}
 
 		private void remove_Click(object sender, EventArgs e)

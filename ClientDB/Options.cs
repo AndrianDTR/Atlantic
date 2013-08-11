@@ -39,8 +39,6 @@ namespace GAssistant
 			
 			m_opts.StoreData();
 			
-			Session.Instance.PassLen = m_opts.MinPassLen;
-						
 			this.DialogResult = DialogResult.OK;
 			Close();
 		}

@@ -142,7 +142,7 @@ namespace AY
 			{
 				get
 				{
-					return AY.db.Properties.Settings.Default.szDbSrcFile 
+					return AY.db.Properties.Settings.Default.szClientDataSrc 
 						+ ClientDbFile;
 				}
 			}
@@ -698,6 +698,7 @@ namespace AY
 					id Integer PRIMARY KEY NOT NULL
 					, name VarChar NOT NULL
 					, phone VarChar DEFAULT('')
+					, scheduleDays VarChar DEFAULT('________')
 					, scheduleTime Time NOT NULL
 					, trainer Integer DEFAULT('')
 					, comment Text DEFAULT('')

@@ -57,6 +57,13 @@
 			this.label10 = new System.Windows.Forms.Label();
 			this.btnChangeCode = new System.Windows.Forms.Button();
 			this.dateSchedTime = new System.Windows.Forms.DateTimePicker();
+			this.checkDay1 = new System.Windows.Forms.CheckBox();
+			this.checkDay2 = new System.Windows.Forms.CheckBox();
+			this.checkDay3 = new System.Windows.Forms.CheckBox();
+			this.checkDay4 = new System.Windows.Forms.CheckBox();
+			this.checkDay5 = new System.Windows.Forms.CheckBox();
+			this.checkDay7 = new System.Windows.Forms.CheckBox();
+			this.checkDay6 = new System.Windows.Forms.CheckBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -76,7 +83,7 @@
 			this.textName.Location = new System.Drawing.Point(168, 59);
 			this.textName.Margin = new System.Windows.Forms.Padding(6);
 			this.textName.Name = "textName";
-			this.textName.Size = new System.Drawing.Size(435, 29);
+			this.textName.Size = new System.Drawing.Size(576, 29);
 			this.textName.TabIndex = 0;
 			// 
 			// label2
@@ -94,7 +101,7 @@
 			this.textPhone.Location = new System.Drawing.Point(168, 104);
 			this.textPhone.Margin = new System.Windows.Forms.Padding(6);
 			this.textPhone.Name = "textPhone";
-			this.textPhone.Size = new System.Drawing.Size(435, 29);
+			this.textPhone.Size = new System.Drawing.Size(576, 29);
 			this.textPhone.TabIndex = 1;
 			// 
 			// label3
@@ -133,28 +140,28 @@
 			this.comboTrainer.Location = new System.Drawing.Point(168, 194);
 			this.comboTrainer.Margin = new System.Windows.Forms.Padding(6);
 			this.comboTrainer.Name = "comboTrainer";
-			this.comboTrainer.Size = new System.Drawing.Size(435, 32);
-			this.comboTrainer.TabIndex = 3;
+			this.comboTrainer.Size = new System.Drawing.Size(576, 32);
+			this.comboTrainer.TabIndex = 10;
 			// 
 			// btnClose
 			// 
 			this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnClose.Location = new System.Drawing.Point(465, 383);
+			this.btnClose.Location = new System.Drawing.Point(607, 381);
 			this.btnClose.Margin = new System.Windows.Forms.Padding(6);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(138, 42);
-			this.btnClose.TabIndex = 6;
+			this.btnClose.TabIndex = 13;
 			this.btnClose.Text = "Cancel";
 			this.btnClose.UseVisualStyleBackColor = true;
 			// 
 			// btnOk
 			// 
 			this.btnOk.Enabled = false;
-			this.btnOk.Location = new System.Drawing.Point(315, 383);
+			this.btnOk.Location = new System.Drawing.Point(457, 381);
 			this.btnOk.Margin = new System.Windows.Forms.Padding(6);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(138, 42);
-			this.btnOk.TabIndex = 5;
+			this.btnOk.TabIndex = 12;
 			this.btnOk.Text = "OK";
 			this.btnOk.UseVisualStyleBackColor = true;
 			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -165,7 +172,7 @@
 			this.textCode.Margin = new System.Windows.Forms.Padding(6);
 			this.textCode.Name = "textCode";
 			this.textCode.ReadOnly = true;
-			this.textCode.Size = new System.Drawing.Size(308, 29);
+			this.textCode.Size = new System.Drawing.Size(449, 29);
 			this.textCode.TabIndex = 9;
 			this.textCode.TabStop = false;
 			// 
@@ -184,12 +191,12 @@
 			// 
 			// textComment
 			// 
-			this.textComment.Location = new System.Drawing.Point(168, 243);
+			this.textComment.Location = new System.Drawing.Point(168, 242);
 			this.textComment.Margin = new System.Windows.Forms.Padding(6);
 			this.textComment.Multiline = true;
 			this.textComment.Name = "textComment";
-			this.textComment.Size = new System.Drawing.Size(435, 126);
-			this.textComment.TabIndex = 4;
+			this.textComment.Size = new System.Drawing.Size(576, 126);
+			this.textComment.TabIndex = 11;
 			// 
 			// label6
 			// 
@@ -209,7 +216,7 @@
 			this.groupBox1.Controls.Add(this.textLastPayDate);
 			this.groupBox1.Controls.Add(this.label7);
 			this.groupBox1.Controls.Add(this.btnPaymentAdd);
-			this.groupBox1.Location = new System.Drawing.Point(612, 12);
+			this.groupBox1.Location = new System.Drawing.Point(753, 14);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(258, 173);
 			this.groupBox1.TabIndex = 14;
@@ -278,7 +285,7 @@
 			this.groupBox2.Controls.Add(this.label9);
 			this.groupBox2.Controls.Add(this.textLastEnter);
 			this.groupBox2.Controls.Add(this.label10);
-			this.groupBox2.Location = new System.Drawing.Point(612, 201);
+			this.groupBox2.Location = new System.Drawing.Point(753, 200);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(258, 168);
 			this.groupBox2.TabIndex = 15;
@@ -339,10 +346,10 @@
 			// 
 			this.btnChangeCode.Enabled = false;
 			this.btnChangeCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.btnChangeCode.Location = new System.Drawing.Point(485, 14);
+			this.btnChangeCode.Location = new System.Drawing.Point(626, 14);
 			this.btnChangeCode.Name = "btnChangeCode";
 			this.btnChangeCode.Size = new System.Drawing.Size(118, 29);
-			this.btnChangeCode.TabIndex = 7;
+			this.btnChangeCode.TabIndex = 14;
 			this.btnChangeCode.Text = "Change";
 			this.btnChangeCode.UseVisualStyleBackColor = true;
 			this.btnChangeCode.Click += new System.EventHandler(this.btnChangeCode_Click);
@@ -354,8 +361,99 @@
 			this.dateSchedTime.Location = new System.Drawing.Point(168, 149);
 			this.dateSchedTime.Name = "dateSchedTime";
 			this.dateSchedTime.ShowUpDown = true;
-			this.dateSchedTime.Size = new System.Drawing.Size(143, 29);
+			this.dateSchedTime.Size = new System.Drawing.Size(74, 29);
 			this.dateSchedTime.TabIndex = 2;
+			// 
+			// checkDay1
+			// 
+			this.checkDay1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.checkDay1.AutoSize = true;
+			this.checkDay1.Location = new System.Drawing.Point(248, 150);
+			this.checkDay1.Name = "checkDay1";
+			this.checkDay1.Size = new System.Drawing.Size(67, 28);
+			this.checkDay1.TabIndex = 3;
+			this.checkDay1.Text = "Mon";
+			this.checkDay1.UseVisualStyleBackColor = true;
+			// 
+			// checkDay2
+			// 
+			this.checkDay2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.checkDay2.AutoSize = true;
+			this.checkDay2.Location = new System.Drawing.Point(321, 150);
+			this.checkDay2.Name = "checkDay2";
+			this.checkDay2.Size = new System.Drawing.Size(67, 28);
+			this.checkDay2.TabIndex = 4;
+			this.checkDay2.Text = "Mon";
+			this.checkDay2.UseVisualStyleBackColor = true;
+			// 
+			// checkDay3
+			// 
+			this.checkDay3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.checkDay3.AutoSize = true;
+			this.checkDay3.Location = new System.Drawing.Point(394, 150);
+			this.checkDay3.Name = "checkDay3";
+			this.checkDay3.Size = new System.Drawing.Size(67, 28);
+			this.checkDay3.TabIndex = 5;
+			this.checkDay3.Text = "Mon";
+			this.checkDay3.UseVisualStyleBackColor = true;
+			// 
+			// checkDay4
+			// 
+			this.checkDay4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.checkDay4.AutoSize = true;
+			this.checkDay4.Location = new System.Drawing.Point(465, 150);
+			this.checkDay4.Name = "checkDay4";
+			this.checkDay4.Size = new System.Drawing.Size(67, 28);
+			this.checkDay4.TabIndex = 6;
+			this.checkDay4.Text = "Mon";
+			this.checkDay4.UseVisualStyleBackColor = true;
+			// 
+			// checkDay5
+			// 
+			this.checkDay5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.checkDay5.AutoSize = true;
+			this.checkDay5.Location = new System.Drawing.Point(536, 150);
+			this.checkDay5.Name = "checkDay5";
+			this.checkDay5.Size = new System.Drawing.Size(67, 28);
+			this.checkDay5.TabIndex = 7;
+			this.checkDay5.Text = "Mon";
+			this.checkDay5.UseVisualStyleBackColor = true;
+			// 
+			// checkDay7
+			// 
+			this.checkDay7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.checkDay7.AutoSize = true;
+			this.checkDay7.Location = new System.Drawing.Point(678, 150);
+			this.checkDay7.Name = "checkDay7";
+			this.checkDay7.Size = new System.Drawing.Size(67, 28);
+			this.checkDay7.TabIndex = 9;
+			this.checkDay7.Text = "Mon";
+			this.checkDay7.UseVisualStyleBackColor = true;
+			// 
+			// checkDay6
+			// 
+			this.checkDay6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.checkDay6.AutoSize = true;
+			this.checkDay6.Location = new System.Drawing.Point(605, 150);
+			this.checkDay6.Name = "checkDay6";
+			this.checkDay6.Size = new System.Drawing.Size(67, 28);
+			this.checkDay6.TabIndex = 8;
+			this.checkDay6.Text = "Mon";
+			this.checkDay6.UseVisualStyleBackColor = true;
 			// 
 			// ClientInfo
 			// 
@@ -363,7 +461,14 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnClose;
-			this.ClientSize = new System.Drawing.Size(881, 438);
+			this.ClientSize = new System.Drawing.Size(1021, 438);
+			this.Controls.Add(this.checkDay7);
+			this.Controls.Add(this.checkDay6);
+			this.Controls.Add(this.checkDay5);
+			this.Controls.Add(this.checkDay4);
+			this.Controls.Add(this.checkDay3);
+			this.Controls.Add(this.checkDay2);
+			this.Controls.Add(this.checkDay1);
 			this.Controls.Add(this.dateSchedTime);
 			this.Controls.Add(this.btnChangeCode);
 			this.Controls.Add(this.groupBox2);
@@ -431,5 +536,12 @@
 		private System.Windows.Forms.Button btnEnter;
 		private System.Windows.Forms.Button btnChangeCode;
 		private System.Windows.Forms.DateTimePicker dateSchedTime;
+		private System.Windows.Forms.CheckBox checkDay1;
+		private System.Windows.Forms.CheckBox checkDay2;
+		private System.Windows.Forms.CheckBox checkDay3;
+		private System.Windows.Forms.CheckBox checkDay4;
+		private System.Windows.Forms.CheckBox checkDay5;
+		private System.Windows.Forms.CheckBox checkDay7;
+		private System.Windows.Forms.CheckBox checkDay6;
 	}
 }

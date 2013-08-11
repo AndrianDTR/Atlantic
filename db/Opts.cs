@@ -21,8 +21,13 @@ namespace AY
 			
 			public Opts()
 			{
+				Update();
+			}
+			
+			public void Update()
+			{
 				String where = String.Format("1 = 1");
-				DataRow data = new DbAdapter().GetFirstRow(DbTable.Settings, where, new List<string> {});
+				DataRow data = new DbAdapter().GetFirstRow(DbTable.Settings, where, new List<string> { });
 
 				if (data == null)
 				{
@@ -35,11 +40,11 @@ namespace AY
 				m_showClientCount = int.Parse(data["showClientCount"].ToString());
 				m_storeMainWindowSatate = int.Parse(data["storeMainWindowState"].ToString());
 				m_mainWindowSatate = int.Parse(data["mainWindowState"].ToString());
-				
+
 				m_language = data["language"].ToString();
 				m_pathBackUp = data["pathBackUp"].ToString();
 			}
-
+			
 			public String Language
 			{
 				get
