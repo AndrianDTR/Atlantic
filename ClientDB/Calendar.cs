@@ -472,7 +472,6 @@ namespace Calendar
             }
         }
 
-        
         internal void RaiseSelectionChanged(EventArgs e)
         {
             if (SelectionChanged != null)
