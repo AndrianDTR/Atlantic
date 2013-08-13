@@ -46,7 +46,7 @@ namespace GAssistant
 					break;
 				}
 			}
-
+			SetScheduleDays(client.ScheduleDays);
 			textComment.Text = client.Comment;
 		}
 

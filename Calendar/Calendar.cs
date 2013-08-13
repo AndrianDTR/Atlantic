@@ -9,116 +9,17 @@ namespace AY
 {
 	namespace Calendar
 	{
-		public partial class Calendar : UserControl
+		public class Calendar : UserControl
 		{
-			private void InitializeComponent()
-			{
-				this.m_grid = new System.Windows.Forms.TableLayoutPanel();
-				this.m_btnPrev = new System.Windows.Forms.Button();
-				this.m_btnNext = new System.Windows.Forms.Button();
-				this.m_headerPanel = new System.Windows.Forms.Panel();
-				this.m_dataPanel = new System.Windows.Forms.Panel();
-				this.m_scrollPanel = new System.Windows.Forms.Panel();
-				this.m_Scrollbar = new System.Windows.Forms.VScrollBar();
-				this.m_grid.SuspendLayout();
-				this.m_dataPanel.SuspendLayout();
-				this.SuspendLayout();
-				// 
-				// m_grid
-				// 
-				this.m_grid.ColumnCount = 1;
-				this.m_grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-				this.m_grid.Controls.Add(this.m_btnPrev, 0, 0);
-				this.m_grid.Controls.Add(this.m_btnNext, 0, 3);
-				this.m_grid.Controls.Add(this.m_headerPanel, 0, 1);
-				this.m_grid.Controls.Add(this.m_dataPanel, 0, 2);
-				this.m_grid.Dock = System.Windows.Forms.DockStyle.Fill;
-				this.m_grid.Location = new System.Drawing.Point(0, 0);
-				this.m_grid.Name = "m_grid";
-				this.m_grid.RowCount = 4;
-				this.m_grid.RowStyles.Add(new System.Windows.Forms.RowStyle());
-				this.m_grid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-				this.m_grid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-				this.m_grid.RowStyles.Add(new System.Windows.Forms.RowStyle());
-				this.m_grid.Size = new System.Drawing.Size(534, 430);
-				this.m_grid.TabIndex = 0;
-				// 
-				// m_btnPrev
-				// 
-				this.m_btnPrev.Location = new System.Drawing.Point(3, 3);
-				this.m_btnPrev.Name = "m_btnPrev";
-				this.m_btnPrev.Size = new System.Drawing.Size(528, 23);
-				this.m_btnPrev.TabIndex = 0;
-				this.m_btnPrev.Text = "button1";
-				this.m_btnPrev.UseVisualStyleBackColor = true;
-				// 
-				// m_btnNext
-				// 
-				this.m_btnNext.Location = new System.Drawing.Point(3, 404);
-				this.m_btnNext.Name = "m_btnNext";
-				this.m_btnNext.Size = new System.Drawing.Size(528, 23);
-				this.m_btnNext.TabIndex = 1;
-				this.m_btnNext.Text = "button2";
-				this.m_btnNext.UseVisualStyleBackColor = true;
-				// 
-				// m_headerPanel
-				// 
-				this.m_headerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-				this.m_headerPanel.Location = new System.Drawing.Point(3, 32);
-				this.m_headerPanel.Name = "m_headerPanel";
-				this.m_headerPanel.Size = new System.Drawing.Size(528, 34);
-				this.m_headerPanel.TabIndex = 2;
-				// 
-				// m_dataPanel
-				// 
-				this.m_dataPanel.Controls.Add(this.m_scrollPanel);
-				this.m_dataPanel.Controls.Add(this.m_Scrollbar);
-				this.m_dataPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-				this.m_dataPanel.Location = new System.Drawing.Point(3, 72);
-				this.m_dataPanel.Name = "m_dataPanel";
-				this.m_dataPanel.Size = new System.Drawing.Size(528, 326);
-				this.m_dataPanel.TabIndex = 3;
-				// 
-				// m_scrollPanel
-				// 
-				this.m_scrollPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-				this.m_scrollPanel.Location = new System.Drawing.Point(0, 0);
-				this.m_scrollPanel.Name = "m_scrollPanel";
-				this.m_scrollPanel.Size = new System.Drawing.Size(509, 326);
-				this.m_scrollPanel.TabIndex = 5;
-				// 
-				// m_Scrollbar
-				// 
-				this.m_Scrollbar.Dock = System.Windows.Forms.DockStyle.Right;
-				this.m_Scrollbar.Location = new System.Drawing.Point(509, 0);
-				this.m_Scrollbar.Maximum = 1000;
-				this.m_Scrollbar.Minimum = 1;
-				this.m_Scrollbar.Name = "m_Scrollbar";
-				this.m_Scrollbar.Size = new System.Drawing.Size(19, 326);
-				this.m_Scrollbar.TabIndex = 4;
-				this.m_Scrollbar.Value = 1;
-				// 
-				// Calendar
-				// 
-				this.Controls.Add(this.m_grid);
-				this.Name = "Calendar";
-				this.Size = new System.Drawing.Size(534, 430);
-				this.m_grid.ResumeLayout(false);
-				this.m_dataPanel.ResumeLayout(false);
-				this.ResumeLayout(false);
-
-			}
-			
 			#region Variables
 
 			private ToolTip m_ToolTip;
 
-			Rectangle m_rSelectionStartAt;
-			DateTime m_dSelectionStartAt;
-			bool m_bSelectionChanged;
-			bool m_bMouseEnter = false;
+			private Rectangle m_rSelectionStartAt;
+			private DateTime m_dSelectionStartAt;
+			private bool m_bSelectionChanged;
+			private bool m_bMouseEnter = false;
 
-			#endregion
 			private TableLayoutPanel m_grid;
 			private Button m_btnPrev;
 			private Button m_btnNext;
@@ -127,57 +28,34 @@ namespace AY
 			private VScrollBar m_Scrollbar;
 			private Panel m_scrollPanel;
 
-			#region Constants
-			int m_nMult = 100;
-			#endregion
-
-			#region c.tor
-
-			public Calendar()
-			{
-				int height = base.Height;
-				SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-				SetStyle(ControlStyles.ResizeRedraw, true);
-				SetStyle(ControlStyles.Selectable, true);
-				
-				InitializeComponent();
-				
-				this.SuspendLayout();
-				
-				m_btnPrev.Height = m_nNavButtonsHeight;
-				m_btnNext.Height = m_nNavButtonsHeight;
-				m_headerPanel.Height = m_nNavButtonsHeight;
-				m_dataPanel.Height = m_nNavButtonsHeight;
-				//m_Scrollbar.Value = RowHeight;
-				m_scrollPanel.Width = m_Scrollbar.Width;
-				
-				this.Renderer = new DefaultRenderer();
-
-				m_Scrollbar.Scroll += new ScrollEventHandler(this.OnScroll);
-				m_headerPanel.Paint += new PaintEventHandler(this.OnHeaderPaint);
-				m_dataPanel.Paint += new PaintEventHandler(this.OnDataPaint);
-
-				m_scrollPanel.Paint += new PaintEventHandler(this.OnScrollPaint);
-
-				m_btnPrev.Paint += new PaintEventHandler(this.OnPrevBtnPaint);
-				m_btnPrev.Click += new EventHandler(this.OnPrevBtnClick);
-
-				m_btnNext.Paint += new PaintEventHandler(this.OnNextBtnPaint);
-				m_btnNext.Click += new EventHandler(this.OnNextBtnClick);
-
-				m_dataPanel.MouseDown += new MouseEventHandler(this.OnDataMouseDown);
-				m_dataPanel.MouseUp += new MouseEventHandler(this.OnDataMouseUp);
-				m_dataPanel.MouseMove += new MouseEventHandler(this.OnDataMouseMove);
-				m_dataPanel.MouseEnter += new EventHandler(this.OnDataMouseEnter);
-				m_dataPanel.MouseLeave += new EventHandler(this.OnDataMouseLeave);
-				this.MouseWheel += new MouseEventHandler(this.OnDataMouseWheel);
-				
-				this.ResumeLayout();
-			}
-
 			#endregion
 
 			#region Properties
+			
+			private AbstractRenderer renderer = new DefaultRenderer();
+			[System.ComponentModel.Browsable(false)]
+			[System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+			public AbstractRenderer Renderer
+			{
+				get
+				{
+					return renderer;
+				}
+				set
+				{
+					renderer = value;
+					Invalidate(true);
+				}
+			}
+
+			private ITool activeTool;
+			[System.ComponentModel.Browsable(false)]
+			public ITool ActiveTool
+			{
+				get { return activeTool; }
+				set { activeTool = value; }
+			}
+			
 			private int m_nHeaderHeight = 20;
 			[System.ComponentModel.DefaultValue(20)]
 			public int HeaderHeight
@@ -240,25 +118,7 @@ namespace AY
 					Invalidate(true);
 				}
 			}
-			/********************************************************/
-
-			private AbstractRenderer renderer;
-
-			[System.ComponentModel.Browsable(false)]
-			[System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-			public AbstractRenderer Renderer
-			{
-				get
-				{
-					return renderer;
-				}
-				set
-				{
-					renderer = value;
-					Invalidate(true);
-				}
-			}
-
+			
 			private DateTime startDate = DateTime.Now;
 			public DateTime StartDate
 			{
@@ -268,49 +128,297 @@ namespace AY
 				}
 				set
 				{
-					startDate = value;
-					OnStartDateChanged();
+					startDate = value.Date;
+					
+					int nWeeks = GetWeekOfYear(new DateTime(startDate.Year, 12, 31));
+					AdjustScrollbar();
+					m_Scrollbar.Value = GetWeekOfYear(StartDate) * m_nMult;
+
+					m_btnPrev.Text = (startDate.Year - 1).ToString();
+					m_btnNext.Text = (startDate.Year + 1).ToString();
+
+					Invalidate(true);
 				}
-			}
-
-			protected virtual void OnStartDateChanged()
-			{
-				startDate = startDate.Date;
-
-				int nWeeks = GetWeekOfYear(new DateTime(startDate.Year, 12, 31));
-				AdjustScrollbar();
-				m_Scrollbar.Value = GetWeekOfYear(StartDate) * m_nMult;
-
-				m_btnPrev.Text = (startDate.Year - 1).ToString();
-				m_btnNext.Text = (startDate.Year + 1).ToString();
-
-				Invalidate(true);
 			}
 
 			private DateTime selectedDate;
-
 			public DateTime SelectedDate
 			{
-				get { return selectedDate; }
+				get 
+				{ 
+					return selectedDate;
+				}
 				set
 				{
 					selectedDate = value;
-					OnSelectedDateChanged();
+					Invalidate(true);
 				}
 			}
-			protected virtual void OnSelectedDateChanged()
+			
+			/*
+			 * Colors
+			 */
+			public Color BgColor
 			{
-				Invalidate(true);
+				get
+				{
+					return renderer.BgColor;
+				}
+				set
+				{
+					renderer.BgColor = value;
+					Invalidate(true);
+				}
 			}
 
-			private ITool activeTool;
-
-			[System.ComponentModel.Browsable(false)]
-			public ITool ActiveTool
+			public Color HeaderBgColor
 			{
-				get { return activeTool; }
-				set { activeTool = value; }
+				get
+				{
+					return renderer.HeaderBgColor;
+				}
+				set
+				{
+					renderer.HeaderBgColor = value;
+					Invalidate(true);
+				}
 			}
+
+			public Color HeaderBgColor2
+			{
+				get
+				{
+					return renderer.HeaderBgColor2;
+				}
+				set
+				{
+					renderer.HeaderBgColor2 = value;
+					Invalidate(true);
+				}
+			}
+
+			public Color MarkerColor
+			{
+				get
+				{
+					return renderer.MarkerColor;
+				}
+				set
+				{
+					renderer.MarkerColor = value;
+					Invalidate(true);
+				}
+			}
+
+			public Color SelectionColor
+			{
+				get
+				{
+					return renderer.SelectionColor;
+				}
+				set
+				{
+					renderer.SelectionColor = value;
+					Invalidate(true);
+				}
+			}
+
+			public Color SelectionBorderColor
+			{
+				get
+				{
+					return renderer.SelectionBorderColor;
+				}
+				set
+				{
+					renderer.SelectionBorderColor = value;
+					Invalidate(true);
+				}
+			}
+
+			public Color VerticalLineColor
+			{
+				get
+				{
+					return renderer.VerticalLineColor;
+				}
+				set
+				{
+					renderer.VerticalLineColor = value;
+					Invalidate(true);
+				}
+			}
+
+			public Color HorisontalLineColor
+			{
+				get
+				{
+					return renderer.HorisontalLineColor;
+				}
+				set
+				{
+					renderer.HorisontalLineColor = value;
+					Invalidate(true);
+				}
+			}
+			#endregion
+
+			
+			#region c.tor
+			
+			public Calendar()
+			{
+				int height = base.Height;
+				SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+				SetStyle(ControlStyles.ResizeRedraw, true);
+				SetStyle(ControlStyles.Selectable, true);
+
+				InitializeComponent();
+
+				this.SuspendLayout();
+
+				/*m_btnPrev.Height = m_nNavButtonsHeight;
+				m_btnNext.Height = m_nNavButtonsHeight;
+				m_headerPanel.Height = m_nNavButtonsHeight;
+				m_dataPanel.Height = m_nNavButtonsHeight;
+				m_scrollPanel.Width = m_Scrollbar.Width;
+				*/
+				this.Renderer = renderer;
+
+				m_Scrollbar.Scroll += new ScrollEventHandler(this.OnScroll);
+				m_headerPanel.Paint += new PaintEventHandler(this.OnHeaderPaint);
+				m_dataPanel.Paint += new PaintEventHandler(this.OnDataPaint);
+
+				m_scrollPanel.Paint += new PaintEventHandler(this.OnScrollPaint);
+
+				m_btnPrev.Paint += new PaintEventHandler(this.OnPrevBtnPaint);
+				m_btnPrev.Click += new EventHandler(this.OnPrevBtnClick);
+
+				m_btnNext.Paint += new PaintEventHandler(this.OnNextBtnPaint);
+				m_btnNext.Click += new EventHandler(this.OnNextBtnClick);
+
+				m_dataPanel.MouseDown += new MouseEventHandler(this.OnDataMouseDown);
+				m_dataPanel.MouseUp += new MouseEventHandler(this.OnDataMouseUp);
+				m_dataPanel.MouseMove += new MouseEventHandler(this.OnDataMouseMove);
+				m_dataPanel.MouseEnter += new EventHandler(this.OnDataMouseEnter);
+				m_dataPanel.MouseLeave += new EventHandler(this.OnDataMouseLeave);
+				this.MouseWheel += new MouseEventHandler(this.OnDataMouseWheel);
+
+				this.ResumeLayout();
+			}
+			
+			private void InitializeComponent()
+			{
+				this.m_grid = new System.Windows.Forms.TableLayoutPanel();
+				this.m_btnPrev = new System.Windows.Forms.Button();
+				this.m_btnNext = new System.Windows.Forms.Button();
+				this.m_headerPanel = new System.Windows.Forms.Panel();
+				this.m_dataPanel = new System.Windows.Forms.Panel();
+				this.m_scrollPanel = new System.Windows.Forms.Panel();
+				this.m_Scrollbar = new System.Windows.Forms.VScrollBar();
+				this.m_grid.SuspendLayout();
+				this.m_dataPanel.SuspendLayout();
+				this.m_scrollPanel.SuspendLayout();
+				this.SuspendLayout();
+				// 
+				// m_grid
+				// 
+				this.m_grid.ColumnCount = 1;
+				this.m_grid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+				this.m_grid.Controls.Add(this.m_btnPrev, 0, 0);
+				this.m_grid.Controls.Add(this.m_btnNext, 0, 3);
+				this.m_grid.Controls.Add(this.m_headerPanel, 0, 1);
+				this.m_grid.Controls.Add(this.m_dataPanel, 0, 2);
+				this.m_grid.Dock = System.Windows.Forms.DockStyle.Fill;
+				this.m_grid.Location = new System.Drawing.Point(0, 0);
+				this.m_grid.Name = "m_grid";
+				this.m_grid.RowCount = 4;
+				this.m_grid.RowStyles.Add(new System.Windows.Forms.RowStyle());
+				this.m_grid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+				this.m_grid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+				this.m_grid.RowStyles.Add(new System.Windows.Forms.RowStyle());
+				this.m_grid.Size = new System.Drawing.Size(530, 426);
+				this.m_grid.TabIndex = 0;
+				// 
+				// m_btnPrev
+				// 
+				this.m_btnPrev.Dock = System.Windows.Forms.DockStyle.Top;
+				this.m_btnPrev.Location = new System.Drawing.Point(0, 0);
+				this.m_btnPrev.Margin = new System.Windows.Forms.Padding(0);
+				this.m_btnPrev.Name = "m_btnPrev";
+				this.m_btnPrev.Size = new System.Drawing.Size(530, 23);
+				this.m_btnPrev.TabIndex = 0;
+				this.m_btnPrev.Text = "button1";
+				this.m_btnPrev.UseVisualStyleBackColor = true;
+				// 
+				// m_btnNext
+				// 
+				this.m_btnNext.Dock = System.Windows.Forms.DockStyle.Bottom;
+				this.m_btnNext.Location = new System.Drawing.Point(0, 403);
+				this.m_btnNext.Margin = new System.Windows.Forms.Padding(0);
+				this.m_btnNext.Name = "m_btnNext";
+				this.m_btnNext.Size = new System.Drawing.Size(530, 23);
+				this.m_btnNext.TabIndex = 1;
+				this.m_btnNext.Text = "button2";
+				this.m_btnNext.UseVisualStyleBackColor = true;
+				// 
+				// m_headerPanel
+				// 
+				this.m_headerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+				this.m_headerPanel.Location = new System.Drawing.Point(0, 23);
+				this.m_headerPanel.Margin = new System.Windows.Forms.Padding(0);
+				this.m_headerPanel.Name = "m_headerPanel";
+				this.m_headerPanel.Size = new System.Drawing.Size(530, 40);
+				this.m_headerPanel.TabIndex = 2;
+				// 
+				// m_dataPanel
+				// 
+				this.m_dataPanel.Controls.Add(this.m_scrollPanel);
+				this.m_dataPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+				this.m_dataPanel.Location = new System.Drawing.Point(0, 63);
+				this.m_dataPanel.Margin = new System.Windows.Forms.Padding(0);
+				this.m_dataPanel.Name = "m_dataPanel";
+				this.m_dataPanel.Size = new System.Drawing.Size(530, 340);
+				this.m_dataPanel.TabIndex = 3;
+				// 
+				// m_scrollPanel
+				// 
+				this.m_scrollPanel.Controls.Add(this.m_Scrollbar);
+				this.m_scrollPanel.Dock = System.Windows.Forms.DockStyle.Right;
+				this.m_scrollPanel.Location = new System.Drawing.Point(511, 0);
+				this.m_scrollPanel.Margin = new System.Windows.Forms.Padding(0);
+				this.m_scrollPanel.Name = "m_scrollPanel";
+				this.m_scrollPanel.Size = new System.Drawing.Size(19, 340);
+				this.m_scrollPanel.TabIndex = 5;
+				// 
+				// m_Scrollbar
+				// 
+				this.m_Scrollbar.Dock = System.Windows.Forms.DockStyle.Right;
+				this.m_Scrollbar.Location = new System.Drawing.Point(0, 0);
+				this.m_Scrollbar.Maximum = 1000;
+				this.m_Scrollbar.Minimum = 1;
+				this.m_Scrollbar.Name = "m_Scrollbar";
+				this.m_Scrollbar.Size = new System.Drawing.Size(19, 340);
+				this.m_Scrollbar.TabIndex = 4;
+				this.m_Scrollbar.Value = 1;
+				// 
+				// Calendar
+				// 
+				this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+				this.Controls.Add(this.m_grid);
+				this.Name = "Calendar";
+				this.Size = new System.Drawing.Size(530, 426);
+				this.m_grid.ResumeLayout(false);
+				this.m_dataPanel.ResumeLayout(false);
+				this.m_scrollPanel.ResumeLayout(false);
+				this.ResumeLayout(false);
+
+			}
+			
+			#endregion
+					
+			#region Constants
+			int m_nMult = 100;
 			#endregion
 
 			#region Event Handlers
@@ -355,7 +463,9 @@ namespace AY
 			{
 				Panel p = (Panel)sender;
 				Rectangle rRect = new Rectangle(0, 0, p.Width, p.Height);
-				renderer.DrawScrollBar(e.Graphics, rRect, p);
+				// TODO: Next line is commented because 
+				// Scrollbar Paint procedure still under construction
+				//renderer.DrawScrollBar(e.Graphics, rRect, p);
 			}
 
 			private void OnPrevBtnClick(object sender, EventArgs e)
@@ -496,18 +606,6 @@ namespace AY
 				e.DrawBackground();
 				e.DrawBorder();
 				e.DrawText();
-			}
-
-			void editbox_KeyUp(object sender, KeyEventArgs e)
-			{
-				if (e.KeyCode == Keys.Escape)
-				{
-					e.Handled = true;
-				}
-				else if (e.KeyCode == Keys.Enter)
-				{
-					e.Handled = true;
-				}
 			}
 
 			internal void RaiseSelectionChanged(EventArgs e)
@@ -666,7 +764,7 @@ namespace AY
 				e.Graphics.SetClip(rect);
 				int rows = rect.Height / RowHeight + 1;
 				rect.Height = rows * RowHeight;
-
+				
 				int nWeeks = GetWeekOfYear(new DateTime(StartDate.Year, 12, 31));
 				int nWeek = m_Scrollbar.Value / m_nMult;
 				DateTime weekStartDate = GetFirstDateOfWeek(StartDate.Year, nWeek);
@@ -710,15 +808,8 @@ namespace AY
 					}
 					rCell.Y += RowHeight;
 				}
-
+				
 				e.Graphics.ResetClip();
-			}
-
-			private void DrawAppointments(PaintEventArgs e, Rectangle rect, DateTime time)
-			{
-				DateTime timeStart = time.Date;
-				DateTime timeEnd = timeStart.AddHours(24);
-				timeEnd = timeEnd.AddSeconds(-1);
 			}
 
 			#endregion

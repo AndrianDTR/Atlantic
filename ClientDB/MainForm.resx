@@ -357,6 +357,9 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="btnBackUp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnBackUp.Location" type="System.Drawing.Point, System.Drawing">
     <value>216, 0</value>
   </data>
@@ -377,6 +380,9 @@
   </data>
   <data name="&gt;&gt;btnBackUp.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="btnTrainersShedule.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="btnTrainersShedule.Location" type="System.Drawing.Point, System.Drawing">
     <value>162, 0</value>
@@ -399,6 +405,9 @@
   <data name="&gt;&gt;btnTrainersShedule.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="btnPaymentsHistory.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnPaymentsHistory.Location" type="System.Drawing.Point, System.Drawing">
     <value>108, 0</value>
   </data>
@@ -420,6 +429,9 @@
   <data name="&gt;&gt;btnPaymentsHistory.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="btnClientManager.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnClientManager.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 0</value>
   </data>
@@ -440,6 +452,9 @@
   </data>
   <data name="&gt;&gt;btnClientManager.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="btnAddClient.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="btnAddClient.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -486,26 +501,53 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="calendar1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="m_calendar.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="m_calendar.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 63</value>
   </data>
-  <data name="calendar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 290</value>
+  <data name="m_calendar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>905, 290</value>
   </data>
-  <data name="calendar1.TabIndex" type="System.Int32, mscorlib">
+  <data name="m_calendar.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;calendar1.Name" xml:space="preserve">
-    <value>calendar1</value>
+  <data name="&gt;&gt;m_calendar.Name" xml:space="preserve">
+    <value>m_calendar</value>
   </data>
-  <data name="&gt;&gt;calendar1.Type" xml:space="preserve">
-    <value>AY.Calendar.Calendar, Calendar, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;m_calendar.Type" xml:space="preserve">
+    <value>GAssistant.DayView, G-Assistant, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;calendar1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;m_calendar.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;calendar1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;m_calendar.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="chart1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="chart1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 359</value>
+  </data>
+  <data name="chart1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>905, 144</value>
+  </data>
+  <data name="chart1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;chart1.Name" xml:space="preserve">
+    <value>chart1</value>
+  </data>
+  <data name="&gt;&gt;chart1.Type" xml:space="preserve">
+    <value>Chart.Chart, Chart, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;chart1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;chart1.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -538,7 +580,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="calendar1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,55,Percent,100,Absolute,150" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="m_calendar" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="chart1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,55,Percent,100,Absolute,150" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

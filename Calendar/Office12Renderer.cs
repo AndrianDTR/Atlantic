@@ -108,7 +108,7 @@ namespace AY
 						g.FillRectangle(backBrush, r);
 				}
 				
-				using (Pen backBrush = new Pen(GridColor))
+				using (Pen backBrush = new Pen(HorisontalLineColor))
 				{
 					g.DrawLine(backBrush, rect.Left, rect.Bottom, rect.Right, rect.Bottom);
 				}
@@ -120,11 +120,14 @@ namespace AY
 
 			public override void DrawCell(System.Drawing.Graphics g, System.Drawing.Rectangle rect, CellInfo ci)
 			{
-				StringFormat m_Format = new StringFormat();
-				m_Format.Alignment = StringAlignment.Center;
-				m_Format.FormatFlags = StringFormatFlags.FitBlackBox;
-				m_Format.LineAlignment = StringAlignment.Center;
-
+				StringFormat m_fTitle = new StringFormat();
+				m_fTitle.Alignment = StringAlignment.Center;
+				m_fTitle.FormatFlags = StringFormatFlags.FitBlackBox;
+				m_fTitle.LineAlignment = StringAlignment.Center;
+				
+				StringFormat m_fTip = new StringFormat();
+				m_fTip.Alignment = StringAlignment.Near;
+				
 				g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
 
 				Color bg = MonthColorMap[ci.date.Month];
@@ -136,17 +139,31 @@ namespace AY
 				using (SolidBrush backBrush = new SolidBrush(bg))
 					g.FillRectangle(backBrush, rect);
 					
-				using (Pen backBrush = new Pen(GridColor))
+				using (Pen vLineClr = new Pen(VerticalLineColor))
 				{
-					g.DrawLine(backBrush, rect.Left, rect.Top, rect.Left, rect.Bottom);
-					g.DrawLine(backBrush, rect.Left, rect.Bottom, rect.Right, rect.Bottom);
+					g.DrawLine(vLineClr, rect.Left, rect.Top, rect.Left, rect.Bottom);
 				}
+
+				using (Pen hLineClr = new Pen(HorisontalLineColor))
+				{
+					g.DrawLine(hLineClr, rect.Left, rect.Bottom, rect.Right, rect.Bottom);
+				}
+				
+				Rectangle rTitle = rect;
+				rTitle.Offset(2, 1);
 				
 				Rectangle rText = rect;
 				rText.Offset(2, 1);
+				
+				Size textSize = g.MeasureString(ci.sTitle, CellDataBoldFont, rTitle.Width).ToSize();
+				rTitle.Height = textSize.Height;
+				rText.Height -= textSize.Height;			
+				rText.Y += textSize.Height;
+				
 				rect.Inflate(1, 1);
 				rect.Offset(1, 0);
 				
+				Brush bText = SystemBrushes.WindowText;
 				if (ci.bSelected)
 				{
 					using (SolidBrush backBrush = new SolidBrush(SelectionColor))
@@ -155,12 +172,11 @@ namespace AY
 					using (Pen borderPen = new Pen(SelectionBorderColor))
 						g.DrawRectangle(borderPen, rect);
 				
-					g.DrawString(ci.sTitle, CellDataBoldFont, SystemBrushes.HighlightText, rText, m_Format);
+					bText = SystemBrushes.HighlightText;
 				}
-				else
-				{
-					g.DrawString(ci.sTitle, CellDataBoldFont, SystemBrushes.WindowText, rText, m_Format);
-				}
+				
+				g.DrawString(ci.sTitle, CellDataBoldFont, bText, rTitle, m_fTitle);
+				g.DrawString(ci.sTip, CellDataFont, bText, rText, m_fTip);
 				
 				g.TextRenderingHint = TextRenderingHint.SystemDefault;
 			}

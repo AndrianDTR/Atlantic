@@ -77,7 +77,7 @@ namespace AY
 
 				// TODO: Process options here.
 				
-				client.ExtraInfo = clientTrigger.ToString();
+				client.ExtraInfo = clientTrig.ToString();
 
 				Logger.Leave();
 				return res;
@@ -88,13 +88,13 @@ namespace AY
 				bool res = false;
 				Logger.Enter();
 
-				Client client = new Client(payment.ClientId);
+				Client client = new Client(clientId);
 
 				Trigger clientTrig = new Trigger(client.ExtraInfo);
 
 				// TODO: Process options here.
 				
-				client.ExtraInfo = clientTrigger.ToString();
+				client.ExtraInfo = clientTrig.ToString();
 
 				Logger.Leave();
 				return res;

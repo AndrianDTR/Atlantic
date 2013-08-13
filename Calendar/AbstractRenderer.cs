@@ -8,42 +8,31 @@ namespace AY
 {
 	namespace Calendar
 	{
-		public class CellInfo
-		{
-			public bool bSelected = false;
-			public bool bCurMonth = false;
-			public DateTime date;
-			public string sTitle = "";
-			public string sTip = "";
-			public object extraInfo = null;
-			
-			
-			public CellInfo(DateTime date)
-			{
-				this.date = date;
-				sTitle = date.Day.ToString();
-				bSelected = false;
-				bCurMonth = false;
-				sTip = "";
-				extraInfo = null;
-			}
-		};
-		
 		public abstract class AbstractRenderer
 		{
+			Color m_selectionColor = SystemColors.Highlight;
 			public virtual Color SelectionColor
 			{
 				get
 				{
-					return SystemColors.Highlight;
+					return m_selectionColor;
+				}
+				set
+				{
+					m_selectionColor = value;
 				}
 			}
 
+			Color m_borderColor = SystemColors.ActiveBorder;
 			public virtual Color SelectionBorderColor
 			{
 				get
 				{
-					return SystemColors.ActiveBorder;
+					return m_borderColor;
+				}
+				set
+				{
+					m_borderColor = value;
 				}
 			}
 			
@@ -333,7 +322,7 @@ namespace AY
 			}
 			
 			private Color dayHorisontalLineColor = Color.FromArgb(200, 200, 255);
-			public virtual Color DayHorisontalLineColor
+			public virtual Color HorisontalLineColor
 			{
 				get
 				{
