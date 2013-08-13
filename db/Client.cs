@@ -13,6 +13,7 @@ namespace AY
 			private String m_name = String.Empty;
 			private String m_phone = String.Empty;
 			private String m_comment = String.Empty;
+			private String m_extraInfo = String.Empty;
 			private String m_scheduleDays = String.Empty;
 			private DateTime m_scheduleTime;
 			private Int64 m_trainer = 0;
@@ -52,6 +53,7 @@ namespace AY
 				m_name = data["name"].ToString();
 				m_phone = data["phone"].ToString();
 				m_comment = data["comment"].ToString();
+				m_extraInfo = data["extraInfo"].ToString();
 				m_scheduleDays = data["scheduleDays"].ToString();
 				m_scheduleTime = DateTime.Parse(data["scheduleTime"].ToString());
 				m_trainer = Int64.Parse(data["trainer"].ToString());
@@ -71,6 +73,7 @@ namespace AY
 				m_name = data["name"].ToString();
 				m_phone = data["phone"].ToString();
 				m_comment = data["comment"].ToString();
+				m_extraInfo = data["extraInfo"].ToString();
 				m_scheduleDays = data["scheduleDays"].ToString();
 				m_scheduleTime = DateTime.Parse(data["scheduleTime"].ToString());
 				m_trainer = Int64.Parse(data["trainer"].ToString());
@@ -113,6 +116,31 @@ namespace AY
 				get
 				{
 					return DbUtils.Dequote(m_comment);
+				}
+			}
+
+			public String ExtraInfo
+			{
+				get
+				{
+					return m_extraInfo;
+				}
+				set
+				{
+					String data = value;
+					
+					Logger.Debug(String.Format("Set extraInfo for client '{0}'", m_name));
+					if (m_id > 0)
+					{
+						DbAdapter ad = new DbAdapter();
+						Dictionary<string, string> fields = new Dictionary<string, string>();
+						fields["extraInfo"] = data;
+
+						if (ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
+						{	
+							m_extraInfo = data;
+						}
+					}
 				}
 			}
 

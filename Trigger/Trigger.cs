@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using AY.Log;
+using AY.db;
 
 namespace AY
 {
@@ -49,14 +50,51 @@ namespace AY
 					m_props[index] = value;
 				}
 			}
+
+			public override String ToString()
+			{
+				String res = String.Empty;
+
+				foreach(KeyValuePair<String, Object> kv in m_props)
+				{
+					res += String.Format("{0}:{1}\n", kv.Key, kv.Value.ToString());
+				}
+
+				return res;
+			}
 			
 			public static bool PaymentTrigger(Int64 paymentId)
 			{
 				bool res = false;
 				Logger.Enter();
 
-				//Payment p = new Payment(pid);
-				//ScheduleRule sr = new ScheduleRule(p.ScheduleId);
+				Payment payment = new Payment(paymentId);
+				ScheduleRule rule = new ScheduleRule(payment.ScheduleId);
+				Client client = new Client(payment.ClientId);
+
+				Trigger ruleTrig = new Trigger(rule.Rule);
+				Trigger clientTrig = new Trigger(client.ExtraInfo);
+
+				// TODO: Process options here.
+				
+				client.ExtraInfo = clientTrigger.ToString();
+
+				Logger.Leave();
+				return res;
+			}
+			
+			public static bool EntranceTrigger(Int64 clientId)
+			{
+				bool res = false;
+				Logger.Enter();
+
+				Client client = new Client(payment.ClientId);
+
+				Trigger clientTrig = new Trigger(client.ExtraInfo);
+
+				// TODO: Process options here.
+				
+				client.ExtraInfo = clientTrigger.ToString();
 
 				Logger.Leave();
 				return res;
