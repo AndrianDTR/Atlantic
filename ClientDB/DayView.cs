@@ -6,7 +6,7 @@ using AY.Calendar;
 
 namespace GAssistant
 {
-	class DayView : Calendar
+	public class DayView : Calendar
 	{
 		public override CellInfo GetCellInfo(DateTime dt)
 		{

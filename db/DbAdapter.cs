@@ -25,6 +25,7 @@ namespace AY
 			ScheduleRules,
 			Statistics,
 			TrainersSchedule,
+			Tickets,
 			_max,
 		};
 		
@@ -77,6 +78,9 @@ namespace AY
 
 					case DbTable.TrainersSchedule:
 						return "trainersSchedule";
+					
+					case DbTable.Tickets:
+						return "tickets";
 
 					default:
 						return String.Empty;
@@ -110,13 +114,16 @@ namespace AY
 						return new String[] { "id", "name", "rule", "price" };
 
 					case DbTable.Statistics:
-						return new String[]{"id", "clientId", "date"};
+						return new String[] { "id", "clientId", "enter", "leave" };
 
 					case DbTable.Trainers:
 						return new String[] { "id", "name", "phone", "extraInfo" };
 
 					case DbTable.TrainersSchedule:
 						return new String[] { "id", "trainerId", "date" };
+
+					case DbTable.Tickets:
+						return new String[] { "clientId", "enter", "leave" };
 
 					default:
 						return new String[]{};
@@ -731,9 +738,18 @@ namespace AY
 				(
 					id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 					, clientId Integer NOT NULL
-					, date TimeStamp Default(CURRENT_TIMESTAMP)
+					, enter DateTime Default(CURRENT_TIMESTAMP)
+					, leave DateTime Default(CURRENT_TIMESTAMP)
 				)";
 
+				string tTickets = @"drop table if exists tickets;
+				CREATE TABLE tickets
+				(
+					  clientId PRIMARY KEY NOT NULL
+					, enter DateTime Default(CURRENT_TIMESTAMP)
+					, leave DateTime Default(CURRENT_TIMESTAMP)
+				)";
+				
 				SQLiteConnection conn = new SQLiteConnection(ClientDbSrc);
 				
 				try
@@ -750,6 +766,7 @@ namespace AY
 					new SQLiteCommand(tStatistics, conn).ExecuteNonQuery();
 					new SQLiteCommand(tTarinersSchedule, conn).ExecuteNonQuery();
 					new SQLiteCommand(tScheduleRules, conn).ExecuteNonQuery();
+					new SQLiteCommand(tTickets, conn).ExecuteNonQuery();
 				}
 				catch (SQLiteException ex)
 				{

@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="Tickets.cs" />
+    <Compile Include="Statistics.cs" />
     <Compile Include="DbAdapter.cs" />
     <Compile Include="Opts.cs" />
     <Compile Include="Payment.cs" />

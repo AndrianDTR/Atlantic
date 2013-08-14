@@ -61,16 +61,30 @@
 			this.sendLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.tabControl1 = new System.Windows.Forms.TabControl();
+			this.tabActiveClients = new System.Windows.Forms.TabPage();
+			this.listClients = new System.Windows.Forms.ListView();
+			this.columnClient = new System.Windows.Forms.ColumnHeader();
+			this.columnStatus = new System.Windows.Forms.ColumnHeader();
+			this.columnEnter = new System.Windows.Forms.ColumnHeader();
+			this.columnLeave = new System.Windows.Forms.ColumnHeader();
+			this.columnEntarncesLeft = new System.Windows.Forms.ColumnHeader();
+			this.tabCalendar = new System.Windows.Forms.TabPage();
+			this.m_calendar = new GAssistant.DayView();
+			this.tabStatistics = new System.Windows.Forms.TabPage();
+			this.chart1 = new Chart.Chart();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnBackUp = new System.Windows.Forms.Button();
 			this.btnTrainersShedule = new System.Windows.Forms.Button();
 			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
-			this.m_calendar = new GAssistant.DayView();
-			this.chart1 = new Chart.Chart();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
+			this.tabControl1.SuspendLayout();
+			this.tabActiveClients.SuspendLayout();
+			this.tabCalendar.SuspendLayout();
+			this.tabStatistics.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -282,11 +296,100 @@
 			// tableLayoutPanel1
 			// 
 			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
+			this.tableLayoutPanel1.Controls.Add(this.tabControl1, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.m_calendar, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.chart1, 0, 2);
 			this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			// 
+			// tabControl1
+			// 
+			resources.ApplyResources(this.tabControl1, "tabControl1");
+			this.tabControl1.Controls.Add(this.tabActiveClients);
+			this.tabControl1.Controls.Add(this.tabCalendar);
+			this.tabControl1.Controls.Add(this.tabStatistics);
+			this.tabControl1.Name = "tabControl1";
+			this.tabControl1.SelectedIndex = 0;
+			// 
+			// tabActiveClients
+			// 
+			this.tabActiveClients.Controls.Add(this.listClients);
+			resources.ApplyResources(this.tabActiveClients, "tabActiveClients");
+			this.tabActiveClients.Name = "tabActiveClients";
+			this.tabActiveClients.UseVisualStyleBackColor = true;
+			// 
+			// listClients
+			// 
+			this.listClients.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnClient,
+            this.columnStatus,
+            this.columnEnter,
+            this.columnLeave,
+            this.columnEntarncesLeft});
+			resources.ApplyResources(this.listClients, "listClients");
+			this.listClients.FullRowSelect = true;
+			this.listClients.GridLines = true;
+			this.listClients.HideSelection = false;
+			this.listClients.MultiSelect = false;
+			this.listClients.Name = "listClients";
+			this.listClients.UseCompatibleStateImageBehavior = false;
+			this.listClients.View = System.Windows.Forms.View.Details;
+			// 
+			// columnClient
+			// 
+			resources.ApplyResources(this.columnClient, "columnClient");
+			// 
+			// columnStatus
+			// 
+			resources.ApplyResources(this.columnStatus, "columnStatus");
+			// 
+			// columnEnter
+			// 
+			resources.ApplyResources(this.columnEnter, "columnEnter");
+			// 
+			// columnLeave
+			// 
+			resources.ApplyResources(this.columnLeave, "columnLeave");
+			// 
+			// columnEntarncesLeft
+			// 
+			resources.ApplyResources(this.columnEntarncesLeft, "columnEntarncesLeft");
+			// 
+			// tabCalendar
+			// 
+			this.tabCalendar.Controls.Add(this.m_calendar);
+			resources.ApplyResources(this.tabCalendar, "tabCalendar");
+			this.tabCalendar.Name = "tabCalendar";
+			this.tabCalendar.UseVisualStyleBackColor = true;
+			// 
+			// m_calendar
+			// 
+			this.m_calendar.ActiveTool = null;
+			this.m_calendar.BgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
+			this.m_calendar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			resources.ApplyResources(this.m_calendar, "m_calendar");
+			this.m_calendar.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
+			this.m_calendar.HeaderBgColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(186)))), ((int)(((byte)(201)))));
+			this.m_calendar.HorisontalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+			this.m_calendar.MarkerColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.m_calendar.Name = "m_calendar";
+			this.m_calendar.SelectedDate = new System.DateTime(((long)(0)));
+			this.m_calendar.SelectionBorderColor = System.Drawing.SystemColors.ActiveBorder;
+			this.m_calendar.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(76)))), ((int)(((byte)(122)))));
+			this.m_calendar.StartDate = new System.DateTime(2013, 8, 13, 0, 0, 0, 0);
+			this.m_calendar.VerticalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(174)))), ((int)(((byte)(217)))));
+			// 
+			// tabStatistics
+			// 
+			this.tabStatistics.Controls.Add(this.chart1);
+			resources.ApplyResources(this.tabStatistics, "tabStatistics");
+			this.tabStatistics.Name = "tabStatistics";
+			this.tabStatistics.UseVisualStyleBackColor = true;
+			// 
+			// chart1
+			// 
+			this.chart1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			resources.ApplyResources(this.chart1, "chart1");
+			this.chart1.Name = "chart1";
 			// 
 			// panel1
 			// 
@@ -337,29 +440,6 @@
 			this.btnAddClient.UseVisualStyleBackColor = true;
 			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
 			// 
-			// m_calendar
-			// 
-			this.m_calendar.ActiveTool = null;
-			this.m_calendar.BgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
-			this.m_calendar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			resources.ApplyResources(this.m_calendar, "m_calendar");
-			this.m_calendar.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
-			this.m_calendar.HeaderBgColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(186)))), ((int)(((byte)(201)))));
-			this.m_calendar.HorisontalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-			this.m_calendar.MarkerColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.m_calendar.Name = "m_calendar";
-			this.m_calendar.SelectedDate = new System.DateTime(((long)(0)));
-			this.m_calendar.SelectionBorderColor = System.Drawing.SystemColors.ActiveBorder;
-			this.m_calendar.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(76)))), ((int)(((byte)(122)))));
-			this.m_calendar.StartDate = new System.DateTime(2013, 8, 13, 0, 0, 0, 0);
-			this.m_calendar.VerticalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(174)))), ((int)(((byte)(217)))));
-			// 
-			// chart1
-			// 
-			this.chart1.BackColor = System.Drawing.Color.White;
-			resources.ApplyResources(this.chart1, "chart1");
-			this.chart1.Name = "chart1";
-			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -374,6 +454,10 @@
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.tableLayoutPanel1.ResumeLayout(false);
+			this.tabControl1.ResumeLayout(false);
+			this.tabActiveClients.ResumeLayout(false);
+			this.tabCalendar.ResumeLayout(false);
+			this.tabStatistics.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -420,8 +504,18 @@
 		private System.Windows.Forms.Button btnClientManager;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.ToolStripMenuItem sendLogToolStripMenuItem;
-		private Chart.Chart chart1;
+		private System.Windows.Forms.TabControl tabControl1;
+		private System.Windows.Forms.TabPage tabCalendar;
 		private DayView m_calendar;
+		private System.Windows.Forms.TabPage tabStatistics;
+		private Chart.Chart chart1;
+		private System.Windows.Forms.TabPage tabActiveClients;
+		private System.Windows.Forms.ListView listClients;
+		private System.Windows.Forms.ColumnHeader columnClient;
+		private System.Windows.Forms.ColumnHeader columnStatus;
+		private System.Windows.Forms.ColumnHeader columnEnter;
+		private System.Windows.Forms.ColumnHeader columnLeave;
+		private System.Windows.Forms.ColumnHeader columnEntarncesLeft;
     }
 }
 

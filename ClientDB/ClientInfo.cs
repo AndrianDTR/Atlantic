@@ -321,5 +321,10 @@ namespace GAssistant
 			AddPayment addPaymDlg = new AddPayment(m_clienId);
 			addPaymDlg.ShowDialog();
 		}
+
+		private void btnEnter_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
