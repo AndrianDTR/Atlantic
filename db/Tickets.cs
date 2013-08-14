@@ -20,7 +20,7 @@ namespace AY
 				
 				if(data == null)
 				{
-					throw new Exception("Error! No such statistics entry.");
+					throw new Exception("Error! No such ticket.");
 				}
 
 				m_clientId = id;

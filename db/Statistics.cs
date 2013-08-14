@@ -7,14 +7,14 @@ namespace AY
 {
 	namespace db
 	{
-		public class Statistics
+		public class StatsEntry
 		{
 			private Int64 m_Id = 0;
 			private Int64 m_clientId = 0;
 			public DateTime m_enter;
 			public DateTime m_leave;
 			
-			public Statistics(Int64 id)
+			public StatsEntry(Int64 id)
 			{	
 				String where = String.Format("id = {0}", id);
 				DataRow data = new DbAdapter().GetFirstRow(DbTable.Statistics, where, new List<string>{"id","name","privilege"});
@@ -63,9 +63,9 @@ namespace AY
 			}
 		}
 
-		public class StatisticsCollection : IEnumerable<Statistics>
+		public class StatisticsCollection : IEnumerable<StatsEntry>
 		{
-			Dictionary<Int64, Statistics> Items = new Dictionary<Int64, Statistics>();
+			Dictionary<Int64, StatsEntry> Items = new Dictionary<Int64, StatsEntry>();
 			
 			public StatisticsCollection()
 			{
@@ -75,7 +75,7 @@ namespace AY
 				
 				foreach(DataRow dr in dt.Rows)
 				{
-					Statistics user = new Statistics(Int64.Parse(dr["id"].ToString()));
+					StatsEntry user = new StatsEntry(Int64.Parse(dr["id"].ToString()));
 					Items[user.Id] = user;
 				}
 			}
@@ -98,7 +98,7 @@ namespace AY
 				if (!da.Insert(DbTable.Statistics, fields, out id))
 					return false;
 
-				Items[id] = new Statistics(id);
+				Items[id] = new StatsEntry(id);
 				return true;
 			}
 
@@ -124,7 +124,7 @@ namespace AY
 				return Items.Remove(item.Id);
 			}
 
-			public Statistics Search(Int64 id)
+			public StatsEntry Search(Int64 id)
 			{
 				if(Items.ContainsKey(id))
 					return Items[id];
@@ -136,7 +136,7 @@ namespace AY
 				get { return Items.Count; }
 			}
 
-			public IEnumerator<Statistics> GetEnumerator()
+			public IEnumerator<StatsEntry> GetEnumerator()
 			{
 				return Items.Values.GetEnumerator();
 			}
