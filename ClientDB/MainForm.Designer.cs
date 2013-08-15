@@ -61,17 +61,17 @@
 			this.sendLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.tabControl1 = new System.Windows.Forms.TabControl();
-			this.tabActiveClients = new System.Windows.Forms.TabPage();
+			this.tabManager = new System.Windows.Forms.TabControl();
+			this.tabActiveClients = new GAssistant.TabTickets();
 			this.listClients = new System.Windows.Forms.ListView();
 			this.columnClient = new System.Windows.Forms.ColumnHeader();
 			this.columnStatus = new System.Windows.Forms.ColumnHeader();
 			this.columnEnter = new System.Windows.Forms.ColumnHeader();
 			this.columnLeave = new System.Windows.Forms.ColumnHeader();
 			this.columnEntarncesLeft = new System.Windows.Forms.ColumnHeader();
-			this.tabCalendar = new System.Windows.Forms.TabPage();
+			this.tabCalendar = new GAssistant.TabCalendar();
 			this.m_calendar = new GAssistant.DayView();
-			this.tabStatistics = new System.Windows.Forms.TabPage();
+			this.tabStatistics = new GAssistant.TabStatistics();
 			this.chart1 = new Chart.Chart();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnBackUp = new System.Windows.Forms.Button();
@@ -81,7 +81,7 @@
 			this.btnAddClient = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
-			this.tabControl1.SuspendLayout();
+			this.tabManager.SuspendLayout();
 			this.tabActiveClients.SuspendLayout();
 			this.tabCalendar.SuspendLayout();
 			this.tabStatistics.SuspendLayout();
@@ -296,19 +296,19 @@
 			// tableLayoutPanel1
 			// 
 			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-			this.tableLayoutPanel1.Controls.Add(this.tabControl1, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.tabManager, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
 			this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			// 
-			// tabControl1
+			// tabManager
 			// 
-			resources.ApplyResources(this.tabControl1, "tabControl1");
-			this.tabControl1.Controls.Add(this.tabActiveClients);
-			this.tabControl1.Controls.Add(this.tabCalendar);
-			this.tabControl1.Controls.Add(this.tabStatistics);
-			this.tabControl1.Name = "tabControl1";
-			this.tabControl1.SelectedIndex = 0;
+			resources.ApplyResources(this.tabManager, "tabManager");
+			this.tabManager.Controls.Add(this.tabActiveClients);
+			this.tabManager.Controls.Add(this.tabCalendar);
+			this.tabManager.Controls.Add(this.tabStatistics);
+			this.tabManager.Name = "tabManager";
+			this.tabManager.SelectedIndex = 0;
 			// 
 			// tabActiveClients
 			// 
@@ -454,7 +454,7 @@
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.tableLayoutPanel1.ResumeLayout(false);
-			this.tabControl1.ResumeLayout(false);
+			this.tabManager.ResumeLayout(false);
 			this.tabActiveClients.ResumeLayout(false);
 			this.tabCalendar.ResumeLayout(false);
 			this.tabStatistics.ResumeLayout(false);
@@ -504,18 +504,18 @@
 		private System.Windows.Forms.Button btnClientManager;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.ToolStripMenuItem sendLogToolStripMenuItem;
-		private System.Windows.Forms.TabControl tabControl1;
-		private System.Windows.Forms.TabPage tabCalendar;
-		private DayView m_calendar;
-		private System.Windows.Forms.TabPage tabStatistics;
-		private Chart.Chart chart1;
-		private System.Windows.Forms.TabPage tabActiveClients;
+		private System.Windows.Forms.TabControl tabManager;
 		private System.Windows.Forms.ListView listClients;
 		private System.Windows.Forms.ColumnHeader columnClient;
 		private System.Windows.Forms.ColumnHeader columnStatus;
 		private System.Windows.Forms.ColumnHeader columnEnter;
 		private System.Windows.Forms.ColumnHeader columnLeave;
 		private System.Windows.Forms.ColumnHeader columnEntarncesLeft;
+		private DayView m_calendar;
+		private Chart.Chart chart1;
+		private TabCalendar tabCalendar;
+		private TabStatistics tabStatistics;
+		private TabTickets tabActiveClients;
     }
 }
 

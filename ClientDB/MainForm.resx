@@ -357,47 +357,8 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="tabControl1.Alignment" type="System.Windows.Forms.TabAlignment, System.Windows.Forms">
+  <data name="tabManager.Alignment" type="System.Windows.Forms.TabAlignment, System.Windows.Forms">
     <value>Bottom</value>
-  </data>
-  <data name="columnClient.Text" xml:space="preserve">
-    <value>Client</value>
-  </data>
-  <data name="columnClient.Width" type="System.Int32, mscorlib">
-    <value>200</value>
-  </data>
-  <data name="columnStatus.Text" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="columnStatus.Width" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="columnEnter.Text" xml:space="preserve">
-    <value>Enter</value>
-  </data>
-  <data name="columnEnter.Width" type="System.Int32, mscorlib">
-    <value>100</value>
-  </data>
-  <data name="columnLeave.Text" xml:space="preserve">
-    <value>Leave</value>
-  </data>
-  <data name="columnLeave.Width" type="System.Int32, mscorlib">
-    <value>100</value>
-  </data>
-  <data name="columnEntarncesLeft.Text" xml:space="preserve">
-    <value>Left times</value>
-  </data>
-  <data name="listClients.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="listClients.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="listClients.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 414</value>
-  </data>
-  <data name="listClients.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;listClients.Name" xml:space="preserve">
     <value>listClients</value>
@@ -427,10 +388,10 @@
     <value>tabActiveClients</value>
   </data>
   <data name="&gt;&gt;tabActiveClients.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>GAssistant.TabTickets, G-Assistant, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tabActiveClients.Parent" xml:space="preserve">
-    <value>tabControl1</value>
+    <value>tabManager</value>
   </data>
   <data name="&gt;&gt;tabActiveClients.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -466,10 +427,10 @@
     <value>tabCalendar</value>
   </data>
   <data name="&gt;&gt;tabCalendar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>GAssistant.TabCalendar, G-Assistant, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tabCalendar.Parent" xml:space="preserve">
-    <value>tabControl1</value>
+    <value>tabManager</value>
   </data>
   <data name="&gt;&gt;tabCalendar.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -505,36 +466,36 @@
     <value>tabStatistics</value>
   </data>
   <data name="&gt;&gt;tabStatistics.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>GAssistant.TabStatistics, G-Assistant, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tabStatistics.Parent" xml:space="preserve">
-    <value>tabControl1</value>
+    <value>tabManager</value>
   </data>
   <data name="&gt;&gt;tabStatistics.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="tabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="tabManager.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tabManager.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 63</value>
   </data>
-  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tabManager.Size" type="System.Drawing.Size, System.Drawing">
     <value>905, 440</value>
   </data>
-  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
+  <data name="tabManager.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
-    <value>tabControl1</value>
+  <data name="&gt;&gt;tabManager.Name" xml:space="preserve">
+    <value>tabManager</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tabManager.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tabManager.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tabManager.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;btnBackUp.Name" xml:space="preserve">
@@ -652,7 +613,58 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tabControl1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,55,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tabManager" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panel1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,55,Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="listClients.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="listClients.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="listClients.Size" type="System.Drawing.Size, System.Drawing">
+    <value>897, 414</value>
+  </data>
+  <data name="listClients.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;listClients.Name" xml:space="preserve">
+    <value>listClients</value>
+  </data>
+  <data name="&gt;&gt;listClients.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listClients.Parent" xml:space="preserve">
+    <value>tabActiveClients</value>
+  </data>
+  <data name="&gt;&gt;listClients.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="columnClient.Text" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="columnClient.Width" type="System.Int32, mscorlib">
+    <value>200</value>
+  </data>
+  <data name="columnStatus.Text" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="columnStatus.Width" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="columnEnter.Text" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="columnEnter.Width" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="columnLeave.Text" xml:space="preserve">
+    <value>Leave</value>
+  </data>
+  <data name="columnLeave.Width" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="columnEntarncesLeft.Text" xml:space="preserve">
+    <value>Left times</value>
   </data>
   <data name="m_calendar.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

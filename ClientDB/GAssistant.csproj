@@ -60,6 +60,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
     <Reference Include="Trigger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
@@ -244,6 +245,15 @@
     </Compile>
     <Compile Include="Statistics.Designer.cs">
       <DependentUpon>Statistics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabCalendar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TabStatistics.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TabTickets.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="UIMessages.cs" />
   </ItemGroup>

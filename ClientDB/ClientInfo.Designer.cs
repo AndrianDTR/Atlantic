@@ -303,6 +303,7 @@
 			this.btnLeave.TabIndex = 1;
 			this.btnLeave.Text = "Leave";
 			this.btnLeave.UseVisualStyleBackColor = true;
+			this.btnLeave.Click += new System.EventHandler(this.btnLeave_Click);
 			// 
 			// btnEnter
 			// 

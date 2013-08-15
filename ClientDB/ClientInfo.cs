@@ -12,10 +12,6 @@ namespace GAssistant
 	{	
 		private Int64 m_clienId = 0;
 		
-		private ClientInfo()
-		{
-		}
-		
 		public ClientInfo(Int64 id)
 		{
 			InitializeComponent();
@@ -24,13 +20,11 @@ namespace GAssistant
 			
 			m_clienId = id;
 			
-			if(id == 0)
+			if (!ConfigUIForNewClient())
 			{
 				return;
 			}
 			
-			textName.ReadOnly = !(m_clienId == 0);
-
 			Client client = new Client(m_clienId);
 			
 			textCode.Text = id.ToString().PadLeft(13, '0');
@@ -70,6 +64,18 @@ namespace GAssistant
 			checkDay5.Text = names[4];
 			checkDay6.Text = names[5];
 			checkDay7.Text = names[6];
+		}
+		
+		private bool ConfigUIForNewClient()
+		{
+			bool existingClient = !(m_clienId == 0);
+			textName.ReadOnly = existingClient;
+			btnPaymentAdd.Enabled = existingClient;
+			btnPaymentHistory.Enabled = existingClient;
+			btnEnter.Enabled = existingClient;
+			btnLeave.Enabled = existingClient;
+			
+			return existingClient;
 		}
 		
 		private void CheckPermissions()
@@ -189,13 +195,10 @@ namespace GAssistant
 			Int64 id = 0;
 			try
 			{
-				Logger.Debug("000:" + val);
 				if (val.Length > 13)
 					throw new InvalidExpressionException();
 
-				Logger.Debug("AAA");
 				id = Int64.Parse(val);
-				Logger.Debug("BBB" + id.ToString());
 			}
 			catch
 			{
@@ -296,6 +299,8 @@ namespace GAssistant
 						, Trainer.Id
 						, textComment.Text
 						, out m_clienId);
+						
+					ConfigUIForNewClient();					
 				}
 				else
 				{
@@ -324,7 +329,14 @@ namespace GAssistant
 
 		private void btnEnter_Click(object sender, EventArgs e)
 		{
+			TicketsCollection tc = new TicketsCollection();
+			
+		}
+
+		private void btnLeave_Click(object sender, EventArgs e)
+		{
 
 		}
+
 	}
 }
