@@ -43,6 +43,9 @@ namespace GAssistant
 			}
 			SetScheduleDays(client.ScheduleDays);
 			textComment.Text = client.Comment;
+			
+			textLastEnter.Text = client.LastEnter.ToString();
+			textLastLeave.Text = client.LastLeave.ToString();
 		}
 
 		private void Init()

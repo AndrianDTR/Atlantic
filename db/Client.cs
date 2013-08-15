@@ -16,6 +16,8 @@ namespace AY
 			private String m_extraInfo = String.Empty;
 			private String m_scheduleDays = String.Empty;
 			private DateTime m_scheduleTime;
+			private DateTime m_lastEnter;
+			private DateTime m_lastLeave;
 			private Int64 m_trainer = 0;
 			
 			public static bool CodeExists(Int64 id)
@@ -56,6 +58,8 @@ namespace AY
 				m_extraInfo = data["extraInfo"].ToString();
 				m_scheduleDays = data["scheduleDays"].ToString();
 				m_scheduleTime = DateTime.Parse(data["scheduleTime"].ToString());
+				m_lastLeave = DateTime.Parse(data["lastEnter"].ToString());
+				m_lastEnter = DateTime.Parse(data["lastLeave"].ToString());
 				m_trainer = Int64.Parse(data["trainer"].ToString());
 			}
 
@@ -76,6 +80,8 @@ namespace AY
 				m_extraInfo = data["extraInfo"].ToString();
 				m_scheduleDays = data["scheduleDays"].ToString();
 				m_scheduleTime = DateTime.Parse(data["scheduleTime"].ToString());
+				m_lastLeave = DateTime.Parse(data["lastEnter"].ToString());
+				m_lastEnter = DateTime.Parse(data["lastLeave"].ToString());
 				m_trainer = Int64.Parse(data["trainer"].ToString());
 			}
 			
@@ -139,6 +145,56 @@ namespace AY
 						if (ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
 						{	
 							m_extraInfo = data;
+						}
+					}
+				}
+			}
+
+			public DateTime LastEnter
+			{
+				get
+				{
+					return m_lastEnter;
+				}
+				set
+				{
+					DateTime enter = value;
+
+					Logger.Debug(String.Format("Set last enter time for client '{0}'", m_id));
+					if (m_id > 0)
+					{
+						DbAdapter ad = new DbAdapter();
+						Dictionary<string, string> fields = new Dictionary<string, string>();
+						fields["lastEnter"] = enter.ToString();
+
+						if (ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
+						{
+							m_lastEnter = enter;
+						}
+					}
+				}
+			}
+
+			public DateTime LastLeave
+			{
+				get
+				{
+					return m_lastLeave;
+				}
+				set
+				{
+					DateTime leave = value;
+
+					Logger.Debug(String.Format("Set last leave time for client '{0}'", m_id));
+					if (m_id > 0)
+					{
+						DbAdapter ad = new DbAdapter();
+						Dictionary<string, string> fields = new Dictionary<string, string>();
+						fields["lastLeave"] = leave.ToString();
+
+						if (ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
+						{
+							m_lastEnter = leave;
 						}
 					}
 				}
