@@ -123,7 +123,7 @@ namespace AY
 						return new String[] { "id", "trainerId", "date" };
 
 					case DbTable.Tickets:
-						return new String[] { "clientId", "enter", "leave" };
+						return new String[] { "clientId", "today", "enter", "leave" };
 
 					default:
 						return new String[]{};
@@ -746,6 +746,7 @@ namespace AY
 				CREATE TABLE tickets
 				(
 					  clientId PRIMARY KEY NOT NULL
+					, today DateTime Default(CURRENT_TIMESTAMP)
 					, enter DateTime Default(CURRENT_TIMESTAMP)
 					, leave DateTime Default(CURRENT_TIMESTAMP)
 				)";

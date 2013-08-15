@@ -62,16 +62,16 @@
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.tabManager = new System.Windows.Forms.TabControl();
-			this.tabActiveClients = new GAssistant.TabTickets();
+			this.tabActiveClients = new System.Windows.Forms.TabPage();
 			this.listClients = new System.Windows.Forms.ListView();
 			this.columnClient = new System.Windows.Forms.ColumnHeader();
 			this.columnStatus = new System.Windows.Forms.ColumnHeader();
 			this.columnEnter = new System.Windows.Forms.ColumnHeader();
 			this.columnLeave = new System.Windows.Forms.ColumnHeader();
 			this.columnEntarncesLeft = new System.Windows.Forms.ColumnHeader();
-			this.tabCalendar = new GAssistant.TabCalendar();
+			this.tabCalendar = new System.Windows.Forms.TabPage();
 			this.m_calendar = new GAssistant.DayView();
-			this.tabStatistics = new GAssistant.TabStatistics();
+			this.tabStatistics = new System.Windows.Forms.TabPage();
 			this.chart1 = new Chart.Chart();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnBackUp = new System.Windows.Forms.Button();
@@ -513,9 +513,9 @@
 		private System.Windows.Forms.ColumnHeader columnEntarncesLeft;
 		private DayView m_calendar;
 		private Chart.Chart chart1;
-		private TabCalendar tabCalendar;
-		private TabStatistics tabStatistics;
-		private TabTickets tabActiveClients;
+		private System.Windows.Forms.TabPage tabCalendar;
+		private System.Windows.Forms.TabPage tabStatistics;
+		private System.Windows.Forms.TabPage tabActiveClients;
     }
 }
 

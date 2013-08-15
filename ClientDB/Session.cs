@@ -1,37 +1,29 @@
 ﻿using System;
+using System.Windows.Forms;
 using AY.Log;
 using AY.db;
+using AY.Utils;
 
 namespace GAssistant
 {
-	class Session
+	class Session : Singleton<Session>
 	{
-		// Constructor
-		public Session()
-		{
-			//Logger.Enter();
-
-			//Logger.Leave();
-		}
-
-		//Singleton implementation
-		private static Session instance;
-
-		public static Session Instance
-		{
-			get
-			{
-				if (instance == null)
-				{
-					instance = new Session();
-				}
-				return instance;
-			}
-		}
-		
 		private int m_passLen = 8;
 		private User m_user = new User();
 		private UserRole m_userRole = new UserRole();
+		private ListView m_ticketsList = null;
+		
+		public ListView Tickets
+		{
+			get
+			{
+				return m_ticketsList;
+			}
+			set
+			{
+				m_ticketsList = value;
+			}
+		}
 		
 		public User User
 		{

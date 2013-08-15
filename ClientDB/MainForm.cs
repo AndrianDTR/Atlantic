@@ -33,7 +33,9 @@ namespace GAssistant
 		private void Reinit()
 		{
 			Session session = Session.Instance;
-
+			
+			session.Tickets = listClients;
+			
 			m_calendar.RowHeight = m_opt.CalRowHeight;
 			session.PassLen = m_opt.MinPassLen;
 			

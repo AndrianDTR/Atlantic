@@ -246,15 +246,6 @@
     <Compile Include="Statistics.Designer.cs">
       <DependentUpon>Statistics.cs</DependentUpon>
     </Compile>
-    <Compile Include="TabCalendar.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="TabStatistics.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="TabTickets.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="UIMessages.cs" />
   </ItemGroup>
   <ItemGroup>

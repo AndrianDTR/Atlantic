@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using AY.db;
 using AY.Log;
 using AY.Utils;
+using AY.Trigger;
 
 namespace GAssistant
 {
@@ -329,7 +330,9 @@ namespace GAssistant
 
 		private void btnEnter_Click(object sender, EventArgs e)
 		{
-			TicketsCollection tc = new TicketsCollection();
+			if(0 == m_clienId)
+				return;
+			
 			
 		}
 
@@ -337,6 +340,16 @@ namespace GAssistant
 		{
 
 		}
-
+		
+		private void OpenTicket()
+		{
+		
+		}
+		
+		private void CloseTicket(Int64 nTicketId)
+		{
+		
+		}
+		
 	}
 }
