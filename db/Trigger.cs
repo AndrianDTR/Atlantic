@@ -8,19 +8,109 @@ namespace AY
 {
 	namespace db
 	{
-		class TriggerProp: Object
+		class ObjType
 		{
-					
+			private Object m_value = null;
+			
+			public ObjType(int val)
+			{
+				m_value = val;
+			}
+
+			public ObjType(Int64 val)
+			{
+				m_value = val;
+			}
+
+			public ObjType(String val)
+			{
+				m_value = val;
+			}
+
+			public ObjType(DateTime val)
+			{
+				m_value = val;
+			}
+
+			public static implicit operator ObjType(int val)
+			{
+				return new ObjType(val);
+			}
+
+			public static implicit operator ObjType(Int64 val)
+			{
+				return new ObjType(val);
+			}
+			
+			public static implicit operator ObjType(DateTime val)
+			{
+				return new ObjType(val);
+			}
+
+			public static implicit operator ObjType(String val)
+			{
+				return new ObjType(val);
+			}
+			
+			public static implicit operator int(ObjType obj)
+			{
+				int res = 0;
+				
+				try
+				{
+					res = int.Parse(obj.m_value.ToString());
+				}
+				catch (System.Exception ex)
+				{
+				}
+				
+				return res;
+			}
+
+			public static implicit operator Int64(ObjType obj)
+			{
+				Int64 res = 0;
+
+				try
+				{
+					res = Int64.Parse(obj.m_value.ToString());
+				}
+				catch (System.Exception ex)
+				{
+				}
+
+				return res;
+			}
+
+			public static implicit operator DateTime(ObjType obj)
+			{
+				DateTime res = new DateTime();
+				
+				try
+				{
+					res = DateTime.Parse(obj.m_value.ToString());
+				}
+				catch (System.Exception ex)
+				{
+				}
+
+				return res;
+			}
+
+			public static implicit operator string(ObjType obj)
+			{
+				return obj.m_value.ToString();
+			}
 		}
 		
 		class Trigger
 		{
-			private Dictionary<String, Object> m_props;
+			private Dictionary<String, ObjType> m_props;
 			
 			public Trigger(String data)
 			{
 				StringReader strReader = new StringReader(data);
-				m_props = new Dictionary<String, Object>();
+				m_props = new Dictionary<String, ObjType>();
 				
 				String prop = strReader.ReadLine();
 				while(prop != null)
@@ -41,7 +131,7 @@ namespace AY
 				}
 			}
 
-			public Object this[String index]
+			public ObjType this[String index]
 			{
 				get
 				{
@@ -64,7 +154,7 @@ namespace AY
 			{
 				String res = String.Empty;
 
-				foreach (KeyValuePair<String, Object> kv in m_props)
+				foreach (KeyValuePair<String, ObjType> kv in m_props)
 				{
 					res += String.Format("{0}:{1}\n", kv.Key, kv.Value.ToString());
 				}
