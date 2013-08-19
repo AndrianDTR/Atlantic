@@ -104,7 +104,7 @@ namespace AY
 				}
 
 				DbAdapter ad = new DbAdapter();
-				Dictionary<string, string> fields = new Dictionary<string, string>();
+				Dictionary<string, Object> fields = new Dictionary<string, Object>();
 				fields["name"] = name;
 				fields["rule"] = rule;
 				fields["price"] = price.ToString();
@@ -142,7 +142,7 @@ namespace AY
 			public Boolean Add(String name, String rule, float price, out Int64 id)
 			{
 				DbAdapter da = new DbAdapter();
-				Dictionary<string, string> fields = new Dictionary<string, string>();
+				Dictionary<string, Object> fields = new Dictionary<string, Object>();
 				fields["name"] = name;
 				fields["rule"] = rule;
 				fields["price"] = price.ToString();

@@ -76,12 +76,25 @@ namespace GAssistant
 				this.WindowState = m_opt.MainWindowState;
 			}
 			session.PassLen = m_opt.MinPassLen;
+			
+			GetOpenedTickets();
 		}
 
 		private void OnClose(object sender, FormClosedEventArgs e)
 		{
 			m_opt.MainWindowState = this.WindowState;
 			m_opt.StoreData();
+		}
+		
+		private void GetOpenedTickets()
+		{
+			foreach (Client client in new ClientCollection())
+			{
+				if(client.OpenTicket.Date == DateTime.Now.Date)
+				{
+					listClients.Items.Add(client.Name);
+				}
+			}
 		}
 		
 		private void clientByBarcodeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -116,7 +129,8 @@ namespace GAssistant
 				}
 				
 				dlg.Clear();
-			};
+				GetOpenedTickets();
+			}
 			
 		}
 

@@ -11,6 +11,9 @@ namespace GAssistant
 {
 	public partial class ClientInfo : Form
 	{	
+		const String cancelText = "Cancel";
+		const String enterText = "Enter";
+		
 		private Int64 m_clienId = 0;
 		
 		public ClientInfo(Int64 id)
@@ -46,6 +49,8 @@ namespace GAssistant
 			
 			textLastEnter.Text = client.LastEnter.ToString();
 			textLastLeave.Text = client.LastLeave.ToString();
+
+			UpdateTimesLeft(client);
 		}
 
 		private void Init()
@@ -68,6 +73,22 @@ namespace GAssistant
 			checkDay5.Text = names[4];
 			checkDay6.Text = names[5];
 			checkDay7.Text = names[6];
+		}
+		
+		private void UpdateTimesLeft(Client client)
+		{
+			CheckPermissions();
+			textTimesLeft.Text = client.TimesLeft.ToString();
+
+			bool enabled = (client.TimesLeft > 0);
+			btnEnter.Enabled = enabled && btnEnter.Enabled;
+			btnLeave.Enabled = enabled && btnLeave.Enabled;
+			
+			if(client.OpenTicket.Date == DateTime.Now.Date)
+			{
+				btnEnter.Checked = true;
+				btnEnter.Text = cancelText;
+			}
 		}
 		
 		private bool ConfigUIForNewClient()
@@ -329,19 +350,37 @@ namespace GAssistant
 			
 			AddPayment addPaymDlg = new AddPayment(m_clienId);
 			addPaymDlg.ShowDialog();
+			
+			UpdateTimesLeft(new Client(m_clienId));
 		}
-
-		private void btnEnter_Click(object sender, EventArgs e)
+		
+		private void btnEnter_CheckedChanged(object sender, EventArgs e)
 		{
 			if(0 == m_clienId)
 				return;
 			
+			Client clientInfo = new Client(m_clienId);
 			
+			if(btnEnter.Checked)
+			{
+				clientInfo.OpenTicket = DateTime.Now;
+				btnEnter.Text = cancelText;
+			}
+			else
+			{
+				clientInfo.OpenTicket = clientInfo.OpenTicket.AddYears(-1);
+				btnEnter.Text = enterText;
+			}
 		}
 
 		private void btnLeave_Click(object sender, EventArgs e)
 		{
-
+			Client clientInfo = new Client(m_clienId);
+			clientInfo.LastEnter = clientInfo.OpenTicket;
+			clientInfo.LastLeave = DateTime.Now;
+			clientInfo.ProcessEnter();
+			
+			btnEnter.Checked = false;
 		}
 		
 		private void OpenTicket()
@@ -353,6 +392,8 @@ namespace GAssistant
 		{
 		
 		}
+
+		
 		
 	}
 }

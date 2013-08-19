@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="ScheduleRules.cs" />
     <Compile Include="Trainer.cs" />
+    <Compile Include="Trigger.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserRole.cs" />
   </ItemGroup>

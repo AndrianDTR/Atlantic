@@ -111,7 +111,7 @@ namespace AY
 					}
 
 					DbAdapter ad = new DbAdapter();
-					Dictionary<string, string> fields = new Dictionary<string, string>();
+					Dictionary<string, Object> fields = new Dictionary<string, Object>();
 					fields["name"] = value;
 					if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
 					{
@@ -134,8 +134,8 @@ namespace AY
 					}
 
 					DbAdapter ad = new DbAdapter();
-					Dictionary<string, string> fields = new Dictionary<string, string>();
-					fields["statistics"] = ((int)value).ToString();
+					Dictionary<string, Object> fields = new Dictionary<string, Object>();
+					fields["statistics"] = ((int)value);
 					if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
 					{
 						throw new Exception("Manage statistics rights could not been changed.");
@@ -158,7 +158,7 @@ namespace AY
 					}
 
 					DbAdapter ad = new DbAdapter();
-					Dictionary<string, string> fields = new Dictionary<string, string>();
+					Dictionary<string, Object> fields = new Dictionary<string, Object>();
 					fields["users"] = ((int)value).ToString();
 					if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
 					{
@@ -182,7 +182,7 @@ namespace AY
 					}
 
 					DbAdapter ad = new DbAdapter();
-					Dictionary<string, string> fields = new Dictionary<string, string>();
+					Dictionary<string, Object> fields = new Dictionary<string, Object>();
 					fields["clients"] = ((int)value).ToString();
 					if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
 					{
@@ -206,7 +206,7 @@ namespace AY
 					}
 
 					DbAdapter ad = new DbAdapter();
-					Dictionary<string, string> fields = new Dictionary<string, string>();
+					Dictionary<string, Object> fields = new Dictionary<string, Object>();
 					fields["payments"] = ((int)value).ToString();
 					if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
 					{
@@ -230,7 +230,7 @@ namespace AY
 					}
 
 					DbAdapter ad = new DbAdapter();
-					Dictionary<string, string> fields = new Dictionary<string, string>();
+					Dictionary<string, Object> fields = new Dictionary<string, Object>();
 					fields["trainers"] = ((int)value).ToString();
 					if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
 					{
@@ -254,7 +254,7 @@ namespace AY
 					}
 
 					DbAdapter ad = new DbAdapter();
-					Dictionary<string, string> fields = new Dictionary<string, string>();
+					Dictionary<string, Object> fields = new Dictionary<string, Object>();
 					fields["schedule"] = ((int)value).ToString();
 					if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
 					{
@@ -278,7 +278,7 @@ namespace AY
 					}
 
 					DbAdapter ad = new DbAdapter();
-					Dictionary<string, string> fields = new Dictionary<string, string>();
+					Dictionary<string, Object> fields = new Dictionary<string, Object>();
 					fields["backup"] = ((int)value).ToString();
 					if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
 					{
@@ -302,7 +302,7 @@ namespace AY
 					}
 
 					DbAdapter ad = new DbAdapter();
-					Dictionary<string, string> fields = new Dictionary<string, string>();
+					Dictionary<string, Object> fields = new Dictionary<string, Object>();
 					fields["privileges"] = ((int)value).ToString();
 					if (!ad.Update(DbTable.UserPrivileges, fields, String.Format("id={0:d}", m_id)))
 					{
@@ -337,7 +337,7 @@ namespace AY
 			public Boolean Add(String name, out Int64 id)
 			{
 				DbAdapter da = new DbAdapter();
-				Dictionary<string, string> fields = new Dictionary<string, string>();
+				Dictionary<string, Object> fields = new Dictionary<string, Object>();
 				fields["name"] = String.Format("'{0}'", name);
 				id = 0;
 				

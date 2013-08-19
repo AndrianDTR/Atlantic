@@ -99,8 +99,9 @@ namespace AY
 						return new String[]{"id", "name", "pass", "privilege"};
 
 					case DbTable.Clients:
-						return new String[]{"id", "name", "phone", "scheduleTime", "trainer"
-							, "comment", "extraInfo"};
+						return new String[]{"id", "name", "phone", "scheduleTime"
+							, "trainer", "lastEnter", "lastLeave", "openTicket"
+							, "comment",  "extraInfo"};
 
 					case DbTable.Payments:
 						return new String[]{"id", "clientId", "scheduleId", "creatorId", "date"
@@ -131,6 +132,16 @@ namespace AY
 			public static String Dequote(String value)
 			{
 				return value;
+			}
+
+			public static String FormatDateTime(DateTime dt)
+			{
+				return dt.ToString("'dd.MM.yyyy HH:mm:ss'");
+			}
+
+			public static DateTime ParseDateTime(String str)
+			{
+				return DateTime.Parse(str);
 			}
 		}
 		
@@ -453,7 +464,7 @@ namespace AY
 			/// <param name="data">A dictionary containing Column names and their new values.</param>
 			/// <param name="where">The where clause for the update statement.</param>
 			/// <returns>A boolean true or false to signify success or failure.</returns>
-			public bool Update(DbTable table, Dictionary<String, String> data, String where)
+			public bool Update(DbTable table, Dictionary<String, Object> data, String where)
 			{
 				Logger.Enter();
 				Boolean returnCode = false;
@@ -468,8 +479,8 @@ namespace AY
 						Logger.Debug("Nothing to update.");
 						break;
 					}
-					
-					foreach (KeyValuePair<String, String> val in data)
+
+					foreach (KeyValuePair<String, Object> val in data)
 					{
 						vals += String.Format(" `{0}` = @{0},", val.Key.ToString());
 					}
@@ -482,9 +493,10 @@ namespace AY
 
 						Logger.Debug(String.Format("Update {0}, query: {1}.", tableName, query));
 						cmd.CommandText = query;
-						foreach (KeyValuePair<String, String> val in data)
+						foreach (KeyValuePair<String, Object> val in data)
 						{
-							cmd.Parameters.AddWithValue(String.Format("@{0}", val.Key.ToString()), val.Value.ToString());
+							cmd.Parameters.AddWithValue(String.Format("@{0}", val.Key.ToString()), val.Value);
+							Logger.Debug(String.Format("AddParam {0} = {1}.", val.Key.ToString(), val.Value));
 						}
 						Int64 id = 0;			
 						ExecuteNonQuery(cmd, out id);
@@ -536,7 +548,7 @@ namespace AY
 			/// <param name="tableName">The table into which we insert the data.</param>
 			/// <param name="data">A dictionary containing the column names and data for the insert.</param>
 			/// <returns>A boolean true or false to signify success or failure.</returns>
-			public bool Insert(DbTable table, Dictionary<String, String> data)
+			public bool Insert(DbTable table, Dictionary<String, Object> data)
 			{
 				Int64 insertId = 0;
 				return Insert(table, data, out insertId);
@@ -549,7 +561,7 @@ namespace AY
 			/// <param name="data">A dictionary containing the column names and data for the insert.</param>
 			/// <param name="inserId">Represent ID of the row that has been inserted.</param>
 			/// <returns>A boolean true or false to signify success or failure.</returns>
-			public bool Insert(DbTable table, Dictionary<String, String> data, out Int64 insertId)
+			public bool Insert(DbTable table, Dictionary<String, Object> data, out Int64 insertId)
 			{
 				Logger.Enter();
 				
@@ -584,7 +596,7 @@ namespace AY
 						Logger.Debug(String.Format("Insert to {0}, query: {1}.", tableName, query));
 						cmd.CommandText = query;
 
-						foreach (KeyValuePair<String, String> val in data)
+						foreach (KeyValuePair<String, Object> val in data)
 						{
 							cmd.Parameters.AddWithValue(val.Key, val.Value);
 						}
@@ -627,6 +639,51 @@ namespace AY
 				
 				Logger.Leave();
 				return res;
+			}
+			
+			private static void FillSampleData()
+			{
+				String fillTariners = @"insert into trainers(name, phone)"
+					+ " values ('AAA', '1111')"
+					+ ", ('BBB', '222')"
+					;
+
+				String fillScheduleRules = @"insert into scheduleRules(name, price, rule)"
+					+ " values('Rule 8x2', 100.00, 'CPUTimesLeft:8\r\nCPUHoursLeft:16\r\nUCIDecHours:2\r\nUCIDecTimes:1')"
+					+ ", ('Rule 12x3', 300.00, 'CPUTimesLeft:12\r\nCPUHoursLeft:36\r\nUCIDecHours:3\r\nUCIDecTimes:1')"
+					;
+
+				String fillClients = @"insert into clients(id, name, phone, scheduleDays, scheduleTime, trainer)"
+					+ " values(3435241043559, 'Client 1', '111', '_X_X_X_', '18:00', 1)"
+					+ ", (6942312660005, 'Client 2', '222', '__X_X__', '14:00', 2)"
+					;
+					
+				SQLiteConnection conn = new SQLiteConnection(ClientDbSrc);
+
+				try
+				{
+					CheckDbFile(AY.db.Properties.Settings.Default.szDbSrcFile);
+
+					conn.Open();
+					Logger.Debug(fillTariners);
+					new SQLiteCommand(fillTariners, conn).ExecuteNonQuery();
+
+					Logger.Debug(fillScheduleRules);
+					new SQLiteCommand(fillScheduleRules, conn).ExecuteNonQuery();
+
+					Logger.Debug(fillClients);
+					new SQLiteCommand(fillClients, conn).ExecuteNonQuery();
+					
+				}
+				catch (SQLiteException ex)
+				{
+					Logger.Error(String.Format("Fill sample data exception: {0}.", ex.Message));
+					throw new Exception("Error! Fill sample data failed.", ex);
+				}
+				finally
+				{
+					conn.Close();
+				}
 			}
 			
 			public static bool ClearDB()
@@ -702,6 +759,7 @@ namespace AY
 					, scheduleTime Time NOT NULL
 					, lastEnter DateTime DEFAULT(datetime('now', '-1 year'))
 					, lastLeave DateTime DEFAULT(datetime('now', '-1 year'))
+					, openTicket DateTime DEFAULT(datetime('now', '-1 year'))
 					, trainer Integer DEFAULT('')
 					, comment Text DEFAULT('')
 					, extraInfo Text DEFAULT('')
@@ -753,6 +811,8 @@ namespace AY
 					new SQLiteCommand(tStatistics, conn).ExecuteNonQuery();
 					new SQLiteCommand(tTarinersSchedule, conn).ExecuteNonQuery();
 					new SQLiteCommand(tScheduleRules, conn).ExecuteNonQuery();
+					
+					FillSampleData();
 				}
 				catch (SQLiteException ex)
 				{

@@ -146,7 +146,7 @@ namespace AY
 				Logger.Enter();
 				
 				DbAdapter ad = new DbAdapter();
-				Dictionary<string, string> fields = new Dictionary<string, string>();
+				Dictionary<string, Object> fields = new Dictionary<string, Object>();
 				fields["language"] = m_language;
 				fields["pathBackUp"] = m_pathBackUp;
 				fields["minPassLen"] = m_minPassLen.ToString();

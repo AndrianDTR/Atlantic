@@ -89,7 +89,7 @@ namespace AY
 			public Boolean Add(Int64 clientId, DateTime enter, DateTime leave, out Int64 id)
 			{
 				DbAdapter da = new DbAdapter();
-				Dictionary<string, string> fields = new Dictionary<string, string>();
+				Dictionary<string, Object> fields = new Dictionary<string, Object>();
 				fields["clientId"] = clientId.ToString();
 				fields["enter"] = enter.ToString();
 				fields["leave"] = leave.ToString();

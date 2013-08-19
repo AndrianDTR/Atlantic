@@ -18,6 +18,7 @@ namespace AY
 			private DateTime m_scheduleTime;
 			private DateTime m_lastEnter;
 			private DateTime m_lastLeave;
+			private DateTime m_openTicket;
 			private Int64 m_trainer = 0;
 			
 			public static bool CodeExists(Int64 id)
@@ -60,6 +61,7 @@ namespace AY
 				m_scheduleTime = DateTime.Parse(data["scheduleTime"].ToString());
 				m_lastLeave = DateTime.Parse(data["lastEnter"].ToString());
 				m_lastEnter = DateTime.Parse(data["lastLeave"].ToString());
+				m_openTicket = DateTime.Parse(data["openTicket"].ToString());
 				m_trainer = Int64.Parse(data["trainer"].ToString());
 			}
 
@@ -82,6 +84,7 @@ namespace AY
 				m_scheduleTime = DateTime.Parse(data["scheduleTime"].ToString());
 				m_lastLeave = DateTime.Parse(data["lastEnter"].ToString());
 				m_lastEnter = DateTime.Parse(data["lastLeave"].ToString());
+				m_openTicket = DateTime.Parse(data["openTicket"].ToString());
 				m_trainer = Int64.Parse(data["trainer"].ToString());
 			}
 			
@@ -139,7 +142,7 @@ namespace AY
 					if (m_id > 0)
 					{
 						DbAdapter ad = new DbAdapter();
-						Dictionary<string, string> fields = new Dictionary<string, string>();
+						Dictionary<string, Object> fields = new Dictionary<string, Object>();
 						fields["extraInfo"] = data;
 
 						if (ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
@@ -147,6 +150,23 @@ namespace AY
 							m_extraInfo = data;
 						}
 					}
+				}
+			}
+			
+			public int TimesLeft
+			{
+				get
+				{
+					Trigger tlt = new Trigger(ExtraInfo);
+					if(tlt.HasAttribute("TimesLeft"))
+						return int.Parse(tlt["TimesLeft"].ToString());
+					return 0;
+				}
+				set
+				{
+					Trigger tlt = new Trigger(ExtraInfo);
+					tlt["TimesLeft"] = value;
+					ExtraInfo = tlt.ToString();
 				}
 			}
 
@@ -164,8 +184,8 @@ namespace AY
 					if (m_id > 0)
 					{
 						DbAdapter ad = new DbAdapter();
-						Dictionary<string, string> fields = new Dictionary<string, string>();
-						fields["lastEnter"] = enter.ToString();
+						Dictionary<string, Object> fields = new Dictionary<string, Object>();
+						fields["lastEnter"] = enter;
 
 						if (ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
 						{
@@ -189,8 +209,8 @@ namespace AY
 					if (m_id > 0)
 					{
 						DbAdapter ad = new DbAdapter();
-						Dictionary<string, string> fields = new Dictionary<string, string>();
-						fields["lastLeave"] = leave.ToString();
+						Dictionary<string, Object> fields = new Dictionary<string, Object>();
+						fields["lastLeave"] = leave;
 
 						if (ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
 						{
@@ -200,6 +220,31 @@ namespace AY
 				}
 			}
 
+			public DateTime OpenTicket
+			{
+				get
+				{
+					return m_openTicket;
+				}
+				set
+				{
+					DateTime enter = value;
+
+					Logger.Debug(String.Format("Set open ticket time for client '{0}'", m_id));
+					if (m_id > 0)
+					{
+						DbAdapter ad = new DbAdapter();
+						Dictionary<string, Object> fields = new Dictionary<string, Object>();
+						fields["openTicket"] = enter;
+
+						if (ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
+						{
+							m_openTicket = enter;
+						}
+					}
+				}
+			}
+			
 			public String ScheduleDays
 			{
 				get
@@ -241,7 +286,7 @@ namespace AY
 				}
 
 				DbAdapter ad = new DbAdapter();
-				Dictionary<string, string> fields = new Dictionary<string, string>();
+				Dictionary<string, Object> fields = new Dictionary<string, Object>();
 				fields["id"] = code.ToString();
 				fields["name"] = DbUtils.Quote(name);
 				fields["phone"] = DbUtils.Quote(phone);
@@ -256,6 +301,42 @@ namespace AY
 				}
 
 				return true;
+			}
+			
+			public void ProcessEnter()
+			{
+				Trigger tClient = new Trigger(ExtraInfo);
+				Trigger tRule = null;
+
+				if (tClient.HasAttribute("PlanId"))
+				{	
+					Int64 ruleId = int.Parse(tClient["RuleId"].ToString());
+					tRule = new Trigger(new ScheduleRule(ruleId).Rule);
+				}
+
+				if (tClient.HasAttribute("TimesLeft"))
+				{
+					int val = int.Parse(tClient["TimesLeft"].ToString());
+					if(tRule != null && tRule.HasAttribute("UCIDecTimes"))
+						val -= int.Parse(tRule["UCIDecTimes"].ToString());
+					else
+						val--;
+
+					tClient["TimesLeft"] = val;
+				}
+				
+				if (tClient.HasAttribute("HoursLeft"))
+				{
+					int val = int.Parse(tClient["HoursLeft"].ToString());
+					if (tRule != null && tRule.HasAttribute("UCIDecHours"))
+						val -= int.Parse(tRule["UCIDecHours"].ToString());
+					else
+						val--;
+
+					tClient["TimesLeft"] = val;
+				}
+				
+				ExtraInfo = tClient.ToString();
 			}
 		}
 
@@ -283,7 +364,7 @@ namespace AY
 			public Boolean Add(Int64 code, String name, String phone, String scheduleDays, DateTime scheduleTime, Int64 trainer, String comment, out Int64 id)
 			{
 				DbAdapter da = new DbAdapter();
-				Dictionary<string, string> fields = new Dictionary<string, string>();
+				Dictionary<string, Object> fields = new Dictionary<string, Object>();
 				fields["id"] = code.ToString();
 				fields["name"] = DbUtils.Quote(name);
 				fields["phone"] = DbUtils.Quote(phone);

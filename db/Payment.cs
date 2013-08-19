@@ -115,11 +115,41 @@ namespace AY
 				Int64 id = 0;
 				return Add(client, service, creator, sum, comment, out id);
 			}
+			
+			private void UpdateClientInfo(Int64 clientId, Int64 ruleId)
+			{
+				Client client = new Client(clientId);
+				ScheduleRule rule = new ScheduleRule(ruleId);
+				Trigger tClient = new Trigger(client.ExtraInfo);
+				Trigger tRule = new Trigger(rule.Rule);
+				
+				if(tRule.HasAttribute("CPUTimesLeft"))
+				{
+					Object val = tClient["TimesLeft"];
+					if (val != null)
+						tClient["TimesLeft"] = int.Parse(val.ToString()) + int.Parse(tRule["CPUTimesLeft"].ToString());
+					else
+						tClient["TimesLeft"] = tRule["CPUTimesLeft"];
+				}
+				
+				if (tRule.HasAttribute("CPUHoursLeft"))
+				{
+					Object val = tClient["HoursLeft"];
+					if (val != null)
+						tClient["HoursLeft"] = int.Parse(val.ToString()) + int.Parse(tRule["CPUHoursLeft"].ToString());
+					else
+						tClient["HoursLeft"] = tRule["CPUHoursLeft"];
+				}
 
+				tClient["RuleId"] = rule.Id;
+				
+				client.ExtraInfo = tClient.ToString();
+			}
+			
 			public Boolean Add(Int64 client, Int64 service, Int64 creator, float sum, String comment, out Int64 id)
 			{
 				DbAdapter da = new DbAdapter();
-				Dictionary<string, string> fields = new Dictionary<string, string>();
+				Dictionary<string, Object> fields = new Dictionary<string, Object>();
 				fields["clientId"] = client.ToString();
 				fields["scheduleId"] = service.ToString();
 				fields["creatorId"] = creator.ToString();
@@ -131,6 +161,8 @@ namespace AY
 				if (!da.Insert(DbTable.Payments, fields, out id))
 					return false;
 
+				UpdateClientInfo(client, service);
+				
 				Items[id] = new Payment(id);
 				return true;
 			}

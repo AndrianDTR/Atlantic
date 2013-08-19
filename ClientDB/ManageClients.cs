@@ -21,12 +21,13 @@ namespace GAssistant
 		
 		private object[] parseClient(Client client)
 		{
-			object[] row = new object[4];
+			object[] row = new object[5];
 			
 			row[0] = client.Code;
 			row[1] = client.Name;
 			row[2] = client.Phone;
-			row[3] = client.ScheduleTime.ToString("HH:mm");
+			row[3] = client.TimesLeft.ToString();
+			row[4] = client.ScheduleTime.ToString("HH:mm");
 			
 			return row;
 		}

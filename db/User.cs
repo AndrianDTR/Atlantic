@@ -88,7 +88,7 @@ namespace AY
 
 					string newHash = DbUtils.md5(value);
 					DbAdapter ad = new DbAdapter();
-					Dictionary<string, string> fields = new Dictionary<string, string>();
+					Dictionary<string, Object> fields = new Dictionary<string, Object>();
 					fields["pass"] = newHash;
 					if(!ad.Update(DbTable.Users, fields, String.Format("id={0:d}", m_userId)))
 					{
@@ -108,7 +108,7 @@ namespace AY
 				string oldHash = DbUtils.md5(oldPass);
 				string newHash = DbUtils.md5(newPass);
 				DbAdapter ad = new DbAdapter();
-				Dictionary<string, string> fields = new Dictionary<string, string>();
+				Dictionary<string, Object> fields = new Dictionary<string, Object>();
 				fields["pass"] = newHash;
 				ad.Update(DbTable.Users, fields, String.Format("id={0:d} and pass = '{1}'", m_userId, oldHash));
 
@@ -166,7 +166,7 @@ namespace AY
 			public Boolean Add(String name, Int64 priv, out Int64 id)
 			{
 				DbAdapter da = new DbAdapter();
-				Dictionary<string, string> fields = new Dictionary<string, string>();
+				Dictionary<string, Object> fields = new Dictionary<string, Object>();
 				fields["name"] = DbUtils.Quote(name);
 				fields["privilege"] = priv.ToString();
 				id = 0;

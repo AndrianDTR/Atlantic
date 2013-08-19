@@ -36,14 +36,15 @@
 			this.textToSearch = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.gridClients = new System.Windows.Forms.DataGridView();
-			this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colPlan = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.btnEdit = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
 			this.btnClose = new System.Windows.Forms.Button();
+			this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.TimesLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colPlan = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			groupBox1 = new System.Windows.Forms.GroupBox();
 			groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridClients)).BeginInit();
@@ -135,6 +136,7 @@
             this.id,
             this.colName,
             this.colPhone,
+            this.TimesLeft,
             this.colPlan});
 			this.gridClients.Location = new System.Drawing.Point(12, 74);
 			this.gridClients.MultiSelect = false;
@@ -143,35 +145,6 @@
 			this.gridClients.Size = new System.Drawing.Size(784, 306);
 			this.gridClients.TabIndex = 0;
 			this.gridClients.DoubleClick += new System.EventHandler(this.OnEdit);
-			// 
-			// id
-			// 
-			this.id.HeaderText = "Id";
-			this.id.Name = "id";
-			this.id.ReadOnly = true;
-			this.id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.id.Width = 150;
-			// 
-			// colName
-			// 
-			this.colName.HeaderText = "Name";
-			this.colName.Name = "colName";
-			this.colName.ReadOnly = true;
-			this.colName.Width = 250;
-			// 
-			// colPhone
-			// 
-			this.colPhone.HeaderText = "Phone";
-			this.colPhone.Name = "colPhone";
-			this.colPhone.ReadOnly = true;
-			this.colPhone.Width = 200;
-			// 
-			// colPlan
-			// 
-			this.colPlan.HeaderText = "Plan";
-			this.colPlan.Name = "colPlan";
-			this.colPlan.ReadOnly = true;
-			this.colPlan.Width = 120;
 			// 
 			// btnAdd
 			// 
@@ -213,6 +186,41 @@
 			this.btnClose.Text = "Close";
 			this.btnClose.UseVisualStyleBackColor = true;
 			this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+			// 
+			// id
+			// 
+			this.id.HeaderText = "Id";
+			this.id.Name = "id";
+			this.id.ReadOnly = true;
+			this.id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.id.Width = 150;
+			// 
+			// colName
+			// 
+			this.colName.HeaderText = "Name";
+			this.colName.Name = "colName";
+			this.colName.ReadOnly = true;
+			this.colName.Width = 250;
+			// 
+			// colPhone
+			// 
+			this.colPhone.HeaderText = "Phone";
+			this.colPhone.Name = "colPhone";
+			this.colPhone.ReadOnly = true;
+			this.colPhone.Width = 150;
+			// 
+			// TimesLeft
+			// 
+			this.TimesLeft.HeaderText = "Times Left";
+			this.TimesLeft.Name = "TimesLeft";
+			this.TimesLeft.Width = 90;
+			// 
+			// colPlan
+			// 
+			this.colPlan.HeaderText = "Plan";
+			this.colPlan.Name = "colPlan";
+			this.colPlan.ReadOnly = true;
+			this.colPlan.Width = 50;
 			// 
 			// ManageClients
 			// 
@@ -258,6 +266,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn id;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colName;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colPhone;
+		private System.Windows.Forms.DataGridViewTextBoxColumn TimesLeft;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colPlan;
 	}
 }

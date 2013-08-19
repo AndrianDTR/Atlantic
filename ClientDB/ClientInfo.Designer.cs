@@ -50,8 +50,10 @@
 			this.label7 = new System.Windows.Forms.Label();
 			this.textLastLeave = new System.Windows.Forms.TextBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.btnEnter = new System.Windows.Forms.CheckBox();
+			this.textTimesLeft = new System.Windows.Forms.TextBox();
+			this.label11 = new System.Windows.Forms.Label();
 			this.btnLeave = new System.Windows.Forms.Button();
-			this.btnEnter = new System.Windows.Forms.Button();
 			this.label9 = new System.Windows.Forms.Label();
 			this.textLastEnter = new System.Windows.Forms.TextBox();
 			this.label10 = new System.Windows.Forms.Label();
@@ -64,8 +66,6 @@
 			this.checkDay5 = new System.Windows.Forms.CheckBox();
 			this.checkDay7 = new System.Windows.Forms.CheckBox();
 			this.checkDay6 = new System.Windows.Forms.CheckBox();
-			this.textTimesLeft = new System.Windows.Forms.TextBox();
-			this.label11 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -281,10 +281,10 @@
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.btnEnter);
 			this.groupBox2.Controls.Add(this.textTimesLeft);
 			this.groupBox2.Controls.Add(this.label11);
 			this.groupBox2.Controls.Add(this.btnLeave);
-			this.groupBox2.Controls.Add(this.btnEnter);
 			this.groupBox2.Controls.Add(this.textLastLeave);
 			this.groupBox2.Controls.Add(this.label9);
 			this.groupBox2.Controls.Add(this.textLastEnter);
@@ -295,6 +295,36 @@
 			this.groupBox2.TabIndex = 15;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Entrance info";
+			// 
+			// btnEnter
+			// 
+			this.btnEnter.Appearance = System.Windows.Forms.Appearance.Button;
+			this.btnEnter.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.btnEnter.Location = new System.Drawing.Point(10, 152);
+			this.btnEnter.Name = "btnEnter";
+			this.btnEnter.Size = new System.Drawing.Size(111, 42);
+			this.btnEnter.TabIndex = 0;
+			this.btnEnter.Text = "Enter";
+			this.btnEnter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.btnEnter.UseVisualStyleBackColor = true;
+			this.btnEnter.CheckedChanged += new System.EventHandler(this.btnEnter_CheckedChanged);
+			// 
+			// textTimesLeft
+			// 
+			this.textTimesLeft.Location = new System.Drawing.Point(72, 114);
+			this.textTimesLeft.Name = "textTimesLeft";
+			this.textTimesLeft.ReadOnly = true;
+			this.textTimesLeft.Size = new System.Drawing.Size(172, 29);
+			this.textTimesLeft.TabIndex = 5;
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Location = new System.Drawing.Point(6, 117);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(61, 24);
+			this.label11.TabIndex = 4;
+			this.label11.Text = "T. Left";
 			// 
 			// btnLeave
 			// 
@@ -308,19 +338,6 @@
 			this.btnLeave.Text = "Leave";
 			this.btnLeave.UseVisualStyleBackColor = true;
 			this.btnLeave.Click += new System.EventHandler(this.btnLeave_Click);
-			// 
-			// btnEnter
-			// 
-			this.btnEnter.Enabled = false;
-			this.btnEnter.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.btnEnter.Location = new System.Drawing.Point(9, 152);
-			this.btnEnter.Margin = new System.Windows.Forms.Padding(6);
-			this.btnEnter.Name = "btnEnter";
-			this.btnEnter.Size = new System.Drawing.Size(114, 42);
-			this.btnEnter.TabIndex = 0;
-			this.btnEnter.Text = "Enter";
-			this.btnEnter.UseVisualStyleBackColor = true;
-			this.btnEnter.Click += new System.EventHandler(this.btnEnter_Click);
 			// 
 			// label9
 			// 
@@ -461,23 +478,6 @@
 			this.checkDay6.Text = "Mon";
 			this.checkDay6.UseVisualStyleBackColor = true;
 			// 
-			// textTimesLeft
-			// 
-			this.textTimesLeft.Location = new System.Drawing.Point(72, 114);
-			this.textTimesLeft.Name = "textTimesLeft";
-			this.textTimesLeft.ReadOnly = true;
-			this.textTimesLeft.Size = new System.Drawing.Size(172, 29);
-			this.textTimesLeft.TabIndex = 5;
-			// 
-			// label11
-			// 
-			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(6, 117);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(61, 24);
-			this.label11.TabIndex = 4;
-			this.label11.Text = "T. Left";
-			// 
 			// ClientInfo
 			// 
 			this.AcceptButton = this.btnOk;
@@ -556,7 +556,6 @@
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.Button btnPaymentHistory;
 		private System.Windows.Forms.Button btnLeave;
-		private System.Windows.Forms.Button btnEnter;
 		private System.Windows.Forms.Button btnChangeCode;
 		private System.Windows.Forms.DateTimePicker dateSchedTime;
 		private System.Windows.Forms.CheckBox checkDay1;
@@ -568,5 +567,6 @@
 		private System.Windows.Forms.CheckBox checkDay6;
 		private System.Windows.Forms.TextBox textTimesLeft;
 		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.CheckBox btnEnter;
 	}
 }
