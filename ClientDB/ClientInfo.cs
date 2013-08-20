@@ -47,9 +47,6 @@ namespace GAssistant
 			SetScheduleDays(client.ScheduleDays);
 			textComment.Text = client.Comment;
 			
-			textLastEnter.Text = client.LastEnter.ToString();
-			textLastLeave.Text = client.LastLeave.ToString();
-
 			UpdateTimesLeft(client);
 		}
 
@@ -83,6 +80,9 @@ namespace GAssistant
 			bool enabled = (client.TimesLeft > 0);
 			btnEnter.Enabled = enabled && btnEnter.Enabled;
 			btnLeave.Enabled = enabled && btnLeave.Enabled;
+
+			textLastEnter.Text = client.LastEnter.ToString();
+			textLastLeave.Text = client.LastLeave.ToString();
 			
 			if(client.OpenTicket.Date == DateTime.Now.Date)
 			{
@@ -98,7 +98,6 @@ namespace GAssistant
 			btnPaymentAdd.Enabled = existingClient;
 			btnPaymentHistory.Enabled = existingClient;
 			btnEnter.Enabled = existingClient;
-			btnLeave.Enabled = existingClient;
 			
 			return existingClient;
 		}
@@ -119,7 +118,6 @@ namespace GAssistant
 			if (UserRole.IsSet(session.UserRole.Clients, UserRights.Write))
 			{
 				btnEnter.Enabled = true;
-				btnLeave.Enabled = true;
 				btnChangeCode.Enabled = true;
 			}
 			
@@ -364,11 +362,13 @@ namespace GAssistant
 			if(btnEnter.Checked)
 			{
 				clientInfo.OpenTicket = DateTime.Now;
+				btnLeave.Enabled = true;
 				btnEnter.Text = cancelText;
 			}
 			else
 			{
 				clientInfo.OpenTicket = clientInfo.OpenTicket.AddYears(-1);
+				btnLeave.Enabled = false;
 				btnEnter.Text = enterText;
 			}
 		}
@@ -381,19 +381,8 @@ namespace GAssistant
 			clientInfo.ProcessEnter();
 			
 			btnEnter.Checked = false;
+			
+			UpdateTimesLeft(new Client(m_clienId));
 		}
-		
-		private void OpenTicket()
-		{
-		
-		}
-		
-		private void CloseTicket(Int64 nTicketId)
-		{
-		
-		}
-
-		
-		
 	}
 }

@@ -10,6 +10,8 @@ namespace AY
 	{
 		class ObjType
 		{
+			#pragma warning disable 0168
+			
 			private Object m_value = null;
 			
 			public ObjType(int val)
@@ -62,6 +64,7 @@ namespace AY
 				}
 				catch (System.Exception ex)
 				{
+					Logger.Error("Parse int failed. Value: " + obj.m_value.ToString());
 				}
 				
 				return res;
@@ -77,6 +80,7 @@ namespace AY
 				}
 				catch (System.Exception ex)
 				{
+					Logger.Error("Parse Int64 failed. Value: " + obj.m_value.ToString());
 				}
 
 				return res;
@@ -92,6 +96,7 @@ namespace AY
 				}
 				catch (System.Exception ex)
 				{
+					Logger.Error("Parse DateTime failed. Value: " + obj.m_value.ToString());
 				}
 
 				return res;
@@ -101,6 +106,13 @@ namespace AY
 			{
 				return obj.m_value.ToString();
 			}
+
+			public override String ToString()
+			{
+				return m_value.ToString();
+			}
+			
+			#pragma warning restore 0168
 		}
 		
 		class Trigger

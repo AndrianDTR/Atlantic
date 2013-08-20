@@ -7,7 +7,7 @@ namespace AY
 {
 	namespace db
 	{
-		public class ScheduleRule
+		public class ScheduleRule: Object
 		{
 			private Int64 m_id = 0;
 			private String m_Name = String.Empty;
@@ -23,10 +23,19 @@ namespace AY
 			{
 				return !(p1.Id == p2.Id);
 			}
-			
-			public ScheduleRule()
+
+			public override bool Equals(Object obj)
 			{
-			
+				if (obj == null || GetType() != obj.GetType())
+					return false;
+
+				ScheduleRule Item = obj as ScheduleRule;
+				return Item.Id == this.Id;
+			}
+
+			public override int GetHashCode()
+			{
+				return base.GetHashCode();
 			}
 			
 			public ScheduleRule(Int64 id)

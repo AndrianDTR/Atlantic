@@ -59,8 +59,8 @@ namespace AY
 				m_extraInfo = data["extraInfo"].ToString();
 				m_scheduleDays = data["scheduleDays"].ToString();
 				m_scheduleTime = DateTime.Parse(data["scheduleTime"].ToString());
-				m_lastLeave = DateTime.Parse(data["lastEnter"].ToString());
-				m_lastEnter = DateTime.Parse(data["lastLeave"].ToString());
+				m_lastEnter = DateTime.Parse(data["lastEnter"].ToString());
+				m_lastLeave = DateTime.Parse(data["lastLeave"].ToString());
 				m_openTicket = DateTime.Parse(data["openTicket"].ToString());
 				m_trainer = Int64.Parse(data["trainer"].ToString());
 			}
@@ -82,8 +82,8 @@ namespace AY
 				m_extraInfo = data["extraInfo"].ToString();
 				m_scheduleDays = data["scheduleDays"].ToString();
 				m_scheduleTime = DateTime.Parse(data["scheduleTime"].ToString());
-				m_lastLeave = DateTime.Parse(data["lastEnter"].ToString());
-				m_lastEnter = DateTime.Parse(data["lastLeave"].ToString());
+				m_lastEnter = DateTime.Parse(data["lastEnter"].ToString());
+				m_lastLeave = DateTime.Parse(data["lastLeave"].ToString());
 				m_openTicket = DateTime.Parse(data["openTicket"].ToString());
 				m_trainer = Int64.Parse(data["trainer"].ToString());
 			}
@@ -159,7 +159,7 @@ namespace AY
 				{
 					Trigger tlt = new Trigger(ExtraInfo);
 					if(tlt.HasAttribute("TimesLeft"))
-						return int.Parse(tlt["TimesLeft"].ToString());
+						return tlt["TimesLeft"];
 					return 0;
 				}
 				set
@@ -308,17 +308,17 @@ namespace AY
 				Trigger tClient = new Trigger(ExtraInfo);
 				Trigger tRule = null;
 
-				if (tClient.HasAttribute("PlanId"))
+				if (tClient.HasAttribute("RuleId"))
 				{	
-					Int64 ruleId = int.Parse(tClient["RuleId"].ToString());
+					Int64 ruleId = tClient["RuleId"];
 					tRule = new Trigger(new ScheduleRule(ruleId).Rule);
 				}
 
 				if (tClient.HasAttribute("TimesLeft"))
 				{
-					int val = int.Parse(tClient["TimesLeft"].ToString());
+					int val = tClient["TimesLeft"];
 					if(tRule != null && tRule.HasAttribute("UCIDecTimes"))
-						val -= int.Parse(tRule["UCIDecTimes"].ToString());
+						val -= tRule["UCIDecTimes"];
 					else
 						val--;
 
@@ -327,13 +327,13 @@ namespace AY
 				
 				if (tClient.HasAttribute("HoursLeft"))
 				{
-					int val = int.Parse(tClient["HoursLeft"].ToString());
+					int val = tClient["HoursLeft"];
 					if (tRule != null && tRule.HasAttribute("UCIDecHours"))
-						val -= int.Parse(tRule["UCIDecHours"].ToString());
+						val -= tRule["UCIDecHours"];
 					else
 						val--;
 
-					tClient["TimesLeft"] = val;
+					tClient["HoursLeft"] = val;
 				}
 				
 				ExtraInfo = tClient.ToString();
