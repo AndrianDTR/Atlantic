@@ -333,6 +333,7 @@
 			this.listClients.Name = "listClients";
 			this.listClients.UseCompatibleStateImageBehavior = false;
 			this.listClients.View = System.Windows.Forms.View.Details;
+			this.listClients.DoubleClick += new System.EventHandler(this.ShowClientInfo);
 			// 
 			// columnClient
 			// 

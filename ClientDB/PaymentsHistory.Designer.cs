@@ -46,12 +46,13 @@
 			this.listPayments.FullRowSelect = true;
 			this.listPayments.GridLines = true;
 			this.listPayments.Location = new System.Drawing.Point(0, 0);
-			this.listPayments.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.listPayments.Margin = new System.Windows.Forms.Padding(4);
 			this.listPayments.Name = "listPayments";
 			this.listPayments.Size = new System.Drawing.Size(1003, 429);
 			this.listPayments.TabIndex = 0;
 			this.listPayments.UseCompatibleStateImageBehavior = false;
 			this.listPayments.View = System.Windows.Forms.View.Details;
+			this.listPayments.DoubleClick += new System.EventHandler(this.ShowDetails);
 			// 
 			// colDate
 			// 
@@ -72,7 +73,7 @@
 			// 
 			this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.btnClose.Location = new System.Drawing.Point(887, 446);
-			this.btnClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnClose.Margin = new System.Windows.Forms.Padding(4);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(100, 28);
 			this.btnClose.TabIndex = 2;
@@ -82,7 +83,7 @@
 			// btnView
 			// 
 			this.btnView.Location = new System.Drawing.Point(779, 446);
-			this.btnView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnView.Margin = new System.Windows.Forms.Padding(4);
 			this.btnView.Name = "btnView";
 			this.btnView.Size = new System.Drawing.Size(100, 28);
 			this.btnView.TabIndex = 1;
@@ -101,7 +102,7 @@
 			this.Controls.Add(this.listPayments);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "PaymentsHistory";

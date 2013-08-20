@@ -12,17 +12,26 @@ namespace GAssistant
 		private User m_user = new User();
 		private UserRole m_userRole = new UserRole();
 		private ListView m_ticketsList = null;
+
+		public delegate void UpdateTicketList();
 		
-		public ListView Tickets
+		private UpdateTicketList m_ticketsUpdDelegate = null;
+		public UpdateTicketList TicketUpdate
 		{
 			get
 			{
-				return m_ticketsList;
+				return m_ticketsUpdDelegate;
 			}
 			set
 			{
-				m_ticketsList = value;
+				m_ticketsUpdDelegate = value;
 			}
+		}
+		
+		public void UpdateTickets()
+		{
+			if(m_ticketsUpdDelegate != null)
+				m_ticketsUpdDelegate();
 		}
 		
 		public User User

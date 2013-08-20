@@ -34,8 +34,6 @@ namespace GAssistant
 		{
 			Session session = Session.Instance;
 			
-			session.Tickets = listClients;
-			
 			m_calendar.RowHeight = m_opt.CalRowHeight;
 			session.PassLen = m_opt.MinPassLen;
 			
@@ -78,6 +76,8 @@ namespace GAssistant
 			session.PassLen = m_opt.MinPassLen;
 			
 			GetOpenedTickets();
+			
+			session.TicketUpdate = new Session.UpdateTicketList(UpdateInfo);
 		}
 
 		private void OnClose(object sender, FormClosedEventArgs e)
@@ -88,11 +88,13 @@ namespace GAssistant
 		
 		private void GetOpenedTickets()
 		{
+			listClients.Items.Clear();
 			foreach (Client client in new ClientCollection())
 			{
 				if(client.OpenTicket.Date == DateTime.Now.Date)
 				{
-					listClients.Items.Add(client.Name);
+					ListViewItem lvi = listClients.Items.Add(client.Name);
+					lvi.Tag = client.Id;
 				}
 			}
 		}
@@ -242,7 +244,6 @@ namespace GAssistant
 
 		private void BackUpDB()
 		{
-			
 			String prefix = DateTime.Now.ToString("yyyyMMdd");
 			String ext = "dbu";
 			String archName = String.Format("{0}\\{1}.{2}"
@@ -278,6 +279,21 @@ namespace GAssistant
 				}
 				Reinit();
 			}
+		}
+
+		private void ShowClientInfo(object sender, EventArgs e)
+		{
+			if(listClients.SelectedItems.Count < 1)
+				return;
+				
+			Int64 clientId = (Int64)listClients.SelectedItems[0].Tag;
+			ClientInfo ci = new ClientInfo(clientId);
+			ci.ShowDialog();
+		}
+		
+		private void UpdateInfo()
+		{
+			GetOpenedTickets();
 		}
     }
 }

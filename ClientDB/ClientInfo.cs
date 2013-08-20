@@ -371,6 +371,8 @@ namespace GAssistant
 				btnLeave.Enabled = false;
 				btnEnter.Text = enterText;
 			}
+
+			Session.Instance.UpdateTickets();
 		}
 
 		private void btnLeave_Click(object sender, EventArgs e)
@@ -383,6 +385,8 @@ namespace GAssistant
 			btnEnter.Checked = false;
 			
 			UpdateTimesLeft(new Client(m_clienId));
+
+			Session.Instance.UpdateTickets();
 		}
 	}
 }
