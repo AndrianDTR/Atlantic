@@ -236,6 +236,7 @@
 			this.btnPaymentHistory.TabIndex = 1;
 			this.btnPaymentHistory.Text = "History";
 			this.btnPaymentHistory.UseVisualStyleBackColor = true;
+			this.btnPaymentHistory.Click += new System.EventHandler(this.btnPaymentHistory_Click);
 			// 
 			// textLastPaySum
 			// 

@@ -245,6 +245,33 @@ namespace AY
 				}
 			}
 			
+			public String[] LastPayment
+			{
+				get
+				{
+					String[] res = new String[2];
+					
+					if(m_id == 0)
+						return res;
+						
+					String where = String.Format("clientId = {0} order by date desc", m_id);
+					DataRow data = new DbAdapter().GetFirstRow(
+						  DbTable.Payments
+						, where
+						, new List<string>{"sum","date"});
+
+					if (data == null)
+					{
+						throw new Exception("Error! No payments has been found.");
+					}
+					
+					res[0] = data["sum"].ToString();
+					res[1] = data["date"].ToString();
+
+					return res;
+				}
+			}
+
 			public String ScheduleDays
 			{
 				get

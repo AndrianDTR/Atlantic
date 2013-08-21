@@ -47,6 +47,7 @@ namespace GAssistant
 			SetScheduleDays(client.ScheduleDays);
 			textComment.Text = client.Comment;
 			
+			UpdateLastPaymentInfo(client);
 			UpdateTimesLeft(client);
 		}
 
@@ -71,10 +72,16 @@ namespace GAssistant
 			checkDay6.Text = names[5];
 			checkDay7.Text = names[6];
 		}
+
+		private void UpdateLastPaymentInfo(Client client)
+		{
+			String[] paymentInfo = client.LastPayment;
+			textLastPaySum.Text = paymentInfo[0];
+			textLastPayDate.Text = paymentInfo[1];
+		}
 		
 		private void UpdateTimesLeft(Client client)
 		{
-			CheckPermissions();
 			textTimesLeft.Text = client.TimesLeft.ToString();
 
 			bool enabled = (client.TimesLeft > 0);
@@ -349,7 +356,9 @@ namespace GAssistant
 			AddPayment addPaymDlg = new AddPayment(m_clienId);
 			addPaymDlg.ShowDialog();
 			
-			UpdateTimesLeft(new Client(m_clienId));
+			Client client = new Client(m_clienId);
+			UpdateTimesLeft(client);
+			UpdateLastPaymentInfo(client);
 		}
 		
 		private void btnEnter_CheckedChanged(object sender, EventArgs e)
@@ -387,6 +396,15 @@ namespace GAssistant
 			UpdateTimesLeft(new Client(m_clienId));
 
 			Session.Instance.UpdateTickets();
+		}
+
+		private void btnPaymentHistory_Click(object sender, EventArgs e)
+		{
+			if(0 == m_clienId)
+				return;
+				
+			PaymentsHistory hist = new PaymentsHistory(m_clienId);
+			hist.ShowDialog();
 		}
 	}
 }

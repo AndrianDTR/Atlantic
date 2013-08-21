@@ -9,16 +9,19 @@ namespace GAssistant
 	{
 		private PaymentsCollection m_payments = null;
 		
-		public PaymentsHistory()
+		public PaymentsHistory(): this (0)
 		{
+		}
+
+		public PaymentsHistory(Int64 clientId)
+		{
+			m_payments = new PaymentsCollection(clientId);
 			InitializeComponent();
 			Reinit();
 		}
 
 		private void Reinit()
 		{
-			m_payments = new PaymentsCollection();
-
 			listPayments.Items.Clear();
 
 			foreach (Payment pay in m_payments)

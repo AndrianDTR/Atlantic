@@ -99,10 +99,23 @@ namespace AY
 		{
 			Dictionary<Int64, Payment> Items = new Dictionary<Int64, Payment>();
 
-			public PaymentsCollection()
+			public PaymentsCollection(): this(0)
+			{
+			}
+
+			public PaymentsCollection(Int64 clientId)
 			{
 				DbAdapter da = new DbAdapter();
-				DataTable dt = da.ExecuteQuery(String.Format("select id from {0};", DbUtils.GetTableName(DbTable.Payments)));
+				String query = String.Format("select id from {0};"
+					, DbUtils.GetTableName(DbTable.Payments));
+				if(clientId != 0)
+				{
+					query = String.Format("select id from {0} where clientId = {1};"
+						, DbUtils.GetTableName(DbTable.Payments)
+						, clientId);
+				}
+				
+				DataTable dt = da.ExecuteQuery(query);
 				foreach (DataRow dr in dt.Rows)
 				{
 					Payment item = new Payment(Int64.Parse(dr["id"].ToString()));
