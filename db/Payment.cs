@@ -154,6 +154,15 @@ namespace AY
 						tClient["HoursLeft"] = tRule["CPUHoursLeft"];
 				}
 
+				if (tRule.HasAttribute("UCIDecHours"))
+				{
+					tClient["DecHours"] = tRule["UCIDecHours"];
+				}
+				else
+				{
+					tClient.Remove("DecHours");
+				}
+
 				tClient["RuleId"] = rule.Id;
 				
 				client.ExtraInfo = tClient.ToString();

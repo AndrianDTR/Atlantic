@@ -174,41 +174,13 @@ namespace AY
 				return res;
 			}
 			
-			public static bool PaymentTrigger(Int64 paymentId)
+			public bool Remove(String key)
 			{
-				bool res = false;
-				Logger.Enter();
-
-				Payment payment = new Payment(paymentId);
-				ScheduleRule rule = new ScheduleRule(payment.ScheduleId);
-				Client client = new Client(payment.ClientId);
-
-				Trigger ruleTrig = new Trigger(rule.Rule);
-				Trigger clientTrig = new Trigger(client.ExtraInfo);
-
-				// TODO: Process options here.
-				
-				client.ExtraInfo = clientTrig.ToString();
-
-				Logger.Leave();
-				return res;
-			}
-			
-			public static bool EntranceTrigger(Int64 clientId)
-			{
-				bool res = false;
-				Logger.Enter();
-
-				Client client = new Client(clientId);
-
-				Trigger clientTrig = new Trigger(client.ExtraInfo);
-
-				// TODO: Process options here.
-				
-				client.ExtraInfo = clientTrig.ToString();
-
-				Logger.Leave();
-				return res;
+				if(m_props.ContainsKey(key))
+				{
+					return m_props.Remove(key);
+				}
+				return false;
 			}
 		}
 	}

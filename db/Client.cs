@@ -170,6 +170,17 @@ namespace AY
 				}
 			}
 
+			public int DecHours
+			{
+				get
+				{
+					Trigger tlt = new Trigger(ExtraInfo);
+					if (tlt.HasAttribute("DecHours"))
+						return tlt["DecHours"];
+					return 0;
+				}
+			}
+
 			public DateTime LastEnter
 			{
 				get
@@ -370,11 +381,22 @@ namespace AY
 		public class ClientCollection : IEnumerable<Client>
 		{
 			Dictionary<Int64, Client> Items = new Dictionary<Int64, Client>();
+			
+			public ClientCollection():this("")
+			{
+			}
 
-			public ClientCollection()
+			public ClientCollection(String filter)
 			{
 				DbAdapter da = new DbAdapter();
-				DataTable dt = da.ExecuteQuery(String.Format("select id from {0};", DbUtils.GetTableName(DbTable.Clients)));
+				
+				if(filter.Length > 0)
+					filter = "where " + filter;
+				
+				DataTable dt = da.ExecuteQuery(
+					  String.Format("select id from {0} {1};"
+					, DbUtils.GetTableName(DbTable.Clients)
+					, filter));
 				foreach(DataRow dr in dt.Rows)
 				{
 					Client user = new Client(Int64.Parse(dr["id"].ToString()));

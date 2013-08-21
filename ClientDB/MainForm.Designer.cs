@@ -79,6 +79,7 @@
 			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
+			this.btmMissLesson = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tabManager.SuspendLayout();
@@ -394,6 +395,7 @@
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.btmMissLesson);
 			this.panel1.Controls.Add(this.btnBackUp);
 			this.panel1.Controls.Add(this.btnTrainersShedule);
 			this.panel1.Controls.Add(this.btnPaymentsHistory);
@@ -440,6 +442,13 @@
 			this.btnAddClient.Name = "btnAddClient";
 			this.btnAddClient.UseVisualStyleBackColor = true;
 			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
+			// 
+			// btmMissLesson
+			// 
+			this.btmMissLesson.Image = global::GAssistant.Properties.Resources._1367374751_edit_remove;
+			resources.ApplyResources(this.btmMissLesson, "btmMissLesson");
+			this.btmMissLesson.Name = "btmMissLesson";
+			this.btmMissLesson.UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 
@@ -517,6 +526,7 @@
 		private System.Windows.Forms.TabPage tabCalendar;
 		private System.Windows.Forms.TabPage tabStatistics;
 		private System.Windows.Forms.TabPage tabActiveClients;
+		private System.Windows.Forms.Button btmMissLesson;
     }
 }
 

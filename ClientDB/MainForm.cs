@@ -3,6 +3,8 @@ using System.IO;
 using System.Windows.Forms;
 using AY.Log;
 using AY.db;
+using AY.Utils;
+using System.Drawing;
 
 namespace GAssistant
 {
@@ -88,12 +90,67 @@ namespace GAssistant
 		
 		private void GetOpenedTickets()
 		{
+			DateTime today = DateTime.Now;
+			
 			listClients.Items.Clear();
-			foreach (Client client in new ClientCollection())
+			// Present (green)  => opened tickets
+			// Delayed (yellow) => schedTime < now < schedTime + ruleDecTime
+			// Missed  (red)    => now > schedTime + ruleDecTime
+
+			foreach (Client client in new ClientCollection("date(openTicket) = date('now', 'localtime')"))
 			{
-				if(client.OpenTicket.Date == DateTime.Now.Date)
+				ListViewItem lvi = listClients.Items.Add(client.Name);
+					
+				lvi.SubItems.Add("Present");
+				lvi.SubItems.Add(client.OpenTicket.ToString("HH:mm"));
+				lvi.SubItems.Add("");
+				lvi.SubItems.Add(client.TimesLeft.ToString());
+				lvi.BackColor = Color.FromArgb(50, 255, 50);
+				
+				lvi.Tag = client.Id;
+			}
+
+			//where substr(scheduleDays, <nWeekDay>, 1) = 'X' and strftime('%H:%M',scheduleTime) = strftime('%H:%M','now')
+			DayOfWeek ws = CultureInfoUtils.GetWeekStart();
+			String where = String.Format("substr(scheduleDays, {0}, 1) = 'X' and strftime('%H:%M',scheduleTime) <= strftime('%H:%M','now','localtime')"
+				, (int)today.DayOfWeek + (int)ws);
+				
+			foreach (Client client in new ClientCollection(where))
+			{
+				TimeSpan t1 = DateTime.Now.TimeOfDay;
+				TimeSpan t2 = client.ScheduleTime.AddHours(client.DecHours).TimeOfDay;
+				if (client.TimesLeft > 0 && t1 <= t2)
 				{
 					ListViewItem lvi = listClients.Items.Add(client.Name);
+
+					lvi.SubItems.Add("Delayed");
+					lvi.SubItems.Add(client.ScheduleTime.ToString("HH:mm"));
+					lvi.SubItems.Add(client.ScheduleTime.AddHours(client.DecHours).ToString("HH:mm"));
+					lvi.SubItems.Add(client.TimesLeft.ToString());
+					lvi.BackColor = Color.FromArgb(255, 255, 50);
+
+					lvi.Tag = client.Id;
+				}
+			}
+
+			//where substr(scheduleDays, <nWeekDay>, 1) = 'X' and strftime('%H:%M',scheduleTime) = strftime('%H:%M','now')
+			where = String.Format("substr(scheduleDays, {0}, 1) = 'X' and strftime('%H:%M',scheduleTime) <= strftime('%H:%M','now','localtime')"
+				, (int)today.DayOfWeek + (int)ws);
+
+			foreach (Client client in new ClientCollection(where))
+			{
+				TimeSpan t1 = DateTime.Now.TimeOfDay;
+				TimeSpan t2 = client.ScheduleTime.AddHours(client.DecHours).TimeOfDay;
+				if (client.TimesLeft > 0 && t1 > t2)
+				{
+					ListViewItem lvi = listClients.Items.Add(client.Name);
+
+					lvi.SubItems.Add("Delayed");
+					lvi.SubItems.Add(client.ScheduleTime.ToString("HH:mm"));
+					lvi.SubItems.Add(client.ScheduleTime.AddHours(client.DecHours).ToString("HH:mm"));
+					lvi.SubItems.Add(client.TimesLeft.ToString());
+					lvi.BackColor = Color.FromArgb(255, 50, 50);
+
 					lvi.Tag = client.Id;
 				}
 			}

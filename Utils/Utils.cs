@@ -18,33 +18,13 @@ namespace AY
 			
 			public static string[] GetWeekDayNames()
 			{
-				int shift = 0;
 				string[] names = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.AbbreviatedDayNames;
-				switch (System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek)
-				{
-					case (DayOfWeek.Sunday):
-						shift = 0;
-						break;
-					case (DayOfWeek.Monday):
-						shift = 1;
-						break;
-					case (DayOfWeek.Tuesday):
-						shift = 2;
-						break;
-					case (DayOfWeek.Wednesday):
-						shift = 3;
-						break;
-					case (DayOfWeek.Thursday):
-						shift = 4;
-						break;
-					case (DayOfWeek.Friday):
-						shift = 5;
-						break;
-					case (DayOfWeek.Saturday):
-						shift = 6;
-						break;
-				}
-				return Shift(names, shift);
+				return Shift(names, (int)GetWeekStart());
+			}
+			
+			public static DayOfWeek GetWeekStart()
+			{
+				return System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
 			}
 		}
 
