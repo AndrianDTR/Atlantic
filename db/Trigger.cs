@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using AY.Log;
 using AY.db;
+using System.Drawing;
 
 namespace AY
 {
@@ -29,6 +30,11 @@ namespace AY
 				m_value = val;
 			}
 
+			public ObjType(Color val)
+			{
+				m_value = val.ToArgb();
+			}
+
 			public ObjType(DateTime val)
 			{
 				m_value = val;
@@ -49,6 +55,11 @@ namespace AY
 				return new ObjType(val);
 			}
 
+			public static implicit operator ObjType(Color val)
+			{
+				return new ObjType(val);
+			}
+			
 			public static implicit operator ObjType(String val)
 			{
 				return new ObjType(val);
@@ -86,6 +97,23 @@ namespace AY
 				return res;
 			}
 
+			public static implicit operator Color(ObjType obj)
+			{
+				Color res = new Color();
+
+				try
+				{
+					Int32 iClr = Int32.Parse(obj.m_value.ToString());
+					res = Color.FromArgb(iClr);
+				}
+				catch (System.Exception ex)
+				{
+					Logger.Error("Parse DateTime failed. Value: " + obj.m_value.ToString());
+				}
+
+				return res;
+			}
+			
 			public static implicit operator DateTime(ObjType obj)
 			{
 				DateTime res = new DateTime();

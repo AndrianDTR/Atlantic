@@ -89,7 +89,8 @@ namespace AY
 				{
 					case DbTable.Settings:
 						return new String[]{"id", "minPassLen", "language", "calRowHeight", "showTrainer"
-							, "showClientCount", "storeMainWindowState", "mainWindowState", "pathBackUp"};
+							, "showClientCount", "storeMainWindowState", "mainWindowState", "pathBackUp"
+							, "colors"};
 
 					case DbTable.UserPrivileges:
 						return new String[]{"id", "name", "clients", "schedule", "trainers"
@@ -703,6 +704,7 @@ namespace AY
 					, storeMainWindowState Integer NOT NULL Default(1)
 					, mainWindowState Integer NOT NULL Default(0)
 					, pathBackUp VarChar NOT NULL Default('BackUp')
+					, colors Text DEFAULT('')
 				);
 				INSERT INTO settings(minPassLen) VALUES(8)";
 				

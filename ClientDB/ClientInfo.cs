@@ -89,11 +89,6 @@ namespace GAssistant
 				btnChangeCode.Enabled = true;
 			}
 
-			if (UserRole.IsSet(session.UserRole.Clients, UserRights.Create))
-			{
-				btnOk.Enabled = true;
-			}
-
 			textTimesLeft.Text = client.TimesLeft.ToString();
 
 			bool enabled = (client.TimesLeft > 0);
@@ -131,6 +126,11 @@ namespace GAssistant
 			if (UserRole.IsSet(session.UserRole.Payments, UserRights.Create))
 			{
 				btnPaymentAdd.Enabled = true;
+			}
+
+			if (UserRole.IsSet(session.UserRole.Clients, UserRights.Create))
+			{
+				btnOk.Enabled = true;
 			}
 		}
 		
@@ -328,6 +328,8 @@ namespace GAssistant
 					this.DialogResult = DialogResult.OK;
 					this.Close();
 				}
+				
+				Session.Instance.UpdateTickets();
 			}
 		}
 

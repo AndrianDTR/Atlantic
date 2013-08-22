@@ -12,10 +12,23 @@ namespace GAssistant
     {
 		public enum ClientTicketStus
 		{
+			None = -1,
 			Present = 0,
 			Overtime,
 			Delayed,
 			Missed,
+		}
+		
+		class ClientStatus
+		{
+			public Int64 Id = 0;
+			public ClientTicketStus state = ClientTicketStus.None;
+			
+			public ClientStatus(Int64 id, ClientTicketStus state)
+			{
+				this.Id = id;
+				this.state = state;
+			}
 		}
 		
 		private Login m_login = new Login();
@@ -104,25 +117,28 @@ namespace GAssistant
 			
 			foreach (Client client in new ClientCollection("date(openTicket) = date('now', 'localtime')"))
 			{
+				// Skip already closed tickets
+				if(client.LastLeave.Date == today.Date)
+					continue;
+				
 				ListViewItem lvi = listClients.Items.Add(client.Name);
 
 				lvi.BackColor = Color.FromArgb(50, 255, 50);
-				String status = ClientTicketStus.Present.ToString();
+				ClientTicketStus status = ClientTicketStus.Present;
 				
-				TimeSpan clientTime = client.OpenTicket.AddHours(client.DecHours).TimeOfDay;
-				if (today.TimeOfDay > clientTime)
+				DateTime clientTime = client.OpenTicket.AddHours(client.DecHours);
+				if (today > clientTime)
 				{
-					status = ClientTicketStus.Overtime.ToString();
+					status = ClientTicketStus.Overtime;
 					lvi.BackColor = Color.FromArgb(255, 200, 100);
 				}
 
-				lvi.SubItems.Add(status);
+				lvi.SubItems.Add(status.ToString());
 				lvi.SubItems.Add(client.OpenTicket.ToString("HH:mm"));
 				lvi.SubItems.Add("");
 				lvi.SubItems.Add(client.TimesLeft.ToString());
 
-				
-				lvi.Tag = client.Id;
+				lvi.Tag = new ClientStatus(client.Id, status);
 			}
 
 			DayOfWeek ws = CultureInfoUtils.GetWeekStart();
@@ -131,20 +147,25 @@ namespace GAssistant
 				
 			foreach (Client client in new ClientCollection(where))
 			{
+				// Skip already closed tickets
+				if (client.LastLeave.Date == today.Date)
+					continue;
+					
 				TimeSpan clientTime = client.ScheduleTime.AddHours(client.DecHours).TimeOfDay;
 				if (client.OpenTicket.Date != today.Date 
 					&& client.TimesLeft > 0 
 					&& today.TimeOfDay <= clientTime)
 				{
 					ListViewItem lvi = listClients.Items.Add(client.Name);
-
+					ClientTicketStus status = ClientTicketStus.Delayed;
+					
 					lvi.BackColor = Color.FromArgb(255, 255, 50);
-					lvi.SubItems.Add(ClientTicketStus.Delayed.ToString());
+					lvi.SubItems.Add(status.ToString());
 					lvi.SubItems.Add(client.ScheduleTime.ToString("HH:mm"));
 					lvi.SubItems.Add(client.ScheduleTime.AddHours(client.DecHours).ToString("HH:mm"));
 					lvi.SubItems.Add(client.TimesLeft.ToString());
-					
-					lvi.Tag = client.Id;
+
+					lvi.Tag = new ClientStatus(client.Id, status);
 				}
 			}
 
@@ -153,20 +174,25 @@ namespace GAssistant
 
 			foreach (Client client in new ClientCollection(where))
 			{
+				// Skip already closed tickets
+				if (client.LastLeave.Date == today.Date)
+					continue;
+					
 				TimeSpan clientTime = client.ScheduleTime.AddHours(client.DecHours).TimeOfDay;
 				if (client.OpenTicket.Date != today.Date 
 					&& client.TimesLeft > 0 
 					&& today.TimeOfDay > clientTime)
 				{
 					ListViewItem lvi = listClients.Items.Add(client.Name);
-
+					ClientTicketStus status = ClientTicketStus.Missed;
+					
 					lvi.BackColor = Color.FromArgb(255, 50, 50);
-					lvi.SubItems.Add(ClientTicketStus.Missed.ToString());
+					lvi.SubItems.Add(status.ToString());
 					lvi.SubItems.Add(client.ScheduleTime.ToString("HH:mm"));
 					lvi.SubItems.Add(client.ScheduleTime.AddHours(client.DecHours).ToString("HH:mm"));
 					lvi.SubItems.Add(client.TimesLeft.ToString());
-					
-					lvi.Tag = client.Id;
+
+					lvi.Tag = new ClientStatus(client.Id, status);
 				}
 			}
 		}
@@ -353,15 +379,33 @@ namespace GAssistant
 		{
 			if(listClients.SelectedItems.Count < 1)
 				return;
-				
-			Int64 clientId = (Int64)listClients.SelectedItems[0].Tag;
-			ClientInfo ci = new ClientInfo(clientId);
+
+			ClientStatus status = (ClientStatus)listClients.SelectedItems[0].Tag;
+			ClientInfo ci = new ClientInfo(status.Id);
 			ci.ShowDialog();
 		}
 		
 		private void UpdateInfo()
 		{
 			GetOpenedTickets();
+		}
+
+		private void btmMissLesson_Click(object sender, EventArgs e)
+		{
+			DateTime now = DateTime.Now.Date;
+			
+			foreach(ListViewItem lvi in listClients.Items)
+			{
+				ClientStatus status = (ClientStatus)lvi.Tag;
+				if(ClientTicketStus.Missed == status.state)
+				{
+					Client client = new Client(status.Id);
+					DateTime st = client.ScheduleTime;
+					client.LastEnter = now.AddHours(st.Hour).AddMinutes(st.Minute);
+					client.LastLeave = client.LastEnter.AddHours(client.DecHours);
+					client.ProcessEnter();
+				}
+			}
 		}
     }
 }

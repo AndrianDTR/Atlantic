@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using AY.Log;
 using AY.db;
+using System.Drawing;
 
 namespace GAssistant
 {
@@ -24,6 +25,8 @@ namespace GAssistant
 			comboLang.Items.Add("English");
 			comboLang.SelectedIndex = 0;
 			//comboLang.SelectedItem = m_opts.Language;
+
+			InitPageColors();
 		}
 
 		private void btnOk_Click(object sender, EventArgs e)
@@ -51,6 +54,52 @@ namespace GAssistant
 			{
 				textPathBackUp.Text = fbd.SelectedPath;
 			}
+		}
+		
+		private void InitPageColors()
+		{
+			btnColorPresent.BackColor = m_opts.ColorPresent;
+			btnColorOvertime.BackColor = m_opts.ColorOvertime;
+			btnColorDelayed.BackColor = m_opts.ColorDelayed;
+			btnColorMissed.BackColor = m_opts.ColorMissed;
+		}
+		
+		private Color ChooseColor(Color old)
+		{
+			Color clr = old;
+			
+			ColorDialog dlg = new ColorDialog();
+			dlg.Color = old;
+			if(DialogResult.OK == dlg.ShowDialog())
+			{
+				clr = dlg.Color;
+			}
+			
+			return clr;
+		}
+		
+		private void btnColorPresent_Click(object sender, EventArgs e)
+		{
+			m_opts.ColorPresent = ChooseColor(m_opts.ColorPresent);
+			InitPageColors();
+		}
+
+		private void btnColorOvertime_Click(object sender, EventArgs e)
+		{
+			m_opts.ColorOvertime = ChooseColor(m_opts.ColorOvertime);
+			InitPageColors();
+		}
+		
+		private void btnColorDelayed_Click(object sender, EventArgs e)
+		{
+			m_opts.ColorDelayed = ChooseColor(m_opts.ColorDelayed);
+			InitPageColors();
+		}
+		
+		private void btnColorMissed_Click(object sender, EventArgs e)
+		{
+			m_opts.ColorMissed = ChooseColor(m_opts.ColorMissed);
+			InitPageColors();
 		}
 	}
 }

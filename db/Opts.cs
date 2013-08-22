@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using AY.Log;
+using System.Drawing;
 
 namespace AY
 {
@@ -18,6 +19,7 @@ namespace AY
 			private int m_storeMainWindowSatate = -1;
 			private int m_mainWindowSatate = -1;
 			private String m_pathBackUp = String.Empty;
+			private String m_colors = String.Empty;
 			
 			public Opts()
 			{
@@ -43,6 +45,7 @@ namespace AY
 
 				m_language = data["language"].ToString();
 				m_pathBackUp = data["pathBackUp"].ToString();
+				m_colors = data["colors"].ToString();
 			}
 			
 			public String Language
@@ -141,6 +144,94 @@ namespace AY
 				}
 			}
 			
+			public Color ColorPresent
+			{
+				get
+				{
+					Color clr = Color.FromArgb(0, 255, 0);
+					
+					Trigger tClr = new Trigger(m_colors);
+					if(tClr.HasAttribute("ColorPresent"))
+					{
+						clr = tClr["ColorPresent"];
+					}
+					
+					return clr;
+				}
+				set
+				{
+					Trigger tClr = new Trigger(m_colors);
+					tClr["ColorPresent"] = value;
+					m_colors = tClr.ToString();
+				}
+			}
+
+			public Color ColorOvertime
+			{
+				get
+				{
+					Color clr = Color.FromArgb(255, 200, 50);
+
+					Trigger tClr = new Trigger(m_colors);
+					if (tClr.HasAttribute("ColorOvertime"))
+					{
+						clr = tClr["ColorOvertime"];
+					}
+
+					return clr;
+				}
+				set
+				{
+					Trigger tClr = new Trigger(m_colors);
+					tClr["ColorOvertime"] = value;
+					m_colors = tClr.ToString();
+				}
+			}
+
+			public Color ColorDelayed
+			{
+				get
+				{
+					Color clr = Color.FromArgb(255, 255, 0);
+
+					Trigger tClr = new Trigger(m_colors);
+					if (tClr.HasAttribute("ColorDelayed"))
+					{
+						clr = tClr["ColorDelayed"];
+					}
+
+					return clr;
+				}
+				set
+				{
+					Trigger tClr = new Trigger(m_colors);
+					tClr["ColorDelayed"] = value;
+					m_colors = tClr.ToString();
+				}
+			}
+
+			public Color ColorMissed
+			{
+				get
+				{
+					Color clr = Color.FromArgb(255, 50, 0);
+
+					Trigger tClr = new Trigger(m_colors);
+					if (tClr.HasAttribute("ColorMissed"))
+					{
+						clr = tClr["ColorMissed"];
+					}
+
+					return clr;
+				}
+				set
+				{
+					Trigger tClr = new Trigger(m_colors);
+					tClr["ColorMissed"] = value;
+					m_colors = tClr.ToString();
+				}
+			}
+			
 			public void StoreData()
 			{
 				Logger.Enter();
@@ -149,6 +240,7 @@ namespace AY
 				Dictionary<string, Object> fields = new Dictionary<string, Object>();
 				fields["language"] = m_language;
 				fields["pathBackUp"] = m_pathBackUp;
+				fields["colors"] = m_colors;
 				fields["minPassLen"] = m_minPassLen.ToString();
 				fields["calRowHeight"] = m_calRowHeight.ToString();
 				fields["showTrainer"] = m_showTrainer.ToString();

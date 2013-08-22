@@ -74,12 +74,12 @@
 			this.tabStatistics = new System.Windows.Forms.TabPage();
 			this.chart1 = new Chart.Chart();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.btmMissLesson = new System.Windows.Forms.Button();
 			this.btnBackUp = new System.Windows.Forms.Button();
 			this.btnTrainersShedule = new System.Windows.Forms.Button();
 			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
-			this.btmMissLesson = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tabManager.SuspendLayout();
@@ -404,6 +404,14 @@
 			resources.ApplyResources(this.panel1, "panel1");
 			this.panel1.Name = "panel1";
 			// 
+			// btmMissLesson
+			// 
+			this.btmMissLesson.Image = global::GAssistant.Properties.Resources._1367374751_edit_remove;
+			resources.ApplyResources(this.btmMissLesson, "btmMissLesson");
+			this.btmMissLesson.Name = "btmMissLesson";
+			this.btmMissLesson.UseVisualStyleBackColor = true;
+			this.btmMissLesson.Click += new System.EventHandler(this.btmMissLesson_Click);
+			// 
 			// btnBackUp
 			// 
 			this.btnBackUp.Image = global::GAssistant.Properties.Resources._1367375035_filesave;
@@ -442,13 +450,6 @@
 			this.btnAddClient.Name = "btnAddClient";
 			this.btnAddClient.UseVisualStyleBackColor = true;
 			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
-			// 
-			// btmMissLesson
-			// 
-			this.btmMissLesson.Image = global::GAssistant.Properties.Resources._1367374751_edit_remove;
-			resources.ApplyResources(this.btmMissLesson, "btmMissLesson");
-			this.btmMissLesson.Name = "btmMissLesson";
-			this.btmMissLesson.UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 

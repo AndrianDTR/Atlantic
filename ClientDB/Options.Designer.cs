@@ -32,7 +32,6 @@
 			this.btnClose = new System.Windows.Forms.Button();
 			this.tabControl = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
-			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.btnBackUpPath = new System.Windows.Forms.Button();
 			this.textPathBackUp = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
@@ -41,16 +40,26 @@
 			this.comboLang = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
+			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.numericCalRowHeight = new System.Windows.Forms.NumericUpDown();
 			this.checkShowClientCount = new System.Windows.Forms.CheckBox();
 			this.checkShowTrainer = new System.Windows.Forms.CheckBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
+			this.btnColorMissed = new System.Windows.Forms.Button();
+			this.btnColorDelayed = new System.Windows.Forms.Button();
+			this.btnColorOvertime = new System.Windows.Forms.Button();
+			this.btnColorPresent = new System.Windows.Forms.Button();
+			this.label8 = new System.Windows.Forms.Label();
+			this.label7 = new System.Windows.Forms.Label();
+			this.label6 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
 			this.tabControl.SuspendLayout();
 			this.tabPage1.SuspendLayout();
-			this.tabPage2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericMinPassLen)).BeginInit();
+			this.tabPage2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericCalRowHeight)).BeginInit();
+			this.tabPage3.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// btnOk
@@ -101,20 +110,6 @@
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "Global";
 			this.tabPage1.UseVisualStyleBackColor = true;
-			// 
-			// tabPage2
-			// 
-			this.tabPage2.Controls.Add(this.numericCalRowHeight);
-			this.tabPage2.Controls.Add(this.checkShowClientCount);
-			this.tabPage2.Controls.Add(this.checkShowTrainer);
-			this.tabPage2.Controls.Add(this.label3);
-			this.tabPage2.Location = new System.Drawing.Point(4, 22);
-			this.tabPage2.Name = "tabPage2";
-			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage2.Size = new System.Drawing.Size(353, 182);
-			this.tabPage2.TabIndex = 1;
-			this.tabPage2.Text = "Calendar";
-			this.tabPage2.UseVisualStyleBackColor = true;
 			// 
 			// btnBackUpPath
 			// 
@@ -200,6 +195,20 @@
 			this.label1.TabIndex = 29;
 			this.label1.Text = "Minimum password length";
 			// 
+			// tabPage2
+			// 
+			this.tabPage2.Controls.Add(this.numericCalRowHeight);
+			this.tabPage2.Controls.Add(this.checkShowClientCount);
+			this.tabPage2.Controls.Add(this.checkShowTrainer);
+			this.tabPage2.Controls.Add(this.label3);
+			this.tabPage2.Location = new System.Drawing.Point(4, 22);
+			this.tabPage2.Name = "tabPage2";
+			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPage2.Size = new System.Drawing.Size(353, 182);
+			this.tabPage2.TabIndex = 1;
+			this.tabPage2.Text = "Calendar";
+			this.tabPage2.UseVisualStyleBackColor = true;
+			// 
 			// numericCalRowHeight
 			// 
 			this.numericCalRowHeight.Location = new System.Drawing.Point(139, 8);
@@ -253,6 +262,14 @@
 			// 
 			// tabPage3
 			// 
+			this.tabPage3.Controls.Add(this.btnColorMissed);
+			this.tabPage3.Controls.Add(this.btnColorDelayed);
+			this.tabPage3.Controls.Add(this.btnColorOvertime);
+			this.tabPage3.Controls.Add(this.btnColorPresent);
+			this.tabPage3.Controls.Add(this.label8);
+			this.tabPage3.Controls.Add(this.label7);
+			this.tabPage3.Controls.Add(this.label6);
+			this.tabPage3.Controls.Add(this.label5);
 			this.tabPage3.Location = new System.Drawing.Point(4, 22);
 			this.tabPage3.Name = "tabPage3";
 			this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -260,6 +277,82 @@
 			this.tabPage3.TabIndex = 2;
 			this.tabPage3.Text = "Ticket colors";
 			this.tabPage3.UseVisualStyleBackColor = true;
+			// 
+			// btnColorMissed
+			// 
+			this.btnColorMissed.Location = new System.Drawing.Point(260, 87);
+			this.btnColorMissed.Name = "btnColorMissed";
+			this.btnColorMissed.Size = new System.Drawing.Size(75, 23);
+			this.btnColorMissed.TabIndex = 11;
+			this.btnColorMissed.Text = "....";
+			this.btnColorMissed.UseVisualStyleBackColor = true;
+			this.btnColorMissed.Click += new System.EventHandler(this.btnColorMissed_Click);
+			// 
+			// btnColorDelayed
+			// 
+			this.btnColorDelayed.Location = new System.Drawing.Point(260, 61);
+			this.btnColorDelayed.Name = "btnColorDelayed";
+			this.btnColorDelayed.Size = new System.Drawing.Size(75, 23);
+			this.btnColorDelayed.TabIndex = 10;
+			this.btnColorDelayed.Text = "...";
+			this.btnColorDelayed.UseVisualStyleBackColor = true;
+			this.btnColorDelayed.Click += new System.EventHandler(this.btnColorDelayed_Click);
+			// 
+			// btnColorOvertime
+			// 
+			this.btnColorOvertime.Location = new System.Drawing.Point(260, 35);
+			this.btnColorOvertime.Name = "btnColorOvertime";
+			this.btnColorOvertime.Size = new System.Drawing.Size(75, 23);
+			this.btnColorOvertime.TabIndex = 9;
+			this.btnColorOvertime.Text = "...";
+			this.btnColorOvertime.UseVisualStyleBackColor = true;
+			this.btnColorOvertime.Click += new System.EventHandler(this.btnColorOvertime_Click);
+			// 
+			// btnColorPresent
+			// 
+			this.btnColorPresent.Location = new System.Drawing.Point(260, 9);
+			this.btnColorPresent.Name = "btnColorPresent";
+			this.btnColorPresent.Size = new System.Drawing.Size(75, 23);
+			this.btnColorPresent.TabIndex = 8;
+			this.btnColorPresent.Text = "...";
+			this.btnColorPresent.UseVisualStyleBackColor = true;
+			this.btnColorPresent.Click += new System.EventHandler(this.btnColorPresent_Click);
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(6, 92);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(40, 13);
+			this.label8.TabIndex = 7;
+			this.label8.Text = "Missed";
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(6, 66);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(46, 13);
+			this.label7.TabIndex = 5;
+			this.label7.Text = "Delayed";
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(6, 40);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(49, 13);
+			this.label6.TabIndex = 3;
+			this.label6.Text = "Overtime";
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(6, 14);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(43, 13);
+			this.label5.TabIndex = 1;
+			this.label5.Text = "Present";
 			// 
 			// Options
 			// 
@@ -282,10 +375,12 @@
 			this.tabControl.ResumeLayout(false);
 			this.tabPage1.ResumeLayout(false);
 			this.tabPage1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numericMinPassLen)).EndInit();
 			this.tabPage2.ResumeLayout(false);
 			this.tabPage2.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericMinPassLen)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericCalRowHeight)).EndInit();
+			this.tabPage3.ResumeLayout(false);
+			this.tabPage3.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -310,6 +405,14 @@
 		private System.Windows.Forms.CheckBox checkShowTrainer;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.TabPage tabPage3;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Button btnColorDelayed;
+		private System.Windows.Forms.Button btnColorOvertime;
+		private System.Windows.Forms.Button btnColorPresent;
+		private System.Windows.Forms.Button btnColorMissed;
 
 	}
 }
