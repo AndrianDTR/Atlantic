@@ -35,7 +35,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart", "Chart\Chart.csproj", "{D0149647-06E2-4360-B177-A66952E51CE4}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GAssistInstall", "GAssistInstall\GAssistInstall.vdproj", "{3548C6C9-6106-4A09-B662-53664B42DE8D}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GAssistInstall", "GAssistInstall\GAssistInstall.vdproj", "{02E0F591-C5A3-4EA0-9A3D-9163B339093D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,8 +75,10 @@ Global
 		{D0149647-06E2-4360-B177-A66952E51CE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0149647-06E2-4360-B177-A66952E51CE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0149647-06E2-4360-B177-A66952E51CE4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3548C6C9-6106-4A09-B662-53664B42DE8D}.Debug|Any CPU.ActiveCfg = Debug
-		{3548C6C9-6106-4A09-B662-53664B42DE8D}.Release|Any CPU.ActiveCfg = Release
+		{02E0F591-C5A3-4EA0-9A3D-9163B339093D}.Debug|Any CPU.ActiveCfg = Debug
+		{02E0F591-C5A3-4EA0-9A3D-9163B339093D}.Debug|Any CPU.Build.0 = Debug
+		{02E0F591-C5A3-4EA0-9A3D-9163B339093D}.Release|Any CPU.ActiveCfg = Release
+		{02E0F591-C5A3-4EA0-9A3D-9163B339093D}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

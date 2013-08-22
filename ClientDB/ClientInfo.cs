@@ -407,6 +407,13 @@ namespace GAssistant
 					btnLeave_Click(sender, new EventArgs());
 					break;
 				
+				case Keys.F2:
+					btnPayment_Click(sender, new EventArgs());
+					break;
+				
+				case Keys.F3:
+					btnPaymentHistory_Click(sender, new EventArgs());
+					break;
 			}
 		}
 	}
