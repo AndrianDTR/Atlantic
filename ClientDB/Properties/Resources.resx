@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="1367374740_edit_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1367374740_edit_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="1367374751_edit_remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1367374751_edit_remove.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -130,9 +133,6 @@
   <data name="1367459833_lock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1367459833_lock.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="1367375242_schedule" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1367375242_schedule.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="1367375035_filesave" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1367375035_filesave.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -142,7 +142,10 @@
   <data name="1367375158_coins" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1367375158_coins.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="1367374740_edit_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\1367374740_edit_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="1367375242_schedule" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1367375242_schedule.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="appointment_missed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\appointment_missed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

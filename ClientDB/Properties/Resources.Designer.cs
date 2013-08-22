@@ -122,5 +122,12 @@ namespace GAssistant.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap appointment_missed {
+            get {
+                object obj = ResourceManager.GetObject("appointment_missed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

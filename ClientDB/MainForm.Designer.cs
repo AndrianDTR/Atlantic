@@ -406,7 +406,7 @@
 			// 
 			// btmMissLesson
 			// 
-			this.btmMissLesson.Image = global::GAssistant.Properties.Resources._1367374751_edit_remove;
+			this.btmMissLesson.Image = global::GAssistant.Properties.Resources.appointment_missed;
 			resources.ApplyResources(this.btmMissLesson, "btmMissLesson");
 			this.btmMissLesson.Name = "btmMissLesson";
 			this.btmMissLesson.UseVisualStyleBackColor = true;
