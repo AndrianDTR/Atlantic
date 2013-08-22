@@ -271,13 +271,11 @@ namespace AY
 						, where
 						, new List<string>{"sum","date"});
 
-					if (data == null)
+					if (data != null)
 					{
-						throw new Exception("Error! No payments has been found.");
+						res[0] = data["sum"].ToString();
+						res[1] = data["date"].ToString();
 					}
-					
-					res[0] = data["sum"].ToString();
-					res[1] = data["date"].ToString();
 
 					return res;
 				}

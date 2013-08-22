@@ -14,7 +14,6 @@ namespace GAssistant
 		private const int m_minBarcodeLen = 13;
 		
 		private bool m_bAutoclose = true;
-		private Int64 m_value = 0;
 		
 		public Prompt()
 		{

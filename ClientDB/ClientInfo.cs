@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using AY.db;
 using AY.Log;
 using AY.Utils;
-using AY.Trigger;
 
 namespace GAssistant
 {
