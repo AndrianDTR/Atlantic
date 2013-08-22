@@ -95,7 +95,7 @@ namespace GAssistant
 				return;
 				
 			Int64 clientId = (Int64)gridClients.SelectedRows[0].Tag;
-			if (!UserCollection.RemoveById(clientId))
+			if (!ClientCollection.RemoveById(clientId))
 			{
 				UIMessages.Error("Client could not been removed.");
 				return;

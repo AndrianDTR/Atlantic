@@ -15,6 +15,8 @@ namespace GAssistant
 		
 		private Int64 m_clienId = 0;
 		
+		private Session session = Session.Instance;
+				
 		public ClientInfo(Int64 id)
 		{
 			InitializeComponent();
@@ -81,6 +83,17 @@ namespace GAssistant
 		
 		private void UpdateTimesLeft(Client client)
 		{
+			if (UserRole.IsSet(session.UserRole.Clients, UserRights.Write))
+			{
+				btnEnter.Enabled = true;
+				btnChangeCode.Enabled = true;
+			}
+
+			if (UserRole.IsSet(session.UserRole.Clients, UserRights.Create))
+			{
+				btnOk.Enabled = true;
+			}
+
 			textTimesLeft.Text = client.TimesLeft.ToString();
 
 			bool enabled = (client.TimesLeft > 0);
@@ -110,7 +123,6 @@ namespace GAssistant
 		
 		private void CheckPermissions()
 		{
-			Session session = Session.Instance;
 			if (UserRole.IsSet(session.UserRole.Payments, UserRights.Read))
 			{
 				btnPaymentHistory.Enabled = true;
@@ -119,17 +131,6 @@ namespace GAssistant
 			if (UserRole.IsSet(session.UserRole.Payments, UserRights.Create))
 			{
 				btnPaymentAdd.Enabled = true;
-			}
-
-			if (UserRole.IsSet(session.UserRole.Clients, UserRights.Write))
-			{
-				btnEnter.Enabled = true;
-				btnChangeCode.Enabled = true;
-			}
-			
-			if (UserRole.IsSet(session.UserRole.Clients, UserRights.Create))
-			{
-				btnOk.Enabled = true;
 			}
 		}
 		
@@ -226,7 +227,14 @@ namespace GAssistant
 			Prompt dlg = new Prompt();
 			while (DialogResult.OK == dlg.ShowDialog())
 			{
-				if(Client.CodeExists(dlg.Value))
+				Int64 id = Session.CheckBarCode(dlg.Value);
+				if (0 == id)
+				{
+					dlg.Clear();
+					continue;
+				}
+				
+				if(Client.CodeExists(id))
 				{
 					UIMessages.Error("This card already attached. Please use another one.");
 					dlg.Clear();
@@ -329,11 +337,13 @@ namespace GAssistant
 				return;
 			
 			AddPayment addPaymDlg = new AddPayment(m_clienId);
-			addPaymDlg.ShowDialog();
+			if(DialogResult.Cancel == addPaymDlg.ShowDialog())
+				return;
 			
 			Client client = new Client(m_clienId);
-			UpdateTimesLeft(client);
+
 			UpdateLastPaymentInfo(client);
+			UpdateTimesLeft(client);
 		}
 		
 		private void btnEnter_CheckedChanged(object sender, EventArgs e)
@@ -380,6 +390,22 @@ namespace GAssistant
 				
 			PaymentsHistory hist = new PaymentsHistory(m_clienId);
 			hist.ShowDialog();
+		}
+
+		private void OnKeyUp(object sender, KeyEventArgs e)
+		{
+			switch (e.KeyCode)
+			{
+				case Keys.F5:
+					btnEnter.Checked = !btnEnter.Checked;
+					btnEnter_CheckedChanged(sender, new EventArgs());
+					break;
+					
+				case Keys.F6:
+					btnLeave_Click(sender, new EventArgs());
+					break;
+				
+			}
 		}
 	}
 }

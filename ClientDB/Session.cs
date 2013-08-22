@@ -67,6 +67,11 @@ namespace GAssistant
 					throw new InvalidExpressionException();
 
 				res = Int64.Parse(code);
+				
+				if(0 == res)
+				{
+					UIMessages.Error("Client code should not be 'NULL'.");
+				}
 			}
 			catch
 			{
@@ -76,7 +81,7 @@ namespace GAssistant
 						, MinBarcodeLen));
 				res = 0;
 			}
-
+			
 			return res;
 		}
 	}

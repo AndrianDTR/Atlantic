@@ -132,7 +132,9 @@ namespace GAssistant
 			foreach (Client client in new ClientCollection(where))
 			{
 				TimeSpan clientTime = client.ScheduleTime.AddHours(client.DecHours).TimeOfDay;
-				if (client.TimesLeft > 0 && today.TimeOfDay <= clientTime)
+				if (client.OpenTicket.Date != today.Date 
+					&& client.TimesLeft > 0 
+					&& today.TimeOfDay <= clientTime)
 				{
 					ListViewItem lvi = listClients.Items.Add(client.Name);
 
@@ -152,7 +154,9 @@ namespace GAssistant
 			foreach (Client client in new ClientCollection(where))
 			{
 				TimeSpan clientTime = client.ScheduleTime.AddHours(client.DecHours).TimeOfDay;
-				if (client.TimesLeft > 0 && today.TimeOfDay > clientTime)
+				if (client.OpenTicket.Date != today.Date 
+					&& client.TimesLeft > 0 
+					&& today.TimeOfDay > clientTime)
 				{
 					ListViewItem lvi = listClients.Items.Add(client.Name);
 
@@ -174,6 +178,11 @@ namespace GAssistant
 			while(DialogResult.OK == dlg.ShowDialog())
 			{
 				Int64 id = Session.CheckBarCode(dlg.Value);
+				if(0 == id)
+				{
+					dlg.Clear();
+					continue;	
+				}
 				
 				if (Client.CodeExists(id))
 				{
