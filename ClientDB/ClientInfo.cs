@@ -31,7 +31,7 @@ namespace GAssistant
 			
 			Client client = new Client(m_clienId);
 			
-			textCode.Text = id.ToString().PadLeft(13, '0');
+			textCode.Text = id.ToString().PadLeft(Session.MinBarcodeLen, '0');
 			textName.Text = client.Name;
 			textPhone.Text = client.Phone;
 			dateSchedTime.Text = client.ScheduleTime.ToLongTimeString();
@@ -147,9 +147,9 @@ namespace GAssistant
 		
 		public static String GenerateEan13Code(String val)
 		{
-			if(val.Length < 13)
+			if(val.Length < Session.MinBarcodeLen)
 			{
-				val = val.PadLeft(13, '0');
+				val = val.PadLeft(Session.MinBarcodeLen, '0');
 			}
 			
 			String grp1 = GetGroupValue(val.Substring(0, 1), "0123456789");
@@ -220,24 +220,6 @@ namespace GAssistant
 			return res;			
 		}
 		
-		private Int64 GetClientId(String val)
-		{
-			Int64 id = 0;
-			try
-			{
-				if (val.Length > 13)
-					throw new InvalidExpressionException();
-
-				id = Int64.Parse(val);
-			}
-			catch
-			{
-				UIMessages.Error("Invalid card number has been specified. Please use only digits and no more 13 characters.");
-				id = 0;
-			}
-			return id;
-		}
-		
 		private Boolean ChangeClientCode()
 		{
 			Boolean res = false;
@@ -252,12 +234,6 @@ namespace GAssistant
 					continue;
 				}
 
-				if (0 == GetClientId(dlg.Value))
-				{
-					dlg.Clear();
-					continue;
-				}
-				
 				textCode.Text = dlg.Value;
 				res = true;
 				break;
@@ -316,7 +292,7 @@ namespace GAssistant
 			
 			if(ValidateForm())
 			{
-				Int64 id = GetClientId(textCode.Text);
+				Int64 id = Session.CheckBarCode(textCode.Text);
 				
 				if(m_clienId == 0)
 				{

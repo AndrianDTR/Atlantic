@@ -10,6 +10,14 @@ namespace GAssistant
 {
     public partial class MainForm : Form
     {
+		public enum ClientTicketStus
+		{
+			Present = 0,
+			Overtime,
+			Delayed,
+			Missed,
+		}
+		
 		private Login m_login = new Login();
 		private ClientCollection m_collection = new ClientCollection();
 		private Opts m_opt = new Opts();
@@ -93,64 +101,67 @@ namespace GAssistant
 			DateTime today = DateTime.Now;
 			
 			listClients.Items.Clear();
-			// Present (green)  => opened tickets
-			// Delayed (yellow) => schedTime < now < schedTime + ruleDecTime
-			// Missed  (red)    => now > schedTime + ruleDecTime
-
+			
 			foreach (Client client in new ClientCollection("date(openTicket) = date('now', 'localtime')"))
 			{
 				ListViewItem lvi = listClients.Items.Add(client.Name);
-					
-				lvi.SubItems.Add("Present");
+
+				lvi.BackColor = Color.FromArgb(50, 255, 50);
+				String status = ClientTicketStus.Present.ToString();
+				
+				TimeSpan clientTime = client.OpenTicket.AddHours(client.DecHours).TimeOfDay;
+				if (today.TimeOfDay > clientTime)
+				{
+					status = ClientTicketStus.Overtime.ToString();
+					lvi.BackColor = Color.FromArgb(255, 200, 100);
+				}
+
+				lvi.SubItems.Add(status);
 				lvi.SubItems.Add(client.OpenTicket.ToString("HH:mm"));
 				lvi.SubItems.Add("");
 				lvi.SubItems.Add(client.TimesLeft.ToString());
-				lvi.BackColor = Color.FromArgb(50, 255, 50);
+
 				
 				lvi.Tag = client.Id;
 			}
 
-			//where substr(scheduleDays, <nWeekDay>, 1) = 'X' and strftime('%H:%M',scheduleTime) = strftime('%H:%M','now')
 			DayOfWeek ws = CultureInfoUtils.GetWeekStart();
 			String where = String.Format("substr(scheduleDays, {0}, 1) = 'X' and strftime('%H:%M',scheduleTime) <= strftime('%H:%M','now','localtime')"
 				, (int)today.DayOfWeek + (int)ws);
 				
 			foreach (Client client in new ClientCollection(where))
 			{
-				TimeSpan t1 = DateTime.Now.TimeOfDay;
-				TimeSpan t2 = client.ScheduleTime.AddHours(client.DecHours).TimeOfDay;
-				if (client.TimesLeft > 0 && t1 <= t2)
+				TimeSpan clientTime = client.ScheduleTime.AddHours(client.DecHours).TimeOfDay;
+				if (client.TimesLeft > 0 && today.TimeOfDay <= clientTime)
 				{
 					ListViewItem lvi = listClients.Items.Add(client.Name);
 
-					lvi.SubItems.Add("Delayed");
+					lvi.BackColor = Color.FromArgb(255, 255, 50);
+					lvi.SubItems.Add(ClientTicketStus.Delayed.ToString());
 					lvi.SubItems.Add(client.ScheduleTime.ToString("HH:mm"));
 					lvi.SubItems.Add(client.ScheduleTime.AddHours(client.DecHours).ToString("HH:mm"));
 					lvi.SubItems.Add(client.TimesLeft.ToString());
-					lvi.BackColor = Color.FromArgb(255, 255, 50);
-
+					
 					lvi.Tag = client.Id;
 				}
 			}
 
-			//where substr(scheduleDays, <nWeekDay>, 1) = 'X' and strftime('%H:%M',scheduleTime) = strftime('%H:%M','now')
 			where = String.Format("substr(scheduleDays, {0}, 1) = 'X' and strftime('%H:%M',scheduleTime) <= strftime('%H:%M','now','localtime')"
 				, (int)today.DayOfWeek + (int)ws);
 
 			foreach (Client client in new ClientCollection(where))
 			{
-				TimeSpan t1 = DateTime.Now.TimeOfDay;
-				TimeSpan t2 = client.ScheduleTime.AddHours(client.DecHours).TimeOfDay;
-				if (client.TimesLeft > 0 && t1 > t2)
+				TimeSpan clientTime = client.ScheduleTime.AddHours(client.DecHours).TimeOfDay;
+				if (client.TimesLeft > 0 && today.TimeOfDay > clientTime)
 				{
 					ListViewItem lvi = listClients.Items.Add(client.Name);
 
-					lvi.SubItems.Add("Delayed");
+					lvi.BackColor = Color.FromArgb(255, 50, 50);
+					lvi.SubItems.Add(ClientTicketStus.Missed.ToString());
 					lvi.SubItems.Add(client.ScheduleTime.ToString("HH:mm"));
 					lvi.SubItems.Add(client.ScheduleTime.AddHours(client.DecHours).ToString("HH:mm"));
 					lvi.SubItems.Add(client.TimesLeft.ToString());
-					lvi.BackColor = Color.FromArgb(255, 50, 50);
-
+					
 					lvi.Tag = client.Id;
 				}
 			}
@@ -162,16 +173,7 @@ namespace GAssistant
 			dlg.Text = "Search client by code";
 			while(DialogResult.OK == dlg.ShowDialog())
 			{
-				Int64 id = 0;
-				if(dlg.Value.Length == 0)
-					continue;
-				
-				if(!Int64.TryParse(dlg.Value, out id))
-				{
-					UIMessages.Error("Invalid card number has been specified. Please use only digits and input no more 13 characters.");
-					dlg.Clear();
-					continue;
-				}
+				Int64 id = Session.CheckBarCode(dlg.Value);
 				
 				if (Client.CodeExists(id))
 				{

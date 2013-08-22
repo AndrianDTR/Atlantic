@@ -11,7 +11,10 @@ namespace GAssistant
 {
 	public partial class Prompt : Form
 	{
+		private const int m_minBarcodeLen = 13;
+		
 		private bool m_bAutoclose = true;
+		private Int64 m_value = 0;
 		
 		public Prompt()
 		{
@@ -19,7 +22,7 @@ namespace GAssistant
 			
 			textBox.Focus();
 		}
-		
+
 		public String Value
 		{
 			get
@@ -43,7 +46,7 @@ namespace GAssistant
 		{
 			textBox.Text = String.Empty;
 		}
-		
+
 		private void btnOk_Click(object sender, EventArgs e)
 		{
 			if(m_bAutoclose)
