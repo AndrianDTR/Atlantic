@@ -21,6 +21,8 @@ namespace GAssistant
 			checkShowClientCount.Checked = m_opts.ShowClientCount;
 			checkSaveMainWindowState.Checked = m_opts.StoreMainWindowState;
 			textPathBackUp.Text = m_opts.PathBackUp;
+			dateStart.Value = m_opts.StartTime;
+			dateEnd.Value = m_opts.EndTime;
 			
 			comboLang.Items.Add("English");
 			comboLang.SelectedIndex = 0;
@@ -37,6 +39,8 @@ namespace GAssistant
 			m_opts.ShowClientCount = checkShowClientCount.Checked;
 			m_opts.StoreMainWindowState = checkSaveMainWindowState.Checked;
 			m_opts.PathBackUp = textPathBackUp.Text;
+			m_opts.StartTime = dateStart.Value;
+			m_opts.EndTime = dateEnd.Value;
 			
 			//opts.Language = comboLang.SelectedItem;
 			

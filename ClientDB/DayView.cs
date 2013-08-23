@@ -19,7 +19,7 @@ namespace GAssistant
 			Reinit();
 		}
 		
-		private void Reinit()
+		public void Reinit()
 		{
 			m_days = CultureInfoUtils.RShift<int>(
 				  new int[7] { 0, 1, 2, 3, 4, 5, 6 }

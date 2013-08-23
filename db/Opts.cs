@@ -16,10 +16,12 @@ namespace AY
 			private int m_calRowHeight = -1;
 			private int m_showTrainer = -1;
 			private int m_showClientCount = -1;
-			private int m_storeMainWindowSatate = -1;
-			private int m_mainWindowSatate = -1;
+			private int m_storeMainWindowState = -1;
+			private int m_mainWindowState = -1;
 			private String m_pathBackUp = String.Empty;
 			private String m_colors = String.Empty;
+			private DateTime m_startTime = DateTime.Now;
+			private DateTime m_endTime = DateTime.Now;
 			
 			public Opts()
 			{
@@ -40,12 +42,15 @@ namespace AY
 				m_calRowHeight = int.Parse(data["calRowHeight"].ToString());
 				m_showTrainer = int.Parse(data["showTrainer"].ToString());
 				m_showClientCount = int.Parse(data["showClientCount"].ToString());
-				m_storeMainWindowSatate = int.Parse(data["storeMainWindowState"].ToString());
-				m_mainWindowSatate = int.Parse(data["mainWindowState"].ToString());
+				m_storeMainWindowState = int.Parse(data["storeMainWindowState"].ToString());
+				m_mainWindowState = int.Parse(data["mainWindowState"].ToString());
 
 				m_language = data["language"].ToString();
 				m_pathBackUp = data["pathBackUp"].ToString();
 				m_colors = data["colors"].ToString();
+				
+				m_startTime = DateTime.Parse(data["startTime"].ToString());
+				m_endTime = DateTime.Parse(data["endTime"].ToString());
 			}
 			
 			public String Language
@@ -124,11 +129,11 @@ namespace AY
 			{
 				get
 				{
-					return (m_storeMainWindowSatate == 1);
+					return (m_storeMainWindowState == 1);
 				}
 				set
 				{
-					m_storeMainWindowSatate = value ? 1 : 0;
+					m_storeMainWindowState = value ? 1 : 0;
 				}
 			}
 
@@ -136,11 +141,11 @@ namespace AY
 			{
 				get
 				{
-					return (FormWindowState)m_mainWindowSatate;
+					return (FormWindowState)m_mainWindowState;
 				}
 				set
 				{
-					m_mainWindowSatate = (int)value;
+					m_mainWindowState = (int)value;
 				}
 			}
 			
@@ -231,6 +236,30 @@ namespace AY
 					m_colors = tClr.ToString();
 				}
 			}
+
+			public DateTime StartTime
+			{
+				get
+				{
+					return m_startTime;
+				}
+				set
+				{
+					m_startTime = value;
+				}
+			}
+
+			public DateTime EndTime
+			{
+				get
+				{
+					return m_endTime;
+				}
+				set
+				{
+					m_endTime = value;
+				}
+			}
 			
 			public void StoreData()
 			{
@@ -241,12 +270,14 @@ namespace AY
 				fields["language"] = m_language;
 				fields["pathBackUp"] = m_pathBackUp;
 				fields["colors"] = m_colors;
-				fields["minPassLen"] = m_minPassLen.ToString();
-				fields["calRowHeight"] = m_calRowHeight.ToString();
-				fields["showTrainer"] = m_showTrainer.ToString();
-				fields["showClientCount"] = m_showClientCount.ToString();
-				fields["storeMainWindowState"] = m_storeMainWindowSatate.ToString();
-				fields["mainWindowState"] = m_mainWindowSatate.ToString();
+				fields["minPassLen"] = m_minPassLen;
+				fields["calRowHeight"] = m_calRowHeight;
+				fields["showTrainer"] = m_showTrainer;
+				fields["showClientCount"] = m_showClientCount;
+				fields["storeMainWindowState"] = m_storeMainWindowState;
+				fields["mainWindowState"] = m_mainWindowState;
+				fields["startTime"] = m_startTime;
+				fields["endTime"] = m_endTime;
 				
 				if (!ad.Update(DbTable.Settings, fields, String.Format("id=1")))
 				{

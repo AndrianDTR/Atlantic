@@ -250,7 +250,7 @@ namespace GAssistant
 			ManageUserRoles pm = new ManageUserRoles();
 			pm.ShowDialog(this);
 		}
-		
+
 		private void manageTrainersToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			ManageTrainers mt = new ManageTrainers();
@@ -385,6 +385,7 @@ namespace GAssistant
 		private void UpdateInfo()
 		{
 			GetOpenedTickets();
+			m_calendar.Reinit();
 		}
 
 		private void btmMissLesson_Click(object sender, EventArgs e)
@@ -402,6 +403,15 @@ namespace GAssistant
 					client.LastLeave = client.LastEnter.AddHours(client.DecHours);
 					client.ProcessEnter();
 				}
+			}
+		}
+
+		private void btnTrainersShedule_Click(object sender, EventArgs e)
+		{
+			TrainerScheduleDlg dlg = new TrainerScheduleDlg();
+			if(DialogResult.OK == dlg.ShowDialog())
+			{
+				UpdateInfo();
 			}
 		}
     }

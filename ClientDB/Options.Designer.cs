@@ -54,6 +54,10 @@
 			this.label7 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
+			this.label9 = new System.Windows.Forms.Label();
+			this.dateStart = new System.Windows.Forms.DateTimePicker();
+			this.dateEnd = new System.Windows.Forms.DateTimePicker();
+			this.label11 = new System.Windows.Forms.Label();
 			this.tabControl.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericMinPassLen)).BeginInit();
@@ -91,10 +95,14 @@
 			this.tabControl.Name = "tabControl";
 			this.tabControl.SelectedIndex = 0;
 			this.tabControl.Size = new System.Drawing.Size(361, 208);
-			this.tabControl.TabIndex = 2;
+			this.tabControl.TabIndex = 0;
 			// 
 			// tabPage1
 			// 
+			this.tabPage1.Controls.Add(this.label11);
+			this.tabPage1.Controls.Add(this.dateEnd);
+			this.tabPage1.Controls.Add(this.dateStart);
+			this.tabPage1.Controls.Add(this.label9);
 			this.tabPage1.Controls.Add(this.btnBackUpPath);
 			this.tabPage1.Controls.Add(this.textPathBackUp);
 			this.tabPage1.Controls.Add(this.label4);
@@ -116,7 +124,7 @@
 			this.btnBackUpPath.Location = new System.Drawing.Point(317, 66);
 			this.btnBackUpPath.Name = "btnBackUpPath";
 			this.btnBackUpPath.Size = new System.Drawing.Size(30, 20);
-			this.btnBackUpPath.TabIndex = 37;
+			this.btnBackUpPath.TabIndex = 3;
 			this.btnBackUpPath.Text = "...";
 			this.btnBackUpPath.UseVisualStyleBackColor = true;
 			// 
@@ -125,7 +133,7 @@
 			this.textPathBackUp.Location = new System.Drawing.Point(152, 66);
 			this.textPathBackUp.Name = "textPathBackUp";
 			this.textPathBackUp.Size = new System.Drawing.Size(159, 20);
-			this.textPathBackUp.TabIndex = 36;
+			this.textPathBackUp.TabIndex = 2;
 			// 
 			// label4
 			// 
@@ -142,7 +150,7 @@
 			this.checkSaveMainWindowState.Location = new System.Drawing.Point(6, 99);
 			this.checkSaveMainWindowState.Name = "checkSaveMainWindowState";
 			this.checkSaveMainWindowState.Size = new System.Drawing.Size(141, 17);
-			this.checkSaveMainWindowState.TabIndex = 34;
+			this.checkSaveMainWindowState.TabIndex = 4;
 			this.checkSaveMainWindowState.Text = "Save main window state";
 			this.checkSaveMainWindowState.UseVisualStyleBackColor = true;
 			// 
@@ -161,7 +169,7 @@
             0});
 			this.numericMinPassLen.Name = "numericMinPassLen";
 			this.numericMinPassLen.Size = new System.Drawing.Size(59, 20);
-			this.numericMinPassLen.TabIndex = 33;
+			this.numericMinPassLen.TabIndex = 0;
 			this.numericMinPassLen.Value = new decimal(new int[] {
             8,
             0,
@@ -175,7 +183,7 @@
 			this.comboLang.Location = new System.Drawing.Point(152, 36);
 			this.comboLang.Name = "comboLang";
 			this.comboLang.Size = new System.Drawing.Size(195, 21);
-			this.comboLang.TabIndex = 31;
+			this.comboLang.TabIndex = 1;
 			// 
 			// label2
 			// 
@@ -224,7 +232,7 @@
             0});
 			this.numericCalRowHeight.Name = "numericCalRowHeight";
 			this.numericCalRowHeight.Size = new System.Drawing.Size(59, 20);
-			this.numericCalRowHeight.TabIndex = 18;
+			this.numericCalRowHeight.TabIndex = 0;
 			this.numericCalRowHeight.Value = new decimal(new int[] {
             80,
             0,
@@ -237,7 +245,7 @@
 			this.checkShowClientCount.Location = new System.Drawing.Point(9, 57);
 			this.checkShowClientCount.Name = "checkShowClientCount";
 			this.checkShowClientCount.Size = new System.Drawing.Size(111, 17);
-			this.checkShowClientCount.TabIndex = 17;
+			this.checkShowClientCount.TabIndex = 2;
 			this.checkShowClientCount.Text = "Show client count";
 			this.checkShowClientCount.UseVisualStyleBackColor = true;
 			// 
@@ -247,7 +255,7 @@
 			this.checkShowTrainer.Location = new System.Drawing.Point(9, 34);
 			this.checkShowTrainer.Name = "checkShowTrainer";
 			this.checkShowTrainer.Size = new System.Drawing.Size(189, 17);
-			this.checkShowTrainer.TabIndex = 16;
+			this.checkShowTrainer.TabIndex = 1;
 			this.checkShowTrainer.Text = "Show tariner name in calendar day";
 			this.checkShowTrainer.UseVisualStyleBackColor = true;
 			// 
@@ -283,7 +291,7 @@
 			this.btnColorMissed.Location = new System.Drawing.Point(260, 87);
 			this.btnColorMissed.Name = "btnColorMissed";
 			this.btnColorMissed.Size = new System.Drawing.Size(75, 23);
-			this.btnColorMissed.TabIndex = 11;
+			this.btnColorMissed.TabIndex = 3;
 			this.btnColorMissed.Text = "....";
 			this.btnColorMissed.UseVisualStyleBackColor = true;
 			this.btnColorMissed.Click += new System.EventHandler(this.btnColorMissed_Click);
@@ -293,7 +301,7 @@
 			this.btnColorDelayed.Location = new System.Drawing.Point(260, 61);
 			this.btnColorDelayed.Name = "btnColorDelayed";
 			this.btnColorDelayed.Size = new System.Drawing.Size(75, 23);
-			this.btnColorDelayed.TabIndex = 10;
+			this.btnColorDelayed.TabIndex = 2;
 			this.btnColorDelayed.Text = "...";
 			this.btnColorDelayed.UseVisualStyleBackColor = true;
 			this.btnColorDelayed.Click += new System.EventHandler(this.btnColorDelayed_Click);
@@ -303,7 +311,7 @@
 			this.btnColorOvertime.Location = new System.Drawing.Point(260, 35);
 			this.btnColorOvertime.Name = "btnColorOvertime";
 			this.btnColorOvertime.Size = new System.Drawing.Size(75, 23);
-			this.btnColorOvertime.TabIndex = 9;
+			this.btnColorOvertime.TabIndex = 1;
 			this.btnColorOvertime.Text = "...";
 			this.btnColorOvertime.UseVisualStyleBackColor = true;
 			this.btnColorOvertime.Click += new System.EventHandler(this.btnColorOvertime_Click);
@@ -313,7 +321,7 @@
 			this.btnColorPresent.Location = new System.Drawing.Point(260, 9);
 			this.btnColorPresent.Name = "btnColorPresent";
 			this.btnColorPresent.Size = new System.Drawing.Size(75, 23);
-			this.btnColorPresent.TabIndex = 8;
+			this.btnColorPresent.TabIndex = 0;
 			this.btnColorPresent.Text = "...";
 			this.btnColorPresent.UseVisualStyleBackColor = true;
 			this.btnColorPresent.Click += new System.EventHandler(this.btnColorPresent_Click);
@@ -353,6 +361,44 @@
 			this.label5.Size = new System.Drawing.Size(43, 13);
 			this.label5.TabIndex = 1;
 			this.label5.Text = "Present";
+			// 
+			// label9
+			// 
+			this.label9.AutoSize = true;
+			this.label9.Location = new System.Drawing.Point(6, 133);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(76, 13);
+			this.label9.TabIndex = 38;
+			this.label9.Text = "Working hours";
+			// 
+			// dateStart
+			// 
+			this.dateStart.CustomFormat = "HH:mm";
+			this.dateStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.dateStart.Location = new System.Drawing.Point(152, 129);
+			this.dateStart.Name = "dateStart";
+			this.dateStart.ShowUpDown = true;
+			this.dateStart.Size = new System.Drawing.Size(61, 20);
+			this.dateStart.TabIndex = 5;
+			// 
+			// dateEnd
+			// 
+			this.dateEnd.CustomFormat = "HH:mm";
+			this.dateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.dateEnd.Location = new System.Drawing.Point(235, 129);
+			this.dateEnd.Name = "dateEnd";
+			this.dateEnd.ShowUpDown = true;
+			this.dateEnd.Size = new System.Drawing.Size(61, 20);
+			this.dateEnd.TabIndex = 6;
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Location = new System.Drawing.Point(219, 133);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(10, 13);
+			this.label11.TabIndex = 8;
+			this.label11.Text = "-";
 			// 
 			// Options
 			// 
@@ -413,6 +459,10 @@
 		private System.Windows.Forms.Button btnColorOvertime;
 		private System.Windows.Forms.Button btnColorPresent;
 		private System.Windows.Forms.Button btnColorMissed;
+		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.DateTimePicker dateStart;
+		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.DateTimePicker dateEnd;
 
 	}
 }

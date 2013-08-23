@@ -90,7 +90,7 @@ namespace AY
 					case DbTable.Settings:
 						return new String[]{"id", "minPassLen", "language", "calRowHeight", "showTrainer"
 							, "showClientCount", "storeMainWindowState", "mainWindowState", "pathBackUp"
-							, "colors"};
+							, "colors", "startTime", "endTime"};
 
 					case DbTable.UserPrivileges:
 						return new String[]{"id", "name", "clients", "schedule", "trainers"
@@ -705,6 +705,8 @@ namespace AY
 					, mainWindowState Integer NOT NULL Default(0)
 					, pathBackUp VarChar NOT NULL Default('BackUp')
 					, colors Text DEFAULT('')
+					, startTime DateTime DEFAULT(datetime('now', 'localtime'))
+					, endTime DateTime DEFAULT(datetime('now', 'localtime'))
 				);
 				INSERT INTO settings(minPassLen) VALUES(8)";
 				

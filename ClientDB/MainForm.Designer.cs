@@ -46,13 +46,15 @@
 			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
 			this.manageClientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.trainersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.trainersScheduleToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.manageTrainersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
 			this.usersAndPasswordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.userRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-			this.manageTrainersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.manageScheduleRulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,6 +98,7 @@
             this.searchToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.clientToolStripMenuItem,
+            this.trainersToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.helpToolStripMenuItem});
 			resources.ApplyResources(this.menuStrip1, "menuStrip1");
@@ -204,6 +207,26 @@
 			resources.ApplyResources(this.manageClientsToolStripMenuItem, "manageClientsToolStripMenuItem");
 			this.manageClientsToolStripMenuItem.Click += new System.EventHandler(this.manageClientsToolStripMenuItem_Click);
 			// 
+			// trainersToolStripMenuItem
+			// 
+			this.trainersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.trainersScheduleToolStripMenuItem1,
+            this.manageTrainersToolStripMenuItem});
+			this.trainersToolStripMenuItem.Name = "trainersToolStripMenuItem";
+			resources.ApplyResources(this.trainersToolStripMenuItem, "trainersToolStripMenuItem");
+			// 
+			// trainersScheduleToolStripMenuItem1
+			// 
+			this.trainersScheduleToolStripMenuItem1.Name = "trainersScheduleToolStripMenuItem1";
+			resources.ApplyResources(this.trainersScheduleToolStripMenuItem1, "trainersScheduleToolStripMenuItem1");
+			this.trainersScheduleToolStripMenuItem1.Click += new System.EventHandler(this.btnTrainersShedule_Click);
+			// 
+			// manageTrainersToolStripMenuItem
+			// 
+			this.manageTrainersToolStripMenuItem.Name = "manageTrainersToolStripMenuItem";
+			resources.ApplyResources(this.manageTrainersToolStripMenuItem, "manageTrainersToolStripMenuItem");
+			this.manageTrainersToolStripMenuItem.Click += new System.EventHandler(this.manageTrainersToolStripMenuItem_Click);
+			// 
 			// settingsToolStripMenuItem
 			// 
 			this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -212,7 +235,6 @@
             this.usersAndPasswordsToolStripMenuItem,
             this.userRolesToolStripMenuItem,
             this.toolStripMenuItem3,
-            this.manageTrainersToolStripMenuItem,
             this.manageScheduleRulesToolStripMenuItem,
             this.toolStripMenuItem4,
             this.optionsToolStripMenuItem});
@@ -246,12 +268,6 @@
 			// 
 			this.toolStripMenuItem3.Name = "toolStripMenuItem3";
 			resources.ApplyResources(this.toolStripMenuItem3, "toolStripMenuItem3");
-			// 
-			// manageTrainersToolStripMenuItem
-			// 
-			this.manageTrainersToolStripMenuItem.Name = "manageTrainersToolStripMenuItem";
-			resources.ApplyResources(this.manageTrainersToolStripMenuItem, "manageTrainersToolStripMenuItem");
-			this.manageTrainersToolStripMenuItem.Click += new System.EventHandler(this.manageTrainersToolStripMenuItem_Click);
 			// 
 			// manageScheduleRulesToolStripMenuItem
 			// 
@@ -426,6 +442,7 @@
 			resources.ApplyResources(this.btnTrainersShedule, "btnTrainersShedule");
 			this.btnTrainersShedule.Name = "btnTrainersShedule";
 			this.btnTrainersShedule.UseVisualStyleBackColor = true;
+			this.btnTrainersShedule.Click += new System.EventHandler(this.btnTrainersShedule_Click);
 			// 
 			// btnPaymentsHistory
 			// 
@@ -507,7 +524,6 @@
 		private System.Windows.Forms.ToolStripMenuItem trainersScheduleToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem userRolesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
-		private System.Windows.Forms.ToolStripMenuItem manageTrainersToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem manageScheduleRulesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
@@ -528,6 +544,9 @@
 		private System.Windows.Forms.TabPage tabStatistics;
 		private System.Windows.Forms.TabPage tabActiveClients;
 		private System.Windows.Forms.Button btmMissLesson;
+		private System.Windows.Forms.ToolStripMenuItem trainersToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem trainersScheduleToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem manageTrainersToolStripMenuItem;
     }
 }
 

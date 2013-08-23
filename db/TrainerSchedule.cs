@@ -9,9 +9,9 @@ namespace AY
 	{
 		public class TrainerSchedule
 		{
-			private Int64 m_Id = 0;
+			private Int64 m_id = 0;
 			private Int64 m_trainerId = 0;
-			public DateTime m_date;
+			public DateTime m_date = new DateTime();
 
 			public TrainerSchedule(Int64 id)
 			{	
@@ -23,16 +23,45 @@ namespace AY
 					throw new Exception("Error! No such trainer schedule entry.");
 				}
 
-				m_Id = id;
+				m_id = id;
 				m_trainerId = Int64.Parse(data["trainerId"].ToString());
 				m_date = DateTime.Parse(data["date"].ToString());
 			}
 
+			public TrainerSchedule(DateTime date)
+			{
+				String where = String.Format("date = '{0}'", date);
+				DataRow data = new DbAdapter().GetFirstRow(DbTable.TrainersSchedule, where, new List<string> { "trainerId", "date" });
+
+				if (data == null)
+				{
+					return;
+				}
+
+				m_id = Int64.Parse(data["id"].ToString());
+				m_trainerId = Int64.Parse(data["trainerId"].ToString());
+				m_date = date;
+			}
+
+			public static Boolean Add(Int64 trainerId, DateTime date, out Int64 id)
+			{
+				DbAdapter da = new DbAdapter();
+				Dictionary<string, Object> fields = new Dictionary<string, Object>();
+				fields["trainerId"] = trainerId;
+				fields["date"] = date;
+				id = 0;
+
+				if (!da.Insert(DbTable.TrainersSchedule, fields, out id))
+					return false;
+
+				return true;
+			}
+			
 			public Int64 Id
 			{
 				get
 				{
-					return m_Id;
+					return m_id;
 				}
 			}
 
@@ -41,6 +70,23 @@ namespace AY
 				get
 				{
 					return m_trainerId;
+				}
+				set
+				{
+					Int64 id = value;
+
+					Logger.Debug(String.Format("Set tarinerId for trainer schedule '{0}'", m_id));
+					if (m_id > 0)
+					{
+						DbAdapter ad = new DbAdapter();
+						Dictionary<string, Object> fields = new Dictionary<string, Object>();
+						fields["trainerId"] = id;
+
+						if (ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
+						{
+							m_trainerId = id;
+						}
+					}
 				}
 			}
 			
@@ -73,11 +119,22 @@ namespace AY
 			Dictionary<Int64, TrainerSchedule> Items = new Dictionary<Int64, TrainerSchedule>();
 
 			public TrainerScheduleCollection()
+				: this("")
+			{
+			}
+
+			public TrainerScheduleCollection(String filter)
 			{
 				DbAdapter da = new DbAdapter();
-				DataTable dt = da.ExecuteQuery(String.Format("select id from {0};"
-					, DbUtils.GetTableName(DbTable.TrainersSchedule)));
 				
+				if(filter.Length > 0)
+					filter = "where " + filter;
+				
+				DataTable dt = da.ExecuteQuery(
+					  String.Format("select id from {0} {1};"
+					, DbUtils.GetTableName(DbTable.TrainersSchedule)
+					, filter));
+			
 				foreach(DataRow dr in dt.Rows)
 				{
 					TrainerSchedule data = new TrainerSchedule(Int64.Parse(dr["id"].ToString()));
@@ -95,8 +152,8 @@ namespace AY
 			{
 				DbAdapter da = new DbAdapter();
 				Dictionary<string, Object> fields = new Dictionary<string, Object>();
-				fields["trainerId"] = trainerId.ToString();
-				fields["date"] = date.ToString();
+				fields["trainerId"] = trainerId;
+				fields["date"] = date;
 				id = 0;
 
 				if (!da.Insert(DbTable.TrainersSchedule, fields, out id))

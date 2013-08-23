@@ -20,7 +20,24 @@ namespace AY
 
 			public static bool operator !=(Trainer p1, Trainer p2)
 			{
+				if (null == p1 || null == p2)
+					return true;
+					
 				return !(p1.Id == p2.Id);
+			}
+
+			public override bool Equals(Object obj)
+			{
+				if (obj == null || GetType() != obj.GetType())
+					return false;
+
+				Trainer Item = obj as Trainer;
+				return Item.Id == this.Id;
+			}
+
+			public override int GetHashCode()
+			{
+				return base.GetHashCode();
 			}
 			
 			private Trainer()
