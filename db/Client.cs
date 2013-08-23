@@ -374,6 +374,8 @@ namespace AY
 					tClient[TriggerFields.HoursLeft] = val;
 				}
 				
+				new StatisticsCollection().Add(Id, LastEnter, LastLeave);
+				
 				ExtraInfo = tClient.ToString();
 			}
 		}
