@@ -118,7 +118,7 @@ namespace AY
 						return new String[] { "id", "name", "phone", "extraInfo" };
 
 					case DbTable.TrainersSchedule:
-						return new String[] { "id", "trainerId", "date" };
+						return new String[] { "id", "trainerId", "workDate" };
 
 					default:
 						return new String[]{};
@@ -750,7 +750,7 @@ namespace AY
 				(
 					id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 					, trainerId Integer NOT NULL
-					, date Date NOT NULL
+					, workDate Date NOT NULL
 				)";
 				
 				string tClients = @"drop table if exists clients; 

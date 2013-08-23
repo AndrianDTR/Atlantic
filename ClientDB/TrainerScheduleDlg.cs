@@ -45,7 +45,7 @@ namespace GAssistant
 		private void InitDateRange()
 		{
 			m_rng = monthCalendar.GetDisplayRange(true);
-			String where = String.Format("date >= '{0}' and date <= '{1}'"
+			String where = String.Format("date(workDate) >= '{0}' and date(workDate) <= '{1}'"
 				, m_rng.Start
 				, m_rng.End);
 			

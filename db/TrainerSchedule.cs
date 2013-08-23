@@ -16,7 +16,7 @@ namespace AY
 			public TrainerSchedule(Int64 id)
 			{	
 				String where = String.Format("id = {0}", id);
-				DataRow data = new DbAdapter().GetFirstRow(DbTable.TrainersSchedule, where, new List<string> { "trainerId", "date"});
+				DataRow data = new DbAdapter().GetFirstRow(DbTable.TrainersSchedule, where, new List<string> { "trainerId", "workDate" });
 				
 				if(data == null)
 				{
@@ -25,13 +25,15 @@ namespace AY
 
 				m_id = id;
 				m_trainerId = Int64.Parse(data["trainerId"].ToString());
-				m_date = DateTime.Parse(data["date"].ToString());
+				m_date = DateTime.Parse(data["workDate"].ToString());
 			}
 
 			public TrainerSchedule(DateTime date)
 			{
-				String where = String.Format("date = '{0}'", date);
-				DataRow data = new DbAdapter().GetFirstRow(DbTable.TrainersSchedule, where, new List<string> { "trainerId", "date" });
+				Logger.Enter();
+				Logger.Debug("Andrian --------------");
+				String where = String.Format("date(workDate) = date('{0}')", date.ToString("yyyy-MM-dd"));
+				DataRow data = new DbAdapter().GetFirstRow(DbTable.TrainersSchedule, where, new List<string> { "id", "trainerId"});
 
 				if (data == null)
 				{
@@ -41,6 +43,7 @@ namespace AY
 				m_id = Int64.Parse(data["id"].ToString());
 				m_trainerId = Int64.Parse(data["trainerId"].ToString());
 				m_date = date;
+				Logger.Leave();
 			}
 
 			public static Boolean Add(Int64 trainerId, DateTime date, out Int64 id)
@@ -48,7 +51,7 @@ namespace AY
 				DbAdapter da = new DbAdapter();
 				Dictionary<string, Object> fields = new Dictionary<string, Object>();
 				fields["trainerId"] = trainerId;
-				fields["date"] = date;
+				fields["workDate"] = date;
 				id = 0;
 
 				if (!da.Insert(DbTable.TrainersSchedule, fields, out id))
@@ -101,8 +104,8 @@ namespace AY
 			public static Trainer GetTrainerForDate(DateTime date)
 			{
 				Trainer res = null;
-				
-				String where = String.Format("date = '{0}'", date);
+
+				String where = String.Format("workDate = '{0}'", date);
 				DataRow data = new DbAdapter().GetFirstRow(DbTable.Statistics, where, new List<string> { "trainerId"});
 
 				if (data != null)
@@ -153,7 +156,7 @@ namespace AY
 				DbAdapter da = new DbAdapter();
 				Dictionary<string, Object> fields = new Dictionary<string, Object>();
 				fields["trainerId"] = trainerId;
-				fields["date"] = date;
+				fields["workDate"] = date;
 				id = 0;
 
 				if (!da.Insert(DbTable.TrainersSchedule, fields, out id))
