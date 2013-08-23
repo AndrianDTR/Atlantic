@@ -16,7 +16,7 @@ namespace AY
 			public TrainerSchedule(Int64 id)
 			{	
 				String where = String.Format("id = {0}", id);
-				DataRow data = new DbAdapter().GetFirstRow(DbTable.Statistics, where, new List<string>{"id","name","privilege"});
+				DataRow data = new DbAdapter().GetFirstRow(DbTable.TrainersSchedule, where, new List<string> { "trainerId", "date"});
 				
 				if(data == null)
 				{
@@ -50,6 +50,21 @@ namespace AY
 				{
 					return m_date;
 				}
+			}
+			
+			public static Trainer GetTrainerForDate(DateTime date)
+			{
+				Trainer res = null;
+				
+				String where = String.Format("date = '{0}'", date);
+				DataRow data = new DbAdapter().GetFirstRow(DbTable.Statistics, where, new List<string> { "trainerId"});
+
+				if (data != null)
+				{
+					Int64 trainerId = Int64.Parse(data["trainerId"].ToString());
+					res = new Trainer(trainerId);
+				}
+				return res;
 			}
 		}
 

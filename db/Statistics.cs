@@ -17,7 +17,7 @@ namespace AY
 			public StatsEntry(Int64 id)
 			{	
 				String where = String.Format("id = {0}", id);
-				DataRow data = new DbAdapter().GetFirstRow(DbTable.Statistics, where, new List<string>{"id","name","privilege"});
+				DataRow data = new DbAdapter().GetFirstRow(DbTable.Statistics, where, new List<string>());
 				
 				if(data == null)
 				{
