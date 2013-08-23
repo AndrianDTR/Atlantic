@@ -30,8 +30,6 @@ namespace AY
 
 			public TrainerSchedule(DateTime date)
 			{
-				Logger.Enter();
-				Logger.Debug("Andrian --------------");
 				String where = String.Format("date(workDate) = date('{0}')", date.ToString("yyyy-MM-dd"));
 				DataRow data = new DbAdapter().GetFirstRow(DbTable.TrainersSchedule, where, new List<string> { "id", "trainerId"});
 
@@ -43,7 +41,6 @@ namespace AY
 				m_id = Int64.Parse(data["id"].ToString());
 				m_trainerId = Int64.Parse(data["trainerId"].ToString());
 				m_date = date;
-				Logger.Leave();
 			}
 
 			public static Boolean Add(Int64 trainerId, DateTime date, out Int64 id)
