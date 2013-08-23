@@ -617,7 +617,7 @@ namespace AY
 			#endregion
 
 			#region Public Methods
-			public virtual CellInfo GetCellInfo(DateTime date)
+			protected virtual CellInfo GetCellInfo(DateTime date)
 			{
 				return new CellInfo(date);
 			}

@@ -15,6 +15,11 @@ namespace AY
 				Array.Copy(array, positions, copy, 0, array.Length - positions);
 				return copy;
 			}
+
+			public static T[] RShift<T>(T[] array, int positions)
+			{
+				return Shift<T>(array, array.Length-positions);
+			}
 			
 			public static string[] GetWeekDayNames()
 			{

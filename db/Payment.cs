@@ -135,35 +135,31 @@ namespace AY
 				ScheduleRule rule = new ScheduleRule(ruleId);
 				Trigger tClient = new Trigger(client.ExtraInfo);
 				Trigger tRule = new Trigger(rule.Rule);
-				
-				if(tRule.HasAttribute("CPUTimesLeft"))
+
+				if (tRule.HasAttribute(TriggerFields.CPUTimesLeft))
 				{
-					Object val = tClient["TimesLeft"];
-					if (val != null)
-						tClient["TimesLeft"] = int.Parse(val.ToString()) + int.Parse(tRule["CPUTimesLeft"].ToString());
-					else
-						tClient["TimesLeft"] = tRule["CPUTimesLeft"];
-				}
-				
-				if (tRule.HasAttribute("CPUHoursLeft"))
-				{
-					Object val = tClient["HoursLeft"];
-					if (val != null)
-						tClient["HoursLeft"] = int.Parse(val.ToString()) + int.Parse(tRule["CPUHoursLeft"].ToString());
-					else
-						tClient["HoursLeft"] = tRule["CPUHoursLeft"];
+					client.TimesLeft += tRule[TriggerFields.CPUTimesLeft];
 				}
 
-				if (tRule.HasAttribute("UCIDecHours"))
+				if (tRule.HasAttribute(TriggerFields.CPUHoursLeft))
 				{
-					tClient["DecHours"] = tRule["UCIDecHours"];
+					Object val = tClient[TriggerFields.HoursLeft];
+					if (val != null)
+						tClient[TriggerFields.HoursLeft] = int.Parse(val.ToString()) + int.Parse(tRule[TriggerFields.CPUHoursLeft]);
+					else
+						tClient[TriggerFields.HoursLeft] = tRule[TriggerFields.CPUHoursLeft];
+				}
+
+				if (tRule.HasAttribute(TriggerFields.UCIDecHours))
+				{
+					tClient[TriggerFields.DecHours] = tRule[TriggerFields.UCIDecHours];
 				}
 				else
 				{
-					tClient.Remove("DecHours");
+					tClient.Remove(TriggerFields.DecHours);
 				}
 
-				tClient["RuleId"] = rule.Id;
+				tClient[TriggerFields.RuleId] = rule.Id;
 				
 				client.ExtraInfo = tClient.ToString();
 			}

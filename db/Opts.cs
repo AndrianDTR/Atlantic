@@ -151,9 +151,9 @@ namespace AY
 					Color clr = Color.FromArgb(0, 255, 0);
 					
 					Trigger tClr = new Trigger(m_colors);
-					if(tClr.HasAttribute("ColorPresent"))
+					if (tClr.HasAttribute(TriggerFields.ColorPresent))
 					{
-						clr = tClr["ColorPresent"];
+						clr = tClr[TriggerFields.ColorPresent];
 					}
 					
 					return clr;
@@ -161,7 +161,7 @@ namespace AY
 				set
 				{
 					Trigger tClr = new Trigger(m_colors);
-					tClr["ColorPresent"] = value;
+					tClr[TriggerFields.ColorPresent] = value;
 					m_colors = tClr.ToString();
 				}
 			}
@@ -173,9 +173,9 @@ namespace AY
 					Color clr = Color.FromArgb(255, 200, 50);
 
 					Trigger tClr = new Trigger(m_colors);
-					if (tClr.HasAttribute("ColorOvertime"))
+					if (tClr.HasAttribute(TriggerFields.ColorOvertime))
 					{
-						clr = tClr["ColorOvertime"];
+						clr = tClr[TriggerFields.ColorOvertime];
 					}
 
 					return clr;
@@ -183,7 +183,7 @@ namespace AY
 				set
 				{
 					Trigger tClr = new Trigger(m_colors);
-					tClr["ColorOvertime"] = value;
+					tClr[TriggerFields.ColorOvertime] = value;
 					m_colors = tClr.ToString();
 				}
 			}
@@ -195,9 +195,9 @@ namespace AY
 					Color clr = Color.FromArgb(255, 255, 0);
 
 					Trigger tClr = new Trigger(m_colors);
-					if (tClr.HasAttribute("ColorDelayed"))
+					if (tClr.HasAttribute(TriggerFields.ColorDelayed))
 					{
-						clr = tClr["ColorDelayed"];
+						clr = tClr[TriggerFields.ColorDelayed];
 					}
 
 					return clr;
@@ -205,7 +205,7 @@ namespace AY
 				set
 				{
 					Trigger tClr = new Trigger(m_colors);
-					tClr["ColorDelayed"] = value;
+					tClr[TriggerFields.ColorDelayed] = value;
 					m_colors = tClr.ToString();
 				}
 			}
@@ -217,9 +217,9 @@ namespace AY
 					Color clr = Color.FromArgb(255, 50, 0);
 
 					Trigger tClr = new Trigger(m_colors);
-					if (tClr.HasAttribute("ColorMissed"))
+					if (tClr.HasAttribute(TriggerFields.ColorMissed))
 					{
-						clr = tClr["ColorMissed"];
+						clr = tClr[TriggerFields.ColorMissed];
 					}
 
 					return clr;
@@ -227,7 +227,7 @@ namespace AY
 				set
 				{
 					Trigger tClr = new Trigger(m_colors);
-					tClr["ColorMissed"] = value;
+					tClr[TriggerFields.ColorMissed] = value;
 					m_colors = tClr.ToString();
 				}
 			}

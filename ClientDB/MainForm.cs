@@ -123,14 +123,14 @@ namespace GAssistant
 				
 				ListViewItem lvi = listClients.Items.Add(client.Name);
 
-				lvi.BackColor = Color.FromArgb(50, 255, 50);
+				lvi.BackColor = m_opt.ColorPresent;
 				ClientTicketStus status = ClientTicketStus.Present;
 				
 				DateTime clientTime = client.OpenTicket.AddHours(client.DecHours);
 				if (today > clientTime)
 				{
 					status = ClientTicketStus.Overtime;
-					lvi.BackColor = Color.FromArgb(255, 200, 100);
+					lvi.BackColor = m_opt.ColorOvertime;
 				}
 
 				lvi.SubItems.Add(status.ToString());
@@ -158,8 +158,8 @@ namespace GAssistant
 				{
 					ListViewItem lvi = listClients.Items.Add(client.Name);
 					ClientTicketStus status = ClientTicketStus.Delayed;
-					
-					lvi.BackColor = Color.FromArgb(255, 255, 50);
+
+					lvi.BackColor = m_opt.ColorDelayed;
 					lvi.SubItems.Add(status.ToString());
 					lvi.SubItems.Add(client.ScheduleTime.ToString("HH:mm"));
 					lvi.SubItems.Add(client.ScheduleTime.AddHours(client.DecHours).ToString("HH:mm"));
@@ -186,7 +186,7 @@ namespace GAssistant
 					ListViewItem lvi = listClients.Items.Add(client.Name);
 					ClientTicketStus status = ClientTicketStus.Missed;
 					
-					lvi.BackColor = Color.FromArgb(255, 50, 50);
+					lvi.BackColor = m_opt.ColorMissed;
 					lvi.SubItems.Add(status.ToString());
 					lvi.SubItems.Add(client.ScheduleTime.ToString("HH:mm"));
 					lvi.SubItems.Add(client.ScheduleTime.AddHours(client.DecHours).ToString("HH:mm"));
@@ -215,7 +215,7 @@ namespace GAssistant
 					ClientInfo ci = new ClientInfo(id);
 					if (DialogResult.OK == ci.ShowDialog(this))
 					{
-						m_collection = new ClientCollection();
+						UpdateInfo();
 						Logger.Debug("Client data changed for: " + ci.ClientName + " " + ci.ClientCode);
 					}
 				}
@@ -225,9 +225,7 @@ namespace GAssistant
 				}
 				
 				dlg.Clear();
-				GetOpenedTickets();
 			}
-			
 		}
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -263,7 +261,7 @@ namespace GAssistant
 		{
 			ManageClients mc = new ManageClients();
 			mc.ShowDialog(this);
-			m_collection = new ClientCollection();
+			UpdateInfo();
 		}
 
 		private void AddClient()
@@ -271,8 +269,7 @@ namespace GAssistant
 			ClientInfo ci = new ClientInfo(0);
 			if (DialogResult.OK != ci.ShowDialog(this))
 				return;
-
-			m_collection = new ClientCollection();
+			UpdateInfo();
 		}
 		
 		private void add_Click(object sender, EventArgs e)
@@ -307,7 +304,7 @@ namespace GAssistant
 		{
 			ManageClients mc = new ManageClients();
 			mc.ShowDialog(this);
-			m_collection = new ClientCollection();
+			UpdateInfo();
 		}
 
 		private void btnPaymentsHistory_Click(object sender, EventArgs e)
@@ -397,7 +394,7 @@ namespace GAssistant
 			foreach(ListViewItem lvi in listClients.Items)
 			{
 				ClientStatus status = (ClientStatus)lvi.Tag;
-				if(ClientTicketStus.Missed == status.state)
+				if(lvi.Selected && ClientTicketStus.Missed == status.state)
 				{
 					Client client = new Client(status.Id);
 					DateTime st = client.ScheduleTime;

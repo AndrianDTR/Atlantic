@@ -20,6 +20,7 @@ namespace AY
 			private DateTime m_lastLeave;
 			private DateTime m_openTicket;
 			private Int64 m_trainer = 0;
+			private int m_timesLeft = 0;
 			
 			public static bool CodeExists(Int64 id)
 			{
@@ -63,6 +64,7 @@ namespace AY
 				m_lastLeave = DateTime.Parse(data["lastLeave"].ToString());
 				m_openTicket = DateTime.Parse(data["openTicket"].ToString());
 				m_trainer = Int64.Parse(data["trainer"].ToString());
+				m_timesLeft = int.Parse(data["timesLeft"].ToString());
 			}
 
 			public Client(String name)
@@ -86,6 +88,7 @@ namespace AY
 				m_lastLeave = DateTime.Parse(data["lastLeave"].ToString());
 				m_openTicket = DateTime.Parse(data["openTicket"].ToString());
 				m_trainer = Int64.Parse(data["trainer"].ToString());
+				m_timesLeft = int.Parse(data["timesLeft"].ToString());
 			}
 			
 			public Int64 Id
@@ -157,16 +160,24 @@ namespace AY
 			{
 				get
 				{
-					Trigger tlt = new Trigger(ExtraInfo);
-					if(tlt.HasAttribute("TimesLeft"))
-						return tlt["TimesLeft"];
-					return 0;
+					return m_timesLeft;
 				}
 				set
 				{
-					Trigger tlt = new Trigger(ExtraInfo);
-					tlt["TimesLeft"] = value;
-					ExtraInfo = tlt.ToString();
+					int data = value;
+
+					Logger.Debug(String.Format("Set times left for client '{0}'", m_name));
+					if (m_id > 0)
+					{
+						DbAdapter ad = new DbAdapter();
+						Dictionary<string, Object> fields = new Dictionary<string, Object>();
+						fields["timesLeft"] = data;
+
+						if (ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
+						{
+							m_timesLeft = data;
+						}
+					}
 				}
 			}
 
@@ -175,8 +186,8 @@ namespace AY
 				get
 				{
 					Trigger tlt = new Trigger(ExtraInfo);
-					if (tlt.HasAttribute("DecHours"))
-						return tlt["DecHours"];
+					if (tlt.HasAttribute(TriggerFields.DecHours))
+						return tlt[TriggerFields.DecHours];
 					return 0;
 				}
 			}
@@ -344,32 +355,23 @@ namespace AY
 				Trigger tClient = new Trigger(ExtraInfo);
 				Trigger tRule = null;
 
-				if (tClient.HasAttribute("RuleId"))
-				{	
-					Int64 ruleId = tClient["RuleId"];
+				if (tClient.HasAttribute(TriggerFields.RuleId))
+				{
+					Int64 ruleId = tClient[TriggerFields.RuleId];
 					tRule = new Trigger(new ScheduleRule(ruleId).Rule);
 				}
 
-				if (tClient.HasAttribute("TimesLeft"))
+				TimesLeft--;
+
+				if (tClient.HasAttribute(TriggerFields.HoursLeft))
 				{
-					int val = tClient["TimesLeft"];
-					if(tRule != null && tRule.HasAttribute("UCIDecTimes"))
-						val -= tRule["UCIDecTimes"];
+					int val = tClient[TriggerFields.HoursLeft];
+					if (tRule != null && tRule.HasAttribute(TriggerFields.UCIDecHours))
+						val -= tRule[TriggerFields.UCIDecHours];
 					else
 						val--;
 
-					tClient["TimesLeft"] = val;
-				}
-				
-				if (tClient.HasAttribute("HoursLeft"))
-				{
-					int val = tClient["HoursLeft"];
-					if (tRule != null && tRule.HasAttribute("UCIDecHours"))
-						val -= tRule["UCIDecHours"];
-					else
-						val--;
-
-					tClient["HoursLeft"] = val;
+					tClient[TriggerFields.HoursLeft] = val;
 				}
 				
 				ExtraInfo = tClient.ToString();

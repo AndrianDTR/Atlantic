@@ -102,7 +102,7 @@ namespace AY
 					case DbTable.Clients:
 						return new String[]{"id", "name", "phone", "scheduleTime"
 							, "trainer", "lastEnter", "lastLeave", "openTicket"
-							, "comment",  "extraInfo"};
+							, "comment",  "extraInfo", "timesLeft"};
 
 					case DbTable.Payments:
 						return new String[]{"id", "clientId", "scheduleId", "creatorId", "date"
@@ -762,9 +762,10 @@ namespace AY
 					, lastEnter DateTime DEFAULT(datetime('now', '-1 year'))
 					, lastLeave DateTime DEFAULT(datetime('now', '-1 year'))
 					, openTicket DateTime DEFAULT(datetime('now', '-1 year'))
-					, trainer Integer DEFAULT('')
+					, trainer Integer DEFAULT(0)
 					, comment Text DEFAULT('')
 					, extraInfo Text DEFAULT('')
+					, timesLeft Integer DEFAULT(0)
 				)";
 				
 				string tPayments = @"drop table if exists payments;

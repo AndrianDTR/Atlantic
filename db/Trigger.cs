@@ -9,6 +9,28 @@ namespace AY
 {
 	namespace db
 	{
+		enum TriggerFields
+		{
+			_min,
+			None,
+			
+			//Payment trigger fields
+			RuleId,
+			CPUTimesLeft,
+			CPUHoursLeft,
+			UCIDecHours,
+			// Client trigger fields
+			HoursLeft,
+			DecHours,
+			// Options trigger fields
+			ColorPresent,
+			ColorOvertime,
+			ColorDelayed,
+			ColorMissed,
+			
+			_max
+		};
+		
 		class ObjType
 		{
 			#pragma warning disable 0168
@@ -145,12 +167,12 @@ namespace AY
 		
 		class Trigger
 		{
-			private Dictionary<String, ObjType> m_props;
+			private Dictionary<TriggerFields, ObjType> m_props;
 			
 			public Trigger(String data)
 			{
 				StringReader strReader = new StringReader(data);
-				m_props = new Dictionary<String, ObjType>();
+				m_props = new Dictionary<TriggerFields, ObjType>();
 				
 				String prop = strReader.ReadLine();
 				while(prop != null)
@@ -165,13 +187,14 @@ namespace AY
 						Logger.Warning(String.Format("Invalid property line. Src: '{0}'.", prop));
 						continue;
 					}
-					m_props[key_val[0].Trim()] = key_val[1].Trim();
+					TriggerFields key = Trigger.GetFieldByName(key_val[0].Trim());
+					m_props[key] = key_val[1].Trim();
 					
 					prop = strReader.ReadLine();
 				}
 			}
 
-			public ObjType this[String index]
+			public ObjType this[TriggerFields index]
 			{
 				get
 				{
@@ -185,7 +208,7 @@ namespace AY
 				}
 			}
 			
-			public Boolean HasAttribute(String key)
+			public Boolean HasAttribute(TriggerFields key)
 			{
 				return m_props.ContainsKey(key);
 			}
@@ -194,7 +217,7 @@ namespace AY
 			{
 				String res = String.Empty;
 
-				foreach (KeyValuePair<String, ObjType> kv in m_props)
+				foreach (KeyValuePair<TriggerFields, ObjType> kv in m_props)
 				{
 					res += String.Format("{0}:{1}\n", kv.Key, kv.Value.ToString());
 				}
@@ -202,13 +225,31 @@ namespace AY
 				return res;
 			}
 			
-			public bool Remove(String key)
+			public bool Remove(TriggerFields key)
 			{
 				if(m_props.ContainsKey(key))
 				{
 					return m_props.Remove(key);
 				}
 				return false;
+			}
+			
+			public static TriggerFields GetFieldByName(String key)
+			{
+				TriggerFields res = TriggerFields.None;
+				
+				for (TriggerFields tf = TriggerFields._min;
+					tf < TriggerFields._max;
+					tf++)
+				{
+					if(key == tf.ToString())
+					{
+						res = tf;
+						break;
+					}
+				}
+				
+				return res;
 			}
 		}
 	}
