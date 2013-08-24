@@ -51,8 +51,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3538A06362F5466CAF5C3085D334C3BB"
+        "OwnerKey" = "8:_CE3E613F204342C48CAE7FCD0303FA6A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_50CDCB8E3C4B697D57CD34916FE4975A"
         "OwnerKey" = "8:_9178A1DF927E480BAFE0AE89E2F3EF86"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_871770C79552406989708EED7A334E8B"
+        "OwnerKey" = "8:_3538A06362F5466CAF5C3085D334C3BB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -77,6 +89,12 @@
         {
         "MsmKey" = "8:_B0D28CD8ED8A41F64B93F1D0DD813CD8"
         "OwnerKey" = "8:_9178A1DF927E480BAFE0AE89E2F3EF86"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CE3E613F204342C48CAE7FCD0303FA6A"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1072,12 +1090,40 @@
         }
         "MergeModule"
         {
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_3538A06362F5466CAF5C3085D334C3BB"
+            {
+            "UseDynamicProperties" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "SourcePath" = "8:policy_9_0_Microsoft_VC90_DebugCRT_x86.msm"
+                "Properties"
+                {
+                }
+            "LanguageId" = "3:0"
+            "Exclude" = "11:FALSE"
+            "Folder" = "8:"
+            "Feature" = "8:"
+            "IsolateTo" = "8:"
+            }
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_871770C79552406989708EED7A334E8B"
+            {
+            "UseDynamicProperties" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "SourcePath" = "8:microsoft_vc90_debugcrt_x86.msm"
+                "Properties"
+                {
+                }
+            "LanguageId" = "3:0"
+            "Exclude" = "11:FALSE"
+            "Folder" = "8:"
+            "Feature" = "8:"
+            "IsolateTo" = "8:"
+            }
         }
         "ProjectOutput"
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9178A1DF927E480BAFE0AE89E2F3EF86"
             {
-            "SourcePath" = "8:..\\ClientDB\\obj\\Debug\\G-Assistant.exe"
+            "SourcePath" = "8:..\\ClientDB\\obj\\Release\\G-Assistant.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5A5B1464E75B4C6FAB8BAC80343277F3"
@@ -1098,6 +1144,34 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{3A3F8E0E-BB13-4EB6-88C1-2492AE2DACCC}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CE3E613F204342C48CAE7FCD0303FA6A"
+            {
+            "SourcePath" = "8:..\\bin\\Release\\reporter.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_5A5B1464E75B4C6FAB8BAC80343277F3"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{11F60D25-D0DC-4726-B5E5-CDF4792A9D4D}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {

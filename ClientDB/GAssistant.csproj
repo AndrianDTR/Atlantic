@@ -225,6 +225,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Register.resx">
+      <DependentUpon>Register.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="TrainerScheduleDlg.resx">
       <DependentUpon>TrainerScheduleDlg.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -246,6 +250,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Register.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Session.cs" />
     <Compile Include="Statistics.cs">
@@ -320,6 +327,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="game_diamond.ico" />
+    <None Include="Resources\Game-diamond-icon.png" />
     <None Include="Resources\appointment_missed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

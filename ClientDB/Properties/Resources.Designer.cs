@@ -129,5 +129,12 @@ namespace GAssistant.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap Game_diamond_icon {
+            get {
+                object obj = ResourceManager.GetObject("Game-diamond-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
