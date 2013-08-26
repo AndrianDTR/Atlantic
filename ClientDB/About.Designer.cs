@@ -29,13 +29,13 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(About));
 			this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+			this.okButton = new System.Windows.Forms.Button();
+			this.textBoxDescription = new System.Windows.Forms.TextBox();
+			this.labelRegistarionInfo = new System.Windows.Forms.Label();
 			this.logoPictureBox = new System.Windows.Forms.PictureBox();
 			this.labelProductName = new System.Windows.Forms.Label();
 			this.labelVersion = new System.Windows.Forms.Label();
 			this.labelCopyright = new System.Windows.Forms.Label();
-			this.labelRegistarionInfo = new System.Windows.Forms.Label();
-			this.textBoxDescription = new System.Windows.Forms.TextBox();
-			this.okButton = new System.Windows.Forms.Button();
 			this.tableLayoutPanel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
 			this.SuspendLayout();
@@ -64,6 +64,39 @@
 			this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
 			this.tableLayoutPanel.Size = new System.Drawing.Size(537, 356);
 			this.tableLayoutPanel.TabIndex = 0;
+			// 
+			// okButton
+			// 
+			this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.okButton.Location = new System.Drawing.Point(459, 330);
+			this.okButton.Name = "okButton";
+			this.okButton.Size = new System.Drawing.Size(75, 23);
+			this.okButton.TabIndex = 28;
+			this.okButton.Text = "&OK";
+			// 
+			// textBoxDescription
+			// 
+			this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.textBoxDescription.Location = new System.Drawing.Point(136, 179);
+			this.textBoxDescription.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
+			this.textBoxDescription.Multiline = true;
+			this.textBoxDescription.Name = "textBoxDescription";
+			this.textBoxDescription.ReadOnly = true;
+			this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+			this.textBoxDescription.Size = new System.Drawing.Size(398, 136);
+			this.textBoxDescription.TabIndex = 27;
+			this.textBoxDescription.TabStop = false;
+			this.textBoxDescription.Text = "Description";
+			// 
+			// labelRegistarionInfo
+			// 
+			this.labelRegistarionInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.labelRegistarionInfo.Location = new System.Drawing.Point(133, 105);
+			this.labelRegistarionInfo.Name = "labelRegistarionInfo";
+			this.labelRegistarionInfo.Size = new System.Drawing.Size(401, 71);
+			this.labelRegistarionInfo.TabIndex = 26;
+			this.labelRegistarionInfo.Text = "Registered to";
 			// 
 			// logoPictureBox
 			// 
@@ -113,39 +146,6 @@
 			this.labelCopyright.TabIndex = 21;
 			this.labelCopyright.Text = "Copyright Andrian Yablonskyy 2013 (C)";
 			this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// labelRegistarionInfo
-			// 
-			this.labelRegistarionInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.labelRegistarionInfo.Location = new System.Drawing.Point(133, 105);
-			this.labelRegistarionInfo.Name = "labelRegistarionInfo";
-			this.labelRegistarionInfo.Size = new System.Drawing.Size(401, 71);
-			this.labelRegistarionInfo.TabIndex = 26;
-			this.labelRegistarionInfo.Text = "Registered to";
-			// 
-			// textBoxDescription
-			// 
-			this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textBoxDescription.Location = new System.Drawing.Point(136, 179);
-			this.textBoxDescription.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
-			this.textBoxDescription.Multiline = true;
-			this.textBoxDescription.Name = "textBoxDescription";
-			this.textBoxDescription.ReadOnly = true;
-			this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.textBoxDescription.Size = new System.Drawing.Size(398, 136);
-			this.textBoxDescription.TabIndex = 27;
-			this.textBoxDescription.TabStop = false;
-			this.textBoxDescription.Text = "Description";
-			// 
-			// okButton
-			// 
-			this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.okButton.Location = new System.Drawing.Point(459, 330);
-			this.okButton.Name = "okButton";
-			this.okButton.Size = new System.Drawing.Size(75, 23);
-			this.okButton.TabIndex = 28;
-			this.okButton.Text = "&OK";
 			// 
 			// About
 			// 
