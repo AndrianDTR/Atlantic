@@ -7,13 +7,15 @@ namespace AY.Utils
 {
 	public class ExeUtils
 	{
+		private static int m_dataBufLen = 4096;
+		
 		private static char[] m_sign = "AYED01".ToCharArray();
 
 		public static void SetExeData(FileInfo file, byte[] buf)
 		{
 			do 
 			{
-				Array.Resize<byte>(ref buf, 4096);
+				Array.Resize<byte>(ref buf, m_dataBufLen);
 
 				FileStream fs = file.Open(FileMode.Open, FileAccess.ReadWrite);
 				BinaryWriter br = new BinaryWriter(fs);
@@ -34,9 +36,9 @@ namespace AY.Utils
 			{
 				FileStream fs = file.Open(FileMode.Open, FileAccess.Read);
 				BinaryReader br = new BinaryReader(fs);
-				int szFoot = 4096 + 8 + m_sign.Length;
+				int szFoot = m_dataBufLen + 8 + m_sign.Length;
 				fs.Seek(-szFoot, SeekOrigin.End);
-				byte[] tmpBuf = br.ReadBytes(4096);
+				byte[] tmpBuf = br.ReadBytes(m_dataBufLen);
 				Int64 orgSize = br.ReadInt64();
 				char[] sign = br.ReadChars(m_sign.Length);
 				br.Close();
@@ -76,6 +78,13 @@ namespace AY.Utils
 		public static bool CheckRegInfo(byte[] data)
 		{
 			bool res = false;
+			
+			DateTime regDate = DateTime.Now;
+			regDate.Ticks = BitConverter.ToInt64(data, 0);
+			
+			String serial = BitConverter.ToString(data, 8, 512);
+
+			String pk = BitConverter.ToString(data, 8, 512);
 			
 			return res;
 		}
