@@ -29,12 +29,10 @@ namespace GAssistant
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Button submit;
-		private System.Windows.Forms.ErrorProvider errNotifier;
-	
+		
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		private System.ComponentModel.Container components = null;
 		private Label label3;
 		private TextBox textSerial;
 		private PictureBox pictureBox1;
