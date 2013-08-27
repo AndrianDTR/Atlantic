@@ -32,6 +32,7 @@ namespace GAssistant
 			
 			if(!ExeUtils.CheckRegInfo(buf))
 			{
+				RegisterForm rdlg = new RegisterForm();
 				Int64 ticks = BitConverter.ToInt64(buf, 0);
 				DateTime regDate = new DateTime(ticks);
 				TimeSpan daysLeft = regDate.AddDays(30).Subtract(DateTime.Now);
@@ -47,7 +48,7 @@ namespace GAssistant
 						, MessageBoxButtons.YesNo);
 					if (DialogResult.Yes == res)
 					{
-						// TODO: Show registration dialog
+						rdlg.ShowDialog();
 					}
 				}
 				else
@@ -61,7 +62,8 @@ namespace GAssistant
 					{
 						Application.Exit();
 					}
-					// TODO: Show registration dialog
+
+					rdlg.ShowDialog();
 				}
 			}
 			

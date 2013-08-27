@@ -32,7 +32,6 @@ namespace GAssistant
 		
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterForm));
 			this.textSerial = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnProcess = new System.Windows.Forms.Button();
@@ -96,7 +95,6 @@ namespace GAssistant
 			// 
 			// pictureBox1
 			// 
-			this.pictureBox1.BackgroundImage = global::GAssistant.Properties.Resources.Game_diamond_icon;
 			this.pictureBox1.Location = new System.Drawing.Point(12, 32);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(130, 130);
