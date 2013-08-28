@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using System.Security.Cryptography;
 using System.Data.Common;
 using System.IO;
 using System.Text;
 using AY.Log;
 using AY.Packer;
+using AY.Utils;
 
 namespace AY
 {
@@ -30,23 +30,6 @@ namespace AY
 		
 		class DbUtils
 		{
-			public static string md5(string input)
-			{
-				// step 1, calculate MD5 hash from input
-				MD5 md5 = MD5.Create();
-				byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-				byte[] hash = md5.ComputeHash(inputBytes);
-
-				// step 2, convert byte array to hex string
-				StringBuilder sb = new StringBuilder();
-				for (int i = 0; i < hash.Length; i++)
-				{
-					sb.Append(hash[i].ToString("X2"));
-				}
-
-				return sb.ToString();
-			}
-
 			public static String GetTableName(DbTable table)
 			{
 				switch (table)
@@ -734,7 +717,7 @@ namespace AY
 					, pass VarChar
 					, privilege Integer NOT NULL
 				);
-				INSERT INTO users(name, pass, privilege) VALUES('admin', '{0}', 1)", DbUtils.md5("administrator"));
+				INSERT INTO users(name, pass, privilege) VALUES('admin', '{0}', 1)", SecUtils.md5("administrator"));
 				
 				string tTrainers = @"drop table if exists trainers;
 				CREATE TABLE trainers

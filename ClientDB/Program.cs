@@ -15,58 +15,6 @@ namespace GAssistant
         [STAThread]
         static void Main()
         {
-			FileInfo fi = new FileInfo("reporter.exe");
-			FileInfo exe = new FileInfo("G-Assistant.exe");
-			byte[] buf = new byte[100];
-			Int64 orgSize = 0;
-			
-			if (!ExeUtils.GetExeData(fi, ref buf, ref orgSize))
-			{
-				byte[] srcDate = BitConverter.GetBytes((Int64)DateTime.Now.Ticks);
-				byte[] srcFailStr = BitConverter.GetBytes((Int64)35768);
-				
-				Array.Copy(srcDate, buf, srcDate.Length);
-				Array.Copy(srcFailStr, 0, buf, srcDate.Length, srcFailStr.Length);
-				ExeUtils.SetExeData(fi, buf);
-			}
-			
-			if(!ExeUtils.CheckRegInfo(buf))
-			{
-				RegisterForm rdlg = new RegisterForm();
-				Int64 ticks = BitConverter.ToInt64(buf, 0);
-				DateTime regDate = new DateTime(ticks);
-				TimeSpan daysLeft = regDate.AddDays(30).Subtract(DateTime.Now);
-				if(daysLeft.Days > 0)
-				{
-					DialogResult res = UIMessages.Warning(
-						String.Format(
-							  "You using unregistered copy of the application.\n"
-							+ "Evaluation period will expire after {0} days.\n"
-							+ "Please contact support and register it.\n\n"
-							+ "If you want register your copy of the application now press \"Yes\"."
-							, daysLeft.Days)
-						, MessageBoxButtons.YesNo);
-					if (DialogResult.Yes == res)
-					{
-						rdlg.ShowDialog();
-					}
-				}
-				else
-				{
-					DialogResult res = UIMessages.Error(
-						  "Evaluation period is expired!\n"
-						+ "Do you wish register your copy of application?"
-						, MessageBoxButtons.YesNo
-						);
-					if(DialogResult.Yes != res)
-					{
-						Application.Exit();
-					}
-
-					rdlg.ShowDialog();
-				}
-			}
-			
 			bool sendReport = false;
 			String szLogFile = "SessionLog.txt";
 			Logger.Create(szLogFile, Logger.LogLevel.Debug);

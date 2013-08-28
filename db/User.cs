@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using AY.Log;
+using AY.Utils;
 
 namespace AY
 {
@@ -86,7 +87,7 @@ namespace AY
 						return;
 					}
 
-					string newHash = DbUtils.md5(value);
+					string newHash = SecUtils.md5(value);
 					DbAdapter ad = new DbAdapter();
 					Dictionary<string, Object> fields = new Dictionary<string, Object>();
 					fields["pass"] = newHash;
@@ -105,8 +106,8 @@ namespace AY
 					return false;
 				}
 
-				string oldHash = DbUtils.md5(oldPass);
-				string newHash = DbUtils.md5(newPass);
+				string oldHash = SecUtils.md5(oldPass);
+				string newHash = SecUtils.md5(newPass);
 				DbAdapter ad = new DbAdapter();
 				Dictionary<string, Object> fields = new Dictionary<string, Object>();
 				fields["pass"] = newHash;
@@ -118,7 +119,7 @@ namespace AY
 			public static User Authenticate(String name, String pass)
 			{
 				User user = null;
-				String where = String.Format("name = '{0}' and pass = '{1}'", DbUtils.Quote(name), DbUtils.md5(pass));
+				String where = String.Format("name = '{0}' and pass = '{1}'", DbUtils.Quote(name), SecUtils.md5(pass));
 				DataRow userData = new DbAdapter().GetFirstRow(DbTable.Users, where, new List<string> { "id", "name", "privilege" });
 				if(userData != null)
 				{

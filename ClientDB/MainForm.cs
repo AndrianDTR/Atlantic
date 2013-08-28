@@ -5,6 +5,7 @@ using AY.Log;
 using AY.db;
 using AY.Utils;
 using System.Drawing;
+using System.Text;
 
 namespace GAssistant
 {
@@ -38,10 +39,77 @@ namespace GAssistant
         public MainForm()
         {
 			InitializeComponent();
-			
+			CheckRegistration();
 			UserLogin();
 			Reinit();
         }
+		
+		private void CheckRegistration()
+		{
+			FileInfo fi = new FileInfo("reporter.exe");
+			byte[] buf = new byte[ExeUtils.BufSize];
+			Int64 orgSize = 0;
+
+			if (!ExeUtils.GetExeData(fi, ref buf, ref orgSize))
+			{
+				byte[] srcDate = BitConverter.GetBytes((Int64)DateTime.Now.Ticks);
+				byte[] serial = Encoding.ASCII.GetBytes(ExeUtils.GetSerialNumber());
+				byte[] pub = new byte[(int)ExeUtils.DataOffsets.PubKey];
+				byte[] prv = new byte[(int)ExeUtils.DataOffsets.PrivKey];
+				SecUtils.RSA(ref pub, ref prv, new System.Security.Cryptography.RSACryptoServiceProvider(512));
+
+				int pos = 0;
+				Array.Copy(srcDate, 0, buf, pos, srcDate.Length);
+
+				pos += (int)ExeUtils.DataOffsets.Data;
+				Array.Copy(serial, 0, buf, pos, serial.Length);
+
+				pos += (int)ExeUtils.DataOffsets.Serial;
+				Array.Copy(pub, 0, buf, pos, pub.Length);
+
+				pos += (int)ExeUtils.DataOffsets.PubKey;
+				Array.Copy(prv, 0, buf, pos, prv.Length);
+
+				ExeUtils.SetExeData(fi, buf);
+			}
+
+			if (!ExeUtils.CheckRegInfo(buf))
+			{
+				RegisterForm rdlg = new RegisterForm(ExeUtils.GetSerialNumberCrypted());
+				Int64 ticks = BitConverter.ToInt64(buf, 0);
+				DateTime regDate = new DateTime(ticks);
+				TimeSpan daysLeft = regDate.AddDays(30).Subtract(DateTime.Now);
+				if (daysLeft.Days > 0)
+				{
+					DialogResult res = UIMessages.Warning(
+						String.Format(
+							  "You using unregistered copy of the application.\n"
+							+ "Evaluation period will expire after {0} days.\n"
+							+ "Please contact support and register it.\n\n"
+							+ "If you want register your copy of the application now press \"Yes\"."
+							, daysLeft.Days)
+						, MessageBoxButtons.YesNo);
+					if (DialogResult.Yes == res)
+					{
+						rdlg.ShowDialog();
+					}
+				}
+				else
+				{
+					DialogResult res = UIMessages.Error(
+						  "Evaluation period is expired!\n"
+						+ "Do you wish register your copy of application?"
+						, MessageBoxButtons.YesNo
+						);
+					if (DialogResult.Yes != res)
+					{
+						Application.Exit();
+					}
+
+					rdlg.ShowDialog();
+				}
+			}
+		}
 		
 		private void UserLogin()
 		{
