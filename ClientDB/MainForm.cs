@@ -97,16 +97,19 @@ namespace GAssistant
 				else
 				{
 					DialogResult res = UIMessages.Error(
-						  "Evaluation period is expired!\n"
+						  "Evaluation period has been expired!\n"
 						+ "Do you wish register your copy of application?"
 						, MessageBoxButtons.YesNo
 						);
 					if (DialogResult.Yes != res)
 					{
-						Application.Exit();
+						Environment.Exit(1);
 					}
-
-					rdlg.ShowDialog();
+					
+					if(DialogResult.OK != rdlg.ShowDialog())
+					{
+						Environment.Exit(1);
+					}
 				}
 			}
 		}

@@ -139,9 +139,6 @@ namespace AY.Utils
 			var data = new byte[size];
 			for (int i = 0; i < data.Length; i++)
 			{
-				// All ASCII symbols: printable and non-printable
-				// data[i] = (byte)r.Next(0, 128);
-				// Only printable ASCII
 				data[i] = (byte)random.Next(32, 127);
 			}
 			var encoding = new ASCIIEncoding();
@@ -192,14 +189,15 @@ namespace AY.Utils
 				if (msg.Length < (int)DataOffsets.ActKey / 4)
 					throw new Exception("Error! Activation key is too short.");
 				
-				if(!msg.StartsWith("Valid ACT key for: " + curSN))
+				msg = msg.Split('|')[0];
+				
+				if (!msg.StartsWith("Registered to ") || !msg.EndsWith(curSN))
 					throw new Exception("Error! Invalid activation key.");
 				
 				res = true;
 			}
 			catch (System.Exception)
 			{
-				
 			}
 			
 			return res;

@@ -15,6 +15,7 @@ namespace GAssistant
 		public Button btnProcess;
 		private Label label3;
 		private TextBox textActKey;
+		public Button btnCancel;
 		private PictureBox pictureBox1;
 
 		public RegisterForm(String serial)
@@ -31,6 +32,7 @@ namespace GAssistant
 			this.label3 = new System.Windows.Forms.Label();
 			this.textActKey = new System.Windows.Forms.TextBox();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.btnCancel = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -59,7 +61,7 @@ namespace GAssistant
 			// 
 			this.btnProcess.AutoSize = true;
 			this.btnProcess.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnProcess.Location = new System.Drawing.Point(423, 179);
+			this.btnProcess.Location = new System.Drawing.Point(302, 181);
 			this.btnProcess.Name = "btnProcess";
 			this.btnProcess.Size = new System.Drawing.Size(114, 23);
 			this.btnProcess.TabIndex = 1;
@@ -96,11 +98,24 @@ namespace GAssistant
 			this.pictureBox1.TabIndex = 22;
 			this.pictureBox1.TabStop = false;
 			// 
+			// btnCancel
+			// 
+			this.btnCancel.AutoSize = true;
+			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.btnCancel.Location = new System.Drawing.Point(422, 181);
+			this.btnCancel.Name = "btnCancel";
+			this.btnCancel.Size = new System.Drawing.Size(114, 23);
+			this.btnCancel.TabIndex = 23;
+			this.btnCancel.Text = "Cancel";
+			// 
 			// RegisterForm
 			// 
 			this.AcceptButton = this.btnProcess;
 			this.BackColor = System.Drawing.SystemColors.Control;
+			this.CancelButton = this.btnCancel;
 			this.ClientSize = new System.Drawing.Size(548, 216);
+			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.textActKey);
@@ -121,28 +136,38 @@ namespace GAssistant
 
 		private void btnProcess_Click(object sender, EventArgs e)
 		{
-			FileInfo fi = new FileInfo("reporter.exe");
-			byte[] buf = new byte[ExeUtils.BufSize];
-			Int64 orgSize = 0;
-			
-			if (ExeUtils.GetExeData(fi, ref buf, ref orgSize))
+			try
 			{
-				byte[] srcDate = BitConverter.GetBytes((Int64)DateTime.Now.Ticks);
-				byte[] serial = Encoding.ASCII.GetBytes(ExeUtils.GetSerialNumber());
-				byte[] act = Convert.FromBase64String(textActKey.Text);
+				FileInfo fi = new FileInfo("reporter.exe");
+				byte[] buf = new byte[ExeUtils.BufSize];
+				Int64 orgSize = 0;
 				
-				int pos = 0;
-				Array.Copy(srcDate, 0, buf, pos, srcDate.Length);
+				if (ExeUtils.GetExeData(fi, ref buf, ref orgSize))
+				{
+					byte[] srcDate = BitConverter.GetBytes((Int64)DateTime.Now.Ticks);
+					byte[] serial = Encoding.ASCII.GetBytes(ExeUtils.GetSerialNumber());
+					byte[] act = Convert.FromBase64String(textActKey.Text);
+					
+					int pos = 0;
+					Array.Copy(srcDate, 0, buf, pos, srcDate.Length);
 
-				pos += (int)ExeUtils.DataOffsets.Data;
-				Array.Copy(serial, 0, buf, pos, serial.Length);
-				
-				pos += (int)ExeUtils.DataOffsets.Serial;
-				pos += (int)ExeUtils.DataOffsets.PubKey;
-				pos += (int)ExeUtils.DataOffsets.PrivKey;
-				Array.Copy(act, 0, buf, pos, act.Length);
+					pos += (int)ExeUtils.DataOffsets.Data;
+					Array.Copy(serial, 0, buf, pos, serial.Length);
+					
+					pos += (int)ExeUtils.DataOffsets.Serial;
+					pos += (int)ExeUtils.DataOffsets.PubKey;
+					pos += (int)ExeUtils.DataOffsets.PrivKey;
+					Array.Copy(act, 0, buf, pos, act.Length);
 
-				ExeUtils.SetExeData(fi, buf, orgSize);
+					ExeUtils.SetExeData(fi, buf, orgSize);
+
+					DialogResult = DialogResult.OK;
+					this.Close();
+				}
+			}
+			catch (System.Exception ex)
+			{
+				UIMessages.Info("Invalid activation key has been entered.");
 			}
 		}
 	}

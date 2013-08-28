@@ -34,6 +34,16 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.btnClose = new System.Windows.Forms.Button();
 			this.btnGenerate = new System.Windows.Forms.Button();
+			this.textFName = new System.Windows.Forms.TextBox();
+			this.label3 = new System.Windows.Forms.Label();
+			this.textLName = new System.Windows.Forms.TextBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.textPhone = new System.Windows.Forms.TextBox();
+			this.label5 = new System.Windows.Forms.Label();
+			this.textEmail = new System.Windows.Forms.TextBox();
+			this.label6 = new System.Windows.Forms.Label();
+			this.textAddress = new System.Windows.Forms.TextBox();
+			this.label7 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -54,16 +64,16 @@
 			// 
 			// textActKey
 			// 
-			this.textActKey.Location = new System.Drawing.Point(15, 85);
+			this.textActKey.Location = new System.Drawing.Point(15, 292);
 			this.textActKey.Multiline = true;
 			this.textActKey.Name = "textActKey";
-			this.textActKey.Size = new System.Drawing.Size(500, 139);
+			this.textActKey.Size = new System.Drawing.Size(500, 119);
 			this.textActKey.TabIndex = 3;
 			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(12, 65);
+			this.label2.Location = new System.Drawing.Point(12, 271);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(74, 13);
 			this.label2.TabIndex = 2;
@@ -72,7 +82,7 @@
 			// btnClose
 			// 
 			this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnClose.Location = new System.Drawing.Point(440, 238);
+			this.btnClose.Location = new System.Drawing.Point(440, 425);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(75, 23);
 			this.btnClose.TabIndex = 4;
@@ -82,7 +92,7 @@
 			// 
 			// btnGenerate
 			// 
-			this.btnGenerate.Location = new System.Drawing.Point(359, 238);
+			this.btnGenerate.Location = new System.Drawing.Point(359, 425);
 			this.btnGenerate.Name = "btnGenerate";
 			this.btnGenerate.Size = new System.Drawing.Size(75, 23);
 			this.btnGenerate.TabIndex = 5;
@@ -90,13 +100,104 @@
 			this.btnGenerate.UseVisualStyleBackColor = true;
 			this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
 			// 
+			// textFName
+			// 
+			this.textFName.Location = new System.Drawing.Point(69, 70);
+			this.textFName.Name = "textFName";
+			this.textFName.Size = new System.Drawing.Size(446, 20);
+			this.textFName.TabIndex = 7;
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(12, 73);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(57, 13);
+			this.label3.TabIndex = 6;
+			this.label3.Text = "First Name";
+			// 
+			// textLName
+			// 
+			this.textLName.Location = new System.Drawing.Point(69, 106);
+			this.textLName.Name = "textLName";
+			this.textLName.Size = new System.Drawing.Size(446, 20);
+			this.textLName.TabIndex = 9;
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(12, 109);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(56, 13);
+			this.label4.TabIndex = 8;
+			this.label4.Text = "Last name";
+			// 
+			// textPhone
+			// 
+			this.textPhone.Location = new System.Drawing.Point(69, 142);
+			this.textPhone.Name = "textPhone";
+			this.textPhone.Size = new System.Drawing.Size(446, 20);
+			this.textPhone.TabIndex = 11;
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(12, 145);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(38, 13);
+			this.label5.TabIndex = 10;
+			this.label5.Text = "Phone";
+			// 
+			// textEmail
+			// 
+			this.textEmail.Location = new System.Drawing.Point(69, 177);
+			this.textEmail.Name = "textEmail";
+			this.textEmail.Size = new System.Drawing.Size(446, 20);
+			this.textEmail.TabIndex = 13;
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(12, 180);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(32, 13);
+			this.label6.TabIndex = 12;
+			this.label6.Text = "Email";
+			// 
+			// textAddress
+			// 
+			this.textAddress.Location = new System.Drawing.Point(69, 211);
+			this.textAddress.Multiline = true;
+			this.textAddress.Name = "textAddress";
+			this.textAddress.Size = new System.Drawing.Size(446, 49);
+			this.textAddress.TabIndex = 15;
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(12, 214);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(45, 13);
+			this.label7.TabIndex = 14;
+			this.label7.Text = "Address";
+			// 
 			// ActivatorForm
 			// 
 			this.AcceptButton = this.btnGenerate;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnClose;
-			this.ClientSize = new System.Drawing.Size(527, 273);
+			this.ClientSize = new System.Drawing.Size(527, 460);
+			this.Controls.Add(this.textAddress);
+			this.Controls.Add(this.label7);
+			this.Controls.Add(this.textEmail);
+			this.Controls.Add(this.label6);
+			this.Controls.Add(this.textPhone);
+			this.Controls.Add(this.label5);
+			this.Controls.Add(this.textLName);
+			this.Controls.Add(this.label4);
+			this.Controls.Add(this.textFName);
+			this.Controls.Add(this.label3);
 			this.Controls.Add(this.btnGenerate);
 			this.Controls.Add(this.btnClose);
 			this.Controls.Add(this.textActKey);
@@ -121,6 +222,16 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Button btnClose;
 		private System.Windows.Forms.Button btnGenerate;
+		private System.Windows.Forms.TextBox textFName;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.TextBox textLName;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.TextBox textPhone;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.TextBox textEmail;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.TextBox textAddress;
+		private System.Windows.Forms.Label label7;
 	}
 }
 
