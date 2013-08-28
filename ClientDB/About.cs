@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using System.IO;
+using AY.Utils;
 
 namespace GAssistant
 {
@@ -14,10 +13,10 @@ namespace GAssistant
 		{
 			InitializeComponent();
 			this.Text = String.Format("About {0}", AssemblyTitle);
-			this.labelProductName.Text = AssemblyProduct;
+			this.labelName.Text = AssemblyProduct;
 			this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
-			this.labelCopyright.Text = AssemblyCopyright;
-			this.textBoxDescription.Text = AssemblyDescription;
+			this.labelCopy.Text = AssemblyCopyright;
+			this.textRegInfo.Text = AppReginfo;
 		}
 
 		#region Assembly Attribute Accessors
@@ -47,19 +46,6 @@ namespace GAssistant
 			}
 		}
 
-		public string AssemblyDescription
-		{
-			get
-			{
-				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
-				if (attributes.Length == 0)
-				{
-					return "";
-				}
-				return ((AssemblyDescriptionAttribute)attributes[0]).Description;
-			}
-		}
-
 		public string AssemblyProduct
 		{
 			get
@@ -86,16 +72,21 @@ namespace GAssistant
 			}
 		}
 
-		public string AssemblyCompany
+		public String AppReginfo
 		{
 			get
 			{
-				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-				if (attributes.Length == 0)
+				String info = "This copy of application is not registered.";
+				FileInfo fi = new FileInfo("reporter.exe");
+				byte[] buf = new byte[ExeUtils.BufSize];
+				Int64 orgSize = 0;
+
+				if (ExeUtils.GetExeData(fi, ref buf, ref orgSize))
 				{
-					return "";
+					info = ExeUtils.GetRegInfo(buf).Replace("\r", "").Replace("\n", "\r\n");
 				}
-				return ((AssemblyCompanyAttribute)attributes[0]).Company;
+				
+				return info;
 			}
 		}
 		#endregion

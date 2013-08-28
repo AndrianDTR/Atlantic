@@ -18,8 +18,7 @@ namespace GAssistant
 		public delegate void UpdateTicketList();
 		
 		private String RegInfo = String.Empty;
-		
-		
+				
 		private UpdateTicketList m_ticketsUpdDelegate = null;
 		public UpdateTicketList TicketUpdate
 		{

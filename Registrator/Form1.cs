@@ -10,17 +10,32 @@ namespace Registrator
 		public ActivatorForm()
 		{
 			InitializeComponent();
+			
+			FillRegInfo();
+		}
+		
+		private void FillRegInfo()
+		{
+			textSerial.Text = "BF279-1DE7C-EDB5A-D0207-488CF-452CA-FD24F-D06D1";
+			textFName.Text = "Andrian";
+			textLName.Text = "Yablonskyy";
+			textPhone.Text = "+ 380 (67) 439 - 1881";
+			textEmail.Text = "an-hak@mail.ru";
+			textAddress.Text = @"81105, N. Yaremchuka str., 8
+Navaria, 
+Ukraine";
+
 		}
 
 		private void btnGenerate_Click(object sender, EventArgs e)
 		{
 			String randStr = ExeUtils.RandomString((int)ExeUtils.DataOffsets.ActKey / 4);
-			
-			String data = String.Empty;
-			data += String.Format("Registered to {0} {1}\n", textFName.Text, textLName.Text);
-			data += String.Format("{0}\n", textAddress.Text);
+
+			String data = "This application copy is registered to:\n\n";
+			data += String.Format("{0} {1}\n", textFName.Text.ToUpper(), textLName.Text.ToUpper());
+			data += String.Format("Address: {0}\n", textAddress.Text);
+			data += String.Format("Email: {0}\n", textEmail.Text); 
 			data += String.Format("Phone: {0}\n", textPhone.Text);
-			data += String.Format("Email: {0}\n", textEmail.Text);
 			data += String.Format("\n");
 			data += String.Format("Serial number: {0}|{1}", textSerial.Text, randStr);
 			

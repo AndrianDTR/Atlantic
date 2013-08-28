@@ -145,20 +145,66 @@ namespace AY.Utils
 			return encoding.GetString(data);
 		}
 		
+		public static DateTime GetRegDate(byte[] data)
+		{
+			int pos = 0;
+			byte[] dat = GetKey(data, ref pos, DataOffsets.Data);
+			Int64 ticks = BitConverter.ToInt64(dat, 0);
+			return new DateTime(ticks);
+		}
+		
+		public static String GetRegSerialNumber(byte[] data)
+		{
+			int pos = (int)DataOffsets.Data;
+			byte[] snm = GetKey(data, ref pos, DataOffsets.Serial);
+			String serial = Encoding.ASCII.GetString(snm);
+			return CryptSerialNumber(serial.Split('\0')[0]);
+		}
+
+		public static String GetRegInfo(byte[] data)
+		{
+			int pos = (int)DataOffsets.Data
+				+ (int)DataOffsets.Serial
+				+ (int)DataOffsets.PubKey
+				+ (int)DataOffsets.PrivKey;
+			byte[] act = GetKey(data, ref pos, DataOffsets.ActKey);
+
+			String curSN = GetSerialNumberCrypted();
+			
+			for (int n = 0; n < act.Length; n++)
+			{
+				ExeUtils.ROR(ref act[n], n % 8);
+			}
+
+			String msg = Encoding.UTF8.GetString(act).Split('\0')[0];
+			if (msg.Length < (int)DataOffsets.ActKey / 4)
+				throw new Exception("Error! Activation key is too short.");
+			
+			msg = msg.Split('|')[0];
+			
+			if (!msg.StartsWith("This application copy is registered to:") || !msg.EndsWith(curSN))
+				throw new Exception("Error! Invalid activation key.");
+				
+			return msg;
+		}
+
 		public static bool CheckRegInfo(byte[] data)
 		{
 			bool res = false;
-			int pos = 0;
+			
 			try
 			{
-				Int64 ticks = BitConverter.ToInt64(data, pos);
-				pos += (int)DataOffsets.Data;
-				DateTime regDate = new DateTime(ticks);
+				int pos = (int)DataOffsets.Data
+					+ (int)DataOffsets.Serial;
+				byte[] pub = GetKey(data, ref pos, DataOffsets.PubKey);
+				byte[] prv = GetKey(data, ref pos, DataOffsets.PrivKey);
+				
+				// Get Reg date
+				DateTime regDate = GetRegDate(data);
 
+				// Get Serial number
 				String curSN = GetSerialNumberCrypted();
-				String serial = Encoding.ASCII.GetString(data, pos, (int)DataOffsets.Serial);
-				serial = CryptSerialNumber(serial.Split('\0')[0]);
-				pos += (int)DataOffsets.Serial;
+				String serial = GetRegSerialNumber(data);
 				
 				for (int n = 0; n < curSN.Length; n++)
 				{
@@ -168,31 +214,8 @@ namespace AY.Utils
 					throw new Exception("Error! Invalid serial number.");
 				}
 				
-				byte[] pub = new byte[(int)DataOffsets.PubKey];
-				Array.Copy(data, pos, pub, 0, (int)DataOffsets.PubKey);
-				pos += (int)DataOffsets.PubKey;
-
-				byte[] prv = new byte[(int)DataOffsets.PrivKey];
-				Array.Copy(data, pos, prv, 0, (int)DataOffsets.PrivKey);
-				pos += (int)DataOffsets.PrivKey;
-
-				byte[] act = new byte[(int)DataOffsets.ActKey];
-				Array.Copy(data, pos, act, 0, (int)DataOffsets.ActKey);
-				pos += (int)DataOffsets.ActKey;
-
-				for (int n = 0; n < act.Length; n++)
-				{
-					ExeUtils.ROR(ref act[n], n % 8);
-				}
-				
-				String msg = Encoding.UTF8.GetString(act).Split('\0')[0];
-				if (msg.Length < (int)DataOffsets.ActKey / 4)
-					throw new Exception("Error! Activation key is too short.");
-				
-				msg = msg.Split('|')[0];
-				
-				if (!msg.StartsWith("Registered to ") || !msg.EndsWith(curSN))
-					throw new Exception("Error! Invalid activation key.");
+				// Get reg msg
+				String msg = GetRegInfo(data);
 				
 				res = true;
 			}
@@ -201,6 +224,15 @@ namespace AY.Utils
 			}
 			
 			return res;
+		}
+		
+		private static byte[] GetKey(byte[] data, ref int offset, DataOffsets keyLen)
+		{
+			byte[] key = new byte[(int)keyLen];
+			Array.Copy(data, offset, key, 0, (int)keyLen);
+			offset += (int)keyLen;
+			
+			return key;
 		}
 		
 		public static void ROL(ref byte val, int nBits)
