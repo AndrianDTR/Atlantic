@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,7 +78,7 @@
 			this.tabCalendar = new System.Windows.Forms.TabPage();
 			this.m_calendar = new GAssistant.DayView();
 			this.tabStatistics = new System.Windows.Forms.TabPage();
-			this.chart1 = new Chart.Chart();
+			this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btmMissLesson = new System.Windows.Forms.Button();
 			this.btnBackUp = new System.Windows.Forms.Button();
@@ -88,6 +92,7 @@
 			this.tabActiveClients.SuspendLayout();
 			this.tabCalendar.SuspendLayout();
 			this.tabStatistics.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -405,9 +410,34 @@
 			// 
 			// chart1
 			// 
-			this.chart1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			chartArea1.AxisX.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
+			chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
+			chartArea1.Name = "ChartArea1";
+			this.chart1.ChartAreas.Add(chartArea1);
 			resources.ApplyResources(this.chart1, "chart1");
+			legend1.Name = "Legend1";
+			this.chart1.Legends.Add(legend1);
 			this.chart1.Name = "chart1";
+			series1.ChartArea = "ChartArea1";
+			series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+			series1.Color = System.Drawing.Color.Blue;
+			series1.IsXValueIndexed = true;
+			series1.Legend = "Legend1";
+			series1.LegendText = "Present";
+			series1.Name = "seriesPresent";
+			series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+			series2.ChartArea = "ChartArea1";
+			series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+			series2.Color = System.Drawing.Color.Red;
+			series2.IsXValueIndexed = true;
+			series2.Legend = "Legend1";
+			series2.LegendText = "Prognose";
+			series2.Name = "seriesPrognosed";
+			series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+			series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
+			this.chart1.Series.Add(series1);
+			this.chart1.Series.Add(series2);
+			this.chart1.PrePaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.FillChart);
 			// 
 			// panel1
 			// 
@@ -486,6 +516,7 @@
 			this.tabActiveClients.ResumeLayout(false);
 			this.tabCalendar.ResumeLayout(false);
 			this.tabStatistics.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
 			this.panel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -539,7 +570,6 @@
 		private System.Windows.Forms.ColumnHeader columnLeave;
 		private System.Windows.Forms.ColumnHeader columnEntarncesLeft;
 		private DayView m_calendar;
-		private Chart.Chart chart1;
 		private System.Windows.Forms.TabPage tabCalendar;
 		private System.Windows.Forms.TabPage tabStatistics;
 		private System.Windows.Forms.TabPage tabActiveClients;
@@ -547,6 +577,7 @@
 		private System.Windows.Forms.ToolStripMenuItem trainersToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem trainersScheduleToolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem manageTrainersToolStripMenuItem;
+		private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
 

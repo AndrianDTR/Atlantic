@@ -21,20 +21,26 @@ namespace GAssistant
 		
 		public void Reinit()
 		{
-			m_days = CultureInfoUtils.RShift<int>(
-				  new int[7] { 0, 1, 2, 3, 4, 5, 6 }
-				, (int)CultureInfoUtils.GetWeekStart());
-			m_clients = new ClientCollection("timesLeft > 0");
-			
-			Dictionary<Int64, String> trainerId2NameMap = new Dictionary<Int64, String>();
-			foreach (Trainer tr in new TrainerCollection())
+			try
 			{
-				trainerId2NameMap[tr.Id] = tr.Name;
+				m_days = CultureInfoUtils.RShift<int>(
+					  new int[7] { 0, 1, 2, 3, 4, 5, 6 }
+					, (int)CultureInfoUtils.GetWeekStart());
+				m_clients = new ClientCollection("timesLeft > 0");
+				
+				Dictionary<Int64, String> trainerId2NameMap = new Dictionary<Int64, String>();
+				foreach (Trainer tr in new TrainerCollection())
+				{
+					trainerId2NameMap[tr.Id] = tr.Name;
+				}
+				m_trainerDate2NameMap.Clear();
+				foreach (TrainerSchedule tr in new TrainerScheduleCollection())
+				{
+					m_trainerDate2NameMap[tr.Date] = trainerId2NameMap[tr.TrainerId];
+				}
 			}
-			m_trainerDate2NameMap.Clear();
-			foreach (TrainerSchedule tr in new TrainerScheduleCollection())
+			catch (System.Exception)
 			{
-				m_trainerDate2NameMap[tr.Date] = trainerId2NameMap[tr.TrainerId];
 			}
 		}
 

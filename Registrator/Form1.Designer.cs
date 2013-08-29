@@ -67,6 +67,7 @@
 			this.textActKey.Location = new System.Drawing.Point(15, 292);
 			this.textActKey.Multiline = true;
 			this.textActKey.Name = "textActKey";
+			this.textActKey.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textActKey.Size = new System.Drawing.Size(500, 119);
 			this.textActKey.TabIndex = 3;
 			// 

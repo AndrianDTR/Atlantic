@@ -28,7 +28,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <ApplicationIcon>game_diamond.ico</ApplicationIcon>
+    <ApplicationIcon>GAssistant.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,7 +49,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Calendar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="Chart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="db, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Logger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -61,6 +60,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Microsoft Chart Controls\Assemblies\System.Windows.Forms.DataVisualization.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
@@ -326,7 +329,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="game_diamond.ico" />
+    <Content Include="GAssistant.ico">
+    </Content>
     <None Include="Resources\Game-diamond-icon.png" />
     <None Include="Resources\appointment_missed.png" />
   </ItemGroup>

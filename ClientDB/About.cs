@@ -77,13 +77,10 @@ namespace GAssistant
 			get
 			{
 				String info = "This copy of application is not registered.";
-				FileInfo fi = new FileInfo("reporter.exe");
-				byte[] buf = new byte[ExeUtils.BufSize];
-				Int64 orgSize = 0;
-
-				if (ExeUtils.GetExeData(fi, ref buf, ref orgSize))
+				byte[] data = RegUtils.RegData;
+				if (null != data)
 				{
-					info = ExeUtils.GetRegInfo(buf).Replace("\r", "").Replace("\n", "\r\n");
+					info = RegUtils.GetRegInfo(data).Replace("\r", "").Replace("\n", "\r\n");
 				}
 				
 				return info;

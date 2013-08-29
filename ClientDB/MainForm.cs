@@ -6,6 +6,8 @@ using AY.db;
 using AY.Utils;
 using System.Drawing;
 using System.Text;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Collections.Generic;
 
 namespace GAssistant
 {
@@ -46,36 +48,36 @@ namespace GAssistant
 		
 		private void CheckRegistration()
 		{
-			FileInfo fi = new FileInfo("reporter.exe");
-			byte[] buf = new byte[ExeUtils.BufSize];
-			Int64 orgSize = 0;
-
-			if (!ExeUtils.GetExeData(fi, ref buf, ref orgSize))
+			byte[] buf = RegUtils.RegData;
+			if (null == buf)
 			{
+				buf = new byte[ExeUtils.BufSize];
 				byte[] srcDate = BitConverter.GetBytes((Int64)DateTime.Now.Ticks);
-				byte[] serial = Encoding.ASCII.GetBytes(ExeUtils.GetSerialNumber());
-				byte[] pub = new byte[(int)ExeUtils.DataOffsets.PubKey];
-				byte[] prv = new byte[(int)ExeUtils.DataOffsets.PrivKey];
-				SecUtils.RSA(ref pub, ref prv, new System.Security.Cryptography.RSACryptoServiceProvider(512));
+				byte[] serial = Encoding.ASCII.GetBytes(RegUtils.GetSerialNumber());
+				byte[] pub = new byte[(int)RegUtils.DataOffsets.PubKey];
+				byte[] prv = new byte[(int)RegUtils.DataOffsets.PrivKey];
+				SecUtils.RSA(ref pub
+					, ref prv
+					, new System.Security.Cryptography.RSACryptoServiceProvider(512));
 
 				int pos = 0;
 				Array.Copy(srcDate, 0, buf, pos, srcDate.Length);
 
-				pos += (int)ExeUtils.DataOffsets.Data;
+				pos += (int)RegUtils.DataOffsets.Data;
 				Array.Copy(serial, 0, buf, pos, serial.Length);
 
-				pos += (int)ExeUtils.DataOffsets.Serial;
+				pos += (int)RegUtils.DataOffsets.Serial;
 				Array.Copy(pub, 0, buf, pos, pub.Length);
 
-				pos += (int)ExeUtils.DataOffsets.PubKey;
+				pos += (int)RegUtils.DataOffsets.PubKey;
 				Array.Copy(prv, 0, buf, pos, prv.Length);
 
-				ExeUtils.SetExeData(fi, buf);
+				RegUtils.RegData = buf;
 			}
 
-			if (!ExeUtils.CheckRegInfo(buf))
+			if (!RegUtils.CheckRegInfo(buf))
 			{
-				RegisterForm rdlg = new RegisterForm(ExeUtils.GetSerialNumberCrypted());
+				RegisterForm rdlg = new RegisterForm(RegUtils.GetSerialNumberCrypted());
 				Int64 ticks = BitConverter.ToInt64(buf, 0);
 				DateTime regDate = new DateTime(ticks);
 				TimeSpan daysLeft = regDate.AddDays(30).Subtract(DateTime.Now);
@@ -484,6 +486,83 @@ namespace GAssistant
 			{
 				UpdateInfo();
 			}
+		}
+		
+		private Dictionary<DateTime, int> GetPrognosedData(DateTime date)
+		{
+			Dictionary<DateTime, int> res = new Dictionary<DateTime, int>();
+			
+			DateTime dt = m_opt.StartTime.AddHours(-1);
+			while(dt < m_opt.EndTime.AddHours(1))
+			{
+				res[dt] = 3;
+				
+				dt = dt.AddMinutes(15);
+			}
+			
+			return res;
+		}
+
+		private Dictionary<DateTime, int> GetPresentData(DateTime date)
+		{
+			Dictionary<DateTime, int> res = new Dictionary<DateTime, int>();
+
+			Random rnd = new Random(Environment.TickCount);
+			DateTime dt = m_opt.StartTime.AddHours(-1);
+			while (dt < m_opt.EndTime.AddHours(1))
+			{
+				res[dt] = rnd.Next(5, 20);
+
+				dt = dt.AddMinutes(15);
+			}
+			
+			return res;
+		}
+
+		private void FillChart(object sender, ChartPaintEventArgs e)
+		{
+			DateTime date = m_calendar.SelectedDate;
+			bool today = false;
+			const int delta = 15;
+					
+			if(date.Date == DateTime.Now.Date)
+				today = true;
+						
+			int nIters = m_opt.EndTime.Subtract(m_opt.StartTime).Minutes / delta;
+			WaitDialog wd = new WaitDialog(0, today ? nIters * 2 : nIters, 1);
+			wd.Show();
+			wd.Refresh();			
+			
+			//chart1.SuspendLayout();
+
+			chart1.ChartAreas[0].AxisX.Interval = 60;
+			chart1.ChartAreas[0].AxisX.IntervalOffset = 0;
+			chart1.ChartAreas[0].AxisX.IsStartedFromZero = true;
+			
+			chart1.Series["seriesPresent"].Points.Clear();
+			chart1.Series["seriesPrognosed"].Points.Clear();
+			
+			Dictionary<DateTime, int> present = GetPresentData(date);
+			Dictionary<DateTime, int> prognosed = GetPrognosedData(date);
+
+			if(date.Date == DateTime.Now.Date)
+			{
+				foreach (KeyValuePair<DateTime, int> kv in present)
+				{
+					wd.StepIt();
+					chart1.Series["seriesPresent"].Points.AddXY(kv.Key, kv.Value);
+				}
+			}
+			
+			foreach (KeyValuePair<DateTime, int> kv in prognosed)
+			{
+				wd.StepIt();
+				chart1.Series["seriesPrognosed"].Points.AddXY(kv.Key, kv.Value);
+			}
+
+			//chart1.ResumeLayout();
+			chart1.Invalidate(true);
+			wd.Close();
 		}
     }
 }

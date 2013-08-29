@@ -29,10 +29,10 @@ Ukraine";
 
 		private void btnGenerate_Click(object sender, EventArgs e)
 		{
-			String randStr = ExeUtils.RandomString((int)ExeUtils.DataOffsets.ActKey / 4);
+			String randStr = RegUtils.RandomString((int)RegUtils.DataOffsets.ActKey / 4);
 
 			String data = "This application copy is registered to:\n\n";
-			data += String.Format("{0} {1}\n", textFName.Text.ToUpper(), textLName.Text.ToUpper());
+			data += String.Format("{0} {1}\n\n", textFName.Text.ToUpper(), textLName.Text.ToUpper());
 			data += String.Format("Address: {0}\n", textAddress.Text);
 			data += String.Format("Email: {0}\n", textEmail.Text); 
 			data += String.Format("Phone: {0}\n", textPhone.Text);
@@ -42,7 +42,7 @@ Ukraine";
 			byte[] key = Encoding.UTF8.GetBytes(data);
 			for(int n = 0; n < key.Length; n++)
 			{
-				ExeUtils.ROL(ref key[n], n % 8);
+				RegUtils.ROL(ref key[n], n % 8);
 			}
 			
 			String key64 = Convert.ToBase64String(key);

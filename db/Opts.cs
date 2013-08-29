@@ -241,11 +241,12 @@ namespace AY
 			{
 				get
 				{
+					m_startTime = DateTime.Now.Date.Add(m_startTime.TimeOfDay);
 					return m_startTime;
 				}
 				set
 				{
-					m_startTime = value;
+					m_startTime = DateTime.Now.Date.Add(value.TimeOfDay);
 				}
 			}
 
@@ -253,11 +254,12 @@ namespace AY
 			{
 				get
 				{
+					m_endTime = DateTime.Now.Date.Add(m_endTime.TimeOfDay);
 					return m_endTime;
 				}
 				set
 				{
-					m_endTime = value;
+					m_endTime = DateTime.Now.Date.Add(value.TimeOfDay);
 				}
 			}
 			

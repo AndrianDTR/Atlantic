@@ -83,9 +83,10 @@ namespace GAssistant
 			// 
 			this.textActKey.BackColor = System.Drawing.SystemColors.Window;
 			this.textActKey.Location = new System.Drawing.Point(171, 85);
-			this.textActKey.MaxLength = 2048;
+			this.textActKey.MaxLength = 32768;
 			this.textActKey.Multiline = true;
 			this.textActKey.Name = "textActKey";
+			this.textActKey.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textActKey.Size = new System.Drawing.Size(366, 80);
 			this.textActKey.TabIndex = 0;
 			// 
@@ -138,34 +139,27 @@ namespace GAssistant
 		{
 			try
 			{
-				FileInfo fi = new FileInfo("reporter.exe");
-				byte[] buf = new byte[ExeUtils.BufSize];
-				Int64 orgSize = 0;
-				
-				if (ExeUtils.GetExeData(fi, ref buf, ref orgSize))
+				byte[] buf = RegUtils.RegData;
+				if (null == buf)
 				{
-					byte[] srcDate = BitConverter.GetBytes((Int64)DateTime.Now.Ticks);
-					byte[] serial = Encoding.ASCII.GetBytes(ExeUtils.GetSerialNumber());
-					byte[] act = Convert.FromBase64String(textActKey.Text);
-					
-					int pos = 0;
-					Array.Copy(srcDate, 0, buf, pos, srcDate.Length);
-
-					pos += (int)ExeUtils.DataOffsets.Data;
-					Array.Copy(serial, 0, buf, pos, serial.Length);
-					
-					pos += (int)ExeUtils.DataOffsets.Serial;
-					pos += (int)ExeUtils.DataOffsets.PubKey;
-					pos += (int)ExeUtils.DataOffsets.PrivKey;
-					Array.Copy(act, 0, buf, pos, act.Length);
-
-					ExeUtils.SetExeData(fi, buf, orgSize);
-
-					DialogResult = DialogResult.OK;
-					this.Close();
+					throw new Exception("Invalid data.");
 				}
+			
+				byte[] act = Convert.FromBase64String(textActKey.Text);
+				
+				int pos = 0;
+				pos += (int)RegUtils.DataOffsets.Data;
+				pos += (int)RegUtils.DataOffsets.Serial;
+				pos += (int)RegUtils.DataOffsets.PubKey;
+				pos += (int)RegUtils.DataOffsets.PrivKey;
+				Array.Copy(act, 0, buf, pos, act.Length);
+
+				RegUtils.RegData = buf;
+
+				DialogResult = DialogResult.OK;
+				this.Close();
 			}
-			catch (System.Exception ex)
+			catch (System.Exception)
 			{
 				UIMessages.Info("Invalid activation key has been entered.");
 			}
