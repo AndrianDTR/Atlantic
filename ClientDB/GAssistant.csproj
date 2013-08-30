@@ -344,12 +344,6 @@
     <None Include="ean13.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="FRE3OF9X.TTF">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="FREE3OF9.TTF">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\Game-diamond-icon.png" />
     <None Include="Resources\appointment_missed.png" />
   </ItemGroup>
