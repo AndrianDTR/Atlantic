@@ -799,8 +799,10 @@ namespace AY
 					new SQLiteCommand(tStatistics, conn).ExecuteNonQuery();
 					new SQLiteCommand(tTarinersSchedule, conn).ExecuteNonQuery();
 					new SQLiteCommand(tScheduleRules, conn).ExecuteNonQuery();
-					
+
+#if DEBUG
 					FillSampleData();
+#endif
 				}
 				catch (SQLiteException ex)
 				{

@@ -12,14 +12,18 @@ namespace GAssistant
 		public Login()
         {
             InitializeComponent();
-            m_loginAttempt = 3;
-        }
+            m_loginAttempt = 2;
+#if DEBUG
+			userName.Text = "admin";
+			password.Text = "administrator";
+#endif
+		}
 		
 		private void loginBtn_Click(object sender, EventArgs e)
 		{
 			if (m_loginAttempt == 0)
 			{
-				Logger.Error("Login failed, no attempt left");
+				Logger.Error("Login failed, no attempt left.");
 				this.DialogResult = DialogResult.Cancel;
 				this.Close();
 			}
@@ -48,8 +52,10 @@ namespace GAssistant
 
 		private void pictureBox1_Click(object sender, EventArgs e)
 		{
+#if DEBUG
 			Logger.Warning("Clear DB by user request.");
 			DbAdapter.ClearDB();
+#endif
 		}
     }
 }

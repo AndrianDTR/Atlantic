@@ -24,13 +24,17 @@ namespace GAssistant
 				DbAdapter ad = new DbAdapter();
 				if( !ad.CheckTables())
 				{
-					Logger.Critical("DB is corrupt.");
-					DialogResult res = UIMessages.Error("Database is corrupt.", MessageBoxButtons.YesNo);
-					if(res == DialogResult.Yes)
+					Logger.Critical("DB is corrupt or not found.");
+					DialogResult res = UIMessages.Error("Database is corrupt or not found.\n"
+						+ "Do you wish to recreate database with default options?"
+						, MessageBoxButtons.YesNo);
+					if(res != DialogResult.Yes)
 					{
-						Logger.Warning("Clear DB after corrupt.");
-						DbAdapter.ClearDB();
+						throw new Exception("Database is corrupt.");	
 					}
+					
+					Logger.Warning("Clear DB after corrupt.");
+					DbAdapter.ClearDB();
 				}
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
@@ -40,7 +44,9 @@ namespace GAssistant
 			{
 				Logger.Critical(ex.ToString());
 				Logger.Trace(ex.StackTrace);
-				if(DialogResult.Yes == UIMessages.Error("Program exited abnormally. Would you like to send report about this?", MessageBoxButtons.YesNo))
+				if(DialogResult.Yes == UIMessages.Error("Program has been exited abnormally.\n"
+					+ "Would you like to send report about this situation?"
+					, MessageBoxButtons.YesNo))
 				{
 					sendReport = true;
 				}
