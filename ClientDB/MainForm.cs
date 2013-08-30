@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Text;
+using System.Collections.Generic;
+using System.Windows.Forms.DataVisualization.Charting;
 using AY.Log;
 using AY.db;
 using AY.Utils;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms.DataVisualization.Charting;
-using System.Collections.Generic;
 
 namespace GAssistant
 {
@@ -142,7 +142,7 @@ namespace GAssistant
 			btnBackUp.Enabled = UserRole.IsSet(priv.Backup, UserRights.Write);
 
 			// Search menu
-			clientByBarcodeToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
+			clientSearchToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
 
 			// View menu
 			paymentsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Payments, UserRights.Read);
@@ -270,8 +270,8 @@ namespace GAssistant
 				}
 			}
 		}
-		
-		private void clientByBarcodeToolStripMenuItem_Click(object sender, EventArgs e)
+
+		private void clientSearchToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Prompt dlg = new Prompt();
 			dlg.Text = "Search client by code";
@@ -564,6 +564,12 @@ namespace GAssistant
 			//chart1.ResumeLayout();
 			chart1.Invalidate(true);
 			wd.Close();
+		}
+
+		private void geterateBarcodesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			BarcodePrinter bp = new BarcodePrinter();
+			bp.ShowDialog();
 		}
     }
 }

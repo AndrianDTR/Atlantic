@@ -13,7 +13,7 @@ namespace GAssistant
 		private ClientCollection m_clients = null;
 		private int[] m_days = null;
 		private Dictionary<DateTime, String> m_trainerDate2NameMap = new Dictionary<DateTime, String>();
-		private Opts m_opt = new Opts();
+		//private Opts m_opt = new Opts();
 		
 		private bool showTrainers = false;
 		private bool showClientCount = false;
@@ -27,8 +27,8 @@ namespace GAssistant
 		{
 			try
 			{
-				showTrainers = m_opt.ShowTrainer;
-				showClientCount = m_opt.ShowClientCount;
+				//showTrainers = m_opt.ShowTrainer;
+				//showClientCount = m_opt.ShowClientCount;
 				
 				m_days = CultureInfoUtils.RShift<int>(
 					  new int[7] { 0, 1, 2, 3, 4, 5, 6 }
@@ -55,29 +55,35 @@ namespace GAssistant
 		{
 			Logger.Enter();
 			CellInfo ci = new CellInfo(dt);
-			
-			int clCount = 0;
-			foreach(Client client in m_clients)
+			try
 			{
-				int ndx = m_days[(int)ci.date.DayOfWeek];
-				if (client.ScheduleDays[ndx] == 'X')
-					clCount++;
-			}
-			String trainer = m_trainerDate2NameMap.ContainsKey(ci.date) 
-				? m_trainerDate2NameMap[ci.date] 
-				: "";
+				int clCount = 0;
+				foreach(Client client in m_clients)
+				{
+					int ndx = m_days[(int)ci.date.DayOfWeek];
+					if (client.ScheduleDays[ndx] == 'X')
+						clCount++;
+				}
+				String trainer = m_trainerDate2NameMap.ContainsKey(ci.date) 
+					? m_trainerDate2NameMap[ci.date] 
+					: "";
 
-			if (showTrainers)	
-			{
-				ci.sTip += String.Format("Trainer: {0}", trainer);
+				if (showTrainers)	
+				{
+					ci.sTip += String.Format("Trainer: {0}", trainer);
+				}
+				
+				if (showClientCount)
+				{
+					if (showTrainers)
+						ci.sTip += "\n";
+							
+					ci.sTip += String.Format("Clients:{0}", clCount);
+				}
 			}
-			
-			if (showClientCount)
+			catch (System.Exception)
 			{
-				if (showTrainers)
-					ci.sTip += "\n";
-						
-				ci.sTip += String.Format("Clients:{0}", clCount);
+
 			}
 			
 			Logger.Leave();

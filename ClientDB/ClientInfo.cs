@@ -134,31 +134,6 @@ namespace GAssistant
 			}
 		}
 		
-		private static String GetGroupValue(String str2parse, String grp)
-		{
-			String res = "";
-			foreach (Char s in str2parse)
-			{
-				int ndx = int.Parse(s.ToString());
-				res += grp[ndx];
-			}
-			return res;
-		}
-		
-		public static String GenerateEan13Code(String val)
-		{
-			if(val.Length < Session.MinBarcodeLen)
-			{
-				val = val.PadLeft(Session.MinBarcodeLen, '0');
-			}
-			
-			String grp1 = GetGroupValue(val.Substring(0, 1), "0123456789");
-			String grp2 = GetGroupValue(val.Substring(1, 6), "ABCDEFGHIJ");
-			String grp3 = GetGroupValue(val.Substring(7, 6), "abcdefghij");
-								
-			return String.Format("{0}{1}*{2}+", grp1, grp2, grp3);
-		}
-
 		public Int64 Id
 		{
 			get { return m_clienId; }

@@ -39,14 +39,12 @@
 			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.clientByBarcodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.paymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.scheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.trainersScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clientSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
 			this.manageClientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,6 +84,8 @@
 			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
+			this.geterateBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tabManager.SuspendLayout();
@@ -100,7 +100,6 @@
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.searchToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.clientToolStripMenuItem,
             this.trainersToolStripMenuItem,
@@ -142,25 +141,6 @@
 			resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
-			// searchToolStripMenuItem
-			// 
-			this.searchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clientByBarcodeToolStripMenuItem,
-            this.paymentToolStripMenuItem});
-			this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-			resources.ApplyResources(this.searchToolStripMenuItem, "searchToolStripMenuItem");
-			// 
-			// clientByBarcodeToolStripMenuItem
-			// 
-			this.clientByBarcodeToolStripMenuItem.Name = "clientByBarcodeToolStripMenuItem";
-			resources.ApplyResources(this.clientByBarcodeToolStripMenuItem, "clientByBarcodeToolStripMenuItem");
-			this.clientByBarcodeToolStripMenuItem.Click += new System.EventHandler(this.clientByBarcodeToolStripMenuItem_Click);
-			// 
-			// paymentToolStripMenuItem
-			// 
-			this.paymentToolStripMenuItem.Name = "paymentToolStripMenuItem";
-			resources.ApplyResources(this.paymentToolStripMenuItem, "paymentToolStripMenuItem");
-			// 
 			// viewToolStripMenuItem
 			// 
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -189,11 +169,20 @@
 			// clientToolStripMenuItem
 			// 
 			this.clientToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clientSearchToolStripMenuItem,
             this.addToolStripMenuItem,
             this.toolStripMenuItem5,
-            this.manageClientsToolStripMenuItem});
+            this.manageClientsToolStripMenuItem,
+            this.toolStripMenuItem6,
+            this.geterateBarcodesToolStripMenuItem});
 			this.clientToolStripMenuItem.Name = "clientToolStripMenuItem";
 			resources.ApplyResources(this.clientToolStripMenuItem, "clientToolStripMenuItem");
+			// 
+			// clientSearchToolStripMenuItem
+			// 
+			this.clientSearchToolStripMenuItem.Name = "clientSearchToolStripMenuItem";
+			resources.ApplyResources(this.clientSearchToolStripMenuItem, "clientSearchToolStripMenuItem");
+			this.clientSearchToolStripMenuItem.Click += new System.EventHandler(this.clientSearchToolStripMenuItem_Click);
 			// 
 			// addToolStripMenuItem
 			// 
@@ -498,6 +487,17 @@
 			this.btnAddClient.UseVisualStyleBackColor = true;
 			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
 			// 
+			// geterateBarcodesToolStripMenuItem
+			// 
+			this.geterateBarcodesToolStripMenuItem.Name = "geterateBarcodesToolStripMenuItem";
+			resources.ApplyResources(this.geterateBarcodesToolStripMenuItem, "geterateBarcodesToolStripMenuItem");
+			this.geterateBarcodesToolStripMenuItem.Click += new System.EventHandler(this.geterateBarcodesToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem6
+			// 
+			this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+			resources.ApplyResources(this.toolStripMenuItem6, "toolStripMenuItem6");
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -530,10 +530,7 @@
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem clientByBarcodeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem paymentToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clientToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
@@ -578,6 +575,9 @@
 		private System.Windows.Forms.ToolStripMenuItem trainersScheduleToolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem manageTrainersToolStripMenuItem;
 		private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+		private System.Windows.Forms.ToolStripMenuItem clientSearchToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+		private System.Windows.Forms.ToolStripMenuItem geterateBarcodesToolStripMenuItem;
     }
 }
 
