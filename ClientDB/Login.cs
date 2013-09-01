@@ -32,7 +32,7 @@ namespace GAssistant
 			
 			User user = User.Authenticate(userName.Text, password.Text);
 			
-			if(user != null)
+			if(user != null && user.Role.Id != 0)
 			{
 				Session.Instance.User = user;
 				Logger.Info(String.Format("User {0} login.", user.Name));

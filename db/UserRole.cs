@@ -41,7 +41,7 @@ namespace AY
 
 				if (data == null)
 				{
-					throw new Exception("Error! No such role.");
+					return;//throw new Exception("Error! No such role.");
 				}
 			
 				m_id = id;

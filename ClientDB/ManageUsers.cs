@@ -28,10 +28,12 @@ namespace GAssistant
 		private void OnLoad(object sender, EventArgs e)
 		{
 			m_userRole.Items.Clear();
+
+			m_userRole.Items.Add(new UserRole());
 			
 			foreach (UserRole priv in privCollection)
 			{
-				int nItem = m_userRole.Items.Add(priv);
+				m_userRole.Items.Add(priv);
 			}
 			
 			ReloadUsers();
@@ -63,7 +65,7 @@ namespace GAssistant
 			UserRole priv = privCollection.Search(curItem.Role.Id);
 			if(priv == null)
 			{
-				UIMessages.Error("Invalid user role has been specified.");
+				m_userRole.SelectedIndex = 0;
 				return;
 			}
 			
