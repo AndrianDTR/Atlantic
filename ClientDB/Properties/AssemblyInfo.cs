@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("G-Assistant")]
 [assembly: AssemblyDescription("Assistant utility to manage gym work.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Developed by Andrian Yablonskyy (andrian.yablonskyy@gmail.com)")]
+[assembly: AssemblyCompany("PRO100 Soft")]
 [assembly: AssemblyProduct("G-Assistant")]
 [assembly: AssemblyCopyright("Copyright © Andrian Yablonskyy 2013")]
 [assembly: AssemblyTrademark("")]

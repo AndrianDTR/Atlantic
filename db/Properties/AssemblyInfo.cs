@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("db")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("DB Adapter")]
+[assembly: AssemblyDescription("Helper lib to simplify save restore data from DB.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Andrian Yablonskyy")]
-[assembly: AssemblyProduct("db")]
+[assembly: AssemblyCompany("PRO100 Soft")]
+[assembly: AssemblyProduct("G-Assistant")]
 [assembly: AssemblyCopyright("Copyright © Andrian Yablonskyy 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

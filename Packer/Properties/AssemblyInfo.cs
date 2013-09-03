@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Packer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Zip utility functional class library.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Andrian Yablonskyy")]
+[assembly: AssemblyCompany("PRO100 Soft")]
 [assembly: AssemblyProduct("Packer")]
 [assembly: AssemblyCopyright("Copyright © Andrian Yablonskyy 2013")]
 [assembly: AssemblyTrademark("")]

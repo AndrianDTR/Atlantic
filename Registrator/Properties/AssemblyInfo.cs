@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Registrator")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Activation key generator.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Samsung")]
+[assembly: AssemblyCompany("PRO100 Soft")]
 [assembly: AssemblyProduct("Registrator")]
-[assembly: AssemblyCopyright("Copyright © Samsung 2013")]
+[assembly: AssemblyCopyright("Copyright © Andrian Yablonskyy 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
