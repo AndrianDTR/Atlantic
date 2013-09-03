@@ -141,9 +141,6 @@ namespace GAssistant
 			importToolStripMenuItem.Enabled = UserRole.IsSet(priv.Backup, UserRights.Write);
 			btnBackUp.Enabled = UserRole.IsSet(priv.Backup, UserRights.Write);
 
-			// Search menu
-			clientSearchToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
-
 			// View menu
 			paymentsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Payments, UserRights.Read);
 			btnPaymentsHistory.Enabled = UserRole.IsSet(priv.Payments, UserRights.Read);
@@ -151,6 +148,8 @@ namespace GAssistant
 			// Clients menu
 			addToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Create);
 			btnAddClient.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
+			
+			clientSearchToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
 			manageClientsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
 			btnClientManager.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
 
@@ -271,19 +270,29 @@ namespace GAssistant
 			}
 		}
 
+		private void btnSearch_Click(object sender, EventArgs e)
+		{
+			SearchClient();
+		}
+		
 		private void clientSearchToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			SearchClient();
+		}
+		
+		private void SearchClient()
 		{
 			Prompt dlg = new Prompt();
 			dlg.Text = "Search client by code";
-			while(DialogResult.OK == dlg.ShowDialog())
+			while (DialogResult.OK == dlg.ShowDialog())
 			{
 				Int64 id = Session.CheckBarCode(dlg.Value);
-				if(0 == id)
+				if (0 == id)
 				{
 					dlg.Clear();
-					continue;	
+					continue;
 				}
-				
+
 				if (Client.CodeExists(id))
 				{
 					ClientInfo ci = new ClientInfo(id);
@@ -297,7 +306,7 @@ namespace GAssistant
 				{
 					UIMessages.Warning("Specified card is unregistered.");
 				}
-				
+
 				dlg.Clear();
 			}
 		}

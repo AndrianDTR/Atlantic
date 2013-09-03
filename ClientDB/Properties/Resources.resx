@@ -130,6 +130,9 @@
   <data name="appointment_missed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\appointment_missed.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Game-diamond-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Game-diamond-icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="1367459833_lock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1367459833_lock.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -138,6 +141,9 @@
   </data>
   <data name="1367375035_filesave" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1367375035_filesave.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1367373274_lock_locked" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1367373274_lock_locked.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -148,7 +154,7 @@
   <data name="1367374740_edit_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1367374740_edit_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Game-diamond-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Game-diamond-icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="search (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\search (1).png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

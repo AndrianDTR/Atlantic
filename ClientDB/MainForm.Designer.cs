@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +48,8 @@
 			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
 			this.manageClientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+			this.geterateBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.trainersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.trainersScheduleToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.manageTrainersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,14 +80,13 @@
 			this.tabStatistics = new System.Windows.Forms.TabPage();
 			this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.btnSearch = new System.Windows.Forms.Button();
 			this.btmMissLesson = new System.Windows.Forms.Button();
 			this.btnBackUp = new System.Windows.Forms.Button();
 			this.btnTrainersShedule = new System.Windows.Forms.Button();
 			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
-			this.geterateBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tabManager.SuspendLayout();
@@ -200,6 +201,17 @@
 			this.manageClientsToolStripMenuItem.Name = "manageClientsToolStripMenuItem";
 			resources.ApplyResources(this.manageClientsToolStripMenuItem, "manageClientsToolStripMenuItem");
 			this.manageClientsToolStripMenuItem.Click += new System.EventHandler(this.manageClientsToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem6
+			// 
+			this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+			resources.ApplyResources(this.toolStripMenuItem6, "toolStripMenuItem6");
+			// 
+			// geterateBarcodesToolStripMenuItem
+			// 
+			this.geterateBarcodesToolStripMenuItem.Name = "geterateBarcodesToolStripMenuItem";
+			resources.ApplyResources(this.geterateBarcodesToolStripMenuItem, "geterateBarcodesToolStripMenuItem");
+			this.geterateBarcodesToolStripMenuItem.Click += new System.EventHandler(this.geterateBarcodesToolStripMenuItem_Click);
 			// 
 			// trainersToolStripMenuItem
 			// 
@@ -399,37 +411,38 @@
 			// 
 			// chart1
 			// 
-			chartArea1.AxisX.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
-			chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
-			chartArea1.Name = "ChartArea1";
-			this.chart1.ChartAreas.Add(chartArea1);
+			chartArea2.AxisX.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
+			chartArea2.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
+			chartArea2.Name = "ChartArea1";
+			this.chart1.ChartAreas.Add(chartArea2);
 			resources.ApplyResources(this.chart1, "chart1");
-			legend1.Name = "Legend1";
-			this.chart1.Legends.Add(legend1);
+			legend2.Name = "Legend1";
+			this.chart1.Legends.Add(legend2);
 			this.chart1.Name = "chart1";
-			series1.ChartArea = "ChartArea1";
-			series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-			series1.Color = System.Drawing.Color.Blue;
-			series1.IsXValueIndexed = true;
-			series1.Legend = "Legend1";
-			series1.LegendText = "Present";
-			series1.Name = "seriesPresent";
-			series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-			series2.ChartArea = "ChartArea1";
-			series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-			series2.Color = System.Drawing.Color.Red;
-			series2.IsXValueIndexed = true;
-			series2.Legend = "Legend1";
-			series2.LegendText = "Prognose";
-			series2.Name = "seriesPrognosed";
-			series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-			series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
-			this.chart1.Series.Add(series1);
-			this.chart1.Series.Add(series2);
+			series3.ChartArea = "ChartArea1";
+			series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+			series3.Color = System.Drawing.Color.Blue;
+			series3.IsXValueIndexed = true;
+			series3.Legend = "Legend1";
+			series3.LegendText = "Present";
+			series3.Name = "seriesPresent";
+			series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+			series4.ChartArea = "ChartArea1";
+			series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+			series4.Color = System.Drawing.Color.Red;
+			series4.IsXValueIndexed = true;
+			series4.Legend = "Legend1";
+			series4.LegendText = "Prognose";
+			series4.Name = "seriesPrognosed";
+			series4.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+			series4.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
+			this.chart1.Series.Add(series3);
+			this.chart1.Series.Add(series4);
 			this.chart1.PrePaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.FillChart);
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.btnSearch);
 			this.panel1.Controls.Add(this.btmMissLesson);
 			this.panel1.Controls.Add(this.btnBackUp);
 			this.panel1.Controls.Add(this.btnTrainersShedule);
@@ -438,6 +451,14 @@
 			this.panel1.Controls.Add(this.btnAddClient);
 			resources.ApplyResources(this.panel1, "panel1");
 			this.panel1.Name = "panel1";
+			// 
+			// btnSearch
+			// 
+			this.btnSearch.Image = global::GAssistant.Properties.Resources.search;
+			resources.ApplyResources(this.btnSearch, "btnSearch");
+			this.btnSearch.Name = "btnSearch";
+			this.btnSearch.UseVisualStyleBackColor = true;
+			this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
 			// 
 			// btmMissLesson
 			// 
@@ -486,17 +507,6 @@
 			this.btnAddClient.Name = "btnAddClient";
 			this.btnAddClient.UseVisualStyleBackColor = true;
 			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
-			// 
-			// geterateBarcodesToolStripMenuItem
-			// 
-			this.geterateBarcodesToolStripMenuItem.Name = "geterateBarcodesToolStripMenuItem";
-			resources.ApplyResources(this.geterateBarcodesToolStripMenuItem, "geterateBarcodesToolStripMenuItem");
-			this.geterateBarcodesToolStripMenuItem.Click += new System.EventHandler(this.geterateBarcodesToolStripMenuItem_Click);
-			// 
-			// toolStripMenuItem6
-			// 
-			this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-			resources.ApplyResources(this.toolStripMenuItem6, "toolStripMenuItem6");
 			// 
 			// MainForm
 			// 
@@ -578,6 +588,7 @@
 		private System.Windows.Forms.ToolStripMenuItem clientSearchToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
 		private System.Windows.Forms.ToolStripMenuItem geterateBarcodesToolStripMenuItem;
+		private System.Windows.Forms.Button btnSearch;
     }
 }
 
