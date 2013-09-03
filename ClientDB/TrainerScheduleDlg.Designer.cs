@@ -39,6 +39,7 @@
 			// 
 			this.monthCalendar.CalendarDimensions = new System.Drawing.Size(3, 1);
 			this.monthCalendar.Location = new System.Drawing.Point(0, 0);
+			this.monthCalendar.Margin = new System.Windows.Forms.Padding(14, 13, 14, 13);
 			this.monthCalendar.Name = "monthCalendar";
 			this.monthCalendar.TabIndex = 0;
 			this.monthCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.OnDateChanged);
@@ -46,9 +47,10 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 164);
+			this.label1.Location = new System.Drawing.Point(18, 252);
+			this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(40, 13);
+			this.label1.Size = new System.Drawing.Size(58, 20);
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Trainer";
 			// 
@@ -56,18 +58,20 @@
 			// 
 			this.comboTrainers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboTrainers.FormattingEnabled = true;
-			this.comboTrainers.Location = new System.Drawing.Point(58, 161);
+			this.comboTrainers.Location = new System.Drawing.Point(87, 248);
+			this.comboTrainers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.comboTrainers.Name = "comboTrainers";
-			this.comboTrainers.Size = new System.Drawing.Size(421, 21);
+			this.comboTrainers.Size = new System.Drawing.Size(444, 28);
 			this.comboTrainers.TabIndex = 2;
 			this.comboTrainers.SelectedIndexChanged += new System.EventHandler(this.OnTrainerChanged);
 			// 
 			// btnCancel
 			// 
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.Location = new System.Drawing.Point(243, 195);
+			this.btnCancel.Location = new System.Drawing.Point(286, 298);
+			this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.btnCancel.Name = "btnCancel";
-			this.btnCancel.Size = new System.Drawing.Size(75, 23);
+			this.btnCancel.Size = new System.Drawing.Size(112, 36);
 			this.btnCancel.TabIndex = 3;
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
@@ -75,9 +79,11 @@
 			// btnOk
 			// 
 			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnOk.Location = new System.Drawing.Point(162, 195);
+			this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.btnOk.Location = new System.Drawing.Point(165, 298);
+			this.btnOk.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.btnOk.Name = "btnOk";
-			this.btnOk.Size = new System.Drawing.Size(75, 23);
+			this.btnOk.Size = new System.Drawing.Size(112, 36);
 			this.btnOk.TabIndex = 4;
 			this.btnOk.Text = "OK";
 			this.btnOk.UseVisualStyleBackColor = true;
@@ -86,16 +92,18 @@
 			// TrainerScheduleDlg
 			// 
 			this.AcceptButton = this.btnOk;
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
-			this.ClientSize = new System.Drawing.Size(480, 226);
+			this.ClientSize = new System.Drawing.Size(563, 348);
 			this.Controls.Add(this.btnOk);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.comboTrainers);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.monthCalendar);
+			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "TrainerScheduleDlg";

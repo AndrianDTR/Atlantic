@@ -13,7 +13,7 @@ namespace GAssistant
 		private ClientCollection m_clients = null;
 		private int[] m_days = null;
 		private Dictionary<DateTime, String> m_trainerDate2NameMap = new Dictionary<DateTime, String>();
-		//private Opts m_opt = new Opts();
+		private Opts m_opt = new Opts();
 		
 		private bool showTrainers = false;
 		private bool showClientCount = false;
@@ -27,8 +27,8 @@ namespace GAssistant
 		{
 			try
 			{
-				//showTrainers = m_opt.ShowTrainer;
-				//showClientCount = m_opt.ShowClientCount;
+				showTrainers = m_opt.ShowTrainer;
+				showClientCount = m_opt.ShowClientCount;
 				
 				m_days = CultureInfoUtils.RShift<int>(
 					  new int[7] { 0, 1, 2, 3, 4, 5, 6 }
