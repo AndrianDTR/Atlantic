@@ -8,12 +8,29 @@ namespace GAssistant
 	public partial class ManageClients : Form
 	{
 		ClientCollection m_collection = new ClientCollection();
+		WaitDialog wd = new WaitDialog(0,0,0);
 		
 		public ManageClients()
 		{
 			InitializeComponent();
+			Init();
 		}
-
+		
+		public void UpdateRange(Int64 maxCount)
+		{
+			wd.Max = (int)maxCount;
+		}
+		
+		private void Init()
+		{
+			wd.Show();
+			wd.Refresh();
+			m_collection.CountChangedHandler = UpdateRange;
+			m_collection.CollectionChangedHandler = wd.StepIt;
+			m_collection.Refresh();
+			wd.Close();
+		}
+		
 		private void btnClose_Click(object sender, EventArgs e)
 		{
 			this.Close();
@@ -35,7 +52,7 @@ namespace GAssistant
 		private void FillGrid()
 		{
 			gridClients.Rows.Clear();
-
+			
 			foreach (Client client in m_collection)
 			{
 				bool addCode = false;

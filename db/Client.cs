@@ -7,9 +7,8 @@ namespace AY
 {
 	namespace db
 	{
-		public class Client
+		public class Client : DbTableRow
 		{
-			private Int64 m_id = 0;
 			private String m_name = String.Empty;
 			private String m_phone = String.Empty;
 			private String m_comment = String.Empty;
@@ -39,71 +38,42 @@ namespace AY
 				return true;
 			}
 			
-			private Client()
+			public Client(Int64 id):base(DbTable.Clients, id)
 			{
+				m_name = Row["name"].ToString();
+				m_phone = Row["phone"].ToString();
+				m_comment = Row["comment"].ToString();
+				m_extraInfo = Row["extraInfo"].ToString();
+				m_scheduleDays = Row["scheduleDays"].ToString();
+				m_scheduleTime = DateTime.Parse(Row["scheduleTime"].ToString());
+				m_lastEnter = DateTime.Parse(Row["lastEnter"].ToString());
+				m_lastLeave = DateTime.Parse(Row["lastLeave"].ToString());
+				m_openTicket = DateTime.Parse(Row["openTicket"].ToString());
+				m_trainer = Int64.Parse(Row["trainer"].ToString());
+				m_timesLeft = int.Parse(Row["timesLeft"].ToString());
+			}
+
+			public Client(DataRow data)
+			{
+				Row = data;
+				m_name = Row["name"].ToString();
+				m_phone = Row["phone"].ToString();
+				m_comment = Row["comment"].ToString();
+				m_extraInfo = Row["extraInfo"].ToString();
+				m_scheduleDays = Row["scheduleDays"].ToString();
+				m_scheduleTime = DateTime.Parse(Row["scheduleTime"].ToString());
+				m_lastEnter = DateTime.Parse(Row["lastEnter"].ToString());
+				m_lastLeave = DateTime.Parse(Row["lastLeave"].ToString());
+				m_openTicket = DateTime.Parse(Row["openTicket"].ToString());
+				m_trainer = Int64.Parse(Row["trainer"].ToString());
+				m_timesLeft = int.Parse(Row["timesLeft"].ToString());
 			}
 			
-			public Client(Int64 id)
-			{	
-				String where = String.Format("id = {0}", id);
-				DataRow data = new DbAdapter().GetFirstRow(DbTable.Clients, where, new List<string>());
-
-				if (data == null)
-				{
-					throw new Exception("Error! No such client.");
-				}
-
-				m_id = id;
-				m_name = data["name"].ToString();
-				m_phone = data["phone"].ToString();
-				m_comment = data["comment"].ToString();
-				m_extraInfo = data["extraInfo"].ToString();
-				m_scheduleDays = data["scheduleDays"].ToString();
-				m_scheduleTime = DateTime.Parse(data["scheduleTime"].ToString());
-				m_lastEnter = DateTime.Parse(data["lastEnter"].ToString());
-				m_lastLeave = DateTime.Parse(data["lastLeave"].ToString());
-				m_openTicket = DateTime.Parse(data["openTicket"].ToString());
-				m_trainer = Int64.Parse(data["trainer"].ToString());
-				m_timesLeft = int.Parse(data["timesLeft"].ToString());
-			}
-
-			public Client(String name)
-			{
-				String where = String.Format("name = '{0}'", name);
-				DataRow data = new DbAdapter().GetFirstRow(DbTable.Clients, where, new List<string>());
-				
-				if (data == null)
-				{
-					throw new Exception("Error! No such client.");
-				}
-
-				m_id = Int64.Parse(data["id"].ToString());
-				m_name = data["name"].ToString();
-				m_phone = data["phone"].ToString();
-				m_comment = data["comment"].ToString();
-				m_extraInfo = data["extraInfo"].ToString();
-				m_scheduleDays = data["scheduleDays"].ToString();
-				m_scheduleTime = DateTime.Parse(data["scheduleTime"].ToString());
-				m_lastEnter = DateTime.Parse(data["lastEnter"].ToString());
-				m_lastLeave = DateTime.Parse(data["lastLeave"].ToString());
-				m_openTicket = DateTime.Parse(data["openTicket"].ToString());
-				m_trainer = Int64.Parse(data["trainer"].ToString());
-				m_timesLeft = int.Parse(data["timesLeft"].ToString());
-			}
-			
-			public Int64 Id
-			{
-				get
-				{
-					return m_id;
-				}
-			}
-
 			public String Code
 			{
 				get
 				{
-					return m_id.ToString().PadLeft(13, '0');
+					return m_id.ToString();
 				}
 			}
 			
@@ -380,15 +350,57 @@ namespace AY
 			}
 		}
 
-		public class ClientCollection : IEnumerable<Client>
+		public class ClientCollection : DbTableRowCollection<Client> 
 		{
-			Dictionary<Int64, Client> Items = new Dictionary<Int64, Client>();
-			
-			public ClientCollection():this("")
+			private CountChangedEventHandler m_countChanged = null;
+			private CollectionChangedEventHandler m_collectionChanged = null;
+
+			public CollectionChangedEventHandler CollectionChangedHandler
 			{
+				get
+				{
+					return m_collectionChanged;
+				}
+				set
+				{
+					m_collectionChanged = value;
+				}
+			}
+			
+			public CountChangedEventHandler CountChangedHandler
+			{
+				get
+				{
+					return m_countChanged;
+				}
+				set
+				{
+					m_countChanged = value;
+				}
 			}
 
-			public ClientCollection(String filter)
+			public override void OnCollectionChanged()
+			{
+				if (null != m_collectionChanged)
+					m_collectionChanged();
+			}
+			
+			public override void OnCountChanged(Int64 newCount)
+			{
+				if(null != m_countChanged)
+					m_countChanged(newCount);
+			}
+
+			public ClientCollection()
+			{
+			}
+			
+			public void Refresh()
+			{
+				Refresh("");
+			}
+
+			public void Refresh(String filter)
 			{
 				DbAdapter da = new DbAdapter();
 				
@@ -396,14 +408,18 @@ namespace AY
 					filter = "where " + filter;
 				
 				DataTable dt = da.ExecuteQuery(
-					  String.Format("select id from {0} {1};"
+					  String.Format("select * from {0} {1};"
 					, DbUtils.GetTableName(DbTable.Clients)
 					, filter));
-				foreach(DataRow dr in dt.Rows)
+
+				OnCountChanged(dt.Rows.Count);
+				
+				foreach (DataRow dr in dt.Rows)
 				{
-					Client user = new Client(Int64.Parse(dr["id"].ToString()));
-					Items[user.Id] = user;
-				}
+					Client client = new Client(dr);
+					Items.Add(client.Id, client);
+					OnCollectionChanged();
+				}	
 			}
 
 			public Boolean Add(Int64 code, String name, String phone, String scheduleDays, DateTime scheduleTime, String comment, Int64 trainer)
@@ -456,10 +472,10 @@ namespace AY
 
 			public Client Search(Int64 id)
 			{
-				if(Items.ContainsKey(id))
+				if (Items.ContainsKey(id))
 					return Items[id];
 				return null;
-			}
+			}	
 			
 			public List<Client> Search(String name)
 			{
@@ -477,21 +493,6 @@ namespace AY
 					}
 				}
 				return collection;
-			}
-			
-			public int Count
-			{
-				get { return Items.Count; }
-			}
-
-			public IEnumerator<Client> GetEnumerator()
-			{
-				return Items.Values.GetEnumerator();
-			}
-
-			System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-			{
-				return Items.Values.GetEnumerator();
 			}
 		}
 	}

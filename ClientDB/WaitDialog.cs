@@ -19,6 +19,24 @@ namespace GAssistant
 			progressComplete.Step = step;
 		}
 		
+		public int Min
+		{
+			get{ return progressComplete.Minimum; }
+			set{ progressComplete.Minimum = value; }
+		}
+
+		public int Max
+		{
+			get { return progressComplete.Maximum; }
+			set { progressComplete.Maximum = value; }
+		}
+
+		public int Step
+		{
+			get { return progressComplete.Step; }
+			set { progressComplete.Step = value; }
+		}
+		
 		public void StepIt()
 		{
 			progressComplete.PerformStep();

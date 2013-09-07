@@ -33,7 +33,8 @@ namespace GAssistant
 				m_days = CultureInfoUtils.RShift<int>(
 					  new int[7] { 0, 1, 2, 3, 4, 5, 6 }
 					, (int)CultureInfoUtils.GetWeekStart());
-				m_clients = new ClientCollection("timesLeft > 0");
+				m_clients = new ClientCollection();
+				m_clients.Refresh("timesLeft > 0");
 				
 				Dictionary<Int64, String> trainerId2NameMap = new Dictionary<Int64, String>();
 				foreach (Trainer tr in new TrainerCollection())

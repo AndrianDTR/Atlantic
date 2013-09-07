@@ -8,6 +8,8 @@ using System.Windows.Forms.DataVisualization.Charting;
 using AY.Log;
 using AY.db;
 using AY.Utils;
+using System.Data;
+using System.Data.SQLite;
 
 namespace GAssistant
 {
@@ -35,7 +37,6 @@ namespace GAssistant
 		}
 		
 		private Login m_login = new Login();
-		private ClientCollection m_collection = new ClientCollection();
 		private Opts m_opt = new Opts();
 		
         public MainForm()
@@ -187,8 +188,9 @@ namespace GAssistant
 			DateTime today = DateTime.Now;
 			
 			listClients.Items.Clear();
-			
-			foreach (Client client in new ClientCollection("date(openTicket) = date('now', 'localtime')"))
+			ClientCollection clients = new ClientCollection();
+			clients.Refresh("date(openTicket) = date('now', 'localtime')");
+			foreach (Client client in clients)
 			{
 				// Skip already closed tickets
 				if(client.LastLeave.Date == today.Date)
@@ -217,8 +219,9 @@ namespace GAssistant
 			DayOfWeek ws = CultureInfoUtils.GetWeekStart();
 			String where = String.Format("substr(scheduleDays, {0}, 1) = 'X' and strftime('%H:%M',scheduleTime) <= strftime('%H:%M','now','localtime')"
 				, (int)today.DayOfWeek + (int)ws);
-				
-			foreach (Client client in new ClientCollection(where))
+
+			clients.Refresh(where);
+			foreach (Client client in clients)
 			{
 				// Skip already closed tickets
 				if (client.LastLeave.Date == today.Date)
@@ -244,8 +247,9 @@ namespace GAssistant
 
 			where = String.Format("substr(scheduleDays, {0}, 1) = 'X' and strftime('%H:%M',scheduleTime) <= strftime('%H:%M','now','localtime')"
 				, (int)today.DayOfWeek + (int)ws);
-
-			foreach (Client client in new ClientCollection(where))
+			
+			clients.Refresh(where);
+			foreach (Client client in clients)
 			{
 				// Skip already closed tickets
 				if (client.LastLeave.Date == today.Date)

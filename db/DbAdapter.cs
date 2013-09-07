@@ -637,11 +637,7 @@ namespace AY
 					+ ", ('Rule 12x3', 300.00, 'CPUTimesLeft:12\r\nCPUHoursLeft:36\r\nUCIDecHours:3\r\nUCIDecTimes:1')"
 					;
 
-				String fillClients = @"insert into clients(id, name, phone, scheduleDays, scheduleTime, trainer)"
-					+ " values(3435241043559, 'Client 1', '111', '_X_X_X_', '18:00', 1)"
-					+ ", (6942312660005, 'Client 2', '222', '__X_X__', '14:00', 2)"
-					;
-					
+				
 				SQLiteConnection conn = new SQLiteConnection(ClientDbSrc);
 
 				try
@@ -655,8 +651,19 @@ namespace AY
 					Logger.Debug(fillScheduleRules);
 					new SQLiteCommand(fillScheduleRules, conn).ExecuteNonQuery();
 
-					Logger.Debug(fillClients);
-					new SQLiteCommand(fillClients, conn).ExecuteNonQuery();
+					for (int k = 0; k < 1000; k += 100)
+					{
+						int n = 0;
+						String fillClients = String.Format("insert into clients(id, name, phone, scheduleDays, scheduleTime, trainer)"
++ "values({0}, 'Client {0}', '111', '_X_X_X_', '18:00', 1)", 2200000000000 + k + n);
+						n++;
+						for ( ; n < 99; n++)
+						{
+							fillClients += string.Format(", ({0}, 'Client 2', '222', '__X_X__', '14:00', 2)", 2200000000001 + k + n);
+						}
+						Logger.Debug(fillClients);
+						new SQLiteCommand(fillClients, conn).ExecuteNonQuery();
+					}
 					
 				}
 				catch (SQLiteException ex)
