@@ -8,7 +8,7 @@ namespace GAssistant
 	public partial class ManageClients : Form
 	{
 		ClientCollection m_collection = new ClientCollection();
-		WaitDialog wd = new WaitDialog(0,0,0);
+		WaitDialog wd = new WaitDialog(0,0,1);
 		
 		public ManageClients()
 		{
@@ -21,12 +21,17 @@ namespace GAssistant
 			wd.Max = (int)maxCount;
 		}
 		
+		private void StepIt()
+		{
+			wd.StepIt();
+		}
+		
 		private void Init()
 		{
 			wd.Show();
 			wd.Refresh();
 			m_collection.CountChangedHandler = UpdateRange;
-			m_collection.CollectionChangedHandler = wd.StepIt;
+			m_collection.CollectionChangedHandler = StepIt;
 			m_collection.Refresh();
 			wd.Close();
 		}
@@ -90,6 +95,7 @@ namespace GAssistant
 
 		private void OnSearch(object sender, EventArgs e)
 		{
+			//TODO: Add timeout before search
 			FillGrid();
 		}
 		

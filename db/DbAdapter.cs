@@ -8,6 +8,7 @@ using System.Text;
 using AY.Log;
 using AY.Packer;
 using AY.Utils;
+using GAssistant;
 
 namespace AY
 {
@@ -642,6 +643,10 @@ namespace AY
 
 				try
 				{
+					WaitDialog wd = new WaitDialog(0, 100000, 100);
+					wd.Show();
+					wd.Refresh();
+					
 					CheckDbFile(AY.db.Properties.Settings.Default.szDbSrcFile);
 
 					conn.Open();
@@ -651,7 +656,7 @@ namespace AY
 					Logger.Debug(fillScheduleRules);
 					new SQLiteCommand(fillScheduleRules, conn).ExecuteNonQuery();
 
-					for (int k = 0; k < 1000; k += 100)
+					for (int k = 0; k < 100000; k += 100)
 					{
 						int n = 0;
 						String fillClients = String.Format("insert into clients(id, name, phone, scheduleDays, scheduleTime, trainer)"
@@ -659,12 +664,15 @@ namespace AY
 						n++;
 						for ( ; n < 99; n++)
 						{
-							fillClients += string.Format(", ({0}, 'Client 2', '222', '__X_X__', '14:00', 2)", 2200000000001 + k + n);
+							fillClients += string.Format(", ({0}, 'Client {0}', '222', '__X_X__', '14:00', 2)", 2200000000001 + k + n);
 						}
 						Logger.Debug(fillClients);
 						new SQLiteCommand(fillClients, conn).ExecuteNonQuery();
+						wd.StepIt();
+						wd.Refresh();
 					}
 					
+					wd.Close();
 				}
 				catch (SQLiteException ex)
 				{
