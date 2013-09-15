@@ -5,7 +5,7 @@ using AY.Log;
 using AY.db;
 using AY.Utils;
 
-namespace GAssistant
+namespace EAssistant
 {
     static class Program
     {

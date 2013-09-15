@@ -10,7 +10,7 @@ using AY;
 using AY.Utils;
 using AY.db;
 
-namespace GAssistant
+namespace EAssistant
 {
 	public partial class BarcodePrinter : Form
 	{

@@ -6,7 +6,7 @@ using AY.db;
 using AY.Log;
 using AY.Utils;
 
-namespace GAssistant
+namespace EAssistant
 {
 	public partial class ClientInfo : Form
 	{	

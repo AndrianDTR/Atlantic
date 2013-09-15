@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using AY.Log;
 using AY.db;
 
-namespace GAssistant
+namespace EAssistant
 {
 	public partial class PaymentDetail : Form
 	{

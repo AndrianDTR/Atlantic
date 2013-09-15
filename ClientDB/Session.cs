@@ -5,7 +5,7 @@ using AY.db;
 using AY.Utils;
 using System.Data;
 
-namespace GAssistant
+namespace EAssistant
 {
 	class Session : Singleton<Session>
 	{

@@ -1,4 +1,4 @@
-﻿namespace GAssistant
+﻿namespace EAssistant
 {
     partial class Login
     {
@@ -42,7 +42,7 @@
 			// 
 			// pictureBox1
 			// 
-			this.pictureBox1.Image = global::GAssistant.Properties.Resources._1367373274_lock_locked;
+			this.pictureBox1.Image = global::EAssistant.Properties.Resources._1367373274_lock_locked;
 			this.pictureBox1.Location = new System.Drawing.Point(31, 26);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(146, 137);

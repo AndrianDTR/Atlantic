@@ -6,7 +6,7 @@ using AY.Calendar;
 using AY.Utils;
 using System.Collections.Generic;
 
-namespace GAssistant
+namespace EAssistant
 {
 	public class DayView : Calendar
 	{

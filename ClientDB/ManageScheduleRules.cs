@@ -5,7 +5,7 @@ using System.Globalization;
 using AY.Log;
 using AY.db;
 
-namespace GAssistant
+namespace EAssistant
 {
 	public partial class ManageScheduleRules : Form
 	{

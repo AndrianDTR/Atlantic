@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using AY.db;
 
-namespace GAssistant
+namespace EAssistant
 {
 	public partial class TrainerScheduleDlg : Form
 	{

@@ -4,7 +4,7 @@ using AY.Log;
 using AY.db;
 using System.Drawing;
 
-namespace GAssistant
+namespace EAssistant
 {
 	public partial class Options : Form
 	{

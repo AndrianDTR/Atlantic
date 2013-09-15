@@ -8,7 +8,6 @@ using System.Text;
 using AY.Log;
 using AY.Packer;
 using AY.Utils;
-using GAssistant;
 
 namespace AY
 {
@@ -643,7 +642,7 @@ namespace AY
 
 				try
 				{
-					WaitDialog wd = new WaitDialog(0, 100000, 100);
+					EAssistant.WaitDialog wd = new EAssistant.WaitDialog(0, 100000, 100);
 					wd.Show();
 					wd.Refresh();
 					

@@ -6,7 +6,7 @@ using System.IO;
 using AY.Utils;
 using System.Text;
 
-namespace GAssistant
+namespace EAssistant
 {
 	public class RegisterForm : System.Windows.Forms.Form
 	{
@@ -92,7 +92,7 @@ namespace GAssistant
 			// 
 			// pictureBox1
 			// 
-			this.pictureBox1.BackgroundImage = global::GAssistant.Properties.Resources.Game_diamond_icon;
+			this.pictureBox1.BackgroundImage = global::EAssistant.Properties.Resources.Game_diamond_icon;
 			this.pictureBox1.Location = new System.Drawing.Point(12, 32);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(130, 133);

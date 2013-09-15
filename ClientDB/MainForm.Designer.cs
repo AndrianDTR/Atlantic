@@ -1,4 +1,4 @@
-﻿namespace GAssistant
+﻿namespace EAssistant
 {
     partial class MainForm
     {
@@ -76,7 +76,7 @@
 			this.columnLeave = new System.Windows.Forms.ColumnHeader();
 			this.columnEntarncesLeft = new System.Windows.Forms.ColumnHeader();
 			this.tabCalendar = new System.Windows.Forms.TabPage();
-			this.m_calendar = new GAssistant.DayView();
+			this.m_calendar = new EAssistant.DayView();
 			this.tabStatistics = new System.Windows.Forms.TabPage();
 			this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
 			this.panel1 = new System.Windows.Forms.Panel();
@@ -454,7 +454,7 @@
 			// 
 			// btnSearch
 			// 
-			this.btnSearch.Image = global::GAssistant.Properties.Resources.search;
+			this.btnSearch.Image = global::EAssistant.Properties.Resources.search;
 			resources.ApplyResources(this.btnSearch, "btnSearch");
 			this.btnSearch.Name = "btnSearch";
 			this.btnSearch.UseVisualStyleBackColor = true;
@@ -462,7 +462,7 @@
 			// 
 			// btmMissLesson
 			// 
-			this.btmMissLesson.Image = global::GAssistant.Properties.Resources.appointment_missed;
+			this.btmMissLesson.Image = global::EAssistant.Properties.Resources.appointment_missed;
 			resources.ApplyResources(this.btmMissLesson, "btmMissLesson");
 			this.btmMissLesson.Name = "btmMissLesson";
 			this.btmMissLesson.UseVisualStyleBackColor = true;
@@ -470,7 +470,7 @@
 			// 
 			// btnBackUp
 			// 
-			this.btnBackUp.Image = global::GAssistant.Properties.Resources._1367375035_filesave;
+			this.btnBackUp.Image = global::EAssistant.Properties.Resources._1367375035_filesave;
 			resources.ApplyResources(this.btnBackUp, "btnBackUp");
 			this.btnBackUp.Name = "btnBackUp";
 			this.btnBackUp.UseVisualStyleBackColor = true;
@@ -478,7 +478,7 @@
 			// 
 			// btnTrainersShedule
 			// 
-			this.btnTrainersShedule.Image = global::GAssistant.Properties.Resources._1367375242_schedule;
+			this.btnTrainersShedule.Image = global::EAssistant.Properties.Resources._1367375242_schedule;
 			resources.ApplyResources(this.btnTrainersShedule, "btnTrainersShedule");
 			this.btnTrainersShedule.Name = "btnTrainersShedule";
 			this.btnTrainersShedule.UseVisualStyleBackColor = true;
@@ -486,7 +486,7 @@
 			// 
 			// btnPaymentsHistory
 			// 
-			this.btnPaymentsHistory.Image = global::GAssistant.Properties.Resources._1367375158_coins;
+			this.btnPaymentsHistory.Image = global::EAssistant.Properties.Resources._1367375158_coins;
 			resources.ApplyResources(this.btnPaymentsHistory, "btnPaymentsHistory");
 			this.btnPaymentsHistory.Name = "btnPaymentsHistory";
 			this.btnPaymentsHistory.UseVisualStyleBackColor = true;
@@ -494,7 +494,7 @@
 			// 
 			// btnClientManager
 			// 
-			this.btnClientManager.Image = global::GAssistant.Properties.Resources._1367375688_27_Edit_Text;
+			this.btnClientManager.Image = global::EAssistant.Properties.Resources._1367375688_27_Edit_Text;
 			resources.ApplyResources(this.btnClientManager, "btnClientManager");
 			this.btnClientManager.Name = "btnClientManager";
 			this.btnClientManager.UseVisualStyleBackColor = true;
@@ -502,7 +502,7 @@
 			// 
 			// btnAddClient
 			// 
-			this.btnAddClient.Image = global::GAssistant.Properties.Resources._1367374740_edit_add;
+			this.btnAddClient.Image = global::EAssistant.Properties.Resources._1367374740_edit_add;
 			resources.ApplyResources(this.btnAddClient, "btnAddClient");
 			this.btnAddClient.Name = "btnAddClient";
 			this.btnAddClient.UseVisualStyleBackColor = true;

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.IO;
 using AY.Utils;
 
-namespace GAssistant
+namespace EAssistant
 {
 	partial class About : Form
 	{
@@ -80,7 +80,13 @@ namespace GAssistant
 				byte[] data = RegUtils.RegData;
 				if (null != data)
 				{
-					info = RegUtils.GetRegInfo(data).Replace("\r", "").Replace("\n", "\r\n");
+					try
+					{
+						info = RegUtils.GetRegInfo(data).Replace("\r", "").Replace("\n", "\r\n");
+					}
+					catch (System.Exception)
+					{
+					}
 				}
 				
 				return info;

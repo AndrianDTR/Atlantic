@@ -140,7 +140,9 @@ namespace AY.Utils
 
 			String msg = Encoding.UTF8.GetString(act).Split('\0')[0];
 			if (msg.Length < (int)DataOffsets.ActKey / 4)
+			{
 				throw new Exception("Error! Activation key is too short.");
+			}
 
 			msg = msg.Split('|')[0];
 

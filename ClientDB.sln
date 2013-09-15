@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GAssistant", "ClientDB\GAssistant.csproj", "{3A3F8E0E-BB13-4EB6-88C1-2492AE2DACCC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EAssistant", "ClientDB\EAssistant.csproj", "{3A3F8E0E-BB13-4EB6-88C1-2492AE2DACCC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F} = {C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F}
 		{A143DC21-278F-4D35-848E-0EA98AC8A330} = {A143DC21-278F-4D35-848E-0EA98AC8A330}

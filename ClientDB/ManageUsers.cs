@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using AY.Log;
 using AY.db;
 
-namespace GAssistant
+namespace EAssistant
 {
 	public partial class ManageUsers : Form
 	{

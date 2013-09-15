@@ -1,4 +1,4 @@
-﻿namespace GAssistant
+﻿namespace EAssistant
 {
 	partial class About
 	{
@@ -76,7 +76,7 @@
 			// logoPictureBox
 			// 
 			this.logoPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.logoPictureBox.Image = global::GAssistant.Properties.Resources.Game_diamond_icon;
+			this.logoPictureBox.Image = global::EAssistant.Properties.Resources.Game_diamond_icon;
 			this.logoPictureBox.Location = new System.Drawing.Point(3, 3);
 			this.logoPictureBox.Name = "logoPictureBox";
 			this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 4);

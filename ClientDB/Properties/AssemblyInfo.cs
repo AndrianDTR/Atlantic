@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("G-Assistant")]
+[assembly: AssemblyTitle("E-Assistant")]
 [assembly: AssemblyDescription("Assistant utility to manage gym work.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("PRO100 Soft")]
-[assembly: AssemblyProduct("G-Assistant")]
+[assembly: AssemblyProduct("E-Assistant")]
 [assembly: AssemblyCopyright("Copyright © Andrian Yablonskyy 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

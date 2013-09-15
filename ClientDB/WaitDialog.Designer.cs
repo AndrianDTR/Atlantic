@@ -1,4 +1,4 @@
-﻿namespace GAssistant
+﻿namespace EAssistant
 {
 	partial class WaitDialog
 	{

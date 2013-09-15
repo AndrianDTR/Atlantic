@@ -11,7 +11,7 @@ using AY.Utils;
 using System.Data;
 using System.Data.SQLite;
 
-namespace GAssistant
+namespace EAssistant
 {
     public partial class MainForm : Form
     {
