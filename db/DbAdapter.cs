@@ -642,10 +642,6 @@ namespace AY
 
 				try
 				{
-					EAssistant.WaitDialog wd = new EAssistant.WaitDialog(0, 100000, 100);
-					wd.Show();
-					wd.Refresh();
-					
 					CheckDbFile(AY.db.Properties.Settings.Default.szDbSrcFile);
 
 					conn.Open();
@@ -667,11 +663,7 @@ namespace AY
 						}
 						Logger.Debug(fillClients);
 						new SQLiteCommand(fillClients, conn).ExecuteNonQuery();
-						wd.StepIt();
-						wd.Refresh();
 					}
-					
-					wd.Close();
 				}
 				catch (SQLiteException ex)
 				{
