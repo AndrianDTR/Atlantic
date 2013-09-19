@@ -7,6 +7,7 @@ namespace EAssistant
 {
 	public partial class ManageClients : Form
 	{
+		Timer m_timerFilterChanged = new Timer();
 		ClientCollection m_collection = new ClientCollection();
 		WaitDialog wd = new WaitDialog(0,0,1);
 		
@@ -14,6 +15,8 @@ namespace EAssistant
 		{
 			InitializeComponent();
 			Init();
+			m_timerFilterChanged.Interval = 1000;
+			m_timerFilterChanged.Tick += new System.EventHandler(this.OnTimerFilter);
 		}
 		
 		public void UpdateRange(Int64 maxCount)
@@ -56,32 +59,27 @@ namespace EAssistant
 	
 		private void FillGrid()
 		{
+			m_collection.Refresh(String.Format("id like '%{0}%'", textToSearch.Text));
+			
+			wd = new WaitDialog(0, m_collection.Count, 1);
+			wd.Show();
+			wd.Refresh();
 			gridClients.Rows.Clear();
 			
 			foreach (Client client in m_collection)
 			{
-				bool addCode = false;
-				bool addName = false;
-				
-				if(checkNames.Checked)
-					if(checkStartWith.Checked)
-						addCode = client.Name.ToUpper().StartsWith(textToSearch.Text.ToUpper());
-					else
-						addCode = client.Name.ToUpper().Contains(textToSearch.Text.ToUpper());
-
-				if(checkCode.Checked)
-					if (checkStartWith.Checked)
-						addName = client.Code.ToUpper().StartsWith(textToSearch.Text.ToUpper());
-					else
-						addName = client.Code.ToUpper().Contains(textToSearch.Text.ToUpper());
-				
-				if(addCode || addName)
-				{
-					int nRow = gridClients.Rows.Add(parseClient(client));
-					gridClients.Rows[nRow].Tag = client.Id;
-				}
+				wd.StepIt();
+				int nRow = gridClients.Rows.Add(parseClient(client));
+				gridClients.Rows[nRow].Tag = client.Id;
 			}
+			wd.Close();
 		}
+
+		private void OnTimerFilter(object sender, EventArgs e)
+		{
+			m_timerFilterChanged.Stop();
+			FillGrid();
+		} 
 		
 		private void OnLoad(object sender, EventArgs e)
 		{
@@ -95,8 +93,8 @@ namespace EAssistant
 
 		private void OnSearch(object sender, EventArgs e)
 		{
-			//TODO: Add timeout before search
-			FillGrid();
+			m_timerFilterChanged.Stop();
+			m_timerFilterChanged.Start();
 		}
 		
 		private void btnAdd_Click(object sender, EventArgs e)

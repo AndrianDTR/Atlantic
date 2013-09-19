@@ -403,6 +403,7 @@ namespace AY
 			public void Refresh(String filter)
 			{
 				DbAdapter da = new DbAdapter();
+				Items.Clear();
 				
 				if(filter.Length > 0)
 					filter = "where " + filter;

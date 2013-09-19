@@ -10,6 +10,7 @@ using AY.db;
 using AY.Utils;
 using System.Data;
 using System.Data.SQLite;
+using AY.AutoUpdate;
 
 namespace EAssistant
 {
@@ -42,6 +43,10 @@ namespace EAssistant
         public MainForm()
         {
 			InitializeComponent();
+			
+			//AutoUpdater.Start("http://pro100soft.eu/EAssistant/updates/latest.xml");
+			AutoUpdater.Start("http://rbsoft.org/updates/right-click-enhancer.xml");
+			
 			CheckRegistration();
 			UserLogin();
 			Reinit();
