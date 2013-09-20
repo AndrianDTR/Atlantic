@@ -350,11 +350,12 @@ namespace AY
 			}
 		}
 
-		public class ClientCollection : DbTableRowCollection<Client> 
+		public class ClientCollection : DbTableRowCollectionBase
 		{
 			private CountChangedEventHandler m_countChanged = null;
 			private CollectionChangedEventHandler m_collectionChanged = null;
-
+			private DataRowCollection m_Items = null;
+			
 			public CollectionChangedEventHandler CollectionChangedHandler
 			{
 				get
@@ -403,7 +404,6 @@ namespace AY
 			public void Refresh(String filter)
 			{
 				DbAdapter da = new DbAdapter();
-				Items.Clear();
 				
 				if(filter.Length > 0)
 					filter = "where " + filter;
@@ -415,12 +415,7 @@ namespace AY
 
 				OnCountChanged(dt.Rows.Count);
 				
-				foreach (DataRow dr in dt.Rows)
-				{
-					Client client = new Client(dr);
-					Items.Add(client.Id, client);
-					OnCollectionChanged();
-				}	
+				m_Items = dt.Rows;
 			}
 
 			public Boolean Add(Int64 code, String name, String phone, String scheduleDays, DateTime scheduleTime, String comment, Int64 trainer)
@@ -444,8 +439,10 @@ namespace AY
 
 				if (!da.Insert(DbTable.Clients, fields, out id))
 					return false;
-
-				Items[id] = new Client(id);
+				
+				DataRow dr = da.GetFirstRow(DbTable.Clients, String.Format("id = {0}", id), new List<string>{});
+				m_Items.Add(dr);
+				
 				return true;
 			}
 
@@ -456,44 +453,28 @@ namespace AY
 				return da.Delete(DbTable.Clients, where);
 			}
 			
-			public bool Remove(Int64 id)
+			public bool Remove(DataRow row)
 			{
+				Int64 id = Int64.Parse(row["id"].ToString());
 				if(!RemoveById(id))
 					return false;
-				return Items.Remove(id);
+				m_Items.Remove(row);
+				return true;
 			}
 
-			public bool Remove(Client item)
+			public DataRow Search(Int64 id)
 			{
-				DbAdapter da = new DbAdapter();
-				String where = String.Format("id = {0}", item.Id);
-				da.Delete(DbTable.Clients, where);
-				return Items.Remove(item.Id);
-			}
-
-			public Client Search(Int64 id)
-			{
-				if (Items.ContainsKey(id))
-					return Items[id];
+				foreach (DataRow dr in m_Items)
+				{
+					if(Int64.Parse(dr["id"].ToString()) == id)
+						return dr;
+				}
 				return null;
 			}	
 			
-			public List<Client> Search(String name)
+			public DataRowCollection Items
 			{
-				return Search(name, false);
-			}
-
-			public List<Client> Search(String name, Boolean contains)
-			{
-				List<Client> collection = new List<Client>();
-				foreach (KeyValuePair<Int64, Client> client in Items)
-				{
-					if((contains && client.Value.Name.Contains(name)) || client.Value.Name.StartsWith(name))
-					{
-						collection.Add(client.Value);
-					}
-				}
-				return collection;
+				get{ return m_Items; }
 			}
 		}
 	}

@@ -1,41 +1,52 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Threading;
+using System.Data;
 using AY.Log;
 using AY.db;
+using System.ComponentModel;
 
 namespace EAssistant
 {
 	public partial class ManageClients : Form
 	{
-		Timer m_timerFilterChanged = new Timer();
+		System.Windows.Forms.Timer m_timerFilterChanged = new System.Windows.Forms.Timer();
 		ClientCollection m_collection = new ClientCollection();
 		WaitDialog wd = new WaitDialog(0,0,1);
+		BackgroundWorker backgroundWorker = new BackgroundWorker();
 		
 		public ManageClients()
 		{
 			InitializeComponent();
-			Init();
+			
+			backgroundWorker.DoWork += BackgroundWorkerDoWork;
+			
 			m_timerFilterChanged.Interval = 1000;
 			m_timerFilterChanged.Tick += new System.EventHandler(this.OnTimerFilter);
 		}
 		
-		public void UpdateRange(Int64 maxCount)
-		{
-			wd.Max = (int)maxCount;
-		}
+		private void BackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
+        {
+			m_collection.Refresh(String.Format("id like '%{0}%'", textToSearch.Text));
+			if(!wd.IsDisposed)
+				wd.Close();
+        }
 		
-		private void StepIt()
+		private void Reinit()
 		{
-			wd.StepIt();
-		}
-		
-		private void Init()
-		{
+			if (wd.IsDisposed)
+				wd = new WaitDialog(0, 1, 1);
 			wd.Show();
 			wd.Refresh();
-			m_collection.CountChangedHandler = UpdateRange;
-			m_collection.CollectionChangedHandler = StepIt;
-			m_collection.Refresh();
+			String pattern = "%{0}%";
+			if(checkStartWith.Checked)
+				pattern = "{0}%";
+				
+			String query = String.Format("id like '{0}'", pattern);
+			if (checkNames.Checked)
+				query += String.Format(" or name like '{0}'", pattern);
+			m_collection.Refresh(String.Format(query, textToSearch.Text));
+			wd.StepIt();
 			wd.Close();
 		}
 		
@@ -59,20 +70,29 @@ namespace EAssistant
 	
 		private void FillGrid()
 		{
-			m_collection.Refresh(String.Format("id like '%{0}%'", textToSearch.Text));
-			
-			wd = new WaitDialog(0, m_collection.Count, 1);
+			gridClients.SuspendLayout();
+			Reinit();
+			gridClients.Rows.Clear();
+
+			if (wd.IsDisposed)
+				wd = new WaitDialog(0, m_collection.Items.Count, 1);
+			else
+				wd.Max = m_collection.Items.Count;
+				
 			wd.Show();
 			wd.Refresh();
-			gridClients.Rows.Clear();
 			
-			foreach (Client client in m_collection)
+			foreach (DataRow dr in m_collection.Items)
 			{
+				Client client = new Client(dr);
 				wd.StepIt();
+				wd.Refresh();
+				
 				int nRow = gridClients.Rows.Add(parseClient(client));
 				gridClients.Rows[nRow].Tag = client.Id;
 			}
 			wd.Close();
+			gridClients.ResumeLayout();
 		}
 
 		private void OnTimerFilter(object sender, EventArgs e)
@@ -93,8 +113,8 @@ namespace EAssistant
 
 		private void OnSearch(object sender, EventArgs e)
 		{
-			m_timerFilterChanged.Stop();
-			m_timerFilterChanged.Start();
+			//m_timerFilterChanged.Stop();
+			//m_timerFilterChanged.Start();
 		}
 		
 		private void btnAdd_Click(object sender, EventArgs e)

@@ -151,30 +151,7 @@ namespace AY.AutoUpdate
                     DownloadURL = appCastUrl != null ? appCastUrl.InnerText : "";
                 }
             }
-			/*
-            if (updateKey != null)
-            {
-                object skip = updateKey.GetValue("skip");
-                object applicationVersion = updateKey.GetValue("version");
-                if (skip != null && applicationVersion != null)
-                {
-                    string skipValue = skip.ToString();
-                    var skipVersion = new Version(applicationVersion.ToString());
-                    if (skipValue.Equals("1") && CurrentVersion <= skipVersion)
-                        return;
-                    if (CurrentVersion > skipVersion)
-                    {
-                        RegistryKey updateKeyWrite = Registry.CurrentUser.CreateSubKey(RegistryLocation);
-                        if (updateKeyWrite != null)
-                        {
-                            updateKeyWrite.SetValue("version", CurrentVersion.ToString());
-                            updateKeyWrite.SetValue("skip", 0);
-                        }
-                    }
-                }
-                updateKey.Close();
-            }
-			*/
+
             if (CurrentVersion == null)
                 return;
 

@@ -45,7 +45,7 @@ namespace EAssistant
 			InitializeComponent();
 			
 			//AutoUpdater.Start("http://pro100soft.eu/EAssistant/updates/latest.xml");
-			AutoUpdater.Start("http://rbsoft.org/updates/right-click-enhancer.xml");
+			AutoUpdater.Start("http://localhost/update.xml");
 			
 			CheckRegistration();
 			UserLogin();
@@ -195,8 +195,9 @@ namespace EAssistant
 			listClients.Items.Clear();
 			ClientCollection clients = new ClientCollection();
 			clients.Refresh("date(openTicket) = date('now', 'localtime')");
-			foreach (Client client in clients)
+			foreach (DataRow dr in clients.Items)
 			{
+				Client client = new Client(dr);
 				// Skip already closed tickets
 				if(client.LastLeave.Date == today.Date)
 					continue;
@@ -226,8 +227,10 @@ namespace EAssistant
 				, (int)today.DayOfWeek + (int)ws);
 
 			clients.Refresh(where);
-			foreach (Client client in clients)
+			foreach (DataRow dr in clients.Items)
 			{
+				Client client = new Client(dr);
+				
 				// Skip already closed tickets
 				if (client.LastLeave.Date == today.Date)
 					continue;
@@ -254,8 +257,10 @@ namespace EAssistant
 				, (int)today.DayOfWeek + (int)ws);
 			
 			clients.Refresh(where);
-			foreach (Client client in clients)
+			foreach (DataRow dr in clients.Items)
 			{
+				Client client = new Client(dr);
+				
 				// Skip already closed tickets
 				if (client.LastLeave.Date == today.Date)
 					continue;

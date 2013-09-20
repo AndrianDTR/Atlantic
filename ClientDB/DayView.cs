@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Data;
 using AY.Log;
 using AY.db;
 using AY.Calendar;
@@ -59,8 +60,9 @@ namespace EAssistant
 			try
 			{
 				int clCount = 0;
-				foreach(Client client in m_clients)
+				foreach(DataRow dr in m_clients.Items)
 				{
+					Client client = new Client(dr);
 					int ndx = m_days[(int)ci.date.DayOfWeek];
 					if (client.ScheduleDays[ndx] == 'X')
 						clCount++;

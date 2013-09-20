@@ -28,41 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DownloadUpdateDialog));
-            this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.labelInformation = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // progressBar
-            // 
-            resources.ApplyResources(this.progressBar, "progressBar");
-            this.progressBar.Name = "progressBar";
-            // 
-            // labelInformation
-            // 
-            resources.ApplyResources(this.labelInformation, "labelInformation");
-            this.labelInformation.Name = "labelInformation";
-            // 
-            // DownloadUpdateDialog
-            // 
-            resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.labelInformation);
-            this.Controls.Add(this.progressBar);
-            this.Controls.Add(this.pictureBoxIcon);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "DownloadUpdateDialog";
-            this.Load += new System.EventHandler(this.DownloadUpdateDialogLoad);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DownloadUpdateDialog));
+			this.progressBar = new System.Windows.Forms.ProgressBar();
+			this.labelInformation = new System.Windows.Forms.Label();
+			this.SuspendLayout();
+			// 
+			// progressBar
+			// 
+			resources.ApplyResources(this.progressBar, "progressBar");
+			this.progressBar.Name = "progressBar";
+			this.progressBar.Step = 1;
+			this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+			// 
+			// labelInformation
+			// 
+			resources.ApplyResources(this.labelInformation, "labelInformation");
+			this.labelInformation.Name = "labelInformation";
+			// 
+			// DownloadUpdateDialog
+			// 
+			resources.ApplyResources(this, "$this");
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.labelInformation);
+			this.Controls.Add(this.progressBar);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
+			this.Name = "DownloadUpdateDialog";
+			this.ShowIcon = false;
+			this.ShowInTaskbar = false;
+			this.Load += new System.EventHandler(this.DownloadUpdateDialogLoad);
+			this.ResumeLayout(false);
+			this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBoxIcon;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label labelInformation;
     }

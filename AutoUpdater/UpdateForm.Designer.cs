@@ -36,7 +36,6 @@ namespace AY.AutoUpdate
 			this.labelDescription = new System.Windows.Forms.Label();
 			this.labelReleaseNotes = new System.Windows.Forms.Label();
 			this.buttonUpdate = new System.Windows.Forms.Button();
-			this.buttonRemindLater = new System.Windows.Forms.Button();
 			this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
 			this.buttonSkip = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
@@ -44,20 +43,21 @@ namespace AY.AutoUpdate
 			// 
 			// webBrowser
 			// 
+			this.webBrowser.IsWebBrowserContextMenuEnabled = false;
 			resources.ApplyResources(this.webBrowser, "webBrowser");
-			this.webBrowser.MinimumSize = new System.Drawing.Size(23, 23);
+			this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
 			this.webBrowser.Name = "webBrowser";
 			// 
 			// labelUpdate
 			// 
 			resources.ApplyResources(this.labelUpdate, "labelUpdate");
-			this.labelUpdate.MaximumSize = new System.Drawing.Size(560, 0);
+			this.labelUpdate.MaximumSize = new System.Drawing.Size(480, 0);
 			this.labelUpdate.Name = "labelUpdate";
 			// 
 			// labelDescription
 			// 
 			resources.ApplyResources(this.labelDescription, "labelDescription");
-			this.labelDescription.MaximumSize = new System.Drawing.Size(550, 0);
+			this.labelDescription.MaximumSize = new System.Drawing.Size(471, 0);
 			this.labelDescription.Name = "labelDescription";
 			// 
 			// labelReleaseNotes
@@ -73,13 +73,6 @@ namespace AY.AutoUpdate
 			this.buttonUpdate.Name = "buttonUpdate";
 			this.buttonUpdate.UseVisualStyleBackColor = true;
 			this.buttonUpdate.Click += new System.EventHandler(this.ButtonUpdateClick);
-			// 
-			// buttonRemindLater
-			// 
-			this.buttonRemindLater.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			resources.ApplyResources(this.buttonRemindLater, "buttonRemindLater");
-			this.buttonRemindLater.Name = "buttonRemindLater";
-			this.buttonRemindLater.UseVisualStyleBackColor = true;
 			// 
 			// pictureBoxIcon
 			// 
@@ -101,7 +94,6 @@ namespace AY.AutoUpdate
 			this.AcceptButton = this.buttonUpdate;
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.CancelButton = this.buttonRemindLater;
 			this.Controls.Add(this.pictureBoxIcon);
 			this.Controls.Add(this.labelReleaseNotes);
 			this.Controls.Add(this.labelDescription);
@@ -109,7 +101,6 @@ namespace AY.AutoUpdate
 			this.Controls.Add(this.webBrowser);
 			this.Controls.Add(this.buttonUpdate);
 			this.Controls.Add(this.buttonSkip);
-			this.Controls.Add(this.buttonRemindLater);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -125,8 +116,7 @@ namespace AY.AutoUpdate
 
         #endregion
 
-        private System.Windows.Forms.Button buttonRemindLater;
-        private System.Windows.Forms.Button buttonUpdate;
+		private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.Button buttonSkip;
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Label labelUpdate;

@@ -50,17 +50,32 @@ namespace AY.db
 			}
 		}
 	}
-
-	public class DbTableRowCollection<EnType> : IEnumerable<EnType>
+	
+	public class DbTableRowCollectionBase
 	{
 		public delegate void CountChangedEventHandler(Int64 newCount);
 		public delegate void CollectionChangedEventHandler();
-		
-		protected Dictionary<Int64, EnType> Items = new Dictionary<Int64, EnType>();
 
 		public event CollectionChangedEventHandler CollectionChanged;
 		public event CountChangedEventHandler CountChanged;
-		
+
+		public virtual void OnCountChanged(Int64 newCount)
+		{
+			if (CountChanged != null)
+				CountChanged(newCount);
+		}
+
+		public virtual void OnCollectionChanged()
+		{
+			if (CollectionChanged != null)
+				CollectionChanged();
+		}
+	}
+
+	public class DbTableRowCollection<EnType> : DbTableRowCollectionBase, IEnumerable<EnType>
+	{
+		protected Dictionary<Int64, EnType> Items = new Dictionary<Int64, EnType>();
+
 		public IEnumerator<EnType> GetEnumerator()
 		{
 			return Items.Values.GetEnumerator();
@@ -74,18 +89,6 @@ namespace AY.db
 		public int Count
 		{
 			get { return Items.Count; }
-		}
-
-		public virtual void OnCountChanged(Int64 newCount)
-		{
-			if (CountChanged != null)
-				CountChanged(newCount);
-		}
-
-		public virtual void OnCollectionChanged()
-		{
-			if (CollectionChanged != null)
-				CollectionChanged();
 		}
 	}
 }
