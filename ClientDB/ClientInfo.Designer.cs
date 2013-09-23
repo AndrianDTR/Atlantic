@@ -1,4 +1,5 @@
-﻿namespace EAssistant
+﻿using EAssistant.clientDataSetTableAdapters;
+namespace EAssistant
 {
 	partial class ClientInfo
 	{
@@ -66,8 +67,11 @@
 			this.checkDay5 = new System.Windows.Forms.CheckBox();
 			this.checkDay7 = new System.Windows.Forms.CheckBox();
 			this.checkDay6 = new System.Windows.Forms.CheckBox();
+			this.clientDataSet = new EAssistant.clientDataSet();
+			this.clientsTableAdapter = new clientsTableAdapter();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.clientDataSet)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -83,7 +87,7 @@
 			// textName
 			// 
 			this.textName.Location = new System.Drawing.Point(127, 49);
-			this.textName.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+			this.textName.Margin = new System.Windows.Forms.Padding(5);
 			this.textName.Name = "textName";
 			this.textName.Size = new System.Drawing.Size(482, 26);
 			this.textName.TabIndex = 0;
@@ -101,7 +105,7 @@
 			// textPhone
 			// 
 			this.textPhone.Location = new System.Drawing.Point(127, 87);
-			this.textPhone.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+			this.textPhone.Margin = new System.Windows.Forms.Padding(5);
 			this.textPhone.Name = "textPhone";
 			this.textPhone.Size = new System.Drawing.Size(482, 26);
 			this.textPhone.TabIndex = 1;
@@ -140,7 +144,7 @@
 			// 
 			this.comboTrainer.FormattingEnabled = true;
 			this.comboTrainer.Location = new System.Drawing.Point(127, 162);
-			this.comboTrainer.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+			this.comboTrainer.Margin = new System.Windows.Forms.Padding(5);
 			this.comboTrainer.Name = "comboTrainer";
 			this.comboTrainer.Size = new System.Drawing.Size(482, 28);
 			this.comboTrainer.TabIndex = 10;
@@ -149,7 +153,7 @@
 			// 
 			this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.btnClose.Location = new System.Drawing.Point(497, 317);
-			this.btnClose.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+			this.btnClose.Margin = new System.Windows.Forms.Padding(5);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(113, 35);
 			this.btnClose.TabIndex = 13;
@@ -160,7 +164,7 @@
 			// 
 			this.btnOk.Enabled = false;
 			this.btnOk.Location = new System.Drawing.Point(374, 317);
-			this.btnOk.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+			this.btnOk.Margin = new System.Windows.Forms.Padding(5);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(113, 35);
 			this.btnOk.TabIndex = 12;
@@ -171,7 +175,7 @@
 			// textCode
 			// 
 			this.textCode.Location = new System.Drawing.Point(127, 12);
-			this.textCode.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+			this.textCode.Margin = new System.Windows.Forms.Padding(5);
 			this.textCode.Name = "textCode";
 			this.textCode.ReadOnly = true;
 			this.textCode.Size = new System.Drawing.Size(378, 26);
@@ -183,7 +187,7 @@
 			this.btnPaymentAdd.Enabled = false;
 			this.btnPaymentAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.btnPaymentAdd.Location = new System.Drawing.Point(7, 102);
-			this.btnPaymentAdd.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+			this.btnPaymentAdd.Margin = new System.Windows.Forms.Padding(5);
 			this.btnPaymentAdd.Name = "btnPaymentAdd";
 			this.btnPaymentAdd.Size = new System.Drawing.Size(93, 35);
 			this.btnPaymentAdd.TabIndex = 0;
@@ -194,7 +198,7 @@
 			// textComment
 			// 
 			this.textComment.Location = new System.Drawing.Point(127, 202);
-			this.textComment.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+			this.textComment.Margin = new System.Windows.Forms.Padding(5);
 			this.textComment.Multiline = true;
 			this.textComment.Name = "textComment";
 			this.textComment.Size = new System.Drawing.Size(482, 106);
@@ -219,9 +223,9 @@
 			this.groupBox1.Controls.Add(this.label7);
 			this.groupBox1.Controls.Add(this.btnPaymentAdd);
 			this.groupBox1.Location = new System.Drawing.Point(616, 12);
-			this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
 			this.groupBox1.Size = new System.Drawing.Size(211, 144);
 			this.groupBox1.TabIndex = 14;
 			this.groupBox1.TabStop = false;
@@ -232,7 +236,7 @@
 			this.btnPaymentHistory.Enabled = false;
 			this.btnPaymentHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.btnPaymentHistory.Location = new System.Drawing.Point(106, 102);
-			this.btnPaymentHistory.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+			this.btnPaymentHistory.Margin = new System.Windows.Forms.Padding(5);
 			this.btnPaymentHistory.Name = "btnPaymentHistory";
 			this.btnPaymentHistory.Size = new System.Drawing.Size(93, 35);
 			this.btnPaymentHistory.TabIndex = 1;
@@ -243,7 +247,7 @@
 			// textLastPaySum
 			// 
 			this.textLastPaySum.Location = new System.Drawing.Point(59, 66);
-			this.textLastPaySum.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textLastPaySum.Margin = new System.Windows.Forms.Padding(2);
 			this.textLastPaySum.Name = "textLastPaySum";
 			this.textLastPaySum.ReadOnly = true;
 			this.textLastPaySum.Size = new System.Drawing.Size(141, 26);
@@ -262,7 +266,7 @@
 			// textLastPayDate
 			// 
 			this.textLastPayDate.Location = new System.Drawing.Point(59, 37);
-			this.textLastPayDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textLastPayDate.Margin = new System.Windows.Forms.Padding(2);
 			this.textLastPayDate.Name = "textLastPayDate";
 			this.textLastPayDate.ReadOnly = true;
 			this.textLastPayDate.Size = new System.Drawing.Size(141, 26);
@@ -281,7 +285,7 @@
 			// textLastLeave
 			// 
 			this.textLastLeave.Location = new System.Drawing.Point(59, 66);
-			this.textLastLeave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textLastLeave.Margin = new System.Windows.Forms.Padding(2);
 			this.textLastLeave.Name = "textLastLeave";
 			this.textLastLeave.ReadOnly = true;
 			this.textLastLeave.Size = new System.Drawing.Size(141, 26);
@@ -298,9 +302,9 @@
 			this.groupBox2.Controls.Add(this.textLastEnter);
 			this.groupBox2.Controls.Add(this.label10);
 			this.groupBox2.Location = new System.Drawing.Point(616, 167);
-			this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
 			this.groupBox2.Size = new System.Drawing.Size(211, 170);
 			this.groupBox2.TabIndex = 15;
 			this.groupBox2.TabStop = false;
@@ -311,7 +315,7 @@
 			this.btnEnter.Appearance = System.Windows.Forms.Appearance.Button;
 			this.btnEnter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.btnEnter.Location = new System.Drawing.Point(8, 127);
-			this.btnEnter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.btnEnter.Margin = new System.Windows.Forms.Padding(2);
 			this.btnEnter.Name = "btnEnter";
 			this.btnEnter.Size = new System.Drawing.Size(91, 35);
 			this.btnEnter.TabIndex = 0;
@@ -323,7 +327,7 @@
 			// textTimesLeft
 			// 
 			this.textTimesLeft.Location = new System.Drawing.Point(59, 95);
-			this.textTimesLeft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textTimesLeft.Margin = new System.Windows.Forms.Padding(2);
 			this.textTimesLeft.Name = "textTimesLeft";
 			this.textTimesLeft.ReadOnly = true;
 			this.textTimesLeft.Size = new System.Drawing.Size(141, 26);
@@ -344,7 +348,7 @@
 			this.btnLeave.Enabled = false;
 			this.btnLeave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.btnLeave.Location = new System.Drawing.Point(106, 127);
-			this.btnLeave.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+			this.btnLeave.Margin = new System.Windows.Forms.Padding(5);
 			this.btnLeave.Name = "btnLeave";
 			this.btnLeave.Size = new System.Drawing.Size(93, 35);
 			this.btnLeave.TabIndex = 1;
@@ -365,7 +369,7 @@
 			// textLastEnter
 			// 
 			this.textLastEnter.Location = new System.Drawing.Point(59, 37);
-			this.textLastEnter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textLastEnter.Margin = new System.Windows.Forms.Padding(2);
 			this.textLastEnter.Name = "textLastEnter";
 			this.textLastEnter.ReadOnly = true;
 			this.textLastEnter.Size = new System.Drawing.Size(141, 26);
@@ -386,7 +390,7 @@
 			this.btnChangeCode.Enabled = false;
 			this.btnChangeCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.btnChangeCode.Location = new System.Drawing.Point(512, 11);
-			this.btnChangeCode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.btnChangeCode.Margin = new System.Windows.Forms.Padding(2);
 			this.btnChangeCode.Name = "btnChangeCode";
 			this.btnChangeCode.Size = new System.Drawing.Size(97, 28);
 			this.btnChangeCode.TabIndex = 14;
@@ -399,7 +403,7 @@
 			this.dateSchedTime.CustomFormat = "HH:mm";
 			this.dateSchedTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
 			this.dateSchedTime.Location = new System.Drawing.Point(127, 124);
-			this.dateSchedTime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.dateSchedTime.Margin = new System.Windows.Forms.Padding(2);
 			this.dateSchedTime.Name = "dateSchedTime";
 			this.dateSchedTime.ShowUpDown = true;
 			this.dateSchedTime.Size = new System.Drawing.Size(66, 26);
@@ -412,7 +416,7 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.checkDay1.AutoSize = true;
 			this.checkDay1.Location = new System.Drawing.Point(203, 125);
-			this.checkDay1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.checkDay1.Margin = new System.Windows.Forms.Padding(2);
 			this.checkDay1.Name = "checkDay1";
 			this.checkDay1.Size = new System.Drawing.Size(59, 24);
 			this.checkDay1.TabIndex = 3;
@@ -426,7 +430,7 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.checkDay2.AutoSize = true;
 			this.checkDay2.Location = new System.Drawing.Point(263, 125);
-			this.checkDay2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.checkDay2.Margin = new System.Windows.Forms.Padding(2);
 			this.checkDay2.Name = "checkDay2";
 			this.checkDay2.Size = new System.Drawing.Size(59, 24);
 			this.checkDay2.TabIndex = 4;
@@ -440,7 +444,7 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.checkDay3.AutoSize = true;
 			this.checkDay3.Location = new System.Drawing.Point(322, 125);
-			this.checkDay3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.checkDay3.Margin = new System.Windows.Forms.Padding(2);
 			this.checkDay3.Name = "checkDay3";
 			this.checkDay3.Size = new System.Drawing.Size(59, 24);
 			this.checkDay3.TabIndex = 5;
@@ -454,7 +458,7 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.checkDay4.AutoSize = true;
 			this.checkDay4.Location = new System.Drawing.Point(380, 125);
-			this.checkDay4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.checkDay4.Margin = new System.Windows.Forms.Padding(2);
 			this.checkDay4.Name = "checkDay4";
 			this.checkDay4.Size = new System.Drawing.Size(59, 24);
 			this.checkDay4.TabIndex = 6;
@@ -468,7 +472,7 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.checkDay5.AutoSize = true;
 			this.checkDay5.Location = new System.Drawing.Point(439, 125);
-			this.checkDay5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.checkDay5.Margin = new System.Windows.Forms.Padding(2);
 			this.checkDay5.Name = "checkDay5";
 			this.checkDay5.Size = new System.Drawing.Size(59, 24);
 			this.checkDay5.TabIndex = 7;
@@ -482,7 +486,7 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.checkDay7.AutoSize = true;
 			this.checkDay7.Location = new System.Drawing.Point(555, 125);
-			this.checkDay7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.checkDay7.Margin = new System.Windows.Forms.Padding(2);
 			this.checkDay7.Name = "checkDay7";
 			this.checkDay7.Size = new System.Drawing.Size(59, 24);
 			this.checkDay7.TabIndex = 9;
@@ -496,12 +500,17 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.checkDay6.AutoSize = true;
 			this.checkDay6.Location = new System.Drawing.Point(495, 125);
-			this.checkDay6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.checkDay6.Margin = new System.Windows.Forms.Padding(2);
 			this.checkDay6.Name = "checkDay6";
 			this.checkDay6.Size = new System.Drawing.Size(59, 24);
 			this.checkDay6.TabIndex = 8;
 			this.checkDay6.Text = "Mon";
 			this.checkDay6.UseVisualStyleBackColor = true;
+			// 
+			// clientDataSet
+			// 
+			this.clientDataSet.DataSetName = "clientDataSet";
+			this.clientDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
 			// 
 			// ClientInfo
 			// 
@@ -537,7 +546,7 @@
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.KeyPreview = true;
-			this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+			this.Margin = new System.Windows.Forms.Padding(5);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "ClientInfo";
@@ -550,6 +559,7 @@
 			this.groupBox1.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.clientDataSet)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -595,5 +605,7 @@
 		private System.Windows.Forms.TextBox textTimesLeft;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.CheckBox btnEnter;
+		private clientDataSet clientDataSet;
+		private clientsTableAdapter clientsTableAdapter;
 	}
 }

@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using AY.db;
 using AY.Log;
 using AY.Utils;
+using EAssistant.clientDataSetTableAdapters;
 
 namespace EAssistant
 {
@@ -16,7 +17,7 @@ namespace EAssistant
 		private Int64 m_clienId = 0;
 		
 		private Session session = Session.Instance;
-				
+	
 		public ClientInfo(Int64 id)
 		{
 			InitializeComponent();
@@ -278,28 +279,35 @@ namespace EAssistant
 				
 				if(m_clienId == 0)
 				{
-					ClientCollection cc = new ClientCollection();
-					cc.Add(id
-						, textName.Text
-						, textPhone.Text
-						, GetScheduleDays()
-						, DateTime.Parse(dateSchedTime.Text)
-						, Trainer.Id
-						, textComment.Text
-						, out m_clienId);
-						
+					clientDataSet.clientsRow cr = clientDataSet.clients.NewclientsRow();
+					cr.id = id;
+					cr.name = textName.Text;
+					cr.phone = textPhone.Text;
+					cr.scheduleDays = GetScheduleDays();
+					cr.scheduleTime = DateTime.Parse(dateSchedTime.Text);
+					cr.trainer = Trainer.Id;
+					cr.comment = textComment.Text;
+					cr.lastEnter = cr.lastLeave = cr.openTicket = DateTime.Now.AddYears(-1);
+					cr.timesLeft = 0;
+					cr.extraInfo = "";
+					m_clienId = id;
+					
+					clientDataSet.clients.Rows.Add(cr);
+					clientsTableAdapter.Update(clientDataSet.clients);
 					ConfigUIForNewClient();					
 				}
 				else
 				{
-					Client client = new Client(m_clienId);
-					client.SetData(id
-						, textName.Text
-						, textPhone.Text
-						, GetScheduleDays()
-						, DateTime.Parse(dateSchedTime.Text)
-						, Trainer.Id
-						, textComment.Text);
+					clientDataSet.clientsRow cr = clientDataSet.clients.FindByid(id);
+					cr.id = id;
+					cr.phone = textPhone.Text;
+					cr.scheduleDays = GetScheduleDays();
+					cr.scheduleTime = DateTime.Parse(dateSchedTime.Text);
+					cr.trainer = Trainer.Id;
+					cr.comment = textComment.Text;
+					m_clienId = id;
+					
+					clientsTableAdapter.Update(clientDataSet.clients);
 					this.DialogResult = DialogResult.OK;
 					this.Close();
 				}

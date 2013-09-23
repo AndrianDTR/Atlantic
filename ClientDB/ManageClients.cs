@@ -10,111 +10,77 @@ namespace EAssistant
 {
 	public partial class ManageClients : Form
 	{
-		System.Windows.Forms.Timer m_timerFilterChanged = new System.Windows.Forms.Timer();
-		ClientCollection m_collection = new ClientCollection();
 		WaitDialog wd = new WaitDialog(0,0,1);
-		BackgroundWorker backgroundWorker = new BackgroundWorker();
 		
 		public ManageClients()
 		{
 			InitializeComponent();
-			
-			backgroundWorker.DoWork += BackgroundWorkerDoWork;
-			
-			m_timerFilterChanged.Interval = 1000;
-			m_timerFilterChanged.Tick += new System.EventHandler(this.OnTimerFilter);
-		}
-		
-		private void BackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
-        {
-			m_collection.Refresh(String.Format("id like '%{0}%'", textToSearch.Text));
-			if(!wd.IsDisposed)
-				wd.Close();
-        }
-		
-		private void Reinit()
-		{
-			if (wd.IsDisposed)
-				wd = new WaitDialog(0, 1, 1);
-			wd.Show();
-			wd.Refresh();
-			String pattern = "%{0}%";
-			if(checkStartWith.Checked)
-				pattern = "{0}%";
-				
-			String query = String.Format("id like '{0}'", pattern);
-			if (checkNames.Checked)
-				query += String.Format(" or name like '{0}'", pattern);
-			m_collection.Refresh(String.Format(query, textToSearch.Text));
-			wd.StepIt();
-			wd.Close();
 		}
 		
 		private void btnClose_Click(object sender, EventArgs e)
 		{
 			this.Close();
 		}
-		
+	
+		private void OnLoad(object sender, EventArgs e)
+		{
+			// TODO: This line of code loads data into the 'clientDataSet.clientsList' table. You can move, or remove it, as needed.
+			this.clientsListTableAdapter.Fill(this.clientDataSet.clientsList);
+		}
+
 		private object[] parseClient(Client client)
 		{
 			object[] row = new object[5];
-			
-			row[0] = client.Code;
+
+			row[0] = client.Id;
 			row[1] = client.Name;
-			row[2] = client.Phone;
-			row[3] = client.TimesLeft.ToString();
-			row[4] = client.ScheduleTime.ToString("HH:mm");
-			
+			row[2] = client.LastEnter;
+			row[3] = client.TimesLeft;
+			row[4] = client.ScheduleTime;
+
 			return row;
 		}
-	
-		private void FillGrid()
-		{
-			gridClients.SuspendLayout();
-			Reinit();
-			gridClients.Rows.Clear();
-
-			if (wd.IsDisposed)
-				wd = new WaitDialog(0, m_collection.Items.Count, 1);
-			else
-				wd.Max = m_collection.Items.Count;
-				
-			wd.Show();
-			wd.Refresh();
-			
-			foreach (DataRow dr in m_collection.Items)
-			{
-				Client client = new Client(dr);
-				wd.StepIt();
-				wd.Refresh();
-				
-				int nRow = gridClients.Rows.Add(parseClient(client));
-				gridClients.Rows[nRow].Tag = client.Id;
-			}
-			wd.Close();
-			gridClients.ResumeLayout();
-		}
-
-		private void OnTimerFilter(object sender, EventArgs e)
-		{
-			m_timerFilterChanged.Stop();
-			FillGrid();
-		} 
 		
-		private void OnLoad(object sender, EventArgs e)
+		private Int64 GetSelectedClientId()
 		{
-			FillGrid();
+			if (gridClients.SelectedRows.Count < 1)
+				return -1;
+		
+			int index = gridClients.SelectedRows[0].Index;
+			DataGridViewRow row = gridClients.Rows[index];
+			Int64 id = (Int64)row.Cells[0].Value;
+			
+			return id;
 		}
 		
 		private void btnSearch_Click(object sender, EventArgs e)
 		{
-			FillGrid();
+			Search();
 		}
 
 		private void OnSearch(object sender, EventArgs e)
 		{
-			//m_timerFilterChanged.Stop();
-			//m_timerFilterChanged.Start();
+			//Search();
+		}
+		
+		private void Search()
+		{
+			String val = textToSearch.Text;
+			if (0 == val.Trim().Length)
+			{
+				clientsListBindingSource.Filter = "";
+				return;
+			}
+
+			String pattern = "%{0}%";
+			if (checkStartWith.Checked)
+				pattern = "{0}%";
+
+			String query = String.Format("id = '{0}'", val);
+			if (checkNames.Checked)
+				query += String.Format(" or name like '{0}'", pattern);
+
+			clientsListBindingSource.Filter = String.Format(query, val);
 		}
 		
 		private void btnAdd_Click(object sender, EventArgs e)
@@ -123,20 +89,21 @@ namespace EAssistant
 			if (DialogResult.OK != ci.ShowDialog(this))
 				return;
 
-			int nRow = gridClients.Rows.Add(parseClient(new Client(ci.Id)));
-			gridClients.Rows[nRow].Tag = ci.Id;	
+			clientDataSet.clientsRow cr = clientDataSet.clients.FindByid(ci.Id);
+			gridClients.Rows.Add(parseClient(new Client(ci.Id)));
 		}
 
 		private void btnRemove_Click(object sender, EventArgs e)
 		{
-			if(gridClients.SelectedRows.Count < 1)
-				return;
+			Int64 id = GetSelectedClientId();
 
+			if (-1 == id)
+				return;
+			
 			if(DialogResult.Yes != UIMessages.Warning("Client will be removed. Do you agree?", MessageBoxButtons.YesNo))
 				return;
 				
-			Int64 clientId = (Int64)gridClients.SelectedRows[0].Tag;
-			if (!ClientCollection.RemoveById(clientId))
+			if (!ClientCollection.RemoveById(id))
 			{
 				UIMessages.Error("Client could not been removed.");
 				return;
@@ -149,18 +116,20 @@ namespace EAssistant
 
 		private void btnHistory_Click(object sender, EventArgs e)
 		{
-			if(gridClients.SelectedRows.Count < 1)
-				return;
+			Int64 id = GetSelectedClientId();
 
-			Int64 clientId = (Int64)gridClients.SelectedRows[0].Tag;
+			if (-1 == id)
+				return;
+			
 		}
 
 		private void btnPayments_Click(object sender, EventArgs e)
 		{
-			if(gridClients.SelectedRows.Count < 1)
-				return;
+			Int64 id = GetSelectedClientId();
 
-			Int64 clientId = (Int64)gridClients.SelectedRows[0].Tag;
+			if (-1 == id)
+				return;
+			
 		}
 
 		private void btnEdit_Click(object sender, EventArgs e)
@@ -175,16 +144,19 @@ namespace EAssistant
 		
 		private void EditClient()
 		{
-			if (gridClients.SelectedRows.Count < 1)
-				return;
+			Int64 id = GetSelectedClientId();
 			
-			Int64 id = (Int64)gridClients.SelectedRows[0].Tag;
+			if(-1 == id)
+				return;
+				
 			ClientInfo ci = new ClientInfo(id);
 			
 			if (DialogResult.OK != ci.ShowDialog())
 				return;
-
-			gridClients.SelectedRows[0].SetValues(parseClient(new Client(id)));
+			
+			int index = gridClients.SelectedRows[0].Index;
+			DataGridViewRow row = gridClients.Rows[index];
+			row.SetValues(parseClient(new Client(ci.Id)));
 		}
 	}
 }

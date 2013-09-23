@@ -43,11 +43,12 @@ namespace EAssistant
         public MainForm()
         {
 			InitializeComponent();
-			
+#if !DEBUG
 			//AutoUpdater.Start("http://pro100soft.eu/EAssistant/updates/latest.xml");
 			AutoUpdater.Start("http://localhost/update.xml");
-			
 			CheckRegistration();
+#endif
+
 			UserLogin();
 			Reinit();
         }
