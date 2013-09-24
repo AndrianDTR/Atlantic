@@ -42,9 +42,7 @@
 			this.btnEdit = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
 			this.btnClose = new System.Windows.Forms.Button();
-			this.clientDataSet = new EAssistant.clientDataSet();
 			this.clientsListBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.clientsListTableAdapter = new EAssistant.clientDataSetTableAdapters.clientsListTableAdapter();
 			this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colLastEnter = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,7 +51,6 @@
 			groupBox1 = new System.Windows.Forms.GroupBox();
 			groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridClients)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.clientDataSet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.clientsListBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -197,20 +194,6 @@
 			this.btnClose.UseVisualStyleBackColor = true;
 			this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
 			// 
-			// clientDataSet
-			// 
-			this.clientDataSet.DataSetName = "clientDataSet";
-			this.clientDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-			// 
-			// clientsListBindingSource
-			// 
-			this.clientsListBindingSource.DataMember = "clientsList";
-			this.clientsListBindingSource.DataSource = this.clientDataSet;
-			// 
-			// clientsListTableAdapter
-			// 
-			this.clientsListTableAdapter.ClearBeforeFill = true;
-			// 
 			// colId
 			// 
 			this.colId.DataPropertyName = "id";
@@ -272,8 +255,6 @@
 			this.Load += new System.EventHandler(this.OnLoad);
 			groupBox1.ResumeLayout(false);
 			groupBox1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.gridClients)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.clientDataSet)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.clientsListBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
@@ -292,9 +273,7 @@
 		private System.Windows.Forms.Button btnEdit;
 		private System.Windows.Forms.Button btnRemove;
 		private System.Windows.Forms.Button btnClose;
-		private clientDataSet clientDataSet;
 		private System.Windows.Forms.BindingSource clientsListBindingSource;
-		private EAssistant.clientDataSetTableAdapters.clientsListTableAdapter clientsListTableAdapter;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colId;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colName;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colLastEnter;

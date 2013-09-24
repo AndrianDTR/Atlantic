@@ -15,6 +15,8 @@ namespace EAssistant
 		public ManageClients()
 		{
 			InitializeComponent();
+			this.clientsListBindingSource.DataMember = "clientsList";
+			this.clientsListBindingSource.DataSource = Session.Instance.dSet;
 		}
 		
 		private void btnClose_Click(object sender, EventArgs e)
@@ -24,8 +26,6 @@ namespace EAssistant
 	
 		private void OnLoad(object sender, EventArgs e)
 		{
-			// TODO: This line of code loads data into the 'clientDataSet.clientsList' table. You can move, or remove it, as needed.
-			this.clientsListTableAdapter.Fill(this.clientDataSet.clientsList);
 		}
 
 		private object[] parseClient(Client client)
@@ -89,7 +89,6 @@ namespace EAssistant
 			if (DialogResult.OK != ci.ShowDialog(this))
 				return;
 
-			clientDataSet.clientsRow cr = clientDataSet.clients.FindByid(ci.Id);
 			gridClients.Rows.Add(parseClient(new Client(ci.Id)));
 		}
 

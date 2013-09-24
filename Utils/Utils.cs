@@ -33,8 +33,14 @@ namespace AY
 			}
 		}
 
-		public abstract class Singleton<DerivedType>
+		public abstract class Singleton<DerivedType>:IDisposable
 		{
+			private bool disposed = false;
+			public virtual void Dispose()
+			{
+				disposed = true;
+			}
+			
 			private static DerivedType m_instance;
 
 			public static DerivedType Instance

@@ -192,7 +192,7 @@ namespace EAssistant
 		private void GetOpenedTickets()
 		{
 			DateTime today = DateTime.Now;
-			
+#if !DEBUG			
 			listClients.Items.Clear();
 			ClientCollection clients = new ClientCollection();
 			clients.Refresh("date(openTicket) = date('now', 'localtime')");
@@ -283,6 +283,7 @@ namespace EAssistant
 					lvi.Tag = new ClientStatus(client.Id, status);
 				}
 			}
+#endif
 		}
 
 		private void btnSearch_Click(object sender, EventArgs e)

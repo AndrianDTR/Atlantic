@@ -31,26 +31,31 @@ namespace EAssistant
 				return;
 			}
 			
-			Client client = new Client(m_clienId);
+			clientDataSet.clientsRow cr = session.dSet.clients.FindByid(m_clienId);
+			if(null == cr)
+			{
+				// No such client
+				return;
+			}
 			
-			textCode.Text = id.ToString().PadLeft(Session.MinBarcodeLen, '0');
-			textName.Text = client.Name;
-			textPhone.Text = client.Phone;
-			dateSchedTime.Text = client.ScheduleTime.ToLongTimeString();
+			textCode.Text = cr.id.ToString();
+			textName.Text = cr.name;
+			textPhone.Text = cr.phone;
+			dateSchedTime.Text = cr.scheduleTime.ToShortTimeString();
 
 			foreach (Trainer it in comboTrainer.Items)
 			{
-				if (it == client.Trainer)
+				if (it.Id == cr.trainer)
 				{
 					comboTrainer.SelectedItem = it;
 					break;
 				}
 			}
-			SetScheduleDays(client.ScheduleDays);
-			textComment.Text = client.Comment;
+			SetScheduleDays(cr.scheduleDays);
+			textComment.Text = cr.comment;
 			
-			UpdateLastPaymentInfo(client);
-			UpdateTimesLeft(client);
+			UpdateLastPaymentInfo(cr);
+			UpdateTimesLeft(cr);
 		}
 
 		private void Init()
@@ -75,14 +80,17 @@ namespace EAssistant
 			checkDay7.Text = names[6];
 		}
 
-		private void UpdateLastPaymentInfo(Client client)
+		private void UpdateLastPaymentInfo(clientDataSet.clientsRow cr)
 		{
-			String[] paymentInfo = client.LastPayment;
+			// TODO get from DB
+			/*
+			String[] paymentInfo = cr.lastPayment;
 			textLastPaySum.Text = paymentInfo[0];
 			textLastPayDate.Text = paymentInfo[1];
+			*/
 		}
-		
-		private void UpdateTimesLeft(Client client)
+
+		private void UpdateTimesLeft(clientDataSet.clientsRow cr)
 		{
 			if (UserRole.IsSet(session.UserRole.Clients, UserRights.Write))
 			{
@@ -90,16 +98,16 @@ namespace EAssistant
 				btnChangeCode.Enabled = true;
 			}
 
-			textTimesLeft.Text = client.TimesLeft.ToString();
+			textTimesLeft.Text = cr.timesLeft.ToString();
 
-			bool enabled = (client.TimesLeft > 0);
+			bool enabled = (cr.timesLeft > 0);
 			btnEnter.Enabled = enabled && btnEnter.Enabled;
 			btnLeave.Enabled = enabled && btnLeave.Enabled;
 
-			textLastEnter.Text = client.LastEnter.ToString();
-			textLastLeave.Text = client.LastLeave.ToString();
+			textLastEnter.Text = cr.lastEnter.ToString();
+			textLastLeave.Text = cr.lastLeave.ToString();
 			
-			if(client.OpenTicket.Date == DateTime.Now.Date)
+			if(cr.openTicket.Date == DateTime.Now.Date)
 			{
 				btnEnter.Checked = true;
 				btnEnter.Text = cancelText;
@@ -279,7 +287,7 @@ namespace EAssistant
 				
 				if(m_clienId == 0)
 				{
-					clientDataSet.clientsRow cr = clientDataSet.clients.NewclientsRow();
+					clientDataSet.clientsRow cr = session.dSet.clients.NewclientsRow();
 					cr.id = id;
 					cr.name = textName.Text;
 					cr.phone = textPhone.Text;
@@ -291,27 +299,29 @@ namespace EAssistant
 					cr.timesLeft = 0;
 					cr.extraInfo = "";
 					m_clienId = id;
-					
-					clientDataSet.clients.Rows.Add(cr);
-					clientsTableAdapter.Update(clientDataSet.clients);
+
+					session.dSet.clients.Rows.Add(cr);
+					session.Adapters.clientsTableAdapter.Update(session.dSet.clients);
 					ConfigUIForNewClient();					
 				}
 				else
 				{
-					clientDataSet.clientsRow cr = clientDataSet.clients.FindByid(id);
-
+					clientDataSet.clientsRow cr = session.dSet.clients.FindByid(m_clienId);
 					if(null == cr)
 						return;
-
+						
 					cr.id = id;
 					cr.phone = textPhone.Text;
 					cr.scheduleDays = GetScheduleDays();
-					cr.scheduleTime = DateTime.Parse(dateSchedTime.Text);
+					cr.scheduleTime = dateSchedTime.Value;
 					cr.trainer = Trainer.Id;
 					cr.comment = textComment.Text;
+					cr.AcceptChanges();
+
 					m_clienId = id;
+
+					session.Adapters.clientsTableAdapter.Update(session.dSet.clients);
 					
-					clientsTableAdapter.Update(clientDataSet.clients);
 					this.DialogResult = DialogResult.OK;
 					this.Close();
 				}
@@ -328,11 +338,11 @@ namespace EAssistant
 			AddPayment addPaymDlg = new AddPayment(m_clienId);
 			if(DialogResult.Cancel == addPaymDlg.ShowDialog())
 				return;
-			
-			Client client = new Client(m_clienId);
 
-			UpdateLastPaymentInfo(client);
-			UpdateTimesLeft(client);
+			clientDataSet.clientsRow cr = session.dSet.clients.FindByid(m_clienId);
+			
+			UpdateLastPaymentInfo(cr);
+			UpdateTimesLeft(cr);
 		}
 		
 		private void btnEnter_CheckedChanged(object sender, EventArgs e)
@@ -366,8 +376,9 @@ namespace EAssistant
 			clientInfo.ProcessEnter();
 			
 			btnEnter.Checked = false;
-			
-			UpdateTimesLeft(new Client(m_clienId));
+
+			clientDataSet.clientsRow cr = session.dSet.clients.FindByid(m_clienId);
+			UpdateTimesLeft(cr);
 
 			Session.Instance.UpdateTickets();
 		}

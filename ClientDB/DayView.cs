@@ -26,6 +26,7 @@ namespace EAssistant
 		
 		public void Reinit()
 		{
+#if !DEBUG
 			try
 			{
 				showTrainers = m_opt.ShowTrainer;
@@ -51,12 +52,14 @@ namespace EAssistant
 			catch (System.Exception)
 			{
 			}
+#endif
 		}
 
 		protected override CellInfo GetCellInfo(DateTime dt)
 		{
 			Logger.Enter();
 			CellInfo ci = new CellInfo(dt);
+#if !DEBUG
 			try
 			{
 				int clCount = 0;
@@ -90,6 +93,7 @@ namespace EAssistant
 			}
 			
 			Logger.Leave();
+#endif
 			return ci;
 		}
 	}

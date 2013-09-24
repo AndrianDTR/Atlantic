@@ -1,5 +1,4 @@
-﻿using EAssistant.clientDataSetTableAdapters;
-namespace EAssistant
+﻿namespace EAssistant
 {
 	partial class ClientInfo
 	{
@@ -67,11 +66,8 @@ namespace EAssistant
 			this.checkDay5 = new System.Windows.Forms.CheckBox();
 			this.checkDay7 = new System.Windows.Forms.CheckBox();
 			this.checkDay6 = new System.Windows.Forms.CheckBox();
-			this.clientDataSet = new EAssistant.clientDataSet();
-			this.clientsTableAdapter = new clientsTableAdapter();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.clientDataSet)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -507,11 +503,6 @@ namespace EAssistant
 			this.checkDay6.Text = "Mon";
 			this.checkDay6.UseVisualStyleBackColor = true;
 			// 
-			// clientDataSet
-			// 
-			this.clientDataSet.DataSetName = "clientDataSet";
-			this.clientDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-			// 
 			// ClientInfo
 			// 
 			this.AcceptButton = this.btnOk;
@@ -559,7 +550,6 @@ namespace EAssistant
 			this.groupBox1.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.clientDataSet)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -605,7 +595,5 @@ namespace EAssistant
 		private System.Windows.Forms.TextBox textTimesLeft;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.CheckBox btnEnter;
-		private clientDataSet clientDataSet;
-		private clientsTableAdapter clientsTableAdapter;
 	}
 }
