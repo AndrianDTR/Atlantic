@@ -299,6 +299,10 @@ namespace EAssistant
 				else
 				{
 					clientDataSet.clientsRow cr = clientDataSet.clients.FindByid(id);
+
+					if(null == cr)
+						return;
+
 					cr.id = id;
 					cr.phone = textPhone.Text;
 					cr.scheduleDays = GetScheduleDays();
