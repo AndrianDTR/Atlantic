@@ -76,7 +76,7 @@ namespace EAssistant
 			
 			if(!new PaymentsCollection().Add(m_ClientId
 				, sc.Id
-				, Session.Instance.User.Id
+				, Session.Instance.UserId
 				, float.Parse(textSum.Text.Trim())
 				, textComment.Text))
 			{

@@ -7,18 +7,18 @@ namespace EAssistant
 {
 	public partial class ChangePassword : Form
 	{
-		private User m_user = null;
+		private dbDataSet.usersRow m_user = null;
 		
 		public ChangePassword()
 		{
 			InitializeComponent();
-			m_user = Session.Instance.User;
+			m_user = Db.Instance.dSet.users.FindByid(Session.Instance.UserId);
 		}
 
 		public ChangePassword(Int64 userId)
 		{
 			InitializeComponent();
-			m_user = new User(userId);
+			m_user = Db.Instance.dSet.users.FindByid(userId);
 		}
 		
 		private void change_Click(object sender, EventArgs e)

@@ -4,8 +4,9 @@ using System.Windows.Forms;
 
 using AY.Log;
 using AY.db;
+using AY.db.dstAdapters;
 using AY.Utils;
-using EAssistant.clientDataSetTableAdapters;
+using System.Data.SqlClient;
 
 namespace EAssistant
 {
@@ -34,16 +35,16 @@ namespace EAssistant
 		private static int m_minBarcodeLen = 13;
 		
 		private int m_passLen = 8;
-		private User m_user = new User();
-		private UserRole m_userRole = new UserRole();
+		private Int64 m_user = 0;
+		private Int64 m_userRole = 0;
 		
 		public delegate void UpdateTicketList();
 		
 		private String RegInfo = String.Empty;
 		
-		private clientDataSet m_clientDataSet;
-		private tAdapter m_tAdapter;
-		private TableAdapterManager tam;
+		//private dbDataSet m_clientDataSet;
+		//private tAdapter m_tAdapter;
+		//private TableAdapterManager tam;
 		
 		private UpdateTicketList m_ticketsUpdDelegate = null;
 		public UpdateTicketList TicketUpdate
@@ -60,6 +61,7 @@ namespace EAssistant
 		
 		private Session()
 		{
+			/*
 			m_clientDataSet = new clientDataSet();
 			m_tAdapter = new tAdapter();
 			tam = new TableAdapterManager();
@@ -92,25 +94,30 @@ namespace EAssistant
 			m_tAdapter.lvtaClientsList.Fill(m_clientDataSet.clientsList);
 			
 			((System.ComponentModel.ISupportInitialize)(m_clientDataSet)).EndInit();
+			*/
+#if DEBUG
+			test();
+#endif			
 		}
 
 		public override void Dispose()
 		{
-			m_clientDataSet.AcceptChanges();
+			/*m_clientDataSet.AcceptChanges();
 			int x = tam.UpdateAll(m_clientDataSet);
 			m_clientDataSet.AcceptChanges();
+			*/
 			base.Dispose();
 		}
 		
-		public clientDataSet dSet
-		{
-			get{ return m_clientDataSet; }
-		}
+		//public dbDataSet dSet
+		//{
+		//    get{ return m_clientDataSet; }
+		//}
 
-		public TableAdapterManager Adapters
-		{
-			get { return tam; }
-		}
+		//public TableAdapterManager Adapters
+		//{
+		//    get { return tam; }
+		//}
 		
 		public void UpdateTickets()
 		{
@@ -118,13 +125,12 @@ namespace EAssistant
 				m_ticketsUpdDelegate();
 		}
 		
-		public User User
+		public Int64 UserId
 		{
 			get{ return m_user;}
-			set{ m_user = value; m_userRole = m_user.Role;}
 		}
 
-		public UserRole UserRole
+		public Int64 UserRoleId
 		{
 			get { return m_userRole; }
 		}
@@ -166,16 +172,35 @@ namespace EAssistant
 			
 			return res;
 		}
+		
+		public void SetUserInfo(Int64 userId, Int64 userPrivId)
+		{
+			m_user = userId;
+			m_userRole = userPrivId;
+		}
 
 		public static void SyncDB()
 		{
-			Session session = Session.Instance;
-			SqlCommandBuilder commandBuilder = new SqlCommandBuilder(session.Adapters.clientsTableAdapter);
-					 
-			session.Adapters.clientsTableAdapter.UpdateCommand = commandBuilder.GetUpdateCommand();
-			session.Adapters.clientsTableAdapter.InsertCommand = commandBuilder.GetInsertCommand();
-					 
-			session.Adapters.clientsTableAdapter.Update(session.dSet);
+			Db.Instance.Adapters.clientsTableAdapter.Update(Db.Instance.dSet);
+		}
+		
+		private void test()
+		{
+			//Int64 newId = 1111000;
+			//dbDataSet.clientsRow cr0 = Db.Instance.dSet.clients.FindByid(newId);
+			//dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(2200000000006);
+			
+			//cr.BeginEdit();
+			//cr.id = newId;
+			//cr.EndEdit();
+			
+			//Db.Instance.dSet.clients.Rows.Add(cr);
+
+			//dbDataSet.clientsRow ucr = Db.Instance.dSet.clients.FindByid(newId);
+			
+			//UIMessages.Info(ucr.name);
+			//int x = Db.Instance.Adapters.UpdateAll(Db.Instance.dSet);
+			//Db.Instance.dSet.AcceptChanges();
 		}
 	}
 }

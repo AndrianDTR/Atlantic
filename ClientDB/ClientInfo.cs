@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using AY.db;
 using AY.Log;
 using AY.Utils;
-using EAssistant.clientDataSetTableAdapters;
+using AY.db.dstAdapters;
 
 namespace EAssistant
 {
@@ -31,7 +31,7 @@ namespace EAssistant
 				return;
 			}
 			
-			clientDataSet.clientsRow cr = session.dSet.clients.FindByid(m_clienId);
+			Client cr = (Client)Db.Instance.dSet.clients.FindByid(m_clienId);
 			if(null == cr)
 			{
 				// No such client
@@ -80,7 +80,7 @@ namespace EAssistant
 			checkDay7.Text = names[6];
 		}
 
-		private void UpdateLastPaymentInfo(clientDataSet.clientsRow cr)
+		private void UpdateLastPaymentInfo(dbDataSet.clientsRow cr)
 		{
 			// TODO get from DB
 			/*
@@ -90,17 +90,18 @@ namespace EAssistant
 			*/
 		}
 
-		private void UpdateTimesLeft(clientDataSet.clientsRow cr)
+		private void UpdateTimesLeft(dbDataSet.clientsRow cr)
 		{
-			if (UserRole.IsSet(session.UserRole.Clients, UserRights.Write))
+			dbDataSet.userPrivilegesRow ur = Db.Instance.dSet.userPrivileges.FindByid(session.UserRoleId);
+			if (dbDataSet.userPrivilegesRow.IsSet(ur.clients, UserRights.Write))
 			{
 				btnEnter.Enabled = true;
 				btnChangeCode.Enabled = true;
 			}
 
-			textTimesLeft.Text = cr.timesLeft.ToString();
+			textTimesLeft.Text = cr.hoursLeft.ToString();
 
-			bool enabled = (cr.timesLeft > 0);
+			bool enabled = (cr.hoursLeft > 0);
 			btnEnter.Enabled = enabled && btnEnter.Enabled;
 			btnLeave.Enabled = enabled && btnLeave.Enabled;
 
@@ -127,17 +128,19 @@ namespace EAssistant
 		
 		private void CheckPermissions()
 		{
-			if (UserRole.IsSet(session.UserRole.Payments, UserRights.Read))
+			dbDataSet.userPrivilegesRow priv = (Db.Instance.dSet.userPrivileges.FindByid(session.UserRoleId));
+			
+			if (dbDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Read))
 			{
 				btnPaymentHistory.Enabled = true;
 			}
-			
-			if (UserRole.IsSet(session.UserRole.Payments, UserRights.Create))
+
+			if (dbDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Create))
 			{
 				btnPaymentAdd.Enabled = true;
 			}
 
-			if (UserRole.IsSet(session.UserRole.Clients, UserRights.Create))
+			if (dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Create))
 			{
 				btnOk.Enabled = true;
 			}
@@ -218,7 +221,7 @@ namespace EAssistant
 					continue;
 				}
 				
-				if(Client.CodeExists(id))
+				if(Client.Exists(id))
 				{
 					UIMessages.Error("This card already attached. Please use another one.");
 					dlg.Clear();
@@ -287,7 +290,7 @@ namespace EAssistant
 				
 				if(m_clienId == 0)
 				{
-					clientDataSet.clientsRow cr = session.dSet.clients.NewclientsRow();
+					Client cr = (Client)Db.Instance.dSet.clients.NewclientsRow();
 					cr.id = id;
 					cr.name = textName.Text;
 					cr.phone = textPhone.Text;
@@ -296,17 +299,18 @@ namespace EAssistant
 					cr.trainer = Trainer.Id;
 					cr.comment = textComment.Text;
 					cr.lastEnter = cr.lastLeave = cr.openTicket = DateTime.Now.AddYears(-1);
-					cr.timesLeft = 0;
-					cr.extraInfo = "";
+					cr.hoursLeft = 0;
+					// TODO: Set default plan ID
+					//cr.plan = 0;
 					m_clienId = id;
 
-					session.dSet.clients.Rows.Add(cr);
-					session.Adapters.clientsTableAdapter.Update(session.dSet.clients);
+					Db.Instance.dSet.clients.Rows.Add(cr);
+					Db.Instance.Adapters.clientsTableAdapter.Update(Db.Instance.dSet.clients);
 					ConfigUIForNewClient();					
 				}
 				else
 				{
-					clientDataSet.clientsRow cr = session.dSet.clients.FindByid(m_clienId);
+					Client cr = (Client)Db.Instance.dSet.clients.FindByid(m_clienId);
 					if(null == cr)
 						return;
 						
@@ -320,7 +324,7 @@ namespace EAssistant
 
 					m_clienId = id;
 
-					session.Adapters.clientsTableAdapter.Update(session.dSet.clients);
+					Db.Instance.Adapters.clientsTableAdapter.Update(Db.Instance.dSet.clients);
 
 					Session.SyncDB();
 					
@@ -341,7 +345,7 @@ namespace EAssistant
 			if(DialogResult.Cancel == addPaymDlg.ShowDialog())
 				return;
 
-			clientDataSet.clientsRow cr = session.dSet.clients.FindByid(m_clienId);
+			dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(m_clienId);
 			
 			UpdateLastPaymentInfo(cr);
 			UpdateTimesLeft(cr);
@@ -349,40 +353,40 @@ namespace EAssistant
 		
 		private void btnEnter_CheckedChanged(object sender, EventArgs e)
 		{
-			if(0 == m_clienId)
-				return;
+			//if(0 == m_clienId)
+			//    return;
 			
-			Client clientInfo = new Client(m_clienId);
+			//Client clientInfo = new Client(m_clienId);
 			
-			if(btnEnter.Checked)
-			{
-				clientInfo.OpenTicket = DateTime.Now;
-				btnLeave.Enabled = true;
-				btnEnter.Text = cancelText;
-			}
-			else
-			{
-				clientInfo.OpenTicket = clientInfo.OpenTicket.AddYears(-1);
-				btnLeave.Enabled = false;
-				btnEnter.Text = enterText;
-			}
+			//if(btnEnter.Checked)
+			//{
+			//    clientInfo.OpenTicket = DateTime.Now;
+			//    btnLeave.Enabled = true;
+			//    btnEnter.Text = cancelText;
+			//}
+			//else
+			//{
+			//    clientInfo.OpenTicket = clientInfo.OpenTicket.AddYears(-1);
+			//    btnLeave.Enabled = false;
+			//    btnEnter.Text = enterText;
+			//}
 
-			Session.Instance.UpdateTickets();
+			//Session.Instance.UpdateTickets();
 		}
 
 		private void btnLeave_Click(object sender, EventArgs e)
 		{
-			Client clientInfo = new Client(m_clienId);
-			clientInfo.LastEnter = clientInfo.OpenTicket;
-			clientInfo.LastLeave = DateTime.Now;
-			clientInfo.ProcessEnter();
+			//Client clientInfo = new Client(m_clienId);
+			//clientInfo.LastEnter = clientInfo.OpenTicket;
+			//clientInfo.LastLeave = DateTime.Now;
+			//clientInfo.ProcessEnter();
 			
-			btnEnter.Checked = false;
+			//btnEnter.Checked = false;
 
-			clientDataSet.clientsRow cr = session.dSet.clients.FindByid(m_clienId);
-			UpdateTimesLeft(cr);
+			//clientDataSet.clientsRow cr = session.dSet.clients.FindByid(m_clienId);
+			//UpdateTimesLeft(cr);
 
-			Session.Instance.UpdateTickets();
+			//Session.Instance.UpdateTickets();
 		}
 
 		private void btnPaymentHistory_Click(object sender, EventArgs e)

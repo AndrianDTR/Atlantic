@@ -7,7 +7,7 @@ namespace EAssistant
 {
 	public partial class ManageUserRoles : Form
 	{
-		UserRole edit = null;
+		dbDataSet.userPrivilegesRow edit = null;
 		
 		public ManageUserRoles()
 		{
@@ -21,49 +21,48 @@ namespace EAssistant
 		
 		private void ReloadRoles()
 		{
-			UserRolesCollection collection = new UserRolesCollection();
 			privilegesGrid.Rows.Clear();
 
-			foreach (UserRole priv in collection)
+			foreach (dbDataSet.userPrivilegesRow priv in Db.Instance.dSet.userPrivileges.Rows)
 			{
-				ListViewItem it = listRoles.Items.Add(priv.Name);
-				it.Tag = priv.Id;
+				ListViewItem it = listRoles.Items.Add(priv.name);
+				it.Tag = priv.id;
 			}
 		}
 		
-		private object[] GetRightsRow(String name, UserRights rights)
+		private object[] GetRightsRow(String name, long rights)
 		{
 			object[] res = new object[5];
 			
 			res[0] = (object)name;
-			res[1] = ((rights & UserRights.Read) == UserRights.Read) ? "X" : " ";
-			res[2] = ((rights & UserRights.Write) == UserRights.Write) ? "X" : " ";
-			res[3] = ((rights & UserRights.Create) == UserRights.Create) ? "X" : " ";
-			res[4] = ((rights & UserRights.Delete) == UserRights.Delete) ? "X" : " ";
+			res[1] = ((rights & (long)UserRights.Read) == (long)UserRights.Read) ? "X" : " ";
+			res[2] = ((rights & (long)UserRights.Write) == (long)UserRights.Write) ? "X" : " ";
+			res[3] = ((rights & (long)UserRights.Create) == (long)UserRights.Create) ? "X" : " ";
+			res[4] = ((rights & (long)UserRights.Delete) == (long)UserRights.Delete) ? "X" : " ";
 			
 			return res;
 		}
-		
-		private void FillPrivileges(UserRole priv)
+
+		private void FillPrivileges(dbDataSet.userPrivilegesRow priv)
 		{
 			privilegesGrid.Rows.Clear();
 			int nRow = 0;
-			nRow = privilegesGrid.Rows.Add(GetRightsRow("Users management", priv.Users));
-			privilegesGrid.Rows[nRow].Tag = priv.Users;
-			nRow = privilegesGrid.Rows.Add(GetRightsRow("Manage privileges", priv.Privileges));
-			privilegesGrid.Rows[nRow].Tag = priv.Privileges;
-			nRow = privilegesGrid.Rows.Add(GetRightsRow("Manage backup data", priv.Backup));
-			privilegesGrid.Rows[nRow].Tag = priv.Backup;
-			nRow = privilegesGrid.Rows.Add(GetRightsRow("Manage clients", priv.Clients));
-			privilegesGrid.Rows[nRow].Tag = priv.Clients;
-			nRow = privilegesGrid.Rows.Add(GetRightsRow("Manage payments", priv.Payments));
-			privilegesGrid.Rows[nRow].Tag = priv.Payments;
-			nRow = privilegesGrid.Rows.Add(GetRightsRow("Manage trainers", priv.Trainers));
-			privilegesGrid.Rows[nRow].Tag = priv.Trainers;
-			nRow = privilegesGrid.Rows.Add(GetRightsRow("Manage schedules", priv.Schedule));
-			privilegesGrid.Rows[nRow].Tag = priv.Schedule;
-			nRow = privilegesGrid.Rows.Add(GetRightsRow("Manage statistics", priv.Statistics));
-			privilegesGrid.Rows[nRow].Tag = priv.Statistics;
+			nRow = privilegesGrid.Rows.Add(GetRightsRow("Users management", priv.users));
+			privilegesGrid.Rows[nRow].Tag = priv.users;
+			nRow = privilegesGrid.Rows.Add(GetRightsRow("Manage privileges", priv.privileges));
+			privilegesGrid.Rows[nRow].Tag = priv.privileges;
+			nRow = privilegesGrid.Rows.Add(GetRightsRow("Manage backup data", priv.backup));
+			privilegesGrid.Rows[nRow].Tag = priv.backup;
+			nRow = privilegesGrid.Rows.Add(GetRightsRow("Manage clients", priv.clients));
+			privilegesGrid.Rows[nRow].Tag = priv.clients;
+			nRow = privilegesGrid.Rows.Add(GetRightsRow("Manage payments", priv.payments));
+			privilegesGrid.Rows[nRow].Tag = priv.payments;
+			nRow = privilegesGrid.Rows.Add(GetRightsRow("Manage trainers", priv.trainers));
+			privilegesGrid.Rows[nRow].Tag = priv.trainers;
+			nRow = privilegesGrid.Rows.Add(GetRightsRow("Manage schedules", priv.schedule));
+			privilegesGrid.Rows[nRow].Tag = priv.schedule;
+			nRow = privilegesGrid.Rows.Add(GetRightsRow("Manage statistics", priv.statistics));
+			privilegesGrid.Rows[nRow].Tag = priv.statistics;
 		}
 		
 		private void listRoles_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,7 +70,8 @@ namespace EAssistant
 			if(listRoles.SelectedItems.Count < 1)
 				return;
 
-			UserRole priv = new UserRole((Int64)listRoles.SelectedItems[0].Tag);
+			Int64 rId = (Int64)listRoles.SelectedItems[0].Tag;
+			dbDataSet.userPrivilegesRow priv = Db.Instance.dSet.userPrivileges.FindByid(rId);
 			FillPrivileges(priv);
 		}
 		
@@ -90,12 +90,13 @@ namespace EAssistant
 		{
 			if (edit == null && listRoles.SelectedItems.Count > 0)
 			{
-				edit = new UserRole((Int64)listRoles.SelectedItems[0].Tag);
+				Int64 rId = (Int64)listRoles.SelectedItems[0].Tag;
+				edit = Db.Instance.dSet.userPrivileges.FindByid(rId);
 			}
 			
 			if(e.Label != null)
 			{
-				edit.Name = e.Label;
+				edit.name = e.Label;
 				listRoles.SelectedItems[0].Text = e.Label;
 				edit = null;
 			}
@@ -103,37 +104,37 @@ namespace EAssistant
 
 		private void addButton_Click(object sender, EventArgs e)
 		{
-			String name = "New role";
-			Int64 id = 0;
+			//String name = "New role";
+			//Int64 id = 0;
 
-			UserRolesCollection collection = new UserRolesCollection();
-			if(!collection.Add(name, out id))
-			{	
-				UIMessages.Error("New role could not been added.");
-				return;
-			}
+			//UserRolesCollection collection = new UserRolesCollection();
+			//if(!collection.Add(name, out id))
+			//{	
+			//    UIMessages.Error("New role could not been added.");
+			//    return;
+			//}
 			
-			UserRole role = new UserRole(id);
+			//UserRole role = new UserRole(id);
 			
-			ListViewItem it = listRoles.Items.Add(name);
-			edit = role;
-			it.Tag = id;
-			it.BeginEdit();
+			//ListViewItem it = listRoles.Items.Add(name);
+			//edit = role;
+			//it.Tag = id;
+			//it.BeginEdit();
 		}
 
 		private void delButton_Click(object sender, EventArgs e)
 		{
-			if (listRoles.SelectedItems.Count > 0)
-			{
-				Int64 id = (Int64)listRoles.SelectedItems[0].Tag;
-				if(!UserRolesCollection.RemoveById(id))
-				{
-					UIMessages.Error("Role could not been removed.");
-					return;
-				}
-				listRoles.Items.Remove(listRoles.SelectedItems[0]);
-				privilegesGrid.Rows.Clear();
-			}
+			//if (listRoles.SelectedItems.Count > 0)
+			//{
+			//    Int64 id = (Int64)listRoles.SelectedItems[0].Tag;
+			//    if(!UserRolesCollection.RemoveById(id))
+			//    {
+			//        UIMessages.Error("Role could not been removed.");
+			//        return;
+			//    }
+			//    listRoles.Items.Remove(listRoles.SelectedItems[0]);
+			//    privilegesGrid.Rows.Clear();
+			//}
 		}
 
 		private void OnClick(object sender, EventArgs e)
@@ -144,43 +145,44 @@ namespace EAssistant
 			if (privilegesGrid.CurrentCell != null 
 			&& privilegesGrid.CurrentCell.ColumnIndex > 0)
 			{
-				UserRole role = new UserRole((Int64)listRoles.SelectedItems[0].Tag);
+				Int64 rId = (Int64)listRoles.SelectedItems[0].Tag;
+				dbDataSet.userPrivilegesRow role = Db.Instance.dSet.userPrivileges.FindByid(rId);
 				
-				UserRights rights = (UserRights)privilegesGrid.CurrentRow.Tag;
+				long rights = (long)privilegesGrid.CurrentRow.Tag;
 				String val = privilegesGrid.CurrentCell.Value.ToString();
 				val = val == "X" ? " " : "X";
 				privilegesGrid.CurrentCell.Value = val;
 				
 				if(val == "X")
-					rights |= (UserRights)(1 << privilegesGrid.CurrentCell.ColumnIndex - 1);
+					rights |= (1 << privilegesGrid.CurrentCell.ColumnIndex - 1);
 				else
-					rights ^= (UserRights)(1 << privilegesGrid.CurrentCell.ColumnIndex - 1);
+					rights ^= (1 << privilegesGrid.CurrentCell.ColumnIndex - 1);
 				
 				switch(privilegesGrid.CurrentRow.Index)
 				{
 					case 0:
-						role.Users = rights;
+						role.users = rights;
 						break;
 					case 1:
-						role.Privileges = rights;
+						role.privileges = rights;
 						break;
 					case 2:
-						role.Backup = rights;
+						role.backup = rights;
 						break;
 					case 3:
-						role.Clients = rights;
+						role.clients = rights;
 						break;
 					case 4:
-						role.Payments = rights;
+						role.payments = rights;
 						break;
 					case 5:
-						role.Trainers = rights;
+						role.trainers = rights;
 						break;
 					case 6:
-						role.Schedule = rights;
+						role.schedule = rights;
 						break;
 					case 7:
-						role.Statistics = rights;
+						role.statistics = rights;
 						break;
 				}
 				privilegesGrid.CurrentRow.Tag = rights;

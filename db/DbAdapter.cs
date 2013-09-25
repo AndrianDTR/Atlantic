@@ -651,7 +651,7 @@ namespace AY
 					Logger.Debug(fillScheduleRules);
 					new SQLiteCommand(fillScheduleRules, conn).ExecuteNonQuery();
 
-					for (int k = 0; k < 100000; k += 100)
+					for (int k = 0; k < 100; k += 100)
 					{
 						int n = 0;
 						String fillClients = String.Format("insert into clients(id, name, phone, scheduleDays, scheduleTime, trainer)"
@@ -755,8 +755,8 @@ namespace AY
 					, openTicket DateTime DEFAULT(datetime('now', '-1 year'))
 					, trainer Integer DEFAULT(0)
 					, comment Text DEFAULT('')
-					, extraInfo Text DEFAULT('')
-					, timesLeft Integer DEFAULT(0)
+					, ruleId Integer NOT NULL
+					, hoursLeft Integer DEFAULT(0)
 				)";
 				
 				string tPayments = @"drop table if exists payments;
@@ -776,8 +776,9 @@ namespace AY
 				(
 					id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 					, name VarChar NOT NULL
-					, rule VarChar NOT NULL
 					, price Float NOT NULL
+					, hoursAdd Integer NOT NULL
+					, hoursDec Integer NOT NULL
 				)";
 				
 				string tStatistics = @"drop table if exists statistics;

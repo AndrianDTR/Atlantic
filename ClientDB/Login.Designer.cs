@@ -58,7 +58,7 @@
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(67, 13);
 			this.label1.TabIndex = 1;
-			this.label1.Text = "User name";
+			this.label1.Text = "dbDataSet.usersRow name";
 			// 
 			// userName
 			// 

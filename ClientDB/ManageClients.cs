@@ -16,7 +16,7 @@ namespace EAssistant
 		{
 			InitializeComponent();
 			this.clientsListBindingSource.DataMember = "clientsList";
-			this.clientsListBindingSource.DataSource = Session.Instance.dSet;
+			this.clientsListBindingSource.DataSource = Db.Instance.dSet;
 		}
 		
 		private void btnClose_Click(object sender, EventArgs e)
@@ -32,11 +32,11 @@ namespace EAssistant
 		{
 			object[] row = new object[5];
 
-			row[0] = client.Id;
-			row[1] = client.Name;
-			row[2] = client.LastEnter;
-			row[3] = client.TimesLeft;
-			row[4] = client.ScheduleTime;
+			row[0] = client.id;
+			row[1] = client.name;
+			row[2] = client.lastEnter;
+			row[3] = client.hoursLeft;
+			row[4] = client.scheduleTime;
 
 			return row;
 		}
@@ -85,32 +85,32 @@ namespace EAssistant
 		
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
-			ClientInfo ci = new ClientInfo(0);
-			if (DialogResult.OK != ci.ShowDialog(this))
-				return;
+			//ClientInfo ci = new ClientInfo(0);
+			//if (DialogResult.OK != ci.ShowDialog(this))
+			//    return;
 
-			gridClients.Rows.Add(parseClient(new Client(ci.Id)));
+			//gridClients.Rows.Add(parseClient(new Client(ci.Id)));
 		}
 
 		private void btnRemove_Click(object sender, EventArgs e)
 		{
-			Int64 id = GetSelectedClientId();
+			//Int64 id = GetSelectedClientId();
 
-			if (-1 == id)
-				return;
+			//if (-1 == id)
+			//    return;
 			
-			if(DialogResult.Yes != UIMessages.Warning("Client will be removed. Do you agree?", MessageBoxButtons.YesNo))
-				return;
+			//if(DialogResult.Yes != UIMessages.Warning("Client will be removed. Do you agree?", MessageBoxButtons.YesNo))
+			//    return;
 				
-			if (!ClientCollection.RemoveById(id))
-			{
-				UIMessages.Error("Client could not been removed.");
-				return;
-			}
-			int ndx = gridClients.SelectedRows[0].Index - 1;
-			gridClients.Rows.Remove(gridClients.SelectedRows[0]);
-			if(ndx >= 0)
-				gridClients.Rows[ndx].Selected = true;
+			//if (!ClientCollection.RemoveById(id))
+			//{
+			//    UIMessages.Error("Client could not been removed.");
+			//    return;
+			//}
+			//int ndx = gridClients.SelectedRows[0].Index - 1;
+			//gridClients.Rows.Remove(gridClients.SelectedRows[0]);
+			//if(ndx >= 0)
+			//    gridClients.Rows[ndx].Selected = true;
 		}
 
 		private void btnHistory_Click(object sender, EventArgs e)
@@ -143,19 +143,19 @@ namespace EAssistant
 		
 		private void EditClient()
 		{
-			Int64 id = GetSelectedClientId();
+			//Int64 id = GetSelectedClientId();
 			
-			if(-1 == id)
-				return;
+			//if(-1 == id)
+			//    return;
 				
-			ClientInfo ci = new ClientInfo(id);
+			//ClientInfo ci = new ClientInfo(id);
 			
-			if (DialogResult.OK != ci.ShowDialog())
-				return;
+			//if (DialogResult.OK != ci.ShowDialog())
+			//    return;
 			
-			int index = gridClients.SelectedRows[0].Index;
-			DataGridViewRow row = gridClients.Rows[index];
-			row.SetValues(parseClient(new Client(ci.Id)));
+			//int index = gridClients.SelectedRows[0].Index;
+			//DataGridViewRow row = gridClients.Rows[index];
+			//row.SetValues(parseClient(new Client(ci.Id)));
 		}
 	}
 }

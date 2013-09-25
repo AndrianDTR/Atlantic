@@ -2,93 +2,60 @@
 using System.Collections.Generic;
 using System.Data;
 using AY.Log;
+using AY.Utils;
+using AY.db.dstAdapters;
 
 namespace AY.db
 {
-	public class DbTableRow
+	public class Db : Singleton<Db>
 	{
-		protected Int64 m_id = 0;
-		protected DataRow m_DataRow = null;
+		private dbDataSet m_clientDataSet;
+		//private tAdapter m_tAdapter;
+		private TableAdapterManager tam;
 		
-		public DbTableRow()
+		private Db()
 		{
+			m_clientDataSet = new dbDataSet();
+			//m_tAdapter = new tAdapter();
+			tam = new TableAdapterManager();
+
+			((System.ComponentModel.ISupportInitialize)(m_clientDataSet)).BeginInit();
+			m_clientDataSet.DataSetName = "clientDataSet";
+			m_clientDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+
+			Adapters.clientsTableAdapter = new clientsTableAdapter();
+			Adapters.paymentsTableAdapter = new paymentsTableAdapter();
+			Adapters.scheduleRulesTableAdapter = new scheduleRulesTableAdapter();
+			Adapters.settingsTableAdapter = new settingsTableAdapter();
+			Adapters.statisticsTableAdapter = new statisticsTableAdapter();
+			Adapters.trainersTableAdapter = new trainersTableAdapter();
+			Adapters.trainersScheduleTableAdapter = new trainersScheduleTableAdapter();
+			Adapters.userPrivilegesTableAdapter = new userPrivilegesTableAdapter();
+			Adapters.usersTableAdapter = new usersTableAdapter();
+
+			Adapters.clientsTableAdapter.Fill(m_clientDataSet.clients);
+			Adapters.paymentsTableAdapter.Fill(m_clientDataSet.payments);
+			Adapters.scheduleRulesTableAdapter.Fill(m_clientDataSet.scheduleRules);
+			Adapters.settingsTableAdapter.Fill(m_clientDataSet.settings);
+			Adapters.statisticsTableAdapter.Fill(m_clientDataSet.statistics);
+			Adapters.trainersTableAdapter.Fill(m_clientDataSet.trainers);
+			Adapters.trainersScheduleTableAdapter.Fill(m_clientDataSet.trainersSchedule);
+			Adapters.userPrivilegesTableAdapter.Fill(m_clientDataSet.userPrivileges);
+			Adapters.usersTableAdapter.Fill(m_clientDataSet.users);
+
+			//m_tAdapter.lvtaClientsList.Fill(m_clientDataSet.clientsList);
+
+			((System.ComponentModel.ISupportInitialize)(m_clientDataSet)).EndInit();
 		}
 
-		public DbTableRow(DbTable table, Int64 id)
+		public dbDataSet dSet
 		{
-			String where = String.Format("id = {0}", id);
-			DataRow data = new DbAdapter().GetFirstRow(table, where, new List<string>());
-
-			if (data == null)
-			{
-				Logger.Warning(String.Format("No such entry, Table: {0}, id: {1}.", table, id));
-				return;
-			}
-
-			m_id = id;
-			m_DataRow = data;
+			get { return m_clientDataSet; }
 		}
 
-		public DataRow Row
+		public TableAdapterManager Adapters
 		{
-			get{ return m_DataRow; }
-			set
-			{ 
-				DataRow dr = value;
-				if(!dr.Table.Columns.Contains("id"))
-					return;
-				m_id = Int64.Parse(dr["id"].ToString());
-				m_DataRow = dr; 
-			}
-		}
-		
-		public Int64 Id
-		{
-			get
-			{
-				return m_id;
-			}
-		}
-	}
-	
-	public class DbTableRowCollectionBase
-	{
-		public delegate void CountChangedEventHandler(Int64 newCount);
-		public delegate void CollectionChangedEventHandler();
-
-		public event CollectionChangedEventHandler CollectionChanged;
-		public event CountChangedEventHandler CountChanged;
-
-		public virtual void OnCountChanged(Int64 newCount)
-		{
-			if (CountChanged != null)
-				CountChanged(newCount);
-		}
-
-		public virtual void OnCollectionChanged()
-		{
-			if (CollectionChanged != null)
-				CollectionChanged();
-		}
-	}
-
-	public class DbTableRowCollection<EnType> : DbTableRowCollectionBase, IEnumerable<EnType>
-	{
-		protected Dictionary<Int64, EnType> Items = new Dictionary<Int64, EnType>();
-
-		public IEnumerator<EnType> GetEnumerator()
-		{
-			return Items.Values.GetEnumerator();
-		}
-
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-		{
-			return Items.Values.GetEnumerator();
-		}
-		
-		public int Count
-		{
-			get { return Items.Count; }
+			get { return tam; }
 		}
 	}
 }

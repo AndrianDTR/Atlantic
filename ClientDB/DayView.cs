@@ -11,7 +11,6 @@ namespace EAssistant
 {
 	public class DayView : Calendar
 	{
-		private ClientCollection m_clients = null;
 		private int[] m_days = null;
 		private Dictionary<DateTime, String> m_trainerDate2NameMap = new Dictionary<DateTime, String>();
 		private Opts m_opt = new Opts();

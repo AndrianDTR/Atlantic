@@ -131,14 +131,14 @@ namespace AY
 			
 			private void UpdateClientInfo(Int64 clientId, Int64 ruleId)
 			{
-				Client client = new Client(clientId);
+				Client client = (Client)Db.Instance.dSet.clients.FindByid(clientId);
 				ScheduleRule rule = new ScheduleRule(ruleId);
-				Trigger tClient = new Trigger(client.ExtraInfo);
+				Trigger tClient = new Trigger(client.plan);
 				Trigger tRule = new Trigger(rule.Rule);
 
 				if (tRule.HasAttribute(TriggerFields.CPUTimesLeft))
 				{
-					client.TimesLeft += tRule[TriggerFields.CPUTimesLeft];
+					client.hoursLeft += tRule[TriggerFields.CPUTimesLeft];
 				}
 
 				if (tRule.HasAttribute(TriggerFields.CPUHoursLeft))
@@ -161,7 +161,9 @@ namespace AY
 
 				tClient[TriggerFields.RuleId] = rule.Id;
 				
-				client.ExtraInfo = tClient.ToString();
+				client.plan = tClient.ToString();
+				client.AcceptChanges();
+				Db.Instance.Adapters.clientsTableAdapter.Update(client);
 			}
 			
 			public Boolean Add(Int64 client, Int64 service, Int64 creator, float sum, String comment, out Int64 id)

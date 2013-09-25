@@ -140,34 +140,34 @@ namespace EAssistant
 			m_calendar.RowHeight = m_opt.CalRowHeight;
 			m_calendar.Reinit();
 			session.PassLen = m_opt.MinPassLen;
-			
-			UserRole priv = session.UserRole;
+
+			dbDataSet.userPrivilegesRow priv = Db.Instance.dSet.userPrivileges.FindByid(session.UserRoleId);
 			
 			// File menu
-			exportToolStripMenuItem.Enabled = UserRole.IsSet(priv.Backup, UserRights.Create);
-			importToolStripMenuItem.Enabled = UserRole.IsSet(priv.Backup, UserRights.Write);
-			btnBackUp.Enabled = UserRole.IsSet(priv.Backup, UserRights.Write);
+			exportToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Create);
+			importToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Write);
+			btnBackUp.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Write);
 
 			// View menu
-			paymentsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Payments, UserRights.Read);
-			btnPaymentsHistory.Enabled = UserRole.IsSet(priv.Payments, UserRights.Read);
+			paymentsToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Read);
+			btnPaymentsHistory.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Read);
 
 			// Clients menu
-			addToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Create);
-			btnAddClient.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
+			addToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Create);
+			btnAddClient.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
 			
-			clientSearchToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
-			manageClientsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
-			btnClientManager.Enabled = UserRole.IsSet(priv.Clients, UserRights.Read);
+			clientSearchToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
+			manageClientsToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
+			btnClientManager.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
 
 			// Settings menu
-			userRolesToolStripMenuItem.Enabled = UserRole.IsSet(priv.Users, UserRights.Read);
-			usersAndPasswordsToolStripMenuItem.Enabled = UserRole.IsSet(priv.Users, UserRights.Read);
+			userRolesToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.users, UserRights.Read);
+			usersAndPasswordsToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.users, UserRights.Read);
 
-			btnTrainersShedule.Enabled = UserRole.IsSet(priv.Trainers, UserRights.Read);
-			manageTrainersToolStripMenuItem.Enabled = UserRole.IsSet(priv.Trainers, UserRights.Read);
+			btnTrainersShedule.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.trainers, UserRights.Read);
+			manageTrainersToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.trainers, UserRights.Read);
 
-			manageScheduleRulesToolStripMenuItem.Enabled = UserRole.IsSet(priv.Schedule, UserRights.Read);
+			manageScheduleRulesToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.schedule, UserRights.Read);
 
 			m_calendar.StartDate = DateTime.Now;
 			m_calendar.SelectedDate = m_calendar.StartDate;
@@ -298,33 +298,33 @@ namespace EAssistant
 		
 		private void SearchClient()
 		{
-			Prompt dlg = new Prompt();
-			dlg.Text = "Search client by code";
-			while (DialogResult.OK == dlg.ShowDialog())
-			{
-				Int64 id = Session.CheckBarCode(dlg.Value);
-				if (0 == id)
-				{
-					dlg.Clear();
-					continue;
-				}
+			//Prompt dlg = new Prompt();
+			//dlg.Text = "Search client by code";
+			//while (DialogResult.OK == dlg.ShowDialog())
+			//{
+			//    Int64 id = Session.CheckBarCode(dlg.Value);
+			//    if (0 == id)
+			//    {
+			//        dlg.Clear();
+			//        continue;
+			//    }
 
-				if (Client.CodeExists(id))
-				{
-					ClientInfo ci = new ClientInfo(id);
-					if (DialogResult.OK == ci.ShowDialog(this))
-					{
-						UpdateInfo();
-						Logger.Debug("Client data changed for: " + ci.ClientName + " " + ci.ClientCode);
-					}
-				}
-				else
-				{
-					UIMessages.Warning("Specified card is unregistered.");
-				}
+			//    if (Client.Exists(id))
+			//    {
+			//        ClientInfo ci = new ClientInfo(id);
+			//        if (DialogResult.OK == ci.ShowDialog(this))
+			//        {
+			//            UpdateInfo();
+			//            Logger.Debug("Client data changed for: " + ci.ClientName + " " + ci.ClientCode);
+			//        }
+			//    }
+			//    else
+			//    {
+			//        UIMessages.Warning("Specified card is unregistered.");
+			//    }
 
-				dlg.Clear();
-			}
+			//    dlg.Clear();
+			//}
 		}
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -463,7 +463,7 @@ namespace EAssistant
 			if(DialogResult.OK == opd.ShowDialog())
 			{
 				new DbAdapter().ImportData(opd.FileName);
-				if(!User.UserExist(Session.Instance.User.Id))
+				if(!dbDataSet.usersRow.UserExist(Session.Instance.UserId))
 				{
 					UserLogin();
 				}
@@ -489,20 +489,20 @@ namespace EAssistant
 
 		private void btmMissLesson_Click(object sender, EventArgs e)
 		{
-			DateTime now = DateTime.Now.Date;
+			//DateTime now = DateTime.Now.Date;
 			
-			foreach(ListViewItem lvi in listClients.Items)
-			{
-				ClientStatus status = (ClientStatus)lvi.Tag;
-				if(lvi.Selected && ClientTicketStus.Missed == status.state)
-				{
-					Client client = new Client(status.Id);
-					DateTime st = client.ScheduleTime;
-					client.LastEnter = now.AddHours(st.Hour).AddMinutes(st.Minute);
-					client.LastLeave = client.LastEnter.AddHours(client.DecHours);
-					client.ProcessEnter();
-				}
-			}
+			//foreach(ListViewItem lvi in listClients.Items)
+			//{
+			//    ClientStatus status = (ClientStatus)lvi.Tag;
+			//    if(lvi.Selected && ClientTicketStus.Missed == status.state)
+			//    {
+			//        Client client = new Client(status.Id);
+			//        DateTime st = client.scheduleTime;
+			//        client.lastEnter = now.AddHours(st.Hour).AddMinutes(st.Minute);
+			//        client.lastLeave = client.lastEnter.AddHours(client.DecHours);
+			//        client.ProcessEnter();
+			//    }
+			//}
 		}
 
 		private void btnTrainersShedule_Click(object sender, EventArgs e)

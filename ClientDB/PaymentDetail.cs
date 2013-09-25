@@ -14,7 +14,7 @@ namespace EAssistant
 			Payment p = new Payment(id);
 			
 			textDate.Text = p.Date.ToString();
-			textUser.Text = new User(p.CreatorId).Name;
+			textUser.Text = (Db.Instance.dSet.users.FindByid(p.CreatorId)).name;
 			textClient.Text = p.ClientId.ToString();
 			textComment.Text = p.Comment;
 			textSum.Text = p.Sum.ToString();

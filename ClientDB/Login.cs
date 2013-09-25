@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using AY.Log;
 using AY.db;
+using System.Data;
 
 namespace EAssistant
 {
@@ -30,13 +31,20 @@ namespace EAssistant
 			
 			Logger.Debug("Try login, attempt left: "+ m_loginAttempt.ToString());
 			
-			User user = User.Authenticate(userName.Text, password.Text);
-			
-			if(user != null && user.Role.Id != 0)
+			dbDataSet.usersRow user = dbDataSet.usersRow.Authenticate(userName.Text, password.Text);
+			if(user != null && user.Role != null)
 			{
-				Session.Instance.User = user;
-				Logger.Info(String.Format("User {0} login.", user.Name));
-				Logger.Instance.User = user.Name;
+				if (null == Db.Instance.dSet.userPrivileges.FindByid(user.privilege))
+				{
+					UIMessages.Error("Access rights could not be resolved for specified user.");
+					this.DialogResult = DialogResult.Cancel;
+					this.Close();
+				}
+
+				Session.Instance.SetUserInfo(user.id, user.privilege);
+
+				Logger.Instance.User = user.name;
+				Logger.Info(String.Format("dbDataSet.usersRow {0} login.", user.name));
 				this.DialogResult = DialogResult.OK;
 				this.Close();
 			}

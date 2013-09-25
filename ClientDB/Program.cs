@@ -9,6 +9,26 @@ namespace EAssistant
 {
     static class Program
     {
+		private static void test()
+		{
+			Int64 newId = 1111000;
+			Int64 id = 2200000000006;
+			dbDataSet.clientsRow cr0 = Db.Instance.dSet.clients.FindByid(newId);
+			dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(id);
+
+			cr.BeginEdit();
+			cr.name = "AAAAA";
+			cr.EndEdit();
+			cr.AcceptChanges();
+			
+			Db.Instance.Adapters.clientsTableAdapter.Update(Db.Instance.dSet.clients);
+			
+			dbDataSet.clientsRow ucr = Db.Instance.dSet.clients.FindByid(id);
+
+			UIMessages.Info(ucr.name);
+			Db.Instance.Adapters.clientsTableAdapter.Update(Db.Instance.dSet.clients);
+		}
+		
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -19,11 +39,16 @@ namespace EAssistant
 			String szLogFile = "SessionLog.txt";
 			Logger.Create(szLogFile, Logger.LogLevel.Debug);
 			Logger.Info("App start.");
+#if !DEBUG			
 			try
 			{
-				DbAdapter ad = new DbAdapter();
+#endif
+
+				test();
+				/*DbAdapter ad = new DbAdapter();
 				if( !ad.CheckTables())
 				{
+				
 					Logger.Critical("DB is corrupt or not found.");
 					DialogResult res = UIMessages.Error("Database is corrupt or not found.\n"
 						+ "Do you wish to recreate database with default options?"
@@ -36,9 +61,11 @@ namespace EAssistant
 					Logger.Warning("Clear DB after corrupt.");
 					DbAdapter.ClearDB();
 				}
+				*/
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 				Application.Run(new MainForm());
+#if !DEBUG
 			}		
 			catch(Exception ex)
 			{
@@ -51,7 +78,7 @@ namespace EAssistant
 					sendReport = true;
 				}
 			}
-			
+#endif				
 			Logger.Info("App end.");
             Logger.Close();
             

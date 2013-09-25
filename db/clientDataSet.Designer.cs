@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace EAssistant {
+namespace AY.db {
     
     
     /// <summary>
@@ -23,7 +23,7 @@ namespace EAssistant {
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
     [global::System.Xml.Serialization.XmlRootAttribute("clientDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class clientDataSet : global::System.Data.DataSet {
+    public partial class dbDataSet : global::System.Data.DataSet {
         
         private clientsDataTable tableclients;
         
@@ -48,7 +48,7 @@ namespace EAssistant {
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public clientDataSet() {
+        public dbDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -58,7 +58,7 @@ namespace EAssistant {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected clientDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected dbDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -246,7 +246,7 @@ namespace EAssistant {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public override global::System.Data.DataSet Clone() {
-            clientDataSet cln = ((clientDataSet)(base.Clone()));
+            dbDataSet cln = ((dbDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -478,7 +478,7 @@ namespace EAssistant {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            clientDataSet ds = new clientDataSet();
+            dbDataSet ds = new dbDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -866,7 +866,7 @@ namespace EAssistant {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                dbDataSet ds = new dbDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1185,7 +1185,7 @@ namespace EAssistant {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                dbDataSet ds = new dbDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1465,7 +1465,7 @@ namespace EAssistant {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                dbDataSet ds = new dbDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1855,7 +1855,7 @@ namespace EAssistant {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                dbDataSet ds = new dbDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2131,7 +2131,7 @@ namespace EAssistant {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                dbDataSet ds = new dbDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2411,7 +2411,7 @@ namespace EAssistant {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                dbDataSet ds = new dbDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2675,7 +2675,7 @@ namespace EAssistant {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                dbDataSet ds = new dbDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3038,7 +3038,7 @@ namespace EAssistant {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                dbDataSet ds = new dbDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3317,7 +3317,7 @@ namespace EAssistant {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                dbDataSet ds = new dbDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3605,7 +3605,7 @@ namespace EAssistant {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                clientDataSet ds = new clientDataSet();
+                dbDataSet ds = new dbDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3814,7 +3814,7 @@ namespace EAssistant {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string extraInfo {
+            public string plan {
                 get {
                     try {
                         return ((string)(this[this.tableclients.extraInfoColumn]));
@@ -3829,7 +3829,7 @@ namespace EAssistant {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long timesLeft {
+            public long hoursLeft {
                 get {
                     try {
                         return ((long)(this[this.tableclients.timesLeftColumn]));
@@ -5075,7 +5075,7 @@ namespace EAssistant {
         }
     }
 }
-namespace EAssistant.clientDataSetTableAdapters {
+namespace AY.db.dstAdapters {
     
     
     /// <summary>
@@ -5688,7 +5688,7 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.clientsDataTable dataTable) {
+        public virtual int Fill(dbDataSet.clientsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -5700,22 +5700,22 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.clientsDataTable GetData() {
+        public virtual dbDataSet.clientsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.clientsDataTable dataTable = new clientDataSet.clientsDataTable();
+            dbDataSet.clientsDataTable dataTable = new dbDataSet.clientsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.clientsDataTable dataTable) {
+        public virtual int Update(dbDataSet.clientsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(dbDataSet dataSet) {
             return this.Adapter.Update(dataSet, "clients");
         }
         
@@ -6487,7 +6487,7 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.paymentsDataTable dataTable) {
+        public virtual int Fill(dbDataSet.paymentsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -6499,22 +6499,22 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.paymentsDataTable GetData() {
+        public virtual dbDataSet.paymentsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.paymentsDataTable dataTable = new clientDataSet.paymentsDataTable();
+            dbDataSet.paymentsDataTable dataTable = new dbDataSet.paymentsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.paymentsDataTable dataTable) {
+        public virtual int Update(dbDataSet.paymentsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(dbDataSet dataSet) {
             return this.Adapter.Update(dataSet, "payments");
         }
         
@@ -6915,7 +6915,7 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.scheduleRulesDataTable dataTable) {
+        public virtual int Fill(dbDataSet.scheduleRulesDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -6927,22 +6927,22 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.scheduleRulesDataTable GetData() {
+        public virtual dbDataSet.scheduleRulesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.scheduleRulesDataTable dataTable = new clientDataSet.scheduleRulesDataTable();
+            dbDataSet.scheduleRulesDataTable dataTable = new dbDataSet.scheduleRulesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.scheduleRulesDataTable dataTable) {
+        public virtual int Update(dbDataSet.scheduleRulesDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(dbDataSet dataSet) {
             return this.Adapter.Update(dataSet, "scheduleRules");
         }
         
@@ -7580,7 +7580,7 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.settingsDataTable dataTable) {
+        public virtual int Fill(dbDataSet.settingsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -7592,22 +7592,22 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.settingsDataTable GetData() {
+        public virtual dbDataSet.settingsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.settingsDataTable dataTable = new clientDataSet.settingsDataTable();
+            dbDataSet.settingsDataTable dataTable = new dbDataSet.settingsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.settingsDataTable dataTable) {
+        public virtual int Update(dbDataSet.settingsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(dbDataSet dataSet) {
             return this.Adapter.Update(dataSet, "settings");
         }
         
@@ -8143,7 +8143,7 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.statisticsDataTable dataTable) {
+        public virtual int Fill(dbDataSet.statisticsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -8155,22 +8155,22 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.statisticsDataTable GetData() {
+        public virtual dbDataSet.statisticsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.statisticsDataTable dataTable = new clientDataSet.statisticsDataTable();
+            dbDataSet.statisticsDataTable dataTable = new dbDataSet.statisticsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.statisticsDataTable dataTable) {
+        public virtual int Update(dbDataSet.statisticsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(dbDataSet dataSet) {
             return this.Adapter.Update(dataSet, "statistics");
         }
         
@@ -8573,7 +8573,7 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.trainersDataTable dataTable) {
+        public virtual int Fill(dbDataSet.trainersDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -8585,22 +8585,22 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.trainersDataTable GetData() {
+        public virtual dbDataSet.trainersDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.trainersDataTable dataTable = new clientDataSet.trainersDataTable();
+            dbDataSet.trainersDataTable dataTable = new dbDataSet.trainersDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.trainersDataTable dataTable) {
+        public virtual int Update(dbDataSet.trainersDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(dbDataSet dataSet) {
             return this.Adapter.Update(dataSet, "trainers");
         }
         
@@ -8978,7 +8978,7 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.trainersScheduleDataTable dataTable) {
+        public virtual int Fill(dbDataSet.trainersScheduleDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -8990,22 +8990,22 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.trainersScheduleDataTable GetData() {
+        public virtual dbDataSet.trainersScheduleDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.trainersScheduleDataTable dataTable = new clientDataSet.trainersScheduleDataTable();
+            dbDataSet.trainersScheduleDataTable dataTable = new dbDataSet.trainersScheduleDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.trainersScheduleDataTable dataTable) {
+        public virtual int Update(dbDataSet.trainersScheduleDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(dbDataSet dataSet) {
             return this.Adapter.Update(dataSet, "trainersSchedule");
         }
         
@@ -9500,7 +9500,7 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.userPrivilegesDataTable dataTable) {
+        public virtual int Fill(dbDataSet.userPrivilegesDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -9512,22 +9512,22 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.userPrivilegesDataTable GetData() {
+        public virtual dbDataSet.userPrivilegesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.userPrivilegesDataTable dataTable = new clientDataSet.userPrivilegesDataTable();
+            dbDataSet.userPrivilegesDataTable dataTable = new dbDataSet.userPrivilegesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.userPrivilegesDataTable dataTable) {
+        public virtual int Update(dbDataSet.userPrivilegesDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(dbDataSet dataSet) {
             return this.Adapter.Update(dataSet, "userPrivileges");
         }
         
@@ -9945,7 +9945,7 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.usersDataTable dataTable) {
+        public virtual int Fill(dbDataSet.usersDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -9957,22 +9957,22 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.usersDataTable GetData() {
+        public virtual dbDataSet.usersDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.usersDataTable dataTable = new clientDataSet.usersDataTable();
+            dbDataSet.usersDataTable dataTable = new dbDataSet.usersDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet.usersDataTable dataTable) {
+        public virtual int Update(dbDataSet.usersDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(clientDataSet dataSet) {
+        public virtual int Update(dbDataSet dataSet) {
             return this.Adapter.Update(dataSet, "users");
         }
         
@@ -10249,7 +10249,7 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(clientDataSet.clientsListDataTable dataTable) {
+        public virtual int Fill(dbDataSet.clientsListDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -10261,9 +10261,9 @@ namespace EAssistant.clientDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual clientDataSet.clientsListDataTable GetData() {
+        public virtual dbDataSet.clientsListDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            clientDataSet.clientsListDataTable dataTable = new clientDataSet.clientsListDataTable();
+            dbDataSet.clientsListDataTable dataTable = new dbDataSet.clientsListDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -10531,7 +10531,7 @@ namespace EAssistant.clientDataSetTableAdapters {
         ///Update rows in top-down order.
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private int UpdateUpdatedRows(clientDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(dbDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._trainersScheduleTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.trainersSchedule.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
@@ -10621,7 +10621,7 @@ namespace EAssistant.clientDataSetTableAdapters {
         ///Insert rows in top-down order.
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private int UpdateInsertedRows(clientDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(dbDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._trainersScheduleTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.trainersSchedule.Select(null, null, global::System.Data.DataViewRowState.Added);
@@ -10702,7 +10702,7 @@ namespace EAssistant.clientDataSetTableAdapters {
         ///Delete rows in bottom-up order.
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private int UpdateDeletedRows(clientDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(dbDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             if ((this._settingsTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.settings.Select(null, null, global::System.Data.DataViewRowState.Deleted);
@@ -10806,7 +10806,7 @@ namespace EAssistant.clientDataSetTableAdapters {
         ///Update all changes to the dataset.
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public virtual int UpdateAll(clientDataSet dataSet) {
+        public virtual int UpdateAll(dbDataSet dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

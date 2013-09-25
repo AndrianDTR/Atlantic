@@ -7,322 +7,63 @@ namespace AY
 {
 	namespace db
 	{
-		public class Client : DbTableRow
+		public class Client : dbDataSet.clientsRow
 		{
-			private String m_name = String.Empty;
-			private String m_phone = String.Empty;
-			private String m_comment = String.Empty;
-			private String m_extraInfo = String.Empty;
-			private String m_scheduleDays = String.Empty;
-			private DateTime m_scheduleTime;
-			private DateTime m_lastEnter;
-			private DateTime m_lastLeave;
-			private DateTime m_openTicket;
-			private Int64 m_trainer = 0;
-			private int m_timesLeft = 0;
-			
-			public static bool CodeExists(Int64 id)
+			public static bool Exists(Int64 id)
 			{
-				return CodeExists(id.ToString());
+				bool res = false;
+				return res;
 			}
 
-			public static bool CodeExists(String id)
+			public Client(DataRowBuilder bldr)
+				: base(bldr)
 			{
-				String where = String.Format("id = '{0}'", id);
-				DataRow data = new DbAdapter().GetFirstRow(DbTable.Clients, where, new List<string>());
-
-				if (data == null)
-				{
-					return false;
-				}
-				return true;
-			}
-			
-			public Client(Int64 id):base(DbTable.Clients, id)
-			{
-				m_name = Row["name"].ToString();
-				m_phone = Row["phone"].ToString();
-				m_comment = Row["comment"].ToString();
-				m_extraInfo = Row["extraInfo"].ToString();
-				m_scheduleDays = Row["scheduleDays"].ToString();
-				m_scheduleTime = DateTime.Parse(Row["scheduleTime"].ToString());
-				m_lastEnter = DateTime.Parse(Row["lastEnter"].ToString());
-				m_lastLeave = DateTime.Parse(Row["lastLeave"].ToString());
-				m_openTicket = DateTime.Parse(Row["openTicket"].ToString());
-				m_trainer = Int64.Parse(Row["trainer"].ToString());
-				m_timesLeft = int.Parse(Row["timesLeft"].ToString());
-			}
-
-			public Client(DataRow data)
-			{
-				Row = data;
-				m_name = Row["name"].ToString();
-				m_phone = Row["phone"].ToString();
-				m_comment = Row["comment"].ToString();
-				m_extraInfo = Row["extraInfo"].ToString();
-				m_scheduleDays = Row["scheduleDays"].ToString();
-				m_scheduleTime = DateTime.Parse(Row["scheduleTime"].ToString());
-				m_lastEnter = DateTime.Parse(Row["lastEnter"].ToString());
-				m_lastLeave = DateTime.Parse(Row["lastLeave"].ToString());
-				m_openTicket = DateTime.Parse(Row["openTicket"].ToString());
-				m_trainer = Int64.Parse(Row["trainer"].ToString());
-				m_timesLeft = int.Parse(Row["timesLeft"].ToString());
-			}
-			
-			public String Code
-			{
-				get
-				{
-					return m_id.ToString();
-				}
-			}
-			
-			public String Name
-			{
-				get
-				{
-					return DbUtils.Dequote(m_name);
-				}
-			}
-
-			public String Phone
-			{
-				get
-				{
-					return DbUtils.Dequote(m_phone);
-				}
-			}
-
-			public String Comment
-			{
-				get
-				{
-					return DbUtils.Dequote(m_comment);
-				}
-			}
-
-			public String ExtraInfo
-			{
-				get
-				{
-					return m_extraInfo;
-				}
-				set
-				{
-					String data = value;
-					
-					Logger.Debug(String.Format("Set extraInfo for client '{0}'", m_name));
-					if (m_id > 0)
-					{
-						DbAdapter ad = new DbAdapter();
-						Dictionary<string, Object> fields = new Dictionary<string, Object>();
-						fields["extraInfo"] = data;
-
-						if (ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
-						{	
-							m_extraInfo = data;
-						}
-					}
-				}
-			}
-			
-			public int TimesLeft
-			{
-				get
-				{
-					return m_timesLeft;
-				}
-				set
-				{
-					int data = value;
-
-					Logger.Debug(String.Format("Set times left for client '{0}'", m_name));
-					if (m_id > 0)
-					{
-						DbAdapter ad = new DbAdapter();
-						Dictionary<string, Object> fields = new Dictionary<string, Object>();
-						fields["timesLeft"] = data;
-
-						if (ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
-						{
-							m_timesLeft = data;
-						}
-					}
-				}
 			}
 
 			public int DecHours
 			{
 				get
 				{
-					Trigger tlt = new Trigger(ExtraInfo);
+					Trigger tlt = new Trigger(plan);
 					if (tlt.HasAttribute(TriggerFields.DecHours))
 						return tlt[TriggerFields.DecHours];
 					return 0;
 				}
 			}
 
-			public DateTime LastEnter
-			{
-				get
-				{
-					return m_lastEnter;
-				}
-				set
-				{
-					DateTime enter = value;
-
-					Logger.Debug(String.Format("Set last enter time for client '{0}'", m_id));
-					if (m_id > 0)
-					{
-						DbAdapter ad = new DbAdapter();
-						Dictionary<string, Object> fields = new Dictionary<string, Object>();
-						fields["lastEnter"] = enter;
-
-						if (ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
-						{
-							m_lastEnter = enter;
-						}
-					}
-				}
-			}
-
-			public DateTime LastLeave
-			{
-				get
-				{
-					return m_lastLeave;
-				}
-				set
-				{
-					DateTime leave = value;
-
-					Logger.Debug(String.Format("Set last leave time for client '{0}'", m_id));
-					if (m_id > 0)
-					{
-						DbAdapter ad = new DbAdapter();
-						Dictionary<string, Object> fields = new Dictionary<string, Object>();
-						fields["lastLeave"] = leave;
-
-						if (ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
-						{
-							m_lastEnter = leave;
-						}
-					}
-				}
-			}
-
-			public DateTime OpenTicket
-			{
-				get
-				{
-					return m_openTicket;
-				}
-				set
-				{
-					DateTime enter = value;
-
-					Logger.Debug(String.Format("Set open ticket time for client '{0}'", m_id));
-					if (m_id > 0)
-					{
-						DbAdapter ad = new DbAdapter();
-						Dictionary<string, Object> fields = new Dictionary<string, Object>();
-						fields["openTicket"] = enter;
-
-						if (ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
-						{
-							m_openTicket = enter;
-						}
-					}
-				}
-			}
-			
 			public String[] LastPayment
 			{
 				get
 				{
 					String[] res = new String[2];
 					
-					if(m_id == 0)
+					if(id == 0)
 						return res;
 						
-					String where = String.Format("clientId = {0} order by date desc", m_id);
-					DataRow data = new DbAdapter().GetFirstRow(
-						  DbTable.Payments
-						, where
-						, new List<string>{"sum","date"});
+					String where = String.Format("clientId={0}", id);
+					DataRow[] data = Db.Instance.dSet.payments.Select(where);
 
-					if (data != null)
+					if (data != null && data.Length > 1)
 					{
-						res[0] = data["sum"].ToString();
-						res[1] = data["date"].ToString();
+						res[0] = data[0]["sum"].ToString();
+						res[1] = data[0]["date"].ToString();
 					}
 
 					return res;
 				}
 			}
 
-			public String ScheduleDays
+			public dbDataSet.trainersRow Trainer
 			{
 				get
 				{
-					return DbUtils.Dequote(m_scheduleDays);
+					return Db.Instance.dSet.trainers.FindByid(trainer);
 				}
-			}
-			
-			public Trainer Trainer
-			{
-				get
-				{
-					return new Trainer(m_trainer);
-				}
-			}
-
-			public Int64 TrainerId
-			{
-				get
-				{
-					return m_trainer;
-				}
-			}
-
-			public DateTime ScheduleTime
-			{
-				get
-				{
-					return m_scheduleTime;
-				}
-			}
-
-			public bool SetData(Int64 code, String name, String phone, String scheduleDays, DateTime scheduleTime, Int64 trainerId, String comment)
-			{
-				Logger.Debug(String.Format("Set data for client '{0}'", m_name));
-				if (m_id <= 0)
-				{
-					return false;
-				}
-
-				DbAdapter ad = new DbAdapter();
-				Dictionary<string, Object> fields = new Dictionary<string, Object>();
-				fields["id"] = code.ToString();
-				fields["name"] = DbUtils.Quote(name);
-				fields["phone"] = DbUtils.Quote(phone);
-				fields["scheduleDays"] = DbUtils.Quote(scheduleDays);
-				fields["scheduleTime"] = scheduleTime.ToString("HH:mm:ss");
-				fields["trainer"] = trainerId.ToString();
-				fields["comment"] = DbUtils.Quote(comment);
-
-				if (!ad.Update(DbTable.Clients, fields, String.Format("id={0:d}", m_id)))
-				{
-					return false;
-				}
-
-				return true;
 			}
 			
 			public void ProcessEnter()
 			{
-				Trigger tClient = new Trigger(ExtraInfo);
+				Trigger tClient = new Trigger(plan);
 				Trigger tRule = null;
 
 				if (tClient.HasAttribute(TriggerFields.RuleId))
@@ -331,7 +72,7 @@ namespace AY
 					tRule = new Trigger(new ScheduleRule(ruleId).Rule);
 				}
 
-				TimesLeft--;
+				hoursLeft--;
 
 				if (tClient.HasAttribute(TriggerFields.HoursLeft))
 				{
@@ -344,12 +85,15 @@ namespace AY
 					tClient[TriggerFields.HoursLeft] = val;
 				}
 				
-				new StatisticsCollection().Add(Id, LastEnter, LastLeave);
+				// TODO: Add entry to statistics table
+				//new StatisticsCollection().Add(id, lastEnter, lastLeave);
 				
-				ExtraInfo = tClient.ToString();
+				plan = tClient.ToString();
+				AcceptChanges();
+				Db.Instance.Adapters.clientsTableAdapter.Update(this);
 			}
 		}
-
+/*
 		public class ClientCollection : DbTableRowCollectionBase
 		{
 			private CountChangedEventHandler m_countChanged = null;
@@ -476,6 +220,6 @@ namespace AY
 			{
 				get{ return m_Items; }
 			}
-		}
+		}*/
 	}
 }

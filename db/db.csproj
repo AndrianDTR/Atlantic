@@ -51,7 +51,17 @@
     <Reference Include="Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs" />
+    <Compile Include="Client.cs">
+    </Compile>
+    <Compile Include="clientDataSet.cs">
+      <DependentUpon>clientDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="clientDataSet.Designer.cs">
+      <DependentUpon>clientDataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Common.cs" />
     <Compile Include="TrainerSchedule.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -72,11 +82,26 @@
     <Compile Include="ScheduleRules.cs" />
     <Compile Include="Trainer.cs" />
     <Compile Include="Trigger.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserRole.cs" />
+    <Compile Include="User.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserRole.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="clientDataSet.xsc">
+      <DependentUpon>clientDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="clientDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>clientDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="clientDataSet.xss">
+      <DependentUpon>clientDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
