@@ -321,6 +321,8 @@ namespace EAssistant
 					m_clienId = id;
 
 					session.Adapters.clientsTableAdapter.Update(session.dSet.clients);
+
+					Session.SyncDB();
 					
 					this.DialogResult = DialogResult.OK;
 					this.Close();

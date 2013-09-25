@@ -166,5 +166,16 @@ namespace EAssistant
 			
 			return res;
 		}
+
+		public static void SyncDB()
+		{
+			Session session = Session.Instance;
+			SqlCommandBuilder commandBuilder = new SqlCommandBuilder(session.Adapters.clientsTableAdapter);
+					 
+			session.Adapters.clientsTableAdapter.UpdateCommand = commandBuilder.GetUpdateCommand();
+			session.Adapters.clientsTableAdapter.InsertCommand = commandBuilder.GetInsertCommand();
+					 
+			session.Adapters.clientsTableAdapter.Update(session.dSet);
+		}
 	}
 }
