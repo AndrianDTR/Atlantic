@@ -30,7 +30,7 @@
 		{
 			this.save = new System.Windows.Forms.Button();
 			this.close = new System.Windows.Forms.Button();
-			this.rule = new System.Windows.Forms.TextBox();
+			this.hoursAdd = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.name = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
@@ -61,13 +61,13 @@
 			this.close.Text = "Close";
 			this.close.UseVisualStyleBackColor = true;
 			// 
-			// rule
+			// hoursAdd
 			// 
-			this.rule.Location = new System.Drawing.Point(282, 59);
-			this.rule.Multiline = true;
-			this.rule.Name = "rule";
-			this.rule.Size = new System.Drawing.Size(314, 130);
-			this.rule.TabIndex = 3;
+			this.hoursAdd.Location = new System.Drawing.Point(282, 59);
+			this.hoursAdd.Multiline = true;
+			this.hoursAdd.Name = "hoursAdd";
+			this.hoursAdd.Size = new System.Drawing.Size(314, 130);
+			this.hoursAdd.TabIndex = 3;
 			// 
 			// label3
 			// 
@@ -152,7 +152,7 @@
 			this.Controls.Add(this.add);
 			this.Controls.Add(this.save);
 			this.Controls.Add(this.close);
-			this.Controls.Add(this.rule);
+			this.Controls.Add(this.hoursAdd);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.name);
 			this.Controls.Add(this.label1);
@@ -175,7 +175,7 @@
 
 		private System.Windows.Forms.Button save;
 		private System.Windows.Forms.Button close;
-		private System.Windows.Forms.TextBox rule;
+		private System.Windows.Forms.TextBox hoursAdd;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.TextBox name;
 		private System.Windows.Forms.Label label1;

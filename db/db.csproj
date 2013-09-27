@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="clientDataSet.cs">
       <DependentUpon>clientDataSet.xsd</DependentUpon>
@@ -77,9 +78,13 @@
     <Compile Include="Statistics.cs" />
     <Compile Include="DbAdapter.cs" />
     <Compile Include="Opts.cs" />
-    <Compile Include="Payment.cs" />
+    <Compile Include="Payment.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScheduleRules.cs" />
+    <Compile Include="ScheduleRules.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Trainer.cs" />
     <Compile Include="Trigger.cs" />
     <Compile Include="User.cs">

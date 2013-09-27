@@ -15,16 +15,18 @@ namespace EAssistant
 			InitializeComponent();
 			m_ClientId = clientId;
 			
-			textClientCode.Text = m_ClientId.ToString().PadLeft(13,'0');
+			textClientCode.Text = m_ClientId.ToString().PadLeft(Session.MinBarcodeLen, '0');
 			
 			comboTypeOfService.Items.Clear();
 			comboTypeOfService.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
 			comboTypeOfService.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-			foreach (ScheduleRule sr in new ScheduleRulesCollection())
+			Db.Instance.Adapters.scheduleRulesTableAdapter.Fill(Db.Instance.dSet.scheduleRules);
+
+			foreach (dbDataSet.scheduleRulesRow srr in Db.Instance.dSet.scheduleRules.Rows)
 			{
-				comboTypeOfService.Items.Add(sr);
-				comboTypeOfService.AutoCompleteCustomSource.Add(sr.ToString());
+				comboTypeOfService.Items.Add(srr);
+				comboTypeOfService.AutoCompleteCustomSource.Add(srr.ToString());
 			}
 			
 			textSum.Text = "0";
@@ -35,8 +37,8 @@ namespace EAssistant
 			if(comboTypeOfService.SelectedIndex < 0)
 				return;
 
-			ScheduleRule sr = (ScheduleRule)comboTypeOfService.SelectedItem;
-			textSum.Text = sr.Price.ToString();
+			dbDataSet.scheduleRulesRow sr = (dbDataSet.scheduleRulesRow)comboTypeOfService.SelectedItem;
+			textSum.Text = sr.price.ToString();
 		}
 
 		private Boolean ValidateForm()
@@ -71,19 +73,22 @@ namespace EAssistant
 		{
 			if(!ValidateForm())
 				return;
+
+			dbDataSet.scheduleRulesRow sc = (dbDataSet.scheduleRulesRow)comboTypeOfService.SelectedItem;
 			
-			ScheduleRule sc = (ScheduleRule)comboTypeOfService.SelectedItem;
-			
-			if(!new PaymentsCollection().Add(m_ClientId
-				, sc.Id
+			int id = Db.Instance.Adapters.paymentsTableAdapter.Insert(m_ClientId
+				, sc.id
 				, Session.Instance.UserId
-				, float.Parse(textSum.Text.Trim())
-				, textComment.Text))
+				, DateTime.Now
+				, decimal.Parse(textSum.Text.Trim())
+				, textComment.Text);
+			if(id != 1)
 			{
 				UIMessages.Error("Payment could not been added.");
 				return;
 			}
 			
+			Db.Instance.AcceptCahnges();
 			this.DialogResult = DialogResult.OK;
 			this.Close();
 		}

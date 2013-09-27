@@ -30,7 +30,6 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.GroupBox groupBox1;
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.checkStartWith = new System.Windows.Forms.CheckBox();
 			this.checkCode = new System.Windows.Forms.CheckBox();
 			this.checkNames = new System.Windows.Forms.CheckBox();
@@ -38,20 +37,15 @@
 			this.textToSearch = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.gridClients = new System.Windows.Forms.DataGridView();
+			this.clientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.btnEdit = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
 			this.btnClose = new System.Windows.Forms.Button();
-			this.clientsListBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colLastEnter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colTimesLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colScheduleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			groupBox1 = new System.Windows.Forms.GroupBox();
 			groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridClients)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.clientsListBindingSource)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -138,16 +132,13 @@
 			this.gridClients.AutoGenerateColumns = false;
 			this.gridClients.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
 			this.gridClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.gridClients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colId,
-            this.colName,
-            this.colLastEnter,
-            this.colTimesLeft,
-            this.colScheduleTime});
-			this.gridClients.DataSource = this.clientsListBindingSource;
+			this.gridClients.DataMember = "clients";
+			this.gridClients.DataSource = this.clientsBindingSource;
+			this.gridClients.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
 			this.gridClients.Location = new System.Drawing.Point(12, 74);
 			this.gridClients.MultiSelect = false;
 			this.gridClients.Name = "gridClients";
+			this.gridClients.ReadOnly = true;
 			this.gridClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridClients.Size = new System.Drawing.Size(784, 307);
 			this.gridClients.TabIndex = 0;
@@ -194,43 +185,6 @@
 			this.btnClose.UseVisualStyleBackColor = true;
 			this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
 			// 
-			// colId
-			// 
-			this.colId.DataPropertyName = "id";
-			this.colId.Frozen = true;
-			this.colId.HeaderText = "Id";
-			this.colId.Name = "colId";
-			// 
-			// colName
-			// 
-			this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.colName.DataPropertyName = "name";
-			this.colName.HeaderText = "Name";
-			this.colName.Name = "colName";
-			// 
-			// colLastEnter
-			// 
-			this.colLastEnter.DataPropertyName = "lastEnter";
-			this.colLastEnter.HeaderText = "Last Enter";
-			this.colLastEnter.Name = "colLastEnter";
-			// 
-			// colTimesLeft
-			// 
-			this.colTimesLeft.DataPropertyName = "timesLeft";
-			this.colTimesLeft.HeaderText = "Times Left";
-			this.colTimesLeft.Name = "colTimesLeft";
-			this.colTimesLeft.Width = 90;
-			// 
-			// colScheduleTime
-			// 
-			this.colScheduleTime.DataPropertyName = "scheduleTime";
-			dataGridViewCellStyle1.Format = "t";
-			dataGridViewCellStyle1.NullValue = null;
-			this.colScheduleTime.DefaultCellStyle = dataGridViewCellStyle1;
-			this.colScheduleTime.HeaderText = "Scheduled Time";
-			this.colScheduleTime.Name = "colScheduleTime";
-			this.colScheduleTime.Width = 110;
-			// 
 			// ManageClients
 			// 
 			this.AcceptButton = this.btnSearch;
@@ -255,7 +209,8 @@
 			this.Load += new System.EventHandler(this.OnLoad);
 			groupBox1.ResumeLayout(false);
 			groupBox1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.clientsListBindingSource)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridClients)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -273,11 +228,11 @@
 		private System.Windows.Forms.Button btnEdit;
 		private System.Windows.Forms.Button btnRemove;
 		private System.Windows.Forms.Button btnClose;
-		private System.Windows.Forms.BindingSource clientsListBindingSource;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colId;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colName;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colLastEnter;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colTimesLeft;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colScheduleTime;
+		private System.Windows.Forms.BindingSource clientsBindingSource;
 	}
 }

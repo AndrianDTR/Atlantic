@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Data;
 using AY.Log;
 using AY.Utils;
-using AY.db.dstAdapters;
+using AY.db.dbDataSetTableAdapters;
 
 namespace AY.db
 {
 	public class Db : Singleton<Db>
 	{
 		private dbDataSet m_clientDataSet;
-		//private tAdapter m_tAdapter;
 		private TableAdapterManager tam;
 		
 		private Db()
 		{
 			m_clientDataSet = new dbDataSet();
-			//m_tAdapter = new tAdapter();
 			tam = new TableAdapterManager();
+			tam.UpdateAll(m_clientDataSet);
 
 			((System.ComponentModel.ISupportInitialize)(m_clientDataSet)).BeginInit();
 			m_clientDataSet.DataSetName = "clientDataSet";
@@ -43,8 +42,6 @@ namespace AY.db
 			Adapters.userPrivilegesTableAdapter.Fill(m_clientDataSet.userPrivileges);
 			Adapters.usersTableAdapter.Fill(m_clientDataSet.users);
 
-			//m_tAdapter.lvtaClientsList.Fill(m_clientDataSet.clientsList);
-
 			((System.ComponentModel.ISupportInitialize)(m_clientDataSet)).EndInit();
 		}
 
@@ -56,6 +53,12 @@ namespace AY.db
 		public TableAdapterManager Adapters
 		{
 			get { return tam; }
+		}
+		
+		public void AcceptCahnges()
+		{
+			Adapters.UpdateAll(dSet);
+			dSet.AcceptChanges();
 		}
 	}
 }

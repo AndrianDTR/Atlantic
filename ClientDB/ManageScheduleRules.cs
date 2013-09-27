@@ -16,12 +16,14 @@ namespace EAssistant
 
 		private void OnLoad(object sender, EventArgs e)
 		{
-			ScheduleRulesCollection collection = new ScheduleRulesCollection();
+			Db.Instance.Adapters.scheduleRulesTableAdapter.Fill(Db.Instance.dSet.scheduleRules);
+			/*
 			rulesList.Items.Clear();
 			foreach (ScheduleRule trainer in collection)
 			{
 				rulesList.Items.Add(trainer);
 			}
+			*/
 		}
 		
 		private bool ValidateForm()
@@ -52,10 +54,11 @@ namespace EAssistant
 				return;
 				
 			String szName = name.Text.Trim();
-			String szPhone = rule.Text.Trim();
+			String szPhone = hoursAdd.Text.Trim();
 			float fPrice = GetPrice();
 			Int64 id = 0;
 
+			/*
 			ScheduleRulesCollection collection = new ScheduleRulesCollection();
 			List<ScheduleRule> trainers = collection.Search(szName);
 			if (trainers.Count > 0)
@@ -74,6 +77,7 @@ namespace EAssistant
 			}
 
 			rulesList.Items.Add(new ScheduleRule(id));
+			*/
 		}
 
 		private void remove_Click(object sender, EventArgs e)
@@ -81,14 +85,16 @@ namespace EAssistant
 			if (rulesList.SelectedItem == null)
 				return;
 
+			/*
 			ScheduleRule trainer = (ScheduleRule)rulesList.SelectedItem;
 			if (!ScheduleRulesCollection.RemoveById(trainer.Id))
 			{
-				UIMessages.Error("Selected schedule rule could not been removed.");
+				UIMessages.Error("Selected schedule hoursAdd could not been removed.");
 				return;
 			}
 			
 			rulesList.Items.Remove(trainer);
+			*/
 		}
 
 		private void save_Click(object sender, EventArgs e)
@@ -100,15 +106,17 @@ namespace EAssistant
 				return;
 			
 			String szName = name.Text.Trim();
-			String szRule = rule.Text.Trim();
+			String szRule = hoursAdd.Text.Trim();
 			float fPrice = GetPrice();
 
 			if (szName.Length < 1)
 				return;
 
+			/*
 			ScheduleRule selected = (ScheduleRule)rulesList.SelectedItem;
 			selected.SetData(szName, szRule, fPrice);
 			rulesList.Items[rulesList.SelectedIndex] = selected;
+			*/
 		}
 
 		private void rulesList_SelectedIndexChanged(object sender, EventArgs e)
@@ -116,11 +124,13 @@ namespace EAssistant
 			if (rulesList.SelectedItem == null)
 				return;
 
+			/*
 			ScheduleRule selected = (ScheduleRule)rulesList.SelectedItem;
 
 			name.Text = selected.Name;
-			rule.Text = selected.Rule;
+			hoursAdd.Text = selected.Rule;
 			price.Text = selected.Price.ToString();
+			*/
 		}
 	}
 }

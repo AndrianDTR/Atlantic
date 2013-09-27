@@ -14,7 +14,7 @@ namespace AY
 			public DateTime date;
 			public string sTitle = "";
 			public string sTip = "";
-			public object extraInfo = null;
+			public object plan = null;
 			
 			
 			public CellInfo(DateTime date)
@@ -24,7 +24,7 @@ namespace AY
 				bSelected = false;
 				bCurMonth = false;
 				sTip = "";
-				extraInfo = null;
+				plan = null;
 			}
 		}
 	}

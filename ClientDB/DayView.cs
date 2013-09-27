@@ -13,7 +13,7 @@ namespace EAssistant
 	{
 		private int[] m_days = null;
 		private Dictionary<DateTime, String> m_trainerDate2NameMap = new Dictionary<DateTime, String>();
-		private Opts m_opt = new Opts();
+		//private Opts m_opt = new Opts();
 		
 		private bool showTrainers = false;
 		private bool showClientCount = false;
@@ -35,7 +35,7 @@ namespace EAssistant
 					  new int[7] { 0, 1, 2, 3, 4, 5, 6 }
 					, (int)CultureInfoUtils.GetWeekStart());
 				m_clients = new ClientCollection();
-				m_clients.Refresh("timesLeft > 0");
+				m_clients.Refresh("hoursLeft > 0");
 				
 				Dictionary<Int64, String> trainerId2NameMap = new Dictionary<Int64, String>();
 				foreach (Trainer tr in new TrainerCollection())

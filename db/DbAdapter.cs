@@ -85,20 +85,20 @@ namespace AY
 					case DbTable.Clients:
 						return new String[]{"id", "name", "phone", "scheduleTime"
 							, "trainer", "lastEnter", "lastLeave", "openTicket"
-							, "comment",  "extraInfo", "timesLeft"};
+							, "comment",  "plan", "hoursLeft"};
 
 					case DbTable.Payments:
 						return new String[]{"id", "clientId", "scheduleId", "creatorId", "date"
 							, "sum", "comment"};
 
 					case DbTable.ScheduleRules:
-						return new String[] { "id", "name", "rule", "price" };
+						return new String[] { "id", "name", "hoursAdd", "price" };
 
 					case DbTable.Statistics:
 						return new String[] { "id", "clientId", "enter", "leave" };
 
 					case DbTable.Trainers:
-						return new String[] { "id", "name", "phone", "extraInfo" };
+						return new String[] { "id", "name", "phone", "plan" };
 
 					case DbTable.TrainersSchedule:
 						return new String[] { "id", "trainerId", "workDate" };
@@ -632,7 +632,7 @@ namespace AY
 					+ ", ('BBB', '222')"
 					;
 
-				String fillScheduleRules = @"insert into scheduleRules(name, price, rule)"
+				String fillScheduleRules = @"insert into scheduleRules(name, price, hoursAdd)"
 					+ " values('Rule 8x2', 100.00, 'CPUTimesLeft:8\r\nCPUHoursLeft:16\r\nUCIDecHours:2\r\nUCIDecTimes:1')"
 					+ ", ('Rule 12x3', 300.00, 'CPUTimesLeft:12\r\nCPUHoursLeft:36\r\nUCIDecHours:3\r\nUCIDecTimes:1')"
 					;
@@ -731,7 +731,7 @@ namespace AY
 					id Integer PRIMARY KEY AUTOINCREMENT NOT NULL
 					, name VarChar NOT NULL
 					, phone VarChar NOT NULL
-					, extraInfo VarChar DEFAULT('')
+					, plan VarChar DEFAULT('')
 				)";
 				
 				string tTarinersSchedule = @"drop table if exists trainersSchedule;

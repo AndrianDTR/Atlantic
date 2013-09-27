@@ -21,7 +21,7 @@ namespace AY.db {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("clientDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("dbDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class dbDataSet : global::System.Data.DataSet {
         
@@ -392,7 +392,7 @@ namespace AY.db {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitClass() {
-            this.DataSetName = "clientDataSet";
+            this.DataSetName = "dbDataSet";
             this.Prefix = "";
             this.Namespace = "http://tempuri.org/clientDataSet.xsd";
             this.EnforceConstraints = true;
@@ -570,9 +570,9 @@ namespace AY.db {
             
             private global::System.Data.DataColumn columncomment;
             
-            private global::System.Data.DataColumn columnextraInfo;
+            private global::System.Data.DataColumn columnplan;
             
-            private global::System.Data.DataColumn columntimesLeft;
+            private global::System.Data.DataColumn columnhoursLeft;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public clientsDataTable() {
@@ -675,16 +675,16 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn extraInfoColumn {
+            public global::System.Data.DataColumn planColumn {
                 get {
-                    return this.columnextraInfo;
+                    return this.columnplan;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn timesLeftColumn {
+            public global::System.Data.DataColumn hoursLeftColumn {
                 get {
-                    return this.columntimesLeft;
+                    return this.columnhoursLeft;
                 }
             }
             
@@ -717,7 +717,7 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public clientsRow AddclientsRow(long id, string name, string phone, string scheduleDays, System.DateTime scheduleTime, System.DateTime lastEnter, System.DateTime lastLeave, System.DateTime openTicket, long trainer, string comment, string extraInfo, long timesLeft) {
+            public clientsRow AddclientsRow(long id, string name, string phone, string scheduleDays, System.DateTime scheduleTime, System.DateTime lastEnter, System.DateTime lastLeave, System.DateTime openTicket, long trainer, string comment, long plan, long hoursLeft) {
                 clientsRow rowclientsRow = ((clientsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id,
@@ -730,8 +730,8 @@ namespace AY.db {
                         openTicket,
                         trainer,
                         comment,
-                        extraInfo,
-                        timesLeft};
+                        plan,
+                        hoursLeft};
                 rowclientsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowclientsRow);
                 return rowclientsRow;
@@ -767,8 +767,8 @@ namespace AY.db {
                 this.columnopenTicket = base.Columns["openTicket"];
                 this.columntrainer = base.Columns["trainer"];
                 this.columncomment = base.Columns["comment"];
-                this.columnextraInfo = base.Columns["extraInfo"];
-                this.columntimesLeft = base.Columns["timesLeft"];
+                this.columnplan = base.Columns["plan"];
+                this.columnhoursLeft = base.Columns["hoursLeft"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -793,10 +793,10 @@ namespace AY.db {
                 base.Columns.Add(this.columntrainer);
                 this.columncomment = new global::System.Data.DataColumn("comment", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncomment);
-                this.columnextraInfo = new global::System.Data.DataColumn("extraInfo", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnextraInfo);
-                this.columntimesLeft = new global::System.Data.DataColumn("timesLeft", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntimesLeft);
+                this.columnplan = new global::System.Data.DataColumn("plan", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnplan);
+                this.columnhoursLeft = new global::System.Data.DataColumn("hoursLeft", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhoursLeft);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AllowDBNull = false;
@@ -807,7 +807,6 @@ namespace AY.db {
                 this.columnscheduleDays.MaxLength = 2147483647;
                 this.columnscheduleTime.AllowDBNull = false;
                 this.columncomment.MaxLength = 2147483647;
-                this.columnextraInfo.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1256,7 +1255,7 @@ namespace AY.db {
             
             private global::System.Data.DataColumn columnname;
             
-            private global::System.Data.DataColumn columnrule;
+            private global::System.Data.DataColumn columnhoursAdd;
             
             private global::System.Data.DataColumn columnprice;
             
@@ -1305,9 +1304,9 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ruleColumn {
+            public global::System.Data.DataColumn hoursAddColumn {
                 get {
-                    return this.columnrule;
+                    return this.columnhoursAdd;
                 }
             }
             
@@ -1347,12 +1346,12 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public scheduleRulesRow AddscheduleRulesRow(string name, string rule, double price) {
+            public scheduleRulesRow AddscheduleRulesRow(string name, long hoursAdd, double price) {
                 scheduleRulesRow rowscheduleRulesRow = ((scheduleRulesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         name,
-                        rule,
+                        hoursAdd,
                         price};
                 rowscheduleRulesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowscheduleRulesRow);
@@ -1381,7 +1380,7 @@ namespace AY.db {
             internal void InitVars() {
                 this.columnid = base.Columns["id"];
                 this.columnname = base.Columns["name"];
-                this.columnrule = base.Columns["rule"];
+                this.columnhoursAdd = base.Columns["hoursAdd"];
                 this.columnprice = base.Columns["price"];
             }
             
@@ -1391,8 +1390,8 @@ namespace AY.db {
                 base.Columns.Add(this.columnid);
                 this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnname);
-                this.columnrule = new global::System.Data.DataColumn("rule", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnrule);
+                this.columnhoursAdd = new global::System.Data.DataColumn("hoursAdd", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhoursAdd);
                 this.columnprice = new global::System.Data.DataColumn("price", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnprice);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -1404,8 +1403,7 @@ namespace AY.db {
                 this.columnid.Unique = true;
                 this.columnname.AllowDBNull = false;
                 this.columnname.MaxLength = 2147483647;
-                this.columnrule.AllowDBNull = false;
-                this.columnrule.MaxLength = 2147483647;
+                this.columnhoursAdd.AllowDBNull = false;
                 this.columnprice.AllowDBNull = false;
             }
             
@@ -2204,7 +2202,7 @@ namespace AY.db {
             
             private global::System.Data.DataColumn columnphone;
             
-            private global::System.Data.DataColumn columnextraInfo;
+            private global::System.Data.DataColumn columnplan;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public trainersDataTable() {
@@ -2258,9 +2256,9 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn extraInfoColumn {
+            public global::System.Data.DataColumn planColumn {
                 get {
-                    return this.columnextraInfo;
+                    return this.columnplan;
                 }
             }
             
@@ -2293,13 +2291,13 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public trainersRow AddtrainersRow(string name, string phone, string extraInfo) {
+            public trainersRow AddtrainersRow(string name, string phone, string plan) {
                 trainersRow rowtrainersRow = ((trainersRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         name,
                         phone,
-                        extraInfo};
+                        plan};
                 rowtrainersRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowtrainersRow);
                 return rowtrainersRow;
@@ -2328,7 +2326,7 @@ namespace AY.db {
                 this.columnid = base.Columns["id"];
                 this.columnname = base.Columns["name"];
                 this.columnphone = base.Columns["phone"];
-                this.columnextraInfo = base.Columns["extraInfo"];
+                this.columnplan = base.Columns["plan"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2339,8 +2337,8 @@ namespace AY.db {
                 base.Columns.Add(this.columnname);
                 this.columnphone = new global::System.Data.DataColumn("phone", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnphone);
-                this.columnextraInfo = new global::System.Data.DataColumn("extraInfo", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnextraInfo);
+                this.columnplan = new global::System.Data.DataColumn("plan", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnplan);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AutoIncrement = true;
@@ -2352,7 +2350,7 @@ namespace AY.db {
                 this.columnname.MaxLength = 2147483647;
                 this.columnphone.AllowDBNull = false;
                 this.columnphone.MaxLength = 2147483647;
-                this.columnextraInfo.MaxLength = 2147483647;
+                this.columnplan.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3390,7 +3388,7 @@ namespace AY.db {
             
             private global::System.Data.DataColumn columnlastEnter;
             
-            private global::System.Data.DataColumn columntimesLeft;
+            private global::System.Data.DataColumn columnhoursLeft;
             
             private global::System.Data.DataColumn columnscheduleTime;
             
@@ -3446,9 +3444,9 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn timesLeftColumn {
+            public global::System.Data.DataColumn hoursLeftColumn {
                 get {
-                    return this.columntimesLeft;
+                    return this.columnhoursLeft;
                 }
             }
             
@@ -3488,13 +3486,13 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public clientsListRow AddclientsListRow(long id, string name, System.DateTime lastEnter, long timesLeft, System.DateTime scheduleTime) {
+            public clientsListRow AddclientsListRow(long id, string name, System.DateTime lastEnter, long hoursLeft, System.DateTime scheduleTime) {
                 clientsListRow rowclientsListRow = ((clientsListRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id,
                         name,
                         lastEnter,
-                        timesLeft,
+                        hoursLeft,
                         scheduleTime};
                 rowclientsListRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowclientsListRow);
@@ -3524,7 +3522,7 @@ namespace AY.db {
                 this.columnid = base.Columns["id"];
                 this.columnname = base.Columns["name"];
                 this.columnlastEnter = base.Columns["lastEnter"];
-                this.columntimesLeft = base.Columns["timesLeft"];
+                this.columnhoursLeft = base.Columns["hoursLeft"];
                 this.columnscheduleTime = base.Columns["scheduleTime"];
             }
             
@@ -3536,8 +3534,8 @@ namespace AY.db {
                 base.Columns.Add(this.columnname);
                 this.columnlastEnter = new global::System.Data.DataColumn("lastEnter", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnlastEnter);
-                this.columntimesLeft = new global::System.Data.DataColumn("timesLeft", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntimesLeft);
+                this.columnhoursLeft = new global::System.Data.DataColumn("hoursLeft", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhoursLeft);
                 this.columnscheduleTime = new global::System.Data.DataColumn("scheduleTime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnscheduleTime);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -3814,17 +3812,17 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string plan {
+            public long plan {
                 get {
                     try {
-                        return ((string)(this[this.tableclients.extraInfoColumn]));
+                        return ((long)(this[this.tableclients.planColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'extraInfo\' in table \'clients\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'plan\' in table \'clients\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableclients.extraInfoColumn] = value;
+                    this[this.tableclients.planColumn] = value;
                 }
             }
             
@@ -3832,14 +3830,14 @@ namespace AY.db {
             public long hoursLeft {
                 get {
                     try {
-                        return ((long)(this[this.tableclients.timesLeftColumn]));
+                        return ((long)(this[this.tableclients.hoursLeftColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'timesLeft\' in table \'clients\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'hoursLeft\' in table \'clients\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableclients.timesLeftColumn] = value;
+                    this[this.tableclients.hoursLeftColumn] = value;
                 }
             }
             
@@ -3914,23 +3912,23 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsextraInfoNull() {
-                return this.IsNull(this.tableclients.extraInfoColumn);
+            public bool IsplanNull() {
+                return this.IsNull(this.tableclients.planColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetextraInfoNull() {
-                this[this.tableclients.extraInfoColumn] = global::System.Convert.DBNull;
+            public void SetplanNull() {
+                this[this.tableclients.planColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IstimesLeftNull() {
-                return this.IsNull(this.tableclients.timesLeftColumn);
+            public bool IshoursLeftNull() {
+                return this.IsNull(this.tableclients.hoursLeftColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SettimesLeftNull() {
-                this[this.tableclients.timesLeftColumn] = global::System.Convert.DBNull;
+            public void SethoursLeftNull() {
+                this[this.tableclients.hoursLeftColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -4084,12 +4082,12 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string rule {
+            public long hoursAdd {
                 get {
-                    return ((string)(this[this.tablescheduleRules.ruleColumn]));
+                    return ((long)(this[this.tablescheduleRules.hoursAddColumn]));
                 }
                 set {
-                    this[this.tablescheduleRules.ruleColumn] = value;
+                    this[this.tablescheduleRules.hoursAddColumn] = value;
                 }
             }
             
@@ -4414,28 +4412,28 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string extraInfo {
+            public string plan {
                 get {
                     try {
-                        return ((string)(this[this.tabletrainers.extraInfoColumn]));
+                        return ((string)(this[this.tabletrainers.planColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'extraInfo\' in table \'trainers\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'plan\' in table \'trainers\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabletrainers.extraInfoColumn] = value;
+                    this[this.tabletrainers.planColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsextraInfoNull() {
-                return this.IsNull(this.tabletrainers.extraInfoColumn);
+            public bool IsplanNull() {
+                return this.IsNull(this.tabletrainers.planColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetextraInfoNull() {
-                this[this.tabletrainers.extraInfoColumn] = global::System.Convert.DBNull;
+            public void SetplanNull() {
+                this[this.tabletrainers.planColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -4719,17 +4717,17 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long timesLeft {
+            public long hoursLeft {
                 get {
                     try {
-                        return ((long)(this[this.tableclientsList.timesLeftColumn]));
+                        return ((long)(this[this.tableclientsList.hoursLeftColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'timesLeft\' in table \'clientsList\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'hoursLeft\' in table \'clientsList\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableclientsList.timesLeftColumn] = value;
+                    this[this.tableclientsList.hoursLeftColumn] = value;
                 }
             }
             
@@ -4754,13 +4752,13 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IstimesLeftNull() {
-                return this.IsNull(this.tableclientsList.timesLeftColumn);
+            public bool IshoursLeftNull() {
+                return this.IsNull(this.tableclientsList.hoursLeftColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SettimesLeftNull() {
-                this[this.tableclientsList.timesLeftColumn] = global::System.Convert.DBNull;
+            public void SethoursLeftNull() {
+                this[this.tableclientsList.hoursLeftColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5075,7 +5073,7 @@ namespace AY.db {
         }
     }
 }
-namespace AY.db.dstAdapters {
+namespace AY.db.dbDataSetTableAdapters {
     
     
     /// <summary>
@@ -5203,12 +5201,12 @@ namespace AY.db.dstAdapters {
             tableMapping.ColumnMappings.Add("openTicket", "openTicket");
             tableMapping.ColumnMappings.Add("trainer", "trainer");
             tableMapping.ColumnMappings.Add("comment", "comment");
-            tableMapping.ColumnMappings.Add("extraInfo", "extraInfo");
-            tableMapping.ColumnMappings.Add("timesLeft", "timesLeft");
+            tableMapping.ColumnMappings.Add("plan", "plan");
+            tableMapping.ColumnMappings.Add("hoursLeft", "hoursLeft");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [main].[sqlite_default_schema].[clients] WHERE (([id] = @Original_id) AND ([name] = @Original_name) AND ((@IsNull_phone = 1 AND [phone] IS NULL) OR ([phone] = @Original_phone)) AND ((@IsNull_scheduleDays = 1 AND [scheduleDays] IS NULL) OR ([scheduleDays] = @Original_scheduleDays)) AND ([scheduleTime] = @Original_scheduleTime) AND ((@IsNull_lastEnter = 1 AND [lastEnter] IS NULL) OR ([lastEnter] = @Original_lastEnter)) AND ((@IsNull_lastLeave = 1 AND [lastLeave] IS NULL) OR ([lastLeave] = @Original_lastLeave)) AND ((@IsNull_openTicket = 1 AND [openTicket] IS NULL) OR ([openTicket] = @Original_openTicket)) AND ((@IsNull_trainer = 1 AND [trainer] IS NULL) OR ([trainer] = @Original_trainer)) AND ((@IsNull_comment = 1 AND [comment] IS NULL) OR ([comment] = @Original_comment)) AND ((@IsNull_extraInfo = 1 AND [extraInfo] IS NULL) OR ([extraInfo] = @Original_extraInfo)) AND ((@IsNull_timesLeft = 1 AND [timesLeft] IS NULL) OR ([timesLeft] = @Original_timesLeft)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [main].[sqlite_default_schema].[clients] WHERE (([id] = @Original_id) AND ([name] = @Original_name) AND ((@IsNull_phone = 1 AND [phone] IS NULL) OR ([phone] = @Original_phone)) AND ((@IsNull_scheduleDays = 1 AND [scheduleDays] IS NULL) OR ([scheduleDays] = @Original_scheduleDays)) AND ([scheduleTime] = @Original_scheduleTime) AND ((@IsNull_lastEnter = 1 AND [lastEnter] IS NULL) OR ([lastEnter] = @Original_lastEnter)) AND ((@IsNull_lastLeave = 1 AND [lastLeave] IS NULL) OR ([lastLeave] = @Original_lastLeave)) AND ((@IsNull_openTicket = 1 AND [openTicket] IS NULL) OR ([openTicket] = @Original_openTicket)) AND ((@IsNull_trainer = 1 AND [trainer] IS NULL) OR ([trainer] = @Original_trainer)) AND ((@IsNull_comment = 1 AND [comment] IS NULL) OR ([comment] = @Original_comment)) AND ((@IsNull_plan = 1 AND [plan] IS NULL) OR ([plan] = @Original_plan)) AND ((@IsNull_hoursLeft = 1 AND [hoursLeft] IS NULL) OR ([hoursLeft] = @Original_hoursLeft)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             global::System.Data.SQLite.SQLiteParameter param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@Original_id";
@@ -5336,37 +5334,37 @@ namespace AY.db.dstAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@IsNull_extraInfo";
+            param.ParameterName = "@IsNull_plan";
             param.DbType = global::System.Data.DbType.Int32;
             param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "extraInfo";
+            param.SourceColumn = "plan";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             param.SourceColumnNullMapping = true;
             this._adapter.DeleteCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_extraInfo";
+            param.ParameterName = "@Original_plan";
             param.DbType = global::System.Data.DbType.String;
-            param.SourceColumn = "extraInfo";
+            param.SourceColumn = "plan";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@IsNull_timesLeft";
+            param.ParameterName = "@IsNull_hoursLeft";
             param.DbType = global::System.Data.DbType.Int32;
             param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "timesLeft";
+            param.SourceColumn = "hoursLeft";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             param.SourceColumnNullMapping = true;
             this._adapter.DeleteCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_timesLeft";
+            param.ParameterName = "@Original_hoursLeft";
             param.DbType = global::System.Data.DbType.Int64;
             param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "timesLeft";
+            param.SourceColumn = "hoursLeft";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
             this._adapter.InsertCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [main].[sqlite_default_schema].[clients] ([id], [name], [phone], [scheduleDays], [scheduleTime], [lastEnter], [lastLeave], [openTicket], [trainer], [comment], [extraInfo], [timesLeft]) VALUES (@id, @name, @phone, @scheduleDays, @scheduleTime, @lastEnter, @lastLeave, @openTicket, @trainer, @comment, @extraInfo, @timesLeft)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [main].[sqlite_default_schema].[clients] ([id], [name], [phone], [scheduleDays], [scheduleTime], [lastEnter], [lastLeave], [openTicket], [trainer], [comment], [plan], [hoursLeft]) VALUES (@id, @name, @phone, @scheduleDays, @scheduleTime, @lastEnter, @lastLeave, @openTicket, @trainer, @comment, @plan, @hoursLeft)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@id";
@@ -5428,19 +5426,19 @@ namespace AY.db.dstAdapters {
             param.SourceColumn = "comment";
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@extraInfo";
+            param.ParameterName = "@plan";
             param.DbType = global::System.Data.DbType.String;
-            param.SourceColumn = "extraInfo";
+            param.SourceColumn = "plan";
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@timesLeft";
+            param.ParameterName = "@hoursLeft";
             param.DbType = global::System.Data.DbType.Int64;
             param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "timesLeft";
+            param.SourceColumn = "hoursLeft";
             this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [main].[sqlite_default_schema].[clients] SET [id] = @id, [name] = @name, [phone] = @phone, [scheduleDays] = @scheduleDays, [scheduleTime] = @scheduleTime, [lastEnter] = @lastEnter, [lastLeave] = @lastLeave, [openTicket] = @openTicket, [trainer] = @trainer, [comment] = @comment, [extraInfo] = @extraInfo, [timesLeft] = @timesLeft WHERE (([id] = @Original_id) AND ([name] = @Original_name) AND ((@IsNull_phone = 1 AND [phone] IS NULL) OR ([phone] = @Original_phone)) AND ((@IsNull_scheduleDays = 1 AND [scheduleDays] IS NULL) OR ([scheduleDays] = @Original_scheduleDays)) AND ([scheduleTime] = @Original_scheduleTime) AND ((@IsNull_lastEnter = 1 AND [lastEnter] IS NULL) OR ([lastEnter] = @Original_lastEnter)) AND ((@IsNull_lastLeave = 1 AND [lastLeave] IS NULL) OR ([lastLeave] = @Original_lastLeave)) AND ((@IsNull_openTicket = 1 AND [openTicket] IS NULL) OR ([openTicket] = @Original_openTicket)) AND ((@IsNull_trainer = 1 AND [trainer] IS NULL) OR ([trainer] = @Original_trainer)) AND ((@IsNull_comment = 1 AND [comment] IS NULL) OR ([comment] = @Original_comment)) AND ((@IsNull_extraInfo = 1 AND [extraInfo] IS NULL) OR ([extraInfo] = @Original_extraInfo)) AND ((@IsNull_timesLeft = 1 AND [timesLeft] IS NULL) OR ([timesLeft] = @Original_timesLeft)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [main].[sqlite_default_schema].[clients] SET [id] = @id, [name] = @name, [phone] = @phone, [scheduleDays] = @scheduleDays, [scheduleTime] = @scheduleTime, [lastEnter] = @lastEnter, [lastLeave] = @lastLeave, [openTicket] = @openTicket, [trainer] = @trainer, [comment] = @comment, [plan] = @plan, [hoursLeft] = @hoursLeft WHERE (([id] = @Original_id) AND ([name] = @Original_name) AND ((@IsNull_phone = 1 AND [phone] IS NULL) OR ([phone] = @Original_phone)) AND ((@IsNull_scheduleDays = 1 AND [scheduleDays] IS NULL) OR ([scheduleDays] = @Original_scheduleDays)) AND ([scheduleTime] = @Original_scheduleTime) AND ((@IsNull_lastEnter = 1 AND [lastEnter] IS NULL) OR ([lastEnter] = @Original_lastEnter)) AND ((@IsNull_lastLeave = 1 AND [lastLeave] IS NULL) OR ([lastLeave] = @Original_lastLeave)) AND ((@IsNull_openTicket = 1 AND [openTicket] IS NULL) OR ([openTicket] = @Original_openTicket)) AND ((@IsNull_trainer = 1 AND [trainer] IS NULL) OR ([trainer] = @Original_trainer)) AND ((@IsNull_comment = 1 AND [comment] IS NULL) OR ([comment] = @Original_comment)) AND ((@IsNull_plan = 1 AND [plan] IS NULL) OR ([plan] = @Original_plan)) AND ((@IsNull_hoursLeft = 1 AND [hoursLeft] IS NULL) OR ([hoursLeft] = @Original_hoursLeft)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@id";
@@ -5502,15 +5500,15 @@ namespace AY.db.dstAdapters {
             param.SourceColumn = "comment";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@extraInfo";
+            param.ParameterName = "@plan";
             param.DbType = global::System.Data.DbType.String;
-            param.SourceColumn = "extraInfo";
+            param.SourceColumn = "plan";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@timesLeft";
+            param.ParameterName = "@hoursLeft";
             param.DbType = global::System.Data.DbType.Int64;
             param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "timesLeft";
+            param.SourceColumn = "hoursLeft";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@Original_id";
@@ -5638,32 +5636,32 @@ namespace AY.db.dstAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@IsNull_extraInfo";
+            param.ParameterName = "@IsNull_plan";
             param.DbType = global::System.Data.DbType.Int32;
             param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "extraInfo";
+            param.SourceColumn = "plan";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             param.SourceColumnNullMapping = true;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_extraInfo";
+            param.ParameterName = "@Original_plan";
             param.DbType = global::System.Data.DbType.String;
-            param.SourceColumn = "extraInfo";
+            param.SourceColumn = "plan";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@IsNull_timesLeft";
+            param.ParameterName = "@IsNull_hoursLeft";
             param.DbType = global::System.Data.DbType.Int32;
             param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "timesLeft";
+            param.SourceColumn = "hoursLeft";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             param.SourceColumnNullMapping = true;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_timesLeft";
+            param.ParameterName = "@Original_hoursLeft";
             param.DbType = global::System.Data.DbType.Int64;
             param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "timesLeft";
+            param.SourceColumn = "hoursLeft";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
@@ -5680,8 +5678,7 @@ namespace AY.db.dstAdapters {
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT [id], [name], [phone], [scheduleDays], [scheduleTime], [lastEnter], [lastL" +
-                "eave], [openTicket], [trainer], [comment], [extraInfo], [timesLeft] FROM [client" +
-                "s]";
+                "eave], [openTicket], [trainer], [comment], [plan], [hoursLeft] FROM [clients]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -5735,7 +5732,7 @@ namespace AY.db.dstAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(long Original_id, string Original_name, string Original_phone, string Original_scheduleDays, System.DateTime Original_scheduleTime, global::System.Nullable<global::System.DateTime> Original_lastEnter, global::System.Nullable<global::System.DateTime> Original_lastLeave, global::System.Nullable<global::System.DateTime> Original_openTicket, global::System.Nullable<long> Original_trainer, string Original_comment, string Original_extraInfo, global::System.Nullable<long> Original_timesLeft) {
+        public virtual int Delete(long Original_id, string Original_name, string Original_phone, string Original_scheduleDays, System.DateTime Original_scheduleTime, global::System.Nullable<global::System.DateTime> Original_lastEnter, global::System.Nullable<global::System.DateTime> Original_lastLeave, global::System.Nullable<global::System.DateTime> Original_openTicket, global::System.Nullable<long> Original_trainer, string Original_comment, string Original_plan, global::System.Nullable<long> Original_hoursLeft) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((long)(Original_id));
             if ((Original_name == null)) {
                 throw new global::System.ArgumentNullException("Original_name");
@@ -5800,17 +5797,17 @@ namespace AY.db.dstAdapters {
                 this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[16].Value = ((string)(Original_comment));
             }
-            if ((Original_extraInfo == null)) {
+            if ((Original_plan == null)) {
                 this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[18].Value = ((string)(Original_extraInfo));
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((string)(Original_plan));
             }
-            if ((Original_timesLeft.HasValue == true)) {
+            if ((Original_hoursLeft.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[20].Value = ((long)(Original_timesLeft.Value));
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((long)(Original_hoursLeft.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
@@ -5835,7 +5832,7 @@ namespace AY.db.dstAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(long id, string name, string phone, string scheduleDays, System.DateTime scheduleTime, global::System.Nullable<global::System.DateTime> lastEnter, global::System.Nullable<global::System.DateTime> lastLeave, global::System.Nullable<global::System.DateTime> openTicket, global::System.Nullable<long> trainer, string comment, string extraInfo, global::System.Nullable<long> timesLeft) {
+        public virtual int Insert(long id, string name, string phone, string scheduleDays, System.DateTime scheduleTime, global::System.Nullable<global::System.DateTime> lastEnter, global::System.Nullable<global::System.DateTime> lastLeave, global::System.Nullable<global::System.DateTime> openTicket, global::System.Nullable<long> trainer, string comment, string plan, global::System.Nullable<long> hoursLeft) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((long)(id));
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
@@ -5886,14 +5883,14 @@ namespace AY.db.dstAdapters {
             else {
                 this.Adapter.InsertCommand.Parameters[9].Value = ((string)(comment));
             }
-            if ((extraInfo == null)) {
+            if ((plan == null)) {
                 this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((string)(extraInfo));
+                this.Adapter.InsertCommand.Parameters[10].Value = ((string)(plan));
             }
-            if ((timesLeft.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[11].Value = ((long)(timesLeft.Value));
+            if ((hoursLeft.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[11].Value = ((long)(hoursLeft.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
@@ -5928,8 +5925,8 @@ namespace AY.db.dstAdapters {
                     global::System.Nullable<global::System.DateTime> openTicket, 
                     global::System.Nullable<long> trainer, 
                     string comment, 
-                    string extraInfo, 
-                    global::System.Nullable<long> timesLeft, 
+                    string plan, 
+                    global::System.Nullable<long> hoursLeft, 
                     long Original_id, 
                     string Original_name, 
                     string Original_phone, 
@@ -5940,8 +5937,8 @@ namespace AY.db.dstAdapters {
                     global::System.Nullable<global::System.DateTime> Original_openTicket, 
                     global::System.Nullable<long> Original_trainer, 
                     string Original_comment, 
-                    string Original_extraInfo, 
-                    global::System.Nullable<long> Original_timesLeft) {
+                    string Original_plan, 
+                    global::System.Nullable<long> Original_hoursLeft) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((long)(id));
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
@@ -5992,14 +5989,14 @@ namespace AY.db.dstAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(comment));
             }
-            if ((extraInfo == null)) {
+            if ((plan == null)) {
                 this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(extraInfo));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(plan));
             }
-            if ((timesLeft.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((long)(timesLeft.Value));
+            if ((hoursLeft.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((long)(hoursLeft.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
@@ -6068,17 +6065,17 @@ namespace AY.db.dstAdapters {
                 this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
                 this.Adapter.UpdateCommand.Parameters[28].Value = ((string)(Original_comment));
             }
-            if ((Original_extraInfo == null)) {
+            if ((Original_plan == null)) {
                 this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((string)(Original_extraInfo));
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((string)(Original_plan));
             }
-            if ((Original_timesLeft.HasValue == true)) {
+            if ((Original_hoursLeft.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((long)(Original_timesLeft.Value));
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((long)(Original_hoursLeft.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
@@ -6113,8 +6110,8 @@ namespace AY.db.dstAdapters {
                     global::System.Nullable<global::System.DateTime> openTicket, 
                     global::System.Nullable<long> trainer, 
                     string comment, 
-                    string extraInfo, 
-                    global::System.Nullable<long> timesLeft, 
+                    string plan, 
+                    global::System.Nullable<long> hoursLeft, 
                     long Original_id, 
                     string Original_name, 
                     string Original_phone, 
@@ -6125,9 +6122,9 @@ namespace AY.db.dstAdapters {
                     global::System.Nullable<global::System.DateTime> Original_openTicket, 
                     global::System.Nullable<long> Original_trainer, 
                     string Original_comment, 
-                    string Original_extraInfo, 
-                    global::System.Nullable<long> Original_timesLeft) {
-            return this.Update(Original_id, name, phone, scheduleDays, scheduleTime, lastEnter, lastLeave, openTicket, trainer, comment, extraInfo, timesLeft, Original_id, Original_name, Original_phone, Original_scheduleDays, Original_scheduleTime, Original_lastEnter, Original_lastLeave, Original_openTicket, Original_trainer, Original_comment, Original_extraInfo, Original_timesLeft);
+                    string Original_plan, 
+                    global::System.Nullable<long> Original_hoursLeft) {
+            return this.Update(Original_id, name, phone, scheduleDays, scheduleTime, lastEnter, lastLeave, openTicket, trainer, comment, plan, hoursLeft, Original_id, Original_name, Original_phone, Original_scheduleDays, Original_scheduleTime, Original_lastEnter, Original_lastLeave, Original_openTicket, Original_trainer, Original_comment, Original_plan, Original_hoursLeft);
         }
     }
     
@@ -6476,12 +6473,18 @@ namespace AY.db.dstAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
+            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[2];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT [id], [clientId], [scheduleId], [creatorId], [date], [sum], [comment] FROM" +
                 " [payments]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SQLite.SQLiteCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT     payments.[id], payments.scheduleId, payments.[date], payments.[sum], s" +
+                "cheduleRules.name\r\nFROM         payments INNER JOIN\r\n                      sched" +
+                "uleRules ON payments.scheduleId = scheduleRules.id";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6501,6 +6504,28 @@ namespace AY.db.dstAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual dbDataSet.paymentsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            dbDataSet.paymentsDataTable dataTable = new dbDataSet.paymentsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillService(dbDataSet.paymentsDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual dbDataSet.paymentsDataTable GetDataService() {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
             dbDataSet.paymentsDataTable dataTable = new dbDataSet.paymentsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -6783,14 +6808,14 @@ namespace AY.db.dstAdapters {
             tableMapping.DataSetTable = "scheduleRules";
             tableMapping.ColumnMappings.Add("id", "id");
             tableMapping.ColumnMappings.Add("name", "name");
-            tableMapping.ColumnMappings.Add("rule", "rule");
+            tableMapping.ColumnMappings.Add("hoursAdd", "hoursAdd");
             tableMapping.ColumnMappings.Add("price", "price");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [main].[sqlite_default_schema].[scheduleRules] WHERE (([id] = @Origin" +
-                "al_id) AND ([name] = @Original_name) AND ([rule] = @Original_rule) AND ([price] " +
-                "= @Original_price))";
+                "al_id) AND ([name] = @Original_name) AND ([hoursAdd] = @Original_rule) AND ([pri" +
+                "ce] = @Original_price))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             global::System.Data.SQLite.SQLiteParameter param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@Original_id";
@@ -6810,7 +6835,7 @@ namespace AY.db.dstAdapters {
             param.ParameterName = "@Original_rule";
             param.DbType = global::System.Data.DbType.AnsiString;
             param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "rule";
+            param.SourceColumn = "hoursAdd";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
@@ -6822,8 +6847,8 @@ namespace AY.db.dstAdapters {
             this._adapter.DeleteCommand.Parameters.Add(param);
             this._adapter.InsertCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [main].[sqlite_default_schema].[scheduleRules] ([name], [rule], [pric" +
-                "e]) VALUES (@name, @rule, @price)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [main].[sqlite_default_schema].[scheduleRules] ([name], [hoursAdd], [" +
+                "price]) VALUES (@name, @hoursAdd, @price)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@name";
@@ -6832,10 +6857,10 @@ namespace AY.db.dstAdapters {
             param.SourceColumn = "name";
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@rule";
+            param.ParameterName = "@hoursAdd";
             param.DbType = global::System.Data.DbType.AnsiString;
             param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "rule";
+            param.SourceColumn = "hoursAdd";
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@price";
@@ -6845,9 +6870,9 @@ namespace AY.db.dstAdapters {
             this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [main].[sqlite_default_schema].[scheduleRules] SET [name] = @name, [rule] " +
-                "= @rule, [price] = @price WHERE (([id] = @Original_id) AND ([name] = @Original_n" +
-                "ame) AND ([rule] = @Original_rule) AND ([price] = @Original_price))";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [main].[sqlite_default_schema].[scheduleRules] SET [name] = @name, [hoursA" +
+                "dd] = @hoursAdd, [price] = @price WHERE (([id] = @Original_id) AND ([name] = @Or" +
+                "iginal_name) AND ([hoursAdd] = @Original_rule) AND ([price] = @Original_price))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@name";
@@ -6856,10 +6881,10 @@ namespace AY.db.dstAdapters {
             param.SourceColumn = "name";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@rule";
+            param.ParameterName = "@hoursAdd";
             param.DbType = global::System.Data.DbType.AnsiString;
             param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "rule";
+            param.SourceColumn = "hoursAdd";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@price";
@@ -6885,7 +6910,7 @@ namespace AY.db.dstAdapters {
             param.ParameterName = "@Original_rule";
             param.DbType = global::System.Data.DbType.AnsiString;
             param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "rule";
+            param.SourceColumn = "hoursAdd";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
@@ -6908,7 +6933,7 @@ namespace AY.db.dstAdapters {
             this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [id], [name], [rule], [price] FROM [scheduleRules]";
+            this._commandCollection[0].CommandText = "SELECT [id], [name], [hoursAdd], [price] FROM [scheduleRules]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -6996,18 +7021,18 @@ namespace AY.db.dstAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string name, string rule, double price) {
+        public virtual int Insert(string name, string hoursAdd, double price) {
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
             else {
                 this.Adapter.InsertCommand.Parameters[0].Value = ((string)(name));
             }
-            if ((rule == null)) {
-                throw new global::System.ArgumentNullException("rule");
+            if ((hoursAdd == null)) {
+                throw new global::System.ArgumentNullException("hoursAdd");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(rule));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(hoursAdd));
             }
             this.Adapter.InsertCommand.Parameters[2].Value = ((double)(price));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
@@ -7029,18 +7054,18 @@ namespace AY.db.dstAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, string rule, double price, long Original_id, string Original_name, string Original_rule, double Original_price) {
+        public virtual int Update(string name, string hoursAdd, double price, long Original_id, string Original_name, string Original_rule, double Original_price) {
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(name));
             }
-            if ((rule == null)) {
-                throw new global::System.ArgumentNullException("rule");
+            if ((hoursAdd == null)) {
+                throw new global::System.ArgumentNullException("hoursAdd");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(rule));
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(hoursAdd));
             }
             this.Adapter.UpdateCommand.Parameters[2].Value = ((double)(price));
             this.Adapter.UpdateCommand.Parameters[3].Value = ((long)(Original_id));
@@ -8428,13 +8453,13 @@ namespace AY.db.dstAdapters {
             tableMapping.ColumnMappings.Add("id", "id");
             tableMapping.ColumnMappings.Add("name", "name");
             tableMapping.ColumnMappings.Add("phone", "phone");
-            tableMapping.ColumnMappings.Add("extraInfo", "extraInfo");
+            tableMapping.ColumnMappings.Add("plan", "plan");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [main].[sqlite_default_schema].[trainers] WHERE (([id] = @Original_id" +
-                ") AND ([name] = @Original_name) AND ([phone] = @Original_phone) AND ((@IsNull_ex" +
-                "traInfo = 1 AND [extraInfo] IS NULL) OR ([extraInfo] = @Original_extraInfo)))";
+                ") AND ([name] = @Original_name) AND ([phone] = @Original_phone) AND ((@IsNull_pl" +
+                "an = 1 AND [plan] IS NULL) OR ([plan] = @Original_plan)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             global::System.Data.SQLite.SQLiteParameter param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@Original_id";
@@ -8458,24 +8483,24 @@ namespace AY.db.dstAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@IsNull_extraInfo";
+            param.ParameterName = "@IsNull_plan";
             param.DbType = global::System.Data.DbType.Int32;
             param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "extraInfo";
+            param.SourceColumn = "plan";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             param.SourceColumnNullMapping = true;
             this._adapter.DeleteCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_extraInfo";
+            param.ParameterName = "@Original_plan";
             param.DbType = global::System.Data.DbType.AnsiString;
             param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "extraInfo";
+            param.SourceColumn = "plan";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
             this._adapter.InsertCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [main].[sqlite_default_schema].[trainers] ([name], [phone], [extraInf" +
-                "o]) VALUES (@name, @phone, @extraInfo)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [main].[sqlite_default_schema].[trainers] ([name], [phone], [plan]) V" +
+                "ALUES (@name, @phone, @plan)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@name";
@@ -8490,14 +8515,14 @@ namespace AY.db.dstAdapters {
             param.SourceColumn = "phone";
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@extraInfo";
+            param.ParameterName = "@plan";
             param.DbType = global::System.Data.DbType.AnsiString;
             param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "extraInfo";
+            param.SourceColumn = "plan";
             this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [main].[sqlite_default_schema].[trainers] SET [name] = @name, [phone] = @phone, [extraInfo] = @extraInfo WHERE (([id] = @Original_id) AND ([name] = @Original_name) AND ([phone] = @Original_phone) AND ((@IsNull_extraInfo = 1 AND [extraInfo] IS NULL) OR ([extraInfo] = @Original_extraInfo)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [main].[sqlite_default_schema].[trainers] SET [name] = @name, [phone] = @phone, [plan] = @plan WHERE (([id] = @Original_id) AND ([name] = @Original_name) AND ([phone] = @Original_phone) AND ((@IsNull_plan = 1 AND [plan] IS NULL) OR ([plan] = @Original_plan)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@name";
@@ -8512,10 +8537,10 @@ namespace AY.db.dstAdapters {
             param.SourceColumn = "phone";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@extraInfo";
+            param.ParameterName = "@plan";
             param.DbType = global::System.Data.DbType.AnsiString;
             param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "extraInfo";
+            param.SourceColumn = "plan";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@Original_id";
@@ -8539,18 +8564,18 @@ namespace AY.db.dstAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@IsNull_extraInfo";
+            param.ParameterName = "@IsNull_plan";
             param.DbType = global::System.Data.DbType.Int32;
             param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "extraInfo";
+            param.SourceColumn = "plan";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             param.SourceColumnNullMapping = true;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_extraInfo";
+            param.ParameterName = "@Original_plan";
             param.DbType = global::System.Data.DbType.AnsiString;
             param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "extraInfo";
+            param.SourceColumn = "plan";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
@@ -8566,7 +8591,7 @@ namespace AY.db.dstAdapters {
             this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [id], [name], [phone], [extraInfo] FROM [trainers]";
+            this._commandCollection[0].CommandText = "SELECT [id], [name], [phone], [plan] FROM [trainers]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -8620,7 +8645,7 @@ namespace AY.db.dstAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(long Original_id, string Original_name, string Original_phone, string Original_extraInfo) {
+        public virtual int Delete(long Original_id, string Original_name, string Original_phone, string Original_plan) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((long)(Original_id));
             if ((Original_name == null)) {
                 throw new global::System.ArgumentNullException("Original_name");
@@ -8634,13 +8659,13 @@ namespace AY.db.dstAdapters {
             else {
                 this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_phone));
             }
-            if ((Original_extraInfo == null)) {
+            if ((Original_plan == null)) {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_extraInfo));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_plan));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -8661,7 +8686,7 @@ namespace AY.db.dstAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string name, string phone, string extraInfo) {
+        public virtual int Insert(string name, string phone, string plan) {
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
@@ -8674,11 +8699,11 @@ namespace AY.db.dstAdapters {
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((string)(phone));
             }
-            if ((extraInfo == null)) {
+            if ((plan == null)) {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(extraInfo));
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(plan));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -8699,7 +8724,7 @@ namespace AY.db.dstAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, string phone, string extraInfo, long Original_id, string Original_name, string Original_phone, string Original_extraInfo) {
+        public virtual int Update(string name, string phone, string plan, long Original_id, string Original_name, string Original_phone, string Original_plan) {
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
@@ -8712,11 +8737,11 @@ namespace AY.db.dstAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(phone));
             }
-            if ((extraInfo == null)) {
+            if ((plan == null)) {
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(extraInfo));
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(plan));
             }
             this.Adapter.UpdateCommand.Parameters[3].Value = ((long)(Original_id));
             if ((Original_name == null)) {
@@ -8731,13 +8756,13 @@ namespace AY.db.dstAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_phone));
             }
-            if ((Original_extraInfo == null)) {
+            if ((Original_plan == null)) {
                 this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_extraInfo));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_plan));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -10226,7 +10251,7 @@ namespace AY.db.dstAdapters {
             tableMapping.ColumnMappings.Add("id", "id");
             tableMapping.ColumnMappings.Add("name", "name");
             tableMapping.ColumnMappings.Add("lastEnter", "lastEnter");
-            tableMapping.ColumnMappings.Add("timesLeft", "timesLeft");
+            tableMapping.ColumnMappings.Add("hoursLeft", "hoursLeft");
             tableMapping.ColumnMappings.Add("scheduleTime", "scheduleTime");
             this._adapter.TableMappings.Add(tableMapping);
         }
@@ -10242,7 +10267,7 @@ namespace AY.db.dstAdapters {
             this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [id], [name], [lastEnter], [timesLeft], [scheduleTime] FROM [clientsList]";
+            this._commandCollection[0].CommandText = "SELECT [id], [name], [lastEnter], [hoursLeft], [scheduleTime] FROM [clientsList]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

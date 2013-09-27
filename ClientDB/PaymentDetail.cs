@@ -11,7 +11,7 @@ namespace EAssistant
 		{
 			InitializeComponent();
 			
-			Payment p = new Payment(id);
+			/*Payment p = new Payment(id);
 			
 			textDate.Text = p.Date.ToString();
 			textUser.Text = (Db.Instance.dSet.users.FindByid(p.CreatorId)).name;
@@ -19,6 +19,7 @@ namespace EAssistant
 			textComment.Text = p.Comment;
 			textSum.Text = p.Sum.ToString();
 			textService.Text = new ScheduleRule(p.ScheduleId).Name;
+			 * */
 		}
 	}
 }

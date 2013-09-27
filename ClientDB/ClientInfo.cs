@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using AY.db;
 using AY.Log;
 using AY.Utils;
-using AY.db.dstAdapters;
+using AY.db.dbDataSetTableAdapters;
 
 namespace EAssistant
 {
@@ -30,8 +30,8 @@ namespace EAssistant
 			{
 				return;
 			}
-			
-			Client cr = (Client)Db.Instance.dSet.clients.FindByid(m_clienId);
+
+			dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(m_clienId);
 			if(null == cr)
 			{
 				// No such client
@@ -82,12 +82,9 @@ namespace EAssistant
 
 		private void UpdateLastPaymentInfo(dbDataSet.clientsRow cr)
 		{
-			// TODO get from DB
-			/*
-			String[] paymentInfo = cr.lastPayment;
+			String[] paymentInfo = cr.LastPayment;
 			textLastPaySum.Text = paymentInfo[0];
 			textLastPayDate.Text = paymentInfo[1];
-			*/
 		}
 
 		private void UpdateTimesLeft(dbDataSet.clientsRow cr)
@@ -220,8 +217,8 @@ namespace EAssistant
 					dlg.Clear();
 					continue;
 				}
-				
-				if(Client.Exists(id))
+
+				if (dbDataSet.clientsRow.Exists(id))
 				{
 					UIMessages.Error("This card already attached. Please use another one.");
 					dlg.Clear();
@@ -290,7 +287,7 @@ namespace EAssistant
 				
 				if(m_clienId == 0)
 				{
-					Client cr = (Client)Db.Instance.dSet.clients.NewclientsRow();
+					dbDataSet.clientsRow cr = Db.Instance.dSet.clients.NewclientsRow();
 					cr.id = id;
 					cr.name = textName.Text;
 					cr.phone = textPhone.Text;
@@ -300,17 +297,16 @@ namespace EAssistant
 					cr.comment = textComment.Text;
 					cr.lastEnter = cr.lastLeave = cr.openTicket = DateTime.Now.AddYears(-1);
 					cr.hoursLeft = 0;
-					// TODO: Set default plan ID
-					//cr.plan = 0;
+					cr.plan = 0;
 					m_clienId = id;
-
-					Db.Instance.dSet.clients.Rows.Add(cr);
-					Db.Instance.Adapters.clientsTableAdapter.Update(Db.Instance.dSet.clients);
+					
+					Db.Instance.AcceptCahnges();
+					
 					ConfigUIForNewClient();					
 				}
 				else
 				{
-					Client cr = (Client)Db.Instance.dSet.clients.FindByid(m_clienId);
+					dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(m_clienId);
 					if(null == cr)
 						return;
 						
@@ -394,7 +390,8 @@ namespace EAssistant
 			if(0 == m_clienId)
 				return;
 				
-			PaymentsHistory hist = new PaymentsHistory(m_clienId);
+			PaymentsHistory hist = new PaymentsHistory();
+			hist.ClientId = m_clienId;
 			hist.ShowDialog();
 		}
 

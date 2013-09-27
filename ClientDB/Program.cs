@@ -4,32 +4,14 @@ using System.IO;
 using AY.Log;
 using AY.db;
 using AY.Utils;
+using System.Data.Common;
+using System.Data;
 
 namespace EAssistant
 {
     static class Program
     {
-		private static void test()
-		{
-			Int64 newId = 1111000;
-			Int64 id = 2200000000006;
-			dbDataSet.clientsRow cr0 = Db.Instance.dSet.clients.FindByid(newId);
-			dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(id);
-
-			cr.BeginEdit();
-			cr.name = "AAAAA";
-			cr.EndEdit();
-			cr.AcceptChanges();
-			
-			Db.Instance.Adapters.clientsTableAdapter.Update(Db.Instance.dSet.clients);
-			
-			dbDataSet.clientsRow ucr = Db.Instance.dSet.clients.FindByid(id);
-
-			UIMessages.Info(ucr.name);
-			Db.Instance.Adapters.clientsTableAdapter.Update(Db.Instance.dSet.clients);
-		}
-		
-        /// <summary>
+		/// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
@@ -39,12 +21,8 @@ namespace EAssistant
 			String szLogFile = "SessionLog.txt";
 			Logger.Create(szLogFile, Logger.LogLevel.Debug);
 			Logger.Info("App start.");
-#if !DEBUG			
 			try
 			{
-#endif
-
-				test();
 				/*DbAdapter ad = new DbAdapter();
 				if( !ad.CheckTables())
 				{
@@ -65,7 +43,6 @@ namespace EAssistant
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 				Application.Run(new MainForm());
-#if !DEBUG
 			}		
 			catch(Exception ex)
 			{
@@ -78,7 +55,6 @@ namespace EAssistant
 					sendReport = true;
 				}
 			}
-#endif				
 			Logger.Info("App end.");
             Logger.Close();
             

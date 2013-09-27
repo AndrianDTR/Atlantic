@@ -15,8 +15,48 @@ namespace EAssistant
 		public ManageClients()
 		{
 			InitializeComponent();
-			this.clientsListBindingSource.DataMember = "clientsList";
-			this.clientsListBindingSource.DataSource = Db.Instance.dSet;
+			this.clientsBindingSource.DataSource = Db.Instance.dSet;
+			Init();
+		}
+		
+		private void Init()
+		{
+			colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			colTimesLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			colScheduleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			colLastEnter = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			
+			colId.DataPropertyName = "id";
+			colId.HeaderText = "ID";
+			colId.Name = "dataGridViewTextBoxColumn1";
+			colId.ReadOnly = true;
+
+			colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			colName.DataPropertyName = "name";
+			colName.HeaderText = "Name";
+			colName.Name = "dataGridViewTextBoxColumn2";
+			colName.ReadOnly = true;
+			
+			colTimesLeft.DataPropertyName = "hoursLeft";
+			colTimesLeft.HeaderText = "Times left";
+			colTimesLeft.Name = "dataGridViewTextBoxColumn3";
+			colTimesLeft.ReadOnly = true;
+			
+			colScheduleTime.DataPropertyName = "scheduleTime";
+			colScheduleTime.DefaultCellStyle.Format = "t";
+			colScheduleTime.DefaultCellStyle.NullValue = null;
+			colScheduleTime.HeaderText = "Time";
+			colScheduleTime.Name = "dataGridViewTextBoxColumn4";
+			colScheduleTime.ReadOnly = true;
+			
+			colLastEnter.DataPropertyName = "lastEnter";
+			colLastEnter.HeaderText = "Last enter";
+			colLastEnter.Name = "dataGridViewTextBoxColumn5";
+			colLastEnter.ReadOnly = true;
+
+			gridClients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+				colId, colName, colTimesLeft, colScheduleTime, colLastEnter});
 		}
 		
 		private void btnClose_Click(object sender, EventArgs e)
@@ -26,9 +66,10 @@ namespace EAssistant
 	
 		private void OnLoad(object sender, EventArgs e)
 		{
+			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
 		}
 
-		private object[] parseClient(Client client)
+		private object[] parseClient(dbDataSet.clientsRow client)
 		{
 			object[] row = new object[5];
 
@@ -68,7 +109,7 @@ namespace EAssistant
 			String val = textToSearch.Text;
 			if (0 == val.Trim().Length)
 			{
-				clientsListBindingSource.Filter = "";
+				clientsBindingSource.Filter = "";
 				return;
 			}
 
@@ -80,16 +121,16 @@ namespace EAssistant
 			if (checkNames.Checked)
 				query += String.Format(" or name like '{0}'", pattern);
 
-			clientsListBindingSource.Filter = String.Format(query, val);
+			clientsBindingSource.Filter = String.Format(query, val);
 		}
 		
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
-			//ClientInfo ci = new ClientInfo(0);
-			//if (DialogResult.OK != ci.ShowDialog(this))
-			//    return;
+			ClientInfo ci = new ClientInfo(0);
+			if (DialogResult.OK != ci.ShowDialog(this))
+			    return;
 
-			//gridClients.Rows.Add(parseClient(new Client(ci.Id)));
+			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
 		}
 
 		private void btnRemove_Click(object sender, EventArgs e)
@@ -111,6 +152,7 @@ namespace EAssistant
 			//gridClients.Rows.Remove(gridClients.SelectedRows[0]);
 			//if(ndx >= 0)
 			//    gridClients.Rows[ndx].Selected = true;
+			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
 		}
 
 		private void btnHistory_Click(object sender, EventArgs e)
@@ -143,19 +185,19 @@ namespace EAssistant
 		
 		private void EditClient()
 		{
-			//Int64 id = GetSelectedClientId();
+			Int64 id = GetSelectedClientId();
 			
-			//if(-1 == id)
-			//    return;
+			if(-1 == id)
+			    return;
 				
-			//ClientInfo ci = new ClientInfo(id);
+			ClientInfo ci = new ClientInfo(id);
 			
-			//if (DialogResult.OK != ci.ShowDialog())
-			//    return;
+			if (DialogResult.OK != ci.ShowDialog())
+			    return;
 			
-			//int index = gridClients.SelectedRows[0].Index;
-			//DataGridViewRow row = gridClients.Rows[index];
-			//row.SetValues(parseClient(new Client(ci.Id)));
+			int index = gridClients.SelectedRows[0].Index;
+			
+			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
 		}
 	}
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using AY.Log;
-using AY.db.dstAdapters;
+using AY.db.dbDataSetTableAdapters;
 
 namespace AY
 {
