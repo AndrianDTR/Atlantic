@@ -2,16 +2,16 @@
 using System.Windows.Forms;
 using AY.Log;
 using AY.db;
+using System.Data;
 
 namespace EAssistant
 {
 	public partial class ManageUserRoles : Form
 	{
-		dbDataSet.userPrivilegesRow edit = null;
-		
 		public ManageUserRoles()
 		{
 			InitializeComponent();
+			userPrivilegesBindingSource.DataSource = Db.Instance.dSet.userPrivileges;
 		}
 
 		private void OnLoad(object sender, EventArgs e)
@@ -21,13 +21,21 @@ namespace EAssistant
 		
 		private void ReloadRoles()
 		{
-			privilegesGrid.Rows.Clear();
+			Db.Instance.Adapters.userPrivilegesTableAdapter.Fill(Db.Instance.dSet.userPrivileges);
+		}
 
-			foreach (dbDataSet.userPrivilegesRow priv in Db.Instance.dSet.userPrivileges.Rows)
+		private void OnChangeCell(object sender, DataGridViewCellEventArgs e)
+		{
+			if (gridRoles.SelectedRows.Count < 1)
+				return;
+
+			if(gridRoles.SelectedRows[0].IsNewRow)
 			{
-				ListViewItem it = listRoles.Items.Add(priv.name);
-				it.Tag = priv.id;
+				privilegesGrid.Rows.Clear();
+				return;
 			}
+			dbDataSet.userPrivilegesRow row = (dbDataSet.userPrivilegesRow)((DataRowView)gridRoles.SelectedRows[0].DataBoundItem).Row;
+			FillPrivileges(row);
 		}
 		
 		private object[] GetRightsRow(String name, long rights)
@@ -65,16 +73,6 @@ namespace EAssistant
 			privilegesGrid.Rows[nRow].Tag = priv.statistics;
 		}
 		
-		private void listRoles_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if(listRoles.SelectedItems.Count < 1)
-				return;
-
-			Int64 rId = (Int64)listRoles.SelectedItems[0].Tag;
-			dbDataSet.userPrivilegesRow priv = Db.Instance.dSet.userPrivileges.FindByid(rId);
-			FillPrivileges(priv);
-		}
-		
 		private void CellValChanged(object sender, DataGridViewCellEventArgs e)
 		{
 			if (e.RowIndex >= 0
@@ -86,67 +84,15 @@ namespace EAssistant
 			}
 		}
 
-		private void AfterEdit(object sender, LabelEditEventArgs e)
-		{
-			if (edit == null && listRoles.SelectedItems.Count > 0)
-			{
-				Int64 rId = (Int64)listRoles.SelectedItems[0].Tag;
-				edit = Db.Instance.dSet.userPrivileges.FindByid(rId);
-			}
-			
-			if(e.Label != null)
-			{
-				edit.name = e.Label;
-				listRoles.SelectedItems[0].Text = e.Label;
-				edit = null;
-			}
-		}
-
-		private void addButton_Click(object sender, EventArgs e)
-		{
-			//String name = "New role";
-			//Int64 id = 0;
-
-			//UserRolesCollection collection = new UserRolesCollection();
-			//if(!collection.Add(name, out id))
-			//{	
-			//    UIMessages.Error("New role could not been added.");
-			//    return;
-			//}
-			
-			//UserRole role = new UserRole(id);
-			
-			//ListViewItem it = listRoles.Items.Add(name);
-			//edit = role;
-			//it.Tag = id;
-			//it.BeginEdit();
-		}
-
-		private void delButton_Click(object sender, EventArgs e)
-		{
-			//if (listRoles.SelectedItems.Count > 0)
-			//{
-			//    Int64 id = (Int64)listRoles.SelectedItems[0].Tag;
-			//    if(!UserRolesCollection.RemoveById(id))
-			//    {
-			//        UIMessages.Error("Role could not been removed.");
-			//        return;
-			//    }
-			//    listRoles.Items.Remove(listRoles.SelectedItems[0]);
-			//    privilegesGrid.Rows.Clear();
-			//}
-		}
-
 		private void OnClick(object sender, EventArgs e)
 		{
-			if (listRoles.SelectedItems.Count <= 0)
+			if (gridRoles.SelectedRows.Count < 1 || gridRoles.SelectedRows[0].IsNewRow)
 				return;
 				
 			if (privilegesGrid.CurrentCell != null 
 			&& privilegesGrid.CurrentCell.ColumnIndex > 0)
 			{
-				Int64 rId = (Int64)listRoles.SelectedItems[0].Tag;
-				dbDataSet.userPrivilegesRow role = Db.Instance.dSet.userPrivileges.FindByid(rId);
+				dbDataSet.userPrivilegesRow role = (dbDataSet.userPrivilegesRow)((DataRowView)gridRoles.SelectedRows[0].DataBoundItem).Row;
 				
 				long rights = (long)privilegesGrid.CurrentRow.Tag;
 				String val = privilegesGrid.CurrentCell.Value.ToString();
@@ -187,6 +133,11 @@ namespace EAssistant
 				}
 				privilegesGrid.CurrentRow.Tag = rights;
 			}
+		}
+
+		private void OnClosing(object sender, FormClosingEventArgs e)
+		{
+			Db.Instance.AcceptChanges();
 		}
 	}
 }

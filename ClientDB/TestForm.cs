@@ -15,5 +15,14 @@ namespace EAssistant
 		{
 			InitializeComponent();
 		}
+
+		private void TestForm_Load(object sender, EventArgs e)
+		{
+			// TODO: This line of code loads data into the 'clientDataSet1.userPrivileges' table. You can move, or remove it, as needed.
+			this.userPrivilegesTableAdapter1.Fill(this.clientDataSet1.userPrivileges);
+			// TODO: This line of code loads data into the 'clientDataSet.userPrivileges' table. You can move, or remove it, as needed.
+			this.userPrivilegesTableAdapter.Fill(this.clientDataSet.userPrivileges);
+
+		}
 	}
 }

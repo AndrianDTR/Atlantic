@@ -24,6 +24,7 @@ namespace AY.db
 
 			Adapters.clientsTableAdapter = new clientsTableAdapter();
 			Adapters.paymentsTableAdapter = new paymentsTableAdapter();
+			Adapters.vPaymentsTableAdapter = new vPaymentsTableAdapter();
 			Adapters.scheduleRulesTableAdapter = new scheduleRulesTableAdapter();
 			Adapters.settingsTableAdapter = new settingsTableAdapter();
 			Adapters.statisticsTableAdapter = new statisticsTableAdapter();
@@ -34,6 +35,7 @@ namespace AY.db
 
 			Adapters.clientsTableAdapter.Fill(m_clientDataSet.clients);
 			Adapters.paymentsTableAdapter.Fill(m_clientDataSet.payments);
+			Adapters.vPaymentsTableAdapter.Fill(m_clientDataSet.vPayments);
 			Adapters.scheduleRulesTableAdapter.Fill(m_clientDataSet.scheduleRules);
 			Adapters.settingsTableAdapter.Fill(m_clientDataSet.settings);
 			Adapters.statisticsTableAdapter.Fill(m_clientDataSet.statistics);
@@ -55,7 +57,7 @@ namespace AY.db
 			get { return tam; }
 		}
 		
-		public void AcceptCahnges()
+		public void AcceptChanges()
 		{
 			Adapters.UpdateAll(dSet);
 			dSet.AcceptChanges();

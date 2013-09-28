@@ -36,7 +36,7 @@
 			this.btnView = new System.Windows.Forms.Button();
 			this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.gridPayments = new System.Windows.Forms.DataGridView();
-			((System.ComponentModel.ISupportInitialize)(bindingSource)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridPayments)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -59,14 +59,9 @@
 			this.btnView.Text = "View details";
 			this.btnView.UseVisualStyleBackColor = true;
 			this.btnView.Click += new System.EventHandler(this.btnView_Click);
-			//
-			// Binding src
-			// 
-			this.bindingSource.Position = 0;
 			// 
 			// gridPayments
 			// 
-			this.gridPayments.AutoGenerateColumns = false;
 			this.gridPayments.AllowUserToAddRows = false;
 			this.gridPayments.AllowUserToDeleteRows = false;
 			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -101,6 +96,7 @@
 			this.gridPayments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridPayments.Size = new System.Drawing.Size(619, 335);
 			this.gridPayments.TabIndex = 3;
+			this.gridPayments.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ViewDetail);
 			// 
 			// PaymentsHistory
 			// 
@@ -121,9 +117,8 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Payments History";
 			this.Load += new System.EventHandler(this.PaymentsHistory_Load);
+			((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridPayments)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(bindingSource)).EndInit();
-
 			this.ResumeLayout(false);
 
 		}

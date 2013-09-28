@@ -17,17 +17,7 @@ namespace AY
 					
 					client.hoursLeft += hoursAdd.hoursAdd;
 					
-					Db.Instance.AcceptCahnges();
-				}
-
-				public String Service
-				{
-					get
-					{
-						dbDataSet.scheduleRulesRow rr = Db.Instance.dSet.scheduleRules.FindByid(scheduleId);
-						return rr.name;
-					}
-					set{}
+					Db.Instance.AcceptChanges();
 				}
 			}
 		}

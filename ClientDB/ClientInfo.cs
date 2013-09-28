@@ -300,7 +300,7 @@ namespace EAssistant
 					cr.plan = 0;
 					m_clienId = id;
 					
-					Db.Instance.AcceptCahnges();
+					Db.Instance.AcceptChanges();
 					
 					ConfigUIForNewClient();					
 				}

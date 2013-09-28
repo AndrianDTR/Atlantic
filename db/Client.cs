@@ -77,7 +77,7 @@ namespace AY
 					
 					plan = tClient.ToString();
 					*/
-					Db.Instance.AcceptCahnges();
+					Db.Instance.AcceptChanges();
 				}
 			}
 		}

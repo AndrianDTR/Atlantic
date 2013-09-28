@@ -88,7 +88,7 @@ namespace EAssistant
 				return;
 			}
 			
-			Db.Instance.AcceptCahnges();
+			Db.Instance.AcceptChanges();
 			this.DialogResult = DialogResult.OK;
 			this.Close();
 		}

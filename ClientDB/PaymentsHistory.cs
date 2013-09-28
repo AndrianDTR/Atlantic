@@ -7,6 +7,7 @@ namespace EAssistant
 {
 	public partial class PaymentsHistory : Form
 	{
+		private DataGridViewTextBoxColumn colId;
 		private DataGridViewTextBoxColumn colDate;
 		private DataGridViewTextBoxColumn colSum;
 		private DataGridViewTextBoxColumn colService;
@@ -22,7 +23,7 @@ namespace EAssistant
 			bindingSource.DataSource = Db.Instance.dSet;
 			bindingSource.Position = 0;
 			gridPayments.DataSource = bindingSource;
-			gridPayments.DataMember = "payments";
+			gridPayments.DataMember = "vPayments";
 		}
 
 		public Int64 ClientId
@@ -37,35 +38,44 @@ namespace EAssistant
 
 		private void PaymentsHistory_Load(object sender, EventArgs e)
 		{
-			Db.Instance.Adapters.paymentsTableAdapter.FillService(Db.Instance.dSet.payments);
+			Db.Instance.Adapters.vPaymentsTableAdapter.Fill(Db.Instance.dSet.vPayments);
 		}
 		
 		private void Init()
 		{
+			colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			colSum = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			colService = new System.Windows.Forms.DataGridViewTextBoxColumn();
+
+			colId.DataPropertyName = "id";
+			colId.HeaderText = "ID";
+			colId.Visible = false;
+			colId.Name = "id";
+			colId.ReadOnly = true;
 			
-			colDate.DataPropertyName = "payments.date";
+			colDate.DataPropertyName = "date";
 			colDate.DefaultCellStyle.Format = "G";
 			colDate.HeaderText = "Date";
-			colDate.Name = "dataGridViewTextBoxColumn1";
+			colDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+			colDate.Name = "date";
 			colDate.ReadOnly = true;
 
-			colSum.DataPropertyName = "payments.sum";
+			colSum.DataPropertyName = "sum";
+			colSum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
 			colSum.DefaultCellStyle.Format = "C2";
 			colSum.HeaderText = "Sum";
-			colSum.Name = "dataGridViewTextBoxColumn2";
+			colSum.Name = "sum";
 			colSum.ReadOnly = true;
 
 			colService.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			colService.DataPropertyName = "scheduleRules.name";
+			colService.DataPropertyName = "service";
 			colService.HeaderText = "Service";
-			colService.Name = "dataGridViewTextBoxColumn3";
+			colService.Name = "service";
 			colService.ReadOnly = true;
 			
 			gridPayments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-				colDate, colSum, colService});
+				colId, colDate, colSum, colService});
 		}
 
 		private void btnView_Click(object sender, EventArgs e)
@@ -73,7 +83,7 @@ namespace EAssistant
 			PaymentInfo();
 		}
 
-		private void ShowDetails(object sender, EventArgs e)
+		private void ViewDetail(object sender, DataGridViewCellEventArgs e)
 		{
 			PaymentInfo();
 		}
@@ -82,12 +92,12 @@ namespace EAssistant
 		{
 			if (gridPayments.SelectedRows.Count < 1)
 				return;
-			
-			/*
-			Int64 id = (Int64)gridPayments.SelectedItems[0];
+
+			Int64 id = (Int64)gridPayments.SelectedRows[0].Cells["id"].Value;
 			PaymentDetail pd = new PaymentDetail(id);
 			pd.ShowDialog();
-			 * */
 		}
+
+
 	}
 }
