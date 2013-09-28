@@ -3280,7 +3280,6 @@ namespace AY.db {
                 this.columnname.AllowDBNull = false;
                 this.columnname.MaxLength = 2147483647;
                 this.columnpass.MaxLength = 2147483647;
-                this.columnprivilege.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5071,7 +5070,12 @@ namespace AY.db {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public long privilege {
                 get {
-                    return ((long)(this[this.tableusers.privilegeColumn]));
+                    if (this.IsprivilegeNull()) {
+                        return 0;
+                    }
+                    else {
+                        return ((long)(this[this.tableusers.privilegeColumn]));
+                    }
                 }
                 set {
                     this[this.tableusers.privilegeColumn] = value;
@@ -5086,6 +5090,16 @@ namespace AY.db {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetpassNull() {
                 this[this.tableusers.passColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsprivilegeNull() {
+                return this.IsNull(this.tableusers.privilegeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetprivilegeNull() {
+                this[this.tableusers.privilegeColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -10672,7 +10686,7 @@ namespace AY.db.dbDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(long Original_id, string Original_name, string Original_pass, long Original_privilege) {
+        public virtual int Delete(long Original_id, string Original_name, string Original_pass, global::System.Nullable<long> Original_privilege) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((long)(Original_id));
             if ((Original_name == null)) {
                 throw new global::System.ArgumentNullException("Original_name");
@@ -10688,7 +10702,12 @@ namespace AY.db.dbDataSetTableAdapters {
                 this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_pass));
             }
-            this.Adapter.DeleteCommand.Parameters[4].Value = ((long)(Original_privilege));
+            if ((Original_privilege.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((long)(Original_privilege.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -10708,7 +10727,7 @@ namespace AY.db.dbDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string name, string pass, long privilege) {
+        public virtual int Insert(string name, string pass, global::System.Nullable<long> privilege) {
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
@@ -10721,7 +10740,12 @@ namespace AY.db.dbDataSetTableAdapters {
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((string)(pass));
             }
-            this.Adapter.InsertCommand.Parameters[2].Value = ((long)(privilege));
+            if ((privilege.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((long)(privilege.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -10741,7 +10765,7 @@ namespace AY.db.dbDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, string pass, long privilege, long Original_id, string Original_name, string Original_pass, long Original_privilege) {
+        public virtual int Update(string name, string pass, global::System.Nullable<long> privilege, long Original_id, string Original_name, string Original_pass, global::System.Nullable<long> Original_privilege) {
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
             }
@@ -10754,7 +10778,12 @@ namespace AY.db.dbDataSetTableAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(pass));
             }
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((long)(privilege));
+            if ((privilege.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((long)(privilege.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
             this.Adapter.UpdateCommand.Parameters[3].Value = ((long)(Original_id));
             if ((Original_name == null)) {
                 throw new global::System.ArgumentNullException("Original_name");
@@ -10770,7 +10799,12 @@ namespace AY.db.dbDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
                 this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_pass));
             }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((long)(Original_privilege));
+            if ((Original_privilege.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((long)(Original_privilege.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

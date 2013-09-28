@@ -8,116 +8,79 @@ namespace EAssistant
 {
 	public partial class ManageUsers : Form
 	{
+		private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+		private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+		private DataGridViewComboBoxColumn privilegeDataGridViewTextBoxColumn;
+		private DataGridViewButtonColumn passDataGridViewTextBoxColumn;
+
 		public ManageUsers()
 		{
 			InitializeComponent();
+			Init();
+			
+			usersBindingSource.DataSource = Db.Instance.dSet.users;
+			userPrivilegesBindingSource.DataSource = Db.Instance.dSet.userPrivileges;
 		}
 
-		private void checkBox2_CheckedChanged(object sender, EventArgs e)
+		private void Init()
 		{
-			m_password.UseSystemPasswordChar = !m_showPass.Checked;
+			idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+			privilegeDataGridViewTextBoxColumn = new DataGridViewComboBoxColumn();
+			passDataGridViewTextBoxColumn = new DataGridViewButtonColumn();
+
+			gridUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+				idDataGridViewTextBoxColumn,
+				nameDataGridViewTextBoxColumn,
+				privilegeDataGridViewTextBoxColumn,
+				passDataGridViewTextBoxColumn
+				});
+            
+			// 
+			// idDataGridViewTextBoxColumn
+			// 
+			idDataGridViewTextBoxColumn.DataPropertyName = "id";
+			idDataGridViewTextBoxColumn.HeaderText = "ID";
+			idDataGridViewTextBoxColumn.Name = "colId";
+			idDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+			nameDataGridViewTextBoxColumn.HeaderText = "Name";
+			nameDataGridViewTextBoxColumn.Name = "colName";
+			// 
+			// passDataGridViewTextBoxColumn
+			// 
+			passDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			passDataGridViewTextBoxColumn.DataPropertyName = "pass";
+			passDataGridViewTextBoxColumn.HeaderText = "Pass";
+			passDataGridViewTextBoxColumn.Name = "colPass";
+			passDataGridViewTextBoxColumn.Text = "Change";
+			passDataGridViewTextBoxColumn.UseColumnTextForButtonValue = true;
+			// 
+			// privilegeDataGridViewTextBoxColumn
+			// 
+			privilegeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			privilegeDataGridViewTextBoxColumn.DataPropertyName = "privilege";
+			privilegeDataGridViewTextBoxColumn.DataSource = userPrivilegesBindingSource;
+			privilegeDataGridViewTextBoxColumn.DisplayMember = "name";
+			privilegeDataGridViewTextBoxColumn.HeaderText = "Role";
+			privilegeDataGridViewTextBoxColumn.Name = "colPriv";
+			privilegeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			privilegeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			privilegeDataGridViewTextBoxColumn.ValueMember = "id";
+			
+			
 		}
 		
-		private void close_Click(object sender, EventArgs e)
-		{
-			this.Close();
-		}
-
 		private void OnLoad(object sender, EventArgs e)
 		{
-			m_userRole.Items.Clear();
-
-			m_userRole.Items.Add("");
-
-			foreach (dbDataSet.userPrivilegesRow priv in Db.Instance.dSet.userPrivileges.Rows)
-			{
-				m_userRole.Items.Add(priv);
-			}
-			
-			ReloadUsers();
+			Db.Instance.Adapters.usersTableAdapter.Fill(Db.Instance.dSet.users);
+			Db.Instance.Adapters.userPrivilegesTableAdapter.Fill(Db.Instance.dSet.userPrivileges);
 		}
 		
-		private void ReloadUsers()
-		{
-			userList.Items.Clear();
-			foreach (dbDataSet.usersRow user in Db.Instance.dSet.users.Rows)
-			{
-				ListViewItem it = userList.Items.Add(user.name);
-				it.SubItems.Add(user.Role.name);
-				it.Tag = user.id;
-			}
-		}
-		
-		private void ChangeUser(object sender, EventArgs e)
-		{
-			m_password.Text = "";
-			m_showPass.Checked = false;
-			
-			if(userList.SelectedItems.Count <= 0)
-				return;
-			
-			Int64 uId = (Int64)userList.SelectedItems[0].Tag;
-			dbDataSet.usersRow curItem = Db.Instance.dSet.users.FindByid(uId);
-
-			m_userName.Text = curItem.name;
-			dbDataSet.userPrivilegesRow priv = curItem.Role;
-			if(priv == null)
-			{
-				m_userRole.SelectedIndex = 0;
-				return;
-			}
-			
-			m_userRole.SelectedItem = priv;
-		}
-
-		private void add_Click(object sender, EventArgs e)
-		{
-			//UserCollection collection = new UserCollection();
-			//List<dbDataSet.usersRow> users = collection.Search(m_userName.Text);
-			//if(users.Count > 0)
-			//{
-			//    UIMessages.Error("dbDataSet.usersRow with specified name already exists.");
-			//    return;
-			//}
-			
-			//int minPassLen = Session.Instance.PassLen;
-			//if(m_password.Text.Length < minPassLen)
-			//{
-			//    UIMessages.Error(String.Format("Password length should be at least {0} characters.", minPassLen));
-			//    return;
-			//}
-			
-			//UserRole role = (UserRole)m_userRole.SelectedItem;
-			//Int64 id = 0;
-			//if (!collection.Add(m_userName.Text, role.Id, out id))
-			//{
-			//    UIMessages.Error("dbDataSet.usersRow could not been added.");
-			//    return;
-			//}
-			//ListViewItem it = userList.Items.Add(m_userName.Text);
-			//it.SubItems.Add(role.Name);
-			//it.Tag = id;
-			//new dbDataSet.usersRow(id).Password = m_password.Text;
-			//m_password.Text = "";
-		}
-
-		private void remove_Click(object sender, EventArgs e)
-		{
-			//if(userList.SelectedItems.Count < 1)
-			//    return;
-
-			//Int64 userId = (Int64)userList.SelectedItems[0].Tag;
-			//if (!UserCollection.RemoveById(userId))
-			//{
-			//    UIMessages.Error("dbDataSet.usersRow could not been removed.");
-			//    return;
-			//}
-			//int ndx = userList.SelectedItems[0].Index - 1;
-			//userList.Items.Remove(userList.SelectedItems[0]);
-			//if(ndx >= 0)
-			//    userList.Items[ndx].Selected = true;
-		}
-
 		private void ChangePass(object sender, EventArgs e)
 		{
 			//if (userList.SelectedItems.Count <= 0)
@@ -133,6 +96,16 @@ namespace EAssistant
 			//dbDataSet.usersRow user =  new dbDataSet.usersRow((Int64)userList.SelectedItems[0].Tag);
 			//user.Password = m_password.Text;
 			
+		}
+
+		private void OnClosing(object sender, FormClosingEventArgs e)
+		{
+			Db.Instance.AcceptChanges();
+		}
+
+		private void OnCellClick(object sender, DataGridViewCellEventArgs e)
+		{
+
 		}
 	}
 }

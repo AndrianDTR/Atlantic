@@ -97,16 +97,6 @@
     <Compile Include="ChangePassword.Designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="clientDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>clientDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="clientDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>clientDataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="ClientInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -364,28 +354,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="clientDataSet.xsc">
-      <DependentUpon>clientDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="clientDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>clientDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="clientDataSet.xss">
-      <DependentUpon>clientDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="clientDataSet1.xsc">
-      <DependentUpon>clientDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="clientDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>clientDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="clientDataSet1.xss">
-      <DependentUpon>clientDataSet1.xsd</DependentUpon>
-    </None>
     <None Include="Resources\search %281%29.png" />
     <None Include="Resources\search.png" />
     <None Include="ean13.ttf">
