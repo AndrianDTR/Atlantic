@@ -8,43 +8,43 @@ namespace EAssistant
 {
 	public partial class Options : Form
 	{
-		private Opts m_opts = null;
+		dbDataSet.settingsRow opts = null;
 		
 		public Options()
 		{
 			InitializeComponent();
-			m_opts = new Opts();
+			opts = Db.Instance.dSet.settings.FindByid(1);
 
-			numericMinPassLen.Value = m_opts.MinPassLen;
-			numericCalRowHeight.Value = m_opts.CalRowHeight;
-			checkShowTrainer.Checked = m_opts.ShowTrainer;
-			checkShowClientCount.Checked = m_opts.ShowClientCount;
-			checkSaveMainWindowState.Checked = m_opts.StoreMainWindowState;
-			textPathBackUp.Text = m_opts.PathBackUp;
-			dateStart.Value = m_opts.StartTime;
-			dateEnd.Value = m_opts.EndTime;
+			numericMinPassLen.Value = opts.minPassLen;
+			numericCalRowHeight.Value = opts.calRowHeight;
+			checkShowTrainer.Checked = opts.ShowTrainer;
+			checkShowClientCount.Checked = opts.ShowClientCount;
+			checkSaveMainWindowState.Checked = opts.StoreMainWindowState;
+			textPathBackUp.Text = opts.pathBackUp;
+			dateStart.Value = opts.StartTime;
+			dateEnd.Value = opts.EndTime;
 			
 			comboLang.Items.Add("English");
 			comboLang.SelectedIndex = 0;
-			//comboLang.SelectedItem = m_opts.Language;
+			//comboLang.SelectedItem = opts.Language;
 
 			InitPageColors();
 		}
 
 		private void btnOk_Click(object sender, EventArgs e)
 		{
-			m_opts.MinPassLen = (int)numericMinPassLen.Value;
-			m_opts.CalRowHeight = (int)numericCalRowHeight.Value;
-			m_opts.ShowTrainer = checkShowTrainer.Checked;
-			m_opts.ShowClientCount = checkShowClientCount.Checked;
-			m_opts.StoreMainWindowState = checkSaveMainWindowState.Checked;
-			m_opts.PathBackUp = textPathBackUp.Text;
-			m_opts.StartTime = dateStart.Value;
-			m_opts.EndTime = dateEnd.Value;
+			opts.minPassLen = (int)numericMinPassLen.Value;
+			opts.calRowHeight = (int)numericCalRowHeight.Value;
+			opts.ShowTrainer = checkShowTrainer.Checked;
+			opts.ShowClientCount = checkShowClientCount.Checked;
+			opts.StoreMainWindowState = checkSaveMainWindowState.Checked;
+			opts.pathBackUp = textPathBackUp.Text;
+			opts.StartTime = dateStart.Value;
+			opts.EndTime = dateEnd.Value;
 			
 			//opts.Language = comboLang.SelectedItem;
 			
-			m_opts.StoreData();
+			Db.Instance.AcceptChanges();
 			
 			this.DialogResult = DialogResult.OK;
 			Close();
@@ -53,7 +53,7 @@ namespace EAssistant
 		private void btnBackUpPath_Click(object sender, EventArgs e)
 		{
 			FolderBrowserDialog fbd = new FolderBrowserDialog();
-			fbd.SelectedPath = m_opts.PathBackUp;
+			fbd.SelectedPath = opts.pathBackUp;
 			if (fbd.ShowDialog() == DialogResult.OK)
 			{
 				textPathBackUp.Text = fbd.SelectedPath;
@@ -62,10 +62,10 @@ namespace EAssistant
 		
 		private void InitPageColors()
 		{
-			btnColorPresent.BackColor = m_opts.ColorPresent;
-			btnColorOvertime.BackColor = m_opts.ColorOvertime;
-			btnColorDelayed.BackColor = m_opts.ColorDelayed;
-			btnColorMissed.BackColor = m_opts.ColorMissed;
+			btnColorPresent.BackColor = opts.ColorPresent;
+			btnColorOvertime.BackColor = opts.ColorOvertime;
+			btnColorDelayed.BackColor = opts.ColorDelayed;
+			btnColorMissed.BackColor = opts.ColorMissed;
 		}
 		
 		private Color ChooseColor(Color old)
@@ -84,25 +84,25 @@ namespace EAssistant
 		
 		private void btnColorPresent_Click(object sender, EventArgs e)
 		{
-			m_opts.ColorPresent = ChooseColor(m_opts.ColorPresent);
+			opts.ColorPresent = ChooseColor(opts.ColorPresent);
 			InitPageColors();
 		}
 
 		private void btnColorOvertime_Click(object sender, EventArgs e)
 		{
-			m_opts.ColorOvertime = ChooseColor(m_opts.ColorOvertime);
+			opts.ColorOvertime = ChooseColor(opts.ColorOvertime);
 			InitPageColors();
 		}
 		
 		private void btnColorDelayed_Click(object sender, EventArgs e)
 		{
-			m_opts.ColorDelayed = ChooseColor(m_opts.ColorDelayed);
+			opts.ColorDelayed = ChooseColor(opts.ColorDelayed);
 			InitPageColors();
 		}
 		
 		private void btnColorMissed_Click(object sender, EventArgs e)
 		{
-			m_opts.ColorMissed = ChooseColor(m_opts.ColorMissed);
+			opts.ColorMissed = ChooseColor(opts.ColorMissed);
 			InitPageColors();
 		}
 	}

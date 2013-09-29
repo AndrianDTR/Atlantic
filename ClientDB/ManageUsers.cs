@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Collections.Generic;
+using System.Data;
 using AY.Log;
 using AY.db;
 
@@ -71,8 +71,6 @@ namespace EAssistant
 			privilegeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			privilegeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			privilegeDataGridViewTextBoxColumn.ValueMember = "id";
-			
-			
 		}
 		
 		private void OnLoad(object sender, EventArgs e)
@@ -80,32 +78,32 @@ namespace EAssistant
 			Db.Instance.Adapters.usersTableAdapter.Fill(Db.Instance.dSet.users);
 			Db.Instance.Adapters.userPrivilegesTableAdapter.Fill(Db.Instance.dSet.userPrivileges);
 		}
-		
-		private void ChangePass(object sender, EventArgs e)
-		{
-			//if (userList.SelectedItems.Count <= 0)
-			//    return;
-
-			//if (m_password.Text.Length < Session.Instance.PassLen)
-			//{
-			//    String msg = String.Format("Password must be at least {0} characters length.", Session.Instance.PassLen);
-			//    UIMessages.Warning(msg);
-			//    return;
-			//}
-			
-			//dbDataSet.usersRow user =  new dbDataSet.usersRow((Int64)userList.SelectedItems[0].Tag);
-			//user.Password = m_password.Text;
-			
-		}
-
-		private void OnClosing(object sender, FormClosingEventArgs e)
-		{
-			Db.Instance.AcceptChanges();
-		}
-
+	
 		private void OnCellClick(object sender, DataGridViewCellEventArgs e)
 		{
+			if (gridUsers.SelectedRows[0].IsNewRow || gridUsers.SelectedRows.Count < 1)
+				return;
 
+			if(gridUsers.Columns[e.ColumnIndex].Name != "colPass")
+				return;
+			
+			SetPassword passDlg = new SetPassword();
+			if(passDlg.ShowDialog() != DialogResult.OK)
+				return;
+
+			dbDataSet.usersRow user = (dbDataSet.usersRow)((DataRowView)gridUsers.SelectedRows[0].DataBoundItem).Row;
+			user.pass = AY.Utils.SecUtils.md5(passDlg.Password);
+		}
+
+		private void btnOK_Click(object sender, EventArgs e)
+		{
+			Db.Instance.AcceptChanges();
+			DialogResult = DialogResult.OK;
+			Close();
+		}
+
+		private void OnDataError(object sender, DataGridViewDataErrorEventArgs e)
+		{
 		}
 	}
 }

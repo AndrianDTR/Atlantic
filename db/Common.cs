@@ -17,7 +17,7 @@ namespace AY.db
 			m_clientDataSet = new dbDataSet();
 			tam = new TableAdapterManager();
 			tam.UpdateAll(m_clientDataSet);
-
+			
 			((System.ComponentModel.ISupportInitialize)(m_clientDataSet)).BeginInit();
 			m_clientDataSet.DataSetName = "clientDataSet";
 			m_clientDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;

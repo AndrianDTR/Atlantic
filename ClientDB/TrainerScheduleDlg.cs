@@ -12,54 +12,58 @@ namespace EAssistant
 {
 	public partial class TrainerScheduleDlg : Form
 	{
+		/*
 		private Dictionary<Int64, Trainer> m_trainerId2ObjMap = new Dictionary<Int64, Trainer>();
-		private Dictionary<DateTime, Trainer> m_trainerDate2ObjMap = new Dictionary<DateTime, Trainer>();
-		private Dictionary<DateTime, Trainer> m_newTrainerDate2ObjMap = new Dictionary<DateTime, Trainer>();
-		private SelectionRange m_rng = null;
 		
+		private Dictionary<DateTime, Trainer> m_newTrainerDate2ObjMap = new Dictionary<DateTime, Trainer>();
+		 */
+
+		private Dictionary<DateTime, long> m_date2TrainerMap = new Dictionary<DateTime, long>();
+		private SelectionRange m_rng = null;
+	
 		public TrainerScheduleDlg()
 		{
 			InitializeComponent();
 
-			m_trainerDate2ObjMap.Clear();
+			trainersBindingSource.DataSource = Db.Instance.dSet.trainers;
 
-			InitTrainerList();
+			comboTrainers.DataBindings.Add(new Binding("Text", this.trainersBindingSource, "name", true));
+			comboTrainers.DataBindings.Add(new Binding("SelectedItem", this.trainersBindingSource, "id", true));
+			comboTrainers.DataSource = this.trainersBindingSource;
+			comboTrainers.DisplayMember = "name";
+
 			InitDateRange();
 			
 			OnDateChanged(null, null);
 		}
-		
-		private void InitTrainerList()
-		{
-			comboTrainers.Items.Clear();
-			comboTrainers.Items.Add("None");
-			comboTrainers.SelectedIndex = 0;
-
-			foreach (Trainer tr in new TrainerCollection())
-			{
-				m_trainerId2ObjMap[tr.Id] = tr;
-				comboTrainers.Items.Add(tr);
-			}
-		}
-		
+	
 		private void InitDateRange()
 		{
 			m_rng = monthCalendar.GetDisplayRange(true);
-			String where = String.Format("date(workDate) >= '{0}' and date(workDate) <= '{1}'"
+			String where = String.Format("id >= '{0}' and id <= '{1}'"
 				, m_rng.Start
 				, m_rng.End);
-			
-			foreach (TrainerSchedule tr in new TrainerScheduleCollection(where))
+
+			foreach (dbDataSet.trainersScheduleRow tsr in Db.Instance.dSet.trainersSchedule.Select(where))
 			{
-				m_trainerDate2ObjMap[tr.Date] = m_trainerId2ObjMap[tr.TrainerId];
+				m_date2TrainerMap[tsr.id] = tsr.trainerId;
 			}
+			
+			for(DateTime dt = m_rng.Start; dt <= m_rng.End; dt = dt.AddDays(1))
+			{
+				if(!m_date2TrainerMap.ContainsKey(dt))
+				{
+					monthCalendar.AddAnnuallyBoldedDate(dt);
+				}
+			}
+			monthCalendar.UpdateBoldedDates();
 		}
-		
-		private void SelectTrainer(Trainer trainer)
+
+		private void SelectTrainer(dbDataSet.trainersRow trainer)
 		{
 			for(int nItem = 1; nItem < comboTrainers.Items.Count; nItem++)
 			{
-				Trainer tr = (Trainer)comboTrainers.Items[nItem];
+				dbDataSet.trainersRow tr = (dbDataSet.trainersRow)comboTrainers.Items[nItem];
 				if(tr == trainer)
 				{
 					comboTrainers.SelectedItem = tr;
@@ -75,69 +79,50 @@ namespace EAssistant
 				InitDateRange();
 				
 			DateTime currDate = monthCalendar.SelectionStart;
-			if(!m_trainerDate2ObjMap.ContainsKey(currDate))
+			if(!m_date2TrainerMap.ContainsKey(currDate))
 			{
-				comboTrainers.SelectedIndex = 0;
+				if (comboTrainers.Items.Count > 0)
+					comboTrainers.SelectedIndex = -1;
 				return;
 			}
 			
-			SelectTrainer(m_trainerDate2ObjMap[currDate]);
+			comboTrainers.SelectedItem = m_date2TrainerMap[currDate];
 		}
 
 		private void OnTrainerChanged(object sender, EventArgs e)
 		{
-			DateTime currDate = monthCalendar.SelectionStart;
-			
-			int ndx = comboTrainers.SelectedIndex;
-			if(0 >= ndx)
-			{	
-				if(0 == ndx 
-					&& m_trainerDate2ObjMap.ContainsKey(currDate))
-				{
-					m_trainerDate2ObjMap.Remove(currDate);
-					m_newTrainerDate2ObjMap[currDate] = null;
-				}
+			if(comboTrainers.SelectedIndex == -1)
 				return;
-			}
 			
-			Trainer tr = comboTrainers.SelectedItem as Trainer;
-			m_trainerDate2ObjMap[currDate] = tr;
-			m_newTrainerDate2ObjMap[currDate] = tr;
+			DateTime currDate = monthCalendar.SelectionStart;
+
+			dbDataSet.trainersRow row = (dbDataSet.trainersRow)((DataRowView)comboTrainers.SelectedItem).Row;
+			m_date2TrainerMap[currDate] = row.id;
+			
+			dbDataSet.trainersScheduleRow tsr = Db.Instance.dSet.trainersSchedule.FindByid(currDate);
+			if(null == tsr)
+			{
+				tsr = Db.Instance.dSet.trainersSchedule.AddtrainersScheduleRow(currDate, row.id);
+			}
+			else
+			{
+				tsr.trainerId = row.id;
+			}
+			monthCalendar.RemoveBoldedDate(currDate);
+			monthCalendar.UpdateBoldedDates();
 		}
 
 		private void btnOk_Click(object sender, EventArgs e)
 		{
-			WaitDialog dlg = new WaitDialog(0, m_newTrainerDate2ObjMap.Count, 1);
-			dlg.Show();
-			dlg.Refresh();
+			Db.Instance.AcceptChanges();
+			DialogResult = DialogResult.OK;
+			Close();		
+		}
 
-			foreach (KeyValuePair<DateTime, Trainer> kv in m_newTrainerDate2ObjMap)
-			{
-				TrainerSchedule ts = new TrainerSchedule(kv.Key);
-
-				Trainer tr = kv.Value;
-				
-				if(null == (Object)tr)
-				{
-					TrainerScheduleCollection.RemoveById(ts.Id);
-				}
-				else
-				{
-
-					if(0 == ts.Id)
-					{
-						Int64 id = 0;
-						TrainerSchedule.Add(tr.Id, kv.Key, out id);
-					}
-					else
-					{
-						ts.TrainerId = tr.Id;
-					}
-				}
-				dlg.StepIt();
-			}
-			
-			dlg.Close();
+		private void TrainerScheduleDlg_Load(object sender, EventArgs e)
+		{
+			Db.Instance.Adapters.trainersTableAdapter.Fill(Db.Instance.dSet.trainers);
+			comboTrainers.SelectedIndex = -1;
 		}
 	}
 }

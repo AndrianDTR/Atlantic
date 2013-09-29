@@ -38,7 +38,7 @@ namespace EAssistant
 		}
 		
 		private Login m_login = new Login();
-		private Opts m_opt = new Opts();
+		private dbDataSet.settingsRow m_opt = null;
 		
         public MainForm()
         {
@@ -48,7 +48,8 @@ namespace EAssistant
 			AutoUpdater.Start("http://localhost/update.xml");
 			CheckRegistration();
 #endif
-
+			m_opt = Db.Instance.dSet.settings.FindByid(1);
+			
 			UserLogin();
 			Reinit();
         }
@@ -137,9 +138,9 @@ namespace EAssistant
 		{
 			Session session = Session.Instance;
 			
-			m_calendar.RowHeight = m_opt.CalRowHeight;
+			m_calendar.RowHeight = (int)m_opt.calRowHeight;
 			m_calendar.Reinit();
-			session.PassLen = m_opt.MinPassLen;
+			session.PassLen = (int)m_opt.minPassLen;
 
 			dbDataSet.userPrivilegesRow priv = Db.Instance.dSet.userPrivileges.FindByid(session.UserRoleId);
 			
@@ -176,7 +177,7 @@ namespace EAssistant
 			{
 				this.WindowState = m_opt.MainWindowState;
 			}
-			session.PassLen = m_opt.MinPassLen;
+			session.PassLen = (int)m_opt.minPassLen;
 			
 			GetOpenedTickets();
 			
@@ -186,7 +187,7 @@ namespace EAssistant
 		private void OnClose(object sender, FormClosedEventArgs e)
 		{
 			m_opt.MainWindowState = this.WindowState;
-			m_opt.StoreData();
+			Db.Instance.Adapters.settingsTableAdapter.Update(m_opt);
 		}
 		
 		private void GetOpenedTickets()
@@ -417,7 +418,6 @@ namespace EAssistant
 			Options opt = new Options();
 			if(DialogResult.OK == opt.ShowDialog())
 			{
-				m_opt.Update();
 				Reinit();
 			}
 		}
@@ -437,12 +437,12 @@ namespace EAssistant
 			String prefix = DateTime.Now.ToString("yyyyMMdd");
 			String ext = "dbu";
 			String archName = String.Format("{0}\\{1}.{2}"
-				, m_opt.PathBackUp
+				, m_opt.pathBackUp
 				, prefix
 				, ext);
-			if (!Directory.Exists(m_opt.PathBackUp))
+			if (!Directory.Exists(m_opt.pathBackUp))
 			{
-				Directory.CreateDirectory(m_opt.PathBackUp);
+				Directory.CreateDirectory(m_opt.pathBackUp);
 			}
 			new DbAdapter().ExportData(archName);
 		}
@@ -458,7 +458,7 @@ namespace EAssistant
 			}
 			
 			OpenFileDialog opd = new OpenFileDialog();
-			opd.InitialDirectory = m_opt.PathBackUp;
+			opd.InitialDirectory = m_opt.pathBackUp;
 			opd.Filter = "Database BackUp files (*.dbu)|*.dbu";
 			if(DialogResult.OK == opd.ShowDialog())
 			{

@@ -840,8 +840,6 @@ namespace AY
 				
 				do 
 				{
-					Opts op = new Opts();
-					
 					String szBackupFile;
 					Archive.Decompress(new FileInfo(szImportFile), out szBackupFile);
 

@@ -28,113 +28,62 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.save = new System.Windows.Forms.Button();
-			this.close = new System.Windows.Forms.Button();
-			this.phone = new System.Windows.Forms.TextBox();
-			this.label3 = new System.Windows.Forms.Label();
-			this.name = new System.Windows.Forms.TextBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.add = new System.Windows.Forms.Button();
-			this.remove = new System.Windows.Forms.Button();
-			this.trainersList = new System.Windows.Forms.ListBox();
+			this.components = new System.ComponentModel.Container();
+			this.btnCancel = new System.Windows.Forms.Button();
+			this.gridTrainers = new System.Windows.Forms.DataGridView();
+			this.btnOK = new System.Windows.Forms.Button();
+			this.trainersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			((System.ComponentModel.ISupportInitialize)(this.gridTrainers)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.trainersBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// save
+			// btnCancel
 			// 
-			this.save.Location = new System.Drawing.Point(389, 195);
-			this.save.Name = "save";
-			this.save.Size = new System.Drawing.Size(75, 23);
-			this.save.TabIndex = 5;
-			this.save.Text = "Apply";
-			this.save.UseVisualStyleBackColor = true;
-			this.save.Click += new System.EventHandler(this.save_Click);
+			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.btnCancel.Location = new System.Drawing.Point(530, 242);
+			this.btnCancel.Name = "btnCancel";
+			this.btnCancel.Size = new System.Drawing.Size(75, 23);
+			this.btnCancel.TabIndex = 6;
+			this.btnCancel.Text = "Cancel";
+			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
-			// close
+			// gridTrainers
 			// 
-			this.close.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.close.Location = new System.Drawing.Point(521, 195);
-			this.close.Name = "close";
-			this.close.Size = new System.Drawing.Size(75, 23);
-			this.close.TabIndex = 6;
-			this.close.Text = "Close";
-			this.close.UseVisualStyleBackColor = true;
+			this.gridTrainers.AllowUserToResizeRows = false;
+			this.gridTrainers.AutoGenerateColumns = false;
+			this.gridTrainers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridTrainers.DataSource = this.trainersBindingSource;
+			this.gridTrainers.Location = new System.Drawing.Point(12, 12);
+			this.gridTrainers.Name = "gridTrainers";
+			this.gridTrainers.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+			this.gridTrainers.RowHeadersVisible = false;
+			this.gridTrainers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.gridTrainers.Size = new System.Drawing.Size(593, 220);
+			this.gridTrainers.TabIndex = 7;
 			// 
-			// phone
+			// btnOK
 			// 
-			this.phone.Location = new System.Drawing.Point(282, 99);
-			this.phone.Name = "phone";
-			this.phone.Size = new System.Drawing.Size(314, 20);
-			this.phone.TabIndex = 2;
+			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.btnOK.Location = new System.Drawing.Point(449, 242);
+			this.btnOK.Name = "btnOK";
+			this.btnOK.Size = new System.Drawing.Size(75, 23);
+			this.btnOK.TabIndex = 8;
+			this.btnOK.Text = "OK";
+			this.btnOK.UseVisualStyleBackColor = true;
+			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
 			// 
-			// label3
+			// trainersBindingSource
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(224, 102);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(38, 13);
-			this.label3.TabIndex = 17;
-			this.label3.Text = "Phone";
-			// 
-			// name
-			// 
-			this.name.Location = new System.Drawing.Point(282, 61);
-			this.name.Name = "name";
-			this.name.Size = new System.Drawing.Size(314, 20);
-			this.name.TabIndex = 1;
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(224, 64);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(35, 13);
-			this.label1.TabIndex = 13;
-			this.label1.Text = "Name";
-			// 
-			// add
-			// 
-			this.add.Location = new System.Drawing.Point(227, 195);
-			this.add.Name = "add";
-			this.add.Size = new System.Drawing.Size(75, 23);
-			this.add.TabIndex = 3;
-			this.add.Text = "Add new";
-			this.add.UseVisualStyleBackColor = true;
-			this.add.Click += new System.EventHandler(this.add_Click);
-			// 
-			// remove
-			// 
-			this.remove.Location = new System.Drawing.Point(308, 195);
-			this.remove.Name = "remove";
-			this.remove.Size = new System.Drawing.Size(75, 23);
-			this.remove.TabIndex = 4;
-			this.remove.Text = "Remove";
-			this.remove.UseVisualStyleBackColor = true;
-			this.remove.Click += new System.EventHandler(this.remove_Click);
-			// 
-			// trainersList
-			// 
-			this.trainersList.Dock = System.Windows.Forms.DockStyle.Left;
-			this.trainersList.FormattingEnabled = true;
-			this.trainersList.Location = new System.Drawing.Point(0, 0);
-			this.trainersList.Name = "trainersList";
-			this.trainersList.Size = new System.Drawing.Size(218, 225);
-			this.trainersList.TabIndex = 0;
-			this.trainersList.SelectedIndexChanged += new System.EventHandler(this.trainerList_SelectedIndexChanged);
+			this.trainersBindingSource.DataMember = "trainers";
 			// 
 			// ManageTrainers
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(611, 225);
-			this.Controls.Add(this.trainersList);
-			this.Controls.Add(this.remove);
-			this.Controls.Add(this.add);
-			this.Controls.Add(this.save);
-			this.Controls.Add(this.close);
-			this.Controls.Add(this.phone);
-			this.Controls.Add(this.label3);
-			this.Controls.Add(this.name);
-			this.Controls.Add(this.label1);
+			this.ClientSize = new System.Drawing.Size(617, 277);
+			this.Controls.Add(this.btnOK);
+			this.Controls.Add(this.gridTrainers);
+			this.Controls.Add(this.btnCancel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -145,21 +94,18 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Manage trainers";
 			this.Load += new System.EventHandler(this.OnLoad);
+			((System.ComponentModel.ISupportInitialize)(this.gridTrainers)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.trainersBindingSource)).EndInit();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.Button save;
-		private System.Windows.Forms.Button close;
-		private System.Windows.Forms.TextBox phone;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.TextBox name;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Button add;
-		private System.Windows.Forms.Button remove;
-		private System.Windows.Forms.ListBox trainersList;
+		private System.Windows.Forms.Button btnCancel;
+		private System.Windows.Forms.DataGridView gridTrainers;
+		private System.Windows.Forms.Button btnOK;
+		private System.Windows.Forms.BindingSource trainersBindingSource;
+		
 	}
 }

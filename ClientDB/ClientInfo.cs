@@ -43,9 +43,9 @@ namespace EAssistant
 			textPhone.Text = cr.phone;
 			dateSchedTime.Text = cr.scheduleTime.ToShortTimeString();
 
-			foreach (Trainer it in comboTrainer.Items)
+			foreach (dbDataSet.trainersRow it in comboTrainer.Items)
 			{
-				if (it.Id == cr.trainer)
+				if (it.id == cr.trainer)
 				{
 					comboTrainer.SelectedItem = it;
 					break;
@@ -64,7 +64,7 @@ namespace EAssistant
 			comboTrainer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
 			comboTrainer.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-			foreach (Trainer tr in new TrainerCollection())
+			foreach (dbDataSet.trainersRow tr in Db.Instance.dSet.trainers)
 			{
 				comboTrainer.Items.Add(tr);
 				comboTrainer.AutoCompleteCustomSource.Add(tr.ToString());
@@ -163,9 +163,9 @@ namespace EAssistant
 			get { return textCode.Text; }
 		}
 
-		public Trainer Trainer
+		public dbDataSet.trainersRow Trainer
 		{
-			get { return (Trainer)comboTrainer.SelectedItem; }
+			get { return (dbDataSet.trainersRow)comboTrainer.SelectedItem; }
 		}
 		
 		private bool ValidateForm()
@@ -293,7 +293,7 @@ namespace EAssistant
 					cr.phone = textPhone.Text;
 					cr.scheduleDays = GetScheduleDays();
 					cr.scheduleTime = DateTime.Parse(dateSchedTime.Text);
-					cr.trainer = Trainer.Id;
+					cr.trainer = Trainer.id;
 					cr.comment = textComment.Text;
 					cr.lastEnter = cr.lastLeave = cr.openTicket = DateTime.Now.AddYears(-1);
 					cr.hoursLeft = 0;
@@ -314,7 +314,7 @@ namespace EAssistant
 					cr.phone = textPhone.Text;
 					cr.scheduleDays = GetScheduleDays();
 					cr.scheduleTime = dateSchedTime.Value;
-					cr.trainer = Trainer.Id;
+					cr.trainer = Trainer.id;
 					cr.comment = textComment.Text;
 					cr.AcceptChanges();
 

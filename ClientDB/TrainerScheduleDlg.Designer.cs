@@ -28,11 +28,14 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.monthCalendar = new System.Windows.Forms.MonthCalendar();
 			this.label1 = new System.Windows.Forms.Label();
 			this.comboTrainers = new System.Windows.Forms.ComboBox();
+			this.trainersBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
+			((System.ComponentModel.ISupportInitialize)(this.trainersBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// monthCalendar
@@ -59,17 +62,21 @@
 			this.comboTrainers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboTrainers.FormattingEnabled = true;
 			this.comboTrainers.Location = new System.Drawing.Point(87, 248);
-			this.comboTrainers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.comboTrainers.Margin = new System.Windows.Forms.Padding(4);
 			this.comboTrainers.Name = "comboTrainers";
 			this.comboTrainers.Size = new System.Drawing.Size(444, 28);
 			this.comboTrainers.TabIndex = 2;
 			this.comboTrainers.SelectedIndexChanged += new System.EventHandler(this.OnTrainerChanged);
 			// 
+			// trainersBindingSource
+			// 
+			this.trainersBindingSource.DataMember = "trainers";
+			// 
 			// btnCancel
 			// 
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.btnCancel.Location = new System.Drawing.Point(286, 298);
-			this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(112, 36);
 			this.btnCancel.TabIndex = 3;
@@ -81,7 +88,7 @@
 			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.btnOk.Location = new System.Drawing.Point(165, 298);
-			this.btnOk.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnOk.Margin = new System.Windows.Forms.Padding(4);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(112, 36);
 			this.btnOk.TabIndex = 4;
@@ -103,7 +110,7 @@
 			this.Controls.Add(this.monthCalendar);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "TrainerScheduleDlg";
@@ -111,6 +118,8 @@
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Trainer schedule";
+			this.Load += new System.EventHandler(this.TrainerScheduleDlg_Load);
+			((System.ComponentModel.ISupportInitialize)(this.trainersBindingSource)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -123,5 +132,6 @@
 		private System.Windows.Forms.ComboBox comboTrainers;
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Button btnOk;
+		private System.Windows.Forms.BindingSource trainersBindingSource;
 	}
 }

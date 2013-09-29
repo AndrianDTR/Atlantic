@@ -1,12 +1,5 @@
 ﻿namespace AY.db {
     public partial class dbDataSet {
-		partial class usersDataTable
-		{
-		}
-	
-		partial class scheduleRulesDataTable
-		{
-		}
 	}
 }
 

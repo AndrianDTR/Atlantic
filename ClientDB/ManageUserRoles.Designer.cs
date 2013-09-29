@@ -29,81 +29,92 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.gridRoles = new System.Windows.Forms.DataGridView();
+			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.panel2 = new System.Windows.Forms.Panel();
+			this.gridRoles = new System.Windows.Forms.DataGridView();
+			this.userPrivilegesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.panel3 = new System.Windows.Forms.Panel();
 			this.privilegesGrid = new System.Windows.Forms.DataGridView();
 			this.accType = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.read = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.write = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.create = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.remove = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.userPrivilegesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colClients = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colSchedule = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colTrainers = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colPayments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colBackup = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colStatisrics = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colUsers = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colPrivileges = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.panel4 = new System.Windows.Forms.Panel();
+			this.btnOK = new System.Windows.Forms.Button();
+			this.btnCancel = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.gridRoles)).BeginInit();
+			this.tableLayoutPanel2.SuspendLayout();
 			this.panel2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.privilegesGrid)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridRoles)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.userPrivilegesBindingSource)).BeginInit();
+			this.panel3.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.privilegesGrid)).BeginInit();
+			this.panel4.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel1
 			// 
-			this.tableLayoutPanel1.ColumnCount = 2;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.05917F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.94083F));
+			this.tableLayoutPanel1.ColumnCount = 1;
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.panel4, 0, 1);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 1;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(676, 203);
-			this.tableLayoutPanel1.TabIndex = 3;
+			this.tableLayoutPanel1.RowCount = 2;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(676, 238);
+			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// panel1
 			// 
-			this.panel1.Controls.Add(this.gridRoles);
+			this.panel1.Controls.Add(this.tableLayoutPanel2);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(3, 3);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(230, 197);
-			this.panel1.TabIndex = 6;
+			this.panel1.Size = new System.Drawing.Size(670, 202);
+			this.panel1.TabIndex = 0;
+			// 
+			// tableLayoutPanel2
+			// 
+			this.tableLayoutPanel2.ColumnCount = 2;
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.05917F));
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.94083F));
+			this.tableLayoutPanel2.Controls.Add(this.panel2, 0, 0);
+			this.tableLayoutPanel2.Controls.Add(this.panel3, 1, 0);
+			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+			this.tableLayoutPanel2.RowCount = 1;
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(670, 202);
+			this.tableLayoutPanel2.TabIndex = 4;
+			// 
+			// panel2
+			// 
+			this.panel2.Controls.Add(this.gridRoles);
+			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panel2.Location = new System.Drawing.Point(3, 3);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(228, 196);
+			this.panel2.TabIndex = 6;
 			// 
 			// gridRoles
 			// 
 			this.gridRoles.AllowUserToResizeRows = false;
 			this.gridRoles.AutoGenerateColumns = false;
 			this.gridRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.gridRoles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colId,
-            this.colName,
-            this.colClients,
-            this.colSchedule,
-            this.colTrainers,
-            this.colPayments,
-            this.colBackup,
-            this.colStatisrics,
-            this.colUsers,
-            this.colPrivileges});
 			this.gridRoles.DataSource = this.userPrivilegesBindingSource;
 			this.gridRoles.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gridRoles.Location = new System.Drawing.Point(0, 0);
@@ -113,18 +124,22 @@
 			this.gridRoles.RowHeadersWidth = 4;
 			this.gridRoles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.gridRoles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.gridRoles.Size = new System.Drawing.Size(230, 197);
+			this.gridRoles.Size = new System.Drawing.Size(228, 196);
 			this.gridRoles.TabIndex = 3;
-			this.gridRoles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnChangeCell);
+			this.gridRoles.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.OnChangeRole);
 			// 
-			// panel2
+			// userPrivilegesBindingSource
 			// 
-			this.panel2.Controls.Add(this.privilegesGrid);
-			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel2.Location = new System.Drawing.Point(239, 3);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(434, 197);
-			this.panel2.TabIndex = 7;
+			this.userPrivilegesBindingSource.DataMember = "userPrivileges";
+			// 
+			// panel3
+			// 
+			this.panel3.Controls.Add(this.privilegesGrid);
+			this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panel3.Location = new System.Drawing.Point(237, 3);
+			this.panel3.Name = "panel3";
+			this.panel3.Size = new System.Drawing.Size(430, 196);
+			this.panel3.TabIndex = 7;
 			// 
 			// privilegesGrid
 			// 
@@ -145,15 +160,15 @@
 			this.privilegesGrid.Name = "privilegesGrid";
 			this.privilegesGrid.RowHeadersVisible = false;
 			this.privilegesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-			this.privilegesGrid.Size = new System.Drawing.Size(434, 197);
+			this.privilegesGrid.Size = new System.Drawing.Size(430, 196);
 			this.privilegesGrid.TabIndex = 0;
-			this.privilegesGrid.Click += new System.EventHandler(this.OnClick);
+			this.privilegesGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ChangePermission);
 			// 
 			// accType
 			// 
 			this.accType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			this.accType.DefaultCellStyle = dataGridViewCellStyle11;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			this.accType.DefaultCellStyle = dataGridViewCellStyle6;
 			this.accType.HeaderText = "Access type";
 			this.accType.Name = "accType";
 			this.accType.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -161,9 +176,9 @@
 			// 
 			// read
 			// 
-			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle12.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.read.DefaultCellStyle = dataGridViewCellStyle12;
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.read.DefaultCellStyle = dataGridViewCellStyle7;
 			this.read.HeaderText = "Read";
 			this.read.Name = "read";
 			this.read.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -172,9 +187,9 @@
 			// 
 			// write
 			// 
-			dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle13.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-			this.write.DefaultCellStyle = dataGridViewCellStyle13;
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+			this.write.DefaultCellStyle = dataGridViewCellStyle8;
 			this.write.HeaderText = "Write";
 			this.write.Name = "write";
 			this.write.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -183,9 +198,9 @@
 			// 
 			// create
 			// 
-			dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle14.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-			this.create.DefaultCellStyle = dataGridViewCellStyle14;
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+			this.create.DefaultCellStyle = dataGridViewCellStyle9;
 			this.create.HeaderText = "Create";
 			this.create.Name = "create";
 			this.create.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -194,94 +209,53 @@
 			// 
 			// remove
 			// 
-			dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle15.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-			this.remove.DefaultCellStyle = dataGridViewCellStyle15;
+			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+			this.remove.DefaultCellStyle = dataGridViewCellStyle10;
 			this.remove.HeaderText = "Delete";
 			this.remove.Name = "remove";
 			this.remove.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.remove.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.remove.Width = 45;
 			// 
-			// userPrivilegesBindingSource
+			// panel4
 			// 
-			this.userPrivilegesBindingSource.DataMember = "userPrivileges";
+			this.panel4.Controls.Add(this.btnOK);
+			this.panel4.Controls.Add(this.btnCancel);
+			this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panel4.Location = new System.Drawing.Point(0, 208);
+			this.panel4.Margin = new System.Windows.Forms.Padding(0);
+			this.panel4.Name = "panel4";
+			this.panel4.Size = new System.Drawing.Size(676, 30);
+			this.panel4.TabIndex = 1;
 			// 
-			// colId
+			// btnOK
 			// 
-			this.colId.DataPropertyName = "id";
-			this.colId.HeaderText = "ID";
-			this.colId.Name = "colId";
-			this.colId.Visible = false;
+			this.btnOK.Location = new System.Drawing.Point(517, 3);
+			this.btnOK.Name = "btnOK";
+			this.btnOK.Size = new System.Drawing.Size(75, 23);
+			this.btnOK.TabIndex = 1;
+			this.btnOK.Text = "OK";
+			this.btnOK.UseVisualStyleBackColor = true;
+			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
 			// 
-			// colName
+			// btnCancel
 			// 
-			this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.colName.DataPropertyName = "name";
-			this.colName.HeaderText = "name";
-			this.colName.Name = "colName";
-			// 
-			// colClients
-			// 
-			this.colClients.DataPropertyName = "clients";
-			this.colClients.HeaderText = "clients";
-			this.colClients.Name = "colClients";
-			this.colClients.Visible = false;
-			// 
-			// colSchedule
-			// 
-			this.colSchedule.DataPropertyName = "schedule";
-			this.colSchedule.HeaderText = "schedule";
-			this.colSchedule.Name = "colSchedule";
-			this.colSchedule.Visible = false;
-			// 
-			// colTrainers
-			// 
-			this.colTrainers.DataPropertyName = "trainers";
-			this.colTrainers.HeaderText = "trainers";
-			this.colTrainers.Name = "colTrainers";
-			this.colTrainers.Visible = false;
-			// 
-			// colPayments
-			// 
-			this.colPayments.DataPropertyName = "payments";
-			this.colPayments.HeaderText = "payments";
-			this.colPayments.Name = "colPayments";
-			this.colPayments.Visible = false;
-			// 
-			// colBackup
-			// 
-			this.colBackup.DataPropertyName = "backup";
-			this.colBackup.HeaderText = "backup";
-			this.colBackup.Name = "colBackup";
-			this.colBackup.Visible = false;
-			// 
-			// colStatisrics
-			// 
-			this.colStatisrics.DataPropertyName = "statistics";
-			this.colStatisrics.HeaderText = "statistics";
-			this.colStatisrics.Name = "colStatisrics";
-			this.colStatisrics.Visible = false;
-			// 
-			// colUsers
-			// 
-			this.colUsers.DataPropertyName = "users";
-			this.colUsers.HeaderText = "users";
-			this.colUsers.Name = "colUsers";
-			this.colUsers.Visible = false;
-			// 
-			// colPrivileges
-			// 
-			this.colPrivileges.DataPropertyName = "privileges";
-			this.colPrivileges.HeaderText = "privileges";
-			this.colPrivileges.Name = "colPrivileges";
-			this.colPrivileges.Visible = false;
+			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnCancel.Location = new System.Drawing.Point(598, 3);
+			this.btnCancel.Name = "btnCancel";
+			this.btnCancel.Size = new System.Drawing.Size(75, 23);
+			this.btnCancel.TabIndex = 0;
+			this.btnCancel.Text = "Cancel";
+			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
 			// ManageUserRoles
 			// 
+			this.AcceptButton = this.btnCancel;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(676, 203);
+			this.CancelButton = this.btnCancel;
+			this.ClientSize = new System.Drawing.Size(676, 238);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
@@ -292,13 +266,15 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "dbDataSet.usersRow roles";
 			this.Load += new System.EventHandler(this.OnLoad);
-			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.gridRoles)).EndInit();
+			this.tableLayoutPanel2.ResumeLayout(false);
 			this.panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.privilegesGrid)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridRoles)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.userPrivilegesBindingSource)).EndInit();
+			this.panel3.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.privilegesGrid)).EndInit();
+			this.panel4.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -307,27 +283,20 @@
 
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.DataGridView gridRoles;
+		private System.Windows.Forms.BindingSource userPrivilegesBindingSource;
+		private System.Windows.Forms.Panel panel3;
 		private System.Windows.Forms.DataGridView privilegesGrid;
 		private System.Windows.Forms.DataGridViewTextBoxColumn accType;
 		private System.Windows.Forms.DataGridViewTextBoxColumn read;
 		private System.Windows.Forms.DataGridViewTextBoxColumn write;
 		private System.Windows.Forms.DataGridViewTextBoxColumn create;
 		private System.Windows.Forms.DataGridViewTextBoxColumn remove;
-		private System.Windows.Forms.DataGridView gridRoles;
-		private System.Windows.Forms.DataGridViewTextBoxColumn id;
-		private System.Windows.Forms.DataGridViewTextBoxColumn name;
-		private System.Windows.Forms.BindingSource userPrivilegesBindingSource;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colId;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colClients;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colSchedule;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colTrainers;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colPayments;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colBackup;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colStatisrics;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colUsers;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colPrivileges;
+		private System.Windows.Forms.Panel panel4;
+		private System.Windows.Forms.Button btnOK;
+		private System.Windows.Forms.Button btnCancel;
 
 	}
 }
