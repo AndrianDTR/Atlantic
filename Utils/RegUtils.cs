@@ -14,6 +14,7 @@ namespace AY.Utils
 		public enum DataOffsets
 		{
 			Data = 8,
+			Id = 64,
 			Serial = 128,
 			PubKey = 1024,
 			PrivKey = 3072,
@@ -115,6 +116,14 @@ namespace AY.Utils
 			return new DateTime(ticks);
 		}
 
+		public static Int64 GetRegId(byte[] data)
+		{
+			int pos = 0;
+			byte[] dat = GetKey(data, ref pos, DataOffsets.Id);
+			Int64 id = BitConverter.ToInt64(dat, 0);
+			return id;
+		}
+
 		public static String GetRegSerialNumber(byte[] data)
 		{
 			int pos = (int)DataOffsets.Data;
@@ -165,6 +174,9 @@ namespace AY.Utils
 
 				// Get Reg date
 				DateTime regDate = GetRegDate(data);
+
+				// Get Reg id
+				Int64 id = GetRegId(data);
 
 				// Get Serial number
 				String curSN = GetSerialNumberCrypted();

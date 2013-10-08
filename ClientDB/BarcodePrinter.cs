@@ -60,7 +60,7 @@ table td, table th {
 				for (int nCol = 0; nCol < nCols; nCol++)
 				{
 					html += "<td style=\"padding:4px;\">";
-					html += String.Format("{0}", GetFreshCode());
+					html += String.Format("{0}", GetNextCode());
 					wd.StepIt();
 					html += "</td>";
 				}
@@ -73,9 +73,18 @@ table td, table th {
 			wd.Close();
 		}
 		
-		private String GetFreshCode()
+		private Int64 GetMaxClientCode()
 		{
 			Int32 code = 0;
+			//clientDataSet.clientRow = Db.Instance.dSet.clients.
+			
+			return code;
+		}
+		
+		private String GetNextCode()
+		{
+			Int32 code = 0;
+			
 			do 
 			{
 				code = m_random.Next(Int32.MaxValue);

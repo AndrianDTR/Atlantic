@@ -377,6 +377,7 @@
 			// columnEntarncesLeft
 			// 
 			resources.ApplyResources(this.columnEntarncesLeft, "columnEntarncesLeft");
+#if DEBUG
 			// 
 			// tabCalendar
 			// 
@@ -439,6 +440,7 @@
 			this.chart1.Series.Add(series1);
 			this.chart1.Series.Add(series2);
 			this.chart1.PrePaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.FillChart);
+#endif
 			// 
 			// panel1
 			// 
