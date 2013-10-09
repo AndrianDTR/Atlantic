@@ -309,9 +309,11 @@ namespace EAssistant
 					dlg.Clear();
 					continue;
 				}
-				if (null != Db.Instance.dSet.clients.FindByid(id))
+				
+				clientDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(id);
+				if (null != cr)
 				{
-					ClientInfo ci = new ClientInfo(id);
+					ClientInfo ci = new ClientInfo(cr);
 					if (DialogResult.OK == ci.ShowDialog(this))
 					{
 						UpdateInfo();
@@ -365,7 +367,7 @@ namespace EAssistant
 
 		private void AddClient()
 		{
-			ClientInfo ci = new ClientInfo(0);
+			ClientInfo ci = new ClientInfo(null);
 			if (DialogResult.OK != ci.ShowDialog(this))
 				return;
 			UpdateInfo();
@@ -475,9 +477,10 @@ namespace EAssistant
 			if(listClients.SelectedItems.Count < 1)
 				return;
 
-			ClientStatus status = (ClientStatus)listClients.SelectedItems[0].Tag;
+			/*ClientStatus status = (ClientStatus)listClients.SelectedItems[0].Tag;
 			ClientInfo ci = new ClientInfo(status.Id);
 			ci.ShowDialog();
+			*/
 		}
 		
 		private void UpdateInfo()

@@ -201,11 +201,13 @@
 			this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
 			this.idDataGridViewTextBoxColumn.HeaderText = "id";
 			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+			this.idDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// nameDataGridViewTextBoxColumn
 			// 
+			this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
-			this.nameDataGridViewTextBoxColumn.HeaderText = "name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
 			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
 			// 
 			// phoneDataGridViewTextBoxColumn
@@ -213,23 +215,24 @@
 			this.phoneDataGridViewTextBoxColumn.DataPropertyName = "phone";
 			this.phoneDataGridViewTextBoxColumn.HeaderText = "phone";
 			this.phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
+			this.phoneDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// scheduleDaysDataGridViewTextBoxColumn
 			// 
 			this.scheduleDaysDataGridViewTextBoxColumn.DataPropertyName = "scheduleDays";
-			this.scheduleDaysDataGridViewTextBoxColumn.HeaderText = "scheduleDays";
+			this.scheduleDaysDataGridViewTextBoxColumn.HeaderText = "Days";
 			this.scheduleDaysDataGridViewTextBoxColumn.Name = "scheduleDaysDataGridViewTextBoxColumn";
 			// 
 			// scheduleTimeDataGridViewTextBoxColumn
 			// 
 			this.scheduleTimeDataGridViewTextBoxColumn.DataPropertyName = "scheduleTime";
-			this.scheduleTimeDataGridViewTextBoxColumn.HeaderText = "scheduleTime";
+			this.scheduleTimeDataGridViewTextBoxColumn.HeaderText = "Time";
 			this.scheduleTimeDataGridViewTextBoxColumn.Name = "scheduleTimeDataGridViewTextBoxColumn";
 			// 
 			// lastEnterDataGridViewTextBoxColumn
 			// 
 			this.lastEnterDataGridViewTextBoxColumn.DataPropertyName = "lastEnter";
-			this.lastEnterDataGridViewTextBoxColumn.HeaderText = "lastEnter";
+			this.lastEnterDataGridViewTextBoxColumn.HeaderText = "Last enter";
 			this.lastEnterDataGridViewTextBoxColumn.Name = "lastEnterDataGridViewTextBoxColumn";
 			// 
 			// lastLeaveDataGridViewTextBoxColumn
@@ -237,35 +240,39 @@
 			this.lastLeaveDataGridViewTextBoxColumn.DataPropertyName = "lastLeave";
 			this.lastLeaveDataGridViewTextBoxColumn.HeaderText = "lastLeave";
 			this.lastLeaveDataGridViewTextBoxColumn.Name = "lastLeaveDataGridViewTextBoxColumn";
+			this.lastLeaveDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// openTicketDataGridViewTextBoxColumn
 			// 
 			this.openTicketDataGridViewTextBoxColumn.DataPropertyName = "openTicket";
 			this.openTicketDataGridViewTextBoxColumn.HeaderText = "openTicket";
 			this.openTicketDataGridViewTextBoxColumn.Name = "openTicketDataGridViewTextBoxColumn";
+			this.openTicketDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// trainerDataGridViewTextBoxColumn
 			// 
 			this.trainerDataGridViewTextBoxColumn.DataPropertyName = "trainer";
 			this.trainerDataGridViewTextBoxColumn.HeaderText = "trainer";
 			this.trainerDataGridViewTextBoxColumn.Name = "trainerDataGridViewTextBoxColumn";
+			this.trainerDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// commentDataGridViewTextBoxColumn
 			// 
 			this.commentDataGridViewTextBoxColumn.DataPropertyName = "comment";
 			this.commentDataGridViewTextBoxColumn.HeaderText = "comment";
 			this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
+			this.commentDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// planDataGridViewTextBoxColumn
 			// 
 			this.planDataGridViewTextBoxColumn.DataPropertyName = "plan";
-			this.planDataGridViewTextBoxColumn.HeaderText = "plan";
+			this.planDataGridViewTextBoxColumn.HeaderText = "Plan";
 			this.planDataGridViewTextBoxColumn.Name = "planDataGridViewTextBoxColumn";
 			// 
 			// hoursLeftDataGridViewTextBoxColumn
 			// 
 			this.hoursLeftDataGridViewTextBoxColumn.DataPropertyName = "hoursLeft";
-			this.hoursLeftDataGridViewTextBoxColumn.HeaderText = "hoursLeft";
+			this.hoursLeftDataGridViewTextBoxColumn.HeaderText = "Hours left";
 			this.hoursLeftDataGridViewTextBoxColumn.Name = "hoursLeftDataGridViewTextBoxColumn";
 			// 
 			// ManageClients

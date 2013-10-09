@@ -125,7 +125,7 @@ namespace EAssistant
 		
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
-			ClientInfo ci = new ClientInfo(0);
+			ClientInfo ci = new ClientInfo(null);
 			if (DialogResult.OK != ci.ShowDialog(this))
 			    return;
 
@@ -144,7 +144,7 @@ namespace EAssistant
 		
 		private void EditClient()
 		{
-			Int64 id = GetSelectedClientId();
+			/*Int64 id = GetSelectedClientId();
 			
 			if(-1 == id)
 			    return;
@@ -157,6 +157,7 @@ namespace EAssistant
 			int index = gridClients.SelectedRows[0].Index;
 			
 			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
+			*/
 		}
 
 		private void OnRemoveRow(object sender, DataGridViewRowCancelEventArgs e)
@@ -166,7 +167,13 @@ namespace EAssistant
 
 		private void OnAddRow(object sender, DataGridViewRowEventArgs e)
 		{
-			;
+			clientDataSet.clientsRow row = (clientDataSet.clientsRow)((DataRowView)e.Row.DataBoundItem).Row;
+			ClientInfo ci = new ClientInfo(row);
+
+			if (DialogResult.OK != ci.ShowDialog())
+				return;
+			
+			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
 		}
 	}
 }

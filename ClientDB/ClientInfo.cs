@@ -13,49 +13,42 @@ namespace EAssistant
 	{	
 		const String cancelText = "Cancel";
 		const String enterText = "Enter";
-		
-		private Int64 m_clienId = 0;
+
+		private clientDataSet.clientsRow m_client = null;
 		
 		private Session session = Session.Instance;
-	
-		public ClientInfo(Int64 id)
+
+		public ClientInfo(clientDataSet.clientsRow client)
 		{
 			InitializeComponent();
 			Init();
 			CheckPermissions();
 			
-			m_clienId = id;
+			m_client = client;
 			
 			if (!ConfigUIForNewClient())
 			{
 				return;
 			}
 
-			clientDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(m_clienId);
-			if(null == cr)
-			{
-				// No such client
-				return;
-			}
-			
-			textCode.Text = cr.id.ToString();
-			textName.Text = cr.name;
-			textPhone.Text = cr.phone;
-			dateSchedTime.Text = cr.scheduleTime.ToShortTimeString();
+			textCode.Text = client.id.ToString();
+			textName.Text = client.name;
+			textPhone.Text = client.phone;
+			dateSchedTime.Text = client.scheduleTime.ToShortTimeString();
 
 			foreach (clientDataSet.trainersRow it in comboTrainer.Items)
 			{
-				if (it.id == cr.trainer)
+				if (it.id == client.trainer)
 				{
 					comboTrainer.SelectedItem = it;
 					break;
 				}
 			}
-			SetScheduleDays(cr.scheduleDays);
-			textComment.Text = cr.comment;
+			SetScheduleDays(client.scheduleDays);
+			textComment.Text = client.comment;
 			
-			UpdateLastPaymentInfo(cr);
-			UpdateTimesLeft(cr);
+			UpdateLastPaymentInfo(client);
+			UpdateTimesLeft(client);
 		}
 
 		private void Init()
@@ -114,7 +107,7 @@ namespace EAssistant
 		
 		private bool ConfigUIForNewClient()
 		{
-			bool existingClient = !(m_clienId == 0);
+			bool existingClient = !(m_client == null);
 			textName.ReadOnly = existingClient;
 			btnPaymentAdd.Enabled = existingClient;
 			btnPaymentHistory.Enabled = existingClient;
@@ -145,7 +138,7 @@ namespace EAssistant
 		
 		public Int64 Id
 		{
-			get { return m_clienId; }
+			get { return m_client.id; }
 		}
 		
 		public String ClientName
@@ -275,7 +268,7 @@ namespace EAssistant
 		
 		private void btnOk_Click(object sender, EventArgs e)
 		{
-			if(m_clienId == 0)
+			if(m_client == null)
 			{
 				if(!ChangeClientCode())
 					return;
@@ -285,7 +278,7 @@ namespace EAssistant
 			{
 				Int64 id = Session.CheckBarCode(textCode.Text);
 				
-				if(m_clienId == 0)
+				if(m_client == null)
 				{
 					clientDataSet.clientsRow cr = Db.Instance.dSet.clients.NewclientsRow();
 					cr.id = id;
@@ -298,7 +291,7 @@ namespace EAssistant
 					cr.lastEnter = cr.lastLeave = cr.openTicket = DateTime.Now.AddYears(-1);
 					cr.hoursLeft = 0;
 					cr.plan = 0;
-					m_clienId = id;
+					m_client = cr;
 					
 					Db.Instance.AcceptChanges();
 					
@@ -306,7 +299,7 @@ namespace EAssistant
 				}
 				else
 				{
-					clientDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(m_clienId);
+					clientDataSet.clientsRow cr = m_client;
 					if(null == cr)
 						return;
 						
@@ -318,7 +311,7 @@ namespace EAssistant
 					cr.comment = textComment.Text;
 					cr.AcceptChanges();
 
-					m_clienId = id;
+					//m_client = id;
 
 					Db.Instance.Adapters.clientsTableAdapter.Update(Db.Instance.dSet.clients);
 
@@ -334,14 +327,14 @@ namespace EAssistant
 
 		private void btnPayment_Click(object sender, EventArgs e)
 		{
-			if (0 == m_clienId)
+			if (null == m_client)
 				return;
 			
-			AddPayment addPaymDlg = new AddPayment(m_clienId);
+			AddPayment addPaymDlg = new AddPayment(m_client.id);
 			if(DialogResult.Cancel == addPaymDlg.ShowDialog())
 				return;
 
-			clientDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(m_clienId);
+			clientDataSet.clientsRow cr = m_client;
 			
 			UpdateLastPaymentInfo(cr);
 			UpdateTimesLeft(cr);
@@ -387,11 +380,11 @@ namespace EAssistant
 
 		private void btnPaymentHistory_Click(object sender, EventArgs e)
 		{
-			if(0 == m_clienId)
+			if(null == m_client)
 				return;
 				
 			PaymentsHistory hist = new PaymentsHistory();
-			hist.ClientId = m_clienId;
+			hist.ClientId = m_client.id;
 			hist.ShowDialog();
 		}
 
