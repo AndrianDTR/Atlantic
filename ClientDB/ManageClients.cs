@@ -163,5 +163,10 @@ namespace EAssistant
 		{
 			;
 		}
+
+		private void OnAddRow(object sender, DataGridViewRowEventArgs e)
+		{
+			;
+		}
 	}
 }

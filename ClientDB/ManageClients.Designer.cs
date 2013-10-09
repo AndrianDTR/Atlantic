@@ -180,6 +180,7 @@
 			this.gridClients.Size = new System.Drawing.Size(784, 302);
 			this.gridClients.TabIndex = 5;
 			this.gridClients.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.OnRemoveRow);
+			this.gridClients.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.OnAddRow);
 			// 
 			// tmpDataSet
 			// 
