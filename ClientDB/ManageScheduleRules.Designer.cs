@@ -28,134 +28,62 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.save = new System.Windows.Forms.Button();
-			this.close = new System.Windows.Forms.Button();
-			this.hoursAdd = new System.Windows.Forms.TextBox();
-			this.label3 = new System.Windows.Forms.Label();
-			this.name = new System.Windows.Forms.TextBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.add = new System.Windows.Forms.Button();
-			this.remove = new System.Windows.Forms.Button();
-			this.rulesList = new System.Windows.Forms.ListBox();
-			this.price = new System.Windows.Forms.TextBox();
-			this.label2 = new System.Windows.Forms.Label();
+			this.components = new System.ComponentModel.Container();
+			this.ok = new System.Windows.Forms.Button();
+			this.cancel = new System.Windows.Forms.Button();
+			this.gridRules = new System.Windows.Forms.DataGridView();
+			this.scheduleRulesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			((System.ComponentModel.ISupportInitialize)(this.gridRules)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.scheduleRulesBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// save
+			// ok
 			// 
-			this.save.Location = new System.Drawing.Point(389, 195);
-			this.save.Name = "save";
-			this.save.Size = new System.Drawing.Size(75, 23);
-			this.save.TabIndex = 6;
-			this.save.Text = "Apply";
-			this.save.UseVisualStyleBackColor = true;
-			this.save.Click += new System.EventHandler(this.save_Click);
+			this.ok.Location = new System.Drawing.Point(443, 343);
+			this.ok.Name = "ok";
+			this.ok.Size = new System.Drawing.Size(75, 23);
+			this.ok.TabIndex = 6;
+			this.ok.Text = "OK";
+			this.ok.UseVisualStyleBackColor = true;
+			this.ok.Click += new System.EventHandler(this.save_Click);
 			// 
-			// close
+			// cancel
 			// 
-			this.close.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.close.Location = new System.Drawing.Point(521, 195);
-			this.close.Name = "close";
-			this.close.Size = new System.Drawing.Size(75, 23);
-			this.close.TabIndex = 7;
-			this.close.Text = "Close";
-			this.close.UseVisualStyleBackColor = true;
+			this.cancel.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.cancel.Location = new System.Drawing.Point(524, 343);
+			this.cancel.Name = "cancel";
+			this.cancel.Size = new System.Drawing.Size(75, 23);
+			this.cancel.TabIndex = 7;
+			this.cancel.Text = "Cancel";
+			this.cancel.UseVisualStyleBackColor = true;
 			// 
-			// hoursAdd
+			// dataGridView1
 			// 
-			this.hoursAdd.Location = new System.Drawing.Point(282, 59);
-			this.hoursAdd.Multiline = true;
-			this.hoursAdd.Name = "hoursAdd";
-			this.hoursAdd.Size = new System.Drawing.Size(314, 130);
-			this.hoursAdd.TabIndex = 3;
+			this.gridRules.AllowUserToResizeRows = false;
+			this.gridRules.AutoGenerateColumns = false;
+			this.gridRules.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.gridRules.DataSource = this.scheduleRulesBindingSource;
+			this.gridRules.Location = new System.Drawing.Point(12, 12);
+			this.gridRules.MultiSelect = false;
+			this.gridRules.Name = "dataGridView1";
+			this.gridRules.RowHeadersVisible = false;
+			this.gridRules.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.gridRules.Size = new System.Drawing.Size(587, 319);
+			this.gridRules.TabIndex = 8;
 			// 
-			// label3
+			// scheduleRulesBindingSource
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(224, 59);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(29, 13);
-			this.label3.TabIndex = 17;
-			this.label3.Text = "Rule";
-			// 
-			// name
-			// 
-			this.name.Location = new System.Drawing.Point(282, 7);
-			this.name.Name = "name";
-			this.name.Size = new System.Drawing.Size(314, 20);
-			this.name.TabIndex = 1;
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(224, 10);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(35, 13);
-			this.label1.TabIndex = 13;
-			this.label1.Text = "Name";
-			// 
-			// add
-			// 
-			this.add.Location = new System.Drawing.Point(227, 195);
-			this.add.Name = "add";
-			this.add.Size = new System.Drawing.Size(75, 23);
-			this.add.TabIndex = 4;
-			this.add.Text = "Add new";
-			this.add.UseVisualStyleBackColor = true;
-			this.add.Click += new System.EventHandler(this.add_Click);
-			// 
-			// remove
-			// 
-			this.remove.Location = new System.Drawing.Point(308, 195);
-			this.remove.Name = "remove";
-			this.remove.Size = new System.Drawing.Size(75, 23);
-			this.remove.TabIndex = 5;
-			this.remove.Text = "Remove";
-			this.remove.UseVisualStyleBackColor = true;
-			this.remove.Click += new System.EventHandler(this.remove_Click);
-			// 
-			// rulesList
-			// 
-			this.rulesList.Dock = System.Windows.Forms.DockStyle.Left;
-			this.rulesList.FormattingEnabled = true;
-			this.rulesList.Location = new System.Drawing.Point(0, 0);
-			this.rulesList.Name = "rulesList";
-			this.rulesList.Size = new System.Drawing.Size(218, 225);
-			this.rulesList.TabIndex = 0;
-			this.rulesList.SelectedIndexChanged += new System.EventHandler(this.rulesList_SelectedIndexChanged);
-			// 
-			// price
-			// 
-			this.price.Location = new System.Drawing.Point(282, 33);
-			this.price.Name = "price";
-			this.price.Size = new System.Drawing.Size(314, 20);
-			this.price.TabIndex = 2;
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(224, 36);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(31, 13);
-			this.label2.TabIndex = 19;
-			this.label2.Text = "Price";
+			this.scheduleRulesBindingSource.DataMember = "scheduleRules";
 			// 
 			// ManageScheduleRules
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(611, 225);
-			this.Controls.Add(this.price);
-			this.Controls.Add(this.label2);
-			this.Controls.Add(this.rulesList);
-			this.Controls.Add(this.remove);
-			this.Controls.Add(this.add);
-			this.Controls.Add(this.save);
-			this.Controls.Add(this.close);
-			this.Controls.Add(this.hoursAdd);
-			this.Controls.Add(this.label3);
-			this.Controls.Add(this.name);
-			this.Controls.Add(this.label1);
+			this.AcceptButton = this.ok;
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.CancelButton = this.cancel;
+			this.ClientSize = new System.Drawing.Size(611, 378);
+			this.Controls.Add(this.gridRules);
+			this.Controls.Add(this.ok);
+			this.Controls.Add(this.cancel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -166,23 +94,17 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Manage schedule rules";
 			this.Load += new System.EventHandler(this.OnLoad);
+			((System.ComponentModel.ISupportInitialize)(this.gridRules)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.scheduleRulesBindingSource)).EndInit();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.Button save;
-		private System.Windows.Forms.Button close;
-		private System.Windows.Forms.TextBox hoursAdd;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.TextBox name;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Button add;
-		private System.Windows.Forms.Button remove;
-		private System.Windows.Forms.ListBox rulesList;
-		private System.Windows.Forms.TextBox price;
-		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Button ok;
+		private System.Windows.Forms.Button cancel;
+		private System.Windows.Forms.DataGridView gridRules;
+		private System.Windows.Forms.BindingSource scheduleRulesBindingSource;
 	}
 }

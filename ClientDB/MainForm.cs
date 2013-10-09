@@ -38,7 +38,7 @@ namespace EAssistant
 		}
 		
 		private Login m_login = new Login();
-		private dbDataSet.settingsRow m_opt = null;
+		private clientDataSet.settingsRow m_opt = null;
 		
         public MainForm()
         {
@@ -142,33 +142,33 @@ namespace EAssistant
 			m_calendar.Reinit();
 			session.PassLen = (int)m_opt.minPassLen;
 
-			dbDataSet.userPrivilegesRow priv = Db.Instance.dSet.userPrivileges.FindByid(session.UserRoleId);
+			clientDataSet.userPrivilegesRow priv = Db.Instance.dSet.userPrivileges.FindByid(session.UserRoleId);
 			
 			// File menu
-			exportToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Create);
-			importToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Write);
-			btnBackUp.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Write);
+			exportToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Create);
+			importToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Write);
+			btnBackUp.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Write);
 
 			// View menu
-			paymentsToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Read);
-			btnPaymentsHistory.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Read);
+			paymentsToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Read);
+			btnPaymentsHistory.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Read);
 
 			// Clients menu
-			addToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Create);
-			btnAddClient.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
+			addToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Create);
+			btnAddClient.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
 			
-			clientSearchToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
-			manageClientsToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
-			btnClientManager.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
+			clientSearchToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
+			manageClientsToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
+			btnClientManager.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
 
 			// Settings menu
-			userRolesToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.users, UserRights.Read);
-			usersAndPasswordsToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.users, UserRights.Read);
+			userRolesToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.users, UserRights.Read);
+			usersAndPasswordsToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.users, UserRights.Read);
 
-			btnTrainersShedule.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.trainers, UserRights.Read);
-			manageTrainersToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.trainers, UserRights.Read);
+			btnTrainersShedule.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.trainers, UserRights.Read);
+			manageTrainersToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.trainers, UserRights.Read);
 
-			manageScheduleRulesToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.schedule, UserRights.Read);
+			manageScheduleRulesToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.schedule, UserRights.Read);
 
 			m_calendar.StartDate = DateTime.Now;
 			m_calendar.SelectedDate = m_calendar.StartDate;
@@ -193,7 +193,7 @@ namespace EAssistant
 		private void GetOpenedTickets()
 		{
 			DateTime today = DateTime.Now;
-
+#if !DEBUG
 			listClients.Items.Clear();
 			ClientCollection clients = new ClientCollection();
 			clients.Refresh("date(openTicket) = date('now', 'localtime')");
@@ -299,33 +299,32 @@ namespace EAssistant
 		
 		private void SearchClient()
 		{
-			//Prompt dlg = new Prompt();
-			//dlg.Text = "Search client by code";
-			//while (DialogResult.OK == dlg.ShowDialog())
-			//{
-			//    Int64 id = Session.CheckBarCode(dlg.Value);
-			//    if (0 == id)
-			//    {
-			//        dlg.Clear();
-			//        continue;
-			//    }
+			Prompt dlg = new Prompt();
+			dlg.Text = "Search client by code";
+			while (DialogResult.OK == dlg.ShowDialog())
+			{
+				Int64 id = Session.CheckBarCode(dlg.Value);
+				if (0 == id)
+				{
+					dlg.Clear();
+					continue;
+				}
+				if (null != Db.Instance.dSet.clients.FindByid(id))
+				{
+					ClientInfo ci = new ClientInfo(id);
+					if (DialogResult.OK == ci.ShowDialog(this))
+					{
+						UpdateInfo();
+						Logger.Debug("Client data changed for: " + ci.ClientName + " " + ci.ClientCode);
+					}
+				}
+				else
+				{
+					UIMessages.Warning("Specified card is unregistered.");
+				}
 
-			//    if (Client.Exists(id))
-			//    {
-			//        ClientInfo ci = new ClientInfo(id);
-			//        if (DialogResult.OK == ci.ShowDialog(this))
-			//        {
-			//            UpdateInfo();
-			//            Logger.Debug("Client data changed for: " + ci.ClientName + " " + ci.ClientCode);
-			//        }
-			//    }
-			//    else
-			//    {
-			//        UIMessages.Warning("Specified card is unregistered.");
-			//    }
-
-			//    dlg.Clear();
-			//}
+				dlg.Clear();
+			}
 		}
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -463,7 +462,7 @@ namespace EAssistant
 			if(DialogResult.OK == opd.ShowDialog())
 			{
 				new DbAdapter().ImportData(opd.FileName);
-				if(!dbDataSet.usersRow.UserExist(Session.Instance.UserId))
+				if(!clientDataSet.usersRow.UserExist(Session.Instance.UserId))
 				{
 					UserLogin();
 				}

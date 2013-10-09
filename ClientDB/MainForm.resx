@@ -369,6 +369,30 @@
   <data name="tabManager.Alignment" type="System.Windows.Forms.TabAlignment, System.Windows.Forms">
     <value>Bottom</value>
   </data>
+  <data name="dataGridView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="dataGridView1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>897, 284</value>
+  </data>
+  <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
+    <value>dataGridView1</value>
+  </data>
+  <data name="&gt;&gt;dataGridView1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridView1.Parent" xml:space="preserve">
+    <value>tabActiveClients</value>
+  </data>
+  <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="columnClient.Text" xml:space="preserve">
     <value>Client</value>
   </data>
@@ -397,13 +421,13 @@
     <value>Left times</value>
   </data>
   <data name="listClients.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+    <value>Bottom</value>
   </data>
   <data name="listClients.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>0, 304</value>
   </data>
   <data name="listClients.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 414</value>
+    <value>897, 110</value>
   </data>
   <data name="listClients.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -418,7 +442,7 @@
     <value>tabActiveClients</value>
   </data>
   <data name="&gt;&gt;listClients.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="tabActiveClients.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 4</value>

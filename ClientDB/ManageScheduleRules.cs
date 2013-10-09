@@ -9,128 +9,75 @@ namespace EAssistant
 {
 	public partial class ManageScheduleRules : Form
 	{
+		private DataGridViewTextBoxColumn colId;
+		private DataGridViewTextBoxColumn colName;
+		private DataGridViewTextBoxColumn colHoursAdd;
+		private DataGridViewTextBoxColumn colHoursPerLesson;
+		private DataGridViewTextBoxColumn colPrice;
+		
 		public ManageScheduleRules()
 		{
 			InitializeComponent();
+			Init();
 		}
 
+		private void Init()
+		{
+			scheduleRulesBindingSource.DataSource = Db.Instance.dSet.scheduleRules;
+			
+			colId = new DataGridViewTextBoxColumn();
+			colName = new DataGridViewTextBoxColumn();
+			colHoursAdd = new DataGridViewTextBoxColumn();
+			colHoursPerLesson = new DataGridViewTextBoxColumn();
+			colPrice = new DataGridViewTextBoxColumn();
+
+			gridRules.Columns.AddRange(new DataGridViewColumn[] {
+				colId, colName, colHoursAdd, colHoursPerLesson, colPrice});
+			
+			// 
+			// colId
+			// 
+			this.colId.DataPropertyName = "id";
+			this.colId.HeaderText = "id";
+			this.colId.Name = "colId";
+			this.colId.Visible = false;
+			// 
+			// colName
+			// 
+			this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.colName.DataPropertyName = "name";
+			this.colName.HeaderText = "Name";
+			this.colName.Name = "colName";
+			// 
+			// colHoursAdd
+			// 
+			this.colHoursAdd.DataPropertyName = "hoursAdd";
+			this.colHoursAdd.HeaderText = "Plan hours";
+			this.colHoursAdd.Name = "colHoursAdd";
+			// 
+			// colHoursPerLesson
+			// 
+			this.colHoursPerLesson.DataPropertyName = "hoursPerLesson";
+			this.colHoursPerLesson.HeaderText = "Lesson";
+			this.colHoursPerLesson.Name = "colHoursPerLesson";
+			// 
+			// colPrice
+			// 
+			this.colPrice.DataPropertyName = "price";
+			this.colPrice.HeaderText = "Price";
+			this.colPrice.Name = "colPrice";
+			
+			
+		}
+		
 		private void OnLoad(object sender, EventArgs e)
 		{
 			Db.Instance.Adapters.scheduleRulesTableAdapter.Fill(Db.Instance.dSet.scheduleRules);
-			/*
-			rulesList.Items.Clear();
-			foreach (ScheduleRule trainer in collection)
-			{
-				rulesList.Items.Add(trainer);
-			}
-			*/
 		}
 		
-		private bool ValidateForm()
-		{
-			try
-			{
-				float.Parse(price.Text.Trim());
-			}
-			catch
-			{
-				UIMessages.Error(String.Format("Please specify price in the 'XX{0}YY' format."
-					, CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator));
-				return false;
-			}
-			
-			return true;
-		}
-		
-		private float GetPrice()
-		{
-			String szPrice = price.Text.Trim();
-			return float.Parse(szPrice);
-		}
-		
-		private void add_Click(object sender, EventArgs e)
-		{
-			if(!ValidateForm())
-				return;
-				
-			String szName = name.Text.Trim();
-			String szPhone = hoursAdd.Text.Trim();
-			float fPrice = GetPrice();
-			Int64 id = 0;
-
-			/*
-			ScheduleRulesCollection collection = new ScheduleRulesCollection();
-			List<ScheduleRule> trainers = collection.Search(szName);
-			if (trainers.Count > 0)
-			{
-				UIMessages.Error("Trainer with specified name already exists.");
-				return;
-			}
-			
-			if(szName.Length < 1)
-				return;
-			
-			if(!collection.Add(szName, szPhone, fPrice, out id))
-			{
-				UIMessages.Error("Trainer could not been added.");
-				return;
-			}
-
-			rulesList.Items.Add(new ScheduleRule(id));
-			*/
-		}
-
-		private void remove_Click(object sender, EventArgs e)
-		{
-			if (rulesList.SelectedItem == null)
-				return;
-
-			/*
-			ScheduleRule trainer = (ScheduleRule)rulesList.SelectedItem;
-			if (!ScheduleRulesCollection.RemoveById(trainer.Id))
-			{
-				UIMessages.Error("Selected schedule hoursAdd could not been removed.");
-				return;
-			}
-			
-			rulesList.Items.Remove(trainer);
-			*/
-		}
-
 		private void save_Click(object sender, EventArgs e)
 		{
-			if (!ValidateForm())
-				return;
-			
-			if (rulesList.SelectedItem == null)
-				return;
-			
-			String szName = name.Text.Trim();
-			String szRule = hoursAdd.Text.Trim();
-			float fPrice = GetPrice();
-
-			if (szName.Length < 1)
-				return;
-
-			/*
-			ScheduleRule selected = (ScheduleRule)rulesList.SelectedItem;
-			selected.SetData(szName, szRule, fPrice);
-			rulesList.Items[rulesList.SelectedIndex] = selected;
-			*/
-		}
-
-		private void rulesList_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (rulesList.SelectedItem == null)
-				return;
-
-			/*
-			ScheduleRule selected = (ScheduleRule)rulesList.SelectedItem;
-
-			name.Text = selected.Name;
-			hoursAdd.Text = selected.Rule;
-			price.Text = selected.Price.ToString();
-			*/
+			Db.Instance.AcceptChanges();
 		}
 	}
 }

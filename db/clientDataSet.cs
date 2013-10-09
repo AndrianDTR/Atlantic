@@ -1,9 +1,12 @@
-﻿namespace AY.db {
-    public partial class dbDataSet {
+﻿namespace AY.db.clientDataSetTableAdapters
+{
+}
+namespace AY.db {
+    public partial class clientDataSet {
 	}
 }
 
-namespace AY.db.dbDataSetTableAdapters 
+namespace AY.db.clientDataSetTableAdapters 
 {
 	public partial class TableAdapterManager
 	{

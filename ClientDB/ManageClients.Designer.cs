@@ -36,15 +36,28 @@
 			this.btnSearch = new System.Windows.Forms.Button();
 			this.textToSearch = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
+			this.btnCancel = new System.Windows.Forms.Button();
+			this.btnOk = new System.Windows.Forms.Button();
 			this.gridClients = new System.Windows.Forms.DataGridView();
+			this.tmpDataSet = new EAssistant.tmpDataSet();
 			this.clientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.btnAdd = new System.Windows.Forms.Button();
-			this.btnEdit = new System.Windows.Forms.Button();
-			this.btnRemove = new System.Windows.Forms.Button();
-			this.btnClose = new System.Windows.Forms.Button();
+			this.clientsTableAdapter = new EAssistant.tmpDataSetTableAdapters.clientsTableAdapter();
+			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.phoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.scheduleDaysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.scheduleTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.lastEnterDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.lastLeaveDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.openTicketDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.trainerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.planDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.hoursLeftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			groupBox1 = new System.Windows.Forms.GroupBox();
 			groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridClients)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tmpDataSet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -124,80 +137,147 @@
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Text";
 			// 
+			// btnCancel
+			// 
+			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnCancel.Location = new System.Drawing.Point(721, 387);
+			this.btnCancel.Name = "btnCancel";
+			this.btnCancel.Size = new System.Drawing.Size(75, 23);
+			this.btnCancel.TabIndex = 4;
+			this.btnCancel.Text = "Cancel";
+			this.btnCancel.UseVisualStyleBackColor = true;
+			// 
+			// btnOk
+			// 
+			this.btnOk.Location = new System.Drawing.Point(640, 387);
+			this.btnOk.Name = "btnOk";
+			this.btnOk.Size = new System.Drawing.Size(75, 23);
+			this.btnOk.TabIndex = 2;
+			this.btnOk.Text = "OK";
+			this.btnOk.UseVisualStyleBackColor = true;
+			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+			// 
 			// gridClients
 			// 
-			this.gridClients.AllowUserToAddRows = false;
-			this.gridClients.AllowUserToDeleteRows = false;
-			this.gridClients.AllowUserToResizeRows = false;
 			this.gridClients.AutoGenerateColumns = false;
-			this.gridClients.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
 			this.gridClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.gridClients.DataMember = "clients";
+			this.gridClients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn,
+            this.nameDataGridViewTextBoxColumn,
+            this.phoneDataGridViewTextBoxColumn,
+            this.scheduleDaysDataGridViewTextBoxColumn,
+            this.scheduleTimeDataGridViewTextBoxColumn,
+            this.lastEnterDataGridViewTextBoxColumn,
+            this.lastLeaveDataGridViewTextBoxColumn,
+            this.openTicketDataGridViewTextBoxColumn,
+            this.trainerDataGridViewTextBoxColumn,
+            this.commentDataGridViewTextBoxColumn,
+            this.planDataGridViewTextBoxColumn,
+            this.hoursLeftDataGridViewTextBoxColumn});
 			this.gridClients.DataSource = this.clientsBindingSource;
-			this.gridClients.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
 			this.gridClients.Location = new System.Drawing.Point(12, 74);
-			this.gridClients.MultiSelect = false;
 			this.gridClients.Name = "gridClients";
-			this.gridClients.ReadOnly = true;
-			this.gridClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.gridClients.Size = new System.Drawing.Size(784, 307);
-			this.gridClients.TabIndex = 0;
-			this.gridClients.DoubleClick += new System.EventHandler(this.OnEdit);
+			this.gridClients.Size = new System.Drawing.Size(784, 302);
+			this.gridClients.TabIndex = 5;
+			this.gridClients.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.OnRemoveRow);
 			// 
-			// btnAdd
+			// tmpDataSet
 			// 
-			this.btnAdd.Location = new System.Drawing.Point(12, 387);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(75, 23);
-			this.btnAdd.TabIndex = 1;
-			this.btnAdd.Text = "Add";
-			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+			this.tmpDataSet.DataSetName = "tmpDataSet";
+			this.tmpDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
 			// 
-			// btnEdit
+			// clientsBindingSource
 			// 
-			this.btnEdit.Location = new System.Drawing.Point(93, 387);
-			this.btnEdit.Name = "btnEdit";
-			this.btnEdit.Size = new System.Drawing.Size(75, 23);
-			this.btnEdit.TabIndex = 2;
-			this.btnEdit.Text = "Edit";
-			this.btnEdit.UseVisualStyleBackColor = true;
-			this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+			this.clientsBindingSource.DataMember = "clients";
+			this.clientsBindingSource.DataSource = this.tmpDataSet;
 			// 
-			// btnRemove
+			// clientsTableAdapter
 			// 
-			this.btnRemove.Location = new System.Drawing.Point(174, 387);
-			this.btnRemove.Name = "btnRemove";
-			this.btnRemove.Size = new System.Drawing.Size(75, 23);
-			this.btnRemove.TabIndex = 3;
-			this.btnRemove.Text = "Remove";
-			this.btnRemove.UseVisualStyleBackColor = true;
-			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+			this.clientsTableAdapter.ClearBeforeFill = true;
 			// 
-			// btnClose
+			// idDataGridViewTextBoxColumn
 			// 
-			this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnClose.Location = new System.Drawing.Point(721, 387);
-			this.btnClose.Name = "btnClose";
-			this.btnClose.Size = new System.Drawing.Size(75, 23);
-			this.btnClose.TabIndex = 4;
-			this.btnClose.Text = "Close";
-			this.btnClose.UseVisualStyleBackColor = true;
-			this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+			this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+			this.idDataGridViewTextBoxColumn.HeaderText = "id";
+			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "name";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			// 
+			// phoneDataGridViewTextBoxColumn
+			// 
+			this.phoneDataGridViewTextBoxColumn.DataPropertyName = "phone";
+			this.phoneDataGridViewTextBoxColumn.HeaderText = "phone";
+			this.phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
+			// 
+			// scheduleDaysDataGridViewTextBoxColumn
+			// 
+			this.scheduleDaysDataGridViewTextBoxColumn.DataPropertyName = "scheduleDays";
+			this.scheduleDaysDataGridViewTextBoxColumn.HeaderText = "scheduleDays";
+			this.scheduleDaysDataGridViewTextBoxColumn.Name = "scheduleDaysDataGridViewTextBoxColumn";
+			// 
+			// scheduleTimeDataGridViewTextBoxColumn
+			// 
+			this.scheduleTimeDataGridViewTextBoxColumn.DataPropertyName = "scheduleTime";
+			this.scheduleTimeDataGridViewTextBoxColumn.HeaderText = "scheduleTime";
+			this.scheduleTimeDataGridViewTextBoxColumn.Name = "scheduleTimeDataGridViewTextBoxColumn";
+			// 
+			// lastEnterDataGridViewTextBoxColumn
+			// 
+			this.lastEnterDataGridViewTextBoxColumn.DataPropertyName = "lastEnter";
+			this.lastEnterDataGridViewTextBoxColumn.HeaderText = "lastEnter";
+			this.lastEnterDataGridViewTextBoxColumn.Name = "lastEnterDataGridViewTextBoxColumn";
+			// 
+			// lastLeaveDataGridViewTextBoxColumn
+			// 
+			this.lastLeaveDataGridViewTextBoxColumn.DataPropertyName = "lastLeave";
+			this.lastLeaveDataGridViewTextBoxColumn.HeaderText = "lastLeave";
+			this.lastLeaveDataGridViewTextBoxColumn.Name = "lastLeaveDataGridViewTextBoxColumn";
+			// 
+			// openTicketDataGridViewTextBoxColumn
+			// 
+			this.openTicketDataGridViewTextBoxColumn.DataPropertyName = "openTicket";
+			this.openTicketDataGridViewTextBoxColumn.HeaderText = "openTicket";
+			this.openTicketDataGridViewTextBoxColumn.Name = "openTicketDataGridViewTextBoxColumn";
+			// 
+			// trainerDataGridViewTextBoxColumn
+			// 
+			this.trainerDataGridViewTextBoxColumn.DataPropertyName = "trainer";
+			this.trainerDataGridViewTextBoxColumn.HeaderText = "trainer";
+			this.trainerDataGridViewTextBoxColumn.Name = "trainerDataGridViewTextBoxColumn";
+			// 
+			// commentDataGridViewTextBoxColumn
+			// 
+			this.commentDataGridViewTextBoxColumn.DataPropertyName = "comment";
+			this.commentDataGridViewTextBoxColumn.HeaderText = "comment";
+			this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
+			// 
+			// planDataGridViewTextBoxColumn
+			// 
+			this.planDataGridViewTextBoxColumn.DataPropertyName = "plan";
+			this.planDataGridViewTextBoxColumn.HeaderText = "plan";
+			this.planDataGridViewTextBoxColumn.Name = "planDataGridViewTextBoxColumn";
+			// 
+			// hoursLeftDataGridViewTextBoxColumn
+			// 
+			this.hoursLeftDataGridViewTextBoxColumn.DataPropertyName = "hoursLeft";
+			this.hoursLeftDataGridViewTextBoxColumn.HeaderText = "hoursLeft";
+			this.hoursLeftDataGridViewTextBoxColumn.Name = "hoursLeftDataGridViewTextBoxColumn";
 			// 
 			// ManageClients
 			// 
 			this.AcceptButton = this.btnSearch;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.CancelButton = this.btnClose;
+			this.CancelButton = this.btnCancel;
 			this.ClientSize = new System.Drawing.Size(808, 422);
-			this.Controls.Add(this.btnClose);
-			this.Controls.Add(this.btnRemove);
-			this.Controls.Add(this.btnEdit);
-			this.Controls.Add(this.btnAdd);
-			this.Controls.Add(groupBox1);
 			this.Controls.Add(this.gridClients);
+			this.Controls.Add(this.btnCancel);
+			this.Controls.Add(this.btnOk);
+			this.Controls.Add(groupBox1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -210,6 +290,7 @@
 			groupBox1.ResumeLayout(false);
 			groupBox1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridClients)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tmpDataSet)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
@@ -217,22 +298,29 @@
 
 		#endregion
 
-		private System.Windows.Forms.DataGridView gridClients;
 		private System.Windows.Forms.CheckBox checkNames;
 		private System.Windows.Forms.Button btnSearch;
 		private System.Windows.Forms.TextBox textToSearch;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.CheckBox checkCode;
 		private System.Windows.Forms.CheckBox checkStartWith;
-		private System.Windows.Forms.Button btnAdd;
-		private System.Windows.Forms.Button btnEdit;
-		private System.Windows.Forms.Button btnRemove;
-		private System.Windows.Forms.Button btnClose;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colId;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colLastEnter;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colTimesLeft;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colScheduleTime;
+		private System.Windows.Forms.Button btnCancel;
+		private System.Windows.Forms.Button btnOk;
+		private System.Windows.Forms.DataGridView gridClients;
+		private tmpDataSet tmpDataSet;
 		private System.Windows.Forms.BindingSource clientsBindingSource;
+		private EAssistant.tmpDataSetTableAdapters.clientsTableAdapter clientsTableAdapter;
+		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn scheduleDaysDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn scheduleTimeDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn lastEnterDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn lastLeaveDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn openTicketDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn trainerDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn planDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn hoursLeftDataGridViewTextBoxColumn;
 	}
 }

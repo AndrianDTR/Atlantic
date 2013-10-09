@@ -15,12 +15,12 @@ namespace EAssistant
 		public ManageClients()
 		{
 			InitializeComponent();
-			this.clientsBindingSource.DataSource = Db.Instance.dSet;
 			Init();
 		}
 		
 		private void Init()
 		{
+			/*
 			colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			colTimesLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,19 +57,18 @@ namespace EAssistant
 
 			gridClients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
 				colId, colName, colTimesLeft, colScheduleTime, colLastEnter});
+			*/
 		}
 		
-		private void btnClose_Click(object sender, EventArgs e)
-		{
-			this.Close();
-		}
-	
 		private void OnLoad(object sender, EventArgs e)
 		{
+			// TODO: This line of code loads data into the 'tmpDataSet.clients' table. You can move, or remove it, as needed.
+			this.clientsTableAdapter.Fill(this.tmpDataSet.clients);
+			// TODO: This line of code loads data into the 'clientDataSet.clients' table. You can move, or remove it, as needed.
 			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
 		}
 
-		private object[] parseClient(dbDataSet.clientsRow client)
+		private object[] parseClient(clientDataSet.clientsRow client)
 		{
 			object[] row = new object[5];
 
@@ -109,7 +108,7 @@ namespace EAssistant
 			String val = textToSearch.Text;
 			if (0 == val.Trim().Length)
 			{
-				clientsBindingSource.Filter = "";
+				//clientsBindingSource.Filter = "";
 				return;
 			}
 
@@ -121,7 +120,7 @@ namespace EAssistant
 			if (checkNames.Checked)
 				query += String.Format(" or name like '{0}'", pattern);
 
-			clientsBindingSource.Filter = String.Format(query, val);
+			//clientsBindingSource.Filter = String.Format(query, val);
 		}
 		
 		private void btnAdd_Click(object sender, EventArgs e)
@@ -133,49 +132,9 @@ namespace EAssistant
 			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
 		}
 
-		private void btnRemove_Click(object sender, EventArgs e)
+		private void btnOk_Click(object sender, EventArgs e)
 		{
-			//Int64 id = GetSelectedClientId();
-
-			//if (-1 == id)
-			//    return;
-			
-			//if(DialogResult.Yes != UIMessages.Warning("Client will be removed. Do you agree?", MessageBoxButtons.YesNo))
-			//    return;
-				
-			//if (!ClientCollection.RemoveById(id))
-			//{
-			//    UIMessages.Error("Client could not been removed.");
-			//    return;
-			//}
-			//int ndx = gridClients.SelectedRows[0].Index - 1;
-			//gridClients.Rows.Remove(gridClients.SelectedRows[0]);
-			//if(ndx >= 0)
-			//    gridClients.Rows[ndx].Selected = true;
-			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
-		}
-
-		private void btnHistory_Click(object sender, EventArgs e)
-		{
-			Int64 id = GetSelectedClientId();
-
-			if (-1 == id)
-				return;
-			
-		}
-
-		private void btnPayments_Click(object sender, EventArgs e)
-		{
-			Int64 id = GetSelectedClientId();
-
-			if (-1 == id)
-				return;
-			
-		}
-
-		private void btnEdit_Click(object sender, EventArgs e)
-		{
-			EditClient();
+			Db.Instance.AcceptChanges();
 		}
 		
 		private void OnEdit(object sender, EventArgs e)
@@ -198,6 +157,11 @@ namespace EAssistant
 			int index = gridClients.SelectedRows[0].Index;
 			
 			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
+		}
+
+		private void OnRemoveRow(object sender, DataGridViewRowCancelEventArgs e)
+		{
+			;
 		}
 	}
 }

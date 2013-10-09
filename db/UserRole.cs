@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using AY.Log;
-using AY.db.dbDataSetTableAdapters;
 
 namespace AY
 {
@@ -17,7 +16,7 @@ namespace AY
 			Delete = 8
 		};
 		
-		public partial class dbDataSet
+		public partial class clientDataSet
 		{
 			public partial class userPrivilegesRow
 			{

@@ -23,7 +23,7 @@ namespace EAssistant
 
 			Db.Instance.Adapters.scheduleRulesTableAdapter.Fill(Db.Instance.dSet.scheduleRules);
 
-			foreach (dbDataSet.scheduleRulesRow srr in Db.Instance.dSet.scheduleRules.Rows)
+			foreach (clientDataSet.scheduleRulesRow srr in Db.Instance.dSet.scheduleRules.Rows)
 			{
 				comboTypeOfService.Items.Add(srr);
 				comboTypeOfService.AutoCompleteCustomSource.Add(srr.ToString());
@@ -37,7 +37,7 @@ namespace EAssistant
 			if(comboTypeOfService.SelectedIndex < 0)
 				return;
 
-			dbDataSet.scheduleRulesRow sr = (dbDataSet.scheduleRulesRow)comboTypeOfService.SelectedItem;
+			clientDataSet.scheduleRulesRow sr = (clientDataSet.scheduleRulesRow)comboTypeOfService.SelectedItem;
 			textSum.Text = sr.price.ToString();
 		}
 
@@ -74,7 +74,7 @@ namespace EAssistant
 			if(!ValidateForm())
 				return;
 
-			dbDataSet.scheduleRulesRow sc = (dbDataSet.scheduleRulesRow)comboTypeOfService.SelectedItem;
+			clientDataSet.scheduleRulesRow sc = (clientDataSet.scheduleRulesRow)comboTypeOfService.SelectedItem;
 			
 			int id = Db.Instance.Adapters.paymentsTableAdapter.Insert(m_ClientId
 				, sc.id

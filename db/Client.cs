@@ -7,7 +7,7 @@ namespace AY
 {
 	namespace db
 	{
-		public partial class dbDataSet
+		public partial class clientDataSet
 		{
 			public partial class clientsRow
 			{
@@ -39,7 +39,7 @@ namespace AY
 					}
 				}
 
-				public dbDataSet.trainersRow Trainer
+				public clientDataSet.trainersRow Trainer
 				{
 					get
 					{

@@ -77,7 +77,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Statistics.cs" />
+    <Compile Include="Statistics.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DbAdapter.cs" />
     <Compile Include="Opts.cs">
       <SubType>Component</SubType>

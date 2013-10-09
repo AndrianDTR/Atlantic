@@ -69,12 +69,6 @@
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.tabManager = new System.Windows.Forms.TabControl();
 			this.tabActiveClients = new System.Windows.Forms.TabPage();
-			this.listClients = new System.Windows.Forms.ListView();
-			this.columnClient = new System.Windows.Forms.ColumnHeader();
-			this.columnStatus = new System.Windows.Forms.ColumnHeader();
-			this.columnEnter = new System.Windows.Forms.ColumnHeader();
-			this.columnLeave = new System.Windows.Forms.ColumnHeader();
-			this.columnEntarncesLeft = new System.Windows.Forms.ColumnHeader();
 			this.tabCalendar = new System.Windows.Forms.TabPage();
 			this.m_calendar = new EAssistant.DayView();
 			this.tabStatistics = new System.Windows.Forms.TabPage();
@@ -87,6 +81,13 @@
 			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
+			this.columnClient = new System.Windows.Forms.ColumnHeader();
+			this.columnStatus = new System.Windows.Forms.ColumnHeader();
+			this.columnEnter = new System.Windows.Forms.ColumnHeader();
+			this.columnLeave = new System.Windows.Forms.ColumnHeader();
+			this.columnEntarncesLeft = new System.Windows.Forms.ColumnHeader();
+			this.listClients = new System.Windows.Forms.ListView();
+			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tabManager.SuspendLayout();
@@ -95,6 +96,7 @@
 			this.tabStatistics.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
 			this.panel1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -335,49 +337,11 @@
 			// 
 			// tabActiveClients
 			// 
+			this.tabActiveClients.Controls.Add(this.dataGridView1);
 			this.tabActiveClients.Controls.Add(this.listClients);
 			resources.ApplyResources(this.tabActiveClients, "tabActiveClients");
 			this.tabActiveClients.Name = "tabActiveClients";
 			this.tabActiveClients.UseVisualStyleBackColor = true;
-			// 
-			// listClients
-			// 
-			this.listClients.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnClient,
-            this.columnStatus,
-            this.columnEnter,
-            this.columnLeave,
-            this.columnEntarncesLeft});
-			resources.ApplyResources(this.listClients, "listClients");
-			this.listClients.FullRowSelect = true;
-			this.listClients.GridLines = true;
-			this.listClients.HideSelection = false;
-			this.listClients.MultiSelect = false;
-			this.listClients.Name = "listClients";
-			this.listClients.UseCompatibleStateImageBehavior = false;
-			this.listClients.View = System.Windows.Forms.View.Details;
-			this.listClients.DoubleClick += new System.EventHandler(this.ShowClientInfo);
-			// 
-			// columnClient
-			// 
-			resources.ApplyResources(this.columnClient, "columnClient");
-			// 
-			// columnStatus
-			// 
-			resources.ApplyResources(this.columnStatus, "columnStatus");
-			// 
-			// columnEnter
-			// 
-			resources.ApplyResources(this.columnEnter, "columnEnter");
-			// 
-			// columnLeave
-			// 
-			resources.ApplyResources(this.columnLeave, "columnLeave");
-			// 
-			// columnEntarncesLeft
-			// 
-			resources.ApplyResources(this.columnEntarncesLeft, "columnEntarncesLeft");
-#if DEBUG
 			// 
 			// tabCalendar
 			// 
@@ -440,7 +404,6 @@
 			this.chart1.Series.Add(series1);
 			this.chart1.Series.Add(series2);
 			this.chart1.PrePaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.FillChart);
-#endif
 			// 
 			// panel1
 			// 
@@ -510,6 +473,50 @@
 			this.btnAddClient.UseVisualStyleBackColor = true;
 			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
 			// 
+			// columnClient
+			// 
+			resources.ApplyResources(this.columnClient, "columnClient");
+			// 
+			// columnStatus
+			// 
+			resources.ApplyResources(this.columnStatus, "columnStatus");
+			// 
+			// columnEnter
+			// 
+			resources.ApplyResources(this.columnEnter, "columnEnter");
+			// 
+			// columnLeave
+			// 
+			resources.ApplyResources(this.columnLeave, "columnLeave");
+			// 
+			// columnEntarncesLeft
+			// 
+			resources.ApplyResources(this.columnEntarncesLeft, "columnEntarncesLeft");
+			// 
+			// listClients
+			// 
+			this.listClients.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnClient,
+            this.columnStatus,
+            this.columnEnter,
+            this.columnLeave,
+            this.columnEntarncesLeft});
+			resources.ApplyResources(this.listClients, "listClients");
+			this.listClients.FullRowSelect = true;
+			this.listClients.GridLines = true;
+			this.listClients.HideSelection = false;
+			this.listClients.MultiSelect = false;
+			this.listClients.Name = "listClients";
+			this.listClients.UseCompatibleStateImageBehavior = false;
+			this.listClients.View = System.Windows.Forms.View.Details;
+			this.listClients.DoubleClick += new System.EventHandler(this.ShowClientInfo);
+			// 
+			// dataGridView1
+			// 
+			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			resources.ApplyResources(this.dataGridView1, "dataGridView1");
+			this.dataGridView1.Name = "dataGridView1";
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -530,6 +537,7 @@
 			this.tabStatistics.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
 			this.panel1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -572,12 +580,6 @@
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.ToolStripMenuItem sendLogToolStripMenuItem;
 		private System.Windows.Forms.TabControl tabManager;
-		private System.Windows.Forms.ListView listClients;
-		private System.Windows.Forms.ColumnHeader columnClient;
-		private System.Windows.Forms.ColumnHeader columnStatus;
-		private System.Windows.Forms.ColumnHeader columnEnter;
-		private System.Windows.Forms.ColumnHeader columnLeave;
-		private System.Windows.Forms.ColumnHeader columnEntarncesLeft;
 		private DayView m_calendar;
 		private System.Windows.Forms.TabPage tabCalendar;
 		private System.Windows.Forms.TabPage tabStatistics;
@@ -591,6 +593,13 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
 		private System.Windows.Forms.ToolStripMenuItem geterateBarcodesToolStripMenuItem;
 		private System.Windows.Forms.Button btnSearch;
+		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.ListView listClients;
+		private System.Windows.Forms.ColumnHeader columnClient;
+		private System.Windows.Forms.ColumnHeader columnStatus;
+		private System.Windows.Forms.ColumnHeader columnEnter;
+		private System.Windows.Forms.ColumnHeader columnLeave;
+		private System.Windows.Forms.ColumnHeader columnEntarncesLeft;
     }
 }
 

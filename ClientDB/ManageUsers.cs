@@ -91,7 +91,7 @@ namespace EAssistant
 			if(passDlg.ShowDialog() != DialogResult.OK)
 				return;
 
-			dbDataSet.usersRow user = (dbDataSet.usersRow)((DataRowView)gridUsers.SelectedRows[0].DataBoundItem).Row;
+			clientDataSet.usersRow user = (clientDataSet.usersRow)((DataRowView)gridUsers.SelectedRows[0].DataBoundItem).Row;
 			user.pass = AY.Utils.SecUtils.md5(passDlg.Password);
 		}
 

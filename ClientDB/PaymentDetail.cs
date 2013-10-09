@@ -11,7 +11,7 @@ namespace EAssistant
 		{
 			InitializeComponent();
 			
-			dbDataSet.paymentsRow pr = Db.Instance.dSet.payments.FindByid(id);
+			clientDataSet.paymentsRow pr = Db.Instance.dSet.payments.FindByid(id);
 			
 			textDate.Text = pr.date.ToString();
 			textUser.Text = (Db.Instance.dSet.users.FindByid(pr.creatorId)).name;

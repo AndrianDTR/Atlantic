@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Data;
 using AY.Log;
 using AY.Utils;
-using AY.db.dbDataSetTableAdapters;
+using AY.db.clientDataSetTableAdapters;
 
 namespace AY.db
 {
 	public class Db : Singleton<Db>
 	{
-		private dbDataSet m_clientDataSet;
+		private clientDataSet m_clientDataSet;
 		private TableAdapterManager tam;
 		
 		private Db()
 		{
-			m_clientDataSet = new dbDataSet();
+			m_clientDataSet = new clientDataSet();
 			tam = new TableAdapterManager();
 			tam.UpdateAll(m_clientDataSet);
 			
@@ -47,7 +47,7 @@ namespace AY.db
 			((System.ComponentModel.ISupportInitialize)(m_clientDataSet)).EndInit();
 		}
 
-		public dbDataSet dSet
+		public clientDataSet dSet
 		{
 			get { return m_clientDataSet; }
 		}
