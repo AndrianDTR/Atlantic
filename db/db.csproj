@@ -56,7 +56,6 @@
     </Compile>
     <Compile Include="clientDataSet.cs">
       <DependentUpon>clientDataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Common.cs">
       <SubType>Component</SubType>

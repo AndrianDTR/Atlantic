@@ -65,6 +65,7 @@ namespace EAssistant
 			colName.DataPropertyName = "name";
 			colName.HeaderText = "Name";
 			colName.Name = "nameDataGridViewTextBoxColumn";
+			colName.ReadOnly = true;
 			// 
 			// phoneDataGridViewTextBoxColumn
 			// 
@@ -135,6 +136,7 @@ namespace EAssistant
 			colPlan.DataPropertyName = "rule";
 			colPlan.HeaderText = "Plan";
 			colPlan.Name = "ruleDataGridViewTextBoxColumn";
+			colPlan.ReadOnly = true;
 			// 
 			// hoursLeftDataGridViewTextBoxColumn
 			// 
@@ -142,6 +144,7 @@ namespace EAssistant
 			colHoursLeft.DataPropertyName = "hoursLeft";
 			colHoursLeft.HeaderText = "Hours left";
 			colHoursLeft.Name = "hoursLeftDataGridViewTextBoxColumn";
+			colHoursLeft.ReadOnly = true;
 
 			gridClients.Columns.AddRange(new DataGridViewColumn[] {
 				colId,

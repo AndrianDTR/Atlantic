@@ -40,13 +40,10 @@
 			this.btnOk = new System.Windows.Forms.Button();
 			this.gridClients = new System.Windows.Forms.DataGridView();
 			this.clientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.tmpDataSet = new EAssistant.tmpDataSet();
-			this.clientsTableAdapter = new EAssistant.tmpDataSetTableAdapters.clientsTableAdapter();
 			groupBox1 = new System.Windows.Forms.GroupBox();
 			groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridClients)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.tmpDataSet)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -151,6 +148,7 @@
 			this.gridClients.AutoGenerateColumns = false;
 			this.gridClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridClients.DataSource = this.clientsBindingSource;
+			this.gridClients.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
 			this.gridClients.Location = new System.Drawing.Point(12, 74);
 			this.gridClients.MultiSelect = false;
 			this.gridClients.Name = "gridClients";
@@ -164,15 +162,6 @@
 			// clientsBindingSource
 			// 
 			this.clientsBindingSource.DataMember = "vClients";
-			// 
-			// tmpDataSet
-			// 
-			this.tmpDataSet.DataSetName = "tmpDataSet";
-			this.tmpDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-			// 
-			// clientsTableAdapter
-			// 
-			this.clientsTableAdapter.ClearBeforeFill = true;
 			// 
 			// ManageClients
 			// 
@@ -198,7 +187,6 @@
 			groupBox1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridClients)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.tmpDataSet)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -214,8 +202,6 @@
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Button btnOk;
 		private System.Windows.Forms.DataGridView gridClients;
-		private tmpDataSet tmpDataSet;
 		private System.Windows.Forms.BindingSource clientsBindingSource;
-		private EAssistant.tmpDataSetTableAdapters.clientsTableAdapter clientsTableAdapter;
 	}
 }
