@@ -8,7 +8,7 @@ namespace EAssistant
 {
 	public partial class Options : Form
 	{
-		clientDataSet.settingsRow opts = null;
+		dbDataSet.settingsRow opts = null;
 		
 		public Options()
 		{

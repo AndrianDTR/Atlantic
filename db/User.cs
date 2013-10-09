@@ -8,7 +8,7 @@ namespace AY
 {
 	namespace db
 	{
-		public partial class clientDataSet{
+		public partial class dbDataSet{
 			public partial class usersRow
 			{
 				public void SetUserPrivileges(Int64 privId)
@@ -51,7 +51,7 @@ namespace AY
 					return true;
 				}
 
-				public static clientDataSet.usersRow Authenticate(String name, String pass)
+				public static dbDataSet.usersRow Authenticate(String name, String pass)
 				{
 					String filter = String.Format("name='{0}' and pass='{1}'", name, SecUtils.md5(pass));
 					DataRow[] dr = Db.Instance.dSet.users.Select(filter);
@@ -59,7 +59,7 @@ namespace AY
 					{
 						return null;
 					}
-					return (clientDataSet.usersRow)dr[0];
+					return (dbDataSet.usersRow)dr[0];
 				}
 
 				public static bool UserExist(Int64 id)

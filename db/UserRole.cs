@@ -16,7 +16,7 @@ namespace AY
 			Delete = 8
 		};
 		
-		public partial class clientDataSet
+		public partial class dbDataSet
 		{
 			public partial class userPrivilegesRow
 			{

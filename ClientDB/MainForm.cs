@@ -38,7 +38,7 @@ namespace EAssistant
 		}
 		
 		private Login m_login = new Login();
-		private clientDataSet.settingsRow m_opt = null;
+		private dbDataSet.settingsRow m_opt = null;
 		
         public MainForm()
         {
@@ -142,33 +142,33 @@ namespace EAssistant
 			m_calendar.Reinit();
 			session.PassLen = (int)m_opt.minPassLen;
 
-			clientDataSet.userPrivilegesRow priv = Db.Instance.dSet.userPrivileges.FindByid(session.UserRoleId);
+			dbDataSet.userPrivilegesRow priv = Db.Instance.dSet.userPrivileges.FindByid(session.UserRoleId);
 			
 			// File menu
-			exportToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Create);
-			importToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Write);
-			btnBackUp.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Write);
+			exportToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Create);
+			importToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Write);
+			btnBackUp.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Write);
 
 			// View menu
-			paymentsToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Read);
-			btnPaymentsHistory.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Read);
+			paymentsToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Read);
+			btnPaymentsHistory.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Read);
 
 			// Clients menu
-			addToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Create);
-			btnAddClient.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
+			addToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Create);
+			btnAddClient.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
 			
-			clientSearchToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
-			manageClientsToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
-			btnClientManager.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
+			clientSearchToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
+			manageClientsToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
+			btnClientManager.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
 
 			// Settings menu
-			userRolesToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.users, UserRights.Read);
-			usersAndPasswordsToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.users, UserRights.Read);
+			userRolesToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.users, UserRights.Read);
+			usersAndPasswordsToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.users, UserRights.Read);
 
-			btnTrainersShedule.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.trainers, UserRights.Read);
-			manageTrainersToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.trainers, UserRights.Read);
+			btnTrainersShedule.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.trainers, UserRights.Read);
+			manageTrainersToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.trainers, UserRights.Read);
 
-			manageScheduleRulesToolStripMenuItem.Enabled = clientDataSet.userPrivilegesRow.IsSet(priv.schedule, UserRights.Read);
+			manageScheduleRulesToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.schedule, UserRights.Read);
 
 			m_calendar.StartDate = DateTime.Now;
 			m_calendar.SelectedDate = m_calendar.StartDate;
@@ -310,7 +310,7 @@ namespace EAssistant
 					continue;
 				}
 				
-				clientDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(id);
+				dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(id);
 				if (null != cr)
 				{
 					ClientInfo ci = new ClientInfo(cr);
@@ -464,7 +464,7 @@ namespace EAssistant
 			if(DialogResult.OK == opd.ShowDialog())
 			{
 				new DbAdapter().ImportData(opd.FileName);
-				if(!clientDataSet.usersRow.UserExist(Session.Instance.UserId))
+				if(!dbDataSet.usersRow.UserExist(Session.Instance.UserId))
 				{
 					UserLogin();
 				}

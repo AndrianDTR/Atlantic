@@ -39,26 +39,14 @@
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
 			this.gridClients = new System.Windows.Forms.DataGridView();
-			this.tmpDataSet = new EAssistant.tmpDataSet();
 			this.clientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.tmpDataSet = new EAssistant.tmpDataSet();
 			this.clientsTableAdapter = new EAssistant.tmpDataSetTableAdapters.clientsTableAdapter();
-			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.phoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.scheduleDaysDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.scheduleTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.lastEnterDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.lastLeaveDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.openTicketDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.trainerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.planDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.hoursLeftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			groupBox1 = new System.Windows.Forms.GroupBox();
 			groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridClients)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.tmpDataSet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tmpDataSet)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -159,121 +147,32 @@
 			// 
 			// gridClients
 			// 
+			this.gridClients.AllowUserToResizeRows = false;
 			this.gridClients.AutoGenerateColumns = false;
 			this.gridClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.gridClients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.nameDataGridViewTextBoxColumn,
-            this.phoneDataGridViewTextBoxColumn,
-            this.scheduleDaysDataGridViewTextBoxColumn,
-            this.scheduleTimeDataGridViewTextBoxColumn,
-            this.lastEnterDataGridViewTextBoxColumn,
-            this.lastLeaveDataGridViewTextBoxColumn,
-            this.openTicketDataGridViewTextBoxColumn,
-            this.trainerDataGridViewTextBoxColumn,
-            this.commentDataGridViewTextBoxColumn,
-            this.planDataGridViewTextBoxColumn,
-            this.hoursLeftDataGridViewTextBoxColumn});
 			this.gridClients.DataSource = this.clientsBindingSource;
 			this.gridClients.Location = new System.Drawing.Point(12, 74);
+			this.gridClients.MultiSelect = false;
 			this.gridClients.Name = "gridClients";
+			this.gridClients.RowHeadersVisible = false;
+			this.gridClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridClients.Size = new System.Drawing.Size(784, 302);
 			this.gridClients.TabIndex = 5;
 			this.gridClients.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.OnRemoveRow);
 			this.gridClients.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.OnAddRow);
+			// 
+			// clientsBindingSource
+			// 
+			this.clientsBindingSource.DataMember = "vClients";
 			// 
 			// tmpDataSet
 			// 
 			this.tmpDataSet.DataSetName = "tmpDataSet";
 			this.tmpDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
 			// 
-			// clientsBindingSource
-			// 
-			this.clientsBindingSource.DataMember = "clients";
-			this.clientsBindingSource.DataSource = this.tmpDataSet;
-			// 
 			// clientsTableAdapter
 			// 
 			this.clientsTableAdapter.ClearBeforeFill = true;
-			// 
-			// idDataGridViewTextBoxColumn
-			// 
-			this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
-			this.idDataGridViewTextBoxColumn.HeaderText = "id";
-			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-			this.idDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// nameDataGridViewTextBoxColumn
-			// 
-			this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
-			this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			// 
-			// phoneDataGridViewTextBoxColumn
-			// 
-			this.phoneDataGridViewTextBoxColumn.DataPropertyName = "phone";
-			this.phoneDataGridViewTextBoxColumn.HeaderText = "phone";
-			this.phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
-			this.phoneDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// scheduleDaysDataGridViewTextBoxColumn
-			// 
-			this.scheduleDaysDataGridViewTextBoxColumn.DataPropertyName = "scheduleDays";
-			this.scheduleDaysDataGridViewTextBoxColumn.HeaderText = "Days";
-			this.scheduleDaysDataGridViewTextBoxColumn.Name = "scheduleDaysDataGridViewTextBoxColumn";
-			// 
-			// scheduleTimeDataGridViewTextBoxColumn
-			// 
-			this.scheduleTimeDataGridViewTextBoxColumn.DataPropertyName = "scheduleTime";
-			this.scheduleTimeDataGridViewTextBoxColumn.HeaderText = "Time";
-			this.scheduleTimeDataGridViewTextBoxColumn.Name = "scheduleTimeDataGridViewTextBoxColumn";
-			// 
-			// lastEnterDataGridViewTextBoxColumn
-			// 
-			this.lastEnterDataGridViewTextBoxColumn.DataPropertyName = "lastEnter";
-			this.lastEnterDataGridViewTextBoxColumn.HeaderText = "Last enter";
-			this.lastEnterDataGridViewTextBoxColumn.Name = "lastEnterDataGridViewTextBoxColumn";
-			// 
-			// lastLeaveDataGridViewTextBoxColumn
-			// 
-			this.lastLeaveDataGridViewTextBoxColumn.DataPropertyName = "lastLeave";
-			this.lastLeaveDataGridViewTextBoxColumn.HeaderText = "lastLeave";
-			this.lastLeaveDataGridViewTextBoxColumn.Name = "lastLeaveDataGridViewTextBoxColumn";
-			this.lastLeaveDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// openTicketDataGridViewTextBoxColumn
-			// 
-			this.openTicketDataGridViewTextBoxColumn.DataPropertyName = "openTicket";
-			this.openTicketDataGridViewTextBoxColumn.HeaderText = "openTicket";
-			this.openTicketDataGridViewTextBoxColumn.Name = "openTicketDataGridViewTextBoxColumn";
-			this.openTicketDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// trainerDataGridViewTextBoxColumn
-			// 
-			this.trainerDataGridViewTextBoxColumn.DataPropertyName = "trainer";
-			this.trainerDataGridViewTextBoxColumn.HeaderText = "trainer";
-			this.trainerDataGridViewTextBoxColumn.Name = "trainerDataGridViewTextBoxColumn";
-			this.trainerDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// commentDataGridViewTextBoxColumn
-			// 
-			this.commentDataGridViewTextBoxColumn.DataPropertyName = "comment";
-			this.commentDataGridViewTextBoxColumn.HeaderText = "comment";
-			this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
-			this.commentDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// planDataGridViewTextBoxColumn
-			// 
-			this.planDataGridViewTextBoxColumn.DataPropertyName = "plan";
-			this.planDataGridViewTextBoxColumn.HeaderText = "Plan";
-			this.planDataGridViewTextBoxColumn.Name = "planDataGridViewTextBoxColumn";
-			// 
-			// hoursLeftDataGridViewTextBoxColumn
-			// 
-			this.hoursLeftDataGridViewTextBoxColumn.DataPropertyName = "hoursLeft";
-			this.hoursLeftDataGridViewTextBoxColumn.HeaderText = "Hours left";
-			this.hoursLeftDataGridViewTextBoxColumn.Name = "hoursLeftDataGridViewTextBoxColumn";
 			// 
 			// ManageClients
 			// 
@@ -298,8 +197,8 @@
 			groupBox1.ResumeLayout(false);
 			groupBox1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridClients)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.tmpDataSet)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.clientsBindingSource)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tmpDataSet)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -318,17 +217,5 @@
 		private tmpDataSet tmpDataSet;
 		private System.Windows.Forms.BindingSource clientsBindingSource;
 		private EAssistant.tmpDataSetTableAdapters.clientsTableAdapter clientsTableAdapter;
-		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn scheduleDaysDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn scheduleTimeDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn lastEnterDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn lastLeaveDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn openTicketDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn trainerDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn planDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn hoursLeftDataGridViewTextBoxColumn;
 	}
 }

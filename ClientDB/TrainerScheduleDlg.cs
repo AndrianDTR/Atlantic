@@ -44,7 +44,7 @@ namespace EAssistant
 				, m_rng.Start
 				, m_rng.End);
 
-			foreach (clientDataSet.trainersScheduleRow tsr in Db.Instance.dSet.trainersSchedule.Select(where))
+			foreach (dbDataSet.trainersScheduleRow tsr in Db.Instance.dSet.trainersSchedule.Select(where))
 			{
 				m_date2TrainerMap[tsr.id] = tsr.trainerId;
 			}
@@ -59,11 +59,11 @@ namespace EAssistant
 			monthCalendar.UpdateBoldedDates();
 		}
 
-		private void SelectTrainer(clientDataSet.trainersRow trainer)
+		private void SelectTrainer(dbDataSet.trainersRow trainer)
 		{
 			for(int nItem = 1; nItem < comboTrainers.Items.Count; nItem++)
 			{
-				clientDataSet.trainersRow tr = (clientDataSet.trainersRow)comboTrainers.Items[nItem];
+				dbDataSet.trainersRow tr = (dbDataSet.trainersRow)comboTrainers.Items[nItem];
 				if(tr == trainer)
 				{
 					comboTrainers.SelectedItem = tr;
@@ -96,10 +96,10 @@ namespace EAssistant
 			
 			DateTime currDate = monthCalendar.SelectionStart;
 
-			clientDataSet.trainersRow row = (clientDataSet.trainersRow)((DataRowView)comboTrainers.SelectedItem).Row;
+			dbDataSet.trainersRow row = (dbDataSet.trainersRow)((DataRowView)comboTrainers.SelectedItem).Row;
 			m_date2TrainerMap[currDate] = row.id;
 			
-			clientDataSet.trainersScheduleRow tsr = Db.Instance.dSet.trainersSchedule.FindByid(currDate);
+			dbDataSet.trainersScheduleRow tsr = Db.Instance.dSet.trainersSchedule.FindByid(currDate);
 			if(null == tsr)
 			{
 				tsr = Db.Instance.dSet.trainersSchedule.AddtrainersScheduleRow(currDate, row.id);

@@ -144,7 +144,7 @@ namespace EAssistant
 			return res;
 		}
 
-		private void FillPrivileges(clientDataSet.userPrivilegesRow priv)
+		private void FillPrivileges(dbDataSet.userPrivilegesRow priv)
 		{
 			privilegesGrid.Rows.Clear();
 			int nRow = 0;
@@ -188,7 +188,7 @@ namespace EAssistant
 				return;
 			}
 
-			clientDataSet.userPrivilegesRow row = (clientDataSet.userPrivilegesRow)((DataRowView)e.Row.DataBoundItem).Row;
+			dbDataSet.userPrivilegesRow row = (dbDataSet.userPrivilegesRow)((DataRowView)e.Row.DataBoundItem).Row;
 			FillPrivileges(row);
 		}
 
@@ -214,7 +214,7 @@ namespace EAssistant
 				privilegesGrid.Rows.Clear();
 				return;
 			}
-			clientDataSet.userPrivilegesRow row = (clientDataSet.userPrivilegesRow)((DataRowView)e.Row.DataBoundItem).Row;
+			dbDataSet.userPrivilegesRow row = (dbDataSet.userPrivilegesRow)((DataRowView)e.Row.DataBoundItem).Row;
 			FillPrivileges(row);
 		}
 
@@ -226,7 +226,7 @@ namespace EAssistant
 			if (privilegesGrid.CurrentCell != null
 				&& privilegesGrid.CurrentCell.ColumnIndex > 0)
 			{
-				clientDataSet.userPrivilegesRow role = (clientDataSet.userPrivilegesRow)((DataRowView)gridRoles.SelectedRows[0].DataBoundItem).Row;
+				dbDataSet.userPrivilegesRow role = (dbDataSet.userPrivilegesRow)((DataRowView)gridRoles.SelectedRows[0].DataBoundItem).Row;
 
 				long rights = (long)privilegesGrid.CurrentRow.Tag;
 				String val = privilegesGrid.CurrentCell.Value.ToString();

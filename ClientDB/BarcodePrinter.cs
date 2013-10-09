@@ -88,7 +88,7 @@ table td, table th {
 			do 
 			{
 				code = m_random.Next(Int32.MaxValue);
-			} while (clientDataSet.clientsRow.Exists(code));
+			} while (dbDataSet.clientsRow.Exists(code));
 			
 			String szCode = String.Format("22{0}"
 				, code.ToString().PadLeft(Session.MinBarcodeLen-3, '0'));

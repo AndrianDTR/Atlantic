@@ -9,7 +9,7 @@ namespace AY
 {
 	namespace db
 	{
-		public partial class clientDataSet
+		public partial class dbDataSet
 		{
 			public partial class settingsRow
 			{

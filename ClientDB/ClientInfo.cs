@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using AY.db;
 using AY.Log;
 using AY.Utils;
-using AY.db.clientDataSetTableAdapters;
+using AY.db.dbDataSetTableAdapters;
 
 namespace EAssistant
 {
@@ -14,11 +14,11 @@ namespace EAssistant
 		const String cancelText = "Cancel";
 		const String enterText = "Enter";
 
-		private clientDataSet.clientsRow m_client = null;
+		private dbDataSet.clientsRow m_client = null;
 		
 		private Session session = Session.Instance;
 
-		public ClientInfo(clientDataSet.clientsRow client)
+		public ClientInfo(dbDataSet.clientsRow client)
 		{
 			InitializeComponent();
 			Init();
@@ -36,7 +36,7 @@ namespace EAssistant
 			textPhone.Text = client.phone;
 			dateSchedTime.Text = client.scheduleTime.ToShortTimeString();
 
-			foreach (clientDataSet.trainersRow it in comboTrainer.Items)
+			foreach (dbDataSet.trainersRow it in comboTrainer.Items)
 			{
 				if (it.id == client.trainer)
 				{
@@ -57,7 +57,7 @@ namespace EAssistant
 			comboTrainer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
 			comboTrainer.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-			foreach (clientDataSet.trainersRow tr in Db.Instance.dSet.trainers)
+			foreach (dbDataSet.trainersRow tr in Db.Instance.dSet.trainers)
 			{
 				comboTrainer.Items.Add(tr);
 				comboTrainer.AutoCompleteCustomSource.Add(tr.ToString());
@@ -73,17 +73,17 @@ namespace EAssistant
 			checkDay7.Text = names[6];
 		}
 
-		private void UpdateLastPaymentInfo(clientDataSet.clientsRow cr)
+		private void UpdateLastPaymentInfo(dbDataSet.clientsRow cr)
 		{
 			String[] paymentInfo = cr.LastPayment;
 			textLastPaySum.Text = paymentInfo[0];
 			textLastPayDate.Text = paymentInfo[1];
 		}
 
-		private void UpdateTimesLeft(clientDataSet.clientsRow cr)
+		private void UpdateTimesLeft(dbDataSet.clientsRow cr)
 		{
-			clientDataSet.userPrivilegesRow ur = Db.Instance.dSet.userPrivileges.FindByid(session.UserRoleId);
-			if (clientDataSet.userPrivilegesRow.IsSet(ur.clients, UserRights.Write))
+			dbDataSet.userPrivilegesRow ur = Db.Instance.dSet.userPrivileges.FindByid(session.UserRoleId);
+			if (dbDataSet.userPrivilegesRow.IsSet(ur.clients, UserRights.Write))
 			{
 				btnEnter.Enabled = true;
 				btnChangeCode.Enabled = true;
@@ -118,19 +118,19 @@ namespace EAssistant
 		
 		private void CheckPermissions()
 		{
-			clientDataSet.userPrivilegesRow priv = (Db.Instance.dSet.userPrivileges.FindByid(session.UserRoleId));
+			dbDataSet.userPrivilegesRow priv = (Db.Instance.dSet.userPrivileges.FindByid(session.UserRoleId));
 			
-			if (clientDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Read))
+			if (dbDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Read))
 			{
 				btnPaymentHistory.Enabled = true;
 			}
 
-			if (clientDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Create))
+			if (dbDataSet.userPrivilegesRow.IsSet(priv.payments, UserRights.Create))
 			{
 				btnPaymentAdd.Enabled = true;
 			}
 
-			if (clientDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Create))
+			if (dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Create))
 			{
 				btnOk.Enabled = true;
 			}
@@ -156,9 +156,9 @@ namespace EAssistant
 			get { return textCode.Text; }
 		}
 
-		public clientDataSet.trainersRow Trainer
+		public dbDataSet.trainersRow Trainer
 		{
-			get { return (clientDataSet.trainersRow)comboTrainer.SelectedItem; }
+			get { return (dbDataSet.trainersRow)comboTrainer.SelectedItem; }
 		}
 		
 		private bool ValidateForm()
@@ -211,7 +211,7 @@ namespace EAssistant
 					continue;
 				}
 
-				if (clientDataSet.clientsRow.Exists(id))
+				if (dbDataSet.clientsRow.Exists(id))
 				{
 					UIMessages.Error("This card already attached. Please use another one.");
 					dlg.Clear();
@@ -280,7 +280,7 @@ namespace EAssistant
 				
 				if(m_client == null)
 				{
-					clientDataSet.clientsRow cr = Db.Instance.dSet.clients.NewclientsRow();
+					dbDataSet.clientsRow cr = Db.Instance.dSet.clients.NewclientsRow();
 					cr.id = id;
 					cr.name = textName.Text;
 					cr.phone = textPhone.Text;
@@ -299,7 +299,7 @@ namespace EAssistant
 				}
 				else
 				{
-					clientDataSet.clientsRow cr = m_client;
+					dbDataSet.clientsRow cr = m_client;
 					if(null == cr)
 						return;
 						
@@ -334,7 +334,7 @@ namespace EAssistant
 			if(DialogResult.Cancel == addPaymDlg.ShowDialog())
 				return;
 
-			clientDataSet.clientsRow cr = m_client;
+			dbDataSet.clientsRow cr = m_client;
 			
 			UpdateLastPaymentInfo(cr);
 			UpdateTimesLeft(cr);

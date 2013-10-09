@@ -10,6 +10,21 @@ namespace EAssistant
 {
 	public partial class ManageClients : Form
 	{
+		private DataGridViewTextBoxColumn colId;
+		private DataGridViewTextBoxColumn colName;
+		private DataGridViewTextBoxColumn colPhone;
+		private DataGridViewTextBoxColumn colSchedule;
+		private DataGridViewTextBoxColumn colScheduleTime;
+		private DataGridViewTextBoxColumn colLastEnter;
+		private DataGridViewTextBoxColumn colLastLeave;
+		private DataGridViewTextBoxColumn colOpenTicket;
+		private DataGridViewTextBoxColumn colTrainer;
+		private DataGridViewTextBoxColumn colComment;
+		private DataGridViewTextBoxColumn colPlanId;
+		private DataGridViewTextBoxColumn colPlan;
+		private DataGridViewTextBoxColumn colHoursLeft;
+		
+		
 		WaitDialog wd = new WaitDialog(0,0,1);
 		
 		public ManageClients()
@@ -20,67 +35,135 @@ namespace EAssistant
 		
 		private void Init()
 		{
-			/*
-			colId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			colTimesLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			colScheduleTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			colLastEnter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			
-			colId.DataPropertyName = "id";
-			colId.HeaderText = "ID";
-			colId.Name = "dataGridViewTextBoxColumn1";
-			colId.ReadOnly = true;
+			colId = new DataGridViewTextBoxColumn();
+			colName = new DataGridViewTextBoxColumn();
+			colPhone = new DataGridViewTextBoxColumn();
+			colSchedule = new DataGridViewTextBoxColumn();
+			colScheduleTime = new DataGridViewTextBoxColumn();
+			colLastEnter = new DataGridViewTextBoxColumn();
+			colLastLeave = new DataGridViewTextBoxColumn();
+			colOpenTicket = new DataGridViewTextBoxColumn();
+			colTrainer = new DataGridViewTextBoxColumn();
+			colComment = new DataGridViewTextBoxColumn();
+			colPlanId = new DataGridViewTextBoxColumn();
+			colPlan = new DataGridViewTextBoxColumn();
+			colHoursLeft = new DataGridViewTextBoxColumn();
 
+			clientsBindingSource.DataSource = Db.Instance.dSet.vClients;
+			
+			// 
+			// idDataGridViewTextBoxColumn
+			// 
+			colId.DataPropertyName = "id";
+			colId.HeaderText = "id";
+			colId.Name = "idDataGridViewTextBoxColumn";
+			colId.Visible = false;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
 			colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			colName.DataPropertyName = "name";
 			colName.HeaderText = "Name";
-			colName.Name = "dataGridViewTextBoxColumn2";
-			colName.ReadOnly = true;
-			
-			colTimesLeft.DataPropertyName = "hoursLeft";
-			colTimesLeft.HeaderText = "Times left";
-			colTimesLeft.Name = "dataGridViewTextBoxColumn3";
-			colTimesLeft.ReadOnly = true;
-			
+			colName.Name = "nameDataGridViewTextBoxColumn";
+			// 
+			// phoneDataGridViewTextBoxColumn
+			// 
+			colPhone.DataPropertyName = "phone";
+			colPhone.HeaderText = "phone";
+			colPhone.Name = "phoneDataGridViewTextBoxColumn";
+			colPhone.Visible = false;
+			// 
+			// scheduleDaysDataGridViewTextBoxColumn
+			// 
+			colSchedule.DataPropertyName = "scheduleDays";
+			colSchedule.HeaderText = "Days";
+			colSchedule.Name = "scheduleDaysDataGridViewTextBoxColumn";
+			colSchedule.Visible = false;
+			// 
+			// scheduleTimeDataGridViewTextBoxColumn
+			// 
 			colScheduleTime.DataPropertyName = "scheduleTime";
-			colScheduleTime.DefaultCellStyle.Format = "t";
-			colScheduleTime.DefaultCellStyle.NullValue = null;
 			colScheduleTime.HeaderText = "Time";
-			colScheduleTime.Name = "dataGridViewTextBoxColumn4";
-			colScheduleTime.ReadOnly = true;
-			
+			colScheduleTime.Name = "scheduleTimeDataGridViewTextBoxColumn";
+			colScheduleTime.Visible = false;
+			// 
+			// lastEnterDataGridViewTextBoxColumn
+			// 
 			colLastEnter.DataPropertyName = "lastEnter";
 			colLastEnter.HeaderText = "Last enter";
-			colLastEnter.Name = "dataGridViewTextBoxColumn5";
-			colLastEnter.ReadOnly = true;
+			colLastEnter.Name = "lastEnterDataGridViewTextBoxColumn";
+			colLastEnter.Visible = false;
+			// 
+			// lastLeaveDataGridViewTextBoxColumn
+			// 
+			colLastLeave.DataPropertyName = "lastLeave";
+			colLastLeave.HeaderText = "lastLeave";
+			colLastLeave.Name = "lastLeaveDataGridViewTextBoxColumn";
+			colLastLeave.Visible = false;
+			// 
+			// openTicketDataGridViewTextBoxColumn
+			// 
+			colOpenTicket.DataPropertyName = "openTicket";
+			colOpenTicket.HeaderText = "openTicket";
+			colOpenTicket.Name = "openTicketDataGridViewTextBoxColumn";
+			colOpenTicket.Visible = false;
+			// 
+			// trainerDataGridViewTextBoxColumn
+			// 
+			colTrainer.DataPropertyName = "trainer";
+			colTrainer.HeaderText = "trainer";
+			colTrainer.Name = "trainerDataGridViewTextBoxColumn";
+			colTrainer.Visible = false;
+			// 
+			// commentDataGridViewTextBoxColumn
+			// 
+			colComment.DataPropertyName = "comment";
+			colComment.HeaderText = "comment";
+			colComment.Name = "commentDataGridViewTextBoxColumn";
+			colComment.Visible = false;
+			// 
+			// planIdDataGridViewTextBoxColumn
+			// 
+			colPlanId.DataPropertyName = "plan";
+			colPlanId.HeaderText = "Plan ID";
+			colPlanId.Name = "planIdDataGridViewTextBoxColumn";
+			colPlanId.Visible = false;
+			// 
+			// planDataGridViewTextBoxColumn
+			// 
+			colPlan.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+			colPlan.DataPropertyName = "rule";
+			colPlan.HeaderText = "Plan";
+			colPlan.Name = "ruleDataGridViewTextBoxColumn";
+			// 
+			// hoursLeftDataGridViewTextBoxColumn
+			// 
+			colHoursLeft.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+			colHoursLeft.DataPropertyName = "hoursLeft";
+			colHoursLeft.HeaderText = "Hours left";
+			colHoursLeft.Name = "hoursLeftDataGridViewTextBoxColumn";
 
-			gridClients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-				colId, colName, colTimesLeft, colScheduleTime, colLastEnter});
-			*/
+			gridClients.Columns.AddRange(new DataGridViewColumn[] {
+				colId,
+				colName,
+				colPhone,
+				colSchedule,
+				colScheduleTime,
+				colLastEnter,
+				colLastLeave,
+				colOpenTicket,
+				colTrainer,
+				colComment,
+				colPlanId,
+				colPlan,
+				colHoursLeft});
 		}
 		
 		private void OnLoad(object sender, EventArgs e)
 		{
-			// TODO: This line of code loads data into the 'tmpDataSet.clients' table. You can move, or remove it, as needed.
-			this.clientsTableAdapter.Fill(this.tmpDataSet.clients);
-			// TODO: This line of code loads data into the 'clientDataSet.clients' table. You can move, or remove it, as needed.
-			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
+			Db.Instance.Adapters.vClientsTableAdapter.Fill(Db.Instance.dSet.vClients);
 		}
 
-		private object[] parseClient(clientDataSet.clientsRow client)
-		{
-			object[] row = new object[5];
-
-			row[0] = client.id;
-			row[1] = client.name;
-			row[2] = client.lastEnter;
-			row[3] = client.hoursLeft;
-			row[4] = client.scheduleTime;
-
-			return row;
-		}
-		
 		private Int64 GetSelectedClientId()
 		{
 			if (gridClients.SelectedRows.Count < 1)
@@ -167,7 +250,7 @@ namespace EAssistant
 
 		private void OnAddRow(object sender, DataGridViewRowEventArgs e)
 		{
-			clientDataSet.clientsRow row = (clientDataSet.clientsRow)((DataRowView)e.Row.DataBoundItem).Row;
+			dbDataSet.clientsRow row = (dbDataSet.clientsRow)((DataRowView)e.Row.DataBoundItem).Row;
 			ClientInfo ci = new ClientInfo(row);
 
 			if (DialogResult.OK != ci.ShowDialog())

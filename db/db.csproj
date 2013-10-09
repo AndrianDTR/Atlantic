@@ -58,12 +58,14 @@
       <DependentUpon>clientDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Common.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="clientDataSet.Designer.cs">
-      <DependentUpon>clientDataSet.xsd</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>clientDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Common.cs" />
     <Compile Include="TrainerSchedule.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -108,9 +110,9 @@
       <DependentUpon>clientDataSet.xsd</DependentUpon>
     </None>
     <None Include="clientDataSet.xsd">
+      <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>clientDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </None>
     <None Include="clientDataSet.xss">
       <DependentUpon>clientDataSet.xsd</DependentUpon>

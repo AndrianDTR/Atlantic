@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 using AY.Log;
 using AY.db;
-using AY.db.clientDataSetTableAdapters;
+using AY.db.dbDataSetTableAdapters;
 using AY.Utils;
 using System.Data.SqlClient;
 

@@ -31,7 +31,7 @@ namespace EAssistant
 			
 			Logger.Debug("Try login, attempt left: "+ m_loginAttempt.ToString());
 			
-			clientDataSet.usersRow user = clientDataSet.usersRow.Authenticate(userName.Text, password.Text);
+			dbDataSet.usersRow user = dbDataSet.usersRow.Authenticate(userName.Text, password.Text);
 			if(user != null && user.Role != null)
 			{
 				if (null == Db.Instance.dSet.userPrivileges.FindByid(user.privilege))

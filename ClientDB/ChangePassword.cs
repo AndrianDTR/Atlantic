@@ -7,7 +7,7 @@ namespace EAssistant
 {
 	public partial class ChangePassword : Form
 	{
-		private clientDataSet.usersRow m_user = null;
+		private dbDataSet.usersRow m_user = null;
 		
 		public ChangePassword()
 		{

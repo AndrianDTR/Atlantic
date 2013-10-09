@@ -7,13 +7,13 @@ namespace AY
 {
 	namespace db
 	{
-		public partial class clientDataSet
+		public partial class dbDataSet
 		{
 			public partial class paymentsRow
 			{
-				private void UpdateClientInfo(clientDataSet.clientsRow client)
+				private void UpdateClientInfo(dbDataSet.clientsRow client)
 				{
-					clientDataSet.scheduleRulesRow hoursAdd = Db.Instance.dSet.scheduleRules.FindByid(client.plan);
+					dbDataSet.scheduleRulesRow hoursAdd = Db.Instance.dSet.scheduleRules.FindByid(client.plan);
 					
 					client.hoursLeft += hoursAdd.hoursAdd;
 					
