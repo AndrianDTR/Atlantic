@@ -12,15 +12,6 @@ namespace EAssistant
 	{
 		private DataGridViewTextBoxColumn colId;
 		private DataGridViewTextBoxColumn colName;
-		private DataGridViewTextBoxColumn colPhone;
-		private DataGridViewTextBoxColumn colSchedule;
-		private DataGridViewTextBoxColumn colScheduleTime;
-		private DataGridViewTextBoxColumn colLastEnter;
-		private DataGridViewTextBoxColumn colLastLeave;
-		private DataGridViewTextBoxColumn colOpenTicket;
-		private DataGridViewTextBoxColumn colTrainer;
-		private DataGridViewTextBoxColumn colComment;
-		private DataGridViewTextBoxColumn colPlanId;
 		private DataGridViewTextBoxColumn colPlan;
 		private DataGridViewTextBoxColumn colHoursLeft;
 		
@@ -37,15 +28,6 @@ namespace EAssistant
 		{
 			colId = new DataGridViewTextBoxColumn();
 			colName = new DataGridViewTextBoxColumn();
-			colPhone = new DataGridViewTextBoxColumn();
-			colSchedule = new DataGridViewTextBoxColumn();
-			colScheduleTime = new DataGridViewTextBoxColumn();
-			colLastEnter = new DataGridViewTextBoxColumn();
-			colLastLeave = new DataGridViewTextBoxColumn();
-			colOpenTicket = new DataGridViewTextBoxColumn();
-			colTrainer = new DataGridViewTextBoxColumn();
-			colComment = new DataGridViewTextBoxColumn();
-			colPlanId = new DataGridViewTextBoxColumn();
 			colPlan = new DataGridViewTextBoxColumn();
 			colHoursLeft = new DataGridViewTextBoxColumn();
 
@@ -67,69 +49,6 @@ namespace EAssistant
 			colName.Name = "nameDataGridViewTextBoxColumn";
 			colName.ReadOnly = true;
 			// 
-			// phoneDataGridViewTextBoxColumn
-			// 
-			colPhone.DataPropertyName = "phone";
-			colPhone.HeaderText = "phone";
-			colPhone.Name = "phoneDataGridViewTextBoxColumn";
-			colPhone.Visible = false;
-			// 
-			// scheduleDaysDataGridViewTextBoxColumn
-			// 
-			colSchedule.DataPropertyName = "scheduleDays";
-			colSchedule.HeaderText = "Days";
-			colSchedule.Name = "scheduleDaysDataGridViewTextBoxColumn";
-			colSchedule.Visible = false;
-			// 
-			// scheduleTimeDataGridViewTextBoxColumn
-			// 
-			colScheduleTime.DataPropertyName = "scheduleTime";
-			colScheduleTime.HeaderText = "Time";
-			colScheduleTime.Name = "scheduleTimeDataGridViewTextBoxColumn";
-			colScheduleTime.Visible = false;
-			// 
-			// lastEnterDataGridViewTextBoxColumn
-			// 
-			colLastEnter.DataPropertyName = "lastEnter";
-			colLastEnter.HeaderText = "Last enter";
-			colLastEnter.Name = "lastEnterDataGridViewTextBoxColumn";
-			colLastEnter.Visible = false;
-			// 
-			// lastLeaveDataGridViewTextBoxColumn
-			// 
-			colLastLeave.DataPropertyName = "lastLeave";
-			colLastLeave.HeaderText = "lastLeave";
-			colLastLeave.Name = "lastLeaveDataGridViewTextBoxColumn";
-			colLastLeave.Visible = false;
-			// 
-			// openTicketDataGridViewTextBoxColumn
-			// 
-			colOpenTicket.DataPropertyName = "openTicket";
-			colOpenTicket.HeaderText = "openTicket";
-			colOpenTicket.Name = "openTicketDataGridViewTextBoxColumn";
-			colOpenTicket.Visible = false;
-			// 
-			// trainerDataGridViewTextBoxColumn
-			// 
-			colTrainer.DataPropertyName = "trainer";
-			colTrainer.HeaderText = "trainer";
-			colTrainer.Name = "trainerDataGridViewTextBoxColumn";
-			colTrainer.Visible = false;
-			// 
-			// commentDataGridViewTextBoxColumn
-			// 
-			colComment.DataPropertyName = "comment";
-			colComment.HeaderText = "comment";
-			colComment.Name = "commentDataGridViewTextBoxColumn";
-			colComment.Visible = false;
-			// 
-			// planIdDataGridViewTextBoxColumn
-			// 
-			colPlanId.DataPropertyName = "plan";
-			colPlanId.HeaderText = "Plan ID";
-			colPlanId.Name = "planIdDataGridViewTextBoxColumn";
-			colPlanId.Visible = false;
-			// 
 			// planDataGridViewTextBoxColumn
 			// 
 			colPlan.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -149,15 +68,6 @@ namespace EAssistant
 			gridClients.Columns.AddRange(new DataGridViewColumn[] {
 				colId,
 				colName,
-				colPhone,
-				colSchedule,
-				colScheduleTime,
-				colLastEnter,
-				colLastLeave,
-				colOpenTicket,
-				colTrainer,
-				colComment,
-				colPlanId,
 				colPlan,
 				colHoursLeft});
 		}
@@ -178,6 +88,14 @@ namespace EAssistant
 			
 			return id;
 		}
+
+		private dbDataSet.vClientsRow GetSelectedRow()
+		{
+			if (gridClients.SelectedRows.Count != 1)
+				return null;
+
+			return (dbDataSet.vClientsRow)((DataRowView)gridClients.SelectedRows[0].DataBoundItem).Row;
+		}
 		
 		private void btnSearch_Click(object sender, EventArgs e)
 		{
@@ -194,7 +112,7 @@ namespace EAssistant
 			String val = textToSearch.Text;
 			if (0 == val.Trim().Length)
 			{
-				//clientsBindingSource.Filter = "";
+				clientsBindingSource.Filter = "";
 				return;
 			}
 
@@ -206,16 +124,7 @@ namespace EAssistant
 			if (checkNames.Checked)
 				query += String.Format(" or name like '{0}'", pattern);
 
-			//clientsBindingSource.Filter = String.Format(query, val);
-		}
-		
-		private void btnAdd_Click(object sender, EventArgs e)
-		{
-			ClientInfo ci = new ClientInfo(null);
-			if (DialogResult.OK != ci.ShowDialog(this))
-			    return;
-
-			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
+			clientsBindingSource.Filter = String.Format(query, val);
 		}
 
 		private void btnOk_Click(object sender, EventArgs e)
@@ -223,27 +132,14 @@ namespace EAssistant
 			Db.Instance.AcceptChanges();
 		}
 		
-		private void OnEdit(object sender, EventArgs e)
-		{
-			EditClient();
-		}
-		
 		private void EditClient()
 		{
-			/*Int64 id = GetSelectedClientId();
-			
-			if(-1 == id)
-			    return;
-				
-			ClientInfo ci = new ClientInfo(id);
-			
-			if (DialogResult.OK != ci.ShowDialog())
-			    return;
-			
-			int index = gridClients.SelectedRows[0].Index;
-			
+			dbDataSet.vClientsRow cr = GetSelectedRow();
+			ClientInfo ci = new ClientInfo(cr.id);
+			if (DialogResult.OK != ci.ShowDialog(this))
+				return;
+
 			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
-			*/
 		}
 
 		private void OnRemoveRow(object sender, DataGridViewRowCancelEventArgs e)
@@ -260,6 +156,16 @@ namespace EAssistant
 				return;
 			
 			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
+		}
+
+		private void btnAdd_Click(object sender, EventArgs e)
+		{
+			EditClient();
+		}
+
+		private void btnEdit_Click(object sender, EventArgs e)
+		{
+			EditClient();			
 		}
 	}
 }

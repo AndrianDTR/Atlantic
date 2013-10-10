@@ -3683,24 +3683,6 @@ namespace AY.db {
             
             private global::System.Data.DataColumn columnname;
             
-            private global::System.Data.DataColumn columnphone;
-            
-            private global::System.Data.DataColumn columnscheduleDays;
-            
-            private global::System.Data.DataColumn columnscheduleTime;
-            
-            private global::System.Data.DataColumn columnlastEnter;
-            
-            private global::System.Data.DataColumn columnlastLeave;
-            
-            private global::System.Data.DataColumn columnopenTicket;
-            
-            private global::System.Data.DataColumn columntrainer;
-            
-            private global::System.Data.DataColumn columncomment;
-            
-            private global::System.Data.DataColumn columnplan;
-            
             private global::System.Data.DataColumn columnhoursLeft;
             
             private global::System.Data.DataColumn columnrule;
@@ -3750,69 +3732,6 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn phoneColumn {
-                get {
-                    return this.columnphone;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn scheduleDaysColumn {
-                get {
-                    return this.columnscheduleDays;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn scheduleTimeColumn {
-                get {
-                    return this.columnscheduleTime;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn lastEnterColumn {
-                get {
-                    return this.columnlastEnter;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn lastLeaveColumn {
-                get {
-                    return this.columnlastLeave;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn openTicketColumn {
-                get {
-                    return this.columnopenTicket;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn trainerColumn {
-                get {
-                    return this.columntrainer;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn commentColumn {
-                get {
-                    return this.columncomment;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn planColumn {
-                get {
-                    return this.columnplan;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn hoursLeftColumn {
                 get {
                     return this.columnhoursLeft;
@@ -3855,20 +3774,11 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public vClientsRow AddvClientsRow(long id, string name, string phone, string scheduleDays, System.DateTime scheduleTime, System.DateTime lastEnter, System.DateTime lastLeave, System.DateTime openTicket, long trainer, string comment, long plan, long hoursLeft, string rule) {
+            public vClientsRow AddvClientsRow(long id, string name, long hoursLeft, string rule) {
                 vClientsRow rowvClientsRow = ((vClientsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id,
                         name,
-                        phone,
-                        scheduleDays,
-                        scheduleTime,
-                        lastEnter,
-                        lastLeave,
-                        openTicket,
-                        trainer,
-                        comment,
-                        plan,
                         hoursLeft,
                         rule};
                 rowvClientsRow.ItemArray = columnValuesArray;
@@ -3898,15 +3808,6 @@ namespace AY.db {
             internal void InitVars() {
                 this.columnid = base.Columns["id"];
                 this.columnname = base.Columns["name"];
-                this.columnphone = base.Columns["phone"];
-                this.columnscheduleDays = base.Columns["scheduleDays"];
-                this.columnscheduleTime = base.Columns["scheduleTime"];
-                this.columnlastEnter = base.Columns["lastEnter"];
-                this.columnlastLeave = base.Columns["lastLeave"];
-                this.columnopenTicket = base.Columns["openTicket"];
-                this.columntrainer = base.Columns["trainer"];
-                this.columncomment = base.Columns["comment"];
-                this.columnplan = base.Columns["plan"];
                 this.columnhoursLeft = base.Columns["hoursLeft"];
                 this.columnrule = base.Columns["rule"];
             }
@@ -3917,24 +3818,6 @@ namespace AY.db {
                 base.Columns.Add(this.columnid);
                 this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnname);
-                this.columnphone = new global::System.Data.DataColumn("phone", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnphone);
-                this.columnscheduleDays = new global::System.Data.DataColumn("scheduleDays", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnscheduleDays);
-                this.columnscheduleTime = new global::System.Data.DataColumn("scheduleTime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnscheduleTime);
-                this.columnlastEnter = new global::System.Data.DataColumn("lastEnter", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnlastEnter);
-                this.columnlastLeave = new global::System.Data.DataColumn("lastLeave", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnlastLeave);
-                this.columnopenTicket = new global::System.Data.DataColumn("openTicket", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnopenTicket);
-                this.columntrainer = new global::System.Data.DataColumn("trainer", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntrainer);
-                this.columncomment = new global::System.Data.DataColumn("comment", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncomment);
-                this.columnplan = new global::System.Data.DataColumn("plan", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnplan);
                 this.columnhoursLeft = new global::System.Data.DataColumn("hoursLeft", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnhoursLeft);
                 this.columnrule = new global::System.Data.DataColumn("rule", typeof(string), null, global::System.Data.MappingType.Element);
@@ -3945,10 +3828,6 @@ namespace AY.db {
                 this.columnid.Unique = true;
                 this.columnname.AllowDBNull = false;
                 this.columnname.MaxLength = 2147483647;
-                this.columnphone.MaxLength = 2147483647;
-                this.columnscheduleDays.MaxLength = 2147483647;
-                this.columnscheduleTime.AllowDBNull = false;
-                this.columncomment.MaxLength = 2147483647;
                 this.columnrule.AllowDBNull = false;
                 this.columnrule.MaxLength = 2147483647;
             }
@@ -5328,136 +5207,6 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string phone {
-                get {
-                    try {
-                        return ((string)(this[this.tablevClients.phoneColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'phone\' in table \'vClients\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablevClients.phoneColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string scheduleDays {
-                get {
-                    try {
-                        return ((string)(this[this.tablevClients.scheduleDaysColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'scheduleDays\' in table \'vClients\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablevClients.scheduleDaysColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime scheduleTime {
-                get {
-                    return ((global::System.DateTime)(this[this.tablevClients.scheduleTimeColumn]));
-                }
-                set {
-                    this[this.tablevClients.scheduleTimeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime lastEnter {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tablevClients.lastEnterColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'lastEnter\' in table \'vClients\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablevClients.lastEnterColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime lastLeave {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tablevClients.lastLeaveColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'lastLeave\' in table \'vClients\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablevClients.lastLeaveColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime openTicket {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tablevClients.openTicketColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'openTicket\' in table \'vClients\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablevClients.openTicketColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long trainer {
-                get {
-                    try {
-                        return ((long)(this[this.tablevClients.trainerColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'trainer\' in table \'vClients\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablevClients.trainerColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string comment {
-                get {
-                    try {
-                        return ((string)(this[this.tablevClients.commentColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'comment\' in table \'vClients\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablevClients.commentColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long plan {
-                get {
-                    try {
-                        return ((long)(this[this.tablevClients.planColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'plan\' in table \'vClients\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablevClients.planColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public long hoursLeft {
                 get {
                     try {
@@ -5480,86 +5229,6 @@ namespace AY.db {
                 set {
                     this[this.tablevClients.ruleColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsphoneNull() {
-                return this.IsNull(this.tablevClients.phoneColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetphoneNull() {
-                this[this.tablevClients.phoneColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsscheduleDaysNull() {
-                return this.IsNull(this.tablevClients.scheduleDaysColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetscheduleDaysNull() {
-                this[this.tablevClients.scheduleDaysColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IslastEnterNull() {
-                return this.IsNull(this.tablevClients.lastEnterColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetlastEnterNull() {
-                this[this.tablevClients.lastEnterColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IslastLeaveNull() {
-                return this.IsNull(this.tablevClients.lastLeaveColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetlastLeaveNull() {
-                this[this.tablevClients.lastLeaveColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsopenTicketNull() {
-                return this.IsNull(this.tablevClients.openTicketColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetopenTicketNull() {
-                this[this.tablevClients.openTicketColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IstrainerNull() {
-                return this.IsNull(this.tablevClients.trainerColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SettrainerNull() {
-                this[this.tablevClients.trainerColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IscommentNull() {
-                return this.IsNull(this.tablevClients.commentColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetcommentNull() {
-                this[this.tablevClients.commentColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsplanNull() {
-                return this.IsNull(this.tablevClients.planColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetplanNull() {
-                this[this.tablevClients.planColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11622,15 +11291,6 @@ namespace AY.db.dbDataSetTableAdapters {
             tableMapping.DataSetTable = "vClients";
             tableMapping.ColumnMappings.Add("id", "id");
             tableMapping.ColumnMappings.Add("name", "name");
-            tableMapping.ColumnMappings.Add("phone", "phone");
-            tableMapping.ColumnMappings.Add("scheduleDays", "scheduleDays");
-            tableMapping.ColumnMappings.Add("scheduleTime", "scheduleTime");
-            tableMapping.ColumnMappings.Add("lastEnter", "lastEnter");
-            tableMapping.ColumnMappings.Add("lastLeave", "lastLeave");
-            tableMapping.ColumnMappings.Add("openTicket", "openTicket");
-            tableMapping.ColumnMappings.Add("trainer", "trainer");
-            tableMapping.ColumnMappings.Add("comment", "comment");
-            tableMapping.ColumnMappings.Add("plan", "plan");
             tableMapping.ColumnMappings.Add("hoursLeft", "hoursLeft");
             tableMapping.ColumnMappings.Add("rule", "rule");
             this._adapter.TableMappings.Add(tableMapping);
@@ -11647,9 +11307,7 @@ namespace AY.db.dbDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [id], [name], [phone], [scheduleDays], [scheduleTime], [lastEnter], [lastL" +
-                "eave], [openTicket], [trainer], [comment], [plan], [hoursLeft], [rule] FROM [vCl" +
-                "ients]";
+            this._commandCollection[0].CommandText = "SELECT [id], [name], [hoursLeft], [rule] FROM [vClients]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

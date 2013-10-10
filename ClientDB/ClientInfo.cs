@@ -14,11 +14,11 @@ namespace EAssistant
 		const String cancelText = "Cancel";
 		const String enterText = "Enter";
 
-		private dbDataSet.clientsRow m_client = null;
+		private Int64 m_client = null;
 		
 		private Session session = Session.Instance;
 
-		public ClientInfo(dbDataSet.clientsRow client)
+		public ClientInfo(Int64 client)
 		{
 			InitializeComponent();
 			Init();

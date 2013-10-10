@@ -40,6 +40,11 @@
 			this.btnOk = new System.Windows.Forms.Button();
 			this.gridClients = new System.Windows.Forms.DataGridView();
 			this.clientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.btnAdd = new System.Windows.Forms.Button();
+			this.btnEdit = new System.Windows.Forms.Button();
+			this.btnRemove = new System.Windows.Forms.Button();
+			this.btnPayments = new System.Windows.Forms.Button();
+			this.BtnEntrance = new System.Windows.Forms.Button();
 			groupBox1 = new System.Windows.Forms.GroupBox();
 			groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridClients)).BeginInit();
@@ -144,6 +149,8 @@
 			// 
 			// gridClients
 			// 
+			this.gridClients.AllowUserToAddRows = false;
+			this.gridClients.AllowUserToDeleteRows = false;
 			this.gridClients.AllowUserToResizeRows = false;
 			this.gridClients.AutoGenerateColumns = false;
 			this.gridClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -156,12 +163,57 @@
 			this.gridClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridClients.Size = new System.Drawing.Size(784, 302);
 			this.gridClients.TabIndex = 5;
-			this.gridClients.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.OnRemoveRow);
-			this.gridClients.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.OnAddRow);
 			// 
 			// clientsBindingSource
 			// 
 			this.clientsBindingSource.DataMember = "vClients";
+			// 
+			// btnAdd
+			// 
+			this.btnAdd.Location = new System.Drawing.Point(12, 387);
+			this.btnAdd.Name = "btnAdd";
+			this.btnAdd.Size = new System.Drawing.Size(75, 23);
+			this.btnAdd.TabIndex = 6;
+			this.btnAdd.Text = "Add";
+			this.btnAdd.UseVisualStyleBackColor = true;
+			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+			// 
+			// btnEdit
+			// 
+			this.btnEdit.Location = new System.Drawing.Point(93, 387);
+			this.btnEdit.Name = "btnEdit";
+			this.btnEdit.Size = new System.Drawing.Size(75, 23);
+			this.btnEdit.TabIndex = 7;
+			this.btnEdit.Text = "Edit";
+			this.btnEdit.UseVisualStyleBackColor = true;
+			this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+			// 
+			// btnRemove
+			// 
+			this.btnRemove.Location = new System.Drawing.Point(174, 387);
+			this.btnRemove.Name = "btnRemove";
+			this.btnRemove.Size = new System.Drawing.Size(75, 23);
+			this.btnRemove.TabIndex = 8;
+			this.btnRemove.Text = "Remove";
+			this.btnRemove.UseVisualStyleBackColor = true;
+			// 
+			// btnPayments
+			// 
+			this.btnPayments.Location = new System.Drawing.Point(255, 387);
+			this.btnPayments.Name = "btnPayments";
+			this.btnPayments.Size = new System.Drawing.Size(75, 23);
+			this.btnPayments.TabIndex = 9;
+			this.btnPayments.Text = "Payments";
+			this.btnPayments.UseVisualStyleBackColor = true;
+			// 
+			// BtnEntrance
+			// 
+			this.BtnEntrance.Location = new System.Drawing.Point(336, 387);
+			this.BtnEntrance.Name = "BtnEntrance";
+			this.BtnEntrance.Size = new System.Drawing.Size(75, 23);
+			this.BtnEntrance.TabIndex = 10;
+			this.BtnEntrance.Text = "Entrance";
+			this.BtnEntrance.UseVisualStyleBackColor = true;
 			// 
 			// ManageClients
 			// 
@@ -170,6 +222,11 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
 			this.ClientSize = new System.Drawing.Size(808, 422);
+			this.Controls.Add(this.BtnEntrance);
+			this.Controls.Add(this.btnPayments);
+			this.Controls.Add(this.btnRemove);
+			this.Controls.Add(this.btnEdit);
+			this.Controls.Add(this.btnAdd);
 			this.Controls.Add(this.gridClients);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOk);
@@ -203,5 +260,10 @@
 		private System.Windows.Forms.Button btnOk;
 		private System.Windows.Forms.DataGridView gridClients;
 		private System.Windows.Forms.BindingSource clientsBindingSource;
+		private System.Windows.Forms.Button btnAdd;
+		private System.Windows.Forms.Button btnEdit;
+		private System.Windows.Forms.Button btnRemove;
+		private System.Windows.Forms.Button btnPayments;
+		private System.Windows.Forms.Button BtnEntrance;
 	}
 }
