@@ -313,7 +313,7 @@ namespace EAssistant
 				dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(id);
 				if (null != cr)
 				{
-					ClientInfo ci = new ClientInfo(cr);
+					ClientInfo ci = new ClientInfo(cr.id);
 					if (DialogResult.OK == ci.ShowDialog(this))
 					{
 						UpdateInfo();
@@ -367,7 +367,7 @@ namespace EAssistant
 
 		private void AddClient()
 		{
-			ClientInfo ci = new ClientInfo(null);
+			ClientInfo ci = new ClientInfo(0);
 			if (DialogResult.OK != ci.ShowDialog(this))
 				return;
 			UpdateInfo();

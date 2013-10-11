@@ -14,7 +14,7 @@ namespace EAssistant
 		const String cancelText = "Cancel";
 		const String enterText = "Enter";
 
-		private Int64 m_client = null;
+		private Int64 m_client = 0;
 		
 		private Session session = Session.Instance;
 
@@ -30,25 +30,29 @@ namespace EAssistant
 			{
 				return;
 			}
-
-			textCode.Text = client.id.ToString();
-			textName.Text = client.name;
-			textPhone.Text = client.phone;
-			dateSchedTime.Text = client.scheduleTime.ToShortTimeString();
+			
+			dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(m_client);
+			if(null == cr)
+				return;
+				
+			textCode.Text = cr.ToString();
+			textName.Text = cr.name;
+			textPhone.Text = cr.phone;
+			dateSchedTime.Text = cr.scheduleTime.ToShortTimeString();
 
 			foreach (dbDataSet.trainersRow it in comboTrainer.Items)
 			{
-				if (it.id == client.trainer)
+				if (it.id == cr.trainer)
 				{
 					comboTrainer.SelectedItem = it;
 					break;
 				}
 			}
-			SetScheduleDays(client.scheduleDays);
-			textComment.Text = client.comment;
+			SetScheduleDays(cr.scheduleDays);
+			textComment.Text = cr.comment;
 			
-			UpdateLastPaymentInfo(client);
-			UpdateTimesLeft(client);
+			UpdateLastPaymentInfo(cr);
+			UpdateTimesLeft(cr);
 		}
 
 		private void Init()
@@ -138,7 +142,7 @@ namespace EAssistant
 		
 		public Int64 Id
 		{
-			get { return m_client.id; }
+			get { return m_client; }
 		}
 		
 		public String ClientName
@@ -268,7 +272,7 @@ namespace EAssistant
 		
 		private void btnOk_Click(object sender, EventArgs e)
 		{
-			if(m_client == null)
+			if(m_client == 0)
 			{
 				if(!ChangeClientCode())
 					return;
@@ -278,7 +282,7 @@ namespace EAssistant
 			{
 				Int64 id = Session.CheckBarCode(textCode.Text);
 				
-				if(m_client == null)
+				if(m_client == 0)
 				{
 					dbDataSet.clientsRow cr = Db.Instance.dSet.clients.NewclientsRow();
 					cr.id = id;
@@ -291,7 +295,7 @@ namespace EAssistant
 					cr.lastEnter = cr.lastLeave = cr.openTicket = DateTime.Now.AddYears(-1);
 					cr.hoursLeft = 0;
 					cr.plan = 0;
-					m_client = cr;
+					m_client = cr.id;
 					
 					Db.Instance.AcceptChanges();
 					
@@ -299,7 +303,7 @@ namespace EAssistant
 				}
 				else
 				{
-					dbDataSet.clientsRow cr = m_client;
+					dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(m_client);
 					if(null == cr)
 						return;
 						
@@ -327,14 +331,14 @@ namespace EAssistant
 
 		private void btnPayment_Click(object sender, EventArgs e)
 		{
-			if (null == m_client)
+			if (0 == m_client)
 				return;
 			
-			AddPayment addPaymDlg = new AddPayment(m_client.id);
+			AddPayment addPaymDlg = new AddPayment(m_client);
 			if(DialogResult.Cancel == addPaymDlg.ShowDialog())
 				return;
 
-			dbDataSet.clientsRow cr = m_client;
+			dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(m_client);
 			
 			UpdateLastPaymentInfo(cr);
 			UpdateTimesLeft(cr);
@@ -380,11 +384,11 @@ namespace EAssistant
 
 		private void btnPaymentHistory_Click(object sender, EventArgs e)
 		{
-			if(null == m_client)
+			if(0 == m_client)
 				return;
 				
 			PaymentsHistory hist = new PaymentsHistory();
-			hist.ClientId = m_client.id;
+			hist.ClientId = m_client;
 			hist.ShowDialog();
 		}
 

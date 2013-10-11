@@ -135,31 +135,24 @@ namespace EAssistant
 		private void EditClient()
 		{
 			dbDataSet.vClientsRow cr = GetSelectedRow();
-			ClientInfo ci = new ClientInfo(cr.id);
+			long id = 0;
+			if(null != cr)
+			{
+				id = cr.id;
+			}
+			ClientInfo ci = new ClientInfo(id);
 			if (DialogResult.OK != ci.ShowDialog(this))
 				return;
 
 			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
 		}
 
-		private void OnRemoveRow(object sender, DataGridViewRowCancelEventArgs e)
-		{
-			;
-		}
-
-		private void OnAddRow(object sender, DataGridViewRowEventArgs e)
-		{
-			dbDataSet.clientsRow row = (dbDataSet.clientsRow)((DataRowView)e.Row.DataBoundItem).Row;
-			ClientInfo ci = new ClientInfo(row);
-
-			if (DialogResult.OK != ci.ShowDialog())
-				return;
-			
-			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
-		}
-
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
+			foreach (DataGridViewRow row in gridClients.SelectedRows)
+			{
+				row.Selected = false;
+			}
 			EditClient();
 		}
 
