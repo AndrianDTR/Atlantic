@@ -173,7 +173,6 @@ namespace EAssistant
 				dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(vcr.id);
 				if(cr != null)
 				{
-					vcr.Delete();
 					cr.Delete();
 					cr.AcceptChanges();
 					Db.Instance.dSet.vClients.AcceptChanges();
