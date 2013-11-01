@@ -79,14 +79,11 @@ namespace EAssistant
 
 		private Int64 GetSelectedClientId()
 		{
-			if (gridClients.SelectedRows.Count < 1)
-				return -1;
-		
-			int index = gridClients.SelectedRows[0].Index;
-			DataGridViewRow row = gridClients.Rows[index];
-			Int64 id = (Int64)row.Cells[0].Value;
-			
-			return id;
+			if (gridClients.SelectedRows.Count != 1)
+				return 0;
+				
+			dbDataSet.vClientsRow cr = (dbDataSet.vClientsRow)((DataRowView)gridClients.SelectedRows[0].DataBoundItem).Row;
+			return cr.id;
 		}
 
 		private dbDataSet.vClientsRow GetSelectedRow()
@@ -130,6 +127,8 @@ namespace EAssistant
 		private void btnOk_Click(object sender, EventArgs e)
 		{
 			Db.Instance.AcceptChanges();
+			DialogResult = DialogResult.OK;
+			Close();
 		}
 		
 		private void EditClient()
@@ -144,7 +143,7 @@ namespace EAssistant
 			if (DialogResult.OK != ci.ShowDialog(this))
 				return;
 
-			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
+			Db.Instance.Adapters.vClientsTableAdapter.Fill(Db.Instance.dSet.vClients);
 		}
 
 		private void btnAdd_Click(object sender, EventArgs e)
@@ -159,6 +158,32 @@ namespace EAssistant
 		private void btnEdit_Click(object sender, EventArgs e)
 		{
 			EditClient();			
+		}
+
+		private void OnEditClient(object sender, EventArgs e)
+		{
+			EditClient();
+		}
+
+		private void btnRemove_Click(object sender, EventArgs e)
+		{
+			dbDataSet.vClientsRow vcr = GetSelectedRow();
+			if (null != vcr)
+			{
+				dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(vcr.id);
+				if(cr != null)
+				{
+					vcr.Delete();
+					cr.Delete();
+					cr.AcceptChanges();
+					Db.Instance.dSet.vClients.AcceptChanges();
+					Db.Instance.Adapters.clientsTableAdapter.Update(cr);
+					Db.Instance.dSet.clients.AcceptChanges();
+					
+					Db.Instance.Adapters.vClientsTableAdapter.Fill(Db.Instance.dSet.vClients);
+				}
+			}
+			
 		}
 	}
 }

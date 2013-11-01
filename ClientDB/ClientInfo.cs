@@ -35,7 +35,7 @@ namespace EAssistant
 			if(null == cr)
 				return;
 				
-			textCode.Text = cr.ToString();
+			textCode.Text = cr.id.ToString();
 			textName.Text = cr.name;
 			textPhone.Text = cr.phone;
 			dateSchedTime.Text = cr.scheduleTime.ToShortTimeString();
@@ -54,7 +54,18 @@ namespace EAssistant
 			UpdateLastPaymentInfo(cr);
 			UpdateTimesLeft(cr);
 		}
+		
+		private bool ConfigUIForNewClient()
+		{
+			bool existingClient = !(m_client == 0);
+			textName.ReadOnly = existingClient;
+			btnPaymentAdd.Enabled = existingClient;
+			btnPaymentHistory.Enabled = existingClient;
+			btnEnter.Enabled = existingClient;
 
+			return existingClient;
+		}
+				
 		private void Init()
 		{
 			comboTrainer.Items.Clear();
@@ -107,17 +118,6 @@ namespace EAssistant
 				btnEnter.Checked = true;
 				btnEnter.Text = cancelText;
 			}
-		}
-		
-		private bool ConfigUIForNewClient()
-		{
-			bool existingClient = !(m_client == null);
-			textName.ReadOnly = existingClient;
-			btnPaymentAdd.Enabled = existingClient;
-			btnPaymentHistory.Enabled = existingClient;
-			btnEnter.Enabled = existingClient;
-			
-			return existingClient;
 		}
 		
 		private void CheckPermissions()

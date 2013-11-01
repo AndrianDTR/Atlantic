@@ -163,6 +163,7 @@
 			this.gridClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridClients.Size = new System.Drawing.Size(784, 302);
 			this.gridClients.TabIndex = 5;
+			this.gridClients.DoubleClick += new System.EventHandler(this.OnEditClient);
 			// 
 			// clientsBindingSource
 			// 
@@ -196,6 +197,7 @@
 			this.btnRemove.TabIndex = 8;
 			this.btnRemove.Text = "Remove";
 			this.btnRemove.UseVisualStyleBackColor = true;
+			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
 			// 
 			// btnPayments
 			// 
