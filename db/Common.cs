@@ -12,7 +12,7 @@ namespace AY.db
 		public partial class TableAdapterManager
 		{
 			private vPaymentsTableAdapter _vPaymentsTableAdapter;
-			private vClientsTableAdapter _vClientsTableAdapter;
+			private VClientsTableAdapter _vClientsTableAdapter;
 			
 			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
 			[global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
@@ -34,7 +34,7 @@ namespace AY.db
 			[global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
 				"ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
 				"", "System.Drawing.Design.UITypeEditor")]
-			public vClientsTableAdapter vClientsTableAdapter
+			public VClientsTableAdapter VClientsTableAdapter
 			{
 				get
 				{
@@ -72,7 +72,7 @@ namespace AY.db
 			Adapters.trainersScheduleTableAdapter = new trainersScheduleTableAdapter();
 			Adapters.userPrivilegesTableAdapter = new userPrivilegesTableAdapter();
 			Adapters.usersTableAdapter = new usersTableAdapter();
-			Adapters.vClientsTableAdapter = new vClientsTableAdapter();
+			Adapters.VClientsTableAdapter = new VClientsTableAdapter();
 			Adapters.vPaymentsTableAdapter = new vPaymentsTableAdapter();
 
 			Adapters.clientsTableAdapter.Fill(m_clientDataSet.clients);
@@ -84,7 +84,7 @@ namespace AY.db
 			Adapters.trainersScheduleTableAdapter.Fill(m_clientDataSet.trainersSchedule);
 			Adapters.userPrivilegesTableAdapter.Fill(m_clientDataSet.userPrivileges);
 			Adapters.usersTableAdapter.Fill(m_clientDataSet.users);
-			Adapters.vClientsTableAdapter.Fill(m_clientDataSet.vClients);
+			Adapters.VClientsTableAdapter.Fill(m_clientDataSet.VClients);
 			Adapters.vPaymentsTableAdapter.Fill(m_clientDataSet.vPayments);
 
 			((System.ComponentModel.ISupportInitialize)(m_clientDataSet)).EndInit();

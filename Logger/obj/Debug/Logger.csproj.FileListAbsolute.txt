@@ -1,0 +1,5 @@
+D:\Projects\Atlantic\bin\Debug\Logger.dll
+D:\Projects\Atlantic\bin\Debug\Logger.pdb
+D:\Projects\Atlantic\Logger\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\Atlantic\Logger\obj\Debug\Logger.dll
+D:\Projects\Atlantic\Logger\obj\Debug\Logger.pdb

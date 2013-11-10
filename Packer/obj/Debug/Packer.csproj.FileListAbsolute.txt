@@ -1,0 +1,5 @@
+D:\Projects\Atlantic\bin\Debug\Packer.dll
+D:\Projects\Atlantic\bin\Debug\Packer.pdb
+D:\Projects\Atlantic\Packer\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\Atlantic\Packer\obj\Debug\Packer.dll
+D:\Projects\Atlantic\Packer\obj\Debug\Packer.pdb

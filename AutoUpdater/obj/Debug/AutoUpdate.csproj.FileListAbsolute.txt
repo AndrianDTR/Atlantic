@@ -1,0 +1,9 @@
+D:\Projects\Atlantic\bin\Debug\AutoUpdate.dll
+D:\Projects\Atlantic\bin\Debug\AutoUpdate.pdb
+D:\Projects\Atlantic\AutoUpdater\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\Atlantic\AutoUpdater\obj\Debug\AY.AutoUpdate.DownloadUpdateDialog.resources
+D:\Projects\Atlantic\AutoUpdater\obj\Debug\AY.AutoUpdate.UpdateForm.resources
+D:\Projects\Atlantic\AutoUpdater\obj\Debug\AY.AutoUpdate.Properties.Resources.resources
+D:\Projects\Atlantic\AutoUpdater\obj\Debug\AutoUpdate.csproj.GenerateResource.Cache
+D:\Projects\Atlantic\AutoUpdater\obj\Debug\AutoUpdate.dll
+D:\Projects\Atlantic\AutoUpdater\obj\Debug\AutoUpdate.pdb

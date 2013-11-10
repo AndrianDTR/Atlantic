@@ -1,0 +1,8 @@
+D:\Projects\Atlantic\bin\Debug\Registrator.exe
+D:\Projects\Atlantic\bin\Debug\Registrator.pdb
+D:\Projects\Atlantic\Registrator\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\Atlantic\Registrator\obj\Debug\Registrator.ActivatorForm.resources
+D:\Projects\Atlantic\Registrator\obj\Debug\Registrator.Properties.Resources.resources
+D:\Projects\Atlantic\Registrator\obj\Debug\Registrator.csproj.GenerateResource.Cache
+D:\Projects\Atlantic\Registrator\obj\Debug\Registrator.exe
+D:\Projects\Atlantic\Registrator\obj\Debug\Registrator.pdb

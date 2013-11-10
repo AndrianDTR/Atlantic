@@ -31,7 +31,7 @@ namespace EAssistant
 			colPlan = new DataGridViewTextBoxColumn();
 			colHoursLeft = new DataGridViewTextBoxColumn();
 
-			clientsBindingSource.DataSource = Db.Instance.dSet.vClients;
+			clientsBindingSource.DataSource = Db.Instance.dSet.VClients;
 			
 			// 
 			// idDataGridViewTextBoxColumn
@@ -74,7 +74,7 @@ namespace EAssistant
 		
 		private void OnLoad(object sender, EventArgs e)
 		{
-			Db.Instance.Adapters.vClientsTableAdapter.Fill(Db.Instance.dSet.vClients);
+			Db.Instance.Adapters.VClientsTableAdapter.Fill(Db.Instance.dSet.VClients);
 		}
 
 		private Int64 GetSelectedClientId()
@@ -82,16 +82,16 @@ namespace EAssistant
 			if (gridClients.SelectedRows.Count != 1)
 				return 0;
 				
-			dbDataSet.vClientsRow cr = (dbDataSet.vClientsRow)((DataRowView)gridClients.SelectedRows[0].DataBoundItem).Row;
+			dbDataSet.VClientsRow cr = (dbDataSet.VClientsRow)((DataRowView)gridClients.SelectedRows[0].DataBoundItem).Row;
 			return cr.id;
 		}
 
-		private dbDataSet.vClientsRow GetSelectedRow()
+		private dbDataSet.VClientsRow GetSelectedRow()
 		{
 			if (gridClients.SelectedRows.Count != 1)
 				return null;
 
-			return (dbDataSet.vClientsRow)((DataRowView)gridClients.SelectedRows[0].DataBoundItem).Row;
+			return (dbDataSet.VClientsRow)((DataRowView)gridClients.SelectedRows[0].DataBoundItem).Row;
 		}
 		
 		private void btnSearch_Click(object sender, EventArgs e)
@@ -133,7 +133,7 @@ namespace EAssistant
 		
 		private void EditClient()
 		{
-			dbDataSet.vClientsRow cr = GetSelectedRow();
+			dbDataSet.VClientsRow cr = GetSelectedRow();
 			long id = 0;
 			if(null != cr)
 			{
@@ -143,7 +143,7 @@ namespace EAssistant
 			if (DialogResult.OK != ci.ShowDialog(this))
 				return;
 
-			Db.Instance.Adapters.vClientsTableAdapter.Fill(Db.Instance.dSet.vClients);
+			Db.Instance.Adapters.VClientsTableAdapter.Fill(Db.Instance.dSet.VClients);
 		}
 
 		private void btnAdd_Click(object sender, EventArgs e)
@@ -167,20 +167,12 @@ namespace EAssistant
 
 		private void btnRemove_Click(object sender, EventArgs e)
 		{
-			dbDataSet.vClientsRow vcr = GetSelectedRow();
+			dbDataSet.VClientsRow vcr = GetSelectedRow();
 			if (null != vcr)
 			{
-				dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(vcr.id);
-				if(cr != null)
-				{
-					cr.Delete();
-					cr.AcceptChanges();
-					Db.Instance.dSet.vClients.AcceptChanges();
-					Db.Instance.Adapters.clientsTableAdapter.Update(cr);
-					Db.Instance.dSet.clients.AcceptChanges();
-					
-					Db.Instance.Adapters.vClientsTableAdapter.Fill(Db.Instance.dSet.vClients);
-				}
+				Db.Instance.Adapters.VClientsTableAdapter.DeleteQuery(vcr.id);
+				Db.Instance.AcceptChanges();
+				Db.Instance.Adapters.VClientsTableAdapter.Fill(Db.Instance.dSet.VClients);
 			}
 			
 		}
