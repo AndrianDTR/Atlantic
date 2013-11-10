@@ -66,8 +66,6 @@ namespace EAssistant
 			this.colPrice.DataPropertyName = "price";
 			this.colPrice.HeaderText = "Price";
 			this.colPrice.Name = "colPrice";
-			
-			
 		}
 		
 		private void OnLoad(object sender, EventArgs e)
@@ -78,6 +76,8 @@ namespace EAssistant
 		private void save_Click(object sender, EventArgs e)
 		{
 			Db.Instance.AcceptChanges();
+			DialogResult = DialogResult.OK;
+			Close();
 		}
 	}
 }

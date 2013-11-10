@@ -41,8 +41,6 @@ namespace AY.db {
         
         private usersDataTable tableusers;
         
-        private vPaymentsDataTable tablevPayments;
-        
         private clientsDataTable tableclients;
         
         private VClientsDataTable tableVClients;
@@ -98,9 +96,6 @@ namespace AY.db {
                 }
                 if ((ds.Tables["users"] != null)) {
                     base.Tables.Add(new usersDataTable(ds.Tables["users"]));
-                }
-                if ((ds.Tables["vPayments"] != null)) {
-                    base.Tables.Add(new vPaymentsDataTable(ds.Tables["vPayments"]));
                 }
                 if ((ds.Tables["clients"] != null)) {
                     base.Tables.Add(new clientsDataTable(ds.Tables["clients"]));
@@ -198,15 +193,6 @@ namespace AY.db {
         public usersDataTable users {
             get {
                 return this.tableusers;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public vPaymentsDataTable vPayments {
-            get {
-                return this.tablevPayments;
             }
         }
         
@@ -320,9 +306,6 @@ namespace AY.db {
                 if ((ds.Tables["users"] != null)) {
                     base.Tables.Add(new usersDataTable(ds.Tables["users"]));
                 }
-                if ((ds.Tables["vPayments"] != null)) {
-                    base.Tables.Add(new vPaymentsDataTable(ds.Tables["vPayments"]));
-                }
                 if ((ds.Tables["clients"] != null)) {
                     base.Tables.Add(new clientsDataTable(ds.Tables["clients"]));
                 }
@@ -410,12 +393,6 @@ namespace AY.db {
                     this.tableusers.InitVars();
                 }
             }
-            this.tablevPayments = ((vPaymentsDataTable)(base.Tables["vPayments"]));
-            if ((initTable == true)) {
-                if ((this.tablevPayments != null)) {
-                    this.tablevPayments.InitVars();
-                }
-            }
             this.tableclients = ((clientsDataTable)(base.Tables["clients"]));
             if ((initTable == true)) {
                 if ((this.tableclients != null)) {
@@ -459,8 +436,6 @@ namespace AY.db {
             base.Tables.Add(this.tableuserPrivileges);
             this.tableusers = new usersDataTable();
             base.Tables.Add(this.tableusers);
-            this.tablevPayments = new vPaymentsDataTable();
-            base.Tables.Add(this.tablevPayments);
             this.tableclients = new clientsDataTable();
             base.Tables.Add(this.tableclients);
             this.tableVClients = new VClientsDataTable();
@@ -506,11 +481,6 @@ namespace AY.db {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeusers() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializevPayments() {
             return false;
         }
         
@@ -597,8 +567,6 @@ namespace AY.db {
         public delegate void userPrivilegesRowChangeEventHandler(object sender, userPrivilegesRowChangeEvent e);
         
         public delegate void usersRowChangeEventHandler(object sender, usersRowChangeEvent e);
-        
-        public delegate void vPaymentsRowChangeEventHandler(object sender, vPaymentsRowChangeEvent e);
         
         public delegate void clientsRowChangeEventHandler(object sender, clientsRowChangeEvent e);
         
@@ -736,7 +704,7 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public paymentsRow AddpaymentsRow(long clientId, long scheduleId, long creatorId, System.DateTime date, decimal sum, string comment) {
+            public paymentsRow AddpaymentsRow(int clientId, long scheduleId, long creatorId, System.DateTime date, decimal sum, string comment) {
                 paymentsRow rowpaymentsRow = ((paymentsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -784,7 +752,7 @@ namespace AY.db {
             private void InitClass() {
                 this.columnid = new global::System.Data.DataColumn("id", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid);
-                this.columnclientId = new global::System.Data.DataColumn("clientId", typeof(long), null, global::System.Data.MappingType.Element);
+                this.columnclientId = new global::System.Data.DataColumn("clientId", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnclientId);
                 this.columnscheduleId = new global::System.Data.DataColumn("scheduleId", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnscheduleId);
@@ -3049,284 +3017,6 @@ namespace AY.db {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class vPaymentsDataTable : global::System.Data.TypedTableBase<vPaymentsRow> {
-            
-            private global::System.Data.DataColumn columnid;
-            
-            private global::System.Data.DataColumn columndate;
-            
-            private global::System.Data.DataColumn columnsum;
-            
-            private global::System.Data.DataColumn columnservice;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public vPaymentsDataTable() {
-                this.TableName = "vPayments";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal vPaymentsDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected vPaymentsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn idColumn {
-                get {
-                    return this.columnid;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn dateColumn {
-                get {
-                    return this.columndate;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn sumColumn {
-                get {
-                    return this.columnsum;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn serviceColumn {
-                get {
-                    return this.columnservice;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public vPaymentsRow this[int index] {
-                get {
-                    return ((vPaymentsRow)(this.Rows[index]));
-                }
-            }
-            
-            public event vPaymentsRowChangeEventHandler vPaymentsRowChanging;
-            
-            public event vPaymentsRowChangeEventHandler vPaymentsRowChanged;
-            
-            public event vPaymentsRowChangeEventHandler vPaymentsRowDeleting;
-            
-            public event vPaymentsRowChangeEventHandler vPaymentsRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddvPaymentsRow(vPaymentsRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public vPaymentsRow AddvPaymentsRow(System.DateTime date, decimal sum, string service) {
-                vPaymentsRow rowvPaymentsRow = ((vPaymentsRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        date,
-                        sum,
-                        service};
-                rowvPaymentsRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowvPaymentsRow);
-                return rowvPaymentsRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public vPaymentsRow FindByid(long id) {
-                return ((vPaymentsRow)(this.Rows.Find(new object[] {
-                            id})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                vPaymentsDataTable cln = ((vPaymentsDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new vPaymentsDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnid = base.Columns["id"];
-                this.columndate = base.Columns["date"];
-                this.columnsum = base.Columns["sum"];
-                this.columnservice = base.Columns["service"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnid = new global::System.Data.DataColumn("id", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnid);
-                this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndate);
-                this.columnsum = new global::System.Data.DataColumn("sum", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsum);
-                this.columnservice = new global::System.Data.DataColumn("service", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnservice);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnid}, true));
-                this.columnid.AutoIncrement = true;
-                this.columnid.AutoIncrementSeed = -1;
-                this.columnid.AutoIncrementStep = -1;
-                this.columnid.AllowDBNull = false;
-                this.columnid.Unique = true;
-                this.columnsum.AllowDBNull = false;
-                this.columnservice.AllowDBNull = false;
-                this.columnservice.MaxLength = 2147483647;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public vPaymentsRow NewvPaymentsRow() {
-                return ((vPaymentsRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new vPaymentsRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(vPaymentsRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.vPaymentsRowChanged != null)) {
-                    this.vPaymentsRowChanged(this, new vPaymentsRowChangeEvent(((vPaymentsRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.vPaymentsRowChanging != null)) {
-                    this.vPaymentsRowChanging(this, new vPaymentsRowChangeEvent(((vPaymentsRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.vPaymentsRowDeleted != null)) {
-                    this.vPaymentsRowDeleted(this, new vPaymentsRowChangeEvent(((vPaymentsRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.vPaymentsRowDeleting != null)) {
-                    this.vPaymentsRowDeleting(this, new vPaymentsRowChangeEvent(((vPaymentsRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemovevPaymentsRow(vPaymentsRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dbDataSet ds = new dbDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "vPaymentsDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class clientsDataTable : global::System.Data.TypedTableBase<clientsRow> {
             
             private global::System.Data.DataColumn columnid;
@@ -3860,7 +3550,6 @@ namespace AY.db {
                 this.columnid.Unique = true;
                 this.columnname.AllowDBNull = false;
                 this.columnname.MaxLength = 2147483647;
-                this.columnrule.AllowDBNull = false;
                 this.columnrule.MaxLength = 2147483647;
             }
             
@@ -3993,8 +3682,6 @@ namespace AY.db {
             
             private global::System.Data.DataColumn columnsum;
             
-            private global::System.Data.DataColumn columnscheduleId;
-            
             private global::System.Data.DataColumn columnname;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4049,13 +3736,6 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn scheduleIdColumn {
-                get {
-                    return this.columnscheduleId;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn nameColumn {
                 get {
                     return this.columnname;
@@ -4091,13 +3771,12 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public VPaymentsRow AddVPaymentsRow(System.DateTime date, decimal sum, long scheduleId, string name) {
+            public VPaymentsRow AddVPaymentsRow(System.DateTime date, decimal sum, string name) {
                 VPaymentsRow rowVPaymentsRow = ((VPaymentsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         date,
                         sum,
-                        scheduleId,
                         name};
                 rowVPaymentsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowVPaymentsRow);
@@ -4127,7 +3806,6 @@ namespace AY.db {
                 this.columnid = base.Columns["id"];
                 this.columndate = base.Columns["date"];
                 this.columnsum = base.Columns["sum"];
-                this.columnscheduleId = base.Columns["scheduleId"];
                 this.columnname = base.Columns["name"];
             }
             
@@ -4139,8 +3817,6 @@ namespace AY.db {
                 base.Columns.Add(this.columndate);
                 this.columnsum = new global::System.Data.DataColumn("sum", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsum);
-                this.columnscheduleId = new global::System.Data.DataColumn("scheduleId", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnscheduleId);
                 this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnname);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -4151,7 +3827,6 @@ namespace AY.db {
                 this.columnid.AllowDBNull = false;
                 this.columnid.Unique = true;
                 this.columnsum.AllowDBNull = false;
-                this.columnscheduleId.AllowDBNull = false;
                 this.columnname.AllowDBNull = false;
                 this.columnname.MaxLength = 2147483647;
             }
@@ -4296,9 +3971,9 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long clientId {
+            public int clientId {
                 get {
-                    return ((long)(this[this.tablepayments.clientIdColumn]));
+                    return ((int)(this[this.tablepayments.clientIdColumn]));
                 }
                 set {
                     this[this.tablepayments.clientIdColumn] = value;
@@ -5160,76 +4835,6 @@ namespace AY.db {
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class vPaymentsRow : global::System.Data.DataRow {
-            
-            private vPaymentsDataTable tablevPayments;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal vPaymentsRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tablevPayments = ((vPaymentsDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long id {
-                get {
-                    return ((long)(this[this.tablevPayments.idColumn]));
-                }
-                set {
-                    this[this.tablevPayments.idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime date {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tablevPayments.dateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'vPayments\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablevPayments.dateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal sum {
-                get {
-                    return ((decimal)(this[this.tablevPayments.sumColumn]));
-                }
-                set {
-                    this[this.tablevPayments.sumColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string service {
-                get {
-                    return ((string)(this[this.tablevPayments.serviceColumn]));
-                }
-                set {
-                    this[this.tablevPayments.serviceColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsdateNull() {
-                return this.IsNull(this.tablevPayments.dateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetdateNull() {
-                this[this.tablevPayments.dateColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public partial class clientsRow : global::System.Data.DataRow {
             
             private clientsDataTable tableclients;
@@ -5548,7 +5153,12 @@ namespace AY.db {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string rule {
                 get {
-                    return ((string)(this[this.tableVClients.ruleColumn]));
+                    try {
+                        return ((string)(this[this.tableVClients.ruleColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'rule\' in table \'VClients\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableVClients.ruleColumn] = value;
@@ -5563,6 +5173,16 @@ namespace AY.db {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SethoursLeftNull() {
                 this[this.tableVClients.hoursLeftColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsruleNull() {
+                return this.IsNull(this.tableVClients.ruleColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetruleNull() {
+                this[this.tableVClients.ruleColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5612,16 +5232,6 @@ namespace AY.db {
                 }
                 set {
                     this[this.tableVPayments.sumColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long scheduleId {
-                get {
-                    return ((long)(this[this.tableVPayments.scheduleIdColumn]));
-                }
-                set {
-                    this[this.tableVPayments.scheduleIdColumn] = value;
                 }
             }
             
@@ -5881,37 +5491,6 @@ namespace AY.db {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public usersRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class vPaymentsRowChangeEvent : global::System.EventArgs {
-            
-            private vPaymentsRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public vPaymentsRowChangeEvent(vPaymentsRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public vPaymentsRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -10403,166 +9982,6 @@ namespace AY.db.dbDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class vPaymentsTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SQLite.SQLiteDataAdapter _adapter;
-        
-        private global::System.Data.SQLite.SQLiteConnection _connection;
-        
-        private global::System.Data.SQLite.SQLiteTransaction _transaction;
-        
-        private global::System.Data.SQLite.SQLiteCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public vPaymentsTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SQLite.SQLiteDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SQLite.SQLiteConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SQLite.SQLiteCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SQLite.SQLiteTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SQLite.SQLiteCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SQLite.SQLiteDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "vPayments";
-            tableMapping.ColumnMappings.Add("id", "id");
-            tableMapping.ColumnMappings.Add("date", "date");
-            tableMapping.ColumnMappings.Add("sum", "sum");
-            tableMapping.ColumnMappings.Add("service", "service");
-            this._adapter.TableMappings.Add(tableMapping);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::AY.db.Properties.Settings.Default.clientConnectionString1;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
-            this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [id], [date], [sum], [service] FROM [vPayments]";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dbDataSet.vPaymentsDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dbDataSet.vPaymentsDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dbDataSet.vPaymentsDataTable dataTable = new dbDataSet.vPaymentsDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class clientsTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SQLite.SQLiteDataAdapter _adapter;
@@ -11155,16 +10574,12 @@ namespace AY.db.dbDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[2];
+            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT [id], [name], [phone], [scheduleDays], [scheduleTime], [lastEnter], [lastL" +
                 "eave], [openTicket], [trainer], [comment], [plan], [hoursLeft] FROM [clients]";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1] = new global::System.Data.SQLite.SQLiteCommand();
-            this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "select max(clients.id) from clients";
-            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11184,28 +10599,6 @@ namespace AY.db.dbDataSetTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual dbDataSet.clientsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            dbDataSet.clientsDataTable dataTable = new dbDataSet.clientsDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int GetMaxId(dbDataSet.clientsDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual dbDataSet.clientsDataTable GetDataMaxId() {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
             dbDataSet.clientsDataTable dataTable = new dbDataSet.clientsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -11769,8 +11162,8 @@ namespace AY.db.dbDataSetTableAdapters {
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT     clients.id, clients.name, clients.hoursLeft, scheduleRules.name AS rul" +
-                "e\r\nFROM         clients INNER JOIN\r\n                      scheduleRules ON clien" +
-                "ts.plan = scheduleRules.id";
+                "e\r\nFROM         clients LEFT OUTER JOIN\r\n                      scheduleRules ON " +
+                "clients.plan = scheduleRules.id";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -11950,7 +11343,6 @@ namespace AY.db.dbDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("id", "id");
             tableMapping.ColumnMappings.Add("date", "date");
             tableMapping.ColumnMappings.Add("sum", "sum");
-            tableMapping.ColumnMappings.Add("scheduleId", "scheduleId");
             tableMapping.ColumnMappings.Add("name", "name");
             this._adapter.TableMappings.Add(tableMapping);
         }
@@ -11966,16 +11358,16 @@ namespace AY.db.dbDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[2];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     payments.id, payments.[date], payments.[sum], payments.scheduleId, sch" +
-                "eduleRules.name\r\nFROM         payments INNER JOIN\r\n                      schedul" +
-                "eRules ON payments.scheduleId = scheduleRules.id";
+            this._commandCollection[0].CommandText = "SELECT     payments.id, payments.[date], payments.[sum], scheduleRules.name\r\nFROM" +
+                "         payments INNER JOIN\r\n                      scheduleRules ON payments.sc" +
+                "heduleId = scheduleRules.id\r\nORDER BY payments.[date] DESC";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT     payments.id, payments.[date], payments.[sum], payments.scheduleId, scheduleRules.name
+            this._commandCollection[1].CommandText = @"SELECT    payments.id, payments.[date], payments.[sum], scheduleRules.name
 FROM         payments INNER JOIN
                       scheduleRules ON payments.scheduleId = scheduleRules.id
-WHERE     (payments.clientId = @cid)
+WHERE     (payments.[clientId] = @cid)
 ORDER BY payments.[date] DESC";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             global::System.Data.SQLite.SQLiteParameter param = new global::System.Data.SQLite.SQLiteParameter();
@@ -12325,12 +11717,12 @@ ORDER BY payments.[date] DESC";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._settingsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.settings.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._trainersScheduleTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.trainersSchedule.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._settingsTableAdapter.Update(updatedRows));
+                    result = (result + this._trainersScheduleTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -12352,12 +11744,12 @@ ORDER BY payments.[date] DESC";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._trainersScheduleTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.trainersSchedule.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._settingsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.settings.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._trainersScheduleTableAdapter.Update(updatedRows));
+                    result = (result + this._settingsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -12412,11 +11804,11 @@ ORDER BY payments.[date] DESC";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._settingsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.settings.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._trainersScheduleTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.trainersSchedule.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._settingsTableAdapter.Update(addedRows));
+                    result = (result + this._trainersScheduleTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -12436,11 +11828,11 @@ ORDER BY payments.[date] DESC";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._trainersScheduleTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.trainersSchedule.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._settingsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.settings.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._trainersScheduleTableAdapter.Update(addedRows));
+                    result = (result + this._settingsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -12485,11 +11877,11 @@ ORDER BY payments.[date] DESC";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._trainersScheduleTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.trainersSchedule.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._settingsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.settings.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._trainersScheduleTableAdapter.Update(deletedRows));
+                    result = (result + this._settingsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -12509,11 +11901,11 @@ ORDER BY payments.[date] DESC";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._settingsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.settings.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._trainersScheduleTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.trainersSchedule.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._settingsTableAdapter.Update(deletedRows));
+                    result = (result + this._trainersScheduleTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

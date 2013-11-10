@@ -8,14 +8,14 @@ namespace EAssistant
 {
 	public partial class AddPayment : Form
 	{
-		private Int64 m_ClientId;
+		private Int32 m_ClientId;
 		
-		public AddPayment(Int64 clientId)
+		public AddPayment(Int32 clientId)
 		{
 			InitializeComponent();
 			m_ClientId = clientId;
-			
-			textClientCode.Text = m_ClientId.ToString().PadLeft(Session.MinBarcodeLen, '0');
+
+			textClientCode.Text = BarcodePrinter.GetCode(m_ClientId); ;
 			
 			comboTypeOfService.Items.Clear();
 			comboTypeOfService.AutoCompleteMode = AutoCompleteMode.SuggestAppend;

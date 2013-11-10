@@ -15,7 +15,7 @@ namespace EAssistant
 			
 			textDate.Text = pr.date.ToString();
 			textUser.Text = (Db.Instance.dSet.users.FindByid(pr.creatorId)).name;
-			textClient.Text = pr.clientId.ToString();
+			textClient.Text = BarcodePrinter.GetCode(pr.clientId);
 			textComment.Text = pr.comment;
 			textSum.Text = pr.sum.ToString();
 			textService.Text = (Db.Instance.dSet.scheduleRules.FindByid(pr.scheduleId)).name;

@@ -11,21 +11,19 @@ namespace EAssistant
 		private DataGridViewTextBoxColumn colDate;
 		private DataGridViewTextBoxColumn colSum;
 		private DataGridViewTextBoxColumn colService;
-
 		
-		private Int64 m_clientId = 0;
+		private Int32 m_clientId = 0;
 		
 		public PaymentsHistory()
 		{
 			InitializeComponent();
-			Init();
 			
 			bindingSource.DataSource = Db.Instance.dSet.VPayments;
 			bindingSource.Position = 0;
 			gridPayments.DataSource = bindingSource;
 		}
 
-		public Int64 ClientId
+		public Int32 ClientId
 		{
 			get{ return m_clientId;}
 			set
@@ -37,6 +35,8 @@ namespace EAssistant
 
 		private void PaymentsHistory_Load(object sender, EventArgs e)
 		{
+			Init();
+			
 			if(0 != m_clientId)
 				Db.Instance.Adapters.VPaymentsTableAdapter.FillBy(Db.Instance.dSet.VPayments, m_clientId);
 			else
@@ -71,11 +71,12 @@ namespace EAssistant
 			colSum.ReadOnly = true;
 
 			colService.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			colService.DataPropertyName = "service";
+			colService.DataPropertyName = "name";
 			colService.HeaderText = "Service";
 			colService.Name = "service";
 			colService.ReadOnly = true;
 			
+			gridPayments.Columns.Clear();
 			gridPayments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
 				colId, colDate, colSum, colService});
 		}

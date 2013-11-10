@@ -106,11 +106,6 @@ namespace EAssistant
 			m_userRole = userPrivId;
 		}
 
-		public static void SyncDB()
-		{
-			Db.Instance.Adapters.clientsTableAdapter.Update(Db.Instance.dSet);
-		}
-		
 		public Int32 CustomerId
 		{
 			get{return m_customerID;}

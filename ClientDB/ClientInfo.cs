@@ -62,6 +62,7 @@ namespace EAssistant
 			btnPaymentAdd.Enabled = existingClient;
 			btnPaymentHistory.Enabled = existingClient;
 			btnEnter.Enabled = existingClient;
+			btnChangeCode.Enabled = existingClient;
 
 			return existingClient;
 		}
@@ -297,9 +298,11 @@ namespace EAssistant
 					cr.plan = 0;
 					m_client = cr.id;
 					
+					Db.Instance.dSet.clients.AddclientsRow(cr);
 					Db.Instance.AcceptChanges();
 					
-					ConfigUIForNewClient();					
+					this.DialogResult = DialogResult.OK;
+					this.Close();				
 				}
 				else
 				{
@@ -315,11 +318,8 @@ namespace EAssistant
 					cr.comment = textComment.Text;
 					cr.AcceptChanges();
 
-					//m_client = id;
-
 					Db.Instance.Adapters.clientsTableAdapter.Update(Db.Instance.dSet.clients);
-
-					Session.SyncDB();
+					Db.Instance.AcceptChanges();
 					
 					this.DialogResult = DialogResult.OK;
 					this.Close();

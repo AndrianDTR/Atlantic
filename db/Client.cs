@@ -27,9 +27,9 @@ namespace AY
 							return res;
 							
 						String where = String.Format("clientId={0}", id);
-						DataRow[] data = Db.Instance.dSet.payments.Select(where);
+						DataRow[] data = Db.Instance.dSet.payments.Select(where, "date desc");
 
-						if (data != null && data.Length > 1)
+						if (data != null)
 						{
 							res[0] = data[0]["sum"].ToString();
 							res[1] = data[0]["date"].ToString();
