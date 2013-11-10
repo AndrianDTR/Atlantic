@@ -39,12 +39,12 @@
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
 			this.gridClients = new System.Windows.Forms.DataGridView();
-			this.clientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.btnEdit = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
 			this.btnPayments = new System.Windows.Forms.Button();
 			this.BtnEntrance = new System.Windows.Forms.Button();
+			this.clientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			groupBox1 = new System.Windows.Forms.GroupBox();
 			groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridClients)).BeginInit();
@@ -165,10 +165,6 @@
 			this.gridClients.TabIndex = 5;
 			this.gridClients.DoubleClick += new System.EventHandler(this.OnEditClient);
 			// 
-			// clientsBindingSource
-			// 
-			this.clientsBindingSource.DataMember = "vClients";
-			// 
 			// btnAdd
 			// 
 			this.btnAdd.Location = new System.Drawing.Point(12, 387);
@@ -207,6 +203,7 @@
 			this.btnPayments.TabIndex = 9;
 			this.btnPayments.Text = "Payments";
 			this.btnPayments.UseVisualStyleBackColor = true;
+			this.btnPayments.Click += new System.EventHandler(this.btnPayments_Click);
 			// 
 			// BtnEntrance
 			// 
@@ -216,6 +213,11 @@
 			this.BtnEntrance.TabIndex = 10;
 			this.BtnEntrance.Text = "Entrance";
 			this.BtnEntrance.UseVisualStyleBackColor = true;
+			this.BtnEntrance.Click += new System.EventHandler(this.BtnEntrance_Click);
+			// 
+			// clientsBindingSource
+			// 
+			this.clientsBindingSource.DataMember = "vClients";
 			// 
 			// ManageClients
 			// 

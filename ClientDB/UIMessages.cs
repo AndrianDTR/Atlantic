@@ -37,5 +37,15 @@ namespace EAssistant
 		{
 			return UIMessages.Info(message, MessageBoxButtons.OK);
 		}
+
+		public static DialogResult NotImplementedFeature()
+		{
+			return UIMessages.Info("This feature is not implemented yet.");
+		}
+		
+		public static DialogResult DisabledFeature()
+		{
+			return UIMessages.Info("This feature is disabled.");
+		}
 	}
 }

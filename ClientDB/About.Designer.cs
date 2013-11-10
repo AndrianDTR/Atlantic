@@ -94,7 +94,7 @@
 			this.labelName.Name = "labelName";
 			this.labelName.Size = new System.Drawing.Size(354, 50);
 			this.labelName.TabIndex = 29;
-			this.labelName.Text = "G-Assistant";
+			this.labelName.Text = "E-Assistant";
 			// 
 			// labelVersion
 			// 

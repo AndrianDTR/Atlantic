@@ -14,11 +14,11 @@ namespace EAssistant
 		const String cancelText = "Cancel";
 		const String enterText = "Enter";
 
-		private Int64 m_client = 0;
+		private Int32 m_client = 0;
 		
 		private Session session = Session.Instance;
 
-		public ClientInfo(Int64 client)
+		public ClientInfo(Int32 client)
 		{
 			InitializeComponent();
 			Init();
@@ -35,7 +35,7 @@ namespace EAssistant
 			if(null == cr)
 				return;
 				
-			textCode.Text = cr.id.ToString();
+			textCode.Text = BarcodePrinter.GetCode(cr.id);
 			textName.Text = cr.name;
 			textPhone.Text = cr.phone;
 			dateSchedTime.Text = cr.scheduleTime.ToShortTimeString();
@@ -280,7 +280,7 @@ namespace EAssistant
 			
 			if(ValidateForm())
 			{
-				Int64 id = Session.CheckBarCode(textCode.Text);
+				Int32 id = Session.CheckBarCode(textCode.Text);
 				
 				if(m_client == 0)
 				{

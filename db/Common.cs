@@ -11,14 +11,14 @@ namespace AY.db
 	{
 		public partial class TableAdapterManager
 		{
-			private vPaymentsTableAdapter _vPaymentsTableAdapter;
+			private VPaymentsTableAdapter _vPaymentsTableAdapter;
 			private VClientsTableAdapter _vClientsTableAdapter;
 			
 			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
 			[global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
 				"ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
 				"", "System.Drawing.Design.UITypeEditor")]
-			public vPaymentsTableAdapter vPaymentsTableAdapter
+			public VPaymentsTableAdapter VPaymentsTableAdapter
 			{
 				get
 				{
@@ -73,7 +73,7 @@ namespace AY.db
 			Adapters.userPrivilegesTableAdapter = new userPrivilegesTableAdapter();
 			Adapters.usersTableAdapter = new usersTableAdapter();
 			Adapters.VClientsTableAdapter = new VClientsTableAdapter();
-			Adapters.vPaymentsTableAdapter = new vPaymentsTableAdapter();
+			Adapters.VPaymentsTableAdapter = new VPaymentsTableAdapter();
 
 			Adapters.clientsTableAdapter.Fill(m_clientDataSet.clients);
 			Adapters.paymentsTableAdapter.Fill(m_clientDataSet.payments);
@@ -85,7 +85,7 @@ namespace AY.db
 			Adapters.userPrivilegesTableAdapter.Fill(m_clientDataSet.userPrivileges);
 			Adapters.usersTableAdapter.Fill(m_clientDataSet.users);
 			Adapters.VClientsTableAdapter.Fill(m_clientDataSet.VClients);
-			Adapters.vPaymentsTableAdapter.Fill(m_clientDataSet.vPayments);
+			Adapters.VPaymentsTableAdapter.Fill(m_clientDataSet.VPayments);
 
 			((System.ComponentModel.ISupportInitialize)(m_clientDataSet)).EndInit();
 		}

@@ -20,10 +20,9 @@ namespace EAssistant
 			InitializeComponent();
 			Init();
 			
-			bindingSource.DataSource = Db.Instance.dSet;
+			bindingSource.DataSource = Db.Instance.dSet.VPayments;
 			bindingSource.Position = 0;
 			gridPayments.DataSource = bindingSource;
-			gridPayments.DataMember = "vPayments";
 		}
 
 		public Int64 ClientId
@@ -32,13 +31,16 @@ namespace EAssistant
 			set
 			{
 				m_clientId = value;
-				bindingSource.Filter = String.Format("clientId = {0}", m_clientId);
+				Db.Instance.Adapters.VPaymentsTableAdapter.FillBy(Db.Instance.dSet.VPayments, m_clientId);
 			}
 		}
 
 		private void PaymentsHistory_Load(object sender, EventArgs e)
 		{
-			Db.Instance.Adapters.vPaymentsTableAdapter.Fill(Db.Instance.dSet.vPayments);
+			if(0 != m_clientId)
+				Db.Instance.Adapters.VPaymentsTableAdapter.FillBy(Db.Instance.dSet.VPayments, m_clientId);
+			else
+				Db.Instance.Adapters.VPaymentsTableAdapter.Fill(Db.Instance.dSet.VPayments);
 		}
 		
 		private void Init()
@@ -97,7 +99,5 @@ namespace EAssistant
 			PaymentDetail pd = new PaymentDetail(id);
 			pd.ShowDialog();
 		}
-
-
 	}
 }

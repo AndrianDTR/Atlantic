@@ -303,7 +303,7 @@ namespace EAssistant
 			dlg.Text = "Search client by code";
 			while (DialogResult.OK == dlg.ShowDialog())
 			{
-				Int64 id = Session.CheckBarCode(dlg.Value);
+				Int32 id = Session.CheckBarCode(dlg.Value);
 				if (0 == id)
 				{
 					dlg.Clear();

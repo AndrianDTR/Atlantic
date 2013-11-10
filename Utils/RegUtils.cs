@@ -19,6 +19,7 @@ namespace AY.Utils
 			PubKey = 1024,
 			PrivKey = 3072,
 			ActKey = 1024,
+			CustomerId = 32,
 		}
 		
 		private static RegistryKey GetAppKey()
@@ -130,6 +131,15 @@ namespace AY.Utils
 			byte[] snm = GetKey(data, ref pos, DataOffsets.Serial);
 			String serial = Encoding.ASCII.GetString(snm);
 			return CryptSerialNumber(serial.Split('\0')[0]);
+		}
+
+		public static Int32 GetRegCustomerId(byte[] data)
+		{
+			int pos = (int)DataOffsets.ActKey;
+			byte[] dat = GetKey(data, ref pos, DataOffsets.CustomerId);
+			Int32 num = BitConverter.ToInt32(dat, 0);
+			
+			return num;
 		}
 
 		public static String GetRegInfo(byte[] data)

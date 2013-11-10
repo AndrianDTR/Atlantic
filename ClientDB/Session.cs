@@ -17,6 +17,7 @@ namespace EAssistant
 		private int m_passLen = 8;
 		private Int64 m_user = 0;
 		private Int64 m_userRole = 0;
+		private Int32 m_customerID = 0;
 		
 		public delegate void UpdateTicketList();
 		
@@ -37,6 +38,9 @@ namespace EAssistant
 		
 		private Session()
 		{
+			byte[] regdata = RegUtils.RegData;
+			if (null != regdata)
+				m_customerID = RegUtils.GetRegCustomerId(regdata);
 		}
 
 		public void UpdateTickets()
@@ -66,15 +70,18 @@ namespace EAssistant
 			get { return m_minBarcodeLen; }
 		}
 
-		public static Int64 CheckBarCode(String code)
+		public static Int32 CheckBarCode(String code)
 		{
-			Int64 res = 0;
+			Int32 res = 0;
 			try
 			{
 				if (code.Length > MinBarcodeLen)
 					throw new InvalidExpressionException();
-
-				res = Int64.Parse(code);
+				
+				int prefix = Int32.Parse(code.Substring(0, 2));
+				int customer = Int32.Parse(code.Substring(2, 5));
+				int client = Int32.Parse(code.Substring(7, 5));
+				res = client;
 				
 				if(0 == res)
 				{
@@ -102,6 +109,11 @@ namespace EAssistant
 		public static void SyncDB()
 		{
 			Db.Instance.Adapters.clientsTableAdapter.Update(Db.Instance.dSet);
+		}
+		
+		public Int32 CustomerId
+		{
+			get{return m_customerID;}
 		}
 	}
 }

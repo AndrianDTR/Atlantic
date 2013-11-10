@@ -134,7 +134,7 @@ namespace EAssistant
 		private void EditClient()
 		{
 			dbDataSet.VClientsRow cr = GetSelectedRow();
-			long id = 0;
+			Int32 id = 0;
 			if(null != cr)
 			{
 				id = cr.id;
@@ -173,8 +173,23 @@ namespace EAssistant
 				Db.Instance.Adapters.VClientsTableAdapter.DeleteQuery(vcr.id);
 				Db.Instance.AcceptChanges();
 				Db.Instance.Adapters.VClientsTableAdapter.Fill(Db.Instance.dSet.VClients);
-			}
-			
+			}	
+		}
+
+		private void btnPayments_Click(object sender, EventArgs e)
+		{
+			dbDataSet.VClientsRow vcr = GetSelectedRow();
+			if (null == vcr)
+				return;
+
+			PaymentsHistory hist = new PaymentsHistory();
+			hist.ClientId = vcr.id;
+			hist.ShowDialog();
+		}
+
+		private void BtnEntrance_Click(object sender, EventArgs e)
+		{
+			UIMessages.NotImplementedFeature();
 		}
 	}
 }

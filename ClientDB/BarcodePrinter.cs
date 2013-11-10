@@ -43,12 +43,12 @@ table td, table th {
 		{
 			int nRows = (int)numericRows.Value;
 			int nCols = (int)numericCols.Value;
+			Int32 nMaxClientId = GetMaxClientCode();
 			
 			WaitDialog wd = new WaitDialog(0, nRows * nCols, 1);
 			wd.Show();
 			wd.Refresh();
-			
-			
+						
 			String html = String.Format("<html><head><style type=\"text/css\">{0}</style></head><body>"
 				+ "<table style=\"font: {1}pt, code EAN13;\">"
 				, m_Style
@@ -60,7 +60,7 @@ table td, table th {
 				for (int nCol = 0; nCol < nCols; nCol++)
 				{
 					html += "<td style=\"padding:4px;\">";
-					html += String.Format("{0}", GetNextCode());
+					html += String.Format("{0}", Barcode.EAN13(GetCode(++nMaxClientId)).ToString());
 					wd.StepIt();
 					html += "</td>";
 				}
@@ -73,26 +73,19 @@ table td, table th {
 			wd.Close();
 		}
 		
-		private Int64 GetMaxClientCode()
+		private Int32 GetMaxClientCode()
 		{
-			Int32 code = 0;
-			//clientDataSet.clientRow = Db.Instance.dSet.clients.
+			Object res = Db.Instance.dSet.clients.Compute("max(id)", "");
+			Int32 code = Int32.Parse(res.ToString());
 			
 			return code;
 		}
 		
-		private String GetNextCode()
+		public static String GetCode(Int32 id)
 		{
-			Int32 code = 0;
-			
-			do 
-			{
-				code = m_random.Next(Int32.MaxValue);
-			} while (dbDataSet.clientsRow.Exists(code));
-			
-			String szCode = String.Format("22{0}"
-				, code.ToString().PadLeft(Session.MinBarcodeLen-3, '0'));
-			return Barcode.EAN13(szCode).ToString();
+			return String.Format("22{0}{1}"
+				, Session.Instance.CustomerId.ToString().PadLeft(5, '0')
+				, id.ToString().PadLeft(5, '0'));
 		}
 
 		private void btnPrint_Click(object sender, EventArgs e)
