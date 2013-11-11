@@ -44,6 +44,8 @@
 			this.label6 = new System.Windows.Forms.Label();
 			this.textAddress = new System.Windows.Forms.TextBox();
 			this.label7 = new System.Windows.Forms.Label();
+			this.textCustomer = new System.Windows.Forms.TextBox();
+			this.label8 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -137,7 +139,7 @@
 			// 
 			this.textPhone.Location = new System.Drawing.Point(69, 142);
 			this.textPhone.Name = "textPhone";
-			this.textPhone.Size = new System.Drawing.Size(446, 20);
+			this.textPhone.Size = new System.Drawing.Size(150, 20);
 			this.textPhone.TabIndex = 11;
 			// 
 			// label5
@@ -182,6 +184,23 @@
 			this.label7.TabIndex = 14;
 			this.label7.Text = "Address";
 			// 
+			// textCustomer
+			// 
+			this.textCustomer.Location = new System.Drawing.Point(365, 142);
+			this.textCustomer.Name = "textCustomer";
+			this.textCustomer.Size = new System.Drawing.Size(150, 20);
+			this.textCustomer.TabIndex = 17;
+			this.textCustomer.Text = "0";
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(298, 145);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(61, 13);
+			this.label8.TabIndex = 16;
+			this.label8.Text = "Customer #";
+			// 
 			// ActivatorForm
 			// 
 			this.AcceptButton = this.btnGenerate;
@@ -189,6 +208,8 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnClose;
 			this.ClientSize = new System.Drawing.Size(527, 460);
+			this.Controls.Add(this.textCustomer);
+			this.Controls.Add(this.label8);
 			this.Controls.Add(this.textAddress);
 			this.Controls.Add(this.label7);
 			this.Controls.Add(this.textEmail);
@@ -233,6 +254,8 @@
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.TextBox textAddress;
 		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.TextBox textCustomer;
+		private System.Windows.Forms.Label label8;
 	}
 }
 

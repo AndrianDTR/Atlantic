@@ -93,6 +93,7 @@
 			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
 			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
 			this.gridPayments.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+			this.gridPayments.RowHeadersVisible = false;
 			this.gridPayments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridPayments.Size = new System.Drawing.Size(619, 335);
 			this.gridPayments.TabIndex = 3;

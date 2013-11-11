@@ -10,8 +10,9 @@ namespace Registrator
 		public ActivatorForm()
 		{
 			InitializeComponent();
-			
+#if DEBUG			
 			FillRegInfo();
+#endif
 		}
 		
 		private void FillRegInfo()
@@ -20,6 +21,7 @@ namespace Registrator
 			textFName.Text = "Andrian";
 			textLName.Text = "Yablonskyy";
 			textPhone.Text = "+ 380 (67) 439 - 1881";
+			textCustomer.Text = "1";
 			textEmail.Text = "an-hak@mail.ru";
 			textAddress.Text = @"81105, N. Yaremchuka str., 8
 Navaria, 
@@ -37,7 +39,8 @@ Ukraine";
 			data += String.Format("Email: {0}\n", textEmail.Text); 
 			data += String.Format("Phone: {0}\n", textPhone.Text);
 			data += String.Format("\n");
-			data += String.Format("Serial number: {0}|{1}", textSerial.Text, randStr);
+			data += String.Format("Serial number: {0}\n", textSerial.Text);
+			data += String.Format("Customer ID: {0}|{1}", textCustomer.Text, randStr);
 			
 			byte[] key = Encoding.UTF8.GetBytes(data);
 			for(int n = 0; n < key.Length; n++)

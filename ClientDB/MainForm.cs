@@ -509,7 +509,7 @@ namespace EAssistant
 
 		private void btnTrainersShedule_Click(object sender, EventArgs e)
 		{
-			TrainerScheduleDlg dlg = new TrainerScheduleDlg();
+			ManageTrainerScheduleDlg dlg = new ManageTrainerScheduleDlg();
 			if(DialogResult.OK == dlg.ShowDialog())
 			{
 				UpdateInfo();
