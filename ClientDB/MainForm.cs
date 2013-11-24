@@ -194,6 +194,11 @@ namespace EAssistant
 		{
 			DateTime today = DateTime.Now;
 #if !DEBUG
+/*
+select trainersSchedule.id as ID, trainersSchedule.trainerId, DT.dt from trainersSchedule left outer join 
+(select date('2013-11-13') as dt) as DT on DT.[dt]=trainersSchedule.id
+--(select count(R) as cc, dID from (select SUBSTR(scheduleDays, strftime('%w', date(ID)), 1) As R, date(ID) as dID from clients where R='X')) as CC on dID = ID where ID = date('2013-11-14')  
+*/
 			listClients.Items.Clear();
 			ClientCollection clients = new ClientCollection();
 			clients.Refresh("date(openTicket) = date('now', 'localtime')");

@@ -13,7 +13,6 @@ namespace EAssistant
 	{
 		private int[] m_days = null;
 		private Dictionary<DateTime, String> m_trainerDate2NameMap = new Dictionary<DateTime, String>();
-		//private Opts m_opt = new Opts();
 		
 		private bool showTrainers = false;
 		private bool showClientCount = false;
@@ -26,17 +25,24 @@ namespace EAssistant
 		public void Reinit()
 		{
 //#if !DEBUG
+/*
+select trainersSchedule.id as ID, trainersSchedule.trainerId, DT.dt from trainersSchedule left outer join 
+(select date('2013-11-13') as dt) as DT on DT.[dt]=trainersSchedule.id
+--(select count(R) as cc, dID from (select SUBSTR(scheduleDays, strftime('%w', date(ID)), 1) As R, date(ID) as dID from clients where R='X')) as CC on dID = ID where ID = date('2013-11-14')  
+*/
+
 			try
 			{
-				showTrainers = m_opt.ShowTrainer;
-				showClientCount = m_opt.ShowClientCount;
+				dbDataSet.settingsRow opts = Db.Instance.dSet.settings.FindByid(1);
+				showTrainers = opts.ShowTrainer;
+				showClientCount = opts.ShowClientCount;
 				
 				m_days = CultureInfoUtils.RShift<int>(
 					  new int[7] { 0, 1, 2, 3, 4, 5, 6 }
 					, (int)CultureInfoUtils.GetWeekStart());
 				//m_clients = new ClientCollection();
 				//m_clients.Refresh("hoursLeft > 0");
-				
+				/*
 				Dictionary<Int64, String> trainerId2NameMap = new Dictionary<Int64, String>();
 				foreach (Trainer tr in new TrainerCollection())
 				{
@@ -46,7 +52,7 @@ namespace EAssistant
 				foreach (TrainerSchedule tr in new TrainerScheduleCollection())
 				{
 					m_trainerDate2NameMap[tr.Date] = trainerId2NameMap[tr.TrainerId];
-				}
+				}*/
 			}
 			catch (System.Exception)
 			{
