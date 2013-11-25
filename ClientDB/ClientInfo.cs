@@ -48,6 +48,7 @@ namespace EAssistant
 					break;
 				}
 			}
+
 			SetScheduleDays(cr.scheduleDays);
 			textComment.Text = cr.comment;
 			
@@ -238,37 +239,42 @@ namespace EAssistant
 		private String GetScheduleDays()
 		{
 			String data = "";
+			char[] entranceInfo = new char[7];
+
+			entranceInfo[0] = checkDay1.Checked ? 'X' : '_';
+			entranceInfo[1] = checkDay2.Checked ? 'X' : '_';
+			entranceInfo[2] = checkDay3.Checked ? 'X' : '_';
+			entranceInfo[3] = checkDay4.Checked ? 'X' : '_';
+			entranceInfo[4] = checkDay5.Checked ? 'X' : '_';
+			entranceInfo[5] = checkDay6.Checked ? 'X' : '_';
+			entranceInfo[6] = checkDay7.Checked ? 'X' : '_';
 			
-			data += checkDay1.Checked ? "X" : "_";
-			data += checkDay2.Checked ? "X" : "_";
-			data += checkDay3.Checked ? "X" : "_";
-			data += checkDay4.Checked ? "X" : "_";
-			data += checkDay5.Checked ? "X" : "_";
-			data += checkDay6.Checked ? "X" : "_";
-			data += checkDay7.Checked ? "X" : "_";
+			entranceInfo = CultureInfoUtils.RShift<char>(entranceInfo, 
+				(int)CultureInfoUtils.GetWeekStart());
+			
+			foreach (char x in entranceInfo)
+			{
+				data += x;
+			}
 			
 			return data;
 		}
-
-		private bool IsDaySet(int nDay, String data)
-		{
-			bool res = false;
-			
-			if (data.Length > nDay && data[nDay - 1] != '_')
-				res = true;
-			
-			return res;
-		}
 		
-		private void SetScheduleDays(String data)
+		private void SetScheduleDays(String info)
 		{
-			checkDay1.Checked = IsDaySet(1, data);
-			checkDay2.Checked = IsDaySet(2, data);
-			checkDay3.Checked = IsDaySet(3, data);
-			checkDay4.Checked = IsDaySet(4, data);
-			checkDay5.Checked = IsDaySet(5, data);
-			checkDay6.Checked = IsDaySet(6, data);
-			checkDay7.Checked = IsDaySet(7, data);
+			char[] entranceInfo = CultureInfoUtils.Shift<char>(info.ToCharArray(),
+				(int)CultureInfoUtils.GetWeekStart());
+			
+			if(entranceInfo.Length != 7)
+				return;
+				
+			checkDay1.Checked = entranceInfo[0] == 'X';
+			checkDay2.Checked = entranceInfo[1] == 'X';
+			checkDay3.Checked = entranceInfo[2] == 'X';
+			checkDay4.Checked = entranceInfo[3] == 'X';
+			checkDay5.Checked = entranceInfo[4] == 'X';
+			checkDay6.Checked = entranceInfo[5] == 'X';
+			checkDay7.Checked = entranceInfo[6] == 'X';
 		}
 		
 		private void btnOk_Click(object sender, EventArgs e)
