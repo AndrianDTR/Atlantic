@@ -64,7 +64,7 @@ namespace EAssistant
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			Db.Instance.Adapters.VTodayClientsTableAdapter.Fill(Db.Instance.dSet.VTodayClients);
+			GetOpenedTickets();
 		}
 		
 		private void InitOnce()
@@ -91,33 +91,38 @@ namespace EAssistant
 			colOTName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			colOTName.DataPropertyName = "name";
 			colOTName.Name = "colOTName";
+			colOTName.HeaderText = "Client Name";
 			colOTName.ReadOnly = true;
 			// 
 			// colOTStatus
 			// 
 			colOTStatus.DataPropertyName = "status";
-			colOTStatus.Name = "status";
+			colOTStatus.Name = "colOTStatus";
+			colOTStatus.HeaderText = "Status";
 			colOTStatus.ReadOnly = true;
 			// 
 			// colOTOpenTicket
 			// 
 			colOTOpenTicket.DataPropertyName = "openTicket";
 			colOTOpenTicket.Name = "colOTOpenTicket";
+			colOTOpenTicket.HeaderText = "Enter";
 			colOTOpenTicket.ReadOnly = true;
 			// 
 			// colOTLastLeave
 			// 
 			colOTLastLeave.DataPropertyName = "lastLeave";
 			colOTLastLeave.Name = "colOTLastLeave";
+			colOTLastLeave.HeaderText = "Leave";
 			colOTLastLeave.ReadOnly = true;
 			// 
 			// colOTHoursLeft
 			// 
 			colOTHoursLeft.DataPropertyName = "hoursLeft";
 			colOTHoursLeft.Name = "colOTHoursLeft";
+			colOTHoursLeft.HeaderText = "Available Hours";
+			colOTHoursLeft.Width = 110;
 			colOTHoursLeft.ReadOnly = true;
-			
-			
+						
 			dataGridView1.Columns.AddRange(new DataGridViewColumn[] {
 				colOTId,
 				colOTName,
@@ -271,14 +276,18 @@ namespace EAssistant
 		
 		private void GetOpenedTickets()
 		{
+			Db.Instance.Adapters.VTodayClientsTableAdapter.Fill(Db.Instance.dSet.VTodayClients);
+			
 			DateTime today = DateTime.Now;
 			
+			foreach( DataGridViewRow row in dataGridView1.Rows)
+			{
+				//Analyse client data / change status field / set BG(FG) colors
+				//row.Cells["colOTStatus"].Value = "AAA";
+				//row.DefaultCellStyle.BackColor = System.Drawing.Color.Blue;
+			}
+			
 #if !DEBUG
-/*
-select trainersSchedule.id as ID, trainersSchedule.trainerId, DT.dt from trainersSchedule left outer join 
-(select date('2013-11-13') as dt) as DT on DT.[dt]=trainersSchedule.id
---(select count(R) as cc, dID from (select SUBSTR(scheduleDays, strftime('%w', date(ID)), 1) As R, date(ID) as dID from clients where R='X')) as CC on dID = ID where ID = date('2013-11-14')  
-*/
 			listClients.Items.Clear();
 			ClientCollection clients = new ClientCollection();
 			clients.Refresh("date(openTicket) = date('now', 'localtime')");
@@ -370,6 +379,7 @@ select trainersSchedule.id as ID, trainersSchedule.trainerId, DT.dt from trainer
 				}
 			}
 #endif
+
 		}
 
 		private void btnSearch_Click(object sender, EventArgs e)
@@ -565,10 +575,10 @@ select trainersSchedule.id as ID, trainersSchedule.trainerId, DT.dt from trainer
 
 		private void ShowClientInfo(object sender, EventArgs e)
 		{
-			if(listClients.SelectedItems.Count < 1)
+			/*if(listClients.SelectedItems.Count < 1)
 				return;
 
-			/*ClientStatus status = (ClientStatus)listClients.SelectedItems[0].Tag;
+			ClientStatus status = (ClientStatus)listClients.SelectedItems[0].Tag;
 			ClientInfo ci = new ClientInfo(status.Id);
 			ci.ShowDialog();
 			*/

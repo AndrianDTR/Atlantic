@@ -3,3 +3,8 @@ D:\Projects\Atlantic\bin\Debug\Logger.pdb
 D:\Projects\Atlantic\Logger\obj\Debug\ResolveAssemblyReference.cache
 D:\Projects\Atlantic\Logger\obj\Debug\Logger.dll
 D:\Projects\Atlantic\Logger\obj\Debug\Logger.pdb
+D:\Cpp\Atlantic\bin\Debug\Logger.dll
+D:\Cpp\Atlantic\bin\Debug\Logger.pdb
+D:\Cpp\Atlantic\Logger\obj\Debug\ResolveAssemblyReference.cache
+D:\Cpp\Atlantic\Logger\obj\Debug\Logger.dll
+D:\Cpp\Atlantic\Logger\obj\Debug\Logger.pdb

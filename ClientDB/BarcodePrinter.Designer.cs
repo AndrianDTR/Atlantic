@@ -32,6 +32,7 @@
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.webBrowser = new System.Windows.Forms.WebBrowser();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.btnRegenerate = new System.Windows.Forms.Button();
 			this.numericRows = new System.Windows.Forms.NumericUpDown();
 			this.label3 = new System.Windows.Forms.Label();
 			this.numericCols = new System.Windows.Forms.NumericUpDown();
@@ -40,7 +41,6 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnPrint = new System.Windows.Forms.Button();
 			this.btnClose = new System.Windows.Forms.Button();
-			this.btnRegenerate = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericRows)).BeginInit();
@@ -90,6 +90,16 @@
 			this.panel1.Size = new System.Drawing.Size(134, 435);
 			this.panel1.TabIndex = 1;
 			// 
+			// btnRegenerate
+			// 
+			this.btnRegenerate.Location = new System.Drawing.Point(13, 254);
+			this.btnRegenerate.Name = "btnRegenerate";
+			this.btnRegenerate.Size = new System.Drawing.Size(110, 23);
+			this.btnRegenerate.TabIndex = 8;
+			this.btnRegenerate.Text = "Regenerate";
+			this.btnRegenerate.UseVisualStyleBackColor = true;
+			this.btnRegenerate.Click += new System.EventHandler(this.btnRegenerate_Click);
+			// 
 			// numericRows
 			// 
 			this.numericRows.Location = new System.Drawing.Point(12, 217);
@@ -102,7 +112,7 @@
 			this.numericRows.Size = new System.Drawing.Size(55, 20);
 			this.numericRows.TabIndex = 7;
 			this.numericRows.Value = new decimal(new int[] {
-            20,
+            16,
             0,
             0,
             0});
@@ -133,7 +143,7 @@
 			this.numericCols.Size = new System.Drawing.Size(55, 20);
 			this.numericCols.TabIndex = 5;
 			this.numericCols.Value = new decimal(new int[] {
-            7,
+            5,
             0,
             0,
             0});
@@ -165,7 +175,7 @@
 			this.numericFontSize.Size = new System.Drawing.Size(55, 20);
 			this.numericFontSize.TabIndex = 3;
 			this.numericFontSize.Value = new decimal(new int[] {
-            24,
+            32,
             0,
             0,
             0});
@@ -198,16 +208,6 @@
 			this.btnClose.TabIndex = 1;
 			this.btnClose.Text = "Close";
 			this.btnClose.UseVisualStyleBackColor = true;
-			// 
-			// btnRegenerate
-			// 
-			this.btnRegenerate.Location = new System.Drawing.Point(13, 254);
-			this.btnRegenerate.Name = "btnRegenerate";
-			this.btnRegenerate.Size = new System.Drawing.Size(110, 23);
-			this.btnRegenerate.TabIndex = 8;
-			this.btnRegenerate.Text = "Regenerate";
-			this.btnRegenerate.UseVisualStyleBackColor = true;
-			this.btnRegenerate.Click += new System.EventHandler(this.btnRegenerate_Click);
 			// 
 			// BarcodePrinter
 			// 

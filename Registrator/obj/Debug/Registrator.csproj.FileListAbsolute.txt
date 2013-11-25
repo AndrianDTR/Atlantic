@@ -6,3 +6,11 @@ D:\Projects\Atlantic\Registrator\obj\Debug\Registrator.Properties.Resources.reso
 D:\Projects\Atlantic\Registrator\obj\Debug\Registrator.csproj.GenerateResource.Cache
 D:\Projects\Atlantic\Registrator\obj\Debug\Registrator.exe
 D:\Projects\Atlantic\Registrator\obj\Debug\Registrator.pdb
+D:\Cpp\Atlantic\bin\Debug\Registrator.exe
+D:\Cpp\Atlantic\bin\Debug\Registrator.pdb
+D:\Cpp\Atlantic\Registrator\obj\Debug\ResolveAssemblyReference.cache
+D:\Cpp\Atlantic\Registrator\obj\Debug\Registrator.ActivatorForm.resources
+D:\Cpp\Atlantic\Registrator\obj\Debug\Registrator.Properties.Resources.resources
+D:\Cpp\Atlantic\Registrator\obj\Debug\Registrator.csproj.GenerateResource.Cache
+D:\Cpp\Atlantic\Registrator\obj\Debug\Registrator.exe
+D:\Cpp\Atlantic\Registrator\obj\Debug\Registrator.pdb

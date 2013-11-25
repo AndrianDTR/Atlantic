@@ -30,10 +30,10 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,12 +72,6 @@
 			this.tabActiveClients = new System.Windows.Forms.TabPage();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.todayClientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.listClients = new System.Windows.Forms.ListView();
-			this.columnClient = new System.Windows.Forms.ColumnHeader();
-			this.columnStatus = new System.Windows.Forms.ColumnHeader();
-			this.columnEnter = new System.Windows.Forms.ColumnHeader();
-			this.columnLeave = new System.Windows.Forms.ColumnHeader();
-			this.columnEntarncesLeft = new System.Windows.Forms.ColumnHeader();
 			this.tabCalendar = new System.Windows.Forms.TabPage();
 			this.m_calendar = new EAssistant.DayView();
 			this.tabStatistics = new System.Windows.Forms.TabPage();
@@ -341,7 +335,6 @@
 			// tabActiveClients
 			// 
 			this.tabActiveClients.Controls.Add(this.dataGridView1);
-			this.tabActiveClients.Controls.Add(this.listClients);
 			resources.ApplyResources(this.tabActiveClients, "tabActiveClients");
 			this.tabActiveClients.Name = "tabActiveClients";
 			this.tabActiveClients.UseVisualStyleBackColor = true;
@@ -353,54 +346,17 @@
 			this.dataGridView1.AllowUserToResizeRows = false;
 			this.dataGridView1.AutoGenerateColumns = false;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.DataSource = this.todayClientsBindingSource; 
+			this.dataGridView1.DataSource = this.todayClientsBindingSource;
 			resources.ApplyResources(this.dataGridView1, "dataGridView1");
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.ReadOnly = true;
 			this.dataGridView1.RowHeadersVisible = false;
+			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dataGridView1.ShowCellErrors = false;
 			// 
 			// todayClientsBindingSource
 			// 
 			this.todayClientsBindingSource.DataMember = "TodayClients";
-			// 
-			// listClients
-			// 
-			this.listClients.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnClient,
-            this.columnStatus,
-            this.columnEnter,
-            this.columnLeave,
-            this.columnEntarncesLeft});
-			resources.ApplyResources(this.listClients, "listClients");
-			this.listClients.FullRowSelect = true;
-			this.listClients.GridLines = true;
-			this.listClients.HideSelection = false;
-			this.listClients.MultiSelect = false;
-			this.listClients.Name = "listClients";
-			this.listClients.UseCompatibleStateImageBehavior = false;
-			this.listClients.View = System.Windows.Forms.View.Details;
-			this.listClients.DoubleClick += new System.EventHandler(this.ShowClientInfo);
-			// 
-			// columnClient
-			// 
-			resources.ApplyResources(this.columnClient, "columnClient");
-			// 
-			// columnStatus
-			// 
-			resources.ApplyResources(this.columnStatus, "columnStatus");
-			// 
-			// columnEnter
-			// 
-			resources.ApplyResources(this.columnEnter, "columnEnter");
-			// 
-			// columnLeave
-			// 
-			resources.ApplyResources(this.columnLeave, "columnLeave");
-			// 
-			// columnEntarncesLeft
-			// 
-			resources.ApplyResources(this.columnEntarncesLeft, "columnEntarncesLeft");
 			// 
 			// tabCalendar
 			// 
@@ -435,33 +391,33 @@
 			// 
 			// chart1
 			// 
-			chartArea1.AxisX.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
-			chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
-			chartArea1.Name = "ChartArea1";
-			this.chart1.ChartAreas.Add(chartArea1);
+			chartArea2.AxisX.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
+			chartArea2.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
+			chartArea2.Name = "ChartArea1";
+			this.chart1.ChartAreas.Add(chartArea2);
 			resources.ApplyResources(this.chart1, "chart1");
-			legend1.Name = "Legend1";
-			this.chart1.Legends.Add(legend1);
+			legend2.Name = "Legend1";
+			this.chart1.Legends.Add(legend2);
 			this.chart1.Name = "chart1";
-			series1.ChartArea = "ChartArea1";
-			series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-			series1.Color = System.Drawing.Color.Blue;
-			series1.IsXValueIndexed = true;
-			series1.Legend = "Legend1";
-			series1.LegendText = "Present";
-			series1.Name = "seriesPresent";
-			series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-			series2.ChartArea = "ChartArea1";
-			series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-			series2.Color = System.Drawing.Color.Red;
-			series2.IsXValueIndexed = true;
-			series2.Legend = "Legend1";
-			series2.LegendText = "Prognose";
-			series2.Name = "seriesPrognosed";
-			series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-			series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
-			this.chart1.Series.Add(series1);
-			this.chart1.Series.Add(series2);
+			series3.ChartArea = "ChartArea1";
+			series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+			series3.Color = System.Drawing.Color.Blue;
+			series3.IsXValueIndexed = true;
+			series3.Legend = "Legend1";
+			series3.LegendText = "Present";
+			series3.Name = "seriesPresent";
+			series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+			series4.ChartArea = "ChartArea1";
+			series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+			series4.Color = System.Drawing.Color.Red;
+			series4.IsXValueIndexed = true;
+			series4.Legend = "Legend1";
+			series4.LegendText = "Prognose";
+			series4.Name = "seriesPrognosed";
+			series4.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+			series4.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
+			this.chart1.Series.Add(series3);
+			this.chart1.Series.Add(series4);
 			this.chart1.PrePaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.FillChart);
 			// 
 			// panel1
@@ -611,12 +567,6 @@
 		private System.Windows.Forms.ToolStripMenuItem geterateBarcodesToolStripMenuItem;
 		private System.Windows.Forms.Button btnSearch;
 		private System.Windows.Forms.DataGridView dataGridView1;
-		private System.Windows.Forms.ListView listClients;
-		private System.Windows.Forms.ColumnHeader columnClient;
-		private System.Windows.Forms.ColumnHeader columnStatus;
-		private System.Windows.Forms.ColumnHeader columnEnter;
-		private System.Windows.Forms.ColumnHeader columnLeave;
-		private System.Windows.Forms.ColumnHeader columnEntarncesLeft;
 		private System.Windows.Forms.BindingSource todayClientsBindingSource;
     }
 }

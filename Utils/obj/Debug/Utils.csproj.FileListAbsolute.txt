@@ -5,3 +5,10 @@ D:\Projects\Atlantic\Utils\obj\Debug\AY.Utils.Properties.Resources.resources
 D:\Projects\Atlantic\Utils\obj\Debug\Utils.csproj.GenerateResource.Cache
 D:\Projects\Atlantic\Utils\obj\Debug\Utils.dll
 D:\Projects\Atlantic\Utils\obj\Debug\Utils.pdb
+D:\Cpp\Atlantic\bin\Debug\Utils.dll
+D:\Cpp\Atlantic\bin\Debug\Utils.pdb
+D:\Cpp\Atlantic\Utils\obj\Debug\ResolveAssemblyReference.cache
+D:\Cpp\Atlantic\Utils\obj\Debug\AY.Utils.Properties.Resources.resources
+D:\Cpp\Atlantic\Utils\obj\Debug\Utils.csproj.GenerateResource.Cache
+D:\Cpp\Atlantic\Utils\obj\Debug\Utils.dll
+D:\Cpp\Atlantic\Utils\obj\Debug\Utils.pdb
