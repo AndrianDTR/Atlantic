@@ -16,6 +16,13 @@ namespace EAssistant
 {
     public partial class MainForm : Form
     {
+		private DataGridViewTextBoxColumn colOTId;
+		private DataGridViewTextBoxColumn colOTName;
+		private DataGridViewTextBoxColumn colOTStatus;
+		private DataGridViewTextBoxColumn colOTOpenTicket;
+		private DataGridViewTextBoxColumn colOTLastLeave;
+		private DataGridViewTextBoxColumn colOTHoursLeft;
+		
 		public enum ClientTicketStus
 		{
 			None = -1,
@@ -51,8 +58,75 @@ namespace EAssistant
 			m_opt = Db.Instance.dSet.settings.FindByid(1);
 			
 			UserLogin();
+			InitOnce();
 			Reinit();
         }
+
+		private void MainForm_Load(object sender, EventArgs e)
+		{
+			Db.Instance.Adapters.VTodayClientsTableAdapter.Fill(Db.Instance.dSet.VTodayClients);
+		}
+		
+		private void InitOnce()
+		{
+			colOTId = new DataGridViewTextBoxColumn();
+			colOTName = new DataGridViewTextBoxColumn();
+			colOTStatus = new DataGridViewTextBoxColumn();
+			colOTOpenTicket = new DataGridViewTextBoxColumn();
+			colOTLastLeave = new DataGridViewTextBoxColumn();
+			colOTHoursLeft = new DataGridViewTextBoxColumn();
+
+			todayClientsBindingSource.DataSource = Db.Instance.dSet.VTodayClients;
+			
+			// 
+			// colOTId
+			// 
+			colOTId.DataPropertyName = "id";
+			colOTId.Name = "colOTId";
+			colOTId.ReadOnly = true;
+			colOTId.Visible = false;
+			// 
+			// colOTName
+			// 
+			colOTName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			colOTName.DataPropertyName = "name";
+			colOTName.Name = "colOTName";
+			colOTName.ReadOnly = true;
+			// 
+			// colOTStatus
+			// 
+			colOTStatus.DataPropertyName = "status";
+			colOTStatus.Name = "status";
+			colOTStatus.ReadOnly = true;
+			// 
+			// colOTOpenTicket
+			// 
+			colOTOpenTicket.DataPropertyName = "openTicket";
+			colOTOpenTicket.Name = "colOTOpenTicket";
+			colOTOpenTicket.ReadOnly = true;
+			// 
+			// colOTLastLeave
+			// 
+			colOTLastLeave.DataPropertyName = "lastLeave";
+			colOTLastLeave.Name = "colOTLastLeave";
+			colOTLastLeave.ReadOnly = true;
+			// 
+			// colOTHoursLeft
+			// 
+			colOTHoursLeft.DataPropertyName = "hoursLeft";
+			colOTHoursLeft.Name = "colOTHoursLeft";
+			colOTHoursLeft.ReadOnly = true;
+			
+			
+			dataGridView1.Columns.AddRange(new DataGridViewColumn[] {
+				colOTId,
+				colOTName,
+				colOTStatus,
+				colOTOpenTicket,
+				colOTLastLeave,
+				colOTHoursLeft});
+		
+		}
 		
 		private void CheckRegistration()
 		{
@@ -134,16 +208,10 @@ namespace EAssistant
 			}
 		}
 		
-		private void Reinit()
+		private void ConfigureUserRights()
 		{
-			Session session = Session.Instance;
-			
-			m_calendar.RowHeight = (int)m_opt.calRowHeight;
-			m_calendar.Reinit();
-			session.PassLen = (int)m_opt.minPassLen;
+			dbDataSet.userPrivilegesRow priv = Db.Instance.dSet.userPrivileges.FindByid(Session.Instance.UserRoleId);
 
-			dbDataSet.userPrivilegesRow priv = Db.Instance.dSet.userPrivileges.FindByid(session.UserRoleId);
-			
 			// File menu
 			exportToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Create);
 			importToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.backup, UserRights.Write);
@@ -156,7 +224,7 @@ namespace EAssistant
 			// Clients menu
 			addToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Create);
 			btnAddClient.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
-			
+
 			clientSearchToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
 			manageClientsToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
 			btnClientManager.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.clients, UserRights.Read);
@@ -169,7 +237,18 @@ namespace EAssistant
 			manageTrainersToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.trainers, UserRights.Read);
 
 			manageScheduleRulesToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.schedule, UserRights.Read);
+		}
+		
+		private void Reinit()
+		{
+			Session session = Session.Instance;
+			
+			m_calendar.RowHeight = (int)m_opt.calRowHeight;
+			m_calendar.Reinit();
+			session.PassLen = (int)m_opt.minPassLen;
 
+			ConfigureUserRights();
+			
 			m_calendar.StartDate = DateTime.Now;
 			m_calendar.SelectedDate = m_calendar.StartDate;
 			
@@ -193,6 +272,7 @@ namespace EAssistant
 		private void GetOpenedTickets()
 		{
 			DateTime today = DateTime.Now;
+			
 #if !DEBUG
 /*
 select trainersSchedule.id as ID, trainersSchedule.trainerId, DT.dt from trainersSchedule left outer join 
@@ -406,6 +486,12 @@ select trainersSchedule.id as ID, trainersSchedule.trainerId, DT.dt from trainer
 			ab.ShowDialog();
 		}
 
+		private void geterateBarcodesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			BarcodePrinter bp = new BarcodePrinter();
+			bp.ShowDialog();
+		}
+
 		private void btnClientManager_Click(object sender, EventArgs e)
 		{
 			ManageClients mc = new ManageClients();
@@ -596,19 +682,6 @@ select trainersSchedule.id as ID, trainersSchedule.trainerId, DT.dt from trainer
 			//chart1.ResumeLayout();
 			chart1.Invalidate(true);
 			wd.Close();
-		}
-
-		private void geterateBarcodesToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			BarcodePrinter bp = new BarcodePrinter();
-			bp.ShowDialog();
-		}
-
-		private void MainForm_Load(object sender, EventArgs e)
-		{
-			// TODO: This line of code loads data into the 'tmpDataSet.TodayClients' table. You can move, or remove it, as needed.
-			this.todayClientsTableAdapter.Fill(this.tmpDataSet.TodayClients);
-
 		}
     }
 }

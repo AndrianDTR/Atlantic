@@ -47,9 +47,9 @@ namespace AY.db {
         
         private VPaymentsDataTable tableVPayments;
         
-        private TodayClientsDataTable tableTodayClients;
+        private VTodayClientsDataTable tableVTodayClients;
         
-        private calendarInfoDataTable tablecalendarInfo;
+        private VCalendarInfoDataTable tableVCalendarInfo;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -110,11 +110,11 @@ namespace AY.db {
                 if ((ds.Tables["VPayments"] != null)) {
                     base.Tables.Add(new VPaymentsDataTable(ds.Tables["VPayments"]));
                 }
-                if ((ds.Tables["TodayClients"] != null)) {
-                    base.Tables.Add(new TodayClientsDataTable(ds.Tables["TodayClients"]));
+                if ((ds.Tables["VTodayClients"] != null)) {
+                    base.Tables.Add(new VTodayClientsDataTable(ds.Tables["VTodayClients"]));
                 }
-                if ((ds.Tables["calendarInfo"] != null)) {
-                    base.Tables.Add(new calendarInfoDataTable(ds.Tables["calendarInfo"]));
+                if ((ds.Tables["VCalendarInfo"] != null)) {
+                    base.Tables.Add(new VCalendarInfoDataTable(ds.Tables["VCalendarInfo"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -236,18 +236,18 @@ namespace AY.db {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public TodayClientsDataTable TodayClients {
+        public VTodayClientsDataTable VTodayClients {
             get {
-                return this.tableTodayClients;
+                return this.tableVTodayClients;
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public calendarInfoDataTable calendarInfo {
+        public VCalendarInfoDataTable VCalendarInfo {
             get {
-                return this.tablecalendarInfo;
+                return this.tableVCalendarInfo;
             }
         }
         
@@ -343,11 +343,11 @@ namespace AY.db {
                 if ((ds.Tables["VPayments"] != null)) {
                     base.Tables.Add(new VPaymentsDataTable(ds.Tables["VPayments"]));
                 }
-                if ((ds.Tables["TodayClients"] != null)) {
-                    base.Tables.Add(new TodayClientsDataTable(ds.Tables["TodayClients"]));
+                if ((ds.Tables["VTodayClients"] != null)) {
+                    base.Tables.Add(new VTodayClientsDataTable(ds.Tables["VTodayClients"]));
                 }
-                if ((ds.Tables["calendarInfo"] != null)) {
-                    base.Tables.Add(new calendarInfoDataTable(ds.Tables["calendarInfo"]));
+                if ((ds.Tables["VCalendarInfo"] != null)) {
+                    base.Tables.Add(new VCalendarInfoDataTable(ds.Tables["VCalendarInfo"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -445,16 +445,16 @@ namespace AY.db {
                     this.tableVPayments.InitVars();
                 }
             }
-            this.tableTodayClients = ((TodayClientsDataTable)(base.Tables["TodayClients"]));
+            this.tableVTodayClients = ((VTodayClientsDataTable)(base.Tables["VTodayClients"]));
             if ((initTable == true)) {
-                if ((this.tableTodayClients != null)) {
-                    this.tableTodayClients.InitVars();
+                if ((this.tableVTodayClients != null)) {
+                    this.tableVTodayClients.InitVars();
                 }
             }
-            this.tablecalendarInfo = ((calendarInfoDataTable)(base.Tables["calendarInfo"]));
+            this.tableVCalendarInfo = ((VCalendarInfoDataTable)(base.Tables["VCalendarInfo"]));
             if ((initTable == true)) {
-                if ((this.tablecalendarInfo != null)) {
-                    this.tablecalendarInfo.InitVars();
+                if ((this.tableVCalendarInfo != null)) {
+                    this.tableVCalendarInfo.InitVars();
                 }
             }
         }
@@ -488,10 +488,10 @@ namespace AY.db {
             base.Tables.Add(this.tableVClients);
             this.tableVPayments = new VPaymentsDataTable();
             base.Tables.Add(this.tableVPayments);
-            this.tableTodayClients = new TodayClientsDataTable();
-            base.Tables.Add(this.tableTodayClients);
-            this.tablecalendarInfo = new calendarInfoDataTable();
-            base.Tables.Add(this.tablecalendarInfo);
+            this.tableVTodayClients = new VTodayClientsDataTable();
+            base.Tables.Add(this.tableVTodayClients);
+            this.tableVCalendarInfo = new VCalendarInfoDataTable();
+            base.Tables.Add(this.tableVCalendarInfo);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -550,12 +550,12 @@ namespace AY.db {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeTodayClients() {
+        private bool ShouldSerializeVTodayClients() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializecalendarInfo() {
+        private bool ShouldSerializeVCalendarInfo() {
             return false;
         }
         
@@ -634,9 +634,9 @@ namespace AY.db {
         
         public delegate void VPaymentsRowChangeEventHandler(object sender, VPaymentsRowChangeEvent e);
         
-        public delegate void TodayClientsRowChangeEventHandler(object sender, TodayClientsRowChangeEvent e);
+        public delegate void VTodayClientsRowChangeEventHandler(object sender, VTodayClientsRowChangeEvent e);
         
-        public delegate void calendarInfoRowChangeEventHandler(object sender, calendarInfoRowChangeEvent e);
+        public delegate void VCalendarInfoRowChangeEventHandler(object sender, VCalendarInfoRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -4016,7 +4016,7 @@ namespace AY.db {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class TodayClientsDataTable : global::System.Data.TypedTableBase<TodayClientsRow> {
+        public partial class VTodayClientsDataTable : global::System.Data.TypedTableBase<VTodayClientsRow> {
             
             private global::System.Data.DataColumn columnid;
             
@@ -4028,16 +4028,18 @@ namespace AY.db {
             
             private global::System.Data.DataColumn columnopenTicket;
             
+            private global::System.Data.DataColumn columnstatus;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TodayClientsDataTable() {
-                this.TableName = "TodayClients";
+            public VTodayClientsDataTable() {
+                this.TableName = "VTodayClients";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal TodayClientsDataTable(global::System.Data.DataTable table) {
+            internal VTodayClientsDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -4053,7 +4055,7 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected TodayClientsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected VTodayClientsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -4094,6 +4096,13 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn statusColumn {
+                get {
+                    return this.columnstatus;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4102,55 +4111,56 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TodayClientsRow this[int index] {
+            public VTodayClientsRow this[int index] {
                 get {
-                    return ((TodayClientsRow)(this.Rows[index]));
+                    return ((VTodayClientsRow)(this.Rows[index]));
                 }
             }
             
-            public event TodayClientsRowChangeEventHandler TodayClientsRowChanging;
+            public event VTodayClientsRowChangeEventHandler VTodayClientsRowChanging;
             
-            public event TodayClientsRowChangeEventHandler TodayClientsRowChanged;
+            public event VTodayClientsRowChangeEventHandler VTodayClientsRowChanged;
             
-            public event TodayClientsRowChangeEventHandler TodayClientsRowDeleting;
+            public event VTodayClientsRowChangeEventHandler VTodayClientsRowDeleting;
             
-            public event TodayClientsRowChangeEventHandler TodayClientsRowDeleted;
+            public event VTodayClientsRowChangeEventHandler VTodayClientsRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddTodayClientsRow(TodayClientsRow row) {
+            public void AddVTodayClientsRow(VTodayClientsRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TodayClientsRow AddTodayClientsRow(int id, string name, long hoursLeft, System.DateTime lastLeave, System.DateTime openTicket) {
-                TodayClientsRow rowTodayClientsRow = ((TodayClientsRow)(this.NewRow()));
+            public VTodayClientsRow AddVTodayClientsRow(int id, string name, long hoursLeft, System.DateTime lastLeave, System.DateTime openTicket, System.DBNull status) {
+                VTodayClientsRow rowVTodayClientsRow = ((VTodayClientsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id,
                         name,
                         hoursLeft,
                         lastLeave,
-                        openTicket};
-                rowTodayClientsRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowTodayClientsRow);
-                return rowTodayClientsRow;
+                        openTicket,
+                        status};
+                rowVTodayClientsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowVTodayClientsRow);
+                return rowVTodayClientsRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TodayClientsRow FindByid(int id) {
-                return ((TodayClientsRow)(this.Rows.Find(new object[] {
+            public VTodayClientsRow FindByid(int id) {
+                return ((VTodayClientsRow)(this.Rows.Find(new object[] {
                             id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public override global::System.Data.DataTable Clone() {
-                TodayClientsDataTable cln = ((TodayClientsDataTable)(base.Clone()));
+                VTodayClientsDataTable cln = ((VTodayClientsDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new TodayClientsDataTable();
+                return new VTodayClientsDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4160,6 +4170,7 @@ namespace AY.db {
                 this.columnhoursLeft = base.Columns["hoursLeft"];
                 this.columnlastLeave = base.Columns["lastLeave"];
                 this.columnopenTicket = base.Columns["openTicket"];
+                this.columnstatus = base.Columns["status"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4174,63 +4185,66 @@ namespace AY.db {
                 base.Columns.Add(this.columnlastLeave);
                 this.columnopenTicket = new global::System.Data.DataColumn("openTicket", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnopenTicket);
+                this.columnstatus = new global::System.Data.DataColumn("status", typeof(global::System.DBNull), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstatus);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AllowDBNull = false;
                 this.columnid.Unique = true;
-                this.columnname.AllowDBNull = false;
+                this.columnid.DefaultValue = ((int)(0));
+                this.columnname.DefaultValue = ((string)(""));
                 this.columnname.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TodayClientsRow NewTodayClientsRow() {
-                return ((TodayClientsRow)(this.NewRow()));
+            public VTodayClientsRow NewVTodayClientsRow() {
+                return ((VTodayClientsRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new TodayClientsRow(builder);
+                return new VTodayClientsRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override global::System.Type GetRowType() {
-                return typeof(TodayClientsRow);
+                return typeof(VTodayClientsRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.TodayClientsRowChanged != null)) {
-                    this.TodayClientsRowChanged(this, new TodayClientsRowChangeEvent(((TodayClientsRow)(e.Row)), e.Action));
+                if ((this.VTodayClientsRowChanged != null)) {
+                    this.VTodayClientsRowChanged(this, new VTodayClientsRowChangeEvent(((VTodayClientsRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.TodayClientsRowChanging != null)) {
-                    this.TodayClientsRowChanging(this, new TodayClientsRowChangeEvent(((TodayClientsRow)(e.Row)), e.Action));
+                if ((this.VTodayClientsRowChanging != null)) {
+                    this.VTodayClientsRowChanging(this, new VTodayClientsRowChangeEvent(((VTodayClientsRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.TodayClientsRowDeleted != null)) {
-                    this.TodayClientsRowDeleted(this, new TodayClientsRowChangeEvent(((TodayClientsRow)(e.Row)), e.Action));
+                if ((this.VTodayClientsRowDeleted != null)) {
+                    this.VTodayClientsRowDeleted(this, new VTodayClientsRowChangeEvent(((VTodayClientsRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.TodayClientsRowDeleting != null)) {
-                    this.TodayClientsRowDeleting(this, new TodayClientsRowChangeEvent(((TodayClientsRow)(e.Row)), e.Action));
+                if ((this.VTodayClientsRowDeleting != null)) {
+                    this.VTodayClientsRowDeleting(this, new VTodayClientsRowChangeEvent(((VTodayClientsRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveTodayClientsRow(TodayClientsRow row) {
+            public void RemoveVTodayClientsRow(VTodayClientsRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -4256,7 +4270,7 @@ namespace AY.db {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "TodayClientsDataTable";
+                attribute2.FixedValue = "VTodayClientsDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -4303,7 +4317,7 @@ namespace AY.db {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class calendarInfoDataTable : global::System.Data.TypedTableBase<calendarInfoRow> {
+        public partial class VCalendarInfoDataTable : global::System.Data.TypedTableBase<VCalendarInfoRow> {
             
             private global::System.Data.DataColumn columncalDate;
             
@@ -4314,15 +4328,15 @@ namespace AY.db {
             private global::System.Data.DataColumn columnweekDay;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public calendarInfoDataTable() {
-                this.TableName = "calendarInfo";
+            public VCalendarInfoDataTable() {
+                this.TableName = "VCalendarInfo";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal calendarInfoDataTable(global::System.Data.DataTable table) {
+            internal VCalendarInfoDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -4338,7 +4352,7 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected calendarInfoDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected VCalendarInfoDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -4380,54 +4394,54 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public calendarInfoRow this[int index] {
+            public VCalendarInfoRow this[int index] {
                 get {
-                    return ((calendarInfoRow)(this.Rows[index]));
+                    return ((VCalendarInfoRow)(this.Rows[index]));
                 }
             }
             
-            public event calendarInfoRowChangeEventHandler calendarInfoRowChanging;
+            public event VCalendarInfoRowChangeEventHandler VCalendarInfoRowChanging;
             
-            public event calendarInfoRowChangeEventHandler calendarInfoRowChanged;
+            public event VCalendarInfoRowChangeEventHandler VCalendarInfoRowChanged;
             
-            public event calendarInfoRowChangeEventHandler calendarInfoRowDeleting;
+            public event VCalendarInfoRowChangeEventHandler VCalendarInfoRowDeleting;
             
-            public event calendarInfoRowChangeEventHandler calendarInfoRowDeleted;
+            public event VCalendarInfoRowChangeEventHandler VCalendarInfoRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddcalendarInfoRow(calendarInfoRow row) {
+            public void AddVCalendarInfoRow(VCalendarInfoRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public calendarInfoRow AddcalendarInfoRow(System.DateTime calDate, string trainer, System.DBNull clientsCount, System.DBNull weekDay) {
-                calendarInfoRow rowcalendarInfoRow = ((calendarInfoRow)(this.NewRow()));
+            public VCalendarInfoRow AddVCalendarInfoRow(System.DateTime calDate, string trainer, System.DBNull clientsCount, System.DBNull weekDay) {
+                VCalendarInfoRow rowVCalendarInfoRow = ((VCalendarInfoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         calDate,
                         trainer,
                         clientsCount,
                         weekDay};
-                rowcalendarInfoRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowcalendarInfoRow);
-                return rowcalendarInfoRow;
+                rowVCalendarInfoRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowVCalendarInfoRow);
+                return rowVCalendarInfoRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public calendarInfoRow FindBycalDate(System.DateTime calDate) {
-                return ((calendarInfoRow)(this.Rows.Find(new object[] {
+            public VCalendarInfoRow FindBycalDate(System.DateTime calDate) {
+                return ((VCalendarInfoRow)(this.Rows.Find(new object[] {
                             calDate})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public override global::System.Data.DataTable Clone() {
-                calendarInfoDataTable cln = ((calendarInfoDataTable)(base.Clone()));
+                VCalendarInfoDataTable cln = ((VCalendarInfoDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new calendarInfoDataTable();
+                return new VCalendarInfoDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4452,59 +4466,58 @@ namespace AY.db {
                                 this.columncalDate}, true));
                 this.columncalDate.AllowDBNull = false;
                 this.columncalDate.Unique = true;
-                this.columntrainer.AllowDBNull = false;
                 this.columntrainer.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public calendarInfoRow NewcalendarInfoRow() {
-                return ((calendarInfoRow)(this.NewRow()));
+            public VCalendarInfoRow NewVCalendarInfoRow() {
+                return ((VCalendarInfoRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new calendarInfoRow(builder);
+                return new VCalendarInfoRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override global::System.Type GetRowType() {
-                return typeof(calendarInfoRow);
+                return typeof(VCalendarInfoRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.calendarInfoRowChanged != null)) {
-                    this.calendarInfoRowChanged(this, new calendarInfoRowChangeEvent(((calendarInfoRow)(e.Row)), e.Action));
+                if ((this.VCalendarInfoRowChanged != null)) {
+                    this.VCalendarInfoRowChanged(this, new VCalendarInfoRowChangeEvent(((VCalendarInfoRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.calendarInfoRowChanging != null)) {
-                    this.calendarInfoRowChanging(this, new calendarInfoRowChangeEvent(((calendarInfoRow)(e.Row)), e.Action));
+                if ((this.VCalendarInfoRowChanging != null)) {
+                    this.VCalendarInfoRowChanging(this, new VCalendarInfoRowChangeEvent(((VCalendarInfoRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.calendarInfoRowDeleted != null)) {
-                    this.calendarInfoRowDeleted(this, new calendarInfoRowChangeEvent(((calendarInfoRow)(e.Row)), e.Action));
+                if ((this.VCalendarInfoRowDeleted != null)) {
+                    this.VCalendarInfoRowDeleted(this, new VCalendarInfoRowChangeEvent(((VCalendarInfoRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.calendarInfoRowDeleting != null)) {
-                    this.calendarInfoRowDeleting(this, new calendarInfoRowChangeEvent(((calendarInfoRow)(e.Row)), e.Action));
+                if ((this.VCalendarInfoRowDeleting != null)) {
+                    this.VCalendarInfoRowDeleting(this, new VCalendarInfoRowChangeEvent(((VCalendarInfoRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemovecalendarInfoRow(calendarInfoRow row) {
+            public void RemoveVCalendarInfoRow(VCalendarInfoRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -4530,7 +4543,7 @@ namespace AY.db {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "calendarInfoDataTable";
+                attribute2.FixedValue = "VCalendarInfoDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -5885,33 +5898,38 @@ namespace AY.db {
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class TodayClientsRow : global::System.Data.DataRow {
+        public partial class VTodayClientsRow : global::System.Data.DataRow {
             
-            private TodayClientsDataTable tableTodayClients;
+            private VTodayClientsDataTable tableVTodayClients;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal TodayClientsRow(global::System.Data.DataRowBuilder rb) : 
+            internal VTodayClientsRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableTodayClients = ((TodayClientsDataTable)(this.Table));
+                this.tableVTodayClients = ((VTodayClientsDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public int id {
                 get {
-                    return ((int)(this[this.tableTodayClients.idColumn]));
+                    return ((int)(this[this.tableVTodayClients.idColumn]));
                 }
                 set {
-                    this[this.tableTodayClients.idColumn] = value;
+                    this[this.tableVTodayClients.idColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string name {
                 get {
-                    return ((string)(this[this.tableTodayClients.nameColumn]));
+                    if (this.IsnameNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableVTodayClients.nameColumn]));
+                    }
                 }
                 set {
-                    this[this.tableTodayClients.nameColumn] = value;
+                    this[this.tableVTodayClients.nameColumn] = value;
                 }
             }
             
@@ -5919,14 +5937,14 @@ namespace AY.db {
             public long hoursLeft {
                 get {
                     try {
-                        return ((long)(this[this.tableTodayClients.hoursLeftColumn]));
+                        return ((long)(this[this.tableVTodayClients.hoursLeftColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'hoursLeft\' in table \'TodayClients\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'hoursLeft\' in table \'VTodayClients\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTodayClients.hoursLeftColumn] = value;
+                    this[this.tableVTodayClients.hoursLeftColumn] = value;
                 }
             }
             
@@ -5934,14 +5952,14 @@ namespace AY.db {
             public System.DateTime lastLeave {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableTodayClients.lastLeaveColumn]));
+                        return ((global::System.DateTime)(this[this.tableVTodayClients.lastLeaveColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'lastLeave\' in table \'TodayClients\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'lastLeave\' in table \'VTodayClients\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTodayClients.lastLeaveColumn] = value;
+                    this[this.tableVTodayClients.lastLeaveColumn] = value;
                 }
             }
             
@@ -5949,45 +5967,80 @@ namespace AY.db {
             public System.DateTime openTicket {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableTodayClients.openTicketColumn]));
+                        return ((global::System.DateTime)(this[this.tableVTodayClients.openTicketColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'openTicket\' in table \'TodayClients\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'openTicket\' in table \'VTodayClients\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTodayClients.openTicketColumn] = value;
+                    this[this.tableVTodayClients.openTicketColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DBNull status {
+                get {
+                    try {
+                        return ((global::System.DBNull)(this[this.tableVTodayClients.statusColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'status\' in table \'VTodayClients\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVTodayClients.statusColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsnameNull() {
+                return this.IsNull(this.tableVTodayClients.nameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetnameNull() {
+                this[this.tableVTodayClients.nameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IshoursLeftNull() {
-                return this.IsNull(this.tableTodayClients.hoursLeftColumn);
+                return this.IsNull(this.tableVTodayClients.hoursLeftColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SethoursLeftNull() {
-                this[this.tableTodayClients.hoursLeftColumn] = global::System.Convert.DBNull;
+                this[this.tableVTodayClients.hoursLeftColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IslastLeaveNull() {
-                return this.IsNull(this.tableTodayClients.lastLeaveColumn);
+                return this.IsNull(this.tableVTodayClients.lastLeaveColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetlastLeaveNull() {
-                this[this.tableTodayClients.lastLeaveColumn] = global::System.Convert.DBNull;
+                this[this.tableVTodayClients.lastLeaveColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsopenTicketNull() {
-                return this.IsNull(this.tableTodayClients.openTicketColumn);
+                return this.IsNull(this.tableVTodayClients.openTicketColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetopenTicketNull() {
-                this[this.tableTodayClients.openTicketColumn] = global::System.Convert.DBNull;
+                this[this.tableVTodayClients.openTicketColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsstatusNull() {
+                return this.IsNull(this.tableVTodayClients.statusColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetstatusNull() {
+                this[this.tableVTodayClients.statusColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5995,33 +6048,38 @@ namespace AY.db {
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class calendarInfoRow : global::System.Data.DataRow {
+        public partial class VCalendarInfoRow : global::System.Data.DataRow {
             
-            private calendarInfoDataTable tablecalendarInfo;
+            private VCalendarInfoDataTable tableVCalendarInfo;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal calendarInfoRow(global::System.Data.DataRowBuilder rb) : 
+            internal VCalendarInfoRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tablecalendarInfo = ((calendarInfoDataTable)(this.Table));
+                this.tableVCalendarInfo = ((VCalendarInfoDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public System.DateTime calDate {
                 get {
-                    return ((global::System.DateTime)(this[this.tablecalendarInfo.calDateColumn]));
+                    return ((global::System.DateTime)(this[this.tableVCalendarInfo.calDateColumn]));
                 }
                 set {
-                    this[this.tablecalendarInfo.calDateColumn] = value;
+                    this[this.tableVCalendarInfo.calDateColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string trainer {
                 get {
-                    return ((string)(this[this.tablecalendarInfo.trainerColumn]));
+                    try {
+                        return ((string)(this[this.tableVCalendarInfo.trainerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'trainer\' in table \'VCalendarInfo\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tablecalendarInfo.trainerColumn] = value;
+                    this[this.tableVCalendarInfo.trainerColumn] = value;
                 }
             }
             
@@ -6029,14 +6087,14 @@ namespace AY.db {
             public System.DBNull clientsCount {
                 get {
                     try {
-                        return ((global::System.DBNull)(this[this.tablecalendarInfo.clientsCountColumn]));
+                        return ((global::System.DBNull)(this[this.tableVCalendarInfo.clientsCountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'clientsCount\' in table \'calendarInfo\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'clientsCount\' in table \'VCalendarInfo\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablecalendarInfo.clientsCountColumn] = value;
+                    this[this.tableVCalendarInfo.clientsCountColumn] = value;
                 }
             }
             
@@ -6044,35 +6102,45 @@ namespace AY.db {
             public System.DBNull weekDay {
                 get {
                     try {
-                        return ((global::System.DBNull)(this[this.tablecalendarInfo.weekDayColumn]));
+                        return ((global::System.DBNull)(this[this.tableVCalendarInfo.weekDayColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'weekDay\' in table \'calendarInfo\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'weekDay\' in table \'VCalendarInfo\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablecalendarInfo.weekDayColumn] = value;
+                    this[this.tableVCalendarInfo.weekDayColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IstrainerNull() {
+                return this.IsNull(this.tableVCalendarInfo.trainerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SettrainerNull() {
+                this[this.tableVCalendarInfo.trainerColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsclientsCountNull() {
-                return this.IsNull(this.tablecalendarInfo.clientsCountColumn);
+                return this.IsNull(this.tableVCalendarInfo.clientsCountColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetclientsCountNull() {
-                this[this.tablecalendarInfo.clientsCountColumn] = global::System.Convert.DBNull;
+                this[this.tableVCalendarInfo.clientsCountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsweekDayNull() {
-                return this.IsNull(this.tablecalendarInfo.weekDayColumn);
+                return this.IsNull(this.tableVCalendarInfo.weekDayColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetweekDayNull() {
-                this[this.tablecalendarInfo.weekDayColumn] = global::System.Convert.DBNull;
+                this[this.tableVCalendarInfo.weekDayColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -6421,20 +6489,20 @@ namespace AY.db {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class TodayClientsRowChangeEvent : global::System.EventArgs {
+        public class VTodayClientsRowChangeEvent : global::System.EventArgs {
             
-            private TodayClientsRow eventRow;
+            private VTodayClientsRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TodayClientsRowChangeEvent(TodayClientsRow row, global::System.Data.DataRowAction action) {
+            public VTodayClientsRowChangeEvent(VTodayClientsRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TodayClientsRow Row {
+            public VTodayClientsRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -6452,20 +6520,20 @@ namespace AY.db {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class calendarInfoRowChangeEvent : global::System.EventArgs {
+        public class VCalendarInfoRowChangeEvent : global::System.EventArgs {
             
-            private calendarInfoRow eventRow;
+            private VCalendarInfoRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public calendarInfoRowChangeEvent(calendarInfoRow row, global::System.Data.DataRowAction action) {
+            public VCalendarInfoRowChangeEvent(VCalendarInfoRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public calendarInfoRow Row {
+            public VCalendarInfoRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -12318,7 +12386,7 @@ ORDER BY payments.[date] DESC";
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class TodayClientsTableAdapter : global::System.ComponentModel.Component {
+    public partial class VTodayClientsTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SQLite.SQLiteDataAdapter _adapter;
         
@@ -12331,7 +12399,7 @@ ORDER BY payments.[date] DESC";
         private bool _clearBeforeFill;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public TodayClientsTableAdapter() {
+        public VTodayClientsTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -12422,12 +12490,13 @@ ORDER BY payments.[date] DESC";
             this._adapter = new global::System.Data.SQLite.SQLiteDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "TodayClients";
+            tableMapping.DataSetTable = "VTodayClients";
             tableMapping.ColumnMappings.Add("id", "id");
             tableMapping.ColumnMappings.Add("name", "name");
             tableMapping.ColumnMappings.Add("hoursLeft", "hoursLeft");
             tableMapping.ColumnMappings.Add("lastLeave", "lastLeave");
             tableMapping.ColumnMappings.Add("openTicket", "openTicket");
+            tableMapping.ColumnMappings.Add("status", "status");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -12442,14 +12511,15 @@ ORDER BY payments.[date] DESC";
             this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     id, name, lastLeave, openTicket, hoursLeft\r\nFROM         TodayClients";
+            this._commandCollection[0].CommandText = "SELECT     id, name, status, openTicket, lastLeave, hoursLeft\r\nFROM         Today" +
+                "Clients";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dbDataSet.TodayClientsDataTable dataTable) {
+        public virtual int Fill(dbDataSet.VTodayClientsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -12461,9 +12531,9 @@ ORDER BY payments.[date] DESC";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dbDataSet.TodayClientsDataTable GetData() {
+        public virtual dbDataSet.VTodayClientsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            dbDataSet.TodayClientsDataTable dataTable = new dbDataSet.TodayClientsDataTable();
+            dbDataSet.VTodayClientsDataTable dataTable = new dbDataSet.VTodayClientsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -12479,7 +12549,7 @@ ORDER BY payments.[date] DESC";
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class calendarInfoTableAdapter : global::System.ComponentModel.Component {
+    public partial class VCalendarInfoTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SQLite.SQLiteDataAdapter _adapter;
         
@@ -12492,7 +12562,7 @@ ORDER BY payments.[date] DESC";
         private bool _clearBeforeFill;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public calendarInfoTableAdapter() {
+        public VCalendarInfoTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -12583,7 +12653,7 @@ ORDER BY payments.[date] DESC";
             this._adapter = new global::System.Data.SQLite.SQLiteDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "calendarInfo";
+            tableMapping.DataSetTable = "VCalendarInfo";
             tableMapping.ColumnMappings.Add("calDate", "calDate");
             tableMapping.ColumnMappings.Add("trainer", "trainer");
             tableMapping.ColumnMappings.Add("clientsCount", "clientsCount");
@@ -12609,7 +12679,7 @@ ORDER BY payments.[date] DESC";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dbDataSet.calendarInfoDataTable dataTable) {
+        public virtual int Fill(dbDataSet.VCalendarInfoDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -12621,9 +12691,9 @@ ORDER BY payments.[date] DESC";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dbDataSet.calendarInfoDataTable GetData() {
+        public virtual dbDataSet.VCalendarInfoDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            dbDataSet.calendarInfoDataTable dataTable = new dbDataSet.calendarInfoDataTable();
+            dbDataSet.VCalendarInfoDataTable dataTable = new dbDataSet.VCalendarInfoDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }

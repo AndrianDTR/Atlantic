@@ -686,6 +686,8 @@ namespace EAssistant {
             
             private global::System.Data.DataColumn columnhoursLeft;
             
+            private global::System.Data.DataColumn columnstatus;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public TodayClientsDataTable() {
                 this.TableName = "TodayClients";
@@ -752,6 +754,13 @@ namespace EAssistant {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn statusColumn {
+                get {
+                    return this.columnstatus;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -780,14 +789,15 @@ namespace EAssistant {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TodayClientsRow AddTodayClientsRow(int id, string name, System.DateTime lastLeave, System.DateTime openTicket, long hoursLeft) {
+            public TodayClientsRow AddTodayClientsRow(int id, string name, System.DateTime lastLeave, System.DateTime openTicket, long hoursLeft, System.DBNull status) {
                 TodayClientsRow rowTodayClientsRow = ((TodayClientsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id,
                         name,
                         lastLeave,
                         openTicket,
-                        hoursLeft};
+                        hoursLeft,
+                        status};
                 rowTodayClientsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTodayClientsRow);
                 return rowTodayClientsRow;
@@ -818,6 +828,7 @@ namespace EAssistant {
                 this.columnlastLeave = base.Columns["lastLeave"];
                 this.columnopenTicket = base.Columns["openTicket"];
                 this.columnhoursLeft = base.Columns["hoursLeft"];
+                this.columnstatus = base.Columns["status"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -832,6 +843,8 @@ namespace EAssistant {
                 base.Columns.Add(this.columnopenTicket);
                 this.columnhoursLeft = new global::System.Data.DataColumn("hoursLeft", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnhoursLeft);
+                this.columnstatus = new global::System.Data.DataColumn("status", typeof(global::System.DBNull), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstatus);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AllowDBNull = false;
@@ -1305,6 +1318,21 @@ namespace EAssistant {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DBNull status {
+                get {
+                    try {
+                        return ((global::System.DBNull)(this[this.tableTodayClients.statusColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'status\' in table \'TodayClients\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTodayClients.statusColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IslastLeaveNull() {
                 return this.IsNull(this.tableTodayClients.lastLeaveColumn);
             }
@@ -1332,6 +1360,16 @@ namespace EAssistant {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SethoursLeftNull() {
                 this[this.tableTodayClients.hoursLeftColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsstatusNull() {
+                return this.IsNull(this.tableTodayClients.statusColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetstatusNull() {
+                this[this.tableTodayClients.statusColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2577,6 +2615,7 @@ namespace EAssistant.tmpDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("lastLeave", "lastLeave");
             tableMapping.ColumnMappings.Add("openTicket", "openTicket");
             tableMapping.ColumnMappings.Add("hoursLeft", "hoursLeft");
+            tableMapping.ColumnMappings.Add("status", "status");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -2591,7 +2630,8 @@ namespace EAssistant.tmpDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     id, name, lastLeave, openTicket, hoursLeft\r\nFROM         TodayClients";
+            this._commandCollection[0].CommandText = "SELECT     id, name, status, openTicket, lastLeave, hoursLeft\r\nFROM         Today" +
+                "Clients";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

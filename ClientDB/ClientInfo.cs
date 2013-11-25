@@ -322,8 +322,7 @@ namespace EAssistant
 					cr.scheduleTime = dateSchedTime.Value;
 					cr.trainer = Trainer.id;
 					cr.comment = textComment.Text;
-					cr.AcceptChanges();
-
+					
 					Db.Instance.Adapters.clientsTableAdapter.Update(Db.Instance.dSet.clients);
 					Db.Instance.AcceptChanges();
 					

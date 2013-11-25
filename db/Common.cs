@@ -13,6 +13,8 @@ namespace AY.db
 		{
 			private VPaymentsTableAdapter _vPaymentsTableAdapter;
 			private VClientsTableAdapter _vClientsTableAdapter;
+			private VCalendarInfoTableAdapter _vCalendarInfoTableAdapter;
+			private VTodayClientsTableAdapter _vTodayClientsTableAdapter;
 			
 			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
 			[global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
@@ -45,6 +47,38 @@ namespace AY.db
 					this._vClientsTableAdapter = value;
 				}
 			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			[global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+				"ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+				"", "System.Drawing.Design.UITypeEditor")]
+			public VCalendarInfoTableAdapter VCalendarInfoTableAdapter
+			{
+				get
+				{
+					return this._vCalendarInfoTableAdapter;
+				}
+				set
+				{
+					this._vCalendarInfoTableAdapter = value;
+				}
+			}
+
+			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+			[global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+				"ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+				"", "System.Drawing.Design.UITypeEditor")]
+			public VTodayClientsTableAdapter VTodayClientsTableAdapter
+			{
+				get
+				{
+					return this._vTodayClientsTableAdapter;
+				}
+				set
+				{
+					this._vTodayClientsTableAdapter = value;
+				}
+			}
 		}
 	}
 	
@@ -74,6 +108,8 @@ namespace AY.db
 			Adapters.usersTableAdapter = new usersTableAdapter();
 			Adapters.VClientsTableAdapter = new VClientsTableAdapter();
 			Adapters.VPaymentsTableAdapter = new VPaymentsTableAdapter();
+			Adapters.VCalendarInfoTableAdapter = new VCalendarInfoTableAdapter();
+			Adapters.VTodayClientsTableAdapter = new VTodayClientsTableAdapter();
 
 			Adapters.clientsTableAdapter.Fill(m_clientDataSet.clients);
 			Adapters.paymentsTableAdapter.Fill(m_clientDataSet.payments);
@@ -86,6 +122,9 @@ namespace AY.db
 			Adapters.usersTableAdapter.Fill(m_clientDataSet.users);
 			Adapters.VClientsTableAdapter.Fill(m_clientDataSet.VClients);
 			Adapters.VPaymentsTableAdapter.Fill(m_clientDataSet.VPayments);
+			Adapters.VCalendarInfoTableAdapter.Fill(m_clientDataSet.VCalendarInfo);
+			Adapters.VTodayClientsTableAdapter.Fill(m_clientDataSet.VTodayClients);
+
 
 			((System.ComponentModel.ISupportInitialize)(m_clientDataSet)).EndInit();
 		}

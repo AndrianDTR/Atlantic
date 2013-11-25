@@ -744,12 +744,12 @@ ORDER BY payments.[date] DESC</CommandText>
               </DbSource>
             </Sources>
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TodayClientsTableAdapter" GeneratorDataComponentClassName="TodayClientsTableAdapter" Name="TodayClients" UserDataComponentName="TodayClientsTableAdapter">
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="VTodayClientsTableAdapter" GeneratorDataComponentClassName="VTodayClientsTableAdapter" Name="VTodayClients" UserDataComponentName="VTodayClientsTableAdapter">
             <MainSource>
               <DbSource ConnectionRef="clientConnectionString (Settings)" DbObjectName="main.TodayClients" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT     id, name, lastLeave, openTicket, hoursLeft
+                    <CommandText>SELECT     id, name, status, openTicket, lastLeave, hoursLeft
 FROM         TodayClients</CommandText>
                     <Parameters />
                   </DbCommand>
@@ -762,10 +762,11 @@ FROM         TodayClients</CommandText>
               <Mapping SourceColumn="hoursLeft" DataSetColumn="hoursLeft" />
               <Mapping SourceColumn="lastLeave" DataSetColumn="lastLeave" />
               <Mapping SourceColumn="openTicket" DataSetColumn="openTicket" />
+              <Mapping SourceColumn="status" DataSetColumn="status" />
             </Mappings>
             <Sources />
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="calendarInfoTableAdapter" GeneratorDataComponentClassName="calendarInfoTableAdapter" Name="calendarInfo" UserDataComponentName="calendarInfoTableAdapter">
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="VCalendarInfoTableAdapter" GeneratorDataComponentClassName="VCalendarInfoTableAdapter" Name="VCalendarInfo" UserDataComponentName="VCalendarInfoTableAdapter">
             <MainSource>
               <DbSource ConnectionRef="clientConnectionString (Settings)" DbObjectName="main.calendarInfo" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
@@ -1035,11 +1036,11 @@ FROM         calendarInfo</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TodayClients" msprop:Generator_UserTableName="TodayClients" msprop:Generator_RowDeletedName="TodayClientsRowDeleted" msprop:Generator_TableClassName="TodayClientsDataTable" msprop:Generator_RowChangedName="TodayClientsRowChanged" msprop:Generator_RowClassName="TodayClientsRow" msprop:Generator_RowChangingName="TodayClientsRowChanging" msprop:Generator_RowEvArgName="TodayClientsRowChangeEvent" msprop:Generator_RowEvHandlerName="TodayClientsRowChangeEventHandler" msprop:Generator_TablePropName="TodayClients" msprop:Generator_TableVarName="tableTodayClients" msprop:Generator_RowDeletingName="TodayClientsRowDeleting">
+        <xs:element name="VTodayClients" msprop:Generator_UserTableName="VTodayClients" msprop:Generator_RowDeletedName="VTodayClientsRowDeleted" msprop:Generator_TableClassName="VTodayClientsDataTable" msprop:Generator_RowChangedName="VTodayClientsRowChanged" msprop:Generator_RowClassName="VTodayClientsRow" msprop:Generator_RowChangingName="VTodayClientsRowChanging" msprop:Generator_RowEvArgName="VTodayClientsRowChangeEvent" msprop:Generator_RowEvHandlerName="VTodayClientsRowChangeEventHandler" msprop:Generator_TablePropName="VTodayClients" msprop:Generator_TableVarName="tableVTodayClients" msprop:Generator_RowDeletingName="VTodayClientsRowDeleting">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="id" msprop:Generator_UserColumnName="id" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInTable="idColumn" type="xs:int" />
-              <xs:element name="name" msprop:Generator_UserColumnName="name" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInTable="nameColumn">
+              <xs:element name="id" msprop:Generator_UserColumnName="id" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInTable="idColumn" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="name" msprop:Generator_UserColumnName="name" msprop:Generator_ColumnPropNameInRow="name" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInTable="nameColumn" default="" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="2147483647" />
@@ -1049,14 +1050,15 @@ FROM         calendarInfo</CommandText>
               <xs:element name="hoursLeft" msprop:Generator_UserColumnName="hoursLeft" msprop:Generator_ColumnPropNameInRow="hoursLeft" msprop:Generator_ColumnVarNameInTable="columnhoursLeft" msprop:Generator_ColumnPropNameInTable="hoursLeftColumn" type="xs:long" minOccurs="0" />
               <xs:element name="lastLeave" msprop:Generator_UserColumnName="lastLeave" msprop:Generator_ColumnPropNameInRow="lastLeave" msprop:Generator_ColumnVarNameInTable="columnlastLeave" msprop:Generator_ColumnPropNameInTable="lastLeaveColumn" type="xs:dateTime" minOccurs="0" />
               <xs:element name="openTicket" msprop:Generator_UserColumnName="openTicket" msprop:Generator_ColumnPropNameInRow="openTicket" msprop:Generator_ColumnVarNameInTable="columnopenTicket" msprop:Generator_ColumnPropNameInTable="openTicketColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="status" msdata:DataType="System.DBNull, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_UserColumnName="status" msprop:Generator_ColumnPropNameInRow="status" msprop:Generator_ColumnVarNameInTable="columnstatus" msprop:Generator_ColumnPropNameInTable="statusColumn" type="xs:anyType" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="calendarInfo" msprop:Generator_UserTableName="calendarInfo" msprop:Generator_RowDeletedName="calendarInfoRowDeleted" msprop:Generator_TableClassName="calendarInfoDataTable" msprop:Generator_RowChangedName="calendarInfoRowChanged" msprop:Generator_RowClassName="calendarInfoRow" msprop:Generator_RowChangingName="calendarInfoRowChanging" msprop:Generator_RowEvArgName="calendarInfoRowChangeEvent" msprop:Generator_RowEvHandlerName="calendarInfoRowChangeEventHandler" msprop:Generator_TablePropName="calendarInfo" msprop:Generator_TableVarName="tablecalendarInfo" msprop:Generator_RowDeletingName="calendarInfoRowDeleting">
+        <xs:element name="VCalendarInfo" msprop:Generator_UserTableName="VCalendarInfo" msprop:Generator_RowDeletedName="VCalendarInfoRowDeleted" msprop:Generator_TableClassName="VCalendarInfoDataTable" msprop:Generator_RowChangedName="VCalendarInfoRowChanged" msprop:Generator_RowClassName="VCalendarInfoRow" msprop:Generator_RowChangingName="VCalendarInfoRowChanging" msprop:Generator_RowEvArgName="VCalendarInfoRowChangeEvent" msprop:Generator_RowEvHandlerName="VCalendarInfoRowChangeEventHandler" msprop:Generator_TablePropName="VCalendarInfo" msprop:Generator_TableVarName="tableVCalendarInfo" msprop:Generator_RowDeletingName="VCalendarInfoRowDeleting">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="calDate" msprop:Generator_UserColumnName="calDate" msprop:Generator_ColumnPropNameInRow="calDate" msprop:Generator_ColumnVarNameInTable="columncalDate" msprop:Generator_ColumnPropNameInTable="calDateColumn" type="xs:dateTime" />
-              <xs:element name="trainer" msprop:Generator_UserColumnName="trainer" msprop:Generator_ColumnPropNameInRow="trainer" msprop:Generator_ColumnVarNameInTable="columntrainer" msprop:Generator_ColumnPropNameInTable="trainerColumn">
+              <xs:element name="calDate" msprop:Generator_UserColumnName="calDate" msprop:Generator_ColumnPropNameInRow="calDate" msprop:Generator_ColumnVarNameInTable="columncalDate" msprop:Generator_ColumnPropNameInTable="calDateColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="trainer" msprop:Generator_UserColumnName="trainer" msprop:Generator_ColumnPropNameInRow="trainer" msprop:Generator_ColumnVarNameInTable="columntrainer" msprop:Generator_ColumnPropNameInTable="trainerColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="2147483647" />
@@ -1114,12 +1116,12 @@ FROM         calendarInfo</CommandText>
       <xs:selector xpath=".//mstns:VPayments" />
       <xs:field xpath="mstns:id" />
     </xs:unique>
-    <xs:unique name="TodayClients_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:TodayClients" />
+    <xs:unique name="VTodayClients_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:VTodayClients" />
       <xs:field xpath="mstns:id" />
     </xs:unique>
-    <xs:unique name="calendarInfo_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:calendarInfo" />
+    <xs:unique name="VCalendarInfo_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:VCalendarInfo" />
       <xs:field xpath="mstns:calDate" />
     </xs:unique>
   </xs:element>
