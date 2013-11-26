@@ -4028,6 +4028,10 @@ namespace AY.db {
             
             private global::System.Data.DataColumn columnopenTicket;
             
+            private global::System.Data.DataColumn columnhoursDec;
+            
+            private global::System.Data.DataColumn columnscheduleTime;
+            
             private global::System.Data.DataColumn columnstatus;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4096,6 +4100,20 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn hoursDecColumn {
+                get {
+                    return this.columnhoursDec;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn scheduleTimeColumn {
+                get {
+                    return this.columnscheduleTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn statusColumn {
                 get {
                     return this.columnstatus;
@@ -4131,7 +4149,7 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public VTodayClientsRow AddVTodayClientsRow(int id, string name, long hoursLeft, System.DateTime lastLeave, System.DateTime openTicket, string status) {
+            public VTodayClientsRow AddVTodayClientsRow(int id, string name, long hoursLeft, System.DateTime lastLeave, System.DateTime openTicket, long hoursDec, System.DateTime scheduleTime, string status) {
                 VTodayClientsRow rowVTodayClientsRow = ((VTodayClientsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id,
@@ -4139,6 +4157,8 @@ namespace AY.db {
                         hoursLeft,
                         lastLeave,
                         openTicket,
+                        hoursDec,
+                        scheduleTime,
                         status};
                 rowVTodayClientsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowVTodayClientsRow);
@@ -4170,6 +4190,8 @@ namespace AY.db {
                 this.columnhoursLeft = base.Columns["hoursLeft"];
                 this.columnlastLeave = base.Columns["lastLeave"];
                 this.columnopenTicket = base.Columns["openTicket"];
+                this.columnhoursDec = base.Columns["hoursDec"];
+                this.columnscheduleTime = base.Columns["scheduleTime"];
                 this.columnstatus = base.Columns["status"];
             }
             
@@ -4185,6 +4207,10 @@ namespace AY.db {
                 base.Columns.Add(this.columnlastLeave);
                 this.columnopenTicket = new global::System.Data.DataColumn("openTicket", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnopenTicket);
+                this.columnhoursDec = new global::System.Data.DataColumn("hoursDec", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhoursDec);
+                this.columnscheduleTime = new global::System.Data.DataColumn("scheduleTime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnscheduleTime);
                 this.columnstatus = new global::System.Data.DataColumn("status", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstatus);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -4192,9 +4218,10 @@ namespace AY.db {
                 this.columnid.AllowDBNull = false;
                 this.columnid.Unique = true;
                 this.columnid.DefaultValue = ((int)(0));
+                this.columnname.AllowDBNull = false;
                 this.columnname.DefaultValue = ((string)(""));
                 this.columnname.MaxLength = 2147483647;
-                this.columnstatus.DefaultValue = ((string)(" "));
+                this.columnscheduleTime.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5924,12 +5951,7 @@ namespace AY.db {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string name {
                 get {
-                    if (this.IsnameNull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tableVTodayClients.nameColumn]));
-                    }
+                    return ((string)(this[this.tableVTodayClients.nameColumn]));
                 }
                 set {
                     this[this.tableVTodayClients.nameColumn] = value;
@@ -5982,28 +6004,43 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public long hoursDec {
+                get {
+                    try {
+                        return ((long)(this[this.tableVTodayClients.hoursDecColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'hoursDec\' in table \'VTodayClients\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVTodayClients.hoursDecColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime scheduleTime {
+                get {
+                    return ((global::System.DateTime)(this[this.tableVTodayClients.scheduleTimeColumn]));
+                }
+                set {
+                    this[this.tableVTodayClients.scheduleTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string status {
                 get {
-                    if (this.IsstatusNull()) {
-                        return string.Empty;
-                    }
-                    else {
+                    try {
                         return ((string)(this[this.tableVTodayClients.statusColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'status\' in table \'VTodayClients\' is DBNull.", e);
                     }
                 }
                 set {
                     this[this.tableVTodayClients.statusColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsnameNull() {
-                return this.IsNull(this.tableVTodayClients.nameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetnameNull() {
-                this[this.tableVTodayClients.nameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6034,6 +6071,16 @@ namespace AY.db {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetopenTicketNull() {
                 this[this.tableVTodayClients.openTicketColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IshoursDecNull() {
+                return this.IsNull(this.tableVTodayClients.hoursDecColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SethoursDecNull() {
+                this[this.tableVTodayClients.hoursDecColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12499,6 +12546,8 @@ ORDER BY payments.[date] DESC";
             tableMapping.ColumnMappings.Add("hoursLeft", "hoursLeft");
             tableMapping.ColumnMappings.Add("lastLeave", "lastLeave");
             tableMapping.ColumnMappings.Add("openTicket", "openTicket");
+            tableMapping.ColumnMappings.Add("hoursDec", "hoursDec");
+            tableMapping.ColumnMappings.Add("scheduleTime", "scheduleTime");
             tableMapping.ColumnMappings.Add("status", "status");
             this._adapter.TableMappings.Add(tableMapping);
         }
@@ -12514,8 +12563,8 @@ ORDER BY payments.[date] DESC";
             this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     id, name, status, openTicket, lastLeave, hoursLeft\r\nFROM         Today" +
-                "Clients";
+            this._commandCollection[0].CommandText = "SELECT     id, name, status, openTicket, lastLeave, hoursLeft, hoursDec, schedule" +
+                "Time\r\nFROM         TodayClients";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

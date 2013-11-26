@@ -351,40 +351,39 @@ namespace EAssistant
 		
 		private void btnEnter_CheckedChanged(object sender, EventArgs e)
 		{
-			//if(0 == m_clienId)
-			//    return;
-			
-			//Client clientInfo = new Client(m_clienId);
-			
-			//if(btnEnter.Checked)
-			//{
-			//    clientInfo.OpenTicket = DateTime.Now;
-			//    btnLeave.Enabled = true;
-			//    btnEnter.Text = cancelText;
-			//}
-			//else
-			//{
-			//    clientInfo.OpenTicket = clientInfo.OpenTicket.AddYears(-1);
-			//    btnLeave.Enabled = false;
-			//    btnEnter.Text = enterText;
-			//}
+			if(0 == m_client)
+			    return;
 
-			//Session.Instance.UpdateTickets();
+			dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(m_client);
+			
+			if(btnEnter.Checked)
+			{
+			    cr.openTicket = DateTime.Now;
+			    btnLeave.Enabled = true;
+			    btnEnter.Text = cancelText;
+			}
+			else
+			{
+				cr.openTicket = cr.openTicket.AddYears(-1);
+			    btnLeave.Enabled = false;
+			    btnEnter.Text = enterText;
+			}
+
+			Session.Instance.UpdateTickets();
 		}
 
 		private void btnLeave_Click(object sender, EventArgs e)
 		{
-			//Client clientInfo = new Client(m_clienId);
-			//clientInfo.LastEnter = clientInfo.OpenTicket;
-			//clientInfo.LastLeave = DateTime.Now;
-			//clientInfo.ProcessEnter();
+			dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(m_client);
+			cr.lastEnter = cr.openTicket;
+			cr.lastLeave = DateTime.Now;
+			cr.ProcessEnter();
 			
-			//btnEnter.Checked = false;
+			btnEnter.Checked = false;
 
-			//clientDataSet.clientsRow cr = session.dSet.clients.FindByid(m_clienId);
-			//UpdateTimesLeft(cr);
+			UpdateTimesLeft(cr);
 
-			//Session.Instance.UpdateTickets();
+			Session.Instance.UpdateTickets();
 		}
 
 		private void btnPaymentHistory_Click(object sender, EventArgs e)

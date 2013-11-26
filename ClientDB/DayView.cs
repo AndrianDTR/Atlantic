@@ -11,7 +11,6 @@ namespace EAssistant
 {
 	public class DayView : Calendar
 	{
-		private int[] m_days = null;
 		dbDataSet.VCalendarInfoDataTable m_calendarData = null;
 		
 		private bool showTrainers = false;

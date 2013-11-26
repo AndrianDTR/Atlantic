@@ -30,10 +30,11 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+			System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,6 +72,7 @@
 			this.tabManager = new System.Windows.Forms.TabControl();
 			this.tabActiveClients = new System.Windows.Forms.TabPage();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.todayClientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.tabCalendar = new System.Windows.Forms.TabPage();
 			this.m_calendar = new EAssistant.DayView();
@@ -84,6 +86,7 @@
 			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
+			this.refreshOpenedTicketsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tabManager.SuspendLayout();
@@ -169,6 +172,7 @@
 			// clientToolStripMenuItem
 			// 
 			this.clientToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.refreshOpenedTicketsToolStripMenuItem,
             this.clientSearchToolStripMenuItem,
             this.addToolStripMenuItem,
             this.toolStripMenuItem5,
@@ -346,6 +350,8 @@
 			this.dataGridView1.AllowUserToResizeRows = false;
 			this.dataGridView1.AutoGenerateColumns = false;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1});
 			this.dataGridView1.DataSource = this.todayClientsBindingSource;
 			resources.ApplyResources(this.dataGridView1, "dataGridView1");
 			this.dataGridView1.Name = "dataGridView1";
@@ -353,6 +359,16 @@
 			this.dataGridView1.RowHeadersVisible = false;
 			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dataGridView1.ShowCellErrors = false;
+			this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShowClientInfo);
+			// 
+			// Column1
+			// 
+			dataGridViewCellStyle1.Format = "t";
+			dataGridViewCellStyle1.NullValue = " ";
+			this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
+			resources.ApplyResources(this.Column1, "Column1");
+			this.Column1.Name = "Column1";
+			this.Column1.ReadOnly = true;
 			// 
 			// todayClientsBindingSource
 			// 
@@ -391,33 +407,33 @@
 			// 
 			// chart1
 			// 
-			chartArea2.AxisX.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
-			chartArea2.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
-			chartArea2.Name = "ChartArea1";
-			this.chart1.ChartAreas.Add(chartArea2);
+			chartArea1.AxisX.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
+			chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
+			chartArea1.Name = "ChartArea1";
+			this.chart1.ChartAreas.Add(chartArea1);
 			resources.ApplyResources(this.chart1, "chart1");
-			legend2.Name = "Legend1";
-			this.chart1.Legends.Add(legend2);
+			legend1.Name = "Legend1";
+			this.chart1.Legends.Add(legend1);
 			this.chart1.Name = "chart1";
-			series3.ChartArea = "ChartArea1";
-			series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-			series3.Color = System.Drawing.Color.Blue;
-			series3.IsXValueIndexed = true;
-			series3.Legend = "Legend1";
-			series3.LegendText = "Present";
-			series3.Name = "seriesPresent";
-			series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-			series4.ChartArea = "ChartArea1";
-			series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-			series4.Color = System.Drawing.Color.Red;
-			series4.IsXValueIndexed = true;
-			series4.Legend = "Legend1";
-			series4.LegendText = "Prognose";
-			series4.Name = "seriesPrognosed";
-			series4.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-			series4.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
-			this.chart1.Series.Add(series3);
-			this.chart1.Series.Add(series4);
+			series1.ChartArea = "ChartArea1";
+			series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+			series1.Color = System.Drawing.Color.Blue;
+			series1.IsXValueIndexed = true;
+			series1.Legend = "Legend1";
+			series1.LegendText = "Present";
+			series1.Name = "seriesPresent";
+			series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+			series2.ChartArea = "ChartArea1";
+			series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+			series2.Color = System.Drawing.Color.Red;
+			series2.IsXValueIndexed = true;
+			series2.Legend = "Legend1";
+			series2.LegendText = "Prognose";
+			series2.Name = "seriesPrognosed";
+			series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+			series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
+			this.chart1.Series.Add(series1);
+			this.chart1.Series.Add(series2);
 			this.chart1.PrePaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.FillChart);
 			// 
 			// panel1
@@ -487,6 +503,12 @@
 			this.btnAddClient.Name = "btnAddClient";
 			this.btnAddClient.UseVisualStyleBackColor = true;
 			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
+			// 
+			// refreshOpenedTicketsToolStripMenuItem
+			// 
+			this.refreshOpenedTicketsToolStripMenuItem.Name = "refreshOpenedTicketsToolStripMenuItem";
+			resources.ApplyResources(this.refreshOpenedTicketsToolStripMenuItem, "refreshOpenedTicketsToolStripMenuItem");
+			this.refreshOpenedTicketsToolStripMenuItem.Click += new System.EventHandler(this.refreshOpenedTicketsToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -568,6 +590,8 @@
 		private System.Windows.Forms.Button btnSearch;
 		private System.Windows.Forms.DataGridView dataGridView1;
 		private System.Windows.Forms.BindingSource todayClientsBindingSource;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+		private System.Windows.Forms.ToolStripMenuItem refreshOpenedTicketsToolStripMenuItem;
     }
 }
 

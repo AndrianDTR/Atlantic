@@ -19,14 +19,17 @@ namespace EAssistant
 		private DataGridViewTextBoxColumn colOTId;
 		private DataGridViewTextBoxColumn colOTName;
 		private DataGridViewTextBoxColumn colOTStatus;
+		private DataGridViewTextBoxColumn colOTSchedTime;
 		private DataGridViewTextBoxColumn colOTOpenTicket;
 		private DataGridViewTextBoxColumn colOTLastLeave;
 		private DataGridViewTextBoxColumn colOTHoursLeft;
+		private DataGridViewTextBoxColumn colOTHoursDec;
 		
 		public enum ClientTicketStus
 		{
 			None = -1,
-			Present = 0,
+			Closed = 0,
+			Present,
 			Overtime,
 			Delayed,
 			Missed,
@@ -69,13 +72,18 @@ namespace EAssistant
 		
 		private void InitOnce()
 		{
+			DataGridViewCellStyle csTime = new DataGridViewCellStyle();
+			csTime.Format = "t";
+			
 			colOTId = new DataGridViewTextBoxColumn();
 			colOTName = new DataGridViewTextBoxColumn();
 			colOTStatus = new DataGridViewTextBoxColumn();
+			colOTSchedTime = new DataGridViewTextBoxColumn();
 			colOTOpenTicket = new DataGridViewTextBoxColumn();
 			colOTLastLeave = new DataGridViewTextBoxColumn();
 			colOTHoursLeft = new DataGridViewTextBoxColumn();
-
+			colOTHoursDec = new DataGridViewTextBoxColumn();
+			
 			todayClientsBindingSource.DataSource = Db.Instance.dSet.VTodayClients;
 			
 			// 
@@ -101,12 +109,21 @@ namespace EAssistant
 			colOTStatus.HeaderText = "Status";
 			colOTStatus.ReadOnly = true;
 			// 
+			// colOTSchedTime
+			// 
+			colOTSchedTime.DataPropertyName = "scheduleTime";
+			colOTSchedTime.Name = "colOTSchedTime";
+			colOTSchedTime.HeaderText = "Time";
+			colOTSchedTime.ReadOnly = true;
+			colOTSchedTime.DefaultCellStyle = csTime;
+			// 
 			// colOTOpenTicket
 			// 
 			colOTOpenTicket.DataPropertyName = "openTicket";
 			colOTOpenTicket.Name = "colOTOpenTicket";
 			colOTOpenTicket.HeaderText = "Enter";
 			colOTOpenTicket.ReadOnly = true;
+			colOTOpenTicket.DefaultCellStyle = csTime;
 			// 
 			// colOTLastLeave
 			// 
@@ -114,6 +131,7 @@ namespace EAssistant
 			colOTLastLeave.Name = "colOTLastLeave";
 			colOTLastLeave.HeaderText = "Leave";
 			colOTLastLeave.ReadOnly = true;
+			colOTLastLeave.DefaultCellStyle = csTime;
 			// 
 			// colOTHoursLeft
 			// 
@@ -122,15 +140,24 @@ namespace EAssistant
 			colOTHoursLeft.HeaderText = "Available Hours";
 			colOTHoursLeft.Width = 110;
 			colOTHoursLeft.ReadOnly = true;
-						
+
+			// 
+			// colOTHoursDec
+			// 
+			colOTHoursDec.DataPropertyName = "hoursDec";
+			colOTHoursDec.Name = "colOTHoursDec";
+			colOTHoursDec.HeaderText = "Lesson";
+			colOTHoursDec.Visible = false;
+
 			dataGridView1.Columns.AddRange(new DataGridViewColumn[] {
 				colOTId,
 				colOTName,
 				colOTStatus,
+				colOTSchedTime,
 				colOTOpenTicket,
 				colOTLastLeave,
-				colOTHoursLeft});
-		
+				colOTHoursLeft,
+				colOTHoursDec});
 		}
 		
 		private void CheckRegistration()
@@ -279,107 +306,59 @@ namespace EAssistant
 			Db.Instance.Adapters.VTodayClientsTableAdapter.Fill(Db.Instance.dSet.VTodayClients);
 			
 			DateTime today = DateTime.Now;
+			DateTime td = today.Date;
+			TimeSpan ct = today.TimeOfDay;
 			
 			foreach( DataGridViewRow row in dataGridView1.Rows)
 			{
-				//Analyse client data / change status field / set BG(FG) colors
-				//row.Cells["colOTStatus"].Value = "AAA";
-				//row.DefaultCellStyle.BackColor = System.Drawing.Color.Blue;
-			}
-			
-#if !DEBUG
-			listClients.Items.Clear();
-			ClientCollection clients = new ClientCollection();
-			clients.Refresh("date(openTicket) = date('now', 'localtime')");
-			foreach (DataRow dr in clients.Items)
-			{
-				Client client = new Client(dr);
-				// Skip already closed tickets
-				if(client.LastLeave.Date == today.Date)
-					continue;
+				DateTime ll = (DateTime)row.Cells["colOTLastLeave"].Value;
+				DateTime ot = (DateTime)row.Cells["colOTOpenTicket"].Value;
+				DateTime st = (DateTime)row.Cells["colOTSchedTime"].Value;
+				Int64 hd = (Int64)row.Cells["colOTHoursDec"].Value;
 				
-				ListViewItem lvi = listClients.Items.Add(client.Name);
-
-				lvi.BackColor = m_opt.ColorPresent;
-				ClientTicketStus status = ClientTicketStus.Present;
-				
-				DateTime clientTime = client.OpenTicket.AddHours(client.DecHours);
-				if (today > clientTime)
+				// Closed tickets
+				if(ll.Date == td && ot < ll)
 				{
-					status = ClientTicketStus.Overtime;
-					lvi.BackColor = m_opt.ColorOvertime;
+					row.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;	
+					row.Cells["colOTStatus"].Value = ClientTicketStus.Closed;
 				}
-
-				lvi.SubItems.Add(status.ToString());
-				lvi.SubItems.Add(client.OpenTicket.ToString("HH:mm"));
-				lvi.SubItems.Add("");
-				lvi.SubItems.Add(client.TimesLeft.ToString());
-
-				lvi.Tag = new ClientStatus(client.Id, status);
-			}
-
-			DayOfWeek ws = CultureInfoUtils.GetWeekStart();
-			String where = String.Format("substr(scheduleDays, {0}, 1) = 'X' and strftime('%H:%M',scheduleTime) <= strftime('%H:%M','now','localtime')"
-				, (int)today.DayOfWeek + (int)ws);
-
-			clients.Refresh(where);
-			foreach (DataRow dr in clients.Items)
-			{
-				Client client = new Client(dr);
-				
-				// Skip already closed tickets
-				if (client.LastLeave.Date == today.Date)
-					continue;
-					
-				TimeSpan clientTime = client.ScheduleTime.AddHours(client.DecHours).TimeOfDay;
-				if (client.OpenTicket.Date != today.Date 
-					&& client.TimesLeft > 0 
-					&& today.TimeOfDay <= clientTime)
+				// Currently present
+				else if(ot.Date == td && ll.Date != td && ot.TimeOfDay.Hours >= ct.Hours - hd)
 				{
-					ListViewItem lvi = listClients.Items.Add(client.Name);
-					ClientTicketStus status = ClientTicketStus.Delayed;
-
-					lvi.BackColor = m_opt.ColorDelayed;
-					lvi.SubItems.Add(status.ToString());
-					lvi.SubItems.Add(client.ScheduleTime.ToString("HH:mm"));
-					lvi.SubItems.Add(client.ScheduleTime.AddHours(client.DecHours).ToString("HH:mm"));
-					lvi.SubItems.Add(client.TimesLeft.ToString());
-
-					lvi.Tag = new ClientStatus(client.Id, status);
+					row.DefaultCellStyle.ForeColor = System.Drawing.Color.Green;
+					row.Cells["colOTLastLeave"].Value = "";
+					row.Cells["colOTStatus"].Value = ClientTicketStus.Present;
+				}
+				// Overtime
+				else if(ot.Date == td && ll.Date != td && ot.TimeOfDay.Hours < ct.Hours - hd)
+				{
+					row.DefaultCellStyle.ForeColor = System.Drawing.Color.Red;
+					row.Cells["colOTLastLeave"].Value = "";
+					row.Cells["colOTStatus"].Value = ClientTicketStus.Overtime;
+				}
+				// Late
+				else if (ot.Date != td && st.TimeOfDay < ct && st.TimeOfDay.TotalMinutes > ct.TotalMinutes + hd * 60)
+				{
+					row.DefaultCellStyle.ForeColor = System.Drawing.Color.Yellow;
+					row.Cells["colOTLastLeave"].Value = "";
+					row.Cells["colOTOpenTicket"].Value = "";
+					row.Cells["colOTStatus"].Value = ClientTicketStus.Delayed;
+				}
+				// Miss
+				else if (ot.Date != td && st.TimeOfDay < ct && st.TimeOfDay.TotalMinutes < ct.TotalMinutes + hd * 60)
+				{
+					row.DefaultCellStyle.ForeColor = System.Drawing.Color.BlueViolet;
+					row.Cells["colOTLastLeave"].Value = "";
+					row.Cells["colOTOpenTicket"].Value = "";
+					row.Cells["colOTStatus"].Value = ClientTicketStus.Missed;
+				}
+				else
+				{
+					row.Cells["colOTLastLeave"].Value = "";
+					row.Cells["colOTOpenTicket"].Value = "";
+					row.Cells["colOTStatus"].Value = ClientTicketStus.None;
 				}
 			}
-
-			where = String.Format("substr(scheduleDays, {0}, 1) = 'X' and strftime('%H:%M',scheduleTime) <= strftime('%H:%M','now','localtime')"
-				, (int)today.DayOfWeek + (int)ws);
-			
-			clients.Refresh(where);
-			foreach (DataRow dr in clients.Items)
-			{
-				Client client = new Client(dr);
-				
-				// Skip already closed tickets
-				if (client.LastLeave.Date == today.Date)
-					continue;
-					
-				TimeSpan clientTime = client.ScheduleTime.AddHours(client.DecHours).TimeOfDay;
-				if (client.OpenTicket.Date != today.Date 
-					&& client.TimesLeft > 0 
-					&& today.TimeOfDay > clientTime)
-				{
-					ListViewItem lvi = listClients.Items.Add(client.Name);
-					ClientTicketStus status = ClientTicketStus.Missed;
-					
-					lvi.BackColor = m_opt.ColorMissed;
-					lvi.SubItems.Add(status.ToString());
-					lvi.SubItems.Add(client.ScheduleTime.ToString("HH:mm"));
-					lvi.SubItems.Add(client.ScheduleTime.AddHours(client.DecHours).ToString("HH:mm"));
-					lvi.SubItems.Add(client.TimesLeft.ToString());
-
-					lvi.Tag = new ClientStatus(client.Id, status);
-				}
-			}
-#endif
-
 		}
 
 		private void btnSearch_Click(object sender, EventArgs e)
@@ -502,6 +481,11 @@ namespace EAssistant
 			bp.ShowDialog();
 		}
 
+		private void refreshOpenedTicketsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			UpdateInfo();
+		}
+
 		private void btnClientManager_Click(object sender, EventArgs e)
 		{
 			ManageClients mc = new ManageClients();
@@ -573,23 +557,20 @@ namespace EAssistant
 			}
 		}
 
-		private void ShowClientInfo(object sender, EventArgs e)
-		{
-			/*if(listClients.SelectedItems.Count < 1)
-				return;
-
-			ClientStatus status = (ClientStatus)listClients.SelectedItems[0].Tag;
-			ClientInfo ci = new ClientInfo(status.Id);
-			ci.ShowDialog();
-			*/
-		}
-		
 		private void UpdateInfo()
 		{
 			GetOpenedTickets();
 			m_calendar.Reinit();
 		}
-
+		
+		private void ShowClientInfo(object sender, DataGridViewCellEventArgs e)
+		{
+			Int32 clientId = (Int32)dataGridView1.Rows[e.RowIndex].Cells["colOTId"].Value;
+			ClientInfo ci = new ClientInfo(clientId);
+			if(ci.ShowDialog() == DialogResult.OK)
+				GetOpenedTickets();
+		}
+		
 		private void btmMissLesson_Click(object sender, EventArgs e)
 		{
 			//DateTime now = DateTime.Now.Date;
