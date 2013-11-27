@@ -303,6 +303,7 @@ namespace EAssistant
 		
 		private void GetOpenedTickets()
 		{
+			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			Db.Instance.Adapters.VTodayClientsTableAdapter.Fill(Db.Instance.dSet.VTodayClients);
 			
 			DateTime today = DateTime.Now;
@@ -319,35 +320,34 @@ namespace EAssistant
 				// Closed tickets
 				if(ll.Date == td && ot < ll)
 				{
-					row.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;	
 					row.Cells["colOTStatus"].Value = ClientTicketStus.Closed;
 				}
-				// Currently present
-				else if(ot.Date == td && ll.Date != td && ot.TimeOfDay.Hours >= ct.Hours - hd)
-				{
-					row.DefaultCellStyle.ForeColor = System.Drawing.Color.Green;
-					row.Cells["colOTLastLeave"].Value = "";
-					row.Cells["colOTStatus"].Value = ClientTicketStus.Present;
-				}
 				// Overtime
-				else if(ot.Date == td && ll.Date != td && ot.TimeOfDay.Hours < ct.Hours - hd)
+				else if (ot.Date == td && ot.TimeOfDay.TotalMinutes + hd * 60 < ct.TotalMinutes)
 				{
-					row.DefaultCellStyle.ForeColor = System.Drawing.Color.Red;
+					row.DefaultCellStyle.BackColor = opt.ColorOvertime;
 					row.Cells["colOTLastLeave"].Value = "";
 					row.Cells["colOTStatus"].Value = ClientTicketStus.Overtime;
 				}
-				// Late
-				else if (ot.Date != td && st.TimeOfDay < ct && st.TimeOfDay.TotalMinutes > ct.TotalMinutes + hd * 60)
+				// Currently present
+				else if (ot.Date == td && ot.TimeOfDay.Hours >= ct.Hours - hd)
 				{
-					row.DefaultCellStyle.ForeColor = System.Drawing.Color.Yellow;
+					row.DefaultCellStyle.BackColor = opt.ColorPresent;
+					row.Cells["colOTLastLeave"].Value = "";
+					row.Cells["colOTStatus"].Value = ClientTicketStus.Present;
+				}
+				// Late
+				else if (st.TimeOfDay < ct && st.TimeOfDay.TotalMinutes + hd * 60 > ct.TotalMinutes)
+				{
+					row.DefaultCellStyle.BackColor = opt.ColorDelayed;
 					row.Cells["colOTLastLeave"].Value = "";
 					row.Cells["colOTOpenTicket"].Value = "";
 					row.Cells["colOTStatus"].Value = ClientTicketStus.Delayed;
 				}
 				// Miss
-				else if (ot.Date != td && st.TimeOfDay < ct && st.TimeOfDay.TotalMinutes < ct.TotalMinutes + hd * 60)
+				else if (ot.Date != td && st.TimeOfDay < ct && st.TimeOfDay.TotalMinutes + hd * 60 < ct.TotalMinutes)
 				{
-					row.DefaultCellStyle.ForeColor = System.Drawing.Color.BlueViolet;
+					row.DefaultCellStyle.BackColor = opt.ColorMissed;
 					row.Cells["colOTLastLeave"].Value = "";
 					row.Cells["colOTOpenTicket"].Value = "";
 					row.Cells["colOTStatus"].Value = ClientTicketStus.Missed;
@@ -356,7 +356,6 @@ namespace EAssistant
 				{
 					row.Cells["colOTLastLeave"].Value = "";
 					row.Cells["colOTOpenTicket"].Value = "";
-					row.Cells["colOTStatus"].Value = ClientTicketStus.None;
 				}
 			}
 		}

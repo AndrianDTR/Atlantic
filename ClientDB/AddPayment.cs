@@ -15,7 +15,7 @@ namespace EAssistant
 			InitializeComponent();
 			m_ClientId = clientId;
 
-			textClientCode.Text = BarcodePrinter.GetCode(m_ClientId); ;
+			textClientCode.Text = BarcodePrinter.GetCode(m_ClientId);
 			
 			comboTypeOfService.Items.Clear();
 			comboTypeOfService.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -82,7 +82,15 @@ namespace EAssistant
 				, DateTime.Now
 				, decimal.Parse(textSum.Text.Trim())
 				, textComment.Text);
-			if(id != 1)
+			
+			dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(m_ClientId);
+			if(null != cr)
+			{
+				cr.hoursLeft += sc.hoursAdd;
+				cr.plan = sc.id;
+			}
+			
+			if(id != 1 | null == cr)
 			{
 				UIMessages.Error("Payment could not been added.");
 				return;

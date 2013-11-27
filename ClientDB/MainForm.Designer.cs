@@ -30,7 +30,6 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
 			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
 			System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -46,6 +45,7 @@
 			this.scheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.trainersScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.refreshOpenedTicketsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clientSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
@@ -72,10 +72,8 @@
 			this.tabManager = new System.Windows.Forms.TabControl();
 			this.tabActiveClients = new System.Windows.Forms.TabPage();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
-			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.todayClientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.tabCalendar = new System.Windows.Forms.TabPage();
-			this.m_calendar = new EAssistant.DayView();
 			this.tabStatistics = new System.Windows.Forms.TabPage();
 			this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
 			this.panel1 = new System.Windows.Forms.Panel();
@@ -86,7 +84,7 @@
 			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
-			this.refreshOpenedTicketsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.m_calendar = new EAssistant.DayView();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tabManager.SuspendLayout();
@@ -181,6 +179,12 @@
             this.geterateBarcodesToolStripMenuItem});
 			this.clientToolStripMenuItem.Name = "clientToolStripMenuItem";
 			resources.ApplyResources(this.clientToolStripMenuItem, "clientToolStripMenuItem");
+			// 
+			// refreshOpenedTicketsToolStripMenuItem
+			// 
+			this.refreshOpenedTicketsToolStripMenuItem.Name = "refreshOpenedTicketsToolStripMenuItem";
+			resources.ApplyResources(this.refreshOpenedTicketsToolStripMenuItem, "refreshOpenedTicketsToolStripMenuItem");
+			this.refreshOpenedTicketsToolStripMenuItem.Click += new System.EventHandler(this.refreshOpenedTicketsToolStripMenuItem_Click);
 			// 
 			// clientSearchToolStripMenuItem
 			// 
@@ -350,8 +354,6 @@
 			this.dataGridView1.AllowUserToResizeRows = false;
 			this.dataGridView1.AutoGenerateColumns = false;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1});
 			this.dataGridView1.DataSource = this.todayClientsBindingSource;
 			resources.ApplyResources(this.dataGridView1, "dataGridView1");
 			this.dataGridView1.Name = "dataGridView1";
@@ -360,15 +362,6 @@
 			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dataGridView1.ShowCellErrors = false;
 			this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShowClientInfo);
-			// 
-			// Column1
-			// 
-			dataGridViewCellStyle1.Format = "t";
-			dataGridViewCellStyle1.NullValue = " ";
-			this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
-			resources.ApplyResources(this.Column1, "Column1");
-			this.Column1.Name = "Column1";
-			this.Column1.ReadOnly = true;
 			// 
 			// todayClientsBindingSource
 			// 
@@ -380,23 +373,6 @@
 			resources.ApplyResources(this.tabCalendar, "tabCalendar");
 			this.tabCalendar.Name = "tabCalendar";
 			this.tabCalendar.UseVisualStyleBackColor = true;
-			// 
-			// m_calendar
-			// 
-			this.m_calendar.ActiveTool = null;
-			this.m_calendar.BgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
-			this.m_calendar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			resources.ApplyResources(this.m_calendar, "m_calendar");
-			this.m_calendar.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
-			this.m_calendar.HeaderBgColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(186)))), ((int)(((byte)(201)))));
-			this.m_calendar.HorisontalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-			this.m_calendar.MarkerColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.m_calendar.Name = "m_calendar";
-			this.m_calendar.SelectedDate = new System.DateTime(((long)(0)));
-			this.m_calendar.SelectionBorderColor = System.Drawing.SystemColors.ActiveBorder;
-			this.m_calendar.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(76)))), ((int)(((byte)(122)))));
-			this.m_calendar.StartDate = new System.DateTime(2013, 8, 13, 0, 0, 0, 0);
-			this.m_calendar.VerticalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(174)))), ((int)(((byte)(217)))));
 			// 
 			// tabStatistics
 			// 
@@ -504,11 +480,22 @@
 			this.btnAddClient.UseVisualStyleBackColor = true;
 			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
 			// 
-			// refreshOpenedTicketsToolStripMenuItem
+			// m_calendar
 			// 
-			this.refreshOpenedTicketsToolStripMenuItem.Name = "refreshOpenedTicketsToolStripMenuItem";
-			resources.ApplyResources(this.refreshOpenedTicketsToolStripMenuItem, "refreshOpenedTicketsToolStripMenuItem");
-			this.refreshOpenedTicketsToolStripMenuItem.Click += new System.EventHandler(this.refreshOpenedTicketsToolStripMenuItem_Click);
+			this.m_calendar.ActiveTool = null;
+			this.m_calendar.BgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
+			this.m_calendar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			resources.ApplyResources(this.m_calendar, "m_calendar");
+			this.m_calendar.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
+			this.m_calendar.HeaderBgColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(186)))), ((int)(((byte)(201)))));
+			this.m_calendar.HorisontalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+			this.m_calendar.MarkerColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.m_calendar.Name = "m_calendar";
+			this.m_calendar.SelectedDate = new System.DateTime(((long)(0)));
+			this.m_calendar.SelectionBorderColor = System.Drawing.SystemColors.ActiveBorder;
+			this.m_calendar.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(76)))), ((int)(((byte)(122)))));
+			this.m_calendar.StartDate = new System.DateTime(2013, 8, 13, 0, 0, 0, 0);
+			this.m_calendar.VerticalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(174)))), ((int)(((byte)(217)))));
 			// 
 			// MainForm
 			// 
@@ -590,7 +577,6 @@
 		private System.Windows.Forms.Button btnSearch;
 		private System.Windows.Forms.DataGridView dataGridView1;
 		private System.Windows.Forms.BindingSource todayClientsBindingSource;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
 		private System.Windows.Forms.ToolStripMenuItem refreshOpenedTicketsToolStripMenuItem;
     }
 }

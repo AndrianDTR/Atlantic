@@ -21,8 +21,10 @@ namespace EAssistant
 			String szLogFile = "SessionLog.txt";
 			Logger.Create(szLogFile, Logger.LogLevel.Debug);
 			Logger.Info("App start.");
+#if !DEBUG
 			try
 			{
+#endif
 				/*DbAdapter ad = new DbAdapter();
 				if( !ad.CheckTables())
 				{
@@ -43,6 +45,7 @@ namespace EAssistant
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 				Application.Run(new MainForm());
+#if !DEBUG
 			}		
 			catch(Exception ex)
 			{
@@ -55,6 +58,7 @@ namespace EAssistant
 					sendReport = true;
 				}
 			}
+#endif
 			Logger.Info("App end.");
             Logger.Close();
             

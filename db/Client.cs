@@ -27,9 +27,10 @@ namespace AY
 							return res;
 							
 						String where = String.Format("clientId={0}", id);
+						Db.Instance.Adapters.paymentsTableAdapter.Fill(Db.Instance.dSet.payments);
 						DataRow[] data = Db.Instance.dSet.payments.Select(where, "date desc");
 
-						if (data != null)
+						if (data.Length != 0)
 						{
 							res[0] = data[0]["sum"].ToString();
 							res[1] = data[0]["date"].ToString();
@@ -49,35 +50,17 @@ namespace AY
 				
 				public void ProcessEnter()
 				{
-					/*
-					Trigger tClient = new Trigger(plan.ToString());
-					Trigger tRule = null;
-
-					if (tClient.HasAttribute(TriggerFields.RuleId))
+					dbDataSet.scheduleRulesRow sr = Db.Instance.dSet.scheduleRules.FindByid(plan);
+					if(sr.Equals(null))
 					{
-						Int64 ruleId = tClient[TriggerFields.RuleId];
-						tRule = new Trigger(new ScheduleRule(ruleId).Rule);
-					}
-
-					hoursLeft--;
-
-					if (tClient.HasAttribute(TriggerFields.HoursLeft))
-					{
-						int val = tClient[TriggerFields.HoursLeft];
-						if (tRule != null && tRule.HasAttribute(TriggerFields.UCIDecHours))
-							val -= tRule[TriggerFields.UCIDecHours];
-						else
-							val--;
-
-						tClient[TriggerFields.HoursLeft] = val;
+						return;
 					}
 					
+					hoursLeft -= sr.hoursPerLesson;
+
 					// TODO: Add entry to statistics table
 					//new StatisticsCollection().Add(id, lastEnter, lastLeave);
-					
-					plan = tClient.ToString();
-					*/
-					Db.Instance.AcceptChanges();
+					AcceptChanges();
 				}
 			}
 		}
