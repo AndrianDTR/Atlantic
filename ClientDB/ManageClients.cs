@@ -14,10 +14,7 @@ namespace EAssistant
 		private DataGridViewTextBoxColumn colName;
 		private DataGridViewTextBoxColumn colPlan;
 		private DataGridViewTextBoxColumn colHoursLeft;
-		
-		
-		WaitDialog wd = new WaitDialog(0,0,1);
-		
+
 		public ManageClients()
 		{
 			InitializeComponent();
@@ -127,6 +124,7 @@ namespace EAssistant
 		private void btnOk_Click(object sender, EventArgs e)
 		{
 			Db.Instance.AcceptChanges();
+			Session.Instance.UpdateMain();
 			DialogResult = DialogResult.OK;
 			Close();
 		}

@@ -11,6 +11,7 @@ using AY.Utils;
 using System.Data;
 using System.Data.SQLite;
 using AY.AutoUpdate;
+using AY.db.dbDataSetTableAdapters;
 
 namespace EAssistant
 {
@@ -389,7 +390,6 @@ namespace EAssistant
 					ClientInfo ci = new ClientInfo(cr.id);
 					if (DialogResult.OK == ci.ShowDialog(this))
 					{
-						UpdateInfo();
 						Logger.Debug("Client data changed for: " + ci.ClientName + " " + ci.ClientCode);
 					}
 				}
@@ -435,7 +435,6 @@ namespace EAssistant
 		{
 			ManageClients mc = new ManageClients();
 			mc.ShowDialog(this);
-			UpdateInfo();
 		}
 
 		private void AddClient()
@@ -443,7 +442,6 @@ namespace EAssistant
 			ClientInfo ci = new ClientInfo(0);
 			if (DialogResult.OK != ci.ShowDialog(this))
 				return;
-			UpdateInfo();
 		}
 		
 		private void add_Click(object sender, EventArgs e)
@@ -489,7 +487,6 @@ namespace EAssistant
 		{
 			ManageClients mc = new ManageClients();
 			mc.ShowDialog(this);
-			UpdateInfo();
 		}
 
 		private void btnPaymentsHistory_Click(object sender, EventArgs e)
@@ -566,35 +563,53 @@ namespace EAssistant
 		{
 			Int32 clientId = (Int32)dataGridView1.Rows[e.RowIndex].Cells["colOTId"].Value;
 			ClientInfo ci = new ClientInfo(clientId);
-			if(ci.ShowDialog() == DialogResult.OK)
-				GetOpenedTickets();
+			ci.ShowDialog();
 		}
 		
 		private void btmMissLesson_Click(object sender, EventArgs e)
 		{
-			//DateTime now = DateTime.Now.Date;
+			DateTime td = DateTime.Now;
+			DateTime cd = td.Date;
+			TimeSpan ct = td.TimeOfDay;
 			
-			//foreach(ListViewItem lvi in listClients.Items)
-			//{
-			//    ClientStatus status = (ClientStatus)lvi.Tag;
-			//    if(lvi.Selected && ClientTicketStus.Missed == status.state)
-			//    {
-			//        Client client = new Client(status.Id);
-			//        DateTime st = client.scheduleTime;
-			//        client.lastEnter = now.AddHours(st.Hour).AddMinutes(st.Minute);
-			//        client.lastLeave = client.lastEnter.AddHours(client.DecHours);
-			//        client.ProcessEnter();
-			//    }
-			//}
+			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
+			
+			foreach (DataGridViewRow row in dataGridView1.Rows)
+			{
+				DateTime ll = (DateTime)row.Cells["colOTLastLeave"].Value;
+				DateTime ot = (DateTime)row.Cells["colOTOpenTicket"].Value;
+				DateTime st = (DateTime)row.Cells["colOTSchedTime"].Value;
+				Int64 hd = (Int64)row.Cells["colOTHoursDec"].Value;
+
+				// Miss
+				if (ll.Date != cd 
+					&& ot.Date != td 
+					&& st.TimeOfDay < ct 
+					&& st.TimeOfDay.TotalMinutes + hd * 60 < ct.TotalMinutes)
+				{
+					int id = (int)row.Cells["colOTId"].Value;
+					dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(id);
+					if(null == cr)
+					{
+						continue;
+					}
+					cr.lastEnter = cd.Add(st.TimeOfDay);
+					cr.lastLeave = cd.Add(st.TimeOfDay.Add(new TimeSpan((int)hd, 0, 0)));
+					cr.ProcessEnter();
+					
+					Db.Instance.Adapters.clientsTableAdapter.Update(cr);
+				}
+			}
+			
+			Db.Instance.AcceptChanges();
+			
+			UpdateInfo();
 		}
 
 		private void btnTrainersShedule_Click(object sender, EventArgs e)
 		{
 			ManageTrainerScheduleDlg dlg = new ManageTrainerScheduleDlg();
-			if(DialogResult.OK == dlg.ShowDialog())
-			{
-				UpdateInfo();
-			}
+			dlg.ShowDialog();
 		}
 		
 		private Dictionary<DateTime, int> GetPrognosedData(DateTime date)

@@ -43,7 +43,7 @@ namespace EAssistant
 				m_customerID = RegUtils.GetRegCustomerId(regdata);
 		}
 
-		public void UpdateTickets()
+		public void UpdateMain()
 		{
 			if(m_ticketsUpdDelegate != null)
 				m_ticketsUpdDelegate();

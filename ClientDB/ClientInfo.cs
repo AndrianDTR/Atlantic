@@ -329,8 +329,6 @@ namespace EAssistant
 					this.DialogResult = DialogResult.OK;
 					this.Close();
 				}
-				
-				Session.Instance.UpdateTickets();
 			}
 		}
 
@@ -368,8 +366,6 @@ namespace EAssistant
 			    btnLeave.Enabled = false;
 			    btnEnter.Text = enterText;
 			}
-
-			Session.Instance.UpdateTickets();
 		}
 
 		private void btnLeave_Click(object sender, EventArgs e)
@@ -378,12 +374,11 @@ namespace EAssistant
 			cr.lastEnter = cr.openTicket;
 			cr.lastLeave = DateTime.Now;
 			cr.ProcessEnter();
+			Db.Instance.AcceptChanges();
 			
 			btnEnter.Checked = false;
 
 			UpdateTimesLeft(cr);
-
-			Session.Instance.UpdateTickets();
 		}
 
 		private void btnPaymentHistory_Click(object sender, EventArgs e)
@@ -417,6 +412,11 @@ namespace EAssistant
 					btnPaymentHistory_Click(sender, new EventArgs());
 					break;
 			}
+		}
+
+		private void OnClose(object sender, FormClosedEventArgs e)
+		{
+			Session.Instance.UpdateMain();
 		}
 	}
 }

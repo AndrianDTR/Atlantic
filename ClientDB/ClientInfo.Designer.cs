@@ -545,6 +545,7 @@
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Enter";
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnClose);
 			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OnKeyUp);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();

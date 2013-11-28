@@ -65,7 +65,7 @@ namespace AY
 				public static bool UserExist(Int64 id)
 				{
 					String where = String.Format("id = {0}", id);
-					DataRow userData = new DbAdapter().GetFirstRow(DbTable.Users, where, new List<string> { "id" });
+					DataRow userData = Db.Instance.dSet.users.FindByid(id);
 					if (userData != null)
 					{
 						return true;

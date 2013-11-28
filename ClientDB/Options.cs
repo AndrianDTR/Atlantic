@@ -45,7 +45,7 @@ namespace EAssistant
 			//opts.Language = comboLang.SelectedItem;
 			
 			Db.Instance.AcceptChanges();
-			
+			Session.Instance.UpdateMain();
 			this.DialogResult = DialogResult.OK;
 			Close();
 		}

@@ -62,7 +62,6 @@ namespace EAssistant
 		{
 #if DEBUG
 			Logger.Warning("Clear DB by user request.");
-			DbAdapter.ClearDB();
 #endif
 		}
     }

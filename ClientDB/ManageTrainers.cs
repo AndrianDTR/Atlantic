@@ -58,9 +58,7 @@ namespace EAssistant
 			// 
 			colComment.DataPropertyName = "extraInfo";
 			colComment.HeaderText = "Comment";
-			colComment.Name = "colComment";
-			
-			
+			colComment.Name = "colComment";	
 		}
 		
 		private void OnLoad(object sender, EventArgs e)
@@ -71,6 +69,7 @@ namespace EAssistant
 		private void btnOK_Click(object sender, EventArgs e)
 		{
 			Db.Instance.AcceptChanges();
+			Session.Instance.UpdateMain();
 		}
 	}
 }

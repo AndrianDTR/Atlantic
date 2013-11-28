@@ -123,6 +123,7 @@ namespace EAssistant
 		private void btnOk_Click(object sender, EventArgs e)
 		{
 			Db.Instance.AcceptChanges();
+			Session.Instance.UpdateMain();
 			DialogResult = DialogResult.OK;
 			Close();		
 		}

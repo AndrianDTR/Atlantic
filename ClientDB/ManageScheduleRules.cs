@@ -76,6 +76,7 @@ namespace EAssistant
 		private void save_Click(object sender, EventArgs e)
 		{
 			Db.Instance.AcceptChanges();
+			Session.Instance.UpdateMain();
 			DialogResult = DialogResult.OK;
 			Close();
 		}

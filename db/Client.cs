@@ -53,14 +53,18 @@ namespace AY
 					dbDataSet.scheduleRulesRow sr = Db.Instance.dSet.scheduleRules.FindByid(plan);
 					if(sr.Equals(null))
 					{
+						Logger.Error(String.Format("Schedule rule could not been found. Client: {0}, schedule rule: {1}.", id, plan));
 						return;
 					}
 					
 					hoursLeft -= sr.hoursPerLesson;
 
-					// TODO: Add entry to statistics table
-					//new StatisticsCollection().Add(id, lastEnter, lastLeave);
-					AcceptChanges();
+					int statsId = Db.Instance.Adapters.statisticsTableAdapter.Insert(id, openTicket, lastLeave);
+					if(statsId == 0)
+					{
+						Logger.Error(String.Format("Statistic record could not be added. Client: {0}.", id));
+						return;
+					}
 				}
 			}
 		}

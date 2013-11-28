@@ -97,6 +97,9 @@ namespace EAssistant
 			}
 			
 			Db.Instance.AcceptChanges();
+			
+			Session.Instance.UpdateMain();
+			
 			this.DialogResult = DialogResult.OK;
 			this.Close();
 		}
