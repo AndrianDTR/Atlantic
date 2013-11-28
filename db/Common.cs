@@ -4,6 +4,8 @@ using System.Data;
 using AY.Log;
 using AY.Utils;
 using AY.db.dbDataSetTableAdapters;
+using AY.Packer;
+using System.IO;
 
 namespace AY.db
 {
@@ -84,15 +86,21 @@ namespace AY.db
 	
 	public class Db : Singleton<Db>
 	{
+		private object m_lock = new object();
 		private dbDataSet m_clientDataSet;
 		private TableAdapterManager tam;
 		
 		private Db()
 		{
 			m_clientDataSet = new dbDataSet();
+			Refill();	
+		}
+
+		private void Refill()
+		{
 			tam = new TableAdapterManager();
 			tam.UpdateAll(m_clientDataSet);
-			
+
 			((System.ComponentModel.ISupportInitialize)(m_clientDataSet)).BeginInit();
 			m_clientDataSet.DataSetName = "clientDataSet";
 			m_clientDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
@@ -125,10 +133,9 @@ namespace AY.db
 			Adapters.VCalendarInfoTableAdapter.Fill(m_clientDataSet.VCalendarInfo);
 			Adapters.VTodayClientsTableAdapter.Fill(m_clientDataSet.VTodayClients);
 
-
 			((System.ComponentModel.ISupportInitialize)(m_clientDataSet)).EndInit();
 		}
-
+		
 		public dbDataSet dSet
 		{
 			get { return m_clientDataSet; }
@@ -143,6 +150,73 @@ namespace AY.db
 		{
 			Adapters.UpdateAll(dSet);
 			dSet.AcceptChanges();
+		}
+
+		public bool ImportData(String szImportFile)
+		{
+			bool res = false;
+			Logger.Enter();
+
+			do
+			{
+				String szBackupFile;
+				Archive.Decompress(new FileInfo(szImportFile), out szBackupFile);
+
+				lock (m_lock)
+				{
+					dbDataSet ds = (dbDataSet)dSet.Clone();
+					try
+					{
+						m_clientDataSet.Clear();
+
+						foreach (DataTable dataTable in dSet.Tables)
+						{
+							dataTable.BeginLoadData();
+						}
+
+						dSet.ReadXml(szBackupFile, XmlReadMode.ReadSchema);
+
+						foreach (DataTable dataTable in dSet.Tables)
+							dataTable.EndLoadData();
+					}
+					catch(Exception ex)
+					{
+						Logger.Error("RestoreDatabase error. Changes could not be applied.");
+						m_clientDataSet = ds;
+					}
+				}
+				
+				res = true;
+			} while (false);
+
+			Logger.Leave();
+			return res;
+		}
+
+		public bool ExportData(String archName)
+		{
+			bool res = false;
+			Logger.Enter();
+
+			do
+			{
+				String tmpFile = DateTime.Now.ToString("yyyyMMddHHmmss") + ".tmp";
+				
+				lock (m_lock)
+				{
+					m_clientDataSet.AcceptChanges();
+					m_clientDataSet.WriteXml(tmpFile, XmlWriteMode.WriteSchema);
+
+					FileInfo f = new FileInfo(tmpFile);
+					Archive.Compress(f, archName);
+					f.Delete();
+				}
+
+				res = true;
+			} while (false);
+
+			Logger.Leave();
+			return res;
 		}
 	}
 }

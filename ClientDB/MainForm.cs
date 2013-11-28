@@ -36,20 +36,7 @@ namespace EAssistant
 			Missed,
 		}
 		
-		class ClientStatus
-		{
-			public Int64 Id = 0;
-			public ClientTicketStus state = ClientTicketStus.None;
-			
-			public ClientStatus(Int64 id, ClientTicketStus state)
-			{
-				this.Id = id;
-				this.state = state;
-			}
-		}
-		
 		private Login m_login = new Login();
-		private dbDataSet.settingsRow m_opt = null;
 		
         public MainForm()
         {
@@ -59,8 +46,6 @@ namespace EAssistant
 			AutoUpdater.Start("http://localhost/update.xml");
 			CheckRegistration();
 #endif
-			m_opt = Db.Instance.dSet.settings.FindByid(1);
-			
 			UserLogin();
 			InitOnce();
 			Reinit();
@@ -274,22 +259,23 @@ namespace EAssistant
 		
 		private void Reinit()
 		{
+			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			Session session = Session.Instance;
 			
-			m_calendar.RowHeight = (int)m_opt.calRowHeight;
+			m_calendar.RowHeight = (int)opt.calRowHeight;
 			m_calendar.Reinit();
-			session.PassLen = (int)m_opt.minPassLen;
+			session.PassLen = (int)opt.minPassLen;
 
 			ConfigureUserRights();
 			
 			m_calendar.StartDate = DateTime.Now;
 			m_calendar.SelectedDate = m_calendar.StartDate;
 			
-			if (m_opt.StoreMainWindowState)
+			if (opt.StoreMainWindowState)
 			{
-				this.WindowState = m_opt.MainWindowState;
+				this.WindowState = opt.MainWindowState;
 			}
-			session.PassLen = (int)m_opt.minPassLen;
+			session.PassLen = (int)opt.minPassLen;
 			
 			GetOpenedTickets();
 			
@@ -298,8 +284,9 @@ namespace EAssistant
 
 		private void OnClose(object sender, FormClosedEventArgs e)
 		{
-			m_opt.MainWindowState = this.WindowState;
-			Db.Instance.Adapters.settingsTableAdapter.Update(m_opt);
+			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
+			opt.MainWindowState = this.WindowState;
+			Db.Instance.Adapters.settingsTableAdapter.Update(opt);
 		}
 		
 		private void GetOpenedTickets()
@@ -516,21 +503,24 @@ namespace EAssistant
 
 		private void BackUpDB()
 		{
+			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			String prefix = DateTime.Now.ToString("yyyyMMdd");
 			String ext = "dbu";
 			String archName = String.Format("{0}\\{1}.{2}"
-				, m_opt.pathBackUp
+				, opt.pathBackUp
 				, prefix
 				, ext);
-			if (!Directory.Exists(m_opt.pathBackUp))
+			if (!Directory.Exists(opt.pathBackUp))
 			{
-				Directory.CreateDirectory(m_opt.pathBackUp);
+				Directory.CreateDirectory(opt.pathBackUp);
 			}
-			new DbAdapter().ExportData(archName);
+			Db.Instance.ExportData(archName);
+			UpdateInfo();
 		}
 		
 		private void importToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			if(DialogResult.Yes != UIMessages.Warning(
 				"Data base will be reverted and all data stored after " +
 				"BackUp will be lost. Do you really want to restore " +
@@ -540,11 +530,11 @@ namespace EAssistant
 			}
 			
 			OpenFileDialog opd = new OpenFileDialog();
-			opd.InitialDirectory = m_opt.pathBackUp;
+			opd.InitialDirectory = opt.pathBackUp;
 			opd.Filter = "Database BackUp files (*.dbu)|*.dbu";
 			if(DialogResult.OK == opd.ShowDialog())
 			{
-				new DbAdapter().ImportData(opd.FileName);
+				Db.Instance.ImportData(opd.FileName);
 				if(!dbDataSet.usersRow.UserExist(Session.Instance.UserId))
 				{
 					UserLogin();
@@ -596,12 +586,17 @@ namespace EAssistant
 					cr.lastEnter = cd.Add(st.TimeOfDay);
 					cr.lastLeave = cd.Add(st.TimeOfDay.Add(new TimeSpan((int)hd, 0, 0)));
 					cr.ProcessEnter();
-					
-					Db.Instance.Adapters.clientsTableAdapter.Update(cr);
 				}
 			}
 			
-			Db.Instance.AcceptChanges();
+			dbDataSet.clientsDataTable cdt = 
+				(dbDataSet.clientsDataTable)Db.Instance.dSet.clients.GetChanges(DataRowState.Modified);
+			
+			if(null == cdt)
+				return;
+			
+			Db.Instance.Adapters.clientsTableAdapter.Update(cdt);
+			Db.Instance.dSet.AcceptChanges();
 			
 			UpdateInfo();
 		}
@@ -614,10 +609,11 @@ namespace EAssistant
 		
 		private Dictionary<DateTime, int> GetPrognosedData(DateTime date)
 		{
+			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			Dictionary<DateTime, int> res = new Dictionary<DateTime, int>();
 			
-			DateTime dt = m_opt.StartTime.AddHours(-1);
-			while(dt < m_opt.EndTime.AddHours(1))
+			DateTime dt = opt.StartTime.AddHours(-1);
+			while(dt < opt.EndTime.AddHours(1))
 			{
 				res[dt] = 3;
 				
@@ -629,11 +625,12 @@ namespace EAssistant
 
 		private Dictionary<DateTime, int> GetPresentData(DateTime date)
 		{
+			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			Dictionary<DateTime, int> res = new Dictionary<DateTime, int>();
 
 			Random rnd = new Random(Environment.TickCount);
-			DateTime dt = m_opt.StartTime.AddHours(-1);
-			while (dt < m_opt.EndTime.AddHours(1))
+			DateTime dt = opt.StartTime.AddHours(-1);
+			while (dt < opt.EndTime.AddHours(1))
 			{
 				res[dt] = rnd.Next(5, 20);
 
@@ -645,6 +642,7 @@ namespace EAssistant
 
 		private void FillChart(object sender, ChartPaintEventArgs e)
 		{
+			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			DateTime date = m_calendar.SelectedDate;
 			bool today = false;
 			const int delta = 15;
@@ -652,7 +650,7 @@ namespace EAssistant
 			if(date.Date == DateTime.Now.Date)
 				today = true;
 						
-			int nIters = m_opt.EndTime.Subtract(m_opt.StartTime).Minutes / delta;
+			int nIters = opt.EndTime.Subtract(opt.StartTime).Minutes / delta;
 			WaitDialog wd = new WaitDialog(0, today ? nIters * 2 : nIters, 1);
 			wd.Show();
 			wd.Refresh();			

@@ -303,11 +303,6 @@
     <Compile Include="TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="tmpDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>tmpDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="ManageTrainerScheduleDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -382,17 +377,6 @@
     </None>
     <None Include="Resources\Game-diamond-icon.png" />
     <None Include="Resources\appointment_missed.png" />
-    <None Include="tmpDataSet.xsc">
-      <DependentUpon>tmpDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="tmpDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>tmpDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="tmpDataSet.xss">
-      <DependentUpon>tmpDataSet.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
