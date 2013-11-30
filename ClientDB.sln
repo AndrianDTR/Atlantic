@@ -21,6 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calendar", "Calendar\Calend
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A4463B91-8424-4040-89D6-5449DA9F46F6} = {A4463B91-8424-4040-89D6-5449DA9F46F6}
+	EndProjectSection
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GAssistInstall", "GAssistInstall\GAssistInstall.vdproj", "{02E0F591-C5A3-4EA0-9A3D-9163B339093D}"
 EndProject

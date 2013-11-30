@@ -205,8 +205,9 @@ namespace AY.Utils
 
 				res = true;
 			}
-			catch (System.Exception)
+			catch (System.Exception ex)
 			{
+				throw ex;
 			}
 
 			return res;

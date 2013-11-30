@@ -149,6 +149,7 @@ namespace EAssistant
 				
 				int pos = 0;
 				pos += (int)RegUtils.DataOffsets.Data;
+				pos += (int)RegUtils.DataOffsets.CustomerId;
 				pos += (int)RegUtils.DataOffsets.Serial;
 				pos += (int)RegUtils.DataOffsets.PubKey;
 				pos += (int)RegUtils.DataOffsets.PrivKey;

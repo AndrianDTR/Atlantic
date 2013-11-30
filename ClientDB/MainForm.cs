@@ -44,8 +44,9 @@ namespace EAssistant
 #if !DEBUG
 			//AutoUpdater.Start("http://pro100soft.eu/EAssistant/updates/latest.xml");
 			AutoUpdater.Start("http://localhost/update.xml");
-			CheckRegistration();
 #endif
+			CheckRegistration();
+
 			UserLogin();
 			InitOnce();
 			Reinit();
@@ -69,8 +70,6 @@ namespace EAssistant
 			colOTLastLeave = new DataGridViewTextBoxColumn();
 			colOTHoursLeft = new DataGridViewTextBoxColumn();
 			colOTHoursDec = new DataGridViewTextBoxColumn();
-			
-			todayClientsBindingSource.DataSource = Db.Instance.dSet.VTodayClients;
 			
 			// 
 			// colOTId
@@ -291,6 +290,7 @@ namespace EAssistant
 		
 		private void GetOpenedTickets()
 		{
+			todayClientsBindingSource.DataSource = Db.Instance.dSet.VTodayClients;
 			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			Db.Instance.Adapters.VTodayClientsTableAdapter.Fill(Db.Instance.dSet.VTodayClients);
 			
@@ -520,6 +520,9 @@ namespace EAssistant
 		
 		private void importToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			UIMessages.DisabledFeature();
+			return;
+			
 			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			if(DialogResult.Yes != UIMessages.Warning(
 				"Data base will be reverted and all data stored after " +

@@ -46,6 +46,8 @@
 			this.label7 = new System.Windows.Forms.Label();
 			this.textCustomer = new System.Windows.Forms.TextBox();
 			this.label8 = new System.Windows.Forms.Label();
+			this.textCustomerId = new System.Windows.Forms.TextBox();
+			this.label9 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -155,7 +157,7 @@
 			// 
 			this.textEmail.Location = new System.Drawing.Point(69, 177);
 			this.textEmail.Name = "textEmail";
-			this.textEmail.Size = new System.Drawing.Size(446, 20);
+			this.textEmail.Size = new System.Drawing.Size(223, 20);
 			this.textEmail.TabIndex = 13;
 			// 
 			// label6
@@ -201,6 +203,23 @@
 			this.label8.TabIndex = 16;
 			this.label8.Text = "Customer #";
 			// 
+			// textCustomerId
+			// 
+			this.textCustomerId.Location = new System.Drawing.Point(365, 177);
+			this.textCustomerId.Name = "textCustomerId";
+			this.textCustomerId.Size = new System.Drawing.Size(150, 20);
+			this.textCustomerId.TabIndex = 19;
+			this.textCustomerId.Text = "0";
+			// 
+			// label9
+			// 
+			this.label9.AutoSize = true;
+			this.label9.Location = new System.Drawing.Point(298, 180);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(65, 13);
+			this.label9.TabIndex = 18;
+			this.label9.Text = "Customer ID";
+			// 
 			// ActivatorForm
 			// 
 			this.AcceptButton = this.btnGenerate;
@@ -208,6 +227,8 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnClose;
 			this.ClientSize = new System.Drawing.Size(527, 460);
+			this.Controls.Add(this.textCustomerId);
+			this.Controls.Add(this.label9);
 			this.Controls.Add(this.textCustomer);
 			this.Controls.Add(this.label8);
 			this.Controls.Add(this.textAddress);
@@ -256,6 +277,8 @@
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.TextBox textCustomer;
 		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.TextBox textCustomerId;
+		private System.Windows.Forms.Label label9;
 	}
 }
 

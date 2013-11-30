@@ -165,6 +165,7 @@ namespace AY.db
 				lock (m_lock)
 				{
 					dbDataSet ds = (dbDataSet)dSet.Clone();
+					
 					try
 					{
 						m_clientDataSet.Clear();
@@ -177,7 +178,9 @@ namespace AY.db
 						dSet.ReadXml(szBackupFile, XmlReadMode.ReadSchema);
 
 						foreach (DataTable dataTable in dSet.Tables)
+						{
 							dataTable.EndLoadData();
+						}
 					}
 					catch(Exception ex)
 					{
