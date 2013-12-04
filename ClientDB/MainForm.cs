@@ -45,7 +45,14 @@ namespace EAssistant
 			//AutoUpdater.Start("http://pro100soft.eu/EAssistant/updates/latest.xml");
 			AutoUpdater.Start("http://localhost/update.xml");
 #endif
-			CheckRegistration();
+			try
+			{
+				CheckRegistration();
+			}
+			catch(Exception ex)
+			{
+				UIMessages.C
+			}
 
 			UserLogin();
 			InitOnce();

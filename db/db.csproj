@@ -105,6 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="client.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="clientDataSet.xsc">
       <DependentUpon>clientDataSet.xsd</DependentUpon>
     </None>
