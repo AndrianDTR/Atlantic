@@ -21,10 +21,9 @@ namespace EAssistant
 			String szLogFile = "SessionLog.txt";
 			Logger.Create(szLogFile, Logger.LogLevel.Debug);
 			Logger.Info("App start.");
-#if !DEBUG
+
 			try
 			{
-#endif
 				/*DbAdapter ad = new DbAdapter();
 				if( !ad.CheckTables())
 				{
@@ -45,20 +44,24 @@ namespace EAssistant
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 				Application.Run(new MainForm());
-#if !DEBUG
 			}		
 			catch(Exception ex)
 			{
 				Logger.Critical(ex.ToString());
 				Logger.Trace(ex.StackTrace);
+
+#if !DEBUG
 				if(DialogResult.Yes == UIMessages.Error("Program has been exited abnormally.\n"
 					+ "Would you like to send report about this situation?"
 					, MessageBoxButtons.YesNo))
 				{
 					sendReport = true;
 				}
-			}
+#else
+				throw ex;
 #endif
+
+			}
 			Logger.Info("App end.");
             Logger.Close();
             

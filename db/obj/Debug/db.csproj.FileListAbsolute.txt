@@ -7,3 +7,12 @@ D:\Cpp\Atlantic\db\obj\Debug\AY.db.Properties.Resources.resources
 D:\Cpp\Atlantic\db\obj\Debug\db.csproj.GenerateResource.Cache
 D:\Cpp\Atlantic\db\obj\Debug\db.dll
 D:\Cpp\Atlantic\db\obj\Debug\db.pdb
+D:\Projects\Atlantic\bin\Debug\client.db
+D:\Projects\Atlantic\bin\Debug\db.dll.config
+D:\Projects\Atlantic\bin\Debug\db.dll
+D:\Projects\Atlantic\bin\Debug\db.pdb
+D:\Projects\Atlantic\db\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\Atlantic\db\obj\Debug\AY.db.Properties.Resources.resources
+D:\Projects\Atlantic\db\obj\Debug\db.csproj.GenerateResource.Cache
+D:\Projects\Atlantic\db\obj\Debug\db.dll
+D:\Projects\Atlantic\db\obj\Debug\db.pdb

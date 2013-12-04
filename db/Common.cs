@@ -184,7 +184,7 @@ namespace AY.db
 					}
 					catch(Exception ex)
 					{
-						Logger.Error("RestoreDatabase error. Changes could not be applied.");
+						Logger.Error(String.Format("RestoreDatabase error. Changes could not be applied. Internal message: {0}", ex.Message));
 						m_clientDataSet = ds;
 					}
 				}

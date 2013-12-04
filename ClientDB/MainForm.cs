@@ -51,7 +51,8 @@ namespace EAssistant
 			}
 			catch(Exception ex)
 			{
-				UIMessages.C
+				UIMessages.Error(ex.Message);
+				throw ex;
 			}
 
 			UserLogin();
