@@ -77,12 +77,12 @@ namespace EAssistant
 			get
 			{
 				String info = "This copy of application is not registered.";
-				byte[] data = RegUtils.RegData;
+				byte[] data = RegUtils.Instance.SavedData;
 				if (null != data)
 				{
 					try
 					{
-						info = RegUtils.GetRegInfo(data).Replace("\r", "").Replace("\n", "\r\n");
+						info = RegUtils.Instance.RegInfo.Replace("\r", "").Replace("\n", "\r\n");
 					}
 					catch (System.Exception)
 					{

@@ -6,101 +6,127 @@ using System.Runtime.InteropServices;
 using System.Management;
 using System.Text.RegularExpressions;
 using Microsoft.Win32;
+using AY.Log;
 
 namespace AY.Utils
 {
-	public class RegUtils
+	public class RegUtils : Singleton<RegUtils>
 	{
+		private byte[] m_data = null;
+		
 		public enum DataOffsets
 		{
-			Data = 8,
-			Id = 64,
-			Serial = 128,
-			PubKey = 1024,
-			PrivKey = 3072,
-			ActKey = 1024,
-			CustomerId = 32,
+			// field				Len
+			Date = 0,				// 8 bytes
+			CustomerId = 8,			// 4 bytes
+			Serial = 12,			// 128
+			PubKey = 140,			// 1024
+			PrivKey = 1164,			// 3072
+			Message = 4236,			// 2048
+			_end = 6284,			// end marker
 		}
 		
-		private static RegistryKey GetAppKey()
+		public enum ActKeyOffsets
+		{
+			//Field					// Len
+			CustomerId = 0,			// 4
+			Serial = 4,				// 128
+			Message = 132,			// 2048
+			_end = 2180,			// end marker
+		}
+
+		private RegUtils()
+		{
+			ReadData();
+		}
+		
+		public void ReadData()
+		{
+			try
+			{
+				RegistryKey key = GetAppKey();
+				m_data = (byte[])key.GetValue(@"data");
+			}
+			catch (System.Exception ex)
+			{
+				Logger.Error(ex.Message);
+				m_data = null;
+			}
+		}
+		
+		public static void ROL(ref byte val, int nBits)
+		{
+			val = (byte)((val >> nBits) | (val << (8 - nBits)));
+		}
+
+		public static void ROR(ref byte val, int nBits)
+		{
+			val = (byte)((val << nBits) | (val >> (8 - nBits)));
+		}
+
+		private byte[] GetKey(byte[] data, int offset, int keyLen)
+		{
+			byte[] key = new byte[keyLen];
+			Array.Copy(data, offset, key, 0, keyLen);
+			
+			return key;
+		}
+		
+		private RegistryKey GetAppKey()
 		{
 			Assembly asm = Assembly.GetExecutingAssembly();
 			GuidAttribute guid = (GuidAttribute)asm.GetCustomAttributes(typeof(GuidAttribute), true)[0];
 			String subKey = "Software\\" + guid.Value;
 			return Registry.LocalMachine.CreateSubKey(subKey, RegistryKeyPermissionCheck.ReadWriteSubTree);
 		}
-		
-		public static byte[] RegData
+
+		public byte[] SavedData
 		{
 			get
 			{
-				byte[] data = null;
-				
-				try
+				if(null == m_data)
 				{
-					RegistryKey key = GetAppKey();
-					data = (byte[])key.GetValue(@"data");
+					Logger.Warning("No registration info.");
+					m_data = FillRegInfo();
 				}
-				catch (System.Exception)
-				{
-				}
-				
-				return data;
+					
+				return m_data;
 			}
 			set
 			{
+				m_data = value;
 				RegistryKey key = GetAppKey();
-				key.SetValue(@"data", value, RegistryValueKind.Binary);
+				key.SetValue(@"data", m_data, RegistryValueKind.Binary);
+				key.Flush();
+				key.Close();
 			}
 		}
 
-		public static String GetSerialNumber()
+		public byte[] FillRegInfo()
 		{
-			String sn = String.Empty;
+			int bufSize = (int)DataOffsets._end;
 
-			ManagementScope scope = new ManagementScope("\\\\" + Environment.MachineName + "\\root\\cimv2");
+			byte[] buf = new byte[bufSize];
+			Array.Clear(buf, 0, bufSize);
 
-			scope.Connect();
+			byte[] srcDate = BitConverter.GetBytes((Int64)DateTime.Now.Ticks);
+			byte[] serial = Encoding.ASCII.GetBytes(SecUtils.SerialNumber);
+			byte[] pub = null;
+			byte[] prv = null;
+			SecUtils.RSA(out pub, out prv);
 
-			ManagementObject wmiClass = new ManagementObject(scope, new ManagementPath("Win32_BaseBoard.Tag=\"Base Board\""), new ObjectGetOptions());
+			Array.Copy(srcDate, 0, buf, (int)DataOffsets.Date, srcDate.Length);
+			Array.Copy(serial, 0, buf, (int)DataOffsets.Serial, serial.Length);
+			Array.Copy(pub, 0, buf, (int)DataOffsets.PubKey, pub.Length);
+			Array.Copy(prv, 0, buf, (int)DataOffsets.PrivKey, prv.Length);
 
-			foreach (PropertyData propData in wmiClass.Properties)
-			{
-				if (propData.Name == "SerialNumber")
-					sn = Convert.ToString(propData.Value);
-			}
-
-			return sn;
+			return buf;
 		}
-
-		public static String CryptSerialNumber(String serial)
-		{
-			String sn = SecUtils.md5(serial);
-
-			sn += SecUtils.md5(sn).Substring(0, 10);
-
-			int n = sn.Length % 5;
-			if (n != 0)
-			{
-				sn = sn.Substring(0, sn.Length - n);
-			}
-
-			sn = Regex.Replace(sn, ".{5}", "$0-");
-			sn = sn.Substring(0, sn.Length - 1);
-
-			return sn;
-		}
-
-		public static String GetSerialNumberCrypted()
-		{
-			String serial = GetSerialNumber();
-			return CryptSerialNumber(serial);
-		}
-
-		public static String RandomString(int size)
+		
+		public String GenerateRandomString(int length)
 		{
 			Random random = new Random(Environment.TickCount);
-			var data = new byte[size];
+			var data = new byte[length];
 			for (int i = 0; i < data.Length; i++)
 			{
 				data[i] = (byte)random.Next(32, 127);
@@ -109,88 +135,93 @@ namespace AY.Utils
 			return encoding.GetString(data);
 		}
 
-		public static DateTime GetRegDate(byte[] data)
+		public DateTime RegDate
 		{
-			int pos = 0;
-			byte[] dat = GetKey(data, ref pos, DataOffsets.Data);
-			Int64 ticks = BitConverter.ToInt64(dat, 0);
-			return new DateTime(ticks);
-		}
-
-		public static Int64 GetRegId(byte[] data)
-		{
-			int pos = 0;
-			byte[] dat = GetKey(data, ref pos, DataOffsets.Id);
-			Int64 id = BitConverter.ToInt64(dat, 0);
-			return id;
-		}
-
-		public static String GetRegSerialNumber(byte[] data)
-		{
-			int pos = (int)DataOffsets.Data;
-			byte[] snm = GetKey(data, ref pos, DataOffsets.Serial);
-			String serial = Encoding.ASCII.GetString(snm);
-			return CryptSerialNumber(serial.Split('\0')[0]);
-		}
-
-		public static Int32 GetRegCustomerId(byte[] data)
-		{
-			int pos = (int)DataOffsets.ActKey;
-			byte[] dat = GetKey(data, ref pos, DataOffsets.CustomerId);
-			Int32 num = BitConverter.ToInt32(dat, 0);
-			
-			return num;
-		}
-
-		public static String GetRegInfo(byte[] data)
-		{
-			int pos = (int)DataOffsets.Data
-				+ (int)DataOffsets.Serial
-				+ (int)DataOffsets.PubKey
-				+ (int)DataOffsets.PrivKey;
-			byte[] act = GetKey(data, ref pos, DataOffsets.ActKey);
-
-			String curSN = GetSerialNumberCrypted();
-
-			for (int n = 0; n < act.Length; n++)
+			get
 			{
-				RegUtils.ROR(ref act[n], n % 8);
+				byte[] dat = GetKey(SavedData
+					, (int)DataOffsets.Date
+					, (int)(DataOffsets.Serial - DataOffsets.Date));
+				Int64 ticks = BitConverter.ToInt64(dat, 0);
+				return new DateTime(ticks);
 			}
-
-			String msg = Encoding.UTF8.GetString(act).Split('\0')[0];
-			if (msg.Length < (int)DataOffsets.ActKey / 4)
-			{
-				throw new Exception("Error! Activation key is too short.");
-			}
-
-			msg = msg.Split('|')[0];
-
-			if (!msg.StartsWith("This application copy is registered to:") || !msg.EndsWith(curSN))
-				throw new Exception("Error! Invalid activation key.");
-
-			return msg;
 		}
 
-		public static bool CheckRegInfo(byte[] data)
+		public Int32 CustomerId
+		{
+			get
+			{
+				byte[] dat = GetKey(m_data
+					, (int)DataOffsets.CustomerId
+					, (int)(DataOffsets.Serial - DataOffsets.CustomerId));
+				Int32 num = BitConverter.ToInt32(dat, 0);
+				
+				return num;
+			}
+		}
+
+		public String SerialNumber
+		{
+			get
+			{
+				byte[] snm = GetKey(SavedData
+					, (int)DataOffsets.Serial
+					, (int)(DataOffsets.PubKey - DataOffsets.Serial));
+				return Encoding.UTF8.GetString(snm);
+			}
+		}
+
+		public String RegInfo
+		{
+			get
+			{
+				int len = (int)(DataOffsets._end - DataOffsets.Message);
+				byte[] bytesMsgt = GetKey(SavedData, (int)DataOffsets.Message, len);
+				for (int n = 0; n < bytesMsgt.Length; n++)
+				{
+					ROR(ref bytesMsgt[n], n % 8);
+				}
+
+				String msg = Encoding.UTF8.GetString(bytesMsgt).Split('\0')[0];
+				if (msg.Length < (int)(DataOffsets._end - DataOffsets.Message))
+				{
+					throw new Exception("Error! Activation key is too short.");
+				}
+
+				msg = msg.Substring(0, msg.IndexOf(MsgSplitter));
+
+				return msg;
+			}
+		}
+
+		public String MsgSplitter
+		{
+			get {return "-=|=-";}
+		}
+		
+		public bool CheckRegistrationInfo()
 		{
 			bool res = false;
 
 			try
 			{
-				int pos = (int)DataOffsets.Data
-					+ (int)DataOffsets.Serial;
-				byte[] pub = GetKey(data, ref pos, DataOffsets.PubKey);
-				byte[] prv = GetKey(data, ref pos, DataOffsets.PrivKey);
+				byte[] pub = GetKey(SavedData
+					, (int)DataOffsets.PubKey
+					, (int)(DataOffsets.PrivKey - DataOffsets.PubKey));
+
+				byte[] prv = GetKey(SavedData
+					, (int)DataOffsets.PrivKey
+					, (int)(DataOffsets.Message - DataOffsets.PrivKey));
 
 				// Get Reg date
-				DateTime regDate = GetRegDate(data);
+				DateTime regDate = RegDate;
 
 				// Get Reg id
-				Int64 id = GetRegId(data);
+				Int32 id = CustomerId;
 
 				// Get Serial number
-				String curSN = GetSerialNumberCrypted();
-				String serial = GetRegSerialNumber(data);
+				String curSN = SecUtils.CryptString(SecUtils.SerialNumber);
+				String serial = SerialNumber;
 
 				for (int n = 0; n < curSN.Length; n++)
 				{
@@ -201,35 +232,16 @@ namespace AY.Utils
 				}
 
 				// Get reg msg
-				String msg = GetRegInfo(data);
+				String msg = RegInfo;
 
 				res = true;
 			}
 			catch (System.Exception ex)
 			{
-				throw ex;
+				Logger.Error(ex.Message);
 			}
 
 			return res;
-		}
-
-		private static byte[] GetKey(byte[] data, ref int offset, DataOffsets keyLen)
-		{
-			byte[] key = new byte[(int)keyLen];
-			Array.Copy(data, offset, key, 0, (int)keyLen);
-			offset += (int)keyLen;
-
-			return key;
-		}
-
-		public static void ROL(ref byte val, int nBits)
-		{
-			val = (byte)((val >> nBits) | (val << (8 - nBits)));
-		}
-
-		public static void ROR(ref byte val, int nBits)
-		{
-			val = (byte)((val << nBits) | (val >> (8 - nBits)));
 		}
 	}
 }

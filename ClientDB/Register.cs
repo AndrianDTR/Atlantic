@@ -5,6 +5,7 @@ using System.Data;
 using System.IO;
 using AY.Utils;
 using System.Text;
+using AY.Log;
 
 namespace EAssistant
 {
@@ -139,23 +140,41 @@ namespace EAssistant
 		{
 			try
 			{
-				byte[] buf = RegUtils.RegData;
+				byte[] buf = RegUtils.Instance.SavedData;
+
+				int regIdLen = (int)(RegUtils.ActKeyOffsets.Serial - RegUtils.ActKeyOffsets.CustomerId);
+				int regSerialLen = (int)(RegUtils.ActKeyOffsets.Message - RegUtils.ActKeyOffsets.Serial);
+				int regMsgLen = (int)(RegUtils.ActKeyOffsets._end - RegUtils.ActKeyOffsets.Message);
+				
 				if (null == buf)
 				{
-					throw new Exception("Invalid data.");
+					//buf = RegUtils.Instance.FillRegInfo();
+					Logger.Critical("No registration data.");
+					throw new Exception();
 				}
 			
-				byte[] act = Convert.FromBase64String(textActKey.Text);
-				
-				int pos = 0;
-				pos += (int)RegUtils.DataOffsets.Data;
-				pos += (int)RegUtils.DataOffsets.CustomerId;
-				pos += (int)RegUtils.DataOffsets.Serial;
-				pos += (int)RegUtils.DataOffsets.PubKey;
-				pos += (int)RegUtils.DataOffsets.PrivKey;
-				Array.Copy(act, 0, buf, pos, act.Length);
+				byte[] data = Convert.FromBase64String(textActKey.Text);
 
-				RegUtils.RegData = buf;
+				Array.Copy(data
+					, (int)RegUtils.ActKeyOffsets.CustomerId
+					, buf
+					, (int)RegUtils.DataOffsets.CustomerId
+					, regIdLen);
+
+				Array.Copy(data
+					, (int)RegUtils.ActKeyOffsets.Serial
+					, buf
+					, (int)RegUtils.DataOffsets.Serial
+					, regSerialLen);
+
+				Array.Copy(data
+					, (int)RegUtils.ActKeyOffsets.Message
+					, buf
+					, (int)RegUtils.DataOffsets.Message
+					, regMsgLen);
+
+				
+				RegUtils.Instance.SavedData = buf;
 
 				DialogResult = DialogResult.OK;
 				this.Close();

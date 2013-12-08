@@ -41,10 +41,13 @@ namespace EAssistant
         public MainForm()
         {
 			InitializeComponent();
-#if !DEBUG
-			//AutoUpdater.Start("http://pro100soft.eu/EAssistant/updates/latest.xml");
-			AutoUpdater.Start("http://localhost/update.xml");
-#endif
+
+			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
+			if(opt.updates == 0)
+			{
+				CheckForUpdates();
+			}
+
 			try
 			{
 				CheckRegistration();
@@ -155,36 +158,16 @@ namespace EAssistant
 		
 		private void CheckRegistration()
 		{
-			byte[] buf = RegUtils.RegData;
+			byte[] buf = RegUtils.Instance.SavedData;
 			if (null == buf)
 			{
-				buf = new byte[ExeUtils.BufSize];
-				byte[] srcDate = BitConverter.GetBytes((Int64)DateTime.Now.Ticks);
-				byte[] serial = Encoding.ASCII.GetBytes(RegUtils.GetSerialNumber());
-				byte[] pub = new byte[(int)RegUtils.DataOffsets.PubKey];
-				byte[] prv = new byte[(int)RegUtils.DataOffsets.PrivKey];
-				SecUtils.RSA(ref pub
-					, ref prv
-					, new System.Security.Cryptography.RSACryptoServiceProvider(512));
-
-				int pos = 0;
-				Array.Copy(srcDate, 0, buf, pos, srcDate.Length);
-
-				pos += (int)RegUtils.DataOffsets.Data;
-				Array.Copy(serial, 0, buf, pos, serial.Length);
-
-				pos += (int)RegUtils.DataOffsets.Serial;
-				Array.Copy(pub, 0, buf, pos, pub.Length);
-
-				pos += (int)RegUtils.DataOffsets.PubKey;
-				Array.Copy(prv, 0, buf, pos, prv.Length);
-
-				RegUtils.RegData = buf;
+				buf = RegUtils.Instance.FillRegInfo();
 			}
 
-			if (!RegUtils.CheckRegInfo(buf))
+			if (!RegUtils.Instance.CheckRegistrationInfo())
 			{
-				RegisterForm rdlg = new RegisterForm(RegUtils.GetSerialNumberCrypted());
+				RegisterForm rdlg = new RegisterForm(SecUtils.CryptString(SecUtils.SerialNumber));
+				
 				Int64 ticks = BitConverter.ToInt64(buf, 0);
 				DateTime regDate = new DateTime(ticks);
 				TimeSpan daysLeft = regDate.AddDays(30).Subtract(DateTime.Now);
@@ -509,6 +492,20 @@ namespace EAssistant
 			BackUpDB();
 		}
 
+		private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			CheckForUpdates();
+		}
+		
+		private void CheckForUpdates()
+		{
+#if !DEBUG
+			//AutoUpdater.Start("http://pro100soft.eu/EAssistant/updates/latest.xml");
+#else
+			AutoUpdater.Start("http://localhost/update.xml");
+#endif
+		}
+		
 		private void BackUpDB()
 		{
 			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
@@ -528,9 +525,10 @@ namespace EAssistant
 		
 		private void importToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+#if !DEBUG
 			UIMessages.DisabledFeature();
 			return;
-			
+#endif	
 			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			if(DialogResult.Yes != UIMessages.Warning(
 				"Data base will be reverted and all data stored after " +

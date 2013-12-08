@@ -29,8 +29,6 @@ namespace AY.db {
         
         private scheduleRulesDataTable tablescheduleRules;
         
-        private settingsDataTable tablesettings;
-        
         private statisticsDataTable tablestatistics;
         
         private trainersDataTable tabletrainers;
@@ -50,6 +48,8 @@ namespace AY.db {
         private VTodayClientsDataTable tableVTodayClients;
         
         private VCalendarInfoDataTable tableVCalendarInfo;
+        
+        private settingsDataTable tablesettings;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -83,9 +83,6 @@ namespace AY.db {
                 if ((ds.Tables["scheduleRules"] != null)) {
                     base.Tables.Add(new scheduleRulesDataTable(ds.Tables["scheduleRules"]));
                 }
-                if ((ds.Tables["settings"] != null)) {
-                    base.Tables.Add(new settingsDataTable(ds.Tables["settings"]));
-                }
                 if ((ds.Tables["statistics"] != null)) {
                     base.Tables.Add(new statisticsDataTable(ds.Tables["statistics"]));
                 }
@@ -115,6 +112,9 @@ namespace AY.db {
                 }
                 if ((ds.Tables["VCalendarInfo"] != null)) {
                     base.Tables.Add(new VCalendarInfoDataTable(ds.Tables["VCalendarInfo"]));
+                }
+                if ((ds.Tables["settings"] != null)) {
+                    base.Tables.Add(new settingsDataTable(ds.Tables["settings"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -149,15 +149,6 @@ namespace AY.db {
         public scheduleRulesDataTable scheduleRules {
             get {
                 return this.tablescheduleRules;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public settingsDataTable settings {
-            get {
-                return this.tablesettings;
             }
         }
         
@@ -252,6 +243,15 @@ namespace AY.db {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public settingsDataTable settings {
+            get {
+                return this.tablesettings;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -316,9 +316,6 @@ namespace AY.db {
                 if ((ds.Tables["scheduleRules"] != null)) {
                     base.Tables.Add(new scheduleRulesDataTable(ds.Tables["scheduleRules"]));
                 }
-                if ((ds.Tables["settings"] != null)) {
-                    base.Tables.Add(new settingsDataTable(ds.Tables["settings"]));
-                }
                 if ((ds.Tables["statistics"] != null)) {
                     base.Tables.Add(new statisticsDataTable(ds.Tables["statistics"]));
                 }
@@ -348,6 +345,9 @@ namespace AY.db {
                 }
                 if ((ds.Tables["VCalendarInfo"] != null)) {
                     base.Tables.Add(new VCalendarInfoDataTable(ds.Tables["VCalendarInfo"]));
+                }
+                if ((ds.Tables["settings"] != null)) {
+                    base.Tables.Add(new settingsDataTable(ds.Tables["settings"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -389,12 +389,6 @@ namespace AY.db {
             if ((initTable == true)) {
                 if ((this.tablescheduleRules != null)) {
                     this.tablescheduleRules.InitVars();
-                }
-            }
-            this.tablesettings = ((settingsDataTable)(base.Tables["settings"]));
-            if ((initTable == true)) {
-                if ((this.tablesettings != null)) {
-                    this.tablesettings.InitVars();
                 }
             }
             this.tablestatistics = ((statisticsDataTable)(base.Tables["statistics"]));
@@ -457,6 +451,12 @@ namespace AY.db {
                     this.tableVCalendarInfo.InitVars();
                 }
             }
+            this.tablesettings = ((settingsDataTable)(base.Tables["settings"]));
+            if ((initTable == true)) {
+                if ((this.tablesettings != null)) {
+                    this.tablesettings.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -470,8 +470,6 @@ namespace AY.db {
             base.Tables.Add(this.tablepayments);
             this.tablescheduleRules = new scheduleRulesDataTable();
             base.Tables.Add(this.tablescheduleRules);
-            this.tablesettings = new settingsDataTable();
-            base.Tables.Add(this.tablesettings);
             this.tablestatistics = new statisticsDataTable();
             base.Tables.Add(this.tablestatistics);
             this.tabletrainers = new trainersDataTable();
@@ -492,6 +490,8 @@ namespace AY.db {
             base.Tables.Add(this.tableVTodayClients);
             this.tableVCalendarInfo = new VCalendarInfoDataTable();
             base.Tables.Add(this.tableVCalendarInfo);
+            this.tablesettings = new settingsDataTable();
+            base.Tables.Add(this.tablesettings);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -501,11 +501,6 @@ namespace AY.db {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializescheduleRules() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializesettings() {
             return false;
         }
         
@@ -556,6 +551,11 @@ namespace AY.db {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeVCalendarInfo() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializesettings() {
             return false;
         }
         
@@ -616,8 +616,6 @@ namespace AY.db {
         
         public delegate void scheduleRulesRowChangeEventHandler(object sender, scheduleRulesRowChangeEvent e);
         
-        public delegate void settingsRowChangeEventHandler(object sender, settingsRowChangeEvent e);
-        
         public delegate void statisticsRowChangeEventHandler(object sender, statisticsRowChangeEvent e);
         
         public delegate void trainersRowChangeEventHandler(object sender, trainersRowChangeEvent e);
@@ -637,6 +635,8 @@ namespace AY.db {
         public delegate void VTodayClientsRowChangeEventHandler(object sender, VTodayClientsRowChangeEvent e);
         
         public delegate void VCalendarInfoRowChangeEventHandler(object sender, VCalendarInfoRowChangeEvent e);
+        
+        public delegate void settingsRowChangeEventHandler(object sender, settingsRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1209,396 +1209,6 @@ namespace AY.db {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "scheduleRulesDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class settingsDataTable : global::System.Data.TypedTableBase<settingsRow> {
-            
-            private global::System.Data.DataColumn columnid;
-            
-            private global::System.Data.DataColumn columnminPassLen;
-            
-            private global::System.Data.DataColumn columnlanguage;
-            
-            private global::System.Data.DataColumn columncalRowHeight;
-            
-            private global::System.Data.DataColumn columnshowTrainer;
-            
-            private global::System.Data.DataColumn columnshowClientCount;
-            
-            private global::System.Data.DataColumn columnstoreMainWindowState;
-            
-            private global::System.Data.DataColumn columnmainWindowState;
-            
-            private global::System.Data.DataColumn columnpathBackUp;
-            
-            private global::System.Data.DataColumn columncolors;
-            
-            private global::System.Data.DataColumn columnstartTime;
-            
-            private global::System.Data.DataColumn columnendTime;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public settingsDataTable() {
-                this.TableName = "settings";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal settingsDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected settingsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn idColumn {
-                get {
-                    return this.columnid;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn minPassLenColumn {
-                get {
-                    return this.columnminPassLen;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn languageColumn {
-                get {
-                    return this.columnlanguage;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn calRowHeightColumn {
-                get {
-                    return this.columncalRowHeight;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn showTrainerColumn {
-                get {
-                    return this.columnshowTrainer;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn showClientCountColumn {
-                get {
-                    return this.columnshowClientCount;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn storeMainWindowStateColumn {
-                get {
-                    return this.columnstoreMainWindowState;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn mainWindowStateColumn {
-                get {
-                    return this.columnmainWindowState;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn pathBackUpColumn {
-                get {
-                    return this.columnpathBackUp;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn colorsColumn {
-                get {
-                    return this.columncolors;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn startTimeColumn {
-                get {
-                    return this.columnstartTime;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn endTimeColumn {
-                get {
-                    return this.columnendTime;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public settingsRow this[int index] {
-                get {
-                    return ((settingsRow)(this.Rows[index]));
-                }
-            }
-            
-            public event settingsRowChangeEventHandler settingsRowChanging;
-            
-            public event settingsRowChangeEventHandler settingsRowChanged;
-            
-            public event settingsRowChangeEventHandler settingsRowDeleting;
-            
-            public event settingsRowChangeEventHandler settingsRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddsettingsRow(settingsRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public settingsRow AddsettingsRow(long minPassLen, string language, long calRowHeight, long showTrainer, long showClientCount, long storeMainWindowState, long mainWindowState, string pathBackUp, string colors, System.DateTime startTime, System.DateTime endTime) {
-                settingsRow rowsettingsRow = ((settingsRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        minPassLen,
-                        language,
-                        calRowHeight,
-                        showTrainer,
-                        showClientCount,
-                        storeMainWindowState,
-                        mainWindowState,
-                        pathBackUp,
-                        colors,
-                        startTime,
-                        endTime};
-                rowsettingsRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowsettingsRow);
-                return rowsettingsRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public settingsRow FindByid(long id) {
-                return ((settingsRow)(this.Rows.Find(new object[] {
-                            id})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                settingsDataTable cln = ((settingsDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new settingsDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnid = base.Columns["id"];
-                this.columnminPassLen = base.Columns["minPassLen"];
-                this.columnlanguage = base.Columns["language"];
-                this.columncalRowHeight = base.Columns["calRowHeight"];
-                this.columnshowTrainer = base.Columns["showTrainer"];
-                this.columnshowClientCount = base.Columns["showClientCount"];
-                this.columnstoreMainWindowState = base.Columns["storeMainWindowState"];
-                this.columnmainWindowState = base.Columns["mainWindowState"];
-                this.columnpathBackUp = base.Columns["pathBackUp"];
-                this.columncolors = base.Columns["colors"];
-                this.columnstartTime = base.Columns["startTime"];
-                this.columnendTime = base.Columns["endTime"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnid = new global::System.Data.DataColumn("id", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnid);
-                this.columnminPassLen = new global::System.Data.DataColumn("minPassLen", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnminPassLen);
-                this.columnlanguage = new global::System.Data.DataColumn("language", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnlanguage);
-                this.columncalRowHeight = new global::System.Data.DataColumn("calRowHeight", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncalRowHeight);
-                this.columnshowTrainer = new global::System.Data.DataColumn("showTrainer", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnshowTrainer);
-                this.columnshowClientCount = new global::System.Data.DataColumn("showClientCount", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnshowClientCount);
-                this.columnstoreMainWindowState = new global::System.Data.DataColumn("storeMainWindowState", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnstoreMainWindowState);
-                this.columnmainWindowState = new global::System.Data.DataColumn("mainWindowState", typeof(long), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmainWindowState);
-                this.columnpathBackUp = new global::System.Data.DataColumn("pathBackUp", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpathBackUp);
-                this.columncolors = new global::System.Data.DataColumn("colors", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncolors);
-                this.columnstartTime = new global::System.Data.DataColumn("startTime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnstartTime);
-                this.columnendTime = new global::System.Data.DataColumn("endTime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnendTime);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnid}, true));
-                this.columnid.AutoIncrement = true;
-                this.columnid.AutoIncrementSeed = -1;
-                this.columnid.AutoIncrementStep = -1;
-                this.columnid.AllowDBNull = false;
-                this.columnid.Unique = true;
-                this.columnminPassLen.AllowDBNull = false;
-                this.columnlanguage.AllowDBNull = false;
-                this.columnlanguage.MaxLength = 2147483647;
-                this.columncalRowHeight.AllowDBNull = false;
-                this.columnshowTrainer.AllowDBNull = false;
-                this.columnshowClientCount.AllowDBNull = false;
-                this.columnstoreMainWindowState.AllowDBNull = false;
-                this.columnmainWindowState.AllowDBNull = false;
-                this.columnpathBackUp.AllowDBNull = false;
-                this.columnpathBackUp.MaxLength = 2147483647;
-                this.columncolors.MaxLength = 2147483647;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public settingsRow NewsettingsRow() {
-                return ((settingsRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new settingsRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(settingsRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.settingsRowChanged != null)) {
-                    this.settingsRowChanged(this, new settingsRowChangeEvent(((settingsRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.settingsRowChanging != null)) {
-                    this.settingsRowChanging(this, new settingsRowChangeEvent(((settingsRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.settingsRowDeleted != null)) {
-                    this.settingsRowDeleted(this, new settingsRowChangeEvent(((settingsRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.settingsRowDeleting != null)) {
-                    this.settingsRowDeleting(this, new settingsRowChangeEvent(((settingsRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemovesettingsRow(settingsRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dbDataSet ds = new dbDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "settingsDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -4615,6 +4225,409 @@ namespace AY.db {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class settingsDataTable : global::System.Data.TypedTableBase<settingsRow> {
+            
+            private global::System.Data.DataColumn columnid;
+            
+            private global::System.Data.DataColumn columnminPassLen;
+            
+            private global::System.Data.DataColumn columnlanguage;
+            
+            private global::System.Data.DataColumn columncalRowHeight;
+            
+            private global::System.Data.DataColumn columnshowTrainer;
+            
+            private global::System.Data.DataColumn columnshowClientCount;
+            
+            private global::System.Data.DataColumn columnstoreMainWindowState;
+            
+            private global::System.Data.DataColumn columnmainWindowState;
+            
+            private global::System.Data.DataColumn columnpathBackUp;
+            
+            private global::System.Data.DataColumn columncolors;
+            
+            private global::System.Data.DataColumn columnstartTime;
+            
+            private global::System.Data.DataColumn columnendTime;
+            
+            private global::System.Data.DataColumn columnupdates;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public settingsDataTable() {
+                this.TableName = "settings";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal settingsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected settingsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn idColumn {
+                get {
+                    return this.columnid;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn minPassLenColumn {
+                get {
+                    return this.columnminPassLen;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn languageColumn {
+                get {
+                    return this.columnlanguage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn calRowHeightColumn {
+                get {
+                    return this.columncalRowHeight;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn showTrainerColumn {
+                get {
+                    return this.columnshowTrainer;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn showClientCountColumn {
+                get {
+                    return this.columnshowClientCount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn storeMainWindowStateColumn {
+                get {
+                    return this.columnstoreMainWindowState;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn mainWindowStateColumn {
+                get {
+                    return this.columnmainWindowState;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn pathBackUpColumn {
+                get {
+                    return this.columnpathBackUp;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn colorsColumn {
+                get {
+                    return this.columncolors;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn startTimeColumn {
+                get {
+                    return this.columnstartTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn endTimeColumn {
+                get {
+                    return this.columnendTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn updatesColumn {
+                get {
+                    return this.columnupdates;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public settingsRow this[int index] {
+                get {
+                    return ((settingsRow)(this.Rows[index]));
+                }
+            }
+            
+            public event settingsRowChangeEventHandler settingsRowChanging;
+            
+            public event settingsRowChangeEventHandler settingsRowChanged;
+            
+            public event settingsRowChangeEventHandler settingsRowDeleting;
+            
+            public event settingsRowChangeEventHandler settingsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddsettingsRow(settingsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public settingsRow AddsettingsRow(long minPassLen, string language, long calRowHeight, long showTrainer, long showClientCount, long storeMainWindowState, long mainWindowState, string pathBackUp, string colors, System.DateTime startTime, System.DateTime endTime, int updates) {
+                settingsRow rowsettingsRow = ((settingsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        minPassLen,
+                        language,
+                        calRowHeight,
+                        showTrainer,
+                        showClientCount,
+                        storeMainWindowState,
+                        mainWindowState,
+                        pathBackUp,
+                        colors,
+                        startTime,
+                        endTime,
+                        updates};
+                rowsettingsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowsettingsRow);
+                return rowsettingsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public settingsRow FindByid(long id) {
+                return ((settingsRow)(this.Rows.Find(new object[] {
+                            id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                settingsDataTable cln = ((settingsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new settingsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnid = base.Columns["id"];
+                this.columnminPassLen = base.Columns["minPassLen"];
+                this.columnlanguage = base.Columns["language"];
+                this.columncalRowHeight = base.Columns["calRowHeight"];
+                this.columnshowTrainer = base.Columns["showTrainer"];
+                this.columnshowClientCount = base.Columns["showClientCount"];
+                this.columnstoreMainWindowState = base.Columns["storeMainWindowState"];
+                this.columnmainWindowState = base.Columns["mainWindowState"];
+                this.columnpathBackUp = base.Columns["pathBackUp"];
+                this.columncolors = base.Columns["colors"];
+                this.columnstartTime = base.Columns["startTime"];
+                this.columnendTime = base.Columns["endTime"];
+                this.columnupdates = base.Columns["updates"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnid = new global::System.Data.DataColumn("id", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnid);
+                this.columnminPassLen = new global::System.Data.DataColumn("minPassLen", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnminPassLen);
+                this.columnlanguage = new global::System.Data.DataColumn("language", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnlanguage);
+                this.columncalRowHeight = new global::System.Data.DataColumn("calRowHeight", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncalRowHeight);
+                this.columnshowTrainer = new global::System.Data.DataColumn("showTrainer", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnshowTrainer);
+                this.columnshowClientCount = new global::System.Data.DataColumn("showClientCount", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnshowClientCount);
+                this.columnstoreMainWindowState = new global::System.Data.DataColumn("storeMainWindowState", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstoreMainWindowState);
+                this.columnmainWindowState = new global::System.Data.DataColumn("mainWindowState", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmainWindowState);
+                this.columnpathBackUp = new global::System.Data.DataColumn("pathBackUp", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpathBackUp);
+                this.columncolors = new global::System.Data.DataColumn("colors", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncolors);
+                this.columnstartTime = new global::System.Data.DataColumn("startTime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstartTime);
+                this.columnendTime = new global::System.Data.DataColumn("endTime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnendTime);
+                this.columnupdates = new global::System.Data.DataColumn("updates", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnupdates);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnid}, true));
+                this.columnid.AutoIncrement = true;
+                this.columnid.AutoIncrementSeed = -1;
+                this.columnid.AutoIncrementStep = -1;
+                this.columnid.AllowDBNull = false;
+                this.columnid.Unique = true;
+                this.columnminPassLen.AllowDBNull = false;
+                this.columnlanguage.AllowDBNull = false;
+                this.columnlanguage.MaxLength = 2147483647;
+                this.columncalRowHeight.AllowDBNull = false;
+                this.columnshowTrainer.AllowDBNull = false;
+                this.columnshowClientCount.AllowDBNull = false;
+                this.columnstoreMainWindowState.AllowDBNull = false;
+                this.columnmainWindowState.AllowDBNull = false;
+                this.columnpathBackUp.AllowDBNull = false;
+                this.columnpathBackUp.MaxLength = 2147483647;
+                this.columncolors.MaxLength = 2147483647;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public settingsRow NewsettingsRow() {
+                return ((settingsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new settingsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(settingsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.settingsRowChanged != null)) {
+                    this.settingsRowChanged(this, new settingsRowChangeEvent(((settingsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.settingsRowChanging != null)) {
+                    this.settingsRowChanging(this, new settingsRowChangeEvent(((settingsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.settingsRowDeleted != null)) {
+                    this.settingsRowDeleted(this, new settingsRowChangeEvent(((settingsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.settingsRowDeleting != null)) {
+                    this.settingsRowDeleting(this, new settingsRowChangeEvent(((settingsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemovesettingsRow(settingsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dbDataSet ds = new dbDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "settingsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -4806,186 +4819,6 @@ namespace AY.db {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SethoursPerLessonNull() {
                 this[this.tablescheduleRules.hoursPerLessonColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class settingsRow : global::System.Data.DataRow {
-            
-            private settingsDataTable tablesettings;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal settingsRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tablesettings = ((settingsDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long id {
-                get {
-                    return ((long)(this[this.tablesettings.idColumn]));
-                }
-                set {
-                    this[this.tablesettings.idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long minPassLen {
-                get {
-                    return ((long)(this[this.tablesettings.minPassLenColumn]));
-                }
-                set {
-                    this[this.tablesettings.minPassLenColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string language {
-                get {
-                    return ((string)(this[this.tablesettings.languageColumn]));
-                }
-                set {
-                    this[this.tablesettings.languageColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long calRowHeight {
-                get {
-                    return ((long)(this[this.tablesettings.calRowHeightColumn]));
-                }
-                set {
-                    this[this.tablesettings.calRowHeightColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long showTrainer {
-                get {
-                    return ((long)(this[this.tablesettings.showTrainerColumn]));
-                }
-                set {
-                    this[this.tablesettings.showTrainerColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long showClientCount {
-                get {
-                    return ((long)(this[this.tablesettings.showClientCountColumn]));
-                }
-                set {
-                    this[this.tablesettings.showClientCountColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long storeMainWindowState {
-                get {
-                    return ((long)(this[this.tablesettings.storeMainWindowStateColumn]));
-                }
-                set {
-                    this[this.tablesettings.storeMainWindowStateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long mainWindowState {
-                get {
-                    return ((long)(this[this.tablesettings.mainWindowStateColumn]));
-                }
-                set {
-                    this[this.tablesettings.mainWindowStateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string pathBackUp {
-                get {
-                    return ((string)(this[this.tablesettings.pathBackUpColumn]));
-                }
-                set {
-                    this[this.tablesettings.pathBackUpColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string colors {
-                get {
-                    try {
-                        return ((string)(this[this.tablesettings.colorsColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'colors\' in table \'settings\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablesettings.colorsColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime startTime {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tablesettings.startTimeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'startTime\' in table \'settings\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablesettings.startTimeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime endTime {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tablesettings.endTimeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'endTime\' in table \'settings\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablesettings.endTimeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IscolorsNull() {
-                return this.IsNull(this.tablesettings.colorsColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetcolorsNull() {
-                this[this.tablesettings.colorsColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsstartTimeNull() {
-                return this.IsNull(this.tablesettings.startTimeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetstartTimeNull() {
-                this[this.tablesettings.startTimeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsendTimeNull() {
-                return this.IsNull(this.tablesettings.endTimeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetendTimeNull() {
-                this[this.tablesettings.endTimeColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -6195,6 +6028,211 @@ namespace AY.db {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class settingsRow : global::System.Data.DataRow {
+            
+            private settingsDataTable tablesettings;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal settingsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablesettings = ((settingsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public long id {
+                get {
+                    return ((long)(this[this.tablesettings.idColumn]));
+                }
+                set {
+                    this[this.tablesettings.idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public long minPassLen {
+                get {
+                    return ((long)(this[this.tablesettings.minPassLenColumn]));
+                }
+                set {
+                    this[this.tablesettings.minPassLenColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string language {
+                get {
+                    return ((string)(this[this.tablesettings.languageColumn]));
+                }
+                set {
+                    this[this.tablesettings.languageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public long calRowHeight {
+                get {
+                    return ((long)(this[this.tablesettings.calRowHeightColumn]));
+                }
+                set {
+                    this[this.tablesettings.calRowHeightColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public long showTrainer {
+                get {
+                    return ((long)(this[this.tablesettings.showTrainerColumn]));
+                }
+                set {
+                    this[this.tablesettings.showTrainerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public long showClientCount {
+                get {
+                    return ((long)(this[this.tablesettings.showClientCountColumn]));
+                }
+                set {
+                    this[this.tablesettings.showClientCountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public long storeMainWindowState {
+                get {
+                    return ((long)(this[this.tablesettings.storeMainWindowStateColumn]));
+                }
+                set {
+                    this[this.tablesettings.storeMainWindowStateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public long mainWindowState {
+                get {
+                    return ((long)(this[this.tablesettings.mainWindowStateColumn]));
+                }
+                set {
+                    this[this.tablesettings.mainWindowStateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string pathBackUp {
+                get {
+                    return ((string)(this[this.tablesettings.pathBackUpColumn]));
+                }
+                set {
+                    this[this.tablesettings.pathBackUpColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string colors {
+                get {
+                    try {
+                        return ((string)(this[this.tablesettings.colorsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'colors\' in table \'settings\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesettings.colorsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime startTime {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tablesettings.startTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'startTime\' in table \'settings\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesettings.startTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime endTime {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tablesettings.endTimeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'endTime\' in table \'settings\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesettings.endTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int updates {
+                get {
+                    try {
+                        return ((int)(this[this.tablesettings.updatesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'updates\' in table \'settings\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesettings.updatesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IscolorsNull() {
+                return this.IsNull(this.tablesettings.colorsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetcolorsNull() {
+                this[this.tablesettings.colorsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsstartTimeNull() {
+                return this.IsNull(this.tablesettings.startTimeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetstartTimeNull() {
+                this[this.tablesettings.startTimeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsendTimeNull() {
+                return this.IsNull(this.tablesettings.endTimeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetendTimeNull() {
+                this[this.tablesettings.endTimeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsupdatesNull() {
+                return this.IsNull(this.tablesettings.updatesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetupdatesNull() {
+                this[this.tablesettings.updatesColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -6243,37 +6281,6 @@ namespace AY.db {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public scheduleRulesRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class settingsRowChangeEvent : global::System.EventArgs {
-            
-            private settingsRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public settingsRowChangeEvent(settingsRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public settingsRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -6584,6 +6591,37 @@ namespace AY.db {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public VCalendarInfoRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class settingsRowChangeEvent : global::System.EventArgs {
+            
+            private settingsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public settingsRowChangeEvent(settingsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public settingsRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -7574,798 +7612,6 @@ namespace AY.db.dbDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
             this.Adapter.UpdateCommand.Parameters[9].Value = ((double)(Original_price));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class settingsTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SQLite.SQLiteDataAdapter _adapter;
-        
-        private global::System.Data.SQLite.SQLiteConnection _connection;
-        
-        private global::System.Data.SQLite.SQLiteTransaction _transaction;
-        
-        private global::System.Data.SQLite.SQLiteCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public settingsTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SQLite.SQLiteDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SQLite.SQLiteConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SQLite.SQLiteCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SQLite.SQLiteTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SQLite.SQLiteCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SQLite.SQLiteDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "settings";
-            tableMapping.ColumnMappings.Add("id", "id");
-            tableMapping.ColumnMappings.Add("minPassLen", "minPassLen");
-            tableMapping.ColumnMappings.Add("language", "language");
-            tableMapping.ColumnMappings.Add("calRowHeight", "calRowHeight");
-            tableMapping.ColumnMappings.Add("showTrainer", "showTrainer");
-            tableMapping.ColumnMappings.Add("showClientCount", "showClientCount");
-            tableMapping.ColumnMappings.Add("storeMainWindowState", "storeMainWindowState");
-            tableMapping.ColumnMappings.Add("mainWindowState", "mainWindowState");
-            tableMapping.ColumnMappings.Add("pathBackUp", "pathBackUp");
-            tableMapping.ColumnMappings.Add("colors", "colors");
-            tableMapping.ColumnMappings.Add("startTime", "startTime");
-            tableMapping.ColumnMappings.Add("endTime", "endTime");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SQLite.SQLiteCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [main].[sqlite_default_schema].[settings] WHERE (([id] = @Original_id) AND ([minPassLen] = @Original_minPassLen) AND ([language] = @Original_language) AND ([calRowHeight] = @Original_calRowHeight) AND ([showTrainer] = @Original_showTrainer) AND ([showClientCount] = @Original_showClientCount) AND ([storeMainWindowState] = @Original_storeMainWindowState) AND ([mainWindowState] = @Original_mainWindowState) AND ([pathBackUp] = @Original_pathBackUp) AND ((@IsNull_colors = 1 AND [colors] IS NULL) OR ([colors] = @Original_colors)) AND ((@IsNull_startTime = 1 AND [startTime] IS NULL) OR ([startTime] = @Original_startTime)) AND ((@IsNull_endTime = 1 AND [endTime] IS NULL) OR ([endTime] = @Original_endTime)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            global::System.Data.SQLite.SQLiteParameter param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_id";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "id";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_minPassLen";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "minPassLen";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_language";
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "language";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_calRowHeight";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "calRowHeight";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_showTrainer";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "showTrainer";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_showClientCount";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "showClientCount";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_storeMainWindowState";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "storeMainWindowState";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_mainWindowState";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "mainWindowState";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_pathBackUp";
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "pathBackUp";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@IsNull_colors";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "colors";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_colors";
-            param.DbType = global::System.Data.DbType.String;
-            param.SourceColumn = "colors";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@IsNull_startTime";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "startTime";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_startTime";
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.SourceColumn = "startTime";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@IsNull_endTime";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "endTime";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_endTime";
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.SourceColumn = "endTime";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            this._adapter.InsertCommand = new global::System.Data.SQLite.SQLiteCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [main].[sqlite_default_schema].[settings] ([minPassLen], [language], [calRowHeight], [showTrainer], [showClientCount], [storeMainWindowState], [mainWindowState], [pathBackUp], [colors], [startTime], [endTime]) VALUES (@minPassLen, @language, @calRowHeight, @showTrainer, @showClientCount, @storeMainWindowState, @mainWindowState, @pathBackUp, @colors, @startTime, @endTime)";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@minPassLen";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "minPassLen";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@language";
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "language";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@calRowHeight";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "calRowHeight";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@showTrainer";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "showTrainer";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@showClientCount";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "showClientCount";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@storeMainWindowState";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "storeMainWindowState";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@mainWindowState";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "mainWindowState";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@pathBackUp";
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "pathBackUp";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@colors";
-            param.DbType = global::System.Data.DbType.String;
-            param.SourceColumn = "colors";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@startTime";
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.SourceColumn = "startTime";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@endTime";
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.SourceColumn = "endTime";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            this._adapter.UpdateCommand = new global::System.Data.SQLite.SQLiteCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [main].[sqlite_default_schema].[settings] SET [minPassLen] = @minPassLen, [language] = @language, [calRowHeight] = @calRowHeight, [showTrainer] = @showTrainer, [showClientCount] = @showClientCount, [storeMainWindowState] = @storeMainWindowState, [mainWindowState] = @mainWindowState, [pathBackUp] = @pathBackUp, [colors] = @colors, [startTime] = @startTime, [endTime] = @endTime WHERE (([id] = @Original_id) AND ([minPassLen] = @Original_minPassLen) AND ([language] = @Original_language) AND ([calRowHeight] = @Original_calRowHeight) AND ([showTrainer] = @Original_showTrainer) AND ([showClientCount] = @Original_showClientCount) AND ([storeMainWindowState] = @Original_storeMainWindowState) AND ([mainWindowState] = @Original_mainWindowState) AND ([pathBackUp] = @Original_pathBackUp) AND ((@IsNull_colors = 1 AND [colors] IS NULL) OR ([colors] = @Original_colors)) AND ((@IsNull_startTime = 1 AND [startTime] IS NULL) OR ([startTime] = @Original_startTime)) AND ((@IsNull_endTime = 1 AND [endTime] IS NULL) OR ([endTime] = @Original_endTime)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@minPassLen";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "minPassLen";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@language";
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "language";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@calRowHeight";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "calRowHeight";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@showTrainer";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "showTrainer";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@showClientCount";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "showClientCount";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@storeMainWindowState";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "storeMainWindowState";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@mainWindowState";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "mainWindowState";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@pathBackUp";
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "pathBackUp";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@colors";
-            param.DbType = global::System.Data.DbType.String;
-            param.SourceColumn = "colors";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@startTime";
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.SourceColumn = "startTime";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@endTime";
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.SourceColumn = "endTime";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_id";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "id";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_minPassLen";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "minPassLen";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_language";
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "language";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_calRowHeight";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "calRowHeight";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_showTrainer";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "showTrainer";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_showClientCount";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "showClientCount";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_storeMainWindowState";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "storeMainWindowState";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_mainWindowState";
-            param.DbType = global::System.Data.DbType.Int64;
-            param.DbType = global::System.Data.DbType.Int64;
-            param.SourceColumn = "mainWindowState";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_pathBackUp";
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "pathBackUp";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@IsNull_colors";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "colors";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_colors";
-            param.DbType = global::System.Data.DbType.String;
-            param.SourceColumn = "colors";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@IsNull_startTime";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "startTime";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_startTime";
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.SourceColumn = "startTime";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@IsNull_endTime";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "endTime";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@Original_endTime";
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.DbType = global::System.Data.DbType.DateTime;
-            param.SourceColumn = "endTime";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::AY.db.Properties.Settings.Default.clientConnectionString1;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
-            this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [id], [minPassLen], [language], [calRowHeight], [showTrainer], [showClient" +
-                "Count], [storeMainWindowState], [mainWindowState], [pathBackUp], [colors], [star" +
-                "tTime], [endTime] FROM [settings]";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dbDataSet.settingsDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dbDataSet.settingsDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dbDataSet.settingsDataTable dataTable = new dbDataSet.settingsDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dbDataSet.settingsDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dbDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "settings");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(long Original_id, long Original_minPassLen, string Original_language, long Original_calRowHeight, long Original_showTrainer, long Original_showClientCount, long Original_storeMainWindowState, long Original_mainWindowState, string Original_pathBackUp, string Original_colors, global::System.Nullable<global::System.DateTime> Original_startTime, global::System.Nullable<global::System.DateTime> Original_endTime) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((long)(Original_id));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((long)(Original_minPassLen));
-            if ((Original_language == null)) {
-                throw new global::System.ArgumentNullException("Original_language");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_language));
-            }
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((long)(Original_calRowHeight));
-            this.Adapter.DeleteCommand.Parameters[4].Value = ((long)(Original_showTrainer));
-            this.Adapter.DeleteCommand.Parameters[5].Value = ((long)(Original_showClientCount));
-            this.Adapter.DeleteCommand.Parameters[6].Value = ((long)(Original_storeMainWindowState));
-            this.Adapter.DeleteCommand.Parameters[7].Value = ((long)(Original_mainWindowState));
-            if ((Original_pathBackUp == null)) {
-                throw new global::System.ArgumentNullException("Original_pathBackUp");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_pathBackUp));
-            }
-            if ((Original_colors == null)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((string)(Original_colors));
-            }
-            if ((Original_startTime.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((System.DateTime)(Original_startTime.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            if ((Original_endTime.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((System.DateTime)(Original_endTime.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(long minPassLen, string language, long calRowHeight, long showTrainer, long showClientCount, long storeMainWindowState, long mainWindowState, string pathBackUp, string colors, global::System.Nullable<global::System.DateTime> startTime, global::System.Nullable<global::System.DateTime> endTime) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((long)(minPassLen));
-            if ((language == null)) {
-                throw new global::System.ArgumentNullException("language");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(language));
-            }
-            this.Adapter.InsertCommand.Parameters[2].Value = ((long)(calRowHeight));
-            this.Adapter.InsertCommand.Parameters[3].Value = ((long)(showTrainer));
-            this.Adapter.InsertCommand.Parameters[4].Value = ((long)(showClientCount));
-            this.Adapter.InsertCommand.Parameters[5].Value = ((long)(storeMainWindowState));
-            this.Adapter.InsertCommand.Parameters[6].Value = ((long)(mainWindowState));
-            if ((pathBackUp == null)) {
-                throw new global::System.ArgumentNullException("pathBackUp");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((string)(pathBackUp));
-            }
-            if ((colors == null)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((string)(colors));
-            }
-            if ((startTime.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((System.DateTime)(startTime.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((endTime.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((System.DateTime)(endTime.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    long minPassLen, 
-                    string language, 
-                    long calRowHeight, 
-                    long showTrainer, 
-                    long showClientCount, 
-                    long storeMainWindowState, 
-                    long mainWindowState, 
-                    string pathBackUp, 
-                    string colors, 
-                    global::System.Nullable<global::System.DateTime> startTime, 
-                    global::System.Nullable<global::System.DateTime> endTime, 
-                    long Original_id, 
-                    long Original_minPassLen, 
-                    string Original_language, 
-                    long Original_calRowHeight, 
-                    long Original_showTrainer, 
-                    long Original_showClientCount, 
-                    long Original_storeMainWindowState, 
-                    long Original_mainWindowState, 
-                    string Original_pathBackUp, 
-                    string Original_colors, 
-                    global::System.Nullable<global::System.DateTime> Original_startTime, 
-                    global::System.Nullable<global::System.DateTime> Original_endTime) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((long)(minPassLen));
-            if ((language == null)) {
-                throw new global::System.ArgumentNullException("language");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(language));
-            }
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((long)(calRowHeight));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((long)(showTrainer));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((long)(showClientCount));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((long)(storeMainWindowState));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((long)(mainWindowState));
-            if ((pathBackUp == null)) {
-                throw new global::System.ArgumentNullException("pathBackUp");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(pathBackUp));
-            }
-            if ((colors == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(colors));
-            }
-            if ((startTime.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((System.DateTime)(startTime.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((endTime.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((System.DateTime)(endTime.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((long)(Original_id));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((long)(Original_minPassLen));
-            if ((Original_language == null)) {
-                throw new global::System.ArgumentNullException("Original_language");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_language));
-            }
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((long)(Original_calRowHeight));
-            this.Adapter.UpdateCommand.Parameters[15].Value = ((long)(Original_showTrainer));
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((long)(Original_showClientCount));
-            this.Adapter.UpdateCommand.Parameters[17].Value = ((long)(Original_storeMainWindowState));
-            this.Adapter.UpdateCommand.Parameters[18].Value = ((long)(Original_mainWindowState));
-            if ((Original_pathBackUp == null)) {
-                throw new global::System.ArgumentNullException("Original_pathBackUp");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((string)(Original_pathBackUp));
-            }
-            if ((Original_colors == null)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((string)(Original_colors));
-            }
-            if ((Original_startTime.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((System.DateTime)(Original_startTime.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
-            }
-            if ((Original_endTime.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((System.DateTime)(Original_endTime.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -12752,6 +11998,371 @@ ORDER BY payments.[date] DESC";
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class settingsTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SQLite.SQLiteDataAdapter _adapter;
+        
+        private global::System.Data.SQLite.SQLiteConnection _connection;
+        
+        private global::System.Data.SQLite.SQLiteTransaction _transaction;
+        
+        private global::System.Data.SQLite.SQLiteCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public settingsTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SQLite.SQLiteDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SQLite.SQLiteConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SQLite.SQLiteCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SQLite.SQLiteTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SQLite.SQLiteCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SQLite.SQLiteDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "settings";
+            tableMapping.ColumnMappings.Add("id", "id");
+            tableMapping.ColumnMappings.Add("minPassLen", "minPassLen");
+            tableMapping.ColumnMappings.Add("language", "language");
+            tableMapping.ColumnMappings.Add("calRowHeight", "calRowHeight");
+            tableMapping.ColumnMappings.Add("showTrainer", "showTrainer");
+            tableMapping.ColumnMappings.Add("showClientCount", "showClientCount");
+            tableMapping.ColumnMappings.Add("storeMainWindowState", "storeMainWindowState");
+            tableMapping.ColumnMappings.Add("mainWindowState", "mainWindowState");
+            tableMapping.ColumnMappings.Add("pathBackUp", "pathBackUp");
+            tableMapping.ColumnMappings.Add("colors", "colors");
+            tableMapping.ColumnMappings.Add("startTime", "startTime");
+            tableMapping.ColumnMappings.Add("endTime", "endTime");
+            tableMapping.ColumnMappings.Add("updates", "updates");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SQLite.SQLiteCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [main].[sqlite_default_schema].[settings] WHERE (([id] = @Original_id" +
+                "))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            global::System.Data.SQLite.SQLiteParameter param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@Original_id";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "id";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            this._adapter.InsertCommand = new global::System.Data.SQLite.SQLiteCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [main].[sqlite_default_schema].[settings] ([minPassLen], [language], [calRowHeight], [showTrainer], [showClientCount], [storeMainWindowState], [mainWindowState], [pathBackUp], [colors], [startTime], [endTime], [updates]) VALUES (@minPassLen, @language, @calRowHeight, @showTrainer, @showClientCount, @storeMainWindowState, @mainWindowState, @pathBackUp, @colors, @startTime, @endTime, @updates)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@minPassLen";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "minPassLen";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@language";
+            param.DbType = global::System.Data.DbType.AnsiString;
+            param.DbType = global::System.Data.DbType.AnsiString;
+            param.SourceColumn = "language";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@calRowHeight";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "calRowHeight";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@showTrainer";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "showTrainer";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@showClientCount";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "showClientCount";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@storeMainWindowState";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "storeMainWindowState";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@mainWindowState";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "mainWindowState";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@pathBackUp";
+            param.DbType = global::System.Data.DbType.AnsiString;
+            param.DbType = global::System.Data.DbType.AnsiString;
+            param.SourceColumn = "pathBackUp";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@colors";
+            param.DbType = global::System.Data.DbType.String;
+            param.SourceColumn = "colors";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@startTime";
+            param.DbType = global::System.Data.DbType.DateTime;
+            param.DbType = global::System.Data.DbType.DateTime;
+            param.SourceColumn = "startTime";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@endTime";
+            param.DbType = global::System.Data.DbType.DateTime;
+            param.DbType = global::System.Data.DbType.DateTime;
+            param.SourceColumn = "endTime";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@updates";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SourceColumn = "updates";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            this._adapter.UpdateCommand = new global::System.Data.SQLite.SQLiteCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [main].[sqlite_default_schema].[settings] SET [minPassLen] = @minPassLen, [language] = @language, [calRowHeight] = @calRowHeight, [showTrainer] = @showTrainer, [showClientCount] = @showClientCount, [storeMainWindowState] = @storeMainWindowState, [mainWindowState] = @mainWindowState, [pathBackUp] = @pathBackUp, [colors] = @colors, [startTime] = @startTime, [endTime] = @endTime, [updates] = @updates WHERE (([id] = @Original_id))";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@minPassLen";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "minPassLen";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@language";
+            param.DbType = global::System.Data.DbType.AnsiString;
+            param.DbType = global::System.Data.DbType.AnsiString;
+            param.SourceColumn = "language";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@calRowHeight";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "calRowHeight";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@showTrainer";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "showTrainer";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@showClientCount";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "showClientCount";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@storeMainWindowState";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "storeMainWindowState";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@mainWindowState";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "mainWindowState";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@pathBackUp";
+            param.DbType = global::System.Data.DbType.AnsiString;
+            param.DbType = global::System.Data.DbType.AnsiString;
+            param.SourceColumn = "pathBackUp";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@colors";
+            param.DbType = global::System.Data.DbType.String;
+            param.SourceColumn = "colors";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@startTime";
+            param.DbType = global::System.Data.DbType.DateTime;
+            param.DbType = global::System.Data.DbType.DateTime;
+            param.SourceColumn = "startTime";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@endTime";
+            param.DbType = global::System.Data.DbType.DateTime;
+            param.DbType = global::System.Data.DbType.DateTime;
+            param.SourceColumn = "endTime";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@updates";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.DbType = global::System.Data.DbType.Int32;
+            param.SourceColumn = "updates";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::System.Data.SQLite.SQLiteParameter();
+            param.ParameterName = "@Original_id";
+            param.DbType = global::System.Data.DbType.Int64;
+            param.DbType = global::System.Data.DbType.Int64;
+            param.SourceColumn = "id";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SQLite.SQLiteConnection();
+            this._connection.ConnectionString = global::AY.db.Properties.Settings.Default.clientConnectionString1;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
+            this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT     id, minPassLen, language, calRowHeight, showTrainer, showClientCount, " +
+                "storeMainWindowState, mainWindowState, pathBackUp, colors, startTime, \r\n        " +
+                "              endTime, updates\r\nFROM         settings";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dbDataSet.settingsDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dbDataSet.settingsDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dbDataSet.settingsDataTable dataTable = new dbDataSet.settingsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dbDataSet.settingsDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dbDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "settings");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -12768,8 +12379,6 @@ ORDER BY payments.[date] DESC";
         
         private scheduleRulesTableAdapter _scheduleRulesTableAdapter;
         
-        private settingsTableAdapter _settingsTableAdapter;
-        
         private statisticsTableAdapter _statisticsTableAdapter;
         
         private trainersTableAdapter _trainersTableAdapter;
@@ -12781,6 +12390,8 @@ ORDER BY payments.[date] DESC";
         private usersTableAdapter _usersTableAdapter;
         
         private clientsTableAdapter _clientsTableAdapter;
+        
+        private settingsTableAdapter _settingsTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -12819,19 +12430,6 @@ ORDER BY payments.[date] DESC";
             }
             set {
                 this._scheduleRulesTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
-        public settingsTableAdapter settingsTableAdapter {
-            get {
-                return this._settingsTableAdapter;
-            }
-            set {
-                this._settingsTableAdapter = value;
             }
         }
         
@@ -12914,6 +12512,19 @@ ORDER BY payments.[date] DESC";
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public settingsTableAdapter settingsTableAdapter {
+            get {
+                return this._settingsTableAdapter;
+            }
+            set {
+                this._settingsTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -12937,10 +12548,6 @@ ORDER BY payments.[date] DESC";
                 if (((this._scheduleRulesTableAdapter != null) 
                             && (this._scheduleRulesTableAdapter.Connection != null))) {
                     return this._scheduleRulesTableAdapter.Connection;
-                }
-                if (((this._settingsTableAdapter != null) 
-                            && (this._settingsTableAdapter.Connection != null))) {
-                    return this._settingsTableAdapter.Connection;
                 }
                 if (((this._statisticsTableAdapter != null) 
                             && (this._statisticsTableAdapter.Connection != null))) {
@@ -12966,6 +12573,10 @@ ORDER BY payments.[date] DESC";
                             && (this._clientsTableAdapter.Connection != null))) {
                     return this._clientsTableAdapter.Connection;
                 }
+                if (((this._settingsTableAdapter != null) 
+                            && (this._settingsTableAdapter.Connection != null))) {
+                    return this._settingsTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -12984,9 +12595,6 @@ ORDER BY payments.[date] DESC";
                 if ((this._scheduleRulesTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._settingsTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._statisticsTableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -13003,6 +12611,9 @@ ORDER BY payments.[date] DESC";
                     count = (count + 1);
                 }
                 if ((this._clientsTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._settingsTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -13024,6 +12635,15 @@ ORDER BY payments.[date] DESC";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._settingsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.settings.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._settingsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._usersTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.users.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -13033,21 +12653,12 @@ ORDER BY payments.[date] DESC";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._userPrivilegesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.userPrivileges.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._statisticsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.statistics.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._userPrivilegesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._settingsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.settings.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._settingsTableAdapter.Update(updatedRows));
+                    result = (result + this._statisticsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -13069,6 +12680,15 @@ ORDER BY payments.[date] DESC";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._userPrivilegesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.userPrivileges.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._userPrivilegesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._trainersScheduleTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.trainersSchedule.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -13084,15 +12704,6 @@ ORDER BY payments.[date] DESC";
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._trainersTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._statisticsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.statistics.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._statisticsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -13113,6 +12724,14 @@ ORDER BY payments.[date] DESC";
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._settingsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.settings.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._settingsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._usersTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.users.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -13121,19 +12740,11 @@ ORDER BY payments.[date] DESC";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._userPrivilegesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.userPrivileges.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._statisticsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.statistics.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._userPrivilegesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._settingsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.settings.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._settingsTableAdapter.Update(addedRows));
+                    result = (result + this._statisticsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -13153,6 +12764,14 @@ ORDER BY payments.[date] DESC";
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._userPrivilegesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.userPrivileges.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._userPrivilegesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._trainersScheduleTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.trainersSchedule.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -13169,14 +12788,6 @@ ORDER BY payments.[date] DESC";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._statisticsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.statistics.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._statisticsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             return result;
         }
         
@@ -13186,14 +12797,6 @@ ORDER BY payments.[date] DESC";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateDeletedRows(dbDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._statisticsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.statistics.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._statisticsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._trainersTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.trainers.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -13207,6 +12810,14 @@ ORDER BY payments.[date] DESC";
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._trainersScheduleTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._userPrivilegesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.userPrivileges.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._userPrivilegesTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -13226,19 +12837,11 @@ ORDER BY payments.[date] DESC";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._settingsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.settings.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._statisticsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.statistics.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._settingsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._userPrivilegesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.userPrivileges.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._userPrivilegesTableAdapter.Update(deletedRows));
+                    result = (result + this._statisticsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -13247,6 +12850,14 @@ ORDER BY payments.[date] DESC";
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._usersTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._settingsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.settings.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._settingsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -13305,11 +12916,6 @@ ORDER BY payments.[date] DESC";
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._settingsTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._settingsTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._statisticsTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._statisticsTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -13337,6 +12943,11 @@ ORDER BY payments.[date] DESC";
             }
             if (((this._clientsTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._clientsTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._settingsTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._settingsTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -13388,15 +12999,6 @@ ORDER BY payments.[date] DESC";
                     if (this._scheduleRulesTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._scheduleRulesTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._scheduleRulesTableAdapter.Adapter);
-                    }
-                }
-                if ((this._settingsTableAdapter != null)) {
-                    revertConnections.Add(this._settingsTableAdapter, this._settingsTableAdapter.Connection);
-                    this._settingsTableAdapter.Connection = ((global::System.Data.SQLite.SQLiteConnection)(workConnection));
-                    this._settingsTableAdapter.Transaction = ((global::System.Data.SQLite.SQLiteTransaction)(workTransaction));
-                    if (this._settingsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._settingsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._settingsTableAdapter.Adapter);
                     }
                 }
                 if ((this._statisticsTableAdapter != null)) {
@@ -13451,6 +13053,15 @@ ORDER BY payments.[date] DESC";
                     if (this._clientsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._clientsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._clientsTableAdapter.Adapter);
+                    }
+                }
+                if ((this._settingsTableAdapter != null)) {
+                    revertConnections.Add(this._settingsTableAdapter, this._settingsTableAdapter.Connection);
+                    this._settingsTableAdapter.Connection = ((global::System.Data.SQLite.SQLiteConnection)(workConnection));
+                    this._settingsTableAdapter.Transaction = ((global::System.Data.SQLite.SQLiteTransaction)(workTransaction));
+                    if (this._settingsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._settingsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._settingsTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -13519,10 +13130,6 @@ ORDER BY payments.[date] DESC";
                     this._scheduleRulesTableAdapter.Connection = ((global::System.Data.SQLite.SQLiteConnection)(revertConnections[this._scheduleRulesTableAdapter]));
                     this._scheduleRulesTableAdapter.Transaction = null;
                 }
-                if ((this._settingsTableAdapter != null)) {
-                    this._settingsTableAdapter.Connection = ((global::System.Data.SQLite.SQLiteConnection)(revertConnections[this._settingsTableAdapter]));
-                    this._settingsTableAdapter.Transaction = null;
-                }
                 if ((this._statisticsTableAdapter != null)) {
                     this._statisticsTableAdapter.Connection = ((global::System.Data.SQLite.SQLiteConnection)(revertConnections[this._statisticsTableAdapter]));
                     this._statisticsTableAdapter.Transaction = null;
@@ -13546,6 +13153,10 @@ ORDER BY payments.[date] DESC";
                 if ((this._clientsTableAdapter != null)) {
                     this._clientsTableAdapter.Connection = ((global::System.Data.SQLite.SQLiteConnection)(revertConnections[this._clientsTableAdapter]));
                     this._clientsTableAdapter.Transaction = null;
+                }
+                if ((this._settingsTableAdapter != null)) {
+                    this._settingsTableAdapter.Connection = ((global::System.Data.SQLite.SQLiteConnection)(revertConnections[this._settingsTableAdapter]));
+                    this._settingsTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

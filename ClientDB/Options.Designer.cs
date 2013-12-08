@@ -32,6 +32,10 @@
 			this.btnClose = new System.Windows.Forms.Button();
 			this.tabControl = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.label11 = new System.Windows.Forms.Label();
+			this.dateEnd = new System.Windows.Forms.DateTimePicker();
+			this.dateStart = new System.Windows.Forms.DateTimePicker();
+			this.label9 = new System.Windows.Forms.Label();
 			this.btnBackUpPath = new System.Windows.Forms.Button();
 			this.textPathBackUp = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
@@ -54,16 +58,16 @@
 			this.label7 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
-			this.label9 = new System.Windows.Forms.Label();
-			this.dateStart = new System.Windows.Forms.DateTimePicker();
-			this.dateEnd = new System.Windows.Forms.DateTimePicker();
-			this.label11 = new System.Windows.Forms.Label();
+			this.tabUpdates = new System.Windows.Forms.TabPage();
+			this.label10 = new System.Windows.Forms.Label();
+			this.comboUpdatesFrequency = new System.Windows.Forms.ComboBox();
 			this.tabControl.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericMinPassLen)).BeginInit();
 			this.tabPage2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericCalRowHeight)).BeginInit();
 			this.tabPage3.SuspendLayout();
+			this.tabUpdates.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// btnOk
@@ -91,6 +95,7 @@
 			this.tabControl.Controls.Add(this.tabPage1);
 			this.tabControl.Controls.Add(this.tabPage2);
 			this.tabControl.Controls.Add(this.tabPage3);
+			this.tabControl.Controls.Add(this.tabUpdates);
 			this.tabControl.Location = new System.Drawing.Point(12, 12);
 			this.tabControl.Name = "tabControl";
 			this.tabControl.SelectedIndex = 0;
@@ -118,6 +123,44 @@
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "Global";
 			this.tabPage1.UseVisualStyleBackColor = true;
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Location = new System.Drawing.Point(219, 133);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(10, 13);
+			this.label11.TabIndex = 8;
+			this.label11.Text = "-";
+			// 
+			// dateEnd
+			// 
+			this.dateEnd.CustomFormat = "HH:mm";
+			this.dateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.dateEnd.Location = new System.Drawing.Point(235, 129);
+			this.dateEnd.Name = "dateEnd";
+			this.dateEnd.ShowUpDown = true;
+			this.dateEnd.Size = new System.Drawing.Size(61, 20);
+			this.dateEnd.TabIndex = 6;
+			// 
+			// dateStart
+			// 
+			this.dateStart.CustomFormat = "HH:mm";
+			this.dateStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.dateStart.Location = new System.Drawing.Point(152, 129);
+			this.dateStart.Name = "dateStart";
+			this.dateStart.ShowUpDown = true;
+			this.dateStart.Size = new System.Drawing.Size(61, 20);
+			this.dateStart.TabIndex = 5;
+			// 
+			// label9
+			// 
+			this.label9.AutoSize = true;
+			this.label9.Location = new System.Drawing.Point(6, 133);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(76, 13);
+			this.label9.TabIndex = 38;
+			this.label9.Text = "Working hours";
 			// 
 			// btnBackUpPath
 			// 
@@ -362,43 +405,38 @@
 			this.label5.TabIndex = 1;
 			this.label5.Text = "Present";
 			// 
-			// label9
+			// tabUpdates
 			// 
-			this.label9.AutoSize = true;
-			this.label9.Location = new System.Drawing.Point(6, 133);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(76, 13);
-			this.label9.TabIndex = 38;
-			this.label9.Text = "Working hours";
+			this.tabUpdates.Controls.Add(this.comboUpdatesFrequency);
+			this.tabUpdates.Controls.Add(this.label10);
+			this.tabUpdates.Location = new System.Drawing.Point(4, 22);
+			this.tabUpdates.Name = "tabUpdates";
+			this.tabUpdates.Padding = new System.Windows.Forms.Padding(3);
+			this.tabUpdates.Size = new System.Drawing.Size(353, 182);
+			this.tabUpdates.TabIndex = 3;
+			this.tabUpdates.Text = "Updates";
+			this.tabUpdates.UseVisualStyleBackColor = true;
 			// 
-			// dateStart
+			// label10
 			// 
-			this.dateStart.CustomFormat = "HH:mm";
-			this.dateStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateStart.Location = new System.Drawing.Point(152, 129);
-			this.dateStart.Name = "dateStart";
-			this.dateStart.ShowUpDown = true;
-			this.dateStart.Size = new System.Drawing.Size(61, 20);
-			this.dateStart.TabIndex = 5;
+			this.label10.AutoSize = true;
+			this.label10.Location = new System.Drawing.Point(6, 80);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(94, 13);
+			this.label10.TabIndex = 0;
+			this.label10.Text = "Check for updates";
 			// 
-			// dateEnd
+			// comboUpdatesFrequency
 			// 
-			this.dateEnd.CustomFormat = "HH:mm";
-			this.dateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.dateEnd.Location = new System.Drawing.Point(235, 129);
-			this.dateEnd.Name = "dateEnd";
-			this.dateEnd.ShowUpDown = true;
-			this.dateEnd.Size = new System.Drawing.Size(61, 20);
-			this.dateEnd.TabIndex = 6;
-			// 
-			// label11
-			// 
-			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(219, 133);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(10, 13);
-			this.label11.TabIndex = 8;
-			this.label11.Text = "-";
+			this.comboUpdatesFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboUpdatesFrequency.FormattingEnabled = true;
+			this.comboUpdatesFrequency.Items.AddRange(new object[] {
+            "On start",
+            "Manually"});
+			this.comboUpdatesFrequency.Location = new System.Drawing.Point(106, 77);
+			this.comboUpdatesFrequency.Name = "comboUpdatesFrequency";
+			this.comboUpdatesFrequency.Size = new System.Drawing.Size(241, 21);
+			this.comboUpdatesFrequency.TabIndex = 1;
 			// 
 			// Options
 			// 
@@ -427,6 +465,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.numericCalRowHeight)).EndInit();
 			this.tabPage3.ResumeLayout(false);
 			this.tabPage3.PerformLayout();
+			this.tabUpdates.ResumeLayout(false);
+			this.tabUpdates.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -463,6 +503,9 @@
 		private System.Windows.Forms.DateTimePicker dateStart;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.DateTimePicker dateEnd;
+		private System.Windows.Forms.TabPage tabUpdates;
+		private System.Windows.Forms.ComboBox comboUpdatesFrequency;
+		private System.Windows.Forms.Label label10;
 
 	}
 }

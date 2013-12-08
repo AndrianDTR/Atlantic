@@ -2,6 +2,8 @@
 using System.Text;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
+using System.Text.RegularExpressions;
+using System.Management;
 
 namespace AY.Utils
 {
@@ -24,12 +26,12 @@ namespace AY.Utils
 			return sb.ToString();
 		}
 
-		public static void RSA(ref byte[] pub, ref byte[] priv)
+		public static void RSA(out byte[] pub, out byte[] priv)
 		{
-			RSA(ref pub, ref priv, new RSACryptoServiceProvider());
+			RSA(out pub, out priv, new RSACryptoServiceProvider(512));
 		}
 		
-		public static void RSA(ref byte[] pub, ref byte[] priv, RSACryptoServiceProvider rsa)
+		public static void RSA(out byte[] pub, out byte[] priv, RSACryptoServiceProvider rsa)
 		{
 			if(rsa == null)
 				rsa = new RSACryptoServiceProvider();
@@ -51,6 +53,43 @@ namespace AY.Utils
 			rsa.ImportCspBlob(privKey);
 			byte[] x = rsa.Decrypt(data, false);
 			return x;
+		}
+
+		public static String CryptString(String szData)
+		{
+			String res = SecUtils.md5(szData);
+
+			res += SecUtils.md5(res).Substring(0, 10);
+
+			int n = res.Length % 5;
+			if (n != 0)
+			{
+				res = res.Substring(0, res.Length - n);
+			}
+
+			res = Regex.Replace(res, ".{5}", "$0-");
+			res = res.Substring(0, res.Length - 1);
+
+			return res;
+		}
+
+		public static String SerialNumber
+		{
+			get
+			{
+				String sn = String.Empty;
+				ManagementScope scope = new ManagementScope("\\\\" + Environment.MachineName + "\\root\\cimv2");
+				scope.Connect();
+				ManagementObject wmiClass = new ManagementObject(scope, new ManagementPath("Win32_BaseBoard.Tag=\"Base Board\""), new ObjectGetOptions());
+
+				foreach (PropertyData propData in wmiClass.Properties)
+				{
+					if (propData.Name == "SerialNumber")
+						sn = Convert.ToString(propData.Value);
+				}
+
+				return sn;
+			}
 		}
 	}
 }

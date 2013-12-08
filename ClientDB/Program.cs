@@ -74,8 +74,6 @@ namespace EAssistant
 					UIMessages.Info(String.Format("Report file has been saved to '{0}'. Please show this file to application developer.", dlg.FileName));
 				}
             }
-            
-            Session.Instance.Dispose();
         }
     }
 }

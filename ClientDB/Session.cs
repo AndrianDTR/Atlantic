@@ -38,9 +38,7 @@ namespace EAssistant
 		
 		private Session()
 		{
-			byte[] regdata = RegUtils.RegData;
-			if (null != regdata)
-				m_customerID = RegUtils.GetRegCustomerId(regdata);
+			m_customerID = RegUtils.Instance.CustomerId;
 		}
 
 		public void UpdateMain()

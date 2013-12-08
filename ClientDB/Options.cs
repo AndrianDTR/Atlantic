@@ -27,6 +27,8 @@ namespace EAssistant
 			comboLang.Items.Add("English");
 			comboLang.SelectedIndex = 0;
 			//comboLang.SelectedItem = opts.Language;
+			
+			comboUpdatesFrequency.SelectedIndex = opts.updates;
 
 			InitPageColors();
 		}
@@ -43,6 +45,8 @@ namespace EAssistant
 			opts.EndTime = dateEnd.Value;
 			
 			//opts.Language = comboLang.SelectedItem;
+
+			opts.updates = comboUpdatesFrequency.SelectedIndex;
 			
 			Db.Instance.AcceptChanges();
 			Session.Instance.UpdateMain();
