@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <item>
-	<version>0.0.8.1</version>
-	<title>E-Assistant 1.0.1</title>
+	<version>0.0.8.3</version>
+	<title>E-Assistant 0.0.8.3</title>
 	<changelogUrl>http://localhost/changelog.html</changelogUrl>
-	<downloadUrl>http://localhost/EAUpdate1.exe</downloadUrl>
+	<downloadUrl>http://localhost/GAssistInstall.msi</downloadUrl>
 </item>

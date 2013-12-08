@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:GAssistInstall"
+"ProjectName" = "8:EAssistantInstall"
 "LanguageId" = "3:1033"
 "CodePage" = "3:1252"
 "UILanguageId" = "3:1033"
@@ -35,12 +35,6 @@
         {
         "MsmKey" = "8:_0D05FE63549EC708A0F835ED177FF1CA"
         "OwnerKey" = "8:_1C97322C751CEFA36B6F58647A970503"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_0D9C064946C941218AC1AA2A42AF570F"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -309,26 +303,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0D9C064946C941218AC1AA2A42AF570F"
-            {
-            "SourcePath" = "8:..\\db\\client.db"
-            "TargetName" = "8:client.db"
-            "Tag" = "8:"
-            "Folder" = "8:_5A5B1464E75B4C6FAB8BAC80343277F3"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1C97322C751CEFA36B6F58647A970503"
@@ -619,7 +593,7 @@
                 {
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_39A59C6A642E43A6B12715A294173F1A"
                     {
-                    "Name" = "8:G-Assistant"
+                    "Name" = "8:E-Assistant"
                     "AlwaysCreate" = "11:FALSE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
@@ -647,7 +621,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:G-Assistant"
         "ProductCode" = "8:{88C7BF48-2846-4271-9D5D-3AAA3DBA38F4}"
-        "PackageCode" = "8:{6359446F-082E-4DA6-998D-DFE8A0B3A127}"
+        "PackageCode" = "8:{A452BFEA-729F-460B-94C7-468D9EA51967}"
         "UpgradeCode" = "8:{543337C2-8622-4BF5-A023-1E36CD62A60A}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
@@ -768,16 +742,16 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9D9C16A671DD4C568CEE9F8F57D91FEB"
             {
-            "Name" = "8:E-Assist"
+            "Name" = "8:E-Assistant"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
+            "IconIndex" = "3:32512"
             "Transitive" = "11:FALSE"
             "Target" = "8:_721B7022B8044618ABDA2711534177AE"
             "Folder" = "8:_39A59C6A642E43A6B12715A294173F1A"
             "WorkingFolder" = "8:_5A5B1464E75B4C6FAB8BAC80343277F3"
-            "Icon" = "8:"
+            "Icon" = "8:_721B7022B8044618ABDA2711534177AE"
             "Feature" = "8:"
             }
         }
@@ -1202,6 +1176,34 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:ContentFiles"
             "OutputProjectGuid" = "8:{A143DC21-278F-4D35-848E-0EA98AC8A330}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_60E68AA72C3548DB919408B7795BD47E"
+            {
+            "SourcePath" = "8:"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_5A5B1464E75B4C6FAB8BAC80343277F3"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:ContentFiles"
+            "OutputProjectGuid" = "8:{DD667F36-DFA9-41F4-8B05-EF1726FF3168}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {

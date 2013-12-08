@@ -500,9 +500,9 @@ namespace EAssistant
 		private void CheckForUpdates()
 		{
 #if !DEBUG
-			AutoUpdater.Start("http://pro100soft.eu/E-Assistant/updates/latest.xml");
+			AutoUpdater.CheckNewVersion("http://pro100soft.eu/E-Assistant/updates/latest.xml");
 #else
-			AutoUpdater.Start("http://localhost/update.xml");
+			AutoUpdater.CheckNewVersion("http://localhost/update.xml");
 #endif
 		}
 		

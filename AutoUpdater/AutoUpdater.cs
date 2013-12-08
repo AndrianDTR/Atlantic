@@ -11,13 +11,6 @@ using System.Threading;
 
 namespace AY.AutoUpdate
 {
-    public enum RemindLaterFormat
-    {
-        Minutes,
-        Hours,
-        Days
-    }
-
     /// <summary>
     /// Main class that lets you auto update applications by setting some static fields and executing its Start method.
     /// </summary>
@@ -39,48 +32,23 @@ namespace AY.AutoUpdate
         /// URL of the xml file that contains information about latest version of the application.
         /// </summary>
         /// 
-        public static String AppCastURL;
-
-        /// <summary>
-        /// Opens the download url in default browser if true. Very usefull if you have portable application.
-        /// </summary>
-        public static bool OpenDownloadPage;
-
-        /// <summary>
-        /// Sets the current culture of the auto update notification window. Set this value if your application supports functionalty to change the languge of the application.
-        /// </summary>
-        public static CultureInfo CurrentCulture;
-
-        /// <summary>
-        /// If this is true users see dialog where they can set remind later interval otherwise it will take the interval from RemindLaterAt and RemindLaterTimeSpan fields.
-        /// </summary>
-        public static Boolean LetUserSelectRemindLater = true;
-
-        /// <summary>
-        /// Remind Later interval after user should be reminded of update.
-        /// </summary>
-        public static int RemindLaterAt = 2;
-
-        /// <summary>
-        /// Set if RemindLaterAt interval should be in Minutes, Hours or Days.
-        /// </summary>
-        public static RemindLaterFormat RemindLaterTimeSpan = RemindLaterFormat.Days;
+        public static String LatestAppVersionXmlUrl;
 
         /// <summary>
         /// Start checking for new version of application and display dialog to the user if update is available.
         /// </summary>
-        public static void Start()
+        public static void CheckNewVersion()
         {
-            Start(AppCastURL);
+            CheckNewVersion(LatestAppVersionXmlUrl);
         }
 
         /// <summary>
         /// Start checking for new version of application and display dialog to the user if update is available.
         /// </summary>
         /// <param name="appCast">URL of the xml file that contains information about latest version of the application.</param>
-        public static void Start(String appCast)
+        public static void CheckNewVersion(String latestVersionXmlUrl)
         {
-            AppCastURL = appCast;
+            LatestAppVersionXmlUrl = latestVersionXmlUrl;
             
             var backgroundWorker = new BackgroundWorker();
 
@@ -91,15 +59,19 @@ namespace AY.AutoUpdate
 
         private static void BackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
         {
-            var mainAssembly = Assembly.GetEntryAssembly();
-            var companyAttribute = (AssemblyCompanyAttribute) GetAttribute(mainAssembly, typeof (AssemblyCompanyAttribute));
-            var titleAttribute = (AssemblyTitleAttribute) GetAttribute(mainAssembly, typeof (AssemblyTitleAttribute));
+            Assembly mainAssembly = Assembly.GetEntryAssembly();
+			AssemblyCompanyAttribute companyAttribute = 
+				(AssemblyCompanyAttribute)GetAttribute(mainAssembly, typeof(AssemblyCompanyAttribute));
+				
+			AssemblyTitleAttribute titleAttribute = 
+				(AssemblyTitleAttribute)GetAttribute(mainAssembly, typeof(AssemblyTitleAttribute));
+				
             AppTitle = titleAttribute != null ? titleAttribute.Title : mainAssembly.GetName().Name;
-            var appCompany = companyAttribute != null ? companyAttribute.Company : "";
+            String appCompany = companyAttribute != null ? companyAttribute.Company : "";
 
             InstalledVersion = mainAssembly.GetName().Version;
 
-            WebRequest webRequest = WebRequest.Create(AppCastURL);
+            WebRequest webRequest = WebRequest.Create(LatestAppVersionXmlUrl);
             webRequest.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
 
             WebResponse webResponse;
@@ -113,70 +85,69 @@ namespace AY.AutoUpdate
                 return;
             }
 
-            Stream appCastStream = webResponse.GetResponseStream();
+            Stream xmlStream = webResponse.GetResponseStream();
 
-            var receivedAppCastDocument = new XmlDocument();
+            XmlDocument receivedAppVerDocument = new XmlDocument();
 
-            if (appCastStream != null) 
-				receivedAppCastDocument.Load(appCastStream);
+            if (xmlStream != null) 
+				receivedAppVerDocument.Load(xmlStream);
             else 
 				return;
 
-            XmlNodeList appCastItems = receivedAppCastDocument.SelectNodes("item");
+            XmlNodeList appVerItems = receivedAppVerDocument.SelectNodes("item");
 
-            if (appCastItems != null)
+            if (appVerItems == null)
+				return;
+            
+            foreach (XmlNode item in appVerItems)
             {
-                foreach (XmlNode item in appCastItems)
+                XmlNode xmlAppVersion = item.SelectSingleNode("version");
+                if (xmlAppVersion != null)
                 {
-                    XmlNode appCastVersion = item.SelectSingleNode("version");
-                    if (appCastVersion != null)
-                    {
-                        String appVersion = appCastVersion.InnerText;
-                        var version = new Version(appVersion);
-                        if (version <= InstalledVersion)
-                            continue;
-                        CurrentVersion = version;
-                    }
-                    else
+                    String appVersion = xmlAppVersion.InnerText;
+                    Version version = new Version(appVersion);
+                    if (version <= InstalledVersion)
                         continue;
-
-                    XmlNode appCastTitle = item.SelectSingleNode("title");
-                    DialogTitle = appCastTitle != null ? appCastTitle.InnerText : "";
-
-                    XmlNode appCastChangeLog = item.SelectSingleNode("changelogUrl");
-                    ChangeLogURL = appCastChangeLog != null ? appCastChangeLog.InnerText : "";
-
-                    XmlNode appCastUrl = item.SelectSingleNode("downloadUrl");
-                    DownloadURL = appCastUrl != null ? appCastUrl.InnerText : "";
+                    CurrentVersion = version;
                 }
-            }
+                else
+                    continue;
 
+                XmlNode xmlAppTitle = item.SelectSingleNode("title");
+                DialogTitle = xmlAppTitle != null ? xmlAppTitle.InnerText : "";
+
+                XmlNode xmlChangeLogUrl = item.SelectSingleNode("changelogUrl");
+                ChangeLogURL = xmlChangeLogUrl != null ? xmlChangeLogUrl.InnerText : "";
+
+                XmlNode xmlDownloadUrl = item.SelectSingleNode("downloadUrl");
+                DownloadURL = xmlDownloadUrl != null ? xmlDownloadUrl.InnerText : "";
+            }
+            
             if (CurrentVersion == null)
                 return;
 
             if (CurrentVersion > InstalledVersion)
             {
-                var thread = new Thread(ShowUI);
-                thread.CurrentCulture = thread.CurrentUICulture = CurrentCulture ?? System.Windows.Forms.Application.CurrentCulture;
-                thread.SetApartmentState(ApartmentState.STA);
-                thread.Start();
+                Thread thrd = new Thread(ShowUI);
+                thrd.SetApartmentState(ApartmentState.STA);
+                thrd.Start();
             }
         }
 
         private static void ShowUI()
         {
-            var updateForm = new UpdateForm();
-
+            UpdateForm updateForm = new UpdateForm();
             updateForm.ShowDialog();
         }
 
         private static Attribute GetAttribute (Assembly assembly,Type attributeType)
         {
-            var attributes = assembly.GetCustomAttributes ( attributeType, false );
-            if ( attributes.Length == 0 )
+            object[] attributes = assembly.GetCustomAttributes(attributeType, false);
+            if (attributes.Length == 0)
             {
                 return null;
             }
+
             return (Attribute) attributes[0];
         }
     }

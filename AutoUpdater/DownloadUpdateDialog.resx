@@ -144,13 +144,13 @@
     <value>True</value>
   </data>
   <data name="labelInformation.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 14px</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="labelInformation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 9</value>
+    <value>12, 15</value>
   </data>
   <data name="labelInformation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 19</value>
+    <value>119, 13</value>
   </data>
   <data name="labelInformation.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>

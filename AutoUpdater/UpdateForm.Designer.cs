@@ -64,7 +64,6 @@ namespace AY.AutoUpdate
 			// 
 			resources.ApplyResources(this.labelReleaseNotes, "labelReleaseNotes");
 			this.labelReleaseNotes.Name = "labelReleaseNotes";
-			this.labelReleaseNotes.Click += new System.EventHandler(this.labelReleaseNotes_Click);
 			// 
 			// buttonUpdate
 			// 
@@ -87,7 +86,6 @@ namespace AY.AutoUpdate
 			resources.ApplyResources(this.buttonSkip, "buttonSkip");
 			this.buttonSkip.Name = "buttonSkip";
 			this.buttonSkip.UseVisualStyleBackColor = true;
-			this.buttonSkip.Click += new System.EventHandler(this.ButtonSkipClick);
 			// 
 			// UpdateForm
 			// 
