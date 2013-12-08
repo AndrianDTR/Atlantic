@@ -117,8 +117,10 @@ namespace AY.AutoUpdate
 
             var receivedAppCastDocument = new XmlDocument();
 
-            if (appCastStream != null) receivedAppCastDocument.Load(appCastStream);
-            else return;
+            if (appCastStream != null) 
+				receivedAppCastDocument.Load(appCastStream);
+            else 
+				return;
 
             XmlNodeList appCastItems = receivedAppCastDocument.SelectNodes("item");
 
@@ -139,15 +141,12 @@ namespace AY.AutoUpdate
                         continue;
 
                     XmlNode appCastTitle = item.SelectSingleNode("title");
-
                     DialogTitle = appCastTitle != null ? appCastTitle.InnerText : "";
 
-                    XmlNode appCastChangeLog = item.SelectSingleNode("changelog");
-
+                    XmlNode appCastChangeLog = item.SelectSingleNode("changelogUrl");
                     ChangeLogURL = appCastChangeLog != null ? appCastChangeLog.InnerText : "";
 
-                    XmlNode appCastUrl = item.SelectSingleNode("url");
-
+                    XmlNode appCastUrl = item.SelectSingleNode("downloadUrl");
                     DownloadURL = appCastUrl != null ? appCastUrl.InnerText : "";
                 }
             }

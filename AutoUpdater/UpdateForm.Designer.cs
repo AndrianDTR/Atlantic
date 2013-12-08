@@ -106,7 +106,7 @@ namespace AY.AutoUpdate
 			this.MinimizeBox = false;
 			this.Name = "UpdateForm";
 			this.ShowIcon = false;
-			this.ShowInTaskbar = false;
+			this.TopMost = true;
 			this.Load += new System.EventHandler(this.UpdateFormLoad);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
 			this.ResumeLayout(false);

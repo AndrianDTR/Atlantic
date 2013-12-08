@@ -42,12 +42,6 @@ namespace EAssistant
         {
 			InitializeComponent();
 
-			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
-			if(opt.updates == 0)
-			{
-				CheckForUpdates();
-			}
-
 			try
 			{
 				CheckRegistration();
@@ -66,6 +60,12 @@ namespace EAssistant
 		private void MainForm_Load(object sender, EventArgs e)
 		{
 			GetOpenedTickets();
+			
+			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
+			if (opt.updates == 0)
+			{
+				CheckForUpdates();
+			}
 		}
 		
 		private void InitOnce()
@@ -500,7 +500,7 @@ namespace EAssistant
 		private void CheckForUpdates()
 		{
 #if !DEBUG
-			//AutoUpdater.Start("http://pro100soft.eu/EAssistant/updates/latest.xml");
+			AutoUpdater.Start("http://pro100soft.eu/E-Assistant/updates/latest.xml");
 #else
 			AutoUpdater.Start("http://localhost/update.xml");
 #endif
