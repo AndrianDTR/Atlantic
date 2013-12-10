@@ -9,12 +9,12 @@ using Microsoft.Win32;
 using System.ComponentModel;
 using System.Threading;
 
-namespace AY.AutoUpdate
+namespace AY.Updater
 {
     /// <summary>
     /// Main class that lets you auto update applications by setting some static fields and executing its Start method.
     /// </summary>
-    public static class AutoUpdater
+    public static class Updater
     {
         internal static String DialogTitle;
 

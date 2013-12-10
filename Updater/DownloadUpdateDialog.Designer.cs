@@ -1,4 +1,4 @@
-﻿namespace AY.AutoUpdate
+﻿namespace AY.Updater
 {
     partial class DownloadUpdateDialog
     {

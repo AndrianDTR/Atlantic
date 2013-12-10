@@ -277,12 +277,6 @@ namespace AY
 
 				this.SuspendLayout();
 
-				/*m_btnPrev.Height = m_nNavButtonsHeight;
-				m_btnNext.Height = m_nNavButtonsHeight;
-				m_headerPanel.Height = m_nNavButtonsHeight;
-				m_dataPanel.Height = m_nNavButtonsHeight;
-				m_scrollPanel.Width = m_Scrollbar.Width;
-				*/
 				this.Renderer = renderer;
 
 				m_Scrollbar.Scroll += new ScrollEventHandler(this.OnScroll);
@@ -722,7 +716,7 @@ namespace AY
 				m_Scrollbar.SmallChange = m_nMult;
 				m_Scrollbar.LargeChange = m_nMult * 5;
 				m_Scrollbar.Minimum = m_nMult;
-				m_Scrollbar.Maximum = (nWeeks - nRows) * m_nMult;
+				m_Scrollbar.Maximum = (nWeeks) * m_nMult;
 			}
 
 			private void DrawHeaders(PaintEventArgs e, Rectangle rect)

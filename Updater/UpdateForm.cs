@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using Microsoft.Win32;
 
-namespace AY.AutoUpdate
+namespace AY.Updater
 {
     internal partial class UpdateForm : Form
     {
@@ -13,11 +13,11 @@ namespace AY.AutoUpdate
         {
             InitializeComponent();
 			ComponentResourceManager resources = new ComponentResourceManager(typeof(UpdateForm));
-            Text = AutoUpdater.DialogTitle;
-            labelUpdate.Text = string.Format(resources.GetString("labelUpdate.Text", CultureInfo.CurrentCulture), AutoUpdater.AppTitle);
+            Text = Updater.DialogTitle;
+            labelUpdate.Text = string.Format(resources.GetString("labelUpdate.Text", CultureInfo.CurrentCulture), Updater.AppTitle);
             labelDescription.Text =
                 string.Format(resources.GetString("labelDescription.Text", CultureInfo.CurrentCulture),
-                    AutoUpdater.AppTitle, AutoUpdater.CurrentVersion, AutoUpdater.InstalledVersion);
+                    Updater.AppTitle, Updater.CurrentVersion, Updater.InstalledVersion);
         }
 
         public override sealed string Text
@@ -28,12 +28,12 @@ namespace AY.AutoUpdate
 
         private void UpdateFormLoad(object sender, EventArgs e)
         {
-            webBrowser.Navigate(AutoUpdater.ChangeLogURL);
+            webBrowser.Navigate(Updater.ChangeLogURL);
         }
 
         private void ButtonUpdateClick(object sender, EventArgs e)
         {
-			DownloadUpdateDialog downloadDialog = new DownloadUpdateDialog(AutoUpdater.DownloadURL);
+			DownloadUpdateDialog downloadDialog = new DownloadUpdateDialog(Updater.DownloadURL);
 
             try
             {

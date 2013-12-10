@@ -6,7 +6,7 @@ using System.Net;
 using System.IO;
 using System.Diagnostics;
 
-namespace AY.AutoUpdate
+namespace AY.Updater
 {
     internal partial class DownloadUpdateDialog : Form
     {

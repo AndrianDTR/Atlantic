@@ -10,7 +10,7 @@ using AY.db;
 using AY.Utils;
 using System.Data;
 using System.Data.SQLite;
-using AY.AutoUpdate;
+using AY.Updater;
 using AY.db.dbDataSetTableAdapters;
 
 namespace EAssistant
@@ -500,9 +500,9 @@ namespace EAssistant
 		private void CheckForUpdates()
 		{
 #if !DEBUG
-			AutoUpdater.CheckNewVersion("http://pro100soft.eu/E-Assistant/updates/latest.xml");
+			Updater.CheckNewVersion("http://pro100soft.eu/E-Assistant/updates/latest.xml");
 #else
-			AutoUpdater.CheckNewVersion("http://localhost/update.xml");
+			Updater.CheckNewVersion("http://localhost/update.xml");
 #endif
 		}
 		

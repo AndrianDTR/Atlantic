@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace AY.AutoUpdate
+namespace AY.Updater
 {
     partial class UpdateForm
     {
@@ -75,7 +75,7 @@ namespace AY.AutoUpdate
 			// 
 			// pictureBoxIcon
 			// 
-			this.pictureBoxIcon.Image = global::AY.AutoUpdate.Properties.Resources.update;
+			this.pictureBoxIcon.Image = global::AY.Updater.Properties.Resources.update;
 			resources.ApplyResources(this.pictureBoxIcon, "pictureBoxIcon");
 			this.pictureBoxIcon.Name = "pictureBoxIcon";
 			this.pictureBoxIcon.TabStop = false;
