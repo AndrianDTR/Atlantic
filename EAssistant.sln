@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "db", "db\db.csproj", "{A143DC21-278F-4D35-848E-0EA98AC8A330}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbAdapter", "DbAdapter\DbAdapter.csproj", "{A143DC21-278F-4D35-848E-0EA98AC8A330}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F} = {C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F}
 		{A4463B91-8424-4040-89D6-5449DA9F46F6} = {A4463B91-8424-4040-89D6-5449DA9F46F6}
@@ -26,7 +26,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj
 		{A4463B91-8424-4040-89D6-5449DA9F46F6} = {A4463B91-8424-4040-89D6-5449DA9F46F6}
 	EndProjectSection
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EAssistantInstall", "GAssistInstall\GAssistInstall.vdproj", "{02E0F591-C5A3-4EA0-9A3D-9163B339093D}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EAssistantInstall", "EAssistantInstall\EAssistantInstall.vdproj", "{02E0F591-C5A3-4EA0-9A3D-9163B339093D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registrator", "Registrator\Registrator.csproj", "{9283D493-5122-449B-97DF-EEFE016E76F9}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -34,9 +34,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registrator", "Registrator\
 		{A4463B91-8424-4040-89D6-5449DA9F46F6} = {A4463B91-8424-4040-89D6-5449DA9F46F6}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdate", "AutoUpdater\AutoUpdate.csproj", "{FB9E7E6B-B19F-4F37-A708-2996190CEF13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.csproj", "{FB9E7E6B-B19F-4F37-A708-2996190CEF13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EAssistant", "ClientDB\EAssistant.csproj", "{DD667F36-DFA9-41F4-8B05-EF1726FF3168}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EAssistant", "EAssistant\EAssistant.csproj", "{DD667F36-DFA9-41F4-8B05-EF1726FF3168}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F} = {C6C3120B-A8F6-4F59-ACB3-CCC7F7FFA24F}
 		{A143DC21-278F-4D35-848E-0EA98AC8A330} = {A143DC21-278F-4D35-848E-0EA98AC8A330}

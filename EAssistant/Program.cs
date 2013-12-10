@@ -24,23 +24,6 @@ namespace EAssistant
 
 			try
 			{
-				/*DbAdapter ad = new DbAdapter();
-				if( !ad.CheckTables())
-				{
-				
-					Logger.Critical("DB is corrupt or not found.");
-					DialogResult res = UIMessages.Error("Database is corrupt or not found.\n"
-						+ "Do you wish to recreate database with default options?"
-						, MessageBoxButtons.YesNo);
-					if(res != DialogResult.Yes)
-					{
-						throw new Exception("Database is corrupt.");	
-					}
-					
-					Logger.Warning("Clear DB after corrupt.");
-					DbAdapter.ClearDB();
-				}
-				*/
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 				Application.Run(new MainForm());
