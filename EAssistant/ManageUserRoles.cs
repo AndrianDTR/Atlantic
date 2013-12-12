@@ -228,7 +228,7 @@ namespace EAssistant
 			{
 				dbDataSet.userPrivilegesRow role = (dbDataSet.userPrivilegesRow)((DataRowView)gridRoles.SelectedRows[0].DataBoundItem).Row;
 
-				long rights = (long)privilegesGrid.CurrentRow.Tag;
+				int rights = (int)privilegesGrid.CurrentRow.Tag;
 				String val = privilegesGrid.CurrentCell.Value.ToString();
 				val = val == "X" ? " " : "X";
 				privilegesGrid.CurrentCell.Value = val;

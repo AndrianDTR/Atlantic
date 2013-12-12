@@ -2209,7 +2209,7 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public userPrivilegesRow AdduserPrivilegesRow(string name, long clients, long schedule, long trainers, long payments, long backup, long statistics, long users, long privileges) {
+            public userPrivilegesRow AdduserPrivilegesRow(string name, int clients, int schedule, int trainers, int payments, int backup, int statistics, int users, int privileges) {
                 userPrivilegesRow rowuserPrivilegesRow = ((userPrivilegesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2265,21 +2265,21 @@ namespace AY.db {
                 base.Columns.Add(this.columnid);
                 this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnname);
-                this.columnclients = new global::System.Data.DataColumn("clients", typeof(long), null, global::System.Data.MappingType.Element);
+                this.columnclients = new global::System.Data.DataColumn("clients", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnclients);
-                this.columnschedule = new global::System.Data.DataColumn("schedule", typeof(long), null, global::System.Data.MappingType.Element);
+                this.columnschedule = new global::System.Data.DataColumn("schedule", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnschedule);
-                this.columntrainers = new global::System.Data.DataColumn("trainers", typeof(long), null, global::System.Data.MappingType.Element);
+                this.columntrainers = new global::System.Data.DataColumn("trainers", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntrainers);
-                this.columnpayments = new global::System.Data.DataColumn("payments", typeof(long), null, global::System.Data.MappingType.Element);
+                this.columnpayments = new global::System.Data.DataColumn("payments", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnpayments);
-                this.columnbackup = new global::System.Data.DataColumn("backup", typeof(long), null, global::System.Data.MappingType.Element);
+                this.columnbackup = new global::System.Data.DataColumn("backup", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnbackup);
-                this.columnstatistics = new global::System.Data.DataColumn("statistics", typeof(long), null, global::System.Data.MappingType.Element);
+                this.columnstatistics = new global::System.Data.DataColumn("statistics", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstatistics);
-                this.columnusers = new global::System.Data.DataColumn("users", typeof(long), null, global::System.Data.MappingType.Element);
+                this.columnusers = new global::System.Data.DataColumn("users", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnusers);
-                this.columnprivileges = new global::System.Data.DataColumn("privileges", typeof(long), null, global::System.Data.MappingType.Element);
+                this.columnprivileges = new global::System.Data.DataColumn("privileges", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnprivileges);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
@@ -2290,6 +2290,14 @@ namespace AY.db {
                 this.columnid.Unique = true;
                 this.columnname.AllowDBNull = false;
                 this.columnname.MaxLength = 2147483647;
+                this.columnclients.DefaultValue = ((int)(0));
+                this.columnschedule.DefaultValue = ((int)(0));
+                this.columntrainers.DefaultValue = ((int)(0));
+                this.columnpayments.DefaultValue = ((int)(0));
+                this.columnbackup.DefaultValue = ((int)(0));
+                this.columnstatistics.DefaultValue = ((int)(0));
+                this.columnusers.DefaultValue = ((int)(0));
+                this.columnprivileges.DefaultValue = ((int)(0));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5047,10 +5055,10 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long clients {
+            public int clients {
                 get {
                     try {
-                        return ((long)(this[this.tableuserPrivileges.clientsColumn]));
+                        return ((int)(this[this.tableuserPrivileges.clientsColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'clients\' in table \'userPrivileges\' is DBNull.", e);
@@ -5062,10 +5070,10 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long schedule {
+            public int schedule {
                 get {
                     try {
-                        return ((long)(this[this.tableuserPrivileges.scheduleColumn]));
+                        return ((int)(this[this.tableuserPrivileges.scheduleColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'schedule\' in table \'userPrivileges\' is DBNull.", e);
@@ -5077,10 +5085,10 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long trainers {
+            public int trainers {
                 get {
                     try {
-                        return ((long)(this[this.tableuserPrivileges.trainersColumn]));
+                        return ((int)(this[this.tableuserPrivileges.trainersColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'trainers\' in table \'userPrivileges\' is DBNull.", e);
@@ -5092,10 +5100,10 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long payments {
+            public int payments {
                 get {
                     try {
-                        return ((long)(this[this.tableuserPrivileges.paymentsColumn]));
+                        return ((int)(this[this.tableuserPrivileges.paymentsColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'payments\' in table \'userPrivileges\' is DBNull.", e);
@@ -5107,10 +5115,10 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long backup {
+            public int backup {
                 get {
                     try {
-                        return ((long)(this[this.tableuserPrivileges.backupColumn]));
+                        return ((int)(this[this.tableuserPrivileges.backupColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'backup\' in table \'userPrivileges\' is DBNull.", e);
@@ -5122,10 +5130,10 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long statistics {
+            public int statistics {
                 get {
                     try {
-                        return ((long)(this[this.tableuserPrivileges.statisticsColumn]));
+                        return ((int)(this[this.tableuserPrivileges.statisticsColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'statistics\' in table \'userPrivileges\' is DBNull.", e);
@@ -5137,10 +5145,10 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long users {
+            public int users {
                 get {
                     try {
-                        return ((long)(this[this.tableuserPrivileges.usersColumn]));
+                        return ((int)(this[this.tableuserPrivileges.usersColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'users\' in table \'userPrivileges\' is DBNull.", e);
@@ -5152,10 +5160,10 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long privileges {
+            public int privileges {
                 get {
                     try {
-                        return ((long)(this[this.tableuserPrivileges.privilegesColumn]));
+                        return ((int)(this[this.tableuserPrivileges.privilegesColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'privileges\' in table \'userPrivileges\' is DBNull.", e);
@@ -12300,7 +12308,7 @@ ORDER BY payments.[date] DESC";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SQLite.SQLiteConnection();
-            this._connection.ConnectionString = global::AY.db.Properties.Settings.Default.clientConnectionString1;
+            this._connection.ConnectionString = global::AY.db.Properties.Settings.Default.clientConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
