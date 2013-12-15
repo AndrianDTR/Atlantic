@@ -30,10 +30,6 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-			System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-			System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,8 +74,7 @@
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.todayClientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.tabCalendar = new System.Windows.Forms.TabPage();
-			this.tabStatistics = new System.Windows.Forms.TabPage();
-			this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+			this.m_calendar = new EAssistant.DayView();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnSearch = new System.Windows.Forms.Button();
 			this.btmMissLesson = new System.Windows.Forms.Button();
@@ -88,7 +83,6 @@
 			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
-			this.m_calendar = new EAssistant.DayView();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tabManager.SuspendLayout();
@@ -96,8 +90,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.todayClientsBindingSource)).BeginInit();
 			this.tabCalendar.SuspendLayout();
-			this.tabStatistics.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -366,7 +358,6 @@
 			resources.ApplyResources(this.tabManager, "tabManager");
 			this.tabManager.Controls.Add(this.tabActiveClients);
 			this.tabManager.Controls.Add(this.tabCalendar);
-			this.tabManager.Controls.Add(this.tabStatistics);
 			this.tabManager.Name = "tabManager";
 			this.tabManager.SelectedIndex = 0;
 			// 
@@ -404,43 +395,22 @@
 			this.tabCalendar.Name = "tabCalendar";
 			this.tabCalendar.UseVisualStyleBackColor = true;
 			// 
-			// tabStatistics
+			// m_calendar
 			// 
-			this.tabStatistics.Controls.Add(this.chart1);
-			resources.ApplyResources(this.tabStatistics, "tabStatistics");
-			this.tabStatistics.Name = "tabStatistics";
-			this.tabStatistics.UseVisualStyleBackColor = true;
-			// 
-			// chart1
-			// 
-			chartArea1.AxisX.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
-			chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Minutes;
-			chartArea1.Name = "ChartArea1";
-			this.chart1.ChartAreas.Add(chartArea1);
-			resources.ApplyResources(this.chart1, "chart1");
-			legend1.Name = "Legend1";
-			this.chart1.Legends.Add(legend1);
-			this.chart1.Name = "chart1";
-			series1.ChartArea = "ChartArea1";
-			series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-			series1.Color = System.Drawing.Color.Blue;
-			series1.IsXValueIndexed = true;
-			series1.Legend = "Legend1";
-			series1.LegendText = "Present";
-			series1.Name = "seriesPresent";
-			series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-			series2.ChartArea = "ChartArea1";
-			series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-			series2.Color = System.Drawing.Color.Red;
-			series2.IsXValueIndexed = true;
-			series2.Legend = "Legend1";
-			series2.LegendText = "Prognose";
-			series2.Name = "seriesPrognosed";
-			series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
-			series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Int32;
-			this.chart1.Series.Add(series1);
-			this.chart1.Series.Add(series2);
-			this.chart1.PrePaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.FillChart);
+			this.m_calendar.ActiveTool = null;
+			this.m_calendar.BgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
+			this.m_calendar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			resources.ApplyResources(this.m_calendar, "m_calendar");
+			this.m_calendar.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
+			this.m_calendar.HeaderBgColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(186)))), ((int)(((byte)(201)))));
+			this.m_calendar.HorisontalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+			this.m_calendar.MarkerColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.m_calendar.Name = "m_calendar";
+			this.m_calendar.SelectedDate = new System.DateTime(((long)(0)));
+			this.m_calendar.SelectionBorderColor = System.Drawing.SystemColors.ActiveBorder;
+			this.m_calendar.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(76)))), ((int)(((byte)(122)))));
+			this.m_calendar.StartDate = new System.DateTime(2013, 8, 13, 0, 0, 0, 0);
+			this.m_calendar.VerticalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(174)))), ((int)(((byte)(217)))));
 			// 
 			// panel1
 			// 
@@ -510,23 +480,6 @@
 			this.btnAddClient.UseVisualStyleBackColor = true;
 			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
 			// 
-			// m_calendar
-			// 
-			this.m_calendar.ActiveTool = null;
-			this.m_calendar.BgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
-			this.m_calendar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			resources.ApplyResources(this.m_calendar, "m_calendar");
-			this.m_calendar.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
-			this.m_calendar.HeaderBgColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(186)))), ((int)(((byte)(201)))));
-			this.m_calendar.HorisontalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-			this.m_calendar.MarkerColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.m_calendar.Name = "m_calendar";
-			this.m_calendar.SelectedDate = new System.DateTime(((long)(0)));
-			this.m_calendar.SelectionBorderColor = System.Drawing.SystemColors.ActiveBorder;
-			this.m_calendar.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(76)))), ((int)(((byte)(122)))));
-			this.m_calendar.StartDate = new System.DateTime(2013, 8, 13, 0, 0, 0, 0);
-			this.m_calendar.VerticalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(174)))), ((int)(((byte)(217)))));
-			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -547,8 +500,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.todayClientsBindingSource)).EndInit();
 			this.tabCalendar.ResumeLayout(false);
-			this.tabStatistics.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
 			this.panel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -594,13 +545,11 @@
 		private System.Windows.Forms.TabControl tabManager;
 		private DayView m_calendar;
 		private System.Windows.Forms.TabPage tabCalendar;
-		private System.Windows.Forms.TabPage tabStatistics;
 		private System.Windows.Forms.TabPage tabActiveClients;
 		private System.Windows.Forms.Button btmMissLesson;
 		private System.Windows.Forms.ToolStripMenuItem trainersToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem trainersScheduleToolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem manageTrainersToolStripMenuItem;
-		private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
 		private System.Windows.Forms.ToolStripMenuItem clientSearchToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
 		private System.Windows.Forms.ToolStripMenuItem geterateBarcodesToolStripMenuItem;
