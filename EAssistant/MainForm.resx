@@ -300,6 +300,15 @@
   <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="openUserManualToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F1</value>
+  </data>
+  <data name="openUserManualToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 22</value>
+  </data>
+  <data name="openUserManualToolStripMenuItem.Text" xml:space="preserve">
+    <value>User manual</value>
+  </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 22</value>
   </data>
@@ -457,7 +466,7 @@
     <value>m_calendar</value>
   </data>
   <data name="&gt;&gt;m_calendar.Type" xml:space="preserve">
-    <value>EAssistant.DayView, E-Assistant, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>EAssistant.DayView, E-Assistant, Version=0.0.8.7, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;m_calendar.Parent" xml:space="preserve">
     <value>tabCalendar</value>
@@ -1936,6 +1945,9 @@
         //////////////////////////////////8=
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -2120,6 +2132,12 @@
     <value>helpToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;openUserManualToolStripMenuItem.Name" xml:space="preserve">
+    <value>openUserManualToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;openUserManualToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;aboutToolStripMenuItem.Name" xml:space="preserve">

@@ -42,6 +42,7 @@ namespace EAssistant
         {
 			InitializeComponent();
 
+			tabStatistics.Hide();
 			try
 			{
 				CheckRegistration();
@@ -496,6 +497,11 @@ namespace EAssistant
 		{
 			CheckForUpdates();
 		}
+
+		private void openUserManualToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			UIMessages.NotImplementedFeature();
+		}
 		
 		private void CheckForUpdates()
 		{
@@ -652,7 +658,7 @@ namespace EAssistant
 		private void FillChart(object sender, ChartPaintEventArgs e)
 		{
 			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
-			DateTime date = m_calendar.SelectedDate;
+			DateTime date = DateTime.Now;
 			bool today = false;
 			const int delta = 15;
 					
@@ -664,8 +670,6 @@ namespace EAssistant
 			wd.Show();
 			wd.Refresh();			
 			
-			//chart1.SuspendLayout();
-
 			chart1.ChartAreas[0].AxisX.Interval = 60;
 			chart1.ChartAreas[0].AxisX.IntervalOffset = 0;
 			chart1.ChartAreas[0].AxisX.IsStartedFromZero = true;
@@ -676,7 +680,7 @@ namespace EAssistant
 			Dictionary<DateTime, int> present = GetPresentData(date);
 			Dictionary<DateTime, int> prognosed = GetPrognosedData(date);
 
-			if(date.Date == DateTime.Now.Date)
+			if(today)
 			{
 				foreach (KeyValuePair<DateTime, int> kv in present)
 				{
@@ -691,8 +695,6 @@ namespace EAssistant
 				chart1.Series["seriesPrognosed"].Points.AddXY(kv.Key, kv.Value);
 			}
 
-			//chart1.ResumeLayout();
-			chart1.Invalidate(true);
 			wd.Close();
 		}
     }

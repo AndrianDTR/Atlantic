@@ -65,6 +65,7 @@
 			this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.openUserManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
 			this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,7 +78,6 @@
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.todayClientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.tabCalendar = new System.Windows.Forms.TabPage();
-			this.m_calendar = new EAssistant.DayView();
 			this.tabStatistics = new System.Windows.Forms.TabPage();
 			this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
 			this.panel1 = new System.Windows.Forms.Panel();
@@ -88,6 +88,7 @@
 			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
+			this.m_calendar = new EAssistant.DayView();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tabManager.SuspendLayout();
@@ -305,6 +306,7 @@
 			// helpToolStripMenuItem
 			// 
 			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openUserManualToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.toolStripMenuItem7,
             this.checkForUpdatesToolStripMenuItem,
@@ -312,6 +314,12 @@
             this.sendLogToolStripMenuItem});
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
 			resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
+			// 
+			// openUserManualToolStripMenuItem
+			// 
+			this.openUserManualToolStripMenuItem.Name = "openUserManualToolStripMenuItem";
+			resources.ApplyResources(this.openUserManualToolStripMenuItem, "openUserManualToolStripMenuItem");
+			this.openUserManualToolStripMenuItem.Click += new System.EventHandler(this.openUserManualToolStripMenuItem_Click);
 			// 
 			// aboutToolStripMenuItem
 			// 
@@ -395,23 +403,6 @@
 			resources.ApplyResources(this.tabCalendar, "tabCalendar");
 			this.tabCalendar.Name = "tabCalendar";
 			this.tabCalendar.UseVisualStyleBackColor = true;
-			// 
-			// m_calendar
-			// 
-			this.m_calendar.ActiveTool = null;
-			this.m_calendar.BgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
-			this.m_calendar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			resources.ApplyResources(this.m_calendar, "m_calendar");
-			this.m_calendar.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
-			this.m_calendar.HeaderBgColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(186)))), ((int)(((byte)(201)))));
-			this.m_calendar.HorisontalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-			this.m_calendar.MarkerColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.m_calendar.Name = "m_calendar";
-			this.m_calendar.SelectedDate = new System.DateTime(((long)(0)));
-			this.m_calendar.SelectionBorderColor = System.Drawing.SystemColors.ActiveBorder;
-			this.m_calendar.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(76)))), ((int)(((byte)(122)))));
-			this.m_calendar.StartDate = new System.DateTime(2013, 8, 13, 0, 0, 0, 0);
-			this.m_calendar.VerticalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(174)))), ((int)(((byte)(217)))));
 			// 
 			// tabStatistics
 			// 
@@ -519,6 +510,23 @@
 			this.btnAddClient.UseVisualStyleBackColor = true;
 			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
 			// 
+			// m_calendar
+			// 
+			this.m_calendar.ActiveTool = null;
+			this.m_calendar.BgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
+			this.m_calendar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			resources.ApplyResources(this.m_calendar, "m_calendar");
+			this.m_calendar.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
+			this.m_calendar.HeaderBgColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(186)))), ((int)(((byte)(201)))));
+			this.m_calendar.HorisontalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+			this.m_calendar.MarkerColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.m_calendar.Name = "m_calendar";
+			this.m_calendar.SelectedDate = new System.DateTime(((long)(0)));
+			this.m_calendar.SelectionBorderColor = System.Drawing.SystemColors.ActiveBorder;
+			this.m_calendar.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(76)))), ((int)(((byte)(122)))));
+			this.m_calendar.StartDate = new System.DateTime(2013, 8, 13, 0, 0, 0, 0);
+			this.m_calendar.VerticalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(174)))), ((int)(((byte)(217)))));
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -603,6 +611,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
 		private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
+		private System.Windows.Forms.ToolStripMenuItem openUserManualToolStripMenuItem;
     }
 }
 
