@@ -71,5 +71,10 @@ namespace EAssistant
 			Db.Instance.AcceptChanges();
 			Session.Instance.UpdateMain();
 		}
+
+		private void OnError(object sender, DataGridViewDataErrorEventArgs e)
+		{
+			UIMessages.Error(e.Exception.Message);
+		}
 	}
 }

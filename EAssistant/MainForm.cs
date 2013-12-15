@@ -42,7 +42,6 @@ namespace EAssistant
         {
 			InitializeComponent();
 
-			tabStatistics.Hide();
 			try
 			{
 				CheckRegistration();
@@ -657,6 +656,7 @@ namespace EAssistant
 
 		private void FillChart(object sender, ChartPaintEventArgs e)
 		{
+			/*
 			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			DateTime date = DateTime.Now;
 			bool today = false;
@@ -696,6 +696,7 @@ namespace EAssistant
 			}
 
 			wd.Close();
+			*/
 		}
     }
 }

@@ -40,6 +40,10 @@ namespace EAssistant
 		protected override CellInfo GetCellInfo(DateTime dt)
 		{
 			CellInfo ci = new CellInfo(dt);
+			
+			if(null == m_calendarData)
+				return ci;
+				
 			DataRow[] drc = m_calendarData.Select(
 				String.Format("calDate='{0}-{1}-{2}'", ci.date.Year, ci.date.Month, ci.date.Day));
 			

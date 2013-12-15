@@ -31,8 +31,8 @@
 			this.components = new System.ComponentModel.Container();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.gridTrainers = new System.Windows.Forms.DataGridView();
-			this.btnOK = new System.Windows.Forms.Button();
 			this.trainersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.btnOK = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.gridTrainers)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trainersBindingSource)).BeginInit();
 			this.SuspendLayout();
@@ -60,6 +60,11 @@
 			this.gridTrainers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridTrainers.Size = new System.Drawing.Size(593, 220);
 			this.gridTrainers.TabIndex = 7;
+			this.gridTrainers.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OnError);
+			// 
+			// trainersBindingSource
+			// 
+			this.trainersBindingSource.DataMember = "trainers";
 			// 
 			// btnOK
 			// 
@@ -71,10 +76,6 @@
 			this.btnOK.Text = "OK";
 			this.btnOK.UseVisualStyleBackColor = true;
 			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-			// 
-			// trainersBindingSource
-			// 
-			this.trainersBindingSource.DataMember = "trainers";
 			// 
 			// ManageTrainers
 			// 
