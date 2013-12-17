@@ -3973,6 +3973,8 @@ namespace AY.db {
             
             private global::System.Data.DataColumn columnweekDay;
             
+            private static System.DateTime columncalDate_defaultValue = global::System.DateTime.Parse("01/01/2001 00:00:00");
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public VCalendarInfoDataTable() {
                 this.TableName = "VCalendarInfo";
@@ -4112,6 +4114,8 @@ namespace AY.db {
                                 this.columncalDate}, true));
                 this.columncalDate.AllowDBNull = false;
                 this.columncalDate.Unique = true;
+                this.columncalDate.DefaultValue = ((System.DateTime)(VCalendarInfoDataTable.columncalDate_defaultValue));
+                this.columntrainer.DefaultValue = ((string)("0"));
                 this.columntrainer.MaxLength = 2147483647;
                 this.columnclientsCount.DefaultValue = ((long)(0));
                 this.columnweekDay.DefaultValue = ((string)("0"));

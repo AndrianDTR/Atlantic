@@ -166,12 +166,15 @@ namespace EAssistant
 		private void btnRemove_Click(object sender, EventArgs e)
 		{
 			dbDataSet.VClientsRow vcr = GetSelectedRow();
-			if (null != vcr)
-			{
-				Db.Instance.Adapters.VClientsTableAdapter.DeleteQuery(vcr.id);
-				Db.Instance.AcceptChanges();
-				Db.Instance.Adapters.VClientsTableAdapter.Fill(Db.Instance.dSet.VClients);
-			}	
+			if (null == vcr)
+				return;
+			
+			if(DialogResult.No == UIMessages.Warning("Selected client record will be deleted.\nDo you want to proceed?", MessageBoxButtons.YesNo))
+				return;
+			
+			Db.Instance.Adapters.VClientsTableAdapter.DeleteQuery(vcr.id);
+			Db.Instance.AcceptChanges();
+			Db.Instance.Adapters.VClientsTableAdapter.Fill(Db.Instance.dSet.VClients);	
 		}
 
 		private void btnPayments_Click(object sender, EventArgs e)

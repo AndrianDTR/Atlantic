@@ -252,23 +252,35 @@
   <data name="trainersToolStripMenuItem.Text" xml:space="preserve">
     <value>Trainers</value>
   </data>
+  <data name="manageServicesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 22</value>
+  </data>
+  <data name="manageServicesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Manage Services</value>
+  </data>
+  <data name="servicesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="servicesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Services</value>
+  </data>
   <data name="changePasswordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
+    <value>187, 22</value>
   </data>
   <data name="changePasswordToolStripMenuItem.Text" xml:space="preserve">
     <value>Change password</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 6</value>
+    <value>184, 6</value>
   </data>
   <data name="usersAndPasswordsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
+    <value>187, 22</value>
   </data>
   <data name="usersAndPasswordsToolStripMenuItem.Text" xml:space="preserve">
     <value>Users and passwords</value>
   </data>
   <data name="userRolesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
+    <value>187, 22</value>
   </data>
   <data name="userRolesToolStripMenuItem.Text" xml:space="preserve">
     <value>Manage user roles</value>
@@ -277,19 +289,13 @@
     <value>MiddleRight</value>
   </data>
   <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 6</value>
-  </data>
-  <data name="manageScheduleRulesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
-  </data>
-  <data name="manageScheduleRulesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Manage schedule rules</value>
+    <value>184, 6</value>
   </data>
   <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 6</value>
+    <value>184, 6</value>
   </data>
   <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
+    <value>187, 22</value>
   </data>
   <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Options</value>
@@ -466,7 +472,7 @@
     <value>m_calendar</value>
   </data>
   <data name="&gt;&gt;m_calendar.Type" xml:space="preserve">
-    <value>EAssistant.DayView, E-Assistant, Version=0.0.8.7, Culture=neutral, PublicKeyToken=null</value>
+    <value>EAssistant.DayView, E-Assistant, Version=0.0.8.17, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;m_calendar.Parent" xml:space="preserve">
     <value>tabCalendar</value>
@@ -1891,9 +1897,6 @@
         //////////////////////////////////8=
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -2056,12 +2059,6 @@
   <data name="&gt;&gt;toolStripMenuItem3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;manageScheduleRulesToolStripMenuItem.Name" xml:space="preserve">
-    <value>manageScheduleRulesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;manageScheduleRulesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripMenuItem4.Name" xml:space="preserve">
     <value>toolStripMenuItem4</value>
   </data>
@@ -2121,6 +2118,18 @@
   </data>
   <data name="&gt;&gt;todayClientsBindingSource.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;servicesToolStripMenuItem.Name" xml:space="preserve">
+    <value>servicesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;servicesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;manageServicesToolStripMenuItem.Name" xml:space="preserve">
+    <value>manageServicesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;manageServicesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

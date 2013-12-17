@@ -244,7 +244,7 @@ namespace EAssistant
 			btnTrainersShedule.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.trainers, UserRights.Read);
 			manageTrainersToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.trainers, UserRights.Read);
 
-			manageScheduleRulesToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.schedule, UserRights.Read);
+			manageServicesToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.schedule, UserRights.Read);
 		}
 		
 		private void Reinit()
@@ -432,7 +432,7 @@ namespace EAssistant
 			AddClient();
 		}
 
-		private void manageScheduleRulesToolStripMenuItem_Click(object sender, EventArgs e)
+		private void manageServicesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			ManageScheduleRules sc = new ManageScheduleRules();
 			sc.ShowDialog(this);

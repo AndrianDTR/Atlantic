@@ -57,7 +57,7 @@
 			this.cancel.Text = "Cancel";
 			this.cancel.UseVisualStyleBackColor = true;
 			// 
-			// dataGridView1
+			// gridRules
 			// 
 			this.gridRules.AllowUserToResizeRows = false;
 			this.gridRules.AutoGenerateColumns = false;
@@ -65,11 +65,12 @@
 			this.gridRules.DataSource = this.scheduleRulesBindingSource;
 			this.gridRules.Location = new System.Drawing.Point(12, 12);
 			this.gridRules.MultiSelect = false;
-			this.gridRules.Name = "dataGridView1";
+			this.gridRules.Name = "gridRules";
 			this.gridRules.RowHeadersVisible = false;
 			this.gridRules.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridRules.Size = new System.Drawing.Size(587, 319);
 			this.gridRules.TabIndex = 8;
+			this.gridRules.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OnError);
 			// 
 			// scheduleRulesBindingSource
 			// 
@@ -92,7 +93,7 @@
 			this.ShowInTaskbar = false;
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Manage schedule rules";
+			this.Text = "Manage services";
 			this.Load += new System.EventHandler(this.OnLoad);
 			((System.ComponentModel.ISupportInitialize)(this.gridRules)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.scheduleRulesBindingSource)).EndInit();

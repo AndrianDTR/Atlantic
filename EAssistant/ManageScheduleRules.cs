@@ -80,5 +80,10 @@ namespace EAssistant
 			DialogResult = DialogResult.OK;
 			Close();
 		}
+
+		private void OnError(object sender, DataGridViewDataErrorEventArgs e)
+		{
+			UIMessages.Error(e.Exception.Message);
+		}
 	}
 }
