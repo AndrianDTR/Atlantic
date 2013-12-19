@@ -21,12 +21,15 @@ namespace EAssistant
 
 		public RegisterForm(String serial)
 		{
+		Logger.Enter();
 			InitializeComponent();
 			textSerial.Text = serial;
+			Logger.Leave();
 		}
 		
 		private void InitializeComponent()
 		{
+		Logger.Enter();
 			this.textSerial = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnProcess = new System.Windows.Forms.Button();
@@ -134,10 +137,12 @@ namespace EAssistant
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
+			Logger.Leave();
 		}
 
 		private void btnProcess_Click(object sender, EventArgs e)
 		{
+		Logger.Enter();
 			try
 			{
 				byte[] buf = RegUtils.Instance.SavedData;
@@ -178,11 +183,14 @@ namespace EAssistant
 
 				DialogResult = DialogResult.OK;
 				this.Close();
+				
 			}
 			catch (System.Exception)
 			{
 				UIMessages.Info("Invalid activation key has been entered.");
 			}
+			Logger.Leave();
+
 		}
 	}
 }
