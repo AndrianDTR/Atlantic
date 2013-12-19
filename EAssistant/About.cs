@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.IO;
 using AY.Utils;
+using AY.Log;
 
 namespace EAssistant
 {
@@ -11,30 +12,41 @@ namespace EAssistant
 	{
 		public About()
 		{
+			Logger.Enter();
+			
 			InitializeComponent();
 			this.Text = String.Format("About {0}", AssemblyTitle);
 			this.labelName.Text = AssemblyProduct;
 			this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
 			this.labelCopy.Text = AssemblyCopyright;
 			this.textRegInfo.Text = AppReginfo;
-		}
 
-		#region Assembly Attribute Accessors
+			Logger.Leave();
+		}
 
 		public string AssemblyTitle
 		{
 			get
 			{
-				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
-				if (attributes.Length > 0)
+				Logger.Enter();
+				string title = "";
+				do
 				{
-					AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
-					if (titleAttribute.Title != "")
+					object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+					if (attributes.Length > 0)
 					{
-						return titleAttribute.Title;
+						AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
+						if (titleAttribute.Title != "")
+						{
+							title = titleAttribute.Title;
+							break;
+						}
 					}
-				}
-				return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+					title = System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+				}while(false);
+				Logger.Leave();
+				
+				return title;
 			}
 		}
 
@@ -42,7 +54,11 @@ namespace EAssistant
 		{
 			get
 			{
-				return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+				Logger.Enter();
+				String ver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+				Logger.Leave();
+
+				return ver;
 			}
 		}
 
@@ -50,12 +66,19 @@ namespace EAssistant
 		{
 			get
 			{
-				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
-				if (attributes.Length == 0)
+				Logger.Enter();
+				String product = "";
+				do 
 				{
-					return "";
-				}
-				return ((AssemblyProductAttribute)attributes[0]).Product;
+					object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+					if (attributes.Length == 0)
+					{
+						break;
+					}
+					product = ((AssemblyProductAttribute)attributes[0]).Product;
+				} while (false);
+				Logger.Leave();
+				return product;
 			}
 		}
 
@@ -63,12 +86,19 @@ namespace EAssistant
 		{
 			get
 			{
-				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-				if (attributes.Length == 0)
+				Logger.Enter();
+				String copy = "";
+				do
 				{
-					return "";
-				}
-				return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+					object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+					if (attributes.Length == 0)
+					{
+						break;
+					}
+					copy = ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+				} while (false);
+				Logger.Leave();
+				return copy;
 			}
 		}
 
@@ -76,23 +106,25 @@ namespace EAssistant
 		{
 			get
 			{
+				Logger.Enter();
 				String info = "This copy of application is not registered.";
-				byte[] data = RegUtils.Instance.SavedData;
-				if (null != data)
+				do
 				{
-					try
+					byte[] data = RegUtils.Instance.SavedData;
+					if (null != data)
 					{
-						info = RegUtils.Instance.RegInfo.Replace("\r", "").Replace("\n", "\r\n");
+						try
+						{
+							info = RegUtils.Instance.RegInfo.Replace("\r", "").Replace("\n", "\r\n");
+						}
+						catch (System.Exception)
+						{
+						}
 					}
-					catch (System.Exception)
-					{
-					}
-				}
-				
+				} while (false);
+				Logger.Leave();
 				return info;
 			}
 		}
-		#endregion
-
 	}
 }

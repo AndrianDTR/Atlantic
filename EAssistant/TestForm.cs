@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using AY.Log;
 
 namespace EAssistant
 {
@@ -13,11 +8,15 @@ namespace EAssistant
 	{
 		public TestForm()
 		{
+			Logger.Enter();
 			InitializeComponent();
+			Logger.Leave();
 		}
 
 		private void TestForm_Load(object sender, EventArgs e)
 		{
+			Logger.Enter();
+			Logger.Leave();
 		}
 	}
 }

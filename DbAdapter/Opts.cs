@@ -21,7 +21,9 @@ namespace AY
 					}
 					set
 					{
+						Logger.Enter();
 						showTrainer = value ? 1 : 0;
+						Logger.Leave();
 					}
 				}
 
@@ -33,7 +35,9 @@ namespace AY
 					}
 					set
 					{
+						Logger.Enter();
 						showClientCount = value ? 1 : 0;
+						Logger.Leave();
 					}
 				}
 
@@ -45,7 +49,9 @@ namespace AY
 					}
 					set
 					{
+						Logger.Enter();
 						storeMainWindowState = value ? 1 : 0;
+						Logger.Leave();
 					}
 				}
 
@@ -57,7 +63,9 @@ namespace AY
 					}
 					set
 					{
+						Logger.Enter();
 						mainWindowState = (int)value;
+						Logger.Leave();
 					}
 				}
 				
@@ -65,6 +73,7 @@ namespace AY
 				{
 					get
 					{
+						Logger.Enter();
 						Color clr = Color.FromArgb(0, 255, 0);
 						
 						Trigger tClr = new Trigger(colors);
@@ -72,14 +81,16 @@ namespace AY
 						{
 							clr = tClr[TriggerFields.ColorPresent];
 						}
-						
+						Logger.Leave();
 						return clr;
 					}
 					set
 					{
+						Logger.Enter();
 						Trigger tClr = new Trigger(colors);
 						tClr[TriggerFields.ColorPresent] = value;
 						colors = tClr.ToString();
+						Logger.Leave();
 					}
 				}
 
@@ -87,6 +98,7 @@ namespace AY
 				{
 					get
 					{
+						Logger.Enter();
 						Color clr = Color.FromArgb(255, 200, 50);
 
 						Trigger tClr = new Trigger(colors);
@@ -94,14 +106,16 @@ namespace AY
 						{
 							clr = tClr[TriggerFields.ColorOvertime];
 						}
-
+						Logger.Leave();
 						return clr;
 					}
 					set
 					{
+						Logger.Enter();
 						Trigger tClr = new Trigger(colors);
 						tClr[TriggerFields.ColorOvertime] = value;
 						colors = tClr.ToString();
+						Logger.Leave();
 					}
 				}
 
@@ -109,6 +123,7 @@ namespace AY
 				{
 					get
 					{
+						Logger.Enter();
 						Color clr = Color.FromArgb(255, 255, 0);
 
 						Trigger tClr = new Trigger(colors);
@@ -116,14 +131,16 @@ namespace AY
 						{
 							clr = tClr[TriggerFields.ColorDelayed];
 						}
-
+						Logger.Leave();
 						return clr;
 					}
 					set
 					{
+						Logger.Enter();
 						Trigger tClr = new Trigger(colors);
 						tClr[TriggerFields.ColorDelayed] = value;
 						colors = tClr.ToString();
+						Logger.Leave();
 					}
 				}
 
@@ -131,6 +148,7 @@ namespace AY
 				{
 					get
 					{
+						Logger.Enter();
 						Color clr = Color.FromArgb(255, 50, 0);
 
 						Trigger tClr = new Trigger(colors);
@@ -138,14 +156,16 @@ namespace AY
 						{
 							clr = tClr[TriggerFields.ColorMissed];
 						}
-
+						Logger.Leave();
 						return clr;
 					}
 					set
 					{
+						Logger.Enter();
 						Trigger tClr = new Trigger(colors);
 						tClr[TriggerFields.ColorMissed] = value;
 						colors = tClr.ToString();
+						Logger.Leave();
 					}
 				}
 
@@ -153,12 +173,16 @@ namespace AY
 				{
 					get
 					{
+						Logger.Enter();
 						startTime = DateTime.Now.Date.Add(startTime.TimeOfDay);
+						Logger.Leave();
 						return startTime;
 					}
 					set
 					{
+						Logger.Enter();
 						startTime = DateTime.Now.Date.Add(value.TimeOfDay);
+						Logger.Leave();
 					}
 				}
 
@@ -166,12 +190,16 @@ namespace AY
 				{
 					get
 					{
+						Logger.Enter();
 						endTime = DateTime.Now.Date.Add(endTime.TimeOfDay);
+						Logger.Leave();
 						return endTime;
 					}
 					set
 					{
+						Logger.Enter();
 						endTime = DateTime.Now.Date.Add(value.TimeOfDay);
+						Logger.Leave();
 					}
 				}
 			}

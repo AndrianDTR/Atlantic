@@ -17,19 +17,22 @@ namespace EAssistant
 
 		public ManageClients()
 		{
+			Logger.Enter();
 			InitializeComponent();
 			Init();
+			Logger.Leave();
 		}
-		
+
 		private void Init()
 		{
+			Logger.Enter();
 			colId = new DataGridViewTextBoxColumn();
 			colName = new DataGridViewTextBoxColumn();
 			colPlan = new DataGridViewTextBoxColumn();
 			colHoursLeft = new DataGridViewTextBoxColumn();
 
 			clientsBindingSource.DataSource = Db.Instance.dSet.VClients;
-			
+
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -67,130 +70,182 @@ namespace EAssistant
 				colName,
 				colPlan,
 				colHoursLeft});
+
+			Logger.Leave();
 		}
-		
+
 		private void OnLoad(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			Db.Instance.Adapters.VClientsTableAdapter.Fill(Db.Instance.dSet.VClients);
+			Logger.Leave();
 		}
 
 		private Int64 GetSelectedClientId()
 		{
-			if (gridClients.SelectedRows.Count != 1)
-				return 0;
-				
-			dbDataSet.VClientsRow cr = (dbDataSet.VClientsRow)((DataRowView)gridClients.SelectedRows[0].DataBoundItem).Row;
-			return cr.id;
+			Logger.Enter();
+			Int64 res = 0;
+			do
+			{
+				if (gridClients.SelectedRows.Count != 1)
+					break;
+
+				dbDataSet.VClientsRow cr = (dbDataSet.VClientsRow)((DataRowView)gridClients.SelectedRows[0].DataBoundItem).Row;
+				res = cr.id;
+			} while (false);
+			Logger.Leave();
+			return res;
 		}
 
 		private dbDataSet.VClientsRow GetSelectedRow()
 		{
-			if (gridClients.SelectedRows.Count != 1)
-				return null;
+			dbDataSet.VClientsRow row = null;
+			Logger.Enter();
+			do
+			{
+				if (gridClients.SelectedRows.Count != 1)
+					break;
+				row = (dbDataSet.VClientsRow)((DataRowView)gridClients.SelectedRows[0].DataBoundItem).Row;
 
-			return (dbDataSet.VClientsRow)((DataRowView)gridClients.SelectedRows[0].DataBoundItem).Row;
+			} while (false);
+			Logger.Leave();
+			return row;
 		}
-		
+
 		private void btnSearch_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			Search();
+			Logger.Leave();
 		}
 
 		private void OnSearch(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			//Search();
+			Logger.Leave();
 		}
-		
+
 		private void Search()
 		{
-			String val = textToSearch.Text;
-			if (0 == val.Trim().Length)
+			Logger.Enter();
+			do
 			{
-				clientsBindingSource.Filter = "";
-				return;
-			}
+				String val = textToSearch.Text;
+				if (0 == val.Trim().Length)
+				{
+					clientsBindingSource.Filter = "";
+					break;
+				}
 
-			String pattern = "%{0}%";
-			if (checkStartWith.Checked)
-				pattern = "{0}%";
+				String pattern = "%{0}%";
+				if (checkStartWith.Checked)
+					pattern = "{0}%";
 
-			String query = String.Format("id = '{0}'", val);
-			if (checkNames.Checked)
-				query += String.Format(" or name like '{0}'", pattern);
+				String query = String.Format("id = '{0}'", val);
+				if (checkNames.Checked)
+					query += String.Format(" or name like '{0}'", pattern);
 
-			clientsBindingSource.Filter = String.Format(query, val);
+				clientsBindingSource.Filter = String.Format(query, val);
+			} while (false);
+			Logger.Leave();
 		}
 
 		private void btnOk_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			Db.Instance.AcceptChanges();
 			Session.Instance.UpdateMain();
 			DialogResult = DialogResult.OK;
 			Close();
+			Logger.Leave();
 		}
-		
+
 		private void EditClient()
 		{
-			dbDataSet.VClientsRow cr = GetSelectedRow();
-			Int32 id = 0;
-			if(null != cr)
+			Logger.Enter();
+			do
 			{
-				id = cr.id;
-			}
-			ClientInfo ci = new ClientInfo(id);
-			if (DialogResult.OK != ci.ShowDialog(this))
-				return;
+				dbDataSet.VClientsRow cr = GetSelectedRow();
+				Int32 id = 0;
+				if (null != cr)
+				{
+					id = cr.id;
+				}
+				ClientInfo ci = new ClientInfo(id);
+				if (DialogResult.OK != ci.ShowDialog(this))
+					break;
 
-			Db.Instance.Adapters.VClientsTableAdapter.Fill(Db.Instance.dSet.VClients);
+				Db.Instance.Adapters.VClientsTableAdapter.Fill(Db.Instance.dSet.VClients);
+			} while (false);
+			Logger.Leave();
 		}
 
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			foreach (DataGridViewRow row in gridClients.SelectedRows)
 			{
 				row.Selected = false;
 			}
 			EditClient();
+			Logger.Leave();
 		}
 
 		private void btnEdit_Click(object sender, EventArgs e)
 		{
-			EditClient();			
+			Logger.Enter();
+			EditClient();
+			Logger.Leave();
 		}
 
 		private void OnEditClient(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			EditClient();
+			Logger.Leave();
 		}
 
 		private void btnRemove_Click(object sender, EventArgs e)
 		{
-			dbDataSet.VClientsRow vcr = GetSelectedRow();
-			if (null == vcr)
-				return;
-			
-			if(DialogResult.No == UIMessages.Warning("Selected client record will be deleted.\nDo you want to proceed?", MessageBoxButtons.YesNo))
-				return;
-			
-			Db.Instance.Adapters.VClientsTableAdapter.DeleteQuery(vcr.id);
-			Db.Instance.AcceptChanges();
-			Db.Instance.Adapters.VClientsTableAdapter.Fill(Db.Instance.dSet.VClients);	
+			Logger.Enter();
+			do
+			{
+				dbDataSet.VClientsRow vcr = GetSelectedRow();
+				if (null == vcr)
+					break;
+
+				if (DialogResult.No == UIMessages.Warning("Selected client record will be deleted.\nDo you want to proceed?", MessageBoxButtons.YesNo))
+					break;
+
+				Db.Instance.Adapters.VClientsTableAdapter.DeleteQuery(vcr.id);
+				Db.Instance.AcceptChanges();
+				Db.Instance.Adapters.VClientsTableAdapter.Fill(Db.Instance.dSet.VClients);
+			} while (false);
+			Logger.Leave();
 		}
 
 		private void btnPayments_Click(object sender, EventArgs e)
 		{
-			dbDataSet.VClientsRow vcr = GetSelectedRow();
-			if (null == vcr)
-				return;
+			Logger.Enter();
+			do
+			{
+				dbDataSet.VClientsRow vcr = GetSelectedRow();
+				if (null == vcr)
+					break;
 
-			PaymentsHistory hist = new PaymentsHistory();
-			hist.ClientId = vcr.id;
-			hist.ShowDialog();
+				PaymentsHistory hist = new PaymentsHistory();
+				hist.ClientId = vcr.id;
+				hist.ShowDialog();
+			} while (false);
+			Logger.Leave();
 		}
 
 		private void BtnEntrance_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			UIMessages.NotImplementedFeature();
+			Logger.Leave();
 		}
 	}
 }

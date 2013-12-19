@@ -15,8 +15,8 @@ using AY.db.dbDataSetTableAdapters;
 
 namespace EAssistant
 {
-    public partial class MainForm : Form
-    {
+	public partial class MainForm : Form
+	{
 		private DataGridViewTextBoxColumn colOTId;
 		private DataGridViewTextBoxColumn colOTName;
 		private DataGridViewTextBoxColumn colOTStatus;
@@ -25,7 +25,7 @@ namespace EAssistant
 		private DataGridViewTextBoxColumn colOTLastLeave;
 		private DataGridViewTextBoxColumn colOTHoursLeft;
 		private DataGridViewTextBoxColumn colOTHoursDec;
-		
+
 		public enum ClientTicketStus
 		{
 			None = -1,
@@ -35,18 +35,19 @@ namespace EAssistant
 			Delayed,
 			Missed,
 		}
-		
+
 		private Login m_login = new Login();
-		
-        public MainForm()
-        {
+
+		public MainForm()
+		{
+			Logger.Enter();
 			InitializeComponent();
 
 			try
 			{
 				CheckRegistration();
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				UIMessages.Error(ex.Message);
 				throw ex;
@@ -55,24 +56,28 @@ namespace EAssistant
 			UserLogin();
 			InitOnce();
 			Reinit();
-        }
+			Logger.Leave();
+		}
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			GetOpenedTickets();
-			
+
 			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			if (opt.updates == 0)
 			{
 				CheckForUpdates();
 			}
+			Logger.Leave();
 		}
-		
+
 		private void InitOnce()
 		{
+			Logger.Enter();
 			DataGridViewCellStyle csTime = new DataGridViewCellStyle();
 			csTime.Format = "t";
-			
+
 			colOTId = new DataGridViewTextBoxColumn();
 			colOTName = new DataGridViewTextBoxColumn();
 			colOTStatus = new DataGridViewTextBoxColumn();
@@ -81,7 +86,7 @@ namespace EAssistant
 			colOTLastLeave = new DataGridViewTextBoxColumn();
 			colOTHoursLeft = new DataGridViewTextBoxColumn();
 			colOTHoursDec = new DataGridViewTextBoxColumn();
-			
+
 			// 
 			// colOTId
 			// 
@@ -154,10 +159,12 @@ namespace EAssistant
 				colOTLastLeave,
 				colOTHoursLeft,
 				colOTHoursDec});
+			Logger.Leave();
 		}
-		
+
 		private void CheckRegistration()
 		{
+			Logger.Enter();
 			byte[] buf = RegUtils.Instance.SavedData;
 			if (null == buf)
 			{
@@ -167,7 +174,7 @@ namespace EAssistant
 			if (!RegUtils.Instance.CheckRegistrationInfo())
 			{
 				RegisterForm rdlg = new RegisterForm(SecUtils.CryptString(SecUtils.SerialNumber));
-				
+
 				Int64 ticks = BitConverter.ToInt64(buf, 0);
 				DateTime regDate = new DateTime(ticks);
 				TimeSpan daysLeft = regDate.AddDays(30).Subtract(DateTime.Now);
@@ -197,27 +204,31 @@ namespace EAssistant
 					{
 						Environment.Exit(1);
 					}
-					
-					if(DialogResult.OK != rdlg.ShowDialog())
+
+					if (DialogResult.OK != rdlg.ShowDialog())
 					{
 						Environment.Exit(1);
 					}
 				}
 			}
+			Logger.Leave();
 		}
-		
+
 		private void UserLogin()
 		{
+			Logger.Enter();
 			DialogResult res = m_login.ShowDialog();
 
 			if (res != DialogResult.OK)
 			{
 				Environment.Exit(1);
 			}
+			Logger.Leave();
 		}
-		
+
 		private void ConfigureUserRights()
 		{
+			Logger.Enter();
 			dbDataSet.userPrivilegesRow priv = Db.Instance.dSet.userPrivileges.FindByid(Session.Instance.UserRoleId);
 
 			// File menu
@@ -245,59 +256,66 @@ namespace EAssistant
 			manageTrainersToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.trainers, UserRights.Read);
 
 			manageServicesToolStripMenuItem.Enabled = dbDataSet.userPrivilegesRow.IsSet(priv.schedule, UserRights.Read);
+
+			Logger.Leave();
 		}
-		
+
 		private void Reinit()
 		{
+			Logger.Enter();
 			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			Session session = Session.Instance;
-			
+
 			m_calendar.RowHeight = (int)opt.calRowHeight;
 			m_calendar.Reinit();
 			session.PassLen = (int)opt.minPassLen;
 
 			ConfigureUserRights();
-			
+
 			m_calendar.StartDate = DateTime.Now;
 			m_calendar.SelectedDate = m_calendar.StartDate;
-			
+
 			if (opt.StoreMainWindowState)
 			{
 				this.WindowState = opt.MainWindowState;
 			}
 			session.PassLen = (int)opt.minPassLen;
-			
+
 			GetOpenedTickets();
-			
+
 			session.TicketUpdate = new Session.UpdateTicketList(UpdateInfo);
+			Logger.Leave();
 		}
 
 		private void OnClose(object sender, FormClosedEventArgs e)
 		{
+			Logger.Enter();
 			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			opt.MainWindowState = this.WindowState;
 			Db.Instance.Adapters.settingsTableAdapter.Update(opt);
+			Logger.Enter();
 		}
-		
+
 		private void GetOpenedTickets()
 		{
+			Logger.Enter();
 			todayClientsBindingSource.DataSource = Db.Instance.dSet.VTodayClients;
 			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			Db.Instance.Adapters.VTodayClientsTableAdapter.Fill(Db.Instance.dSet.VTodayClients);
-			
+
 			DateTime today = DateTime.Now;
 			DateTime td = today.Date;
 			TimeSpan ct = today.TimeOfDay;
-			
-			foreach( DataGridViewRow row in dataGridView1.Rows)
+
+			foreach (DataGridViewRow row in dataGridView1.Rows)
 			{
 				DateTime ll = (DateTime)row.Cells["colOTLastLeave"].Value;
 				DateTime ot = (DateTime)row.Cells["colOTOpenTicket"].Value;
 				DateTime st = (DateTime)row.Cells["colOTSchedTime"].Value;
 				Int64 hd = (Int64)row.Cells["colOTHoursDec"].Value;
-				
+
 				// Closed tickets
-				if(ll.Date == td && ot < ll)
+				if (ll.Date == td && ot < ll)
 				{
 					row.Cells["colOTStatus"].Value = ClientTicketStus.Closed;
 				}
@@ -337,20 +355,26 @@ namespace EAssistant
 					row.Cells["colOTOpenTicket"].Value = "";
 				}
 			}
+			Logger.Leave();
 		}
 
 		private void btnSearch_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			SearchClient();
+			Logger.Leave();
 		}
-		
+
 		private void clientSearchToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			SearchClient();
+			Logger.Leave();
 		}
-		
+
 		private void SearchClient()
 		{
+			Logger.Enter();
 			Prompt dlg = new Prompt();
 			dlg.Text = "Search client by code";
 			while (DialogResult.OK == dlg.ShowDialog())
@@ -361,7 +385,7 @@ namespace EAssistant
 					dlg.Clear();
 					continue;
 				}
-				
+
 				dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(id);
 				if (null != cr)
 				{
@@ -378,141 +402,186 @@ namespace EAssistant
 
 				dlg.Clear();
 			}
+			Logger.Leave();
 		}
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
+		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Logger.Enter();
+			this.Close();
+			Logger.Leave();
 		}
 
 		private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			ChangePassword cp = new ChangePassword();
 			cp.ShowDialog(this);
+			Logger.Leave();
 		}
 
 		private void usersAndPasswordsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			ManageUsers users = new ManageUsers();
 			users.ShowDialog(this);
+			Logger.Leave();
 		}
-		
+
 		private void userRolesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			ManageUserRoles pm = new ManageUserRoles();
 			pm.ShowDialog(this);
+			Logger.Leave();
 		}
 
 		private void manageTrainersToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			ManageTrainers mt = new ManageTrainers();
 			mt.ShowDialog(this);
+			Logger.Leave();
 		}
 
 		private void manageClientsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			ManageClients mc = new ManageClients();
 			mc.ShowDialog(this);
+			Logger.Leave();
 		}
 
 		private void AddClient()
 		{
+			Logger.Enter();
 			ClientInfo ci = new ClientInfo(0);
-			if (DialogResult.OK != ci.ShowDialog(this))
-				return;
+			ci.ShowDialog(this);
+			Logger.Leave();
 		}
-		
+
 		private void add_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			AddClient();
+			Logger.Leave();
 		}
-		
+
 		private void addToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			AddClient();
+			Logger.Leave();
 		}
 
 		private void manageServicesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			ManageScheduleRules sc = new ManageScheduleRules();
 			sc.ShowDialog(this);
+			Logger.Leave();
 		}
 
 		private void paymentsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			PaymentsHistory his = new PaymentsHistory();
 			his.ShowDialog();
+			Logger.Leave();
 		}
 
 		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			About ab = new About();
 			ab.ShowDialog();
+			Logger.Leave();
 		}
 
 		private void geterateBarcodesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			BarcodePrinter bp = new BarcodePrinter();
 			bp.ShowDialog();
+			Logger.Leave();
 		}
 
 		private void refreshOpenedTicketsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			UpdateInfo();
+			Logger.Leave();
 		}
 
 		private void btnClientManager_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			ManageClients mc = new ManageClients();
 			mc.ShowDialog(this);
+			Logger.Leave();
 		}
 
 		private void btnPaymentsHistory_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			PaymentsHistory his = new PaymentsHistory();
 			his.ShowDialog();
+			Logger.Leave();
 		}
 
 		private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			Options opt = new Options();
-			if(DialogResult.OK == opt.ShowDialog())
+			if (DialogResult.OK == opt.ShowDialog())
 			{
 				Reinit();
 			}
+			Logger.Leave();
 		}
 
 		private void btnBackUp_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			BackUpDB();
+			Logger.Leave();
 		}
-		
+
 		private void exportToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			BackUpDB();
+			Logger.Leave();
 		}
 
 		private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			CheckForUpdates();
+			Logger.Leave();
 		}
 
 		private void openUserManualToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			UIMessages.NotImplementedFeature();
+			Logger.Leave();
 		}
-		
+
 		private void CheckForUpdates()
 		{
+			Logger.Enter();
 #if !DEBUG
 			Updater.CheckNewVersion("http://pro100soft.eu/E-Assistant/updates/latest.xml");
 #else
 			Updater.CheckNewVersion("http://localhost/update.xml");
 #endif
+			Logger.Leave();
 		}
-		
+
 		private void BackUpDB()
 		{
+			Logger.Enter();
 			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			String prefix = DateTime.Now.ToString("yyyyMMdd");
 			String ext = "dbu";
@@ -526,119 +595,138 @@ namespace EAssistant
 			}
 			Db.Instance.ExportData(archName);
 			UpdateInfo();
+			Logger.Leave();
 		}
-		
+
 		private void importToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
+			do
+			{
 #if !DEBUG
 			UIMessages.DisabledFeature();
-			return;
-#endif	
-			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
-			if(DialogResult.Yes != UIMessages.Warning(
-				"Data base will be reverted and all data stored after " +
-				"BackUp will be lost. Do you really want to restore " +
-				"database from BackUp file?", MessageBoxButtons.YesNo))
-			{
-				return;
-			}
-			
-			OpenFileDialog opd = new OpenFileDialog();
-			opd.InitialDirectory = opt.pathBackUp;
-			opd.Filter = "Database BackUp files (*.dbu)|*.dbu";
-			if(DialogResult.OK == opd.ShowDialog())
-			{
-				Db.Instance.ImportData(opd.FileName);
-				if(!dbDataSet.usersRow.UserExist(Session.Instance.UserId))
+			break;
+#endif
+				dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
+				if (DialogResult.Yes != UIMessages.Warning(
+					"Data base will be reverted and all data stored after " +
+					"BackUp will be lost. Do you really want to restore " +
+					"database from BackUp file?", MessageBoxButtons.YesNo))
 				{
-					UserLogin();
+					break;
 				}
-				Reinit();
-			}
+
+				OpenFileDialog opd = new OpenFileDialog();
+				opd.InitialDirectory = opt.pathBackUp;
+				opd.Filter = "Database BackUp files (*.dbu)|*.dbu";
+				if (DialogResult.OK == opd.ShowDialog())
+				{
+					Db.Instance.ImportData(opd.FileName);
+					if (!dbDataSet.usersRow.UserExist(Session.Instance.UserId))
+					{
+						UserLogin();
+					}
+					Reinit();
+				}
+			} while (false);
+			Logger.Leave();
 		}
 
 		private void UpdateInfo()
 		{
+			Logger.Enter();
 			GetOpenedTickets();
 			m_calendar.Reinit();
+			Logger.Leave();
 		}
-		
+
 		private void ShowClientInfo(object sender, DataGridViewCellEventArgs e)
 		{
+			Logger.Enter();
 			Int32 clientId = (Int32)dataGridView1.Rows[e.RowIndex].Cells["colOTId"].Value;
 			ClientInfo ci = new ClientInfo(clientId);
 			ci.ShowDialog();
+			Logger.Leave();
 		}
-		
+
 		private void btmMissLesson_Click(object sender, EventArgs e)
 		{
-			DateTime td = DateTime.Now;
-			DateTime cd = td.Date;
-			TimeSpan ct = td.TimeOfDay;
-			
-			Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
-			
-			foreach (DataGridViewRow row in dataGridView1.Rows)
+			Logger.Enter();
+			do
 			{
-				DateTime ll = (DateTime)row.Cells["colOTLastLeave"].Value;
-				DateTime ot = (DateTime)row.Cells["colOTOpenTicket"].Value;
-				DateTime st = (DateTime)row.Cells["colOTSchedTime"].Value;
-				Int64 hd = (Int64)row.Cells["colOTHoursDec"].Value;
+				DateTime td = DateTime.Now;
+				DateTime cd = td.Date;
+				TimeSpan ct = td.TimeOfDay;
 
-				// Miss
-				if (ll.Date != cd 
-					&& ot.Date != td 
-					&& st.TimeOfDay < ct 
-					&& st.TimeOfDay.TotalMinutes + hd * 60 < ct.TotalMinutes)
+				Db.Instance.Adapters.clientsTableAdapter.Fill(Db.Instance.dSet.clients);
+
+				foreach (DataGridViewRow row in dataGridView1.Rows)
 				{
-					int id = (int)row.Cells["colOTId"].Value;
-					dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(id);
-					if(null == cr)
+					DateTime ll = (DateTime)row.Cells["colOTLastLeave"].Value;
+					DateTime ot = (DateTime)row.Cells["colOTOpenTicket"].Value;
+					DateTime st = (DateTime)row.Cells["colOTSchedTime"].Value;
+					Int64 hd = (Int64)row.Cells["colOTHoursDec"].Value;
+
+					// Miss
+					if (ll.Date != cd
+						&& ot.Date != td
+						&& st.TimeOfDay < ct
+						&& st.TimeOfDay.TotalMinutes + hd * 60 < ct.TotalMinutes)
 					{
-						continue;
+						int id = (int)row.Cells["colOTId"].Value;
+						dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(id);
+						if (null == cr)
+						{
+							continue;
+						}
+						cr.lastEnter = cd.Add(st.TimeOfDay);
+						cr.lastLeave = cd.Add(st.TimeOfDay.Add(new TimeSpan((int)hd, 0, 0)));
+						cr.ProcessEnter();
 					}
-					cr.lastEnter = cd.Add(st.TimeOfDay);
-					cr.lastLeave = cd.Add(st.TimeOfDay.Add(new TimeSpan((int)hd, 0, 0)));
-					cr.ProcessEnter();
 				}
-			}
-			
-			dbDataSet.clientsDataTable cdt = 
-				(dbDataSet.clientsDataTable)Db.Instance.dSet.clients.GetChanges(DataRowState.Modified);
-			
-			if(null == cdt)
-				return;
-			
-			Db.Instance.Adapters.clientsTableAdapter.Update(cdt);
-			Db.Instance.dSet.AcceptChanges();
-			
-			UpdateInfo();
+
+				dbDataSet.clientsDataTable cdt =
+					(dbDataSet.clientsDataTable)Db.Instance.dSet.clients.GetChanges(DataRowState.Modified);
+
+				if (null == cdt)
+					break;
+
+				Db.Instance.Adapters.clientsTableAdapter.Update(cdt);
+				Db.Instance.dSet.AcceptChanges();
+
+				UpdateInfo();
+			} while (false);
+			Logger.Leave();
 		}
 
 		private void btnTrainersShedule_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			ManageTrainerScheduleDlg dlg = new ManageTrainerScheduleDlg();
 			dlg.ShowDialog();
+			Logger.Leave();
 		}
-		
+
 		private Dictionary<DateTime, int> GetPrognosedData(DateTime date)
 		{
+			Logger.Enter();
 			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			Dictionary<DateTime, int> res = new Dictionary<DateTime, int>();
-			
+
 			DateTime dt = opt.StartTime.AddHours(-1);
-			while(dt < opt.EndTime.AddHours(1))
+			while (dt < opt.EndTime.AddHours(1))
 			{
 				res[dt] = 3;
-				
+
 				dt = dt.AddMinutes(15);
 			}
-			
+			Logger.Leave();
 			return res;
 		}
 
 		private Dictionary<DateTime, int> GetPresentData(DateTime date)
 		{
+			Logger.Enter();
 			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			Dictionary<DateTime, int> res = new Dictionary<DateTime, int>();
 
@@ -650,12 +738,14 @@ namespace EAssistant
 
 				dt = dt.AddMinutes(15);
 			}
-			
+
+			Logger.Leave();
 			return res;
 		}
 
 		private void FillChart(object sender, ChartPaintEventArgs e)
 		{
+			Logger.Enter();
 			/*
 			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 			DateTime date = DateTime.Now;
@@ -697,6 +787,7 @@ namespace EAssistant
 
 			wd.Close();
 			*/
+			Logger.Leave();
 		}
-    }
+	}
 }
