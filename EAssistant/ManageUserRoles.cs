@@ -22,15 +22,18 @@ namespace EAssistant
 
 		public ManageUserRoles()
 		{
+			Logger.Enter();
 			InitializeComponent();
-			
+
 			userPrivilegesBindingSource.DataSource = Db.Instance.dSet.userPrivileges;
-			
+
 			Init();
+			Logger.Leave();
 		}
 
 		private void Init()
 		{
+			Logger.Enter();
 			colId = new DataGridViewTextBoxColumn();
 			colName = new DataGridViewTextBoxColumn();
 			colClients = new DataGridViewTextBoxColumn();
@@ -41,7 +44,7 @@ namespace EAssistant
 			colStatistics = new DataGridViewTextBoxColumn();
 			colUsers = new DataGridViewTextBoxColumn();
 			colPrivileges = new DataGridViewTextBoxColumn();
-			
+
 			gridRoles.Columns.AddRange(new DataGridViewColumn[] {
 				colId,
 				colName,
@@ -53,7 +56,7 @@ namespace EAssistant
 				colStatistics,
 				colUsers,
 				colPrivileges});
-            
+
 			// 
 			// colId
 			// 
@@ -124,28 +127,35 @@ namespace EAssistant
 			colPrivileges.HeaderText = "privileges";
 			colPrivileges.Name = "colPrivileges";
 			colPrivileges.Visible = false;
+
+			Logger.Leave();
 		}
-		
+
 		private void OnLoad(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			Db.Instance.Adapters.userPrivilegesTableAdapter.Fill(Db.Instance.dSet.userPrivileges);
+			Logger.Leave();
 		}
-		
+
 		private object[] GetRightsRow(String name, long rights)
 		{
+			Logger.Enter();
 			object[] res = new object[5];
-			
+
 			res[0] = (object)name;
 			res[1] = ((rights & (long)UserRights.Read) == (long)UserRights.Read) ? "X" : " ";
 			res[2] = ((rights & (long)UserRights.Write) == (long)UserRights.Write) ? "X" : " ";
 			res[3] = ((rights & (long)UserRights.Create) == (long)UserRights.Create) ? "X" : " ";
 			res[4] = ((rights & (long)UserRights.Delete) == (long)UserRights.Delete) ? "X" : " ";
-			
+
+			Logger.Leave();
 			return res;
 		}
 
 		private void FillPrivileges(dbDataSet.userPrivilegesRow priv)
 		{
+			Logger.Enter();
 			privilegesGrid.Rows.Clear();
 			int nRow = 0;
 			nRow = privilegesGrid.Rows.Add(GetRightsRow("Users management", priv.users));
@@ -164,10 +174,12 @@ namespace EAssistant
 			privilegesGrid.Rows[nRow].Tag = priv.schedule;
 			nRow = privilegesGrid.Rows.Add(GetRightsRow("Manage statistics", priv.statistics));
 			privilegesGrid.Rows[nRow].Tag = priv.statistics;
+			Logger.Leave();
 		}
-		
+
 		private void CellValChanged(object sender, DataGridViewCellEventArgs e)
 		{
+			Logger.Enter();
 			if (e.RowIndex >= 0
 				&& e.RowIndex < privilegesGrid.Rows.Count
 				&& e.ColumnIndex >= 0
@@ -175,98 +187,118 @@ namespace EAssistant
 			{
 				object o = privilegesGrid.Rows[e.RowIndex].Cells[e.ColumnIndex];
 			}
+			Logger.Leave();
 		}
 
 		private void ChangeRow(object sender, DataGridViewRowStateChangedEventArgs e)
 		{
-			if(e.StateChanged != DataGridViewElementStates.Selected)
-				return;
-
-			if (e.Row.IsNewRow)
+			Logger.Enter();
+			do
 			{
-				privilegesGrid.Rows.Clear();
-				return;
-			}
+				if (e.StateChanged != DataGridViewElementStates.Selected)
+					break;
 
-			dbDataSet.userPrivilegesRow row = (dbDataSet.userPrivilegesRow)((DataRowView)e.Row.DataBoundItem).Row;
-			FillPrivileges(row);
+				if (e.Row.IsNewRow)
+				{
+					privilegesGrid.Rows.Clear();
+					break;
+				}
+
+				dbDataSet.userPrivilegesRow row = (dbDataSet.userPrivilegesRow)((DataRowView)e.Row.DataBoundItem).Row;
+				FillPrivileges(row);
+			} while (false);
+			Logger.Leave();
 		}
 
 		private void DelRow(object sender, DataGridViewRowCancelEventArgs e)
 		{
+			Logger.Enter();
 			privilegesGrid.Rows.Clear();
+			Logger.Leave();
 		}
 
 		private void btnOK_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			Db.Instance.AcceptChanges();
 			DialogResult = DialogResult.OK;
 			Close();
+			Logger.Leave();
 		}
 
 		private void OnChangeRole(object sender, DataGridViewRowStateChangedEventArgs e)
 		{
-			if (e.StateChanged != DataGridViewElementStates.Selected)
-				return;
-				
-			if (e.Row.IsNewRow)
+			Logger.Enter();
+			do
 			{
-				privilegesGrid.Rows.Clear();
-				return;
-			}
-			dbDataSet.userPrivilegesRow row = (dbDataSet.userPrivilegesRow)((DataRowView)e.Row.DataBoundItem).Row;
-			FillPrivileges(row);
+				if (e.StateChanged != DataGridViewElementStates.Selected)
+					break;
+
+				if (e.Row.IsNewRow)
+				{
+					privilegesGrid.Rows.Clear();
+					break;
+				}
+				dbDataSet.userPrivilegesRow row = (dbDataSet.userPrivilegesRow)((DataRowView)e.Row.DataBoundItem).Row;
+				FillPrivileges(row);
+			} while (false);
+			Logger.Leave();
 		}
 
 		private void ChangePermission(object sender, DataGridViewCellEventArgs e)
 		{
-			if (gridRoles.SelectedRows.Count < 1 || gridRoles.SelectedRows[0].IsNewRow)
-				return;
-
-			if (privilegesGrid.CurrentCell != null
-				&& privilegesGrid.CurrentCell.ColumnIndex > 0)
+			Logger.Enter();
+			do
 			{
-				dbDataSet.userPrivilegesRow role = (dbDataSet.userPrivilegesRow)((DataRowView)gridRoles.SelectedRows[0].DataBoundItem).Row;
+				if (gridRoles.SelectedRows.Count < 1 || gridRoles.SelectedRows[0].IsNewRow)
+					break;
 
-				int rights = (int)privilegesGrid.CurrentRow.Tag;
-				String val = privilegesGrid.CurrentCell.Value.ToString();
-				val = val == "X" ? " " : "X";
-				privilegesGrid.CurrentCell.Value = val;
-
-				if (val == "X")
-					rights |= (1 << privilegesGrid.CurrentCell.ColumnIndex - 1);
-				else
-					rights ^= (1 << privilegesGrid.CurrentCell.ColumnIndex - 1);
-
-				switch (privilegesGrid.CurrentRow.Index)
+				if (privilegesGrid.CurrentCell != null
+					&& privilegesGrid.CurrentCell.ColumnIndex > 0)
 				{
-					case 0:
-						role.users = rights;
-						break;
-					case 1:
-						role.privileges = rights;
-						break;
-					case 2:
-						role.backup = rights;
-						break;
-					case 3:
-						role.clients = rights;
-						break;
-					case 4:
-						role.payments = rights;
-						break;
-					case 5:
-						role.trainers = rights;
-						break;
-					case 6:
-						role.schedule = rights;
-						break;
-					case 7:
-						role.statistics = rights;
-						break;
+					dbDataSet.userPrivilegesRow role = (dbDataSet.userPrivilegesRow)((DataRowView)gridRoles.SelectedRows[0].DataBoundItem).Row;
+
+					int rights = (int)privilegesGrid.CurrentRow.Tag;
+					String val = privilegesGrid.CurrentCell.Value.ToString();
+					val = val == "X" ? " " : "X";
+					privilegesGrid.CurrentCell.Value = val;
+
+					if (val == "X")
+						rights |= (1 << privilegesGrid.CurrentCell.ColumnIndex - 1);
+					else
+						rights ^= (1 << privilegesGrid.CurrentCell.ColumnIndex - 1);
+
+					switch (privilegesGrid.CurrentRow.Index)
+					{
+						case 0:
+							role.users = rights;
+							break;
+						case 1:
+							role.privileges = rights;
+							break;
+						case 2:
+							role.backup = rights;
+							break;
+						case 3:
+							role.clients = rights;
+							break;
+						case 4:
+							role.payments = rights;
+							break;
+						case 5:
+							role.trainers = rights;
+							break;
+						case 6:
+							role.schedule = rights;
+							break;
+						case 7:
+							role.statistics = rights;
+							break;
+					}
+					privilegesGrid.CurrentRow.Tag = rights;
 				}
-				privilegesGrid.CurrentRow.Tag = rights;
-			}
+			} while (false);
+			Logger.Leave();
 		}
 	}
 }

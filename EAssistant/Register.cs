@@ -21,15 +21,15 @@ namespace EAssistant
 
 		public RegisterForm(String serial)
 		{
-		Logger.Enter();
+			Logger.Enter();
 			InitializeComponent();
 			textSerial.Text = serial;
 			Logger.Leave();
 		}
-		
+
 		private void InitializeComponent()
 		{
-		Logger.Enter();
+			Logger.Enter();
 			this.textSerial = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnProcess = new System.Windows.Forms.Button();
@@ -142,7 +142,7 @@ namespace EAssistant
 
 		private void btnProcess_Click(object sender, EventArgs e)
 		{
-		Logger.Enter();
+			Logger.Enter();
 			try
 			{
 				byte[] buf = RegUtils.Instance.SavedData;
@@ -150,14 +150,14 @@ namespace EAssistant
 				int regIdLen = (int)(RegUtils.ActKeyOffsets.Serial - RegUtils.ActKeyOffsets.CustomerId);
 				int regSerialLen = (int)(RegUtils.ActKeyOffsets.Message - RegUtils.ActKeyOffsets.Serial);
 				int regMsgLen = (int)(RegUtils.ActKeyOffsets._end - RegUtils.ActKeyOffsets.Message);
-				
+
 				if (null == buf)
 				{
 					//buf = RegUtils.Instance.FillRegInfo();
 					Logger.Critical("No registration data.");
 					throw new Exception();
 				}
-			
+
 				byte[] data = Convert.FromBase64String(textActKey.Text);
 
 				Array.Copy(data
@@ -178,12 +178,12 @@ namespace EAssistant
 					, (int)RegUtils.DataOffsets.Message
 					, regMsgLen);
 
-				
+
 				RegUtils.Instance.SavedData = buf;
 
 				DialogResult = DialogResult.OK;
 				this.Close();
-				
+
 			}
 			catch (System.Exception)
 			{

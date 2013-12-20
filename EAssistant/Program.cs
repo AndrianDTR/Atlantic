@@ -17,9 +17,11 @@ namespace EAssistant
         [STAThread]
         static void Main()
         {
-			bool sendReport = false;
 			String szLogFile = "SessionLog.txt";
 			Logger.Create(szLogFile, Logger.LogLevel.Debug);
+			Logger.Enter();
+
+			bool sendReport = false;
 			Logger.Info("App start.");
 
 			try
@@ -46,16 +48,21 @@ namespace EAssistant
 
 			}
 			Logger.Info("App end.");
+			Logger.Leave();
             Logger.Close();
             
             if(sendReport)
             {
+				SendReport bug = new SendReport(szLogFile);
+				
+				/*
 				SaveFileDialog dlg = new SaveFileDialog();
 				if(DialogResult.OK == dlg.ShowDialog())
 				{
 					File.Copy(szLogFile, dlg.FileName, true);
 					UIMessages.Info(String.Format("Report file has been saved to '{0}'. Please show this file to application developer.", dlg.FileName));
 				}
+				*/
             }
         }
     }

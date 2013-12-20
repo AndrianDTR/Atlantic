@@ -14,17 +14,20 @@ namespace EAssistant
 		private DataGridViewTextBoxColumn colHoursAdd;
 		private DataGridViewTextBoxColumn colHoursPerLesson;
 		private DataGridViewTextBoxColumn colPrice;
-		
+
 		public ManageScheduleRules()
 		{
+			Logger.Enter();
 			InitializeComponent();
 			Init();
+			Logger.Leave();
 		}
 
 		private void Init()
 		{
+			Logger.Enter();
 			scheduleRulesBindingSource.DataSource = Db.Instance.dSet.scheduleRules;
-			
+
 			colId = new DataGridViewTextBoxColumn();
 			colName = new DataGridViewTextBoxColumn();
 			colHoursAdd = new DataGridViewTextBoxColumn();
@@ -33,7 +36,7 @@ namespace EAssistant
 
 			gridRules.Columns.AddRange(new DataGridViewColumn[] {
 				colId, colName, colHoursAdd, colHoursPerLesson, colPrice});
-			
+
 			// 
 			// colId
 			// 
@@ -66,24 +69,32 @@ namespace EAssistant
 			this.colPrice.DataPropertyName = "price";
 			this.colPrice.HeaderText = "Price";
 			this.colPrice.Name = "colPrice";
+
+			Logger.Leave();
 		}
-		
+
 		private void OnLoad(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			Db.Instance.Adapters.scheduleRulesTableAdapter.Fill(Db.Instance.dSet.scheduleRules);
+			Logger.Leave();
 		}
-		
+
 		private void save_Click(object sender, EventArgs e)
 		{
+			Logger.Enter();
 			Db.Instance.AcceptChanges();
 			Session.Instance.UpdateMain();
 			DialogResult = DialogResult.OK;
 			Close();
+			Logger.Leave();
 		}
 
 		private void OnError(object sender, DataGridViewDataErrorEventArgs e)
 		{
+			Logger.Enter();
 			UIMessages.Error(e.Exception.Message);
+			Logger.Leave();
 		}
 	}
 }

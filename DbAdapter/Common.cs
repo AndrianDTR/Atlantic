@@ -92,12 +92,15 @@ namespace AY.db
 		
 		private Db()
 		{
+			Logger.Enter();
 			m_clientDataSet = new dbDataSet();
 			Refill();	
+			Logger.Leave();
 		}
 
 		private void Refill()
 		{
+		Logger.Enter();
 			tam = new TableAdapterManager();
 			tam.UpdateAll(m_clientDataSet);
 
@@ -134,6 +137,8 @@ namespace AY.db
 			Adapters.VTodayClientsTableAdapter.Fill(m_clientDataSet.VTodayClients);
 
 			((System.ComponentModel.ISupportInitialize)(m_clientDataSet)).EndInit();
+			
+			Logger.Leave();
 		}
 		
 		public dbDataSet dSet
@@ -148,8 +153,10 @@ namespace AY.db
 		
 		public void AcceptChanges()
 		{
+		Logger.Enter();
 			Adapters.UpdateAll(dSet);
 			dSet.AcceptChanges();
+			Logger.Leave();
 		}
 
 		public bool ImportData(String szImportFile)

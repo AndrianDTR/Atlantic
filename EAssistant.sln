@@ -35,6 +35,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registrator", "Registrator\
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.csproj", "{FB9E7E6B-B19F-4F37-A708-2996190CEF13}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A4463B91-8424-4040-89D6-5449DA9F46F6} = {A4463B91-8424-4040-89D6-5449DA9F46F6}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EAssistant", "EAssistant\EAssistant.csproj", "{DD667F36-DFA9-41F4-8B05-EF1726FF3168}"
 	ProjectSection(ProjectDependencies) = postProject

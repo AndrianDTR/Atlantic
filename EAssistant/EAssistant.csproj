@@ -57,6 +57,9 @@
     <Reference Include="Logger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="Packer, Version=1.0.0.62, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -303,6 +306,7 @@
     <Compile Include="Register.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SendReport.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="SetPassword.cs">
       <SubType>Form</SubType>

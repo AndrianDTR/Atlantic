@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using AY.Log;
 
 namespace EAssistant
 {
@@ -10,6 +11,7 @@ namespace EAssistant
 	{
 		public static DialogResult Error(String message, MessageBoxButtons buttons)
 		{
+			Logger.Error(message);
 			return MessageBox.Show(message, "Error", buttons, MessageBoxIcon.Error);
 		}
 
@@ -20,6 +22,7 @@ namespace EAssistant
 
 		public static DialogResult Warning(String message, MessageBoxButtons buttons)
 		{
+			Logger.Warning(message);
 			return MessageBox.Show(message, "Warning", buttons, MessageBoxIcon.Warning);
 		}
 
@@ -30,6 +33,7 @@ namespace EAssistant
 
 		public static DialogResult Info(String message, MessageBoxButtons buttons)
 		{
+			Logger.Info(message);
 			return MessageBox.Show(message, "Information", buttons, MessageBoxIcon.Information);
 		}
 

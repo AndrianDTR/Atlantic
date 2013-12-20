@@ -604,8 +604,8 @@ namespace EAssistant
 			do
 			{
 #if !DEBUG
-			UIMessages.DisabledFeature();
-			break;
+				UIMessages.DisabledFeature();
+				break;
 #endif
 				dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
 				if (DialogResult.Yes != UIMessages.Warning(
