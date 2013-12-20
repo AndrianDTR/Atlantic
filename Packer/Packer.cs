@@ -11,6 +11,8 @@ namespace AY
 		{
 			public static void Compress(FileInfo fileToCompress, String szOutFile)
 			{
+				Logger.Enter();
+
 				using (FileStream originalFileStream = fileToCompress.OpenRead())
 				{
 					using (FileStream archFileStream = File.Create(szOutFile))
@@ -31,10 +33,13 @@ namespace AY
 						}
 					}
 				}
+
+				Logger.Leave();
 			}
 
 			public static void Decompress(FileInfo archFile, out String szOutFile)
 			{
+				Logger.Enter();
 				using (FileStream archFileStream = archFile.OpenRead())
 				{
 					String currentFileName = archFile.FullName;
@@ -57,6 +62,48 @@ namespace AY
 						}
 					}
 				}
+				Logger.Leave();
+			}
+
+			public static Byte[] CompressArray(Byte[] inBuf)
+			{
+				Logger.Enter();
+
+				MemoryStream memory = new MemoryStream();
+
+				using (GZipStream gzip = new GZipStream(memory, CompressionMode.Compress))
+				{
+					gzip.Write(inBuf, 0, inBuf.Length);
+				}
+
+				Logger.Leave();
+				return memory.ToArray();
+			}
+
+			public static Byte[] DecompressArray(Byte[] inBuf)
+			{
+				Logger.Enter();
+				MemoryStream memory = new MemoryStream();
+				
+				using (GZipStream stream = new GZipStream(new MemoryStream(inBuf), CompressionMode.Decompress))
+				{
+					const int size = 4096;
+					byte[] buffer = new byte[size];
+					
+					int count = 0;
+					do
+					{
+						count = stream.Read(buffer, 0, size);
+						if (count > 0)
+						{
+							memory.Write(buffer, 0, count);
+						}
+					}
+					while (count > 0);
+				}
+
+				Logger.Leave();
+				return memory.ToArray();
 			}
 		}
 	}

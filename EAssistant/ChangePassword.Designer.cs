@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			System.Windows.Forms.Button change;
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangePassword));
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.message = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
@@ -54,6 +55,7 @@
 			// 
 			// pictureBox1
 			// 
+			this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
 			this.pictureBox1.Location = new System.Drawing.Point(12, 42);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(136, 139);

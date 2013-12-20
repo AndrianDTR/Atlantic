@@ -12,6 +12,8 @@ using System.Data;
 using System.Data.SQLite;
 using AY.Updater;
 using AY.db.dbDataSetTableAdapters;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace EAssistant
 {
@@ -564,7 +566,9 @@ namespace EAssistant
 		private void openUserManualToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Logger.Enter();
-			UIMessages.NotImplementedFeature();
+
+			Process.Start("E-Assistant User Manual.pdf"); 
+			
 			Logger.Leave();
 		}
 

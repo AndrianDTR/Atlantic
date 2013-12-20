@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("E-Assistant")]
 [assembly: AssemblyDescription("Assistant utility to manage gym work.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("PRO100 Soft")]
+[assembly: AssemblyCompany("Pro100 Soft")]
 [assembly: AssemblyProduct("E-Assistant")]
 [assembly: AssemblyCopyright("Copyright © Andrian Yablonskyy 2013")]
 [assembly: AssemblyTrademark("")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.0.8.46")]
-[assembly: AssemblyFileVersion("0.0.1.46")]
+[assembly: AssemblyVersion("0.1.0.69")]
+[assembly: AssemblyFileVersion("0.1.0.69")]

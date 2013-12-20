@@ -393,6 +393,9 @@
   <ItemGroup>
     <None Include="Properties\DataSources\AY.db.dbDataSet+trainersDataTable.datasource" />
     <None Include="Properties\DataSources\AY.db.dbDataSetTableAdapters.trainersTableAdapter.datasource" />
+    <Content Include="E-Assistant User Manual.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\search %281%29.png" />
     <None Include="Resources\search.png" />
     <Content Include="ean13.ttf">
@@ -405,6 +408,7 @@
     <Content Include="EAssistant.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\EAssistantUserManual.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,6 +6,8 @@ using System.IO;
 using AY.Utils;
 using System.Text;
 using AY.Log;
+using AY.Packer;
+using System.IO.Compression;
 
 namespace EAssistant
 {
@@ -159,6 +161,7 @@ namespace EAssistant
 				}
 
 				byte[] data = Convert.FromBase64String(textActKey.Text);
+				data = Archive.DecompressArray(data);
 
 				Array.Copy(data
 					, (int)RegUtils.ActKeyOffsets.CustomerId
@@ -185,8 +188,9 @@ namespace EAssistant
 				this.Close();
 
 			}
-			catch (System.Exception)
+			catch (System.Exception ex)
 			{
+				Logger.Error(String.Format("Registration error, internal message: {0}", ex.Message));
 				UIMessages.Info("Invalid activation key has been entered.");
 			}
 			Logger.Leave();

@@ -6,7 +6,9 @@ using System.Runtime.InteropServices;
 using System.Management;
 using System.Text.RegularExpressions;
 using Microsoft.Win32;
+using System.IO.Compression;
 using AY.Log;
+using AY.Packer;
 
 namespace AY.Utils
 {
@@ -45,7 +47,8 @@ namespace AY.Utils
 			try
 			{
 				RegistryKey key = GetAppKey();
-				m_data = (byte[])key.GetValue(@"data");
+				byte[] data = (byte[])key.GetValue(@"data");
+				m_data = Archive.DecompressArray(data);
 			}
 			catch (System.Exception ex)
 			{

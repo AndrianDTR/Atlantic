@@ -2,6 +2,8 @@
 using System.Text;
 using System.Windows.Forms;
 using AY.Utils;
+using AY.Packer;
+using System.IO.Compression;
 
 namespace Registrator
 {
@@ -73,8 +75,9 @@ namespace Registrator
 			len = Math.Min(bytesMsg.Length
 				, (int)(RegUtils.ActKeyOffsets._end - RegUtils.ActKeyOffsets.Message));
 			Array.Copy(bytesMsg, 0, bytesBuf, (int)RegUtils.ActKeyOffsets.Message, len);
-			
-			textActKey.Text = Convert.ToBase64String(bytesBuf);
+
+			Byte[] data = Archive.CompressArray(bytesBuf);
+			textActKey.Text = Convert.ToBase64String(data);
 		}
 
 		private void btnClose_Click(object sender, EventArgs e)

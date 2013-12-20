@@ -291,9 +291,6 @@
   <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 6</value>
   </data>
-  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 6</value>
-  </data>
   <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 22</value>
   </data>
@@ -472,7 +469,7 @@
     <value>m_calendar</value>
   </data>
   <data name="&gt;&gt;m_calendar.Type" xml:space="preserve">
-    <value>EAssistant.DayView, E-Assistant, Version=0.0.8.17, Culture=neutral, PublicKeyToken=null</value>
+    <value>EAssistant.DayView, E-Assistant, Version=0.1.0.69, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;m_calendar.Parent" xml:space="preserve">
     <value>tabCalendar</value>
@@ -2023,6 +2020,18 @@
   <data name="&gt;&gt;manageTrainersToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;servicesToolStripMenuItem.Name" xml:space="preserve">
+    <value>servicesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;servicesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;manageServicesToolStripMenuItem.Name" xml:space="preserve">
+    <value>manageServicesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;manageServicesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;settingsToolStripMenuItem.Name" xml:space="preserve">
     <value>settingsToolStripMenuItem</value>
   </data>
@@ -2057,12 +2066,6 @@
     <value>toolStripMenuItem3</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem4.Name" xml:space="preserve">
-    <value>toolStripMenuItem4</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;optionsToolStripMenuItem.Name" xml:space="preserve">
@@ -2118,18 +2121,6 @@
   </data>
   <data name="&gt;&gt;todayClientsBindingSource.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;servicesToolStripMenuItem.Name" xml:space="preserve">
-    <value>servicesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;servicesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;manageServicesToolStripMenuItem.Name" xml:space="preserve">
-    <value>manageServicesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;manageServicesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

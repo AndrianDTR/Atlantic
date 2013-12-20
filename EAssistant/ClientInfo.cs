@@ -229,7 +229,7 @@ namespace EAssistant
 		private Boolean ChangeClientCode()
 		{
 			Logger.Enter();
-			Boolean res = false;
+					Boolean res = false;
 
 			Prompt dlg = new Prompt();
 			while (DialogResult.OK == dlg.ShowDialog())
