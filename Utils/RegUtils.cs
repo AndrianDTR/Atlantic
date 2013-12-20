@@ -99,7 +99,7 @@ namespace AY.Utils
 			{
 				m_data = value;
 				RegistryKey key = GetAppKey();
-				key.SetValue(@"data", m_data, RegistryValueKind.Binary);
+				key.SetValue(@"data", Archive.CompressArray(m_data), RegistryValueKind.Binary);
 				key.Flush();
 				key.Close();
 			}
