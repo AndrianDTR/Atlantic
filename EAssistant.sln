@@ -52,6 +52,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EAssistant", "EAssistant\EA
 		{3B65D397-4C3D-44BC-8E69-7AE6A16581F8} = {3B65D397-4C3D-44BC-8E69-7AE6A16581F8}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UninstallEAssistant", "UninstallEAssistant\UninstallEAssistant.csproj", "{DAB013EB-415C-43C7-AA06-270EC39F0B2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -154,6 +156,16 @@ Global
 		{DD667F36-DFA9-41F4-8B05-EF1726FF3168}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DD667F36-DFA9-41F4-8B05-EF1726FF3168}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DD667F36-DFA9-41F4-8B05-EF1726FF3168}.Release|Win32.ActiveCfg = Release|Any CPU
+		{DAB013EB-415C-43C7-AA06-270EC39F0B2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAB013EB-415C-43C7-AA06-270EC39F0B2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAB013EB-415C-43C7-AA06-270EC39F0B2D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DAB013EB-415C-43C7-AA06-270EC39F0B2D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DAB013EB-415C-43C7-AA06-270EC39F0B2D}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{DAB013EB-415C-43C7-AA06-270EC39F0B2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAB013EB-415C-43C7-AA06-270EC39F0B2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAB013EB-415C-43C7-AA06-270EC39F0B2D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DAB013EB-415C-43C7-AA06-270EC39F0B2D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DAB013EB-415C-43C7-AA06-270EC39F0B2D}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

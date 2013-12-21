@@ -22,13 +22,19 @@
         "Entry"
         {
         "MsmKey" = "8:_34D018C9BE22AEB7FCC0AC7D820359F1"
-        "OwnerKey" = "8:_BAF1A2596FDE5C1F1B96CF0DDDA7342F"
+        "OwnerKey" = "8:_9B85588ED5B1C4001C540F9B7A383BBD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_34D018C9BE22AEB7FCC0AC7D820359F1"
         "OwnerKey" = "8:_721B7022B8044618ABDA2711534177AE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_34D018C9BE22AEB7FCC0AC7D820359F1"
+        "OwnerKey" = "8:_BAF1A2596FDE5C1F1B96CF0DDDA7342F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -70,13 +76,13 @@
         "Entry"
         {
         "MsmKey" = "8:_753517212D23C56218EB870D98584019"
-        "OwnerKey" = "8:_34D018C9BE22AEB7FCC0AC7D820359F1"
+        "OwnerKey" = "8:_BAF1A2596FDE5C1F1B96CF0DDDA7342F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_753517212D23C56218EB870D98584019"
-        "OwnerKey" = "8:_BAF1A2596FDE5C1F1B96CF0DDDA7342F"
+        "OwnerKey" = "8:_34D018C9BE22AEB7FCC0AC7D820359F1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -105,6 +111,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D5FE0FB7560A4D2F9DB850CD3FDD7349"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_F8A1CD679F81EC71151DC7678B53A4CF"
         "OwnerKey" = "8:_721B7022B8044618ABDA2711534177AE"
         "MsmSig" = "8:_UNDEFINED"
@@ -119,6 +131,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_721B7022B8044618ABDA2711534177AE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D5FE0FB7560A4D2F9DB850CD3FDD7349"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -136,12 +154,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_34D018C9BE22AEB7FCC0AC7D820359F1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_43B832FA300AFFA351585A32688E88BF"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -149,6 +161,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_9B85588ED5B1C4001C540F9B7A383BBD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_34D018C9BE22AEB7FCC0AC7D820359F1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -278,7 +296,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Updater, Version=1.2.0.65, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Updater, Version=1.2.0.92, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_2AF00EBA06740E4E2457225AAE0ACA47"
@@ -309,16 +327,16 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Packer, Version=1.0.0.76, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Packer, Version=1.0.0.120, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_34D018C9BE22AEB7FCC0AC7D820359F1"
                     {
-                    "Name" = "8:Packer.dll"
+                    "Name" = "8:Packer.DLL"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Packer.dll"
+            "SourcePath" = "8:Packer.DLL"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5A5B1464E75B4C6FAB8BAC80343277F3"
@@ -371,7 +389,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Calendar, Version=1.0.0.57, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Calendar, Version=1.0.0.84, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_43B832FA300AFFA351585A32688E88BF"
@@ -402,7 +420,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Logger, Version=1.0.0.77, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Logger, Version=1.0.0.126, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_753517212D23C56218EB870D98584019"
@@ -433,7 +451,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Utils, Version=1.0.0.73, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Utils, Version=1.0.0.122, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_9B85588ED5B1C4001C540F9B7A383BBD"
@@ -464,7 +482,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:db, Version=1.0.0.75, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:db, Version=1.0.0.102, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_BAF1A2596FDE5C1F1B96CF0DDDA7342F"
@@ -1212,6 +1230,34 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{DD667F36-DFA9-41F4-8B05-EF1726FF3168}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_D5FE0FB7560A4D2F9DB850CD3FDD7349"
+            {
+            "SourcePath" = "8:..\\UninstallEAssistant\\obj\\Debug\\UninstallEAssistant.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_5A5B1464E75B4C6FAB8BAC80343277F3"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{DAB013EB-415C-43C7-AA06-270EC39F0B2D}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {

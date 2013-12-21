@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Logger")]
-[assembly: AssemblyDescription("Logger utility class library.")]
+[assembly: AssemblyTitle("UninstallEAssistant")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("PRO100 Soft")]
-[assembly: AssemblyProduct("Logger")]
-[assembly: AssemblyCopyright("Copyright © Andrian Yablonskyy 2013")]
+[assembly: AssemblyCompany("Samsung")]
+[assembly: AssemblyProduct("UninstallEAssistant")]
+[assembly: AssemblyCopyright("Copyright © Samsung 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ffee6007-708a-4e76-8239-77425e43c801")]
+[assembly: Guid("ea84f6fc-2777-4e9f-8785-a31b75b024b1")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.127")]
-[assembly: AssemblyFileVersion("1.0.0.127")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
