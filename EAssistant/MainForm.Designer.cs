@@ -65,8 +65,6 @@
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
 			this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
-			this.sendLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.tabManager = new System.Windows.Forms.TabControl();
@@ -302,9 +300,7 @@
             this.openUserManualToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.toolStripMenuItem7,
-            this.checkForUpdatesToolStripMenuItem,
-            this.toolStripMenuItem8,
-            this.sendLogToolStripMenuItem});
+            this.checkForUpdatesToolStripMenuItem});
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
 			resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
 			// 
@@ -330,16 +326,6 @@
 			this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
 			resources.ApplyResources(this.checkForUpdatesToolStripMenuItem, "checkForUpdatesToolStripMenuItem");
 			this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
-			// 
-			// toolStripMenuItem8
-			// 
-			this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-			resources.ApplyResources(this.toolStripMenuItem8, "toolStripMenuItem8");
-			// 
-			// sendLogToolStripMenuItem
-			// 
-			this.sendLogToolStripMenuItem.Name = "sendLogToolStripMenuItem";
-			resources.ApplyResources(this.sendLogToolStripMenuItem, "sendLogToolStripMenuItem");
 			// 
 			// panel2
 			// 
@@ -540,9 +526,7 @@
 		private System.Windows.Forms.ToolStripMenuItem manageClientsToolStripMenuItem;
 		private System.Windows.Forms.Button btnClientManager;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-		private System.Windows.Forms.ToolStripMenuItem sendLogToolStripMenuItem;
 		private System.Windows.Forms.TabControl tabManager;
-		private DayView m_calendar;
 		private System.Windows.Forms.TabPage tabCalendar;
 		private System.Windows.Forms.TabPage tabActiveClients;
 		private System.Windows.Forms.Button btmMissLesson;
@@ -558,7 +542,6 @@
 		private System.Windows.Forms.ToolStripMenuItem refreshOpenedTicketsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
 		private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
 		private System.Windows.Forms.ToolStripMenuItem openUserManualToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem servicesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem manageServicesToolStripMenuItem;

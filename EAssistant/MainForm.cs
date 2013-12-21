@@ -19,6 +19,8 @@ namespace EAssistant
 {
 	public partial class MainForm : Form
 	{
+		private DayView m_calendar = new DayView();
+		
 		private DataGridViewTextBoxColumn colOTId;
 		private DataGridViewTextBoxColumn colOTName;
 		private DataGridViewTextBoxColumn colOTStatus;
