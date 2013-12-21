@@ -17,7 +17,7 @@ namespace AY.db
 			private VClientsTableAdapter _vClientsTableAdapter;
 			private VCalendarInfoTableAdapter _vCalendarInfoTableAdapter;
 			private VTodayClientsTableAdapter _vTodayClientsTableAdapter;
-			
+
 			[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
 			[global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
 				"ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
@@ -83,24 +83,24 @@ namespace AY.db
 			}
 		}
 	}
-	
+
 	public class Db : Singleton<Db>
 	{
 		private object m_lock = new object();
 		private dbDataSet m_clientDataSet;
 		private TableAdapterManager tam;
-		
+
 		private Db()
 		{
 			Logger.Enter();
 			m_clientDataSet = new dbDataSet();
-			Refill();	
+			Refill();
 			Logger.Leave();
 		}
 
 		private void Refill()
 		{
-		Logger.Enter();
+			Logger.Enter();
 			tam = new TableAdapterManager();
 			tam.UpdateAll(m_clientDataSet);
 
@@ -137,10 +137,10 @@ namespace AY.db
 			Adapters.VTodayClientsTableAdapter.Fill(m_clientDataSet.VTodayClients);
 
 			((System.ComponentModel.ISupportInitialize)(m_clientDataSet)).EndInit();
-			
+
 			Logger.Leave();
 		}
-		
+
 		public dbDataSet dSet
 		{
 			get { return m_clientDataSet; }
@@ -150,10 +150,10 @@ namespace AY.db
 		{
 			get { return tam; }
 		}
-		
+
 		public void AcceptChanges()
 		{
-		Logger.Enter();
+			Logger.Enter();
 			Adapters.UpdateAll(dSet);
 			dSet.AcceptChanges();
 			Logger.Leave();
@@ -172,7 +172,7 @@ namespace AY.db
 				lock (m_lock)
 				{
 					dbDataSet ds = (dbDataSet)dSet.Clone();
-					
+
 					try
 					{
 						m_clientDataSet.Clear();
@@ -189,13 +189,13 @@ namespace AY.db
 							dataTable.EndLoadData();
 						}
 					}
-					catch(Exception ex)
+					catch (Exception ex)
 					{
 						Logger.Error(String.Format("RestoreDatabase error. Changes could not be applied. Internal message: {0}", ex.Message));
 						m_clientDataSet = ds;
 					}
 				}
-				
+
 				res = true;
 			} while (false);
 
@@ -211,7 +211,7 @@ namespace AY.db
 			do
 			{
 				String tmpFile = DateTime.Now.ToString("yyyyMMddHHmmss") + ".tmp";
-				
+
 				lock (m_lock)
 				{
 					m_clientDataSet.AcceptChanges();

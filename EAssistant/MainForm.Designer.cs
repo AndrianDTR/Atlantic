@@ -81,6 +81,8 @@
 			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
+			this.sendLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tabManager.SuspendLayout();
@@ -300,7 +302,9 @@
             this.openUserManualToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.toolStripMenuItem7,
-            this.checkForUpdatesToolStripMenuItem});
+            this.checkForUpdatesToolStripMenuItem,
+            this.toolStripMenuItem4,
+            this.sendLogToolStripMenuItem});
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
 			resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
 			// 
@@ -467,6 +471,17 @@
 			this.btnAddClient.UseVisualStyleBackColor = true;
 			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
 			// 
+			// sendLogToolStripMenuItem
+			// 
+			this.sendLogToolStripMenuItem.Name = "sendLogToolStripMenuItem";
+			resources.ApplyResources(this.sendLogToolStripMenuItem, "sendLogToolStripMenuItem");
+			this.sendLogToolStripMenuItem.Click += new System.EventHandler(this.sendLogToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem4
+			// 
+			this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+			resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -545,6 +560,8 @@
 		private System.Windows.Forms.ToolStripMenuItem openUserManualToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem servicesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem manageServicesToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+		private System.Windows.Forms.ToolStripMenuItem sendLogToolStripMenuItem;
     }
 }
 

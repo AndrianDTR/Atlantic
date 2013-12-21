@@ -25,6 +25,7 @@ namespace AY
 				Emergency,
 				None,
 			}
+			private bool m_freeze = false;
 			private static String[] m_szLogLevels = {"","Trace","Debug","Info","Warning","Error","Critical","Emergency"};
 			private LogLevel m_level = LogLevel.None;
 			private String m_szFile = null;
@@ -65,7 +66,39 @@ namespace AY
 					m_userName = value;
 				}
 			}
-			
+
+			public static String FilePath
+			{
+				get
+				{
+					return m_hInstance.m_szFile;
+				}
+			}
+
+			public static void Flush()
+			{
+				m_hInstance.m_fs.Flush();
+			}
+
+			public static void Freeze()
+			{
+				lock (new object())
+				{
+					m_hInstance.m_freeze = true;
+					m_hInstance.m_fs.Flush();
+					m_hInstance.m_fs.Close();
+				}
+			}
+
+			public static void Continue()
+			{
+				lock (new object())
+				{
+					m_hInstance.m_fs = new FileStream(FilePath, FileMode.Append);
+					m_hInstance.m_freeze = false;
+				}
+			}
+
 			public static void Close()
 			{
 				lock (new object())
@@ -120,9 +153,12 @@ namespace AY
 				{
 					if(m_messages.Count > 0)
 					{
-						String msg = m_messages.Dequeue();
-						byte[] buf = GetBytes(msg);
-						m_fs.Write(buf, 0, buf.Length);
+						if(!m_freeze)
+						{
+							String msg = m_messages.Dequeue();
+							byte[] buf = GetBytes(msg);
+							m_fs.Write(buf, 0, buf.Length);
+						}
 					}
 					else
 					{

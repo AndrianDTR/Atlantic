@@ -574,6 +574,16 @@ namespace EAssistant
 			Logger.Leave();
 		}
 
+		private void sendLogToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Logger.Enter();
+
+			BugReport br = new BugReport();
+			br.ShowDialog();
+			
+			Logger.Leave();
+		}
+
 		private void CheckForUpdates()
 		{
 			Logger.Enter();

@@ -5,29 +5,39 @@ using System.IO;
 using System.Net.Mail;
 using AY.Packer;
 using System.Net;
+using System.ComponentModel;
 
 namespace EAssistant
 {
 	class SendReport
 	{
 		String __to = "bug@pro100soft.eu";
-		String __subj = "BUG";
-		String __msg = "This mail is auto-generated.";
 		String __from = "mandaryn.club@gmail.com";
 		String __password = "Welcom!985";
 		
-		public SendReport(String filePath)
+		String szSubj = "";
+		String szText = "";
+						
+		public SendReport(String subj, String body)
 		{
-			FileInfo f = new FileInfo(filePath);
-			String archName = "Bug-report.gz";
+			szSubj = subj;
+			szText = body;
 			
-			Archive.Compress(f, archName);
-			FileInfo f2 = new FileInfo(archName);
-			
-			SendEmail(__to, __subj, __msg, archName);
-			
-			f.Delete();
-			f2.Delete();
+			BackgroundWorker bw = new BackgroundWorker();
+			bw.DoWork +=
+				new DoWorkEventHandler(bw_DoWork);
+			bw.RunWorkerCompleted +=
+				new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
+
+			if (bw.IsBusy != true)
+			{
+				bw.RunWorkerAsync();
+			}
+		}
+		
+		public SendReport()
+			: this("BUG", "This mail is auto-generated.")
+		{
 		}
 		
 		private void SendEmail(string To, string Subject, string Msg, String reportFile)
@@ -50,6 +60,41 @@ namespace EAssistant
 			smtpClient.Credentials = loginInfo;
 			smtpClient.Send(msg);
 
+			Logger.Leave();
+		}
+
+		private void bw_DoWork(object sender, DoWorkEventArgs e)
+		{
+			Logger.Enter();
+
+			BackgroundWorker worker = sender as BackgroundWorker;
+
+			Logger.Freeze();
+
+			FileInfo f = new FileInfo(Logger.FilePath);
+			String archName = "Bug-report.gz";
+
+			Archive.Compress(f, archName);
+			SendEmail(__to, szSubj, szText, archName);
+
+			Logger.Leave();
+		}
+
+		private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			Logger.Enter();
+			if ((e.Cancelled == true))
+			{
+				Logger.Info("Send report canceled.");
+			}
+			else if (!(e.Error == null))
+			{
+				Logger.Info("Error: " + e.Error.Message);
+			}
+			else
+			{
+				Logger.Continue();
+			}
 			Logger.Leave();
 		}	
 	}

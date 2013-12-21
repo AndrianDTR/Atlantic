@@ -49,11 +49,12 @@ namespace EAssistant
 			}
 			Logger.Info("App end.");
 			Logger.Leave();
+			Logger.Flush();
             Logger.Close();
             
             if(sendReport)
             {
-				SendReport bug = new SendReport(szLogFile);
+				new SendReport();
 				
 				/*
 				SaveFileDialog dlg = new SaveFileDialog();
