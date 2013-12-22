@@ -7,9 +7,9 @@ using AY.Packer;
 using System.Net;
 using System.ComponentModel;
 
-namespace EAssistant
+namespace AY.Utils
 {
-	class SendReport
+	public class SendReport
 	{
 		String __to = "bug@pro100soft.eu";
 		String __from = "mandaryn.club@gmail.com";
@@ -18,26 +18,48 @@ namespace EAssistant
 		String szSubj = "";
 		String szText = "";
 						
-		public SendReport(String subj, String body)
+		public SendReport(String subj, String body, bool bg)
 		{
+			Logger.Enter();
+			
 			szSubj = subj;
 			szText = body;
 			
-			BackgroundWorker bw = new BackgroundWorker();
-			bw.DoWork +=
-				new DoWorkEventHandler(bw_DoWork);
-			bw.RunWorkerCompleted +=
-				new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
-
-			if (bw.IsBusy != true)
+			if(bg)
 			{
-				bw.RunWorkerAsync();
+				BackgroundWorker bw = new BackgroundWorker();
+
+				bw.DoWork +=
+					new DoWorkEventHandler(bw_DoWork);
+				bw.RunWorkerCompleted +=
+					new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
+
+				if (bw.IsBusy != true)
+				{
+					bw.RunWorkerAsync();
+				}
 			}
+			else
+			{
+				__Send();
+				Logger.Continue();
+			}
+			
+			Logger.Leave();
 		}
 		
-		public SendReport()
-			: this("BUG", "This mail is auto-generated.")
+		public SendReport(bool bg)
+			: this("BUG", "This mail is auto-generated.", bg)
 		{
+			Logger.Enter();
+			Logger.Leave();
+		}
+
+		public SendReport()
+			: this(true)
+		{
+			Logger.Enter();
+			Logger.Leave();
 		}
 		
 		private void SendEmail(string To, string Subject, string Msg, String reportFile)
@@ -69,13 +91,24 @@ namespace EAssistant
 
 			BackgroundWorker worker = sender as BackgroundWorker;
 
+			__Send();
+
+			Logger.Leave();
+		}
+		
+		private void __Send()
+		{
+			Logger.Enter();
+
 			Logger.Freeze();
 
 			FileInfo f = new FileInfo(Logger.FilePath);
 			String archName = "Bug-report.gz";
 
 			Archive.Compress(f, archName);
+#if !DEBUG
 			SendEmail(__to, szSubj, szText, archName);
+#endif
 
 			Logger.Leave();
 		}

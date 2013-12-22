@@ -49,22 +49,12 @@ namespace EAssistant
 			}
 			Logger.Info("App end.");
 			Logger.Leave();
-			Logger.Flush();
-            Logger.Close();
-            
+			
             if(sendReport)
             {
-				new SendReport();
-				
-				/*
-				SaveFileDialog dlg = new SaveFileDialog();
-				if(DialogResult.OK == dlg.ShowDialog())
-				{
-					File.Copy(szLogFile, dlg.FileName, true);
-					UIMessages.Info(String.Format("Report file has been saved to '{0}'. Please show this file to application developer.", dlg.FileName));
-				}
-				*/
+				new SendReport(false);
             }
+            Logger.Close();
         }
     }
 }

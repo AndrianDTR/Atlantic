@@ -7,7 +7,7 @@ using AY.Log;
 
 namespace EAssistant
 {
-	class UIMessages
+	public class UIMessages
 	{
 		public static DialogResult Error(String message, MessageBoxButtons buttons)
 		{

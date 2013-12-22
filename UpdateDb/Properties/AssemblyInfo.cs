@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Packer")]
-[assembly: AssemblyDescription("Zip utility functional class library.")]
+[assembly: AssemblyTitle("MigrateDb")]
+[assembly: AssemblyDescription("DB migrate utility")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("PRO100 Soft")]
-[assembly: AssemblyProduct("Packer")]
+[assembly: AssemblyCompany("Pro100 Soft")]
+[assembly: AssemblyProduct("UpdateDb")]
 [assembly: AssemblyCopyright("Copyright © Andrian Yablonskyy 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("37b8717b-f1d0-4351-b9b2-70ac072c8c36")]
+[assembly: Guid("98de904b-f61f-4bca-90ab-6d0182a79842")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.243")]
-[assembly: AssemblyFileVersion("1.0.0.243")]
+[assembly: AssemblyVersion("0.1.0.31")]
+[assembly: AssemblyFileVersion("0.1.0.31")]

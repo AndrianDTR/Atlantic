@@ -15,6 +15,7 @@ namespace EAssistant
 		private int m_nMinCodeLen = Session.MinBarcodeLen;
 		Random m_random = new Random(Environment.TickCount);
 		String m_Style = "";
+		
 		public BarcodePrinter()
 		{
 			Logger.Enter();

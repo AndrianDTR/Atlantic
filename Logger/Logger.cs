@@ -77,7 +77,10 @@ namespace AY
 
 			public static void Flush()
 			{
-				m_hInstance.m_fs.Flush();
+				if(m_hInstance.m_fs.CanWrite)
+				{
+					m_hInstance.m_fs.Flush();
+				}
 			}
 
 			public static void Freeze()
@@ -85,8 +88,11 @@ namespace AY
 				lock (new object())
 				{
 					m_hInstance.m_freeze = true;
-					m_hInstance.m_fs.Flush();
-					m_hInstance.m_fs.Close();
+					if(m_hInstance.m_fs.CanWrite)
+					{
+						m_hInstance.m_fs.Flush();
+						m_hInstance.m_fs.Close();
+					}
 				}
 			}
 
@@ -107,23 +113,26 @@ namespace AY
 					{
 						m_hInstance.m_bStop = true;
 
-						// finish logging
-						while (true)
+						if (m_hInstance.m_fs.CanWrite)
 						{
-							if (m_hInstance.m_messages.Count > 0)
+							// finish logging
+							while (true)
 							{
-								String msg = m_hInstance.m_messages.Dequeue();
-								byte[] buf = m_hInstance.GetBytes(msg);
-								m_hInstance.m_fs.Write(buf, 0, buf.Length);
+								if (m_hInstance.m_messages.Count > 0)
+								{
+									String msg = m_hInstance.m_messages.Dequeue();
+									byte[] buf = m_hInstance.GetBytes(msg);
+									m_hInstance.m_fs.Write(buf, 0, buf.Length);
+								}
+								else
+								{
+									break;
+								}
 							}
-							else
-							{
-								break;
-							}
+							
+							m_hInstance.m_fs.Flush();
+							m_hInstance.m_fs.Close();
 						}
-
-						m_hInstance.m_fs.Flush();
-						m_hInstance.m_fs.Close();
 					}
 				}
 			}
@@ -153,7 +162,7 @@ namespace AY
 				{
 					if(m_messages.Count > 0)
 					{
-						if(!m_freeze)
+						if(!m_freeze && m_hInstance.m_fs.CanWrite)
 						{
 							String msg = m_messages.Dequeue();
 							byte[] buf = GetBytes(msg);

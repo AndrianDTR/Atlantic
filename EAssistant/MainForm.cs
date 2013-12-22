@@ -45,8 +45,28 @@ namespace EAssistant
 		public MainForm()
 		{
 			Logger.Enter();
+			// 
+			// m_calendar
+			// 
+			m_calendar = new DayView();
+			m_calendar.ActiveTool = null;
+			m_calendar.BgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
+			m_calendar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			m_calendar.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(236)))), ((int)(((byte)(246)))));
+			m_calendar.HeaderBgColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(186)))), ((int)(((byte)(201)))));
+			m_calendar.HorisontalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+			m_calendar.MarkerColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			m_calendar.Name = "m_calendar";
+			m_calendar.SelectedDate = new System.DateTime(((long)(0)));
+			m_calendar.SelectionBorderColor = System.Drawing.SystemColors.ActiveBorder;
+			m_calendar.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(76)))), ((int)(((byte)(122)))));
+			m_calendar.StartDate = new System.DateTime(2013, 8, 13, 0, 0, 0, 0);
+			m_calendar.VerticalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(174)))), ((int)(((byte)(217)))));
+			
 			InitializeComponent();
 
+			tabCalendar.Controls.Add(m_calendar);
+			
 			try
 			{
 				CheckRegistration();

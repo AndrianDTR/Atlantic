@@ -18,16 +18,16 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="..\EAssistant"
+			IntermediateDirectory="obj\$(ConfigurationName)"
 			ConfigurationType="0"
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="make_doc"
-				ReBuildCommandLine="make_doc"
-				CleanCommandLine="clean_doc"
-				Output=""
+				BuildCommandLine="make_doc $(OutDir)"
+				ReBuildCommandLine="make_doc $(OutDir)"
+				CleanCommandLine="clean_doc $(OutDir)"
+				Output="$(OutDir)\E-Assistant User Manual.pdf"
 				PreprocessorDefinitions="WIN32;_DEBUG"
 				IncludeSearchPath=""
 				ForcedIncludes=""
@@ -38,7 +38,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\bin\$(ConfigurationName)"
+			OutputDirectory="..\EAssistant"
 			IntermediateDirectory="obj\$(ConfigurationName)"
 			ConfigurationType="0"
 			>

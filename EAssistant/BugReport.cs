@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using AY.Log;
+using AY.Utils;
 
 namespace EAssistant
 {
