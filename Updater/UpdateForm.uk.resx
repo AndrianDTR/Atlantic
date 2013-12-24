@@ -128,26 +128,23 @@
   <data name="labelUpdate.Text" xml:space="preserve">
     <value>Доступна нова версія {0}!</value>
   </data>
-  <data name="labelDescription.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="labelReleaseNotes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelReleaseNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 13</value>
+    <value>116, 13</value>
   </data>
   <data name="labelReleaseNotes.Text" xml:space="preserve">
-    <value>Зміни для нової версії:</value>
+    <value>Зміни та доповнення:</value>
   </data>
   <data name="buttonUpdate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="buttonUpdate.Text" xml:space="preserve">
-    <value>Оновити</value>
+  <data name="btnUpdate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="buttonSkip.Text" xml:space="preserve">
-    <value>Відмінити</value>
+  <data name="btnUpdate.Text" xml:space="preserve">
+    <value>Оновити</value>
   </data>
   <data name="pictureBoxIcon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -689,11 +686,5 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 </value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Оновлення програми</value>
-  </data>
-  <data name="labelDescription.Text" xml:space="preserve">
-    <value>{0} {1} is now available. You have version {2} installed. Would you like to download it now?</value>
   </data>
 </root>

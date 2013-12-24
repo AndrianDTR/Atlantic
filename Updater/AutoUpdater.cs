@@ -59,7 +59,8 @@ namespace AY.Updater
 
         private static void BackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
         {
-            Assembly mainAssembly = Assembly.GetEntryAssembly();
+			Thread.CurrentThread.CurrentUICulture = new CultureInfo("uk");
+			Assembly mainAssembly = Assembly.GetEntryAssembly();
 			AssemblyCompanyAttribute companyAttribute = 
 				(AssemblyCompanyAttribute)GetAttribute(mainAssembly, typeof(AssemblyCompanyAttribute));
 				

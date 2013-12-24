@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using System.ComponentModel;
 using Microsoft.Win32;
+using System.Threading;
 using AY.Log;
 using AY.db;
 using AY.db.dbDataSetTableAdapters;
@@ -16,8 +17,8 @@ namespace AY.Updater
 		{
 			Logger.Enter();
 			InitializeComponent();
-			
-			dbDataSet.settingsRow row = Db.Instance.dSet.settings.FindByid(1);
+
+			/*dbDataSet.settingsRow row = Db.Instance.dSet.settings.FindByid(1);
 			CultureInfo cult = new CultureInfo(row.language);
 			ComponentResourceManager resources = new ComponentResourceManager(typeof(UpdateForm));
 			Text = Updater.DialogTitle;
@@ -25,19 +26,8 @@ namespace AY.Updater
 			labelDescription.Text =
 				string.Format(resources.GetString("labelReleaseNotes.Text", cult),
 					Updater.AppTitle, Updater.CurrentVersion, Updater.InstalledVersion);
-
+			*/
 			Logger.Leave();
-		}
-
-		public override sealed string Text
-		{
-			get { return base.Text; }
-			set
-			{
-				Logger.Enter();
-				base.Text = value;
-				Logger.Leave();
-			}
 		}
 
 		private void UpdateFormLoad(object sender, EventArgs e)
@@ -61,6 +51,11 @@ namespace AY.Updater
 				Logger.Error("Invocation exception.");
 			}
 			Logger.Leave();
+		}
+
+		private void labelReleaseNotes_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }
