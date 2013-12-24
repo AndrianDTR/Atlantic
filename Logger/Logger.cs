@@ -12,6 +12,7 @@ namespace AY
 		public class Logger
 		{
 			private String m_userName = "";
+			private bool m_bClose = true;
 			
 			public enum LogLevel
 			{
@@ -37,6 +38,7 @@ namespace AY
 			
 			private Logger(String file, LogLevel flags)
 			{
+				m_bClose = false;
 				m_level = flags;
 				m_szFile = file;
 				m_messages = new Queue<String>();
@@ -77,10 +79,10 @@ namespace AY
 
 			public static void Flush()
 			{
-				if(m_hInstance.m_fs.CanWrite)
-				{
-					m_hInstance.m_fs.Flush();
-				}
+				if (m_hInstance.m_bClose)
+					return;
+					
+				m_hInstance.m_fs.Flush();
 			}
 
 			public static void Freeze()
@@ -88,11 +90,13 @@ namespace AY
 				lock (new object())
 				{
 					m_hInstance.m_freeze = true;
-					if(m_hInstance.m_fs.CanWrite)
-					{
-						m_hInstance.m_fs.Flush();
-						m_hInstance.m_fs.Close();
-					}
+
+					if (m_hInstance.m_bClose)
+						return;
+						
+					m_hInstance.m_fs.Flush();
+					m_hInstance.m_fs.Close();
+					m_hInstance.m_bClose = true;
 				}
 			}
 
@@ -102,6 +106,8 @@ namespace AY
 				{
 					m_hInstance.m_fs = new FileStream(FilePath, FileMode.Append);
 					m_hInstance.m_freeze = false;
+					m_hInstance.m_bClose = false;
+					
 				}
 			}
 
@@ -113,26 +119,24 @@ namespace AY
 					{
 						m_hInstance.m_bStop = true;
 
-						if (m_hInstance.m_fs.CanWrite)
+						// finish logging
+						while (true)
 						{
-							// finish logging
-							while (true)
+							if (m_hInstance.m_messages.Count > 0)
 							{
-								if (m_hInstance.m_messages.Count > 0)
-								{
-									String msg = m_hInstance.m_messages.Dequeue();
-									byte[] buf = m_hInstance.GetBytes(msg);
-									m_hInstance.m_fs.Write(buf, 0, buf.Length);
-								}
-								else
-								{
-									break;
-								}
+								String msg = m_hInstance.m_messages.Dequeue();
+								byte[] buf = m_hInstance.GetBytes(msg);
+								m_hInstance.m_fs.Write(buf, 0, buf.Length);
 							}
-							
-							m_hInstance.m_fs.Flush();
-							m_hInstance.m_fs.Close();
+							else
+							{
+								break;
+							}
 						}
+						
+						m_hInstance.m_fs.Flush();
+						m_hInstance.m_fs.Close();
+						m_hInstance.m_bClose = true;
 					}
 				}
 			}
@@ -160,14 +164,11 @@ namespace AY
 			{
 				while(true)
 				{
-					if(m_messages.Count > 0)
+					if (!m_bClose && !m_freeze && m_messages.Count > 0)
 					{
-						if(!m_freeze && m_hInstance.m_fs.CanWrite)
-						{
-							String msg = m_messages.Dequeue();
-							byte[] buf = GetBytes(msg);
-							m_fs.Write(buf, 0, buf.Length);
-						}
+						String msg = m_messages.Dequeue();
+						byte[] buf = GetBytes(msg);
+						m_fs.Write(buf, 0, buf.Length);
 					}
 					else
 					{

@@ -12,7 +12,10 @@ namespace EAssistant
 		public static DialogResult Error(String message, MessageBoxButtons buttons)
 		{
 			Logger.Error(message);
-			return MessageBox.Show(message, "Error", buttons, MessageBoxIcon.Error);
+			
+			return MessageBox.Show(message
+			, Session.Instance.GetResStr("error")
+			, buttons, MessageBoxIcon.Error);
 		}
 
 		public static DialogResult Error(String message)

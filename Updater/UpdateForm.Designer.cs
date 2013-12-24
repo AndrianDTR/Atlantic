@@ -36,62 +36,86 @@ namespace AY.Updater
 			this.labelDescription = new System.Windows.Forms.Label();
 			this.labelReleaseNotes = new System.Windows.Forms.Label();
 			this.buttonUpdate = new System.Windows.Forms.Button();
-			this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
 			this.buttonSkip = new System.Windows.Forms.Button();
+			this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// webBrowser
 			// 
-			this.webBrowser.IsWebBrowserContextMenuEnabled = false;
+			this.webBrowser.AccessibleDescription = null;
+			this.webBrowser.AccessibleName = null;
 			resources.ApplyResources(this.webBrowser, "webBrowser");
+			this.webBrowser.IsWebBrowserContextMenuEnabled = false;
 			this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
 			this.webBrowser.Name = "webBrowser";
 			// 
 			// labelUpdate
 			// 
+			this.labelUpdate.AccessibleDescription = null;
+			this.labelUpdate.AccessibleName = null;
 			resources.ApplyResources(this.labelUpdate, "labelUpdate");
 			this.labelUpdate.MaximumSize = new System.Drawing.Size(480, 0);
 			this.labelUpdate.Name = "labelUpdate";
 			// 
 			// labelDescription
 			// 
+			this.labelDescription.AccessibleDescription = null;
+			this.labelDescription.AccessibleName = null;
 			resources.ApplyResources(this.labelDescription, "labelDescription");
 			this.labelDescription.MaximumSize = new System.Drawing.Size(471, 0);
 			this.labelDescription.Name = "labelDescription";
 			// 
 			// labelReleaseNotes
 			// 
+			this.labelReleaseNotes.AccessibleDescription = null;
+			this.labelReleaseNotes.AccessibleName = null;
 			resources.ApplyResources(this.labelReleaseNotes, "labelReleaseNotes");
 			this.labelReleaseNotes.Name = "labelReleaseNotes";
 			// 
 			// buttonUpdate
 			// 
-			this.buttonUpdate.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.buttonUpdate.AccessibleDescription = null;
+			this.buttonUpdate.AccessibleName = null;
 			resources.ApplyResources(this.buttonUpdate, "buttonUpdate");
+			this.buttonUpdate.BackgroundImage = null;
+			this.buttonUpdate.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.buttonUpdate.Font = null;
 			this.buttonUpdate.Name = "buttonUpdate";
 			this.buttonUpdate.UseVisualStyleBackColor = true;
 			this.buttonUpdate.Click += new System.EventHandler(this.ButtonUpdateClick);
 			// 
-			// pictureBoxIcon
-			// 
-			this.pictureBoxIcon.Image = global::AY.Updater.Properties.Resources.update;
-			resources.ApplyResources(this.pictureBoxIcon, "pictureBoxIcon");
-			this.pictureBoxIcon.Name = "pictureBoxIcon";
-			this.pictureBoxIcon.TabStop = false;
-			// 
 			// buttonSkip
 			// 
-			this.buttonSkip.DialogResult = System.Windows.Forms.DialogResult.Abort;
+			this.buttonSkip.AccessibleDescription = null;
+			this.buttonSkip.AccessibleName = null;
 			resources.ApplyResources(this.buttonSkip, "buttonSkip");
+			this.buttonSkip.BackgroundImage = null;
+			this.buttonSkip.DialogResult = System.Windows.Forms.DialogResult.Abort;
+			this.buttonSkip.Font = null;
 			this.buttonSkip.Name = "buttonSkip";
 			this.buttonSkip.UseVisualStyleBackColor = true;
+			// 
+			// pictureBoxIcon
+			// 
+			this.pictureBoxIcon.AccessibleDescription = null;
+			this.pictureBoxIcon.AccessibleName = null;
+			resources.ApplyResources(this.pictureBoxIcon, "pictureBoxIcon");
+			this.pictureBoxIcon.BackgroundImage = null;
+			this.pictureBoxIcon.Font = null;
+			this.pictureBoxIcon.Image = global::AY.Updater.Properties.Resources.update;
+			this.pictureBoxIcon.ImageLocation = null;
+			this.pictureBoxIcon.Name = "pictureBoxIcon";
+			this.pictureBoxIcon.TabStop = false;
 			// 
 			// UpdateForm
 			// 
 			this.AcceptButton = this.buttonUpdate;
+			this.AccessibleDescription = null;
+			this.AccessibleName = null;
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackgroundImage = null;
 			this.Controls.Add(this.pictureBoxIcon);
 			this.Controls.Add(this.labelReleaseNotes);
 			this.Controls.Add(this.labelDescription);

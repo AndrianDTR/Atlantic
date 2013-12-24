@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using Microsoft.Win32;
 using AY.Log;
+using AY.db;
+using AY.db.dbDataSetTableAdapters;
 
 namespace AY.Updater
 {
@@ -14,11 +16,14 @@ namespace AY.Updater
 		{
 			Logger.Enter();
 			InitializeComponent();
+			
+			dbDataSet.settingsRow row = Db.Instance.dSet.settings.FindByid(1);
+			CultureInfo cult = new CultureInfo(row.language);
 			ComponentResourceManager resources = new ComponentResourceManager(typeof(UpdateForm));
 			Text = Updater.DialogTitle;
-			labelUpdate.Text = string.Format(resources.GetString("labelUpdate.Text", CultureInfo.CurrentCulture), Updater.AppTitle);
+			labelUpdate.Text = string.Format(resources.GetString("labelUpdate.Text", cult), Updater.AppTitle);
 			labelDescription.Text =
-				string.Format(resources.GetString("labelDescription.Text", CultureInfo.CurrentCulture),
+				string.Format(resources.GetString("labelReleaseNotes.Text", cult),
 					Updater.AppTitle, Updater.CurrentVersion, Updater.InstalledVersion);
 
 			Logger.Leave();

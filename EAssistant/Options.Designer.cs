@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.btnOk = new System.Windows.Forms.Button();
 			this.btnClose = new System.Windows.Forms.Button();
 			this.tabControl = new System.Windows.Forms.TabControl();
@@ -59,8 +60,9 @@
 			this.label6 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.tabUpdates = new System.Windows.Forms.TabPage();
-			this.label10 = new System.Windows.Forms.Label();
 			this.comboUpdatesFrequency = new System.Windows.Forms.ComboBox();
+			this.label10 = new System.Windows.Forms.Label();
+			this.languagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.tabControl.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericMinPassLen)).BeginInit();
@@ -68,6 +70,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.numericCalRowHeight)).BeginInit();
 			this.tabPage3.SuspendLayout();
 			this.tabUpdates.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.languagesBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// btnOk
@@ -221,12 +224,15 @@
 			// 
 			// comboLang
 			// 
+			this.comboLang.DataSource = this.languagesBindingSource;
+			this.comboLang.DisplayMember = "name";
 			this.comboLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboLang.FormattingEnabled = true;
 			this.comboLang.Location = new System.Drawing.Point(152, 36);
 			this.comboLang.Name = "comboLang";
 			this.comboLang.Size = new System.Drawing.Size(195, 21);
 			this.comboLang.TabIndex = 1;
+			this.comboLang.ValueMember = "code";
 			// 
 			// label2
 			// 
@@ -417,15 +423,6 @@
 			this.tabUpdates.Text = "Updates";
 			this.tabUpdates.UseVisualStyleBackColor = true;
 			// 
-			// label10
-			// 
-			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(6, 80);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(94, 13);
-			this.label10.TabIndex = 0;
-			this.label10.Text = "Check for updates";
-			// 
 			// comboUpdatesFrequency
 			// 
 			this.comboUpdatesFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -437,6 +434,19 @@
 			this.comboUpdatesFrequency.Name = "comboUpdatesFrequency";
 			this.comboUpdatesFrequency.Size = new System.Drawing.Size(241, 21);
 			this.comboUpdatesFrequency.TabIndex = 1;
+			// 
+			// label10
+			// 
+			this.label10.AutoSize = true;
+			this.label10.Location = new System.Drawing.Point(6, 80);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(94, 13);
+			this.label10.TabIndex = 0;
+			this.label10.Text = "Check for updates";
+			// 
+			// languagesBindingSource
+			// 
+			this.languagesBindingSource.DataMember = "languages";
 			// 
 			// Options
 			// 
@@ -456,6 +466,7 @@
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Options";
+			this.Load += new System.EventHandler(this.Options_Load);
 			this.tabControl.ResumeLayout(false);
 			this.tabPage1.ResumeLayout(false);
 			this.tabPage1.PerformLayout();
@@ -467,6 +478,7 @@
 			this.tabPage3.PerformLayout();
 			this.tabUpdates.ResumeLayout(false);
 			this.tabUpdates.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.languagesBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -506,6 +518,6 @@
 		private System.Windows.Forms.TabPage tabUpdates;
 		private System.Windows.Forms.ComboBox comboUpdatesFrequency;
 		private System.Windows.Forms.Label label10;
-
+		private System.Windows.Forms.BindingSource languagesBindingSource;
 	}
 }

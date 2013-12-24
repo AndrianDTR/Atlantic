@@ -11,7 +11,6 @@ namespace AY
 		{
 			public static void Compress(FileInfo fileToCompress, String szOutFile)
 			{
-				Logger.Enter();
 				using (FileStream originalFileStream = fileToCompress.OpenRead())
 				{
 					using (FileStream archFileStream = File.Create(szOutFile))
@@ -25,8 +24,6 @@ namespace AY
 								Logger.Info("Write: "+ nRead.ToString());
 								archStream.Write(buffer, 0, nRead);
 							}
-							//archStream.Flush();
-							//archStream.Close();
 							Logger.Info(string.Format("Compressed {0} from {1} to {2} bytes.",
 								  fileToCompress.Name
 								, fileToCompress.Length.ToString()
@@ -36,8 +33,6 @@ namespace AY
 						}
 					}
 				}
-
-				Logger.Leave();
 			}
 
 			public static void Decompress(FileInfo archFile, out String szOutFile)

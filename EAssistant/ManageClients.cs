@@ -131,20 +131,31 @@ namespace EAssistant
 			Logger.Enter();
 			do
 			{
-				String val = textToSearch.Text;
-				if (0 == val.Trim().Length)
+				String val = textToSearch.Text.Trim();
+				if (0 == val.Length)
 				{
 					clientsBindingSource.Filter = "";
 					break;
 				}
 
+				if (radioId.Checked)
+				{
+					Int32 iVal = 0;
+					if(!Int32.TryParse(val, out iVal))
+					{
+						UIMessages.Error("Client ID should be an integer value.");
+						break;
+					}
+				}
+				
 				String pattern = "%{0}%";
 				if (checkStartWith.Checked)
 					pattern = "{0}%";
+				
+				String query = String.Format("id like '{0}'", pattern);
 
-				String query = String.Format("id = '{0}'", val);
-				if (checkNames.Checked)
-					query += String.Format(" or name like '{0}'", pattern);
+				if (radioName.Checked)
+					query = String.Format("name like '{0}'", pattern);
 
 				clientsBindingSource.Filter = String.Format(query, val);
 			} while (false);

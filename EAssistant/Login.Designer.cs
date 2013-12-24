@@ -42,86 +42,89 @@
 			// 
 			// pictureBox1
 			// 
+			this.pictureBox1.AccessibleDescription = null;
+			this.pictureBox1.AccessibleName = null;
+			resources.ApplyResources(this.pictureBox1, "pictureBox1");
+			this.pictureBox1.BackgroundImage = null;
+			this.pictureBox1.Font = null;
 			this.pictureBox1.Image = global::EAssistant.Properties.Resources._1367373274_lock_locked;
-			this.pictureBox1.Location = new System.Drawing.Point(31, 26);
+			this.pictureBox1.ImageLocation = null;
 			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(146, 137);
-			this.pictureBox1.TabIndex = 0;
 			this.pictureBox1.TabStop = false;
 			this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
 			// 
 			// label1
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label1.Location = new System.Drawing.Point(191, 70);
+			this.label1.AccessibleDescription = null;
+			this.label1.AccessibleName = null;
+			resources.ApplyResources(this.label1, "label1");
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(33, 13);
-			this.label1.TabIndex = 1;
-			this.label1.Text = "User";
 			// 
 			// userName
 			// 
-			this.userName.Location = new System.Drawing.Point(267, 67);
+			this.userName.AccessibleDescription = null;
+			this.userName.AccessibleName = null;
+			resources.ApplyResources(this.userName, "userName");
+			this.userName.BackgroundImage = null;
+			this.userName.Font = null;
 			this.userName.Name = "userName";
-			this.userName.Size = new System.Drawing.Size(222, 20);
-			this.userName.TabIndex = 0;
 			// 
 			// label2
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.label2.Location = new System.Drawing.Point(191, 106);
+			this.label2.AccessibleDescription = null;
+			this.label2.AccessibleName = null;
+			resources.ApplyResources(this.label2, "label2");
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(61, 13);
-			this.label2.TabIndex = 3;
-			this.label2.Text = "Password";
 			// 
 			// password
 			// 
-			this.password.Location = new System.Drawing.Point(267, 103);
+			this.password.AccessibleDescription = null;
+			this.password.AccessibleName = null;
+			resources.ApplyResources(this.password, "password");
+			this.password.BackgroundImage = null;
+			this.password.Font = null;
 			this.password.Name = "password";
-			this.password.Size = new System.Drawing.Size(222, 20);
-			this.password.TabIndex = 1;
 			this.password.UseSystemPasswordChar = true;
 			// 
 			// loginBtn
 			// 
-			this.loginBtn.Location = new System.Drawing.Point(267, 156);
+			this.loginBtn.AccessibleDescription = null;
+			this.loginBtn.AccessibleName = null;
+			resources.ApplyResources(this.loginBtn, "loginBtn");
+			this.loginBtn.BackgroundImage = null;
+			this.loginBtn.Font = null;
 			this.loginBtn.Name = "loginBtn";
-			this.loginBtn.Size = new System.Drawing.Size(98, 23);
-			this.loginBtn.TabIndex = 2;
-			this.loginBtn.Text = "Login";
 			this.loginBtn.UseVisualStyleBackColor = true;
 			this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
 			// 
 			// Cancel
 			// 
+			this.Cancel.AccessibleDescription = null;
+			this.Cancel.AccessibleName = null;
+			resources.ApplyResources(this.Cancel, "Cancel");
+			this.Cancel.BackgroundImage = null;
 			this.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.Cancel.Location = new System.Drawing.Point(391, 156);
+			this.Cancel.Font = null;
 			this.Cancel.Name = "Cancel";
-			this.Cancel.Size = new System.Drawing.Size(98, 23);
-			this.Cancel.TabIndex = 3;
-			this.Cancel.Text = "Cancel";
 			this.Cancel.UseVisualStyleBackColor = true;
 			// 
 			// message
 			// 
-			this.message.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.message.AccessibleDescription = null;
+			this.message.AccessibleName = null;
+			resources.ApplyResources(this.message, "message");
 			this.message.ForeColor = System.Drawing.Color.DarkRed;
-			this.message.Location = new System.Drawing.Point(191, 12);
 			this.message.Name = "message";
-			this.message.Size = new System.Drawing.Size(298, 40);
-			this.message.TabIndex = 7;
-			this.message.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// Login
 			// 
 			this.AcceptButton = this.loginBtn;
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AccessibleDescription = null;
+			this.AccessibleName = null;
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackgroundImage = null;
 			this.CancelButton = this.Cancel;
-			this.ClientSize = new System.Drawing.Size(514, 191);
 			this.Controls.Add(this.message);
 			this.Controls.Add(this.Cancel);
 			this.Controls.Add(this.loginBtn);
@@ -130,14 +133,12 @@
 			this.Controls.Add(this.userName);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.pictureBox1);
+			this.Font = null;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "Login";
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Login";
 			this.TopMost = true;
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);

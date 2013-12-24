@@ -109,6 +109,7 @@ namespace AY.db
 			m_clientDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
 
 			Adapters.clientsTableAdapter = new clientsTableAdapter();
+			Adapters.languagesTableAdapter = new languagesTableAdapter();
 			Adapters.paymentsTableAdapter = new paymentsTableAdapter();
 			Adapters.scheduleRulesTableAdapter = new scheduleRulesTableAdapter();
 			Adapters.settingsTableAdapter = new settingsTableAdapter();
@@ -123,6 +124,7 @@ namespace AY.db
 			Adapters.VTodayClientsTableAdapter = new VTodayClientsTableAdapter();
 
 			Adapters.clientsTableAdapter.Fill(m_clientDataSet.clients);
+			Adapters.languagesTableAdapter.Fill(m_clientDataSet.languages);
 			Adapters.paymentsTableAdapter.Fill(m_clientDataSet.payments);
 			Adapters.scheduleRulesTableAdapter.Fill(m_clientDataSet.scheduleRules);
 			Adapters.settingsTableAdapter.Fill(m_clientDataSet.settings);

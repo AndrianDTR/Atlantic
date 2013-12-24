@@ -29,13 +29,12 @@ namespace MigrateDb
 			
 			Logger.Info("App end.");
 			Logger.Leave();
-		
+			Logger.Close();
+			
 			if(sendReport)
 			{
 				new SendReport(false);
 			}
-
-			Logger.Close();
 		}
 	}
 }

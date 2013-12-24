@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Resources;
 
 using AY.Log;
 using AY.db;
@@ -12,6 +14,9 @@ namespace EAssistant
 {
 	class Session : Singleton<Session>
 	{
+		ResourceManager rm = null;
+		CultureInfo m_culture = null;
+		
 		private static int m_minBarcodeLen = 13;
 
 		private int m_passLen = 8;
@@ -41,7 +46,12 @@ namespace EAssistant
 		private Session()
 		{
 			Logger.Enter();
+			
 			m_customerID = RegUtils.Instance.CustomerId;
+			dbDataSet.settingsRow row = Db.Instance.dSet.settings.FindByid(1);
+			Culture = new CultureInfo(row.language);
+			rm = new ResourceManager("EAssistant.Resources.Res", typeof(MainForm).Assembly);
+			
 			Logger.Leave();
 		}
 
@@ -121,6 +131,23 @@ namespace EAssistant
 		public Int32 CustomerId
 		{
 			get { return m_customerID; }
+		}
+
+		public CultureInfo Culture
+		{
+			get
+			{
+				return m_culture;
+			}
+			set
+			{
+				m_culture = value;
+			}
+		}
+		
+		public String GetResStr(String name)
+		{
+			return rm.GetString(name, Culture);
 		}
 	}
 }

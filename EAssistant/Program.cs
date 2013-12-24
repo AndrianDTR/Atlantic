@@ -6,6 +6,7 @@ using AY.db;
 using AY.Utils;
 using System.Data.Common;
 using System.Data;
+using System.Threading;
 
 namespace EAssistant
 {
@@ -23,9 +24,12 @@ namespace EAssistant
 
 			bool sendReport = false;
 			Logger.Info("App start.");
-
+			
 			try
 			{
+				Thread.CurrentThread.CurrentUICulture = Session.Instance.Culture;
+			
+				UIMessages.Error("AAAAA");
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 				Application.Run(new MainForm());
@@ -36,9 +40,8 @@ namespace EAssistant
 				Logger.Trace(ex.StackTrace);
 
 #if !DEBUG
-				if(DialogResult.Yes == UIMessages.Error("Program has been exited abnormally.\n"
-					+ "Would you like to send report about this situation?"
-					, MessageBoxButtons.YesNo))
+				String msg = Session.Instance.GetResStr("abnormal_termination");				
+				if(DialogResult.Yes == UIMessages.Error(msg, MessageBoxButtons.YesNo))
 				{
 					sendReport = true;
 				}
@@ -49,12 +52,12 @@ namespace EAssistant
 			}
 			Logger.Info("App end.");
 			Logger.Leave();
+			Logger.Close();
 			
             if(sendReport)
             {
 				new SendReport(false);
             }
-            Logger.Close();
         }
     }
 }

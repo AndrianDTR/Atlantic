@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using AY.Log;
 using AY.db;
 using System.Drawing;
+using System.Data;
 
 namespace EAssistant
 {
@@ -14,6 +15,10 @@ namespace EAssistant
 		{
 			Logger.Enter();
 			InitializeComponent();
+
+			languagesBindingSource.DataSource = Db.Instance.dSet.languages;
+			
+			
 			opts = Db.Instance.dSet.settings.FindByid(1);
 
 			numericMinPassLen.Value = opts.minPassLen;
@@ -25,12 +30,8 @@ namespace EAssistant
 			dateStart.Value = opts.StartTime;
 			dateEnd.Value = opts.EndTime;
 
-			comboLang.Items.Add("English");
-			comboLang.SelectedIndex = 0;
-			//comboLang.SelectedItem = opts.Language;
-
 			comboUpdatesFrequency.SelectedIndex = opts.updates;
-
+			
 			InitPageColors();
 			Logger.Leave();
 		}
@@ -47,7 +48,8 @@ namespace EAssistant
 			opts.StartTime = dateStart.Value;
 			opts.EndTime = dateEnd.Value;
 
-			//opts.Language = comboLang.SelectedItem;
+			DataRowView drv = (DataRowView)comboLang.SelectedItem;
+			opts.language = drv.Row["code"].ToString();
 
 			opts.updates = comboUpdatesFrequency.SelectedIndex;
 
@@ -126,6 +128,14 @@ namespace EAssistant
 			opts.ColorMissed = ChooseColor(opts.ColorMissed);
 			InitPageColors();
 			Logger.Leave();
+		}
+
+		private void Options_Load(object sender, EventArgs e)
+		{
+			// TODO: This line of code loads data into the 'clientDataSet.languages' table. You can move, or remove it, as needed.
+			Db.Instance.Adapters.languagesTableAdapter.Fill(Db.Instance.dSet.languages);
+			
+			comboLang.SelectedItem = opts.language;
 		}
 	}
 }

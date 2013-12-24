@@ -31,20 +31,20 @@
 			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.GroupBox groupBox1;
 			this.checkStartWith = new System.Windows.Forms.CheckBox();
-			this.checkCode = new System.Windows.Forms.CheckBox();
-			this.checkNames = new System.Windows.Forms.CheckBox();
 			this.btnSearch = new System.Windows.Forms.Button();
 			this.textToSearch = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOk = new System.Windows.Forms.Button();
 			this.gridClients = new System.Windows.Forms.DataGridView();
+			this.clientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.btnEdit = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
 			this.btnPayments = new System.Windows.Forms.Button();
 			this.BtnEntrance = new System.Windows.Forms.Button();
-			this.clientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.radioName = new System.Windows.Forms.RadioButton();
+			this.radioId = new System.Windows.Forms.RadioButton();
 			groupBox1 = new System.Windows.Forms.GroupBox();
 			groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridClients)).BeginInit();
@@ -53,9 +53,9 @@
 			// 
 			// groupBox1
 			// 
+			groupBox1.Controls.Add(this.radioId);
+			groupBox1.Controls.Add(this.radioName);
 			groupBox1.Controls.Add(this.checkStartWith);
-			groupBox1.Controls.Add(this.checkCode);
-			groupBox1.Controls.Add(this.checkNames);
 			groupBox1.Controls.Add(this.btnSearch);
 			groupBox1.Controls.Add(this.textToSearch);
 			groupBox1.Controls.Add(this.label1);
@@ -75,30 +75,6 @@
 			this.checkStartWith.TabIndex = 4;
 			this.checkStartWith.Text = "Starts with";
 			this.checkStartWith.UseVisualStyleBackColor = true;
-			// 
-			// checkCode
-			// 
-			this.checkCode.AutoSize = true;
-			this.checkCode.Checked = true;
-			this.checkCode.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkCode.Location = new System.Drawing.Point(552, 23);
-			this.checkCode.Name = "checkCode";
-			this.checkCode.Size = new System.Drawing.Size(101, 17);
-			this.checkCode.TabIndex = 3;
-			this.checkCode.Text = "Search by code";
-			this.checkCode.UseVisualStyleBackColor = true;
-			// 
-			// checkNames
-			// 
-			this.checkNames.AutoSize = true;
-			this.checkNames.Checked = true;
-			this.checkNames.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.checkNames.Location = new System.Drawing.Point(433, 23);
-			this.checkNames.Name = "checkNames";
-			this.checkNames.Size = new System.Drawing.Size(105, 17);
-			this.checkNames.TabIndex = 2;
-			this.checkNames.Text = "Search in names";
-			this.checkNames.UseVisualStyleBackColor = true;
 			// 
 			// btnSearch
 			// 
@@ -133,7 +109,7 @@
 			this.btnCancel.Location = new System.Drawing.Point(721, 387);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
-			this.btnCancel.TabIndex = 4;
+			this.btnCancel.TabIndex = 7;
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
@@ -142,7 +118,7 @@
 			this.btnOk.Location = new System.Drawing.Point(640, 387);
 			this.btnOk.Name = "btnOk";
 			this.btnOk.Size = new System.Drawing.Size(75, 23);
-			this.btnOk.TabIndex = 2;
+			this.btnOk.TabIndex = 6;
 			this.btnOk.Text = "OK";
 			this.btnOk.UseVisualStyleBackColor = true;
 			this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -162,15 +138,19 @@
 			this.gridClients.RowHeadersVisible = false;
 			this.gridClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.gridClients.Size = new System.Drawing.Size(784, 302);
-			this.gridClients.TabIndex = 5;
+			this.gridClients.TabIndex = 0;
 			this.gridClients.DoubleClick += new System.EventHandler(this.OnEditClient);
+			// 
+			// clientsBindingSource
+			// 
+			this.clientsBindingSource.DataMember = "vClients";
 			// 
 			// btnAdd
 			// 
 			this.btnAdd.Location = new System.Drawing.Point(12, 387);
 			this.btnAdd.Name = "btnAdd";
 			this.btnAdd.Size = new System.Drawing.Size(75, 23);
-			this.btnAdd.TabIndex = 6;
+			this.btnAdd.TabIndex = 1;
 			this.btnAdd.Text = "Add";
 			this.btnAdd.UseVisualStyleBackColor = true;
 			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -180,7 +160,7 @@
 			this.btnEdit.Location = new System.Drawing.Point(93, 387);
 			this.btnEdit.Name = "btnEdit";
 			this.btnEdit.Size = new System.Drawing.Size(75, 23);
-			this.btnEdit.TabIndex = 7;
+			this.btnEdit.TabIndex = 2;
 			this.btnEdit.Text = "Edit";
 			this.btnEdit.UseVisualStyleBackColor = true;
 			this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -190,7 +170,7 @@
 			this.btnRemove.Location = new System.Drawing.Point(174, 387);
 			this.btnRemove.Name = "btnRemove";
 			this.btnRemove.Size = new System.Drawing.Size(75, 23);
-			this.btnRemove.TabIndex = 8;
+			this.btnRemove.TabIndex = 3;
 			this.btnRemove.Text = "Remove";
 			this.btnRemove.UseVisualStyleBackColor = true;
 			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
@@ -200,7 +180,7 @@
 			this.btnPayments.Location = new System.Drawing.Point(255, 387);
 			this.btnPayments.Name = "btnPayments";
 			this.btnPayments.Size = new System.Drawing.Size(75, 23);
-			this.btnPayments.TabIndex = 9;
+			this.btnPayments.TabIndex = 4;
 			this.btnPayments.Text = "Payments";
 			this.btnPayments.UseVisualStyleBackColor = true;
 			this.btnPayments.Click += new System.EventHandler(this.btnPayments_Click);
@@ -210,14 +190,32 @@
 			this.BtnEntrance.Location = new System.Drawing.Point(336, 387);
 			this.BtnEntrance.Name = "BtnEntrance";
 			this.BtnEntrance.Size = new System.Drawing.Size(75, 23);
-			this.BtnEntrance.TabIndex = 10;
+			this.BtnEntrance.TabIndex = 5;
 			this.BtnEntrance.Text = "Entrance";
 			this.BtnEntrance.UseVisualStyleBackColor = true;
 			this.BtnEntrance.Click += new System.EventHandler(this.BtnEntrance_Click);
 			// 
-			// clientsBindingSource
+			// radioName
 			// 
-			this.clientsBindingSource.DataMember = "vClients";
+			this.radioName.AutoSize = true;
+			this.radioName.Checked = true;
+			this.radioName.Location = new System.Drawing.Point(535, 22);
+			this.radioName.Name = "radioName";
+			this.radioName.Size = new System.Drawing.Size(80, 17);
+			this.radioName.TabIndex = 3;
+			this.radioName.TabStop = true;
+			this.radioName.Text = "Client name";
+			this.radioName.UseVisualStyleBackColor = true;
+			// 
+			// radioId
+			// 
+			this.radioId.AutoSize = true;
+			this.radioId.Location = new System.Drawing.Point(464, 22);
+			this.radioId.Name = "radioId";
+			this.radioId.Size = new System.Drawing.Size(65, 17);
+			this.radioId.TabIndex = 2;
+			this.radioId.Text = "Client ID";
+			this.radioId.UseVisualStyleBackColor = true;
 			// 
 			// ManageClients
 			// 
@@ -254,11 +252,9 @@
 
 		#endregion
 
-		private System.Windows.Forms.CheckBox checkNames;
 		private System.Windows.Forms.Button btnSearch;
 		private System.Windows.Forms.TextBox textToSearch;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.CheckBox checkCode;
 		private System.Windows.Forms.CheckBox checkStartWith;
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Button btnOk;
@@ -269,5 +265,7 @@
 		private System.Windows.Forms.Button btnRemove;
 		private System.Windows.Forms.Button btnPayments;
 		private System.Windows.Forms.Button BtnEntrance;
+		private System.Windows.Forms.RadioButton radioId;
+		private System.Windows.Forms.RadioButton radioName;
 	}
 }

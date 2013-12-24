@@ -38,10 +38,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\Debug\db.dll</HintPath>
     </Reference>
-    <Reference Include="E-Assistant, Version=0.1.0.126, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\Debug\E-Assistant.exe</HintPath>
-    </Reference>
     <Reference Include="Logger, Version=1.0.0.217, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\Debug\Logger.dll</HintPath>

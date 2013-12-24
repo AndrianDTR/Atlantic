@@ -11,7 +11,9 @@ namespace MigrateDb
 		public Migrate()
 		{
 			Logger.Enter();
-			throw new Exception("Try");
+			
+			//Db.Instance.ExportData("AAA.gz");
+			
 			Logger.Leave();
 		}
 	}

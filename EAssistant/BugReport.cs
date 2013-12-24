@@ -23,7 +23,7 @@ namespace EAssistant
 			String text = String.Format("From: {0}<br/><br/>Problem: {1}"
 				, textEmail.Text
 				, textIssue.Text);
-			new SendReport("Issue", text);
+			new SendReport("Issue", text, true);
 			
 			DialogResult = DialogResult.OK;
 			
