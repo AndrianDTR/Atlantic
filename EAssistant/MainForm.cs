@@ -206,10 +206,7 @@ namespace EAssistant
 				{
 					DialogResult res = UIMessages.Warning(
 						String.Format(
-							  "You using unregistered copy of the application.\n"
-							+ "Evaluation period will expire after {0} days.\n"
-							+ "Please contact support and register it.\n\n"
-							+ "If you want register your copy of the application now press \"Yes\"."
+							  Session.Instance.GetResStr("check_registration")
 							, daysLeft.Days)
 						, MessageBoxButtons.YesNo);
 					if (DialogResult.Yes == res)
@@ -220,8 +217,7 @@ namespace EAssistant
 				else
 				{
 					DialogResult res = UIMessages.Error(
-						  "Evaluation period has been expired!\n"
-						+ "Do you wish register your copy of application?"
+						  Session.Instance.GetResStr("evaluation_end")
 						, MessageBoxButtons.YesNo
 						);
 					if (DialogResult.Yes != res)
@@ -421,7 +417,8 @@ namespace EAssistant
 				}
 				else
 				{
-					UIMessages.Warning("Specified card is unregistered.");
+					UIMessages.Warning(
+						Session.Instance.GetResStr("unregistered_client"));
 				}
 
 				dlg.Clear();

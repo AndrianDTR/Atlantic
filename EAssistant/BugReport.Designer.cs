@@ -39,78 +39,81 @@
 			// 
 			// label1
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 23);
+			this.label1.AccessibleDescription = null;
+			this.label1.AccessibleName = null;
+			resources.ApplyResources(this.label1, "label1");
+			this.label1.Font = null;
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(32, 13);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Email";
 			// 
 			// label2
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(12, 49);
+			this.label2.AccessibleDescription = null;
+			this.label2.AccessibleName = null;
+			resources.ApplyResources(this.label2, "label2");
+			this.label2.Font = null;
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(45, 13);
-			this.label2.TabIndex = 1;
-			this.label2.Text = "Problem";
 			// 
 			// textEmail
 			// 
-			this.textEmail.Location = new System.Drawing.Point(81, 20);
+			this.textEmail.AccessibleDescription = null;
+			this.textEmail.AccessibleName = null;
+			resources.ApplyResources(this.textEmail, "textEmail");
+			this.textEmail.BackgroundImage = null;
+			this.textEmail.Font = null;
 			this.textEmail.Name = "textEmail";
-			this.textEmail.Size = new System.Drawing.Size(466, 20);
-			this.textEmail.TabIndex = 2;
 			// 
 			// textIssue
 			// 
-			this.textIssue.Location = new System.Drawing.Point(81, 49);
-			this.textIssue.Multiline = true;
+			this.textIssue.AccessibleDescription = null;
+			this.textIssue.AccessibleName = null;
+			resources.ApplyResources(this.textIssue, "textIssue");
+			this.textIssue.BackgroundImage = null;
+			this.textIssue.Font = null;
 			this.textIssue.Name = "textIssue";
-			this.textIssue.Size = new System.Drawing.Size(466, 170);
-			this.textIssue.TabIndex = 3;
 			// 
 			// btnCancel
 			// 
+			this.btnCancel.AccessibleDescription = null;
+			this.btnCancel.AccessibleName = null;
+			resources.ApplyResources(this.btnCancel, "btnCancel");
+			this.btnCancel.BackgroundImage = null;
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.Location = new System.Drawing.Point(469, 237);
+			this.btnCancel.Font = null;
 			this.btnCancel.Name = "btnCancel";
-			this.btnCancel.Size = new System.Drawing.Size(78, 24);
-			this.btnCancel.TabIndex = 4;
-			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
 			// btnSend
 			// 
-			this.btnSend.Location = new System.Drawing.Point(385, 237);
+			this.btnSend.AccessibleDescription = null;
+			this.btnSend.AccessibleName = null;
+			resources.ApplyResources(this.btnSend, "btnSend");
+			this.btnSend.BackgroundImage = null;
+			this.btnSend.Font = null;
 			this.btnSend.Name = "btnSend";
-			this.btnSend.Size = new System.Drawing.Size(78, 24);
-			this.btnSend.TabIndex = 5;
-			this.btnSend.Text = "Send";
 			this.btnSend.UseVisualStyleBackColor = true;
 			this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
 			// 
 			// BugReport
 			// 
 			this.AcceptButton = this.btnSend;
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AccessibleDescription = null;
+			this.AccessibleName = null;
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackgroundImage = null;
 			this.CancelButton = this.btnCancel;
-			this.ClientSize = new System.Drawing.Size(559, 273);
 			this.Controls.Add(this.btnSend);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.textIssue);
 			this.Controls.Add(this.textEmail);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
+			this.Font = null;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "BugReport";
 			this.ShowInTaskbar = false;
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "BugReport";
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

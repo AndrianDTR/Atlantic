@@ -15,7 +15,7 @@ namespace AY.Utils
 	public class RegUtils : Singleton<RegUtils>
 	{
 		private byte[] m_data = null;
-		
+
 		public enum DataOffsets
 		{
 			// field				Len
@@ -27,7 +27,7 @@ namespace AY.Utils
 			Message = 4236,			// 2048
 			_end = 6284,			// end marker
 		}
-		
+
 		public enum ActKeyOffsets
 		{
 			//Field					// Len
@@ -39,11 +39,14 @@ namespace AY.Utils
 
 		private RegUtils()
 		{
+			Logger.Enter();
 			ReadData();
+			Logger.Leave();
 		}
-		
+
 		public void ReadData()
 		{
+			Logger.Enter();
 			try
 			{
 				RegistryKey key = GetAppKey();
@@ -55,31 +58,39 @@ namespace AY.Utils
 				Logger.Error(ex.Message);
 				m_data = null;
 			}
+			Logger.Leave();
 		}
-		
+
 		public static void ROL(ref byte val, int nBits)
 		{
+			Logger.Enter();
 			val = (byte)((val >> nBits) | (val << (8 - nBits)));
+			Logger.Leave();
 		}
 
 		public static void ROR(ref byte val, int nBits)
 		{
+			Logger.Enter();
 			val = (byte)((val << nBits) | (val >> (8 - nBits)));
+			Logger.Leave();
 		}
 
 		private byte[] GetKey(byte[] data, int offset, int keyLen)
 		{
+			Logger.Enter();
 			byte[] key = new byte[keyLen];
 			Array.Copy(data, offset, key, 0, keyLen);
-			
+			Logger.Leave();
 			return key;
 		}
-		
+
 		private RegistryKey GetAppKey()
 		{
+			Logger.Enter();
 			Assembly asm = Assembly.GetExecutingAssembly();
 			GuidAttribute guid = (GuidAttribute)asm.GetCustomAttributes(typeof(GuidAttribute), true)[0];
 			String subKey = "Software\\" + guid.Value;
+			Logger.Leave();
 			return Registry.LocalMachine.CreateSubKey(subKey, RegistryKeyPermissionCheck.ReadWriteSubTree);
 		}
 
@@ -87,26 +98,30 @@ namespace AY.Utils
 		{
 			get
 			{
-				if(null == m_data)
+				Logger.Enter();
+				if (null == m_data || m_data.Length == 0)
 				{
 					Logger.Warning("No registration info.");
 					m_data = FillRegInfo();
 				}
-					
+				Logger.Leave();
 				return m_data;
 			}
 			set
 			{
+				Logger.Enter();
 				m_data = value;
 				RegistryKey key = GetAppKey();
 				key.SetValue(@"data", Archive.CompressArray(m_data), RegistryValueKind.Binary);
 				key.Flush();
 				key.Close();
+				Logger.Leave();
 			}
 		}
 
 		public byte[] FillRegInfo()
 		{
+			Logger.Enter();
 			int bufSize = (int)DataOffsets._end;
 
 			byte[] buf = new byte[bufSize];
@@ -123,11 +138,13 @@ namespace AY.Utils
 			Array.Copy(pub, 0, buf, (int)DataOffsets.PubKey, pub.Length);
 			Array.Copy(prv, 0, buf, (int)DataOffsets.PrivKey, prv.Length);
 
+			Logger.Leave();
 			return buf;
 		}
-		
+
 		public String GenerateRandomString(int length)
 		{
+			Logger.Enter();
 			Random random = new Random(Environment.TickCount);
 			var data = new byte[length];
 			for (int i = 0; i < data.Length; i++)
@@ -135,6 +152,7 @@ namespace AY.Utils
 				data[i] = (byte)random.Next(32, 127);
 			}
 			var encoding = new ASCIIEncoding();
+			Logger.Leave();
 			return encoding.GetString(data);
 		}
 
@@ -142,10 +160,12 @@ namespace AY.Utils
 		{
 			get
 			{
+				Logger.Enter();
 				byte[] dat = GetKey(SavedData
 					, (int)DataOffsets.Date
 					, (int)(DataOffsets.Serial - DataOffsets.Date));
 				Int64 ticks = BitConverter.ToInt64(dat, 0);
+				Logger.Leave();
 				return new DateTime(ticks);
 			}
 		}
@@ -154,11 +174,12 @@ namespace AY.Utils
 		{
 			get
 			{
-				byte[] dat = GetKey(m_data
+				Logger.Enter();
+				byte[] dat = GetKey(SavedData
 					, (int)DataOffsets.CustomerId
 					, (int)(DataOffsets.Serial - DataOffsets.CustomerId));
 				Int32 num = BitConverter.ToInt32(dat, 0);
-				
+				Logger.Leave();
 				return num;
 			}
 		}
@@ -167,9 +188,11 @@ namespace AY.Utils
 		{
 			get
 			{
+				Logger.Enter();
 				byte[] snm = GetKey(SavedData
 					, (int)DataOffsets.Serial
 					, (int)(DataOffsets.PubKey - DataOffsets.Serial));
+				Logger.Leave();
 				return Encoding.UTF8.GetString(snm);
 			}
 		}
@@ -178,6 +201,7 @@ namespace AY.Utils
 		{
 			get
 			{
+				Logger.Enter();
 				int len = (int)(DataOffsets._end - DataOffsets.Message);
 				byte[] bytesMsgt = GetKey(SavedData, (int)DataOffsets.Message, len);
 				for (int n = 0; n < bytesMsgt.Length; n++)
@@ -192,18 +216,19 @@ namespace AY.Utils
 				}
 
 				msg = msg.Substring(0, msg.IndexOf(MsgSplitter));
-
+				Logger.Leave();
 				return msg;
 			}
 		}
 
 		public String MsgSplitter
 		{
-			get {return "-=|=-";}
+			get { return "-=|=-"; }
 		}
-		
+
 		public bool CheckRegistrationInfo()
 		{
+			Logger.Enter();
 			bool res = false;
 
 			try
@@ -243,7 +268,7 @@ namespace AY.Utils
 			{
 				Logger.Error(ex.Message);
 			}
-
+			Logger.Leave();
 			return res;
 		}
 	}

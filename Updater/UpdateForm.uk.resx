@@ -132,19 +132,19 @@
     <value>NoControl</value>
   </data>
   <data name="labelReleaseNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 13</value>
+    <value>119, 13</value>
   </data>
   <data name="labelReleaseNotes.Text" xml:space="preserve">
-    <value>Зміни та доповнення:</value>
+    <value>Зміни та доповнення :</value>
   </data>
   <data name="buttonUpdate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btnUpdate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnUpdate.Text" xml:space="preserve">
+  <data name="buttonUpdate.Text" xml:space="preserve">
     <value>Оновити</value>
+  </data>
+  <data name="buttonSkip.Text" xml:space="preserve">
+    <value>Скасувати</value>
   </data>
   <data name="pictureBoxIcon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -686,5 +686,11 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Оновлення програми</value>
   </data>
 </root>

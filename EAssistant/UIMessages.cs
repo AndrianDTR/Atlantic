@@ -26,7 +26,9 @@ namespace EAssistant
 		public static DialogResult Warning(String message, MessageBoxButtons buttons)
 		{
 			Logger.Warning(message);
-			return MessageBox.Show(message, "Warning", buttons, MessageBoxIcon.Warning);
+			return MessageBox.Show(message
+				, Session.Instance.GetResStr("warning")
+				, buttons, MessageBoxIcon.Warning);
 		}
 
 		public static DialogResult Warning(String message)
@@ -37,7 +39,9 @@ namespace EAssistant
 		public static DialogResult Info(String message, MessageBoxButtons buttons)
 		{
 			Logger.Info(message);
-			return MessageBox.Show(message, "Information", buttons, MessageBoxIcon.Information);
+			return MessageBox.Show(message
+				, Session.Instance.GetResStr("information")
+				, buttons, MessageBoxIcon.Information);
 		}
 
 		public static DialogResult Info(String message)
@@ -47,12 +51,16 @@ namespace EAssistant
 
 		public static DialogResult NotImplementedFeature()
 		{
-			return UIMessages.Info("This feature is not implemented yet.");
+			return UIMessages.Info(
+				Session.Instance.GetResStr("not_implemented")
+				);
 		}
 		
 		public static DialogResult DisabledFeature()
 		{
-			return UIMessages.Info("This feature is disabled.");
+			return UIMessages.Info(
+				Session.Instance.GetResStr("disabled_feature")
+				);
 		}
 	}
 }

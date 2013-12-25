@@ -31,7 +31,7 @@ namespace EAssistant
 
 		private void InitializeComponent()
 		{
-			Logger.Enter();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterForm));
 			this.textSerial = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.btnProcess = new System.Windows.Forms.Button();
@@ -44,84 +44,81 @@ namespace EAssistant
 			// 
 			// textSerial
 			// 
+			this.textSerial.AccessibleDescription = null;
+			this.textSerial.AccessibleName = null;
+			resources.ApplyResources(this.textSerial, "textSerial");
 			this.textSerial.BackColor = System.Drawing.SystemColors.Window;
-			this.textSerial.Location = new System.Drawing.Point(171, 32);
-			this.textSerial.MaxLength = 32;
+			this.textSerial.BackgroundImage = null;
+			this.textSerial.Font = null;
 			this.textSerial.Name = "textSerial";
 			this.textSerial.ReadOnly = true;
-			this.textSerial.Size = new System.Drawing.Size(366, 20);
-			this.textSerial.TabIndex = 0;
 			// 
 			// label1
 			// 
-			this.label1.AutoSize = true;
+			this.label1.AccessibleDescription = null;
+			this.label1.AccessibleName = null;
+			resources.ApplyResources(this.label1, "label1");
 			this.label1.BackColor = System.Drawing.Color.Transparent;
-			this.label1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(171, 13);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(37, 13);
-			this.label1.TabIndex = 10;
-			this.label1.Text = "Serial:";
 			// 
 			// btnProcess
 			// 
-			this.btnProcess.AutoSize = true;
-			this.btnProcess.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnProcess.Location = new System.Drawing.Point(302, 181);
+			this.btnProcess.AccessibleDescription = null;
+			this.btnProcess.AccessibleName = null;
+			resources.ApplyResources(this.btnProcess, "btnProcess");
+			this.btnProcess.BackgroundImage = null;
+			this.btnProcess.Font = null;
 			this.btnProcess.Name = "btnProcess";
-			this.btnProcess.Size = new System.Drawing.Size(114, 23);
-			this.btnProcess.TabIndex = 1;
-			this.btnProcess.Text = "Process";
 			this.btnProcess.Click += new System.EventHandler(this.btnProcess_Click);
 			// 
 			// label3
 			// 
-			this.label3.AutoSize = true;
+			this.label3.AccessibleDescription = null;
+			this.label3.AccessibleName = null;
+			resources.ApplyResources(this.label3, "label3");
 			this.label3.BackColor = System.Drawing.Color.Transparent;
-			this.label3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label3.Location = new System.Drawing.Point(171, 67);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(79, 13);
-			this.label3.TabIndex = 21;
-			this.label3.Text = "Activation key:";
 			// 
 			// textActKey
 			// 
+			this.textActKey.AccessibleDescription = null;
+			this.textActKey.AccessibleName = null;
+			resources.ApplyResources(this.textActKey, "textActKey");
 			this.textActKey.BackColor = System.Drawing.SystemColors.Window;
-			this.textActKey.Location = new System.Drawing.Point(171, 85);
-			this.textActKey.MaxLength = 32768;
-			this.textActKey.Multiline = true;
+			this.textActKey.BackgroundImage = null;
+			this.textActKey.Font = null;
 			this.textActKey.Name = "textActKey";
-			this.textActKey.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textActKey.Size = new System.Drawing.Size(366, 80);
-			this.textActKey.TabIndex = 0;
 			// 
 			// pictureBox1
 			// 
+			this.pictureBox1.AccessibleDescription = null;
+			this.pictureBox1.AccessibleName = null;
+			resources.ApplyResources(this.pictureBox1, "pictureBox1");
 			this.pictureBox1.BackgroundImage = global::EAssistant.Properties.Resources.Game_diamond_icon;
-			this.pictureBox1.Location = new System.Drawing.Point(12, 32);
+			this.pictureBox1.Font = null;
+			this.pictureBox1.ImageLocation = null;
 			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(130, 133);
-			this.pictureBox1.TabIndex = 22;
 			this.pictureBox1.TabStop = false;
 			// 
 			// btnCancel
 			// 
-			this.btnCancel.AutoSize = true;
+			this.btnCancel.AccessibleDescription = null;
+			this.btnCancel.AccessibleName = null;
+			resources.ApplyResources(this.btnCancel, "btnCancel");
+			this.btnCancel.BackgroundImage = null;
 			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.btnCancel.Location = new System.Drawing.Point(422, 181);
+			this.btnCancel.Font = null;
 			this.btnCancel.Name = "btnCancel";
-			this.btnCancel.Size = new System.Drawing.Size(114, 23);
-			this.btnCancel.TabIndex = 23;
-			this.btnCancel.Text = "Cancel";
 			// 
 			// RegisterForm
 			// 
 			this.AcceptButton = this.btnProcess;
+			this.AccessibleDescription = null;
+			this.AccessibleName = null;
+			resources.ApplyResources(this, "$this");
 			this.BackColor = System.Drawing.SystemColors.Control;
+			this.BackgroundImage = null;
 			this.CancelButton = this.btnCancel;
-			this.ClientSize = new System.Drawing.Size(548, 216);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.label3);
@@ -129,17 +126,16 @@ namespace EAssistant
 			this.Controls.Add(this.btnProcess);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.textSerial);
+			this.Font = null;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.Icon = null;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "RegisterForm";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Register";
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-			Logger.Leave();
 		}
 
 		private void btnProcess_Click(object sender, EventArgs e)
@@ -191,7 +187,8 @@ namespace EAssistant
 			catch (System.Exception ex)
 			{
 				Logger.Error(String.Format("Registration error, internal message: {0}", ex.Message));
-				UIMessages.Info("Invalid activation key has been entered.");
+				UIMessages.Info(
+					Session.Instance.GetResStr("invalid_activation_key"));
 			}
 			Logger.Leave();
 

@@ -16,17 +16,15 @@ namespace AY.Updater
 		public UpdateForm()
 		{
 			Logger.Enter();
+			
+			dbDataSet.settingsRow row = Db.Instance.dSet.settings.FindByid(1);
+			CultureInfo cult = new CultureInfo(row.language);
+			Thread.CurrentThread.CurrentUICulture = cult;
+			
 			InitializeComponent();
 
-			/*dbDataSet.settingsRow row = Db.Instance.dSet.settings.FindByid(1);
-			CultureInfo cult = new CultureInfo(row.language);
-			ComponentResourceManager resources = new ComponentResourceManager(typeof(UpdateForm));
-			Text = Updater.DialogTitle;
-			labelUpdate.Text = string.Format(resources.GetString("labelUpdate.Text", cult), Updater.AppTitle);
-			labelDescription.Text =
-				string.Format(resources.GetString("labelReleaseNotes.Text", cult),
-					Updater.AppTitle, Updater.CurrentVersion, Updater.InstalledVersion);
-			*/
+			labelUpdate.Text = String.Format(labelUpdate.Text, Updater.AppTitle);
+
 			Logger.Leave();
 		}
 

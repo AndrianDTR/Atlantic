@@ -29,7 +29,6 @@ namespace EAssistant
 			{
 				Thread.CurrentThread.CurrentUICulture = Session.Instance.Culture;
 			
-				UIMessages.Error("AAAAA");
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 				Application.Run(new MainForm());

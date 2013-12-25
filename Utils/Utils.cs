@@ -43,8 +43,8 @@ namespace AY
 				{
 					if (m_instance == null)
 					{
-						m_instance = (DerivedType)Activator.CreateInstance(
-							typeof(DerivedType), true);
+						m_instance = (DerivedType)
+						Activator.CreateInstance(typeof(DerivedType), true);
 					}
 					return m_instance;
 				}

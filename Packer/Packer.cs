@@ -83,23 +83,30 @@ namespace AY
 				Logger.Enter();
 				MemoryStream memory = new MemoryStream();
 				
-				using (GZipStream stream = new GZipStream(new MemoryStream(inBuf), CompressionMode.Decompress))
+				try
 				{
-					const int size = 4096;
-					byte[] buffer = new byte[size];
-					
-					int count = 0;
-					do
+					using (GZipStream stream = new GZipStream(new MemoryStream(inBuf), CompressionMode.Decompress))
 					{
-						count = stream.Read(buffer, 0, size);
-						if (count > 0)
+						const int size = 4096;
+						byte[] buffer = new byte[size];
+						
+						int count = 0;
+						do
 						{
-							memory.Write(buffer, 0, count);
+							count = stream.Read(buffer, 0, size);
+							if (count > 0)
+							{
+								memory.Write(buffer, 0, count);
+							}
 						}
+						while (count > 0);
 					}
-					while (count > 0);
 				}
-
+				catch(Exception ex)
+				{
+					Logger.Error(String.Format("Decompress error.Internal msg: {0}", ex.Message));
+				}
+				
 				Logger.Leave();
 				return memory.ToArray();
 			}

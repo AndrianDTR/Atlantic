@@ -11,9 +11,6 @@ namespace EAssistant
 {
 	public partial class ClientInfo : Form
 	{
-		const String cancelText = "Cancel";
-		const String enterText = "Enter";
-
 		private Int32 m_client = 0;
 
 		private Session session = Session.Instance;
@@ -130,7 +127,7 @@ namespace EAssistant
 			if (cr.openTicket.Date == DateTime.Now.Date)
 			{
 				btnEnter.Checked = true;
-				btnEnter.Text = cancelText;
+				btnEnter.Text = Session.Instance.GetResStr("cancel");
 			}
 			Logger.Leave();
 		}
@@ -243,7 +240,7 @@ namespace EAssistant
 
 				if (dbDataSet.clientsRow.Exists(id))
 				{
-					UIMessages.Error("This card already attached. Please use another one.");
+					UIMessages.Error(Session.Instance.GetResStr("client_exist"));
 					dlg.Clear();
 					continue;
 				}
@@ -406,13 +403,13 @@ namespace EAssistant
 				{
 					cr.openTicket = DateTime.Now;
 					btnLeave.Enabled = true;
-					btnEnter.Text = cancelText;
+					btnEnter.Text = Session.Instance.GetResStr("cancel");
 				}
 				else
 				{
 					cr.openTicket = cr.openTicket.AddYears(-1);
 					btnLeave.Enabled = false;
-					btnEnter.Text = enterText;
+					btnEnter.Text = Session.Instance.GetResStr("enter");
 				}
 			} while (false);
 			Logger.Leave();

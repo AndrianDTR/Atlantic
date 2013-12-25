@@ -213,12 +213,28 @@
       <DependentUpon>BugReport.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="BugReport.uk.resx">
+      <DependentUpon>BugReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ClientInfo.resx">
       <DependentUpon>ClientInfo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientInfo.uk.resx">
+      <DependentUpon>ClientInfo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Prompt.uk.resx">
+      <DependentUpon>Prompt.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Register.uk.resx">
+      <DependentUpon>Register.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Res.en.resx">
@@ -288,6 +304,10 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SetPassword.resx">
+      <DependentUpon>SetPassword.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetPassword.uk.resx">
       <DependentUpon>SetPassword.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

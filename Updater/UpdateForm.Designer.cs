@@ -36,7 +36,6 @@ namespace AY.Updater
 			this.labelReleaseNotes = new System.Windows.Forms.Label();
 			this.buttonUpdate = new System.Windows.Forms.Button();
 			this.buttonSkip = new System.Windows.Forms.Button();
-			this.btnUpdate = new System.Windows.Forms.Button();
 			this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
 			this.SuspendLayout();
@@ -89,16 +88,6 @@ namespace AY.Updater
 			this.buttonSkip.Name = "buttonSkip";
 			this.buttonSkip.UseVisualStyleBackColor = true;
 			// 
-			// btnUpdate
-			// 
-			this.btnUpdate.AccessibleDescription = null;
-			this.btnUpdate.AccessibleName = null;
-			resources.ApplyResources(this.btnUpdate, "btnUpdate");
-			this.btnUpdate.BackgroundImage = null;
-			this.btnUpdate.Font = null;
-			this.btnUpdate.Name = "btnUpdate";
-			this.btnUpdate.UseVisualStyleBackColor = true;
-			// 
 			// pictureBoxIcon
 			// 
 			this.pictureBoxIcon.AccessibleDescription = null;
@@ -119,7 +108,6 @@ namespace AY.Updater
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackgroundImage = null;
-			this.Controls.Add(this.btnUpdate);
 			this.Controls.Add(this.pictureBoxIcon);
 			this.Controls.Add(this.labelReleaseNotes);
 			this.Controls.Add(this.labelUpdate);
@@ -146,8 +134,7 @@ namespace AY.Updater
         private System.Windows.Forms.WebBrowser webBrowser;
 		private System.Windows.Forms.Label labelUpdate;
         private System.Windows.Forms.Label labelReleaseNotes;
-        private System.Windows.Forms.PictureBox pictureBoxIcon;
-		private System.Windows.Forms.Button btnUpdate;
+		private System.Windows.Forms.PictureBox pictureBoxIcon;
 
     }
 }
