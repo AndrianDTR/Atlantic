@@ -601,6 +601,12 @@ namespace EAssistant
 			Logger.Leave();
 		}
 
+		private void generateListOfBarcodesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			BarcodeList bl = new BarcodeList();
+			bl.ShowDialog();
+		}
+		
 		private void CheckForUpdates()
 		{
 			Logger.Enter();

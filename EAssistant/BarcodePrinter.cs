@@ -88,7 +88,8 @@ table td, table th {
 		{
 			Logger.Enter();
 			Object res = Db.Instance.dSet.clients.Compute("max(id)", "");
-			Int32 code = Int32.Parse(res.ToString());
+			Int32 code = 0;
+			Int32.TryParse(res.ToString(), out code);
 			Logger.Leave();
 
 			return code;

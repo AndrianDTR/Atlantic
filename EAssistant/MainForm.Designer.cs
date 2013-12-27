@@ -49,8 +49,9 @@
 			this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
 			this.geterateBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.trainersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.trainersScheduleToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.manageTrainersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
+			this.trainersScheduleToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.servicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.manageServicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,9 +73,9 @@
 			this.tabManager = new System.Windows.Forms.TabControl();
 			this.tabActiveClients = new System.Windows.Forms.TabPage();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.todayClientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.tabCalendar = new System.Windows.Forms.TabPage();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.todayClientsBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.btnSearch = new System.Windows.Forms.Button();
 			this.btmMissLesson = new System.Windows.Forms.Button();
 			this.btnBackUp = new System.Windows.Forms.Button();
@@ -82,23 +83,18 @@
 			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
-			this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
+			this.generateListOfBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tabManager.SuspendLayout();
 			this.tabActiveClients.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.todayClientsBindingSource)).BeginInit();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
 			// 
-			this.menuStrip1.AccessibleDescription = null;
-			this.menuStrip1.AccessibleName = null;
-			resources.ApplyResources(this.menuStrip1, "menuStrip1");
-			this.menuStrip1.BackgroundImage = null;
-			this.menuStrip1.Font = null;
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.viewToolStripMenuItem,
@@ -107,106 +103,69 @@
             this.servicesToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.helpToolStripMenuItem});
+			resources.ApplyResources(this.menuStrip1, "menuStrip1");
 			this.menuStrip1.Name = "menuStrip1";
 			// 
 			// fileToolStripMenuItem
 			// 
-			this.fileToolStripMenuItem.AccessibleDescription = null;
-			this.fileToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
-			this.fileToolStripMenuItem.BackgroundImage = null;
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importToolStripMenuItem,
             this.exportToolStripMenuItem,
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-			this.fileToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
 			// 
 			// importToolStripMenuItem
 			// 
-			this.importToolStripMenuItem.AccessibleDescription = null;
-			this.importToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.importToolStripMenuItem, "importToolStripMenuItem");
-			this.importToolStripMenuItem.BackgroundImage = null;
 			this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-			this.importToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.importToolStripMenuItem, "importToolStripMenuItem");
 			this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
 			// 
 			// exportToolStripMenuItem
 			// 
-			this.exportToolStripMenuItem.AccessibleDescription = null;
-			this.exportToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.exportToolStripMenuItem, "exportToolStripMenuItem");
-			this.exportToolStripMenuItem.BackgroundImage = null;
 			this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-			this.exportToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.exportToolStripMenuItem, "exportToolStripMenuItem");
 			this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem1
 			// 
-			this.toolStripMenuItem1.AccessibleDescription = null;
-			this.toolStripMenuItem1.AccessibleName = null;
-			resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
 			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
 			// 
 			// exitToolStripMenuItem
 			// 
-			this.exitToolStripMenuItem.AccessibleDescription = null;
-			this.exitToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
-			this.exitToolStripMenuItem.BackgroundImage = null;
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.exitToolStripMenuItem, "exitToolStripMenuItem");
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
 			// viewToolStripMenuItem
 			// 
-			this.viewToolStripMenuItem.AccessibleDescription = null;
-			this.viewToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.viewToolStripMenuItem, "viewToolStripMenuItem");
-			this.viewToolStripMenuItem.BackgroundImage = null;
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.paymentsToolStripMenuItem,
             this.scheduleToolStripMenuItem,
             this.trainersScheduleToolStripMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-			this.viewToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.viewToolStripMenuItem, "viewToolStripMenuItem");
 			// 
 			// paymentsToolStripMenuItem
 			// 
-			this.paymentsToolStripMenuItem.AccessibleDescription = null;
-			this.paymentsToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.paymentsToolStripMenuItem, "paymentsToolStripMenuItem");
-			this.paymentsToolStripMenuItem.BackgroundImage = null;
 			this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
-			this.paymentsToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.paymentsToolStripMenuItem, "paymentsToolStripMenuItem");
 			this.paymentsToolStripMenuItem.Click += new System.EventHandler(this.paymentsToolStripMenuItem_Click);
 			// 
 			// scheduleToolStripMenuItem
 			// 
-			this.scheduleToolStripMenuItem.AccessibleDescription = null;
-			this.scheduleToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.scheduleToolStripMenuItem, "scheduleToolStripMenuItem");
-			this.scheduleToolStripMenuItem.BackgroundImage = null;
 			this.scheduleToolStripMenuItem.Name = "scheduleToolStripMenuItem";
-			this.scheduleToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.scheduleToolStripMenuItem, "scheduleToolStripMenuItem");
 			// 
 			// trainersScheduleToolStripMenuItem
 			// 
-			this.trainersScheduleToolStripMenuItem.AccessibleDescription = null;
-			this.trainersScheduleToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.trainersScheduleToolStripMenuItem, "trainersScheduleToolStripMenuItem");
-			this.trainersScheduleToolStripMenuItem.BackgroundImage = null;
 			this.trainersScheduleToolStripMenuItem.Name = "trainersScheduleToolStripMenuItem";
-			this.trainersScheduleToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.trainersScheduleToolStripMenuItem, "trainersScheduleToolStripMenuItem");
 			// 
 			// clientToolStripMenuItem
 			// 
-			this.clientToolStripMenuItem.AccessibleDescription = null;
-			this.clientToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.clientToolStripMenuItem, "clientToolStripMenuItem");
-			this.clientToolStripMenuItem.BackgroundImage = null;
 			this.clientToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.refreshOpenedTicketsToolStripMenuItem,
             this.clientSearchToolStripMenuItem,
@@ -214,134 +173,92 @@
             this.toolStripMenuItem5,
             this.manageClientsToolStripMenuItem,
             this.toolStripMenuItem6,
-            this.geterateBarcodesToolStripMenuItem});
+            this.geterateBarcodesToolStripMenuItem,
+            this.generateListOfBarcodesToolStripMenuItem});
 			this.clientToolStripMenuItem.Name = "clientToolStripMenuItem";
-			this.clientToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.clientToolStripMenuItem, "clientToolStripMenuItem");
 			// 
 			// refreshOpenedTicketsToolStripMenuItem
 			// 
-			this.refreshOpenedTicketsToolStripMenuItem.AccessibleDescription = null;
-			this.refreshOpenedTicketsToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.refreshOpenedTicketsToolStripMenuItem, "refreshOpenedTicketsToolStripMenuItem");
-			this.refreshOpenedTicketsToolStripMenuItem.BackgroundImage = null;
 			this.refreshOpenedTicketsToolStripMenuItem.Name = "refreshOpenedTicketsToolStripMenuItem";
-			this.refreshOpenedTicketsToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.refreshOpenedTicketsToolStripMenuItem, "refreshOpenedTicketsToolStripMenuItem");
 			this.refreshOpenedTicketsToolStripMenuItem.Click += new System.EventHandler(this.refreshOpenedTicketsToolStripMenuItem_Click);
 			// 
 			// clientSearchToolStripMenuItem
 			// 
-			this.clientSearchToolStripMenuItem.AccessibleDescription = null;
-			this.clientSearchToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.clientSearchToolStripMenuItem, "clientSearchToolStripMenuItem");
-			this.clientSearchToolStripMenuItem.BackgroundImage = null;
 			this.clientSearchToolStripMenuItem.Name = "clientSearchToolStripMenuItem";
-			this.clientSearchToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.clientSearchToolStripMenuItem, "clientSearchToolStripMenuItem");
 			this.clientSearchToolStripMenuItem.Click += new System.EventHandler(this.clientSearchToolStripMenuItem_Click);
 			// 
 			// addToolStripMenuItem
 			// 
-			this.addToolStripMenuItem.AccessibleDescription = null;
-			this.addToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.addToolStripMenuItem, "addToolStripMenuItem");
-			this.addToolStripMenuItem.BackgroundImage = null;
 			this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-			this.addToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.addToolStripMenuItem, "addToolStripMenuItem");
 			this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem5
 			// 
-			this.toolStripMenuItem5.AccessibleDescription = null;
-			this.toolStripMenuItem5.AccessibleName = null;
-			resources.ApplyResources(this.toolStripMenuItem5, "toolStripMenuItem5");
 			this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+			resources.ApplyResources(this.toolStripMenuItem5, "toolStripMenuItem5");
 			// 
 			// manageClientsToolStripMenuItem
 			// 
-			this.manageClientsToolStripMenuItem.AccessibleDescription = null;
-			this.manageClientsToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.manageClientsToolStripMenuItem, "manageClientsToolStripMenuItem");
-			this.manageClientsToolStripMenuItem.BackgroundImage = null;
 			this.manageClientsToolStripMenuItem.Name = "manageClientsToolStripMenuItem";
-			this.manageClientsToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.manageClientsToolStripMenuItem, "manageClientsToolStripMenuItem");
 			this.manageClientsToolStripMenuItem.Click += new System.EventHandler(this.manageClientsToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem6
 			// 
-			this.toolStripMenuItem6.AccessibleDescription = null;
-			this.toolStripMenuItem6.AccessibleName = null;
-			resources.ApplyResources(this.toolStripMenuItem6, "toolStripMenuItem6");
 			this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+			resources.ApplyResources(this.toolStripMenuItem6, "toolStripMenuItem6");
 			// 
 			// geterateBarcodesToolStripMenuItem
 			// 
-			this.geterateBarcodesToolStripMenuItem.AccessibleDescription = null;
-			this.geterateBarcodesToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.geterateBarcodesToolStripMenuItem, "geterateBarcodesToolStripMenuItem");
-			this.geterateBarcodesToolStripMenuItem.BackgroundImage = null;
 			this.geterateBarcodesToolStripMenuItem.Name = "geterateBarcodesToolStripMenuItem";
-			this.geterateBarcodesToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.geterateBarcodesToolStripMenuItem, "geterateBarcodesToolStripMenuItem");
 			this.geterateBarcodesToolStripMenuItem.Click += new System.EventHandler(this.geterateBarcodesToolStripMenuItem_Click);
 			// 
 			// trainersToolStripMenuItem
 			// 
-			this.trainersToolStripMenuItem.AccessibleDescription = null;
-			this.trainersToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.trainersToolStripMenuItem, "trainersToolStripMenuItem");
-			this.trainersToolStripMenuItem.BackgroundImage = null;
 			this.trainersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manageTrainersToolStripMenuItem,
             this.toolStripMenuItem8,
             this.trainersScheduleToolStripMenuItem1});
 			this.trainersToolStripMenuItem.Name = "trainersToolStripMenuItem";
-			this.trainersToolStripMenuItem.ShortcutKeyDisplayString = null;
-			// 
-			// trainersScheduleToolStripMenuItem1
-			// 
-			this.trainersScheduleToolStripMenuItem1.AccessibleDescription = null;
-			this.trainersScheduleToolStripMenuItem1.AccessibleName = null;
-			resources.ApplyResources(this.trainersScheduleToolStripMenuItem1, "trainersScheduleToolStripMenuItem1");
-			this.trainersScheduleToolStripMenuItem1.BackgroundImage = null;
-			this.trainersScheduleToolStripMenuItem1.Name = "trainersScheduleToolStripMenuItem1";
-			this.trainersScheduleToolStripMenuItem1.ShortcutKeyDisplayString = null;
-			this.trainersScheduleToolStripMenuItem1.Click += new System.EventHandler(this.btnTrainersShedule_Click);
+			resources.ApplyResources(this.trainersToolStripMenuItem, "trainersToolStripMenuItem");
 			// 
 			// manageTrainersToolStripMenuItem
 			// 
-			this.manageTrainersToolStripMenuItem.AccessibleDescription = null;
-			this.manageTrainersToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.manageTrainersToolStripMenuItem, "manageTrainersToolStripMenuItem");
-			this.manageTrainersToolStripMenuItem.BackgroundImage = null;
 			this.manageTrainersToolStripMenuItem.Name = "manageTrainersToolStripMenuItem";
-			this.manageTrainersToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.manageTrainersToolStripMenuItem, "manageTrainersToolStripMenuItem");
 			this.manageTrainersToolStripMenuItem.Click += new System.EventHandler(this.manageTrainersToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem8
+			// 
+			this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+			resources.ApplyResources(this.toolStripMenuItem8, "toolStripMenuItem8");
+			// 
+			// trainersScheduleToolStripMenuItem1
+			// 
+			this.trainersScheduleToolStripMenuItem1.Name = "trainersScheduleToolStripMenuItem1";
+			resources.ApplyResources(this.trainersScheduleToolStripMenuItem1, "trainersScheduleToolStripMenuItem1");
+			this.trainersScheduleToolStripMenuItem1.Click += new System.EventHandler(this.btnTrainersShedule_Click);
 			// 
 			// servicesToolStripMenuItem
 			// 
-			this.servicesToolStripMenuItem.AccessibleDescription = null;
-			this.servicesToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.servicesToolStripMenuItem, "servicesToolStripMenuItem");
-			this.servicesToolStripMenuItem.BackgroundImage = null;
 			this.servicesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manageServicesToolStripMenuItem});
 			this.servicesToolStripMenuItem.Name = "servicesToolStripMenuItem";
-			this.servicesToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.servicesToolStripMenuItem, "servicesToolStripMenuItem");
 			// 
 			// manageServicesToolStripMenuItem
 			// 
-			this.manageServicesToolStripMenuItem.AccessibleDescription = null;
-			this.manageServicesToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.manageServicesToolStripMenuItem, "manageServicesToolStripMenuItem");
-			this.manageServicesToolStripMenuItem.BackgroundImage = null;
 			this.manageServicesToolStripMenuItem.Name = "manageServicesToolStripMenuItem";
-			this.manageServicesToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.manageServicesToolStripMenuItem, "manageServicesToolStripMenuItem");
 			this.manageServicesToolStripMenuItem.Click += new System.EventHandler(this.manageServicesToolStripMenuItem_Click);
 			// 
 			// settingsToolStripMenuItem
 			// 
-			this.settingsToolStripMenuItem.AccessibleDescription = null;
-			this.settingsToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
-			this.settingsToolStripMenuItem.BackgroundImage = null;
 			this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changePasswordToolStripMenuItem,
             this.toolStripMenuItem2,
@@ -350,68 +267,44 @@
             this.toolStripMenuItem3,
             this.optionsToolStripMenuItem});
 			this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-			this.settingsToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
 			// 
 			// changePasswordToolStripMenuItem
 			// 
-			this.changePasswordToolStripMenuItem.AccessibleDescription = null;
-			this.changePasswordToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.changePasswordToolStripMenuItem, "changePasswordToolStripMenuItem");
-			this.changePasswordToolStripMenuItem.BackgroundImage = null;
 			this.changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
-			this.changePasswordToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.changePasswordToolStripMenuItem, "changePasswordToolStripMenuItem");
 			this.changePasswordToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem2
 			// 
-			this.toolStripMenuItem2.AccessibleDescription = null;
-			this.toolStripMenuItem2.AccessibleName = null;
-			resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
 			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+			resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
 			// 
 			// usersAndPasswordsToolStripMenuItem
 			// 
-			this.usersAndPasswordsToolStripMenuItem.AccessibleDescription = null;
-			this.usersAndPasswordsToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.usersAndPasswordsToolStripMenuItem, "usersAndPasswordsToolStripMenuItem");
-			this.usersAndPasswordsToolStripMenuItem.BackgroundImage = null;
 			this.usersAndPasswordsToolStripMenuItem.Name = "usersAndPasswordsToolStripMenuItem";
-			this.usersAndPasswordsToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.usersAndPasswordsToolStripMenuItem, "usersAndPasswordsToolStripMenuItem");
 			this.usersAndPasswordsToolStripMenuItem.Click += new System.EventHandler(this.usersAndPasswordsToolStripMenuItem_Click);
 			// 
 			// userRolesToolStripMenuItem
 			// 
-			this.userRolesToolStripMenuItem.AccessibleDescription = null;
-			this.userRolesToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.userRolesToolStripMenuItem, "userRolesToolStripMenuItem");
-			this.userRolesToolStripMenuItem.BackgroundImage = null;
 			this.userRolesToolStripMenuItem.Name = "userRolesToolStripMenuItem";
-			this.userRolesToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.userRolesToolStripMenuItem, "userRolesToolStripMenuItem");
 			this.userRolesToolStripMenuItem.Click += new System.EventHandler(this.userRolesToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem3
 			// 
-			this.toolStripMenuItem3.AccessibleDescription = null;
-			this.toolStripMenuItem3.AccessibleName = null;
-			resources.ApplyResources(this.toolStripMenuItem3, "toolStripMenuItem3");
 			this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+			resources.ApplyResources(this.toolStripMenuItem3, "toolStripMenuItem3");
 			// 
 			// optionsToolStripMenuItem
 			// 
-			this.optionsToolStripMenuItem.AccessibleDescription = null;
-			this.optionsToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
-			this.optionsToolStripMenuItem.BackgroundImage = null;
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-			this.optionsToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
 			this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
-			this.helpToolStripMenuItem.AccessibleDescription = null;
-			this.helpToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
-			this.helpToolStripMenuItem.BackgroundImage = null;
 			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openUserManualToolStripMenuItem,
             this.aboutToolStripMenuItem,
@@ -420,119 +313,79 @@
             this.toolStripMenuItem4,
             this.sendLogToolStripMenuItem});
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-			this.helpToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
 			// 
 			// openUserManualToolStripMenuItem
 			// 
-			this.openUserManualToolStripMenuItem.AccessibleDescription = null;
-			this.openUserManualToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.openUserManualToolStripMenuItem, "openUserManualToolStripMenuItem");
-			this.openUserManualToolStripMenuItem.BackgroundImage = null;
 			this.openUserManualToolStripMenuItem.Name = "openUserManualToolStripMenuItem";
-			this.openUserManualToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.openUserManualToolStripMenuItem, "openUserManualToolStripMenuItem");
 			this.openUserManualToolStripMenuItem.Click += new System.EventHandler(this.openUserManualToolStripMenuItem_Click);
 			// 
 			// aboutToolStripMenuItem
 			// 
-			this.aboutToolStripMenuItem.AccessibleDescription = null;
-			this.aboutToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
-			this.aboutToolStripMenuItem.BackgroundImage = null;
 			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-			this.aboutToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem7
 			// 
-			this.toolStripMenuItem7.AccessibleDescription = null;
-			this.toolStripMenuItem7.AccessibleName = null;
-			resources.ApplyResources(this.toolStripMenuItem7, "toolStripMenuItem7");
 			this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+			resources.ApplyResources(this.toolStripMenuItem7, "toolStripMenuItem7");
 			// 
 			// checkForUpdatesToolStripMenuItem
 			// 
-			this.checkForUpdatesToolStripMenuItem.AccessibleDescription = null;
-			this.checkForUpdatesToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.checkForUpdatesToolStripMenuItem, "checkForUpdatesToolStripMenuItem");
-			this.checkForUpdatesToolStripMenuItem.BackgroundImage = null;
 			this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-			this.checkForUpdatesToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.checkForUpdatesToolStripMenuItem, "checkForUpdatesToolStripMenuItem");
 			this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem4
 			// 
-			this.toolStripMenuItem4.AccessibleDescription = null;
-			this.toolStripMenuItem4.AccessibleName = null;
-			resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
 			this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+			resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
 			// 
 			// sendLogToolStripMenuItem
 			// 
-			this.sendLogToolStripMenuItem.AccessibleDescription = null;
-			this.sendLogToolStripMenuItem.AccessibleName = null;
-			resources.ApplyResources(this.sendLogToolStripMenuItem, "sendLogToolStripMenuItem");
-			this.sendLogToolStripMenuItem.BackgroundImage = null;
 			this.sendLogToolStripMenuItem.Name = "sendLogToolStripMenuItem";
-			this.sendLogToolStripMenuItem.ShortcutKeyDisplayString = null;
+			resources.ApplyResources(this.sendLogToolStripMenuItem, "sendLogToolStripMenuItem");
 			this.sendLogToolStripMenuItem.Click += new System.EventHandler(this.sendLogToolStripMenuItem_Click);
 			// 
 			// panel2
 			// 
-			this.panel2.AccessibleDescription = null;
-			this.panel2.AccessibleName = null;
 			resources.ApplyResources(this.panel2, "panel2");
-			this.panel2.BackgroundImage = null;
-			this.panel2.Font = null;
 			this.panel2.Name = "panel2";
 			// 
 			// tableLayoutPanel1
 			// 
-			this.tableLayoutPanel1.AccessibleDescription = null;
-			this.tableLayoutPanel1.AccessibleName = null;
 			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-			this.tableLayoutPanel1.BackgroundImage = null;
 			this.tableLayoutPanel1.Controls.Add(this.tabManager, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-			this.tableLayoutPanel1.Font = null;
 			this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			// 
 			// tabManager
 			// 
-			this.tabManager.AccessibleDescription = null;
-			this.tabManager.AccessibleName = null;
 			resources.ApplyResources(this.tabManager, "tabManager");
-			this.tabManager.BackgroundImage = null;
 			this.tabManager.Controls.Add(this.tabActiveClients);
 			this.tabManager.Controls.Add(this.tabCalendar);
-			this.tabManager.Font = null;
 			this.tabManager.Name = "tabManager";
 			this.tabManager.SelectedIndex = 0;
 			// 
 			// tabActiveClients
 			// 
-			this.tabActiveClients.AccessibleDescription = null;
-			this.tabActiveClients.AccessibleName = null;
-			resources.ApplyResources(this.tabActiveClients, "tabActiveClients");
-			this.tabActiveClients.BackgroundImage = null;
 			this.tabActiveClients.Controls.Add(this.dataGridView1);
-			this.tabActiveClients.Font = null;
+			resources.ApplyResources(this.tabActiveClients, "tabActiveClients");
 			this.tabActiveClients.Name = "tabActiveClients";
 			this.tabActiveClients.UseVisualStyleBackColor = true;
 			// 
 			// dataGridView1
 			// 
-			this.dataGridView1.AccessibleDescription = null;
-			this.dataGridView1.AccessibleName = null;
 			this.dataGridView1.AllowUserToAddRows = false;
 			this.dataGridView1.AllowUserToDeleteRows = false;
 			this.dataGridView1.AllowUserToResizeRows = false;
-			resources.ApplyResources(this.dataGridView1, "dataGridView1");
 			this.dataGridView1.AutoGenerateColumns = false;
-			this.dataGridView1.BackgroundImage = null;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView1.DataSource = this.todayClientsBindingSource;
-			this.dataGridView1.Font = null;
+			resources.ApplyResources(this.dataGridView1, "dataGridView1");
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.ReadOnly = true;
 			this.dataGridView1.RowHeadersVisible = false;
@@ -540,21 +393,17 @@
 			this.dataGridView1.ShowCellErrors = false;
 			this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShowClientInfo);
 			// 
+			// todayClientsBindingSource
+			// 
+			this.todayClientsBindingSource.DataMember = "TodayClients";
+			// 
 			// tabCalendar
 			// 
-			this.tabCalendar.AccessibleDescription = null;
-			this.tabCalendar.AccessibleName = null;
 			resources.ApplyResources(this.tabCalendar, "tabCalendar");
-			this.tabCalendar.BackgroundImage = null;
-			this.tabCalendar.Font = null;
 			this.tabCalendar.Name = "tabCalendar";
 			// 
 			// panel1
 			// 
-			this.panel1.AccessibleDescription = null;
-			this.panel1.AccessibleName = null;
-			resources.ApplyResources(this.panel1, "panel1");
-			this.panel1.BackgroundImage = null;
 			this.panel1.Controls.Add(this.btnSearch);
 			this.panel1.Controls.Add(this.btmMissLesson);
 			this.panel1.Controls.Add(this.btnBackUp);
@@ -562,115 +411,78 @@
 			this.panel1.Controls.Add(this.btnPaymentsHistory);
 			this.panel1.Controls.Add(this.btnClientManager);
 			this.panel1.Controls.Add(this.btnAddClient);
-			this.panel1.Font = null;
+			resources.ApplyResources(this.panel1, "panel1");
 			this.panel1.Name = "panel1";
-			// 
-			// todayClientsBindingSource
-			// 
-			this.todayClientsBindingSource.DataMember = "TodayClients";
 			// 
 			// btnSearch
 			// 
-			this.btnSearch.AccessibleDescription = null;
-			this.btnSearch.AccessibleName = null;
-			resources.ApplyResources(this.btnSearch, "btnSearch");
-			this.btnSearch.BackgroundImage = null;
-			this.btnSearch.Font = null;
 			this.btnSearch.Image = global::EAssistant.Properties.Resources.search;
+			resources.ApplyResources(this.btnSearch, "btnSearch");
 			this.btnSearch.Name = "btnSearch";
 			this.btnSearch.UseVisualStyleBackColor = true;
 			this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
 			// 
 			// btmMissLesson
 			// 
-			this.btmMissLesson.AccessibleDescription = null;
-			this.btmMissLesson.AccessibleName = null;
-			resources.ApplyResources(this.btmMissLesson, "btmMissLesson");
-			this.btmMissLesson.BackgroundImage = null;
-			this.btmMissLesson.Font = null;
 			this.btmMissLesson.Image = global::EAssistant.Properties.Resources.appointment_missed;
+			resources.ApplyResources(this.btmMissLesson, "btmMissLesson");
 			this.btmMissLesson.Name = "btmMissLesson";
 			this.btmMissLesson.UseVisualStyleBackColor = true;
 			this.btmMissLesson.Click += new System.EventHandler(this.btmMissLesson_Click);
 			// 
 			// btnBackUp
 			// 
-			this.btnBackUp.AccessibleDescription = null;
-			this.btnBackUp.AccessibleName = null;
-			resources.ApplyResources(this.btnBackUp, "btnBackUp");
-			this.btnBackUp.BackgroundImage = null;
-			this.btnBackUp.Font = null;
 			this.btnBackUp.Image = global::EAssistant.Properties.Resources._1367375035_filesave;
+			resources.ApplyResources(this.btnBackUp, "btnBackUp");
 			this.btnBackUp.Name = "btnBackUp";
 			this.btnBackUp.UseVisualStyleBackColor = true;
 			this.btnBackUp.Click += new System.EventHandler(this.btnBackUp_Click);
 			// 
 			// btnTrainersShedule
 			// 
-			this.btnTrainersShedule.AccessibleDescription = null;
-			this.btnTrainersShedule.AccessibleName = null;
-			resources.ApplyResources(this.btnTrainersShedule, "btnTrainersShedule");
-			this.btnTrainersShedule.BackgroundImage = null;
-			this.btnTrainersShedule.Font = null;
 			this.btnTrainersShedule.Image = global::EAssistant.Properties.Resources._1367375242_schedule;
+			resources.ApplyResources(this.btnTrainersShedule, "btnTrainersShedule");
 			this.btnTrainersShedule.Name = "btnTrainersShedule";
 			this.btnTrainersShedule.UseVisualStyleBackColor = true;
 			this.btnTrainersShedule.Click += new System.EventHandler(this.btnTrainersShedule_Click);
 			// 
 			// btnPaymentsHistory
 			// 
-			this.btnPaymentsHistory.AccessibleDescription = null;
-			this.btnPaymentsHistory.AccessibleName = null;
-			resources.ApplyResources(this.btnPaymentsHistory, "btnPaymentsHistory");
-			this.btnPaymentsHistory.BackgroundImage = null;
-			this.btnPaymentsHistory.Font = null;
 			this.btnPaymentsHistory.Image = global::EAssistant.Properties.Resources._1367375158_coins;
+			resources.ApplyResources(this.btnPaymentsHistory, "btnPaymentsHistory");
 			this.btnPaymentsHistory.Name = "btnPaymentsHistory";
 			this.btnPaymentsHistory.UseVisualStyleBackColor = true;
 			this.btnPaymentsHistory.Click += new System.EventHandler(this.btnPaymentsHistory_Click);
 			// 
 			// btnClientManager
 			// 
-			this.btnClientManager.AccessibleDescription = null;
-			this.btnClientManager.AccessibleName = null;
-			resources.ApplyResources(this.btnClientManager, "btnClientManager");
-			this.btnClientManager.BackgroundImage = null;
-			this.btnClientManager.Font = null;
 			this.btnClientManager.Image = global::EAssistant.Properties.Resources._1367375688_27_Edit_Text;
+			resources.ApplyResources(this.btnClientManager, "btnClientManager");
 			this.btnClientManager.Name = "btnClientManager";
 			this.btnClientManager.UseVisualStyleBackColor = true;
 			this.btnClientManager.Click += new System.EventHandler(this.btnClientManager_Click);
 			// 
 			// btnAddClient
 			// 
-			this.btnAddClient.AccessibleDescription = null;
-			this.btnAddClient.AccessibleName = null;
-			resources.ApplyResources(this.btnAddClient, "btnAddClient");
-			this.btnAddClient.BackgroundImage = null;
-			this.btnAddClient.Font = null;
 			this.btnAddClient.Image = global::EAssistant.Properties.Resources._1367374740_edit_add;
+			resources.ApplyResources(this.btnAddClient, "btnAddClient");
 			this.btnAddClient.Name = "btnAddClient";
 			this.btnAddClient.UseVisualStyleBackColor = true;
 			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
 			// 
-			// toolStripMenuItem8
+			// generateListOfBarcodesToolStripMenuItem
 			// 
-			this.toolStripMenuItem8.AccessibleDescription = null;
-			this.toolStripMenuItem8.AccessibleName = null;
-			resources.ApplyResources(this.toolStripMenuItem8, "toolStripMenuItem8");
-			this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+			this.generateListOfBarcodesToolStripMenuItem.Name = "generateListOfBarcodesToolStripMenuItem";
+			resources.ApplyResources(this.generateListOfBarcodesToolStripMenuItem, "generateListOfBarcodesToolStripMenuItem");
+			this.generateListOfBarcodesToolStripMenuItem.Click += new System.EventHandler(this.generateListOfBarcodesToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
-			this.AccessibleDescription = null;
-			this.AccessibleName = null;
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackgroundImage = null;
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.menuStrip1);
-			this.Font = null;
 			this.KeyPreview = true;
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainForm";
@@ -682,8 +494,8 @@
 			this.tabManager.ResumeLayout(false);
 			this.tabActiveClients.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-			this.panel1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.todayClientsBindingSource)).EndInit();
+			this.panel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -744,6 +556,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
 		private System.Windows.Forms.ToolStripMenuItem sendLogToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
+		private System.Windows.Forms.ToolStripMenuItem generateListOfBarcodesToolStripMenuItem;
     }
 }
 
