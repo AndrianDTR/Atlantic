@@ -2,6 +2,10 @@
     
     
     public partial class dbDataSet {
+		partial class settingsDataTable
+		{
+		}
+	
 		partial class VPaymentsDataTable
 		{
 		}

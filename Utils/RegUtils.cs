@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Management;
 using System.Text.RegularExpressions;
 using Microsoft.Win32;
@@ -49,7 +47,7 @@ namespace AY.Utils
 			Logger.Enter();
 			try
 			{
-				RegistryKey key = GetAppKey();
+				RegistryKey key = CultureInfoUtils.GetAppKey();
 				byte[] data = (byte[])key.GetValue(@"data");
 				m_data = Archive.DecompressArray(data);
 			}
@@ -63,16 +61,12 @@ namespace AY.Utils
 
 		public static void ROL(ref byte val, int nBits)
 		{
-			Logger.Enter();
 			val = (byte)((val >> nBits) | (val << (8 - nBits)));
-			Logger.Leave();
 		}
 
 		public static void ROR(ref byte val, int nBits)
 		{
-			Logger.Enter();
 			val = (byte)((val << nBits) | (val >> (8 - nBits)));
-			Logger.Leave();
 		}
 
 		private byte[] GetKey(byte[] data, int offset, int keyLen)
@@ -82,16 +76,6 @@ namespace AY.Utils
 			Array.Copy(data, offset, key, 0, keyLen);
 			Logger.Leave();
 			return key;
-		}
-
-		private RegistryKey GetAppKey()
-		{
-			Logger.Enter();
-			Assembly asm = Assembly.GetExecutingAssembly();
-			GuidAttribute guid = (GuidAttribute)asm.GetCustomAttributes(typeof(GuidAttribute), true)[0];
-			String subKey = "Software\\" + guid.Value;
-			Logger.Leave();
-			return Registry.LocalMachine.CreateSubKey(subKey, RegistryKeyPermissionCheck.ReadWriteSubTree);
 		}
 
 		public byte[] SavedData
@@ -111,7 +95,7 @@ namespace AY.Utils
 			{
 				Logger.Enter();
 				m_data = value;
-				RegistryKey key = GetAppKey();
+				RegistryKey key = CultureInfoUtils.GetAppKey();
 				key.SetValue(@"data", Archive.CompressArray(m_data), RegistryValueKind.Binary);
 				key.Flush();
 				key.Close();

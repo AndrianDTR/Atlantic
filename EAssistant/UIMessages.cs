@@ -14,7 +14,7 @@ namespace EAssistant
 			Logger.Error(message);
 			
 			return MessageBox.Show(message
-			, Session.Instance.GetResStr("error")
+			, Session.GetResStr("error")
 			, buttons, MessageBoxIcon.Error);
 		}
 
@@ -27,7 +27,7 @@ namespace EAssistant
 		{
 			Logger.Warning(message);
 			return MessageBox.Show(message
-				, Session.Instance.GetResStr("warning")
+				, Session.GetResStr("warning")
 				, buttons, MessageBoxIcon.Warning);
 		}
 
@@ -40,7 +40,7 @@ namespace EAssistant
 		{
 			Logger.Info(message);
 			return MessageBox.Show(message
-				, Session.Instance.GetResStr("information")
+				, Session.GetResStr("information")
 				, buttons, MessageBoxIcon.Information);
 		}
 
@@ -52,14 +52,14 @@ namespace EAssistant
 		public static DialogResult NotImplementedFeature()
 		{
 			return UIMessages.Info(
-				Session.Instance.GetResStr("not_implemented")
+				Session.GetResStr("not_implemented")
 				);
 		}
 		
 		public static DialogResult DisabledFeature()
 		{
 			return UIMessages.Info(
-				Session.Instance.GetResStr("disabled_feature")
+				Session.GetResStr("disabled_feature")
 				);
 		}
 	}

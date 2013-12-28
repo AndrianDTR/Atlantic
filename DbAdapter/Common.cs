@@ -6,6 +6,7 @@ using AY.Utils;
 using AY.db.dbDataSetTableAdapters;
 using AY.Packer;
 using System.IO;
+using System.Reflection;
 
 namespace AY.db
 {
@@ -223,6 +224,34 @@ namespace AY.db
 					Archive.Compress(f, archName);
 					f.Delete();
 				}
+
+				res = true;
+			} while (false);
+
+			Logger.Leave();
+			return res;
+		}
+
+		public bool ResetDB()
+		{
+			bool res = false;
+			Logger.Enter();
+
+			do
+			{
+				Assembly assembly = Assembly.GetExecutingAssembly();
+				Stream file = assembly.GetManifestResourceStream("DbAdapter.Resources.client");
+
+				BinaryReader bReader = new BinaryReader(file);
+				FileStream fStream = new FileStream(@"client.db.new", FileMode.Create);
+
+				using (BinaryWriter bWriter = new BinaryWriter(fStream))
+				{
+					bWriter.Write(bReader.ReadBytes((int)file.Length));
+					bReader.Close();
+					bWriter.Close();
+				}
+				file.Close();
 
 				res = true;
 			} while (false);

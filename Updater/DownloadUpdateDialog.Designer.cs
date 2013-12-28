@@ -35,38 +35,30 @@
 			// 
 			// progressBar
 			// 
-			this.progressBar.AccessibleDescription = null;
-			this.progressBar.AccessibleName = null;
 			resources.ApplyResources(this.progressBar, "progressBar");
-			this.progressBar.BackgroundImage = null;
-			this.progressBar.Font = null;
 			this.progressBar.Name = "progressBar";
 			this.progressBar.Step = 1;
 			this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
 			// 
 			// labelInformation
 			// 
-			this.labelInformation.AccessibleDescription = null;
-			this.labelInformation.AccessibleName = null;
 			resources.ApplyResources(this.labelInformation, "labelInformation");
 			this.labelInformation.Name = "labelInformation";
 			// 
 			// DownloadUpdateDialog
 			// 
-			this.AccessibleDescription = null;
-			this.AccessibleName = null;
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackgroundImage = null;
+			this.ControlBox = false;
 			this.Controls.Add(this.labelInformation);
 			this.Controls.Add(this.progressBar);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.Icon = null;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "DownloadUpdateDialog";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
+			this.TopMost = true;
 			this.Load += new System.EventHandler(this.DownloadUpdateDialogLoad);
 			this.ResumeLayout(false);
 			this.PerformLayout();

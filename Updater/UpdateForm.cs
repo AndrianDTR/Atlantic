@@ -6,8 +6,7 @@ using System.ComponentModel;
 using Microsoft.Win32;
 using System.Threading;
 using AY.Log;
-using AY.db;
-using AY.db.dbDataSetTableAdapters;
+using AY.Utils;
 
 namespace AY.Updater
 {
@@ -16,14 +15,12 @@ namespace AY.Updater
 		public UpdateForm()
 		{
 			Logger.Enter();
-			
-			dbDataSet.settingsRow row = Db.Instance.dSet.settings.FindByid(1);
-			CultureInfo cult = new CultureInfo(row.language);
-			Thread.CurrentThread.CurrentUICulture = cult;
+
+			Thread.CurrentThread.CurrentUICulture = CultureInfoUtils.CurrentCulture;
 			
 			InitializeComponent();
 
-			labelUpdate.Text = String.Format(labelUpdate.Text, Updater.AppTitle);
+			labelUpdate.Text = String.Format(labelUpdate.Text, Updater.AppTitle, Updater.CurrentVersion);
 
 			Logger.Leave();
 		}

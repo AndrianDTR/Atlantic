@@ -14,8 +14,7 @@ namespace EAssistant
 {
 	class Session : Singleton<Session>
 	{
-		ResourceManager rm = null;
-		CultureInfo m_culture = null;
+		static ResourceManager rm = null;
 		
 		private static int m_minBarcodeLen = 13;
 
@@ -48,13 +47,23 @@ namespace EAssistant
 			Logger.Enter();
 			
 			m_customerID = RegUtils.Instance.CustomerId;
-			dbDataSet.settingsRow row = Db.Instance.dSet.settings.FindByid(1);
-			Culture = new CultureInfo(row.language);
-			rm = new ResourceManager("EAssistant.Resources.Res", typeof(MainForm).Assembly);
 			
 			Logger.Leave();
 		}
 
+		protected ResourceManager ResourceManager
+		{
+			get
+			{
+				if(null == rm)
+				{
+					rm = new ResourceManager("EAssistant.Resources.Res", typeof(MainForm).Assembly);
+				}
+				
+				return rm;
+			}
+		}
+		
 		public void UpdateMain()
 		{
 			Logger.Enter();
@@ -84,12 +93,12 @@ namespace EAssistant
 			}
 		}
 
-		public static int MinBarcodeLen
+		public int MinBarcodeLen
 		{
 			get { return m_minBarcodeLen; }
 		}
 
-		public static Int32 CheckBarCode(String code)
+		public Int32 CheckBarCode(String code)
 		{
 			Int32 res = 0;
 			Logger.Enter();
@@ -98,21 +107,17 @@ namespace EAssistant
 				if (code.Length > MinBarcodeLen)
 					throw new InvalidExpressionException();
 
-				int prefix = Int32.Parse(code.Substring(0, 2));
-				int customer = Int32.Parse(code.Substring(2, 5));
-				int client = Int32.Parse(code.Substring(7, 5));
-				res = client;
-
-				if (0 == res)
-				{
-					UIMessages.Error("Client code should not be 'NULL'.");
-				}
+				Int32 prefix = 0;
+				Int32 customer = 0;
+				
+				Int32.TryParse(code.Substring(0, 2), out prefix);
+				Int32.TryParse(code.Substring(2, 5), out customer);
+				Int32.TryParse(code.Substring(7, 5), out res);
 			}
 			catch
 			{
 				UIMessages.Error(
-					String.Format("Invalid card number has been specified.\n"
-						+ "Please use only digits and no more {0} characters."
+					String.Format(GetResStr("invalid_barcode")
 						, MinBarcodeLen));
 				res = 0;
 			}
@@ -133,21 +138,24 @@ namespace EAssistant
 			get { return m_customerID; }
 		}
 
-		public CultureInfo Culture
+		public static String GetResStr(String name)
 		{
-			get
+			Logger.Enter();
+			String res = "";
+			try
 			{
-				return m_culture;
+				res = Session.Instance.ResourceManager.GetString(
+					name, CultureInfoUtils.CurrentCulture);
 			}
-			set
+			catch(Exception ex)
 			{
-				m_culture = value;
+				Logger.Error(String.Format(
+						"Get resource string \"{0}\" error, Internal msg: {1}"
+						, name
+						, ex.Message)
+					);
 			}
-		}
-		
-		public String GetResStr(String name)
-		{
-			return rm.GetString(name, Culture);
+			return res;
 		}
 	}
 }

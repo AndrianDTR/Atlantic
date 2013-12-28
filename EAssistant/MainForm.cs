@@ -5,15 +5,15 @@ using System.Drawing;
 using System.Text;
 using System.Collections.Generic;
 using System.Windows.Forms.DataVisualization.Charting;
-using AY.Log;
-using AY.db;
-using AY.Utils;
 using System.Data;
 using System.Data.SQLite;
-using AY.Updater;
-using AY.db.dbDataSetTableAdapters;
 using System.Diagnostics;
 using System.Reflection;
+using AY.Updater;
+using AY.Log;
+using AY.db;
+using AY.db.dbDataSetTableAdapters;
+using AY.Utils;
 
 namespace EAssistant
 {
@@ -62,6 +62,7 @@ namespace EAssistant
 			m_calendar.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(76)))), ((int)(((byte)(122)))));
 			m_calendar.StartDate = new System.DateTime(2013, 8, 13, 0, 0, 0, 0);
 			m_calendar.VerticalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(174)))), ((int)(((byte)(217)))));
+			m_calendar.Dock = DockStyle.Fill;
 			
 			InitializeComponent();
 
@@ -86,16 +87,28 @@ namespace EAssistant
 		private void MainForm_Load(object sender, EventArgs e)
 		{
 			Logger.Enter();
+			
 			GetOpenedTickets();
 
-			dbDataSet.settingsRow opt = Db.Instance.dSet.settings.FindByid(1);
-			if (opt.updates == 0)
+			if (Updater.CheckUpdatesAutomacically)
 			{
 				CheckForUpdates();
 			}
+			
 			Logger.Leave();
 		}
 
+		public void CheckForUpdates()
+		{
+			Logger.Enter();
+#if !DEBUG
+			Updater.CheckNewVersion("http://pro100soft.eu/E-Assistant/updates/latest.xml");
+#else
+			Updater.CheckNewVersion("http://localhost/update.xml");
+#endif
+			Logger.Leave();
+		}
+		
 		private void InitOnce()
 		{
 			Logger.Enter();
@@ -121,49 +134,53 @@ namespace EAssistant
 			// 
 			// colOTName
 			// 
-			colOTName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			colOTName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 			colOTName.DataPropertyName = "name";
 			colOTName.Name = "colOTName";
-			colOTName.HeaderText = "Client Name";
+			colOTName.HeaderText = Session.GetResStr("OTL_CLIENT_NAME");
 			colOTName.ReadOnly = true;
 			// 
 			// colOTStatus
 			// 
+			colOTStatus.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 			colOTStatus.DataPropertyName = "status";
 			colOTStatus.Name = "colOTStatus";
-			colOTStatus.HeaderText = "Status";
+			colOTStatus.HeaderText = Session.GetResStr("OTL_STATUS"); ;
 			colOTStatus.ReadOnly = true;
 			// 
 			// colOTSchedTime
 			// 
+			colOTSchedTime.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 			colOTSchedTime.DataPropertyName = "scheduleTime";
 			colOTSchedTime.Name = "colOTSchedTime";
-			colOTSchedTime.HeaderText = "Time";
+			colOTSchedTime.HeaderText = Session.GetResStr("OTL_SCHEDULE_TIME");
 			colOTSchedTime.ReadOnly = true;
 			colOTSchedTime.DefaultCellStyle = csTime;
 			// 
 			// colOTOpenTicket
 			// 
+			colOTOpenTicket.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 			colOTOpenTicket.DataPropertyName = "openTicket";
 			colOTOpenTicket.Name = "colOTOpenTicket";
-			colOTOpenTicket.HeaderText = "Enter";
+			colOTOpenTicket.HeaderText = Session.GetResStr("OTL_ENTER_TIME");
 			colOTOpenTicket.ReadOnly = true;
 			colOTOpenTicket.DefaultCellStyle = csTime;
 			// 
 			// colOTLastLeave
 			// 
+			colOTLastLeave.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 			colOTLastLeave.DataPropertyName = "lastLeave";
 			colOTLastLeave.Name = "colOTLastLeave";
-			colOTLastLeave.HeaderText = "Leave";
+			colOTLastLeave.HeaderText = Session.GetResStr("OTL_LEAVE_TIME");
 			colOTLastLeave.ReadOnly = true;
 			colOTLastLeave.DefaultCellStyle = csTime;
 			// 
 			// colOTHoursLeft
 			// 
+			colOTHoursLeft.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 			colOTHoursLeft.DataPropertyName = "hoursLeft";
 			colOTHoursLeft.Name = "colOTHoursLeft";
-			colOTHoursLeft.HeaderText = "Available Hours";
-			colOTHoursLeft.Width = 110;
+			colOTHoursLeft.HeaderText = Session.GetResStr("OTL_AVAILABLE_HOURS");
 			colOTHoursLeft.ReadOnly = true;
 
 			// 
@@ -171,7 +188,7 @@ namespace EAssistant
 			// 
 			colOTHoursDec.DataPropertyName = "hoursDec";
 			colOTHoursDec.Name = "colOTHoursDec";
-			colOTHoursDec.HeaderText = "Lesson";
+			colOTHoursDec.HeaderText = Session.GetResStr("OTL_LESSON_LEN");
 			colOTHoursDec.Visible = false;
 
 			dataGridView1.Columns.AddRange(new DataGridViewColumn[] {
@@ -201,12 +218,12 @@ namespace EAssistant
 
 				Int64 ticks = BitConverter.ToInt64(buf, 0);
 				DateTime regDate = new DateTime(ticks);
-				TimeSpan daysLeft = regDate.AddDays(30).Subtract(DateTime.Now);
+				TimeSpan daysLeft = regDate.AddDays(15).Subtract(DateTime.Now);
 				if (daysLeft.Days > 0)
 				{
 					DialogResult res = UIMessages.Warning(
 						String.Format(
-							  Session.Instance.GetResStr("check_registration")
+							  Session.GetResStr("check_registration")
 							, daysLeft.Days)
 						, MessageBoxButtons.YesNo);
 					if (DialogResult.Yes == res)
@@ -217,7 +234,7 @@ namespace EAssistant
 				else
 				{
 					DialogResult res = UIMessages.Error(
-						  Session.Instance.GetResStr("evaluation_end")
+						  Session.GetResStr("evaluation_end")
 						, MessageBoxButtons.YesNo
 						);
 					if (DialogResult.Yes != res)
@@ -399,7 +416,7 @@ namespace EAssistant
 			dlg.Text = "Search client by code";
 			while (DialogResult.OK == dlg.ShowDialog())
 			{
-				Int32 id = Session.CheckBarCode(dlg.Value);
+				Int32 id = Session.Instance.CheckBarCode(dlg.Value);
 				if (0 == id)
 				{
 					dlg.Clear();
@@ -418,7 +435,7 @@ namespace EAssistant
 				else
 				{
 					UIMessages.Warning(
-						Session.Instance.GetResStr("unregistered_client"));
+						Session.GetResStr("unregistered_client"));
 				}
 
 				dlg.Clear();
@@ -607,17 +624,6 @@ namespace EAssistant
 			bl.ShowDialog();
 		}
 		
-		private void CheckForUpdates()
-		{
-			Logger.Enter();
-#if !DEBUG
-			Updater.CheckNewVersion("http://pro100soft.eu/E-Assistant/updates/latest.xml");
-#else
-			Updater.CheckNewVersion("http://localhost/update.xml");
-#endif
-			Logger.Leave();
-		}
-
 		private void BackUpDB()
 		{
 			Logger.Enter();

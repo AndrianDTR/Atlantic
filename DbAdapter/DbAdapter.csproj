@@ -69,6 +69,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>clientDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="TrainerSchedule.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -109,7 +114,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <Content Include="client.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="clientDataSet.xsc">
       <DependentUpon>clientDataSet.xsd</DependentUpon>
@@ -131,6 +136,11 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

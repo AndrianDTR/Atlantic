@@ -4,6 +4,9 @@ using AY.Log;
 using AY.db;
 using System.Drawing;
 using System.Data;
+using AY.Utils;
+using System.Globalization;
+using AY.Updater;
 
 namespace EAssistant
 {
@@ -30,7 +33,7 @@ namespace EAssistant
 			dateStart.Value = opts.StartTime;
 			dateEnd.Value = opts.EndTime;
 
-			comboUpdatesFrequency.SelectedIndex = opts.updates;
+			checkAutoupdates.Checked = Updater.CheckUpdatesAutomacically;
 			
 			InitPageColors();
 			Logger.Leave();
@@ -49,9 +52,9 @@ namespace EAssistant
 			opts.EndTime = dateEnd.Value;
 
 			DataRowView drv = (DataRowView)comboLang.SelectedItem;
-			opts.language = drv.Row["code"].ToString();
+			CultureInfoUtils.CurrentCulture = new CultureInfo(drv.Row["code"].ToString());
 
-			opts.updates = comboUpdatesFrequency.SelectedIndex;
+			Updater.CheckUpdatesAutomacically = checkAutoupdates.Checked;
 
 			Db.Instance.AcceptChanges();
 			Session.Instance.UpdateMain();
@@ -132,10 +135,19 @@ namespace EAssistant
 
 		private void Options_Load(object sender, EventArgs e)
 		{
-			// TODO: This line of code loads data into the 'clientDataSet.languages' table. You can move, or remove it, as needed.
-			Db.Instance.Adapters.languagesTableAdapter.Fill(Db.Instance.dSet.languages);
+			Logger.Enter();
 			
-			comboLang.SelectedItem = opts.language;
+			Db.Instance.Adapters.languagesTableAdapter.Fill(Db.Instance.dSet.languages);
+
+			foreach (DataRowView drv in comboLang.Items)
+			{
+				if(drv.Row["code"].ToString() == CultureInfoUtils.CurrentCulture.Name)
+				{
+					comboLang.SelectedItem = drv;
+					break;
+				}
+			}
+			Logger.Leave();
 		}
 	}
 }

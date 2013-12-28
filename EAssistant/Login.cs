@@ -67,6 +67,7 @@ namespace EAssistant
 			Logger.Enter();
 #if DEBUG
 			Logger.Warning("Clear DB by user request.");
+			Db.Instance.ResetDB();
 #endif
 			Logger.Leave();
 		}

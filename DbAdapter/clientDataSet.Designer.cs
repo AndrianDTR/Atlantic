@@ -4280,8 +4280,6 @@ namespace AY.db {
             
             private global::System.Data.DataColumn columnminPassLen;
             
-            private global::System.Data.DataColumn columnlanguage;
-            
             private global::System.Data.DataColumn columncalRowHeight;
             
             private global::System.Data.DataColumn columnshowTrainer;
@@ -4299,8 +4297,6 @@ namespace AY.db {
             private global::System.Data.DataColumn columnstartTime;
             
             private global::System.Data.DataColumn columnendTime;
-            
-            private global::System.Data.DataColumn columnupdates;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public settingsDataTable() {
@@ -4343,13 +4339,6 @@ namespace AY.db {
             public global::System.Data.DataColumn minPassLenColumn {
                 get {
                     return this.columnminPassLen;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn languageColumn {
-                get {
-                    return this.columnlanguage;
                 }
             }
             
@@ -4417,13 +4406,6 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn updatesColumn {
-                get {
-                    return this.columnupdates;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4452,12 +4434,11 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public settingsRow AddsettingsRow(long minPassLen, string language, long calRowHeight, long showTrainer, long showClientCount, long storeMainWindowState, long mainWindowState, string pathBackUp, string colors, System.DateTime startTime, System.DateTime endTime, int updates) {
+            public settingsRow AddsettingsRow(long minPassLen, long calRowHeight, long showTrainer, long showClientCount, long storeMainWindowState, long mainWindowState, string pathBackUp, string colors, System.DateTime startTime, System.DateTime endTime) {
                 settingsRow rowsettingsRow = ((settingsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         minPassLen,
-                        language,
                         calRowHeight,
                         showTrainer,
                         showClientCount,
@@ -4466,8 +4447,7 @@ namespace AY.db {
                         pathBackUp,
                         colors,
                         startTime,
-                        endTime,
-                        updates};
+                        endTime};
                 rowsettingsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsettingsRow);
                 return rowsettingsRow;
@@ -4495,7 +4475,6 @@ namespace AY.db {
             internal void InitVars() {
                 this.columnid = base.Columns["id"];
                 this.columnminPassLen = base.Columns["minPassLen"];
-                this.columnlanguage = base.Columns["language"];
                 this.columncalRowHeight = base.Columns["calRowHeight"];
                 this.columnshowTrainer = base.Columns["showTrainer"];
                 this.columnshowClientCount = base.Columns["showClientCount"];
@@ -4505,7 +4484,6 @@ namespace AY.db {
                 this.columncolors = base.Columns["colors"];
                 this.columnstartTime = base.Columns["startTime"];
                 this.columnendTime = base.Columns["endTime"];
-                this.columnupdates = base.Columns["updates"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4514,8 +4492,6 @@ namespace AY.db {
                 base.Columns.Add(this.columnid);
                 this.columnminPassLen = new global::System.Data.DataColumn("minPassLen", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnminPassLen);
-                this.columnlanguage = new global::System.Data.DataColumn("language", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnlanguage);
                 this.columncalRowHeight = new global::System.Data.DataColumn("calRowHeight", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncalRowHeight);
                 this.columnshowTrainer = new global::System.Data.DataColumn("showTrainer", typeof(long), null, global::System.Data.MappingType.Element);
@@ -4534,8 +4510,6 @@ namespace AY.db {
                 base.Columns.Add(this.columnstartTime);
                 this.columnendTime = new global::System.Data.DataColumn("endTime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnendTime);
-                this.columnupdates = new global::System.Data.DataColumn("updates", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnupdates);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AutoIncrement = true;
@@ -4544,8 +4518,6 @@ namespace AY.db {
                 this.columnid.AllowDBNull = false;
                 this.columnid.Unique = true;
                 this.columnminPassLen.AllowDBNull = false;
-                this.columnlanguage.AllowDBNull = false;
-                this.columnlanguage.MaxLength = 2147483647;
                 this.columncalRowHeight.AllowDBNull = false;
                 this.columnshowTrainer.AllowDBNull = false;
                 this.columnshowClientCount.AllowDBNull = false;
@@ -6346,16 +6318,6 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string language {
-                get {
-                    return ((string)(this[this.tablesettings.languageColumn]));
-                }
-                set {
-                    this[this.tablesettings.languageColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public long calRowHeight {
                 get {
                     return ((long)(this[this.tablesettings.calRowHeightColumn]));
@@ -6461,21 +6423,6 @@ namespace AY.db {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int updates {
-                get {
-                    try {
-                        return ((int)(this[this.tablesettings.updatesColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'updates\' in table \'settings\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablesettings.updatesColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IscolorsNull() {
                 return this.IsNull(this.tablesettings.colorsColumn);
             }
@@ -6503,16 +6450,6 @@ namespace AY.db {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetendTimeNull() {
                 this[this.tablesettings.endTimeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsupdatesNull() {
-                return this.IsNull(this.tablesettings.updatesColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetupdatesNull() {
-                this[this.tablesettings.updatesColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -12464,7 +12401,6 @@ ORDER BY payments.[date] DESC";
             tableMapping.DataSetTable = "settings";
             tableMapping.ColumnMappings.Add("id", "id");
             tableMapping.ColumnMappings.Add("minPassLen", "minPassLen");
-            tableMapping.ColumnMappings.Add("language", "language");
             tableMapping.ColumnMappings.Add("calRowHeight", "calRowHeight");
             tableMapping.ColumnMappings.Add("showTrainer", "showTrainer");
             tableMapping.ColumnMappings.Add("showClientCount", "showClientCount");
@@ -12474,7 +12410,6 @@ ORDER BY payments.[date] DESC";
             tableMapping.ColumnMappings.Add("colors", "colors");
             tableMapping.ColumnMappings.Add("startTime", "startTime");
             tableMapping.ColumnMappings.Add("endTime", "endTime");
-            tableMapping.ColumnMappings.Add("updates", "updates");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -12490,7 +12425,7 @@ ORDER BY payments.[date] DESC";
             this._adapter.DeleteCommand.Parameters.Add(param);
             this._adapter.InsertCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [main].[sqlite_default_schema].[settings] ([minPassLen], [language], [calRowHeight], [showTrainer], [showClientCount], [storeMainWindowState], [mainWindowState], [pathBackUp], [colors], [startTime], [endTime], [updates]) VALUES (@minPassLen, @language, @calRowHeight, @showTrainer, @showClientCount, @storeMainWindowState, @mainWindowState, @pathBackUp, @colors, @startTime, @endTime, @updates)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [main].[sqlite_default_schema].[settings] ([minPassLen], [calRowHeight], [showTrainer], [showClientCount], [storeMainWindowState], [mainWindowState], [pathBackUp], [colors], [startTime], [endTime]) VALUES (@minPassLen, @calRowHeight, @showTrainer, @showClientCount, @storeMainWindowState, @mainWindowState, @pathBackUp, @colors, @startTime, @endTime)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@minPassLen";
@@ -12499,12 +12434,6 @@ ORDER BY payments.[date] DESC";
             param.SourceColumn = "minPassLen";
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@language";
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "language";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@calRowHeight";
             param.DbType = global::System.Data.DbType.Int64;
             param.DbType = global::System.Data.DbType.Int64;
@@ -12557,15 +12486,9 @@ ORDER BY payments.[date] DESC";
             param.DbType = global::System.Data.DbType.DateTime;
             param.SourceColumn = "endTime";
             this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@updates";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "updates";
-            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::System.Data.SQLite.SQLiteCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [main].[sqlite_default_schema].[settings] SET [minPassLen] = @minPassLen, [language] = @language, [calRowHeight] = @calRowHeight, [showTrainer] = @showTrainer, [showClientCount] = @showClientCount, [storeMainWindowState] = @storeMainWindowState, [mainWindowState] = @mainWindowState, [pathBackUp] = @pathBackUp, [colors] = @colors, [startTime] = @startTime, [endTime] = @endTime, [updates] = @updates WHERE (([id] = @Original_id))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [main].[sqlite_default_schema].[settings] SET [minPassLen] = @minPassLen, [calRowHeight] = @calRowHeight, [showTrainer] = @showTrainer, [showClientCount] = @showClientCount, [storeMainWindowState] = @storeMainWindowState, [mainWindowState] = @mainWindowState, [pathBackUp] = @pathBackUp, [colors] = @colors, [startTime] = @startTime, [endTime] = @endTime WHERE (([id] = @Original_id))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@minPassLen";
@@ -12574,12 +12497,6 @@ ORDER BY payments.[date] DESC";
             param.SourceColumn = "minPassLen";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@language";
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.DbType = global::System.Data.DbType.AnsiString;
-            param.SourceColumn = "language";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@calRowHeight";
             param.DbType = global::System.Data.DbType.Int64;
             param.DbType = global::System.Data.DbType.Int64;
@@ -12631,12 +12548,6 @@ ORDER BY payments.[date] DESC";
             param.DbType = global::System.Data.DbType.DateTime;
             param.DbType = global::System.Data.DbType.DateTime;
             param.SourceColumn = "endTime";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::System.Data.SQLite.SQLiteParameter();
-            param.ParameterName = "@updates";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.DbType = global::System.Data.DbType.Int32;
-            param.SourceColumn = "updates";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::System.Data.SQLite.SQLiteParameter();
             param.ParameterName = "@Original_id";
@@ -12658,9 +12569,8 @@ ORDER BY payments.[date] DESC";
             this._commandCollection = new global::System.Data.SQLite.SQLiteCommand[1];
             this._commandCollection[0] = new global::System.Data.SQLite.SQLiteCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     id, minPassLen, language, calRowHeight, showTrainer, showClientCount, " +
-                "storeMainWindowState, mainWindowState, pathBackUp, colors, startTime, \r\n        " +
-                "              endTime, updates\r\nFROM         settings";
+            this._commandCollection[0].CommandText = "SELECT id, minPassLen, calRowHeight, showTrainer, showClientCount, storeMainWindo" +
+                "wState, mainWindowState, pathBackUp, colors, startTime, endTime FROM settings";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

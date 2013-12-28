@@ -44,7 +44,6 @@ namespace EAssistant
 
 		protected override CellInfo GetCellInfo(DateTime dt)
 		{
-			Logger.Enter();
 			CellInfo ci = new CellInfo(dt);
 			do
 			{
@@ -71,7 +70,6 @@ namespace EAssistant
 				}
 
 			} while (false);
-			Logger.Leave();
 			return ci;
 		}
 	}

@@ -127,7 +127,7 @@ namespace EAssistant
 			if (cr.openTicket.Date == DateTime.Now.Date)
 			{
 				btnEnter.Checked = true;
-				btnEnter.Text = Session.Instance.GetResStr("cancel");
+				btnEnter.Text = Session.GetResStr("cancel");
 			}
 			Logger.Leave();
 		}
@@ -231,7 +231,7 @@ namespace EAssistant
 			Prompt dlg = new Prompt();
 			while (DialogResult.OK == dlg.ShowDialog())
 			{
-				Int64 id = Session.CheckBarCode(dlg.Value);
+				Int64 id = Session.Instance.CheckBarCode(dlg.Value);
 				if (0 == id)
 				{
 					dlg.Clear();
@@ -240,7 +240,7 @@ namespace EAssistant
 
 				if (dbDataSet.clientsRow.Exists(id))
 				{
-					UIMessages.Error(Session.Instance.GetResStr("client_exist"));
+					UIMessages.Error(Session.GetResStr("client_exist"));
 					dlg.Clear();
 					continue;
 				}
@@ -322,7 +322,7 @@ namespace EAssistant
 
 				if (ValidateForm())
 				{
-					Int32 id = Session.CheckBarCode(textCode.Text);
+					Int32 id = Session.Instance.CheckBarCode(textCode.Text);
 
 					if (m_client == 0)
 					{
@@ -403,13 +403,13 @@ namespace EAssistant
 				{
 					cr.openTicket = DateTime.Now;
 					btnLeave.Enabled = true;
-					btnEnter.Text = Session.Instance.GetResStr("cancel");
+					btnEnter.Text = Session.GetResStr("cancel");
 				}
 				else
 				{
 					cr.openTicket = cr.openTicket.AddYears(-1);
 					btnLeave.Enabled = false;
-					btnEnter.Text = Session.Instance.GetResStr("enter");
+					btnEnter.Text = Session.GetResStr("enter");
 				}
 			} while (false);
 			Logger.Leave();

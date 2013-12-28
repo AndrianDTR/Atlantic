@@ -43,6 +43,7 @@
 			this.checkSaveMainWindowState = new System.Windows.Forms.CheckBox();
 			this.numericMinPassLen = new System.Windows.Forms.NumericUpDown();
 			this.comboLang = new System.Windows.Forms.ComboBox();
+			this.languagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -60,17 +61,15 @@
 			this.label6 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.tabUpdates = new System.Windows.Forms.TabPage();
-			this.comboUpdatesFrequency = new System.Windows.Forms.ComboBox();
-			this.label10 = new System.Windows.Forms.Label();
-			this.languagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.checkAutoupdates = new System.Windows.Forms.CheckBox();
 			this.tabControl.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericMinPassLen)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.languagesBindingSource)).BeginInit();
 			this.tabPage2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericCalRowHeight)).BeginInit();
 			this.tabPage3.SuspendLayout();
 			this.tabUpdates.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.languagesBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// btnOk
@@ -233,6 +232,10 @@
 			this.comboLang.Size = new System.Drawing.Size(195, 21);
 			this.comboLang.TabIndex = 1;
 			this.comboLang.ValueMember = "code";
+			// 
+			// languagesBindingSource
+			// 
+			this.languagesBindingSource.DataMember = "languages";
 			// 
 			// label2
 			// 
@@ -413,8 +416,7 @@
 			// 
 			// tabUpdates
 			// 
-			this.tabUpdates.Controls.Add(this.comboUpdatesFrequency);
-			this.tabUpdates.Controls.Add(this.label10);
+			this.tabUpdates.Controls.Add(this.checkAutoupdates);
 			this.tabUpdates.Location = new System.Drawing.Point(4, 22);
 			this.tabUpdates.Name = "tabUpdates";
 			this.tabUpdates.Padding = new System.Windows.Forms.Padding(3);
@@ -423,30 +425,15 @@
 			this.tabUpdates.Text = "Updates";
 			this.tabUpdates.UseVisualStyleBackColor = true;
 			// 
-			// comboUpdatesFrequency
+			// checkAutoupdates
 			// 
-			this.comboUpdatesFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboUpdatesFrequency.FormattingEnabled = true;
-			this.comboUpdatesFrequency.Items.AddRange(new object[] {
-            "On start",
-            "Manually"});
-			this.comboUpdatesFrequency.Location = new System.Drawing.Point(106, 77);
-			this.comboUpdatesFrequency.Name = "comboUpdatesFrequency";
-			this.comboUpdatesFrequency.Size = new System.Drawing.Size(241, 21);
-			this.comboUpdatesFrequency.TabIndex = 1;
-			// 
-			// label10
-			// 
-			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(6, 80);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(94, 13);
-			this.label10.TabIndex = 0;
-			this.label10.Text = "Check for updates";
-			// 
-			// languagesBindingSource
-			// 
-			this.languagesBindingSource.DataMember = "languages";
+			this.checkAutoupdates.AutoSize = true;
+			this.checkAutoupdates.Location = new System.Drawing.Point(18, 80);
+			this.checkAutoupdates.Name = "checkAutoupdates";
+			this.checkAutoupdates.Size = new System.Drawing.Size(177, 17);
+			this.checkAutoupdates.TabIndex = 0;
+			this.checkAutoupdates.Text = "Check for updates automatically";
+			this.checkAutoupdates.UseVisualStyleBackColor = true;
 			// 
 			// Options
 			// 
@@ -471,6 +458,7 @@
 			this.tabPage1.ResumeLayout(false);
 			this.tabPage1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericMinPassLen)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.languagesBindingSource)).EndInit();
 			this.tabPage2.ResumeLayout(false);
 			this.tabPage2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericCalRowHeight)).EndInit();
@@ -478,7 +466,6 @@
 			this.tabPage3.PerformLayout();
 			this.tabUpdates.ResumeLayout(false);
 			this.tabUpdates.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.languagesBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -516,8 +503,7 @@
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.DateTimePicker dateEnd;
 		private System.Windows.Forms.TabPage tabUpdates;
-		private System.Windows.Forms.ComboBox comboUpdatesFrequency;
-		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.BindingSource languagesBindingSource;
+		private System.Windows.Forms.CheckBox checkAutoupdates;
 	}
 }

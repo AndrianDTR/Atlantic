@@ -8,6 +8,8 @@ using System.Reflection;
 using Microsoft.Win32;
 using System.ComponentModel;
 using System.Threading;
+using AY.Log;
+using AY.Utils;
 
 namespace AY.Updater
 {
@@ -150,5 +152,42 @@ namespace AY.Updater
 
             return (Attribute) attributes[0];
         }
+
+		public static bool CheckUpdatesAutomacically
+		{
+			get
+			{
+				Logger.Enter();
+				bool res = true;
+
+				try
+				{
+					RegistryKey key = CultureInfoUtils.GetAppKey();
+					bool.TryParse(key.GetValue(@"autoupdate").ToString(), out res);
+				}
+				catch (System.Exception ex)
+				{
+					res = true;
+					Logger.Error(String.Format("Get autoupdate state error. Internal msg: {0}", ex.Message));
+				}
+				Logger.Leave();
+				return res;
+			}
+			set
+			{
+				Logger.Enter();
+				try
+				{
+					RegistryKey key = CultureInfoUtils.GetAppKey();
+					bool upd = value;
+					key.SetValue("autoupdate", upd.ToString(), RegistryValueKind.String);
+				}
+				catch (System.Exception ex)
+				{
+					Logger.Error(String.Format("Set autoupdate state error. Internal msg: {0}", ex.Message));
+				}
+				Logger.Leave();
+			}
+		}
     }
 }

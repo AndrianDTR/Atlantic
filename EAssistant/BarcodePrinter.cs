@@ -12,7 +12,7 @@ namespace EAssistant
 {
 	public partial class BarcodePrinter : Form
 	{
-		private int m_nMinCodeLen = Session.MinBarcodeLen;
+		private int m_nMinCodeLen = Session.Instance.MinBarcodeLen;
 		Random m_random = new Random(Environment.TickCount);
 		String m_Style = "";
 		

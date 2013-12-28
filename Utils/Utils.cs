@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Microsoft.Win32;
+using AY.Log;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace AY
 {
@@ -30,6 +34,54 @@ namespace AY
 			public static DayOfWeek GetWeekStart()
 			{
 				return System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
+			}
+
+			public static RegistryKey GetAppKey()
+			{
+				Logger.Enter();
+				Assembly asm = Assembly.GetExecutingAssembly();
+				GuidAttribute guid = (GuidAttribute)asm.GetCustomAttributes(typeof(GuidAttribute), true)[0];
+				String subKey = "Software\\" + guid.Value;
+				Logger.Leave();
+				return Registry.LocalMachine.CreateSubKey(subKey, RegistryKeyPermissionCheck.ReadWriteSubTree);
+			}
+		
+			public static CultureInfo CurrentCulture
+			{
+				get
+				{
+					Logger.Enter();
+					CultureInfo culture = CultureInfo.CurrentCulture;
+					
+					try
+					{
+						RegistryKey key = GetAppKey();
+						String lang = (String)key.GetValue(@"language");
+						culture = new CultureInfo(lang);
+					}
+					catch (System.Exception ex)
+					{
+						culture = CultureInfo.CurrentCulture;
+						Logger.Error(String.Format("Get language error. Internal msg: {0}", ex.Message));
+					}
+					Logger.Leave();
+					return culture;
+				}
+				set
+				{
+					Logger.Enter();
+					try
+					{
+						RegistryKey key = GetAppKey();
+						CultureInfo cul = value;
+						key.SetValue("language", cul.Name, RegistryValueKind.String);
+					}
+					catch (System.Exception ex)
+					{
+						Logger.Error(String.Format("Set language error. Internal msg: {0}", ex.Message));
+					}
+					Logger.Leave();
+				}
 			}
 		}
 

@@ -48,6 +48,7 @@
 			this.manageClientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
 			this.geterateBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.generateListOfBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.trainersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.manageTrainersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
@@ -83,7 +84,6 @@
 			this.btnPaymentsHistory = new System.Windows.Forms.Button();
 			this.btnClientManager = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
-			this.generateListOfBarcodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tabManager.SuspendLayout();
@@ -217,6 +217,12 @@
 			this.geterateBarcodesToolStripMenuItem.Name = "geterateBarcodesToolStripMenuItem";
 			resources.ApplyResources(this.geterateBarcodesToolStripMenuItem, "geterateBarcodesToolStripMenuItem");
 			this.geterateBarcodesToolStripMenuItem.Click += new System.EventHandler(this.geterateBarcodesToolStripMenuItem_Click);
+			// 
+			// generateListOfBarcodesToolStripMenuItem
+			// 
+			this.generateListOfBarcodesToolStripMenuItem.Name = "generateListOfBarcodesToolStripMenuItem";
+			resources.ApplyResources(this.generateListOfBarcodesToolStripMenuItem, "generateListOfBarcodesToolStripMenuItem");
+			this.generateListOfBarcodesToolStripMenuItem.Click += new System.EventHandler(this.generateListOfBarcodesToolStripMenuItem_Click);
 			// 
 			// trainersToolStripMenuItem
 			// 
@@ -469,12 +475,6 @@
 			this.btnAddClient.Name = "btnAddClient";
 			this.btnAddClient.UseVisualStyleBackColor = true;
 			this.btnAddClient.Click += new System.EventHandler(this.add_Click);
-			// 
-			// generateListOfBarcodesToolStripMenuItem
-			// 
-			this.generateListOfBarcodesToolStripMenuItem.Name = "generateListOfBarcodesToolStripMenuItem";
-			resources.ApplyResources(this.generateListOfBarcodesToolStripMenuItem, "generateListOfBarcodesToolStripMenuItem");
-			this.generateListOfBarcodesToolStripMenuItem.Click += new System.EventHandler(this.generateListOfBarcodesToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 

@@ -188,7 +188,7 @@ namespace EAssistant
 			{
 				Logger.Error(String.Format("Registration error, internal message: {0}", ex.Message));
 				UIMessages.Info(
-					Session.Instance.GetResStr("invalid_activation_key"));
+					Session.GetResStr("invalid_activation_key"));
 			}
 			Logger.Leave();
 
