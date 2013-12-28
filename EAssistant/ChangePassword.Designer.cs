@@ -45,99 +45,107 @@
 			// 
 			// change
 			// 
-			change.Location = new System.Drawing.Point(278, 196);
+			change.AccessibleDescription = null;
+			change.AccessibleName = null;
+			resources.ApplyResources(change, "change");
+			change.BackgroundImage = null;
+			change.Font = null;
 			change.Name = "change";
-			change.Size = new System.Drawing.Size(89, 23);
-			change.TabIndex = 3;
-			change.Text = "Change";
 			change.UseVisualStyleBackColor = true;
 			change.Click += new System.EventHandler(this.change_Click);
 			// 
 			// pictureBox1
 			// 
-			this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-			this.pictureBox1.Location = new System.Drawing.Point(12, 42);
+			this.pictureBox1.AccessibleDescription = null;
+			this.pictureBox1.AccessibleName = null;
+			resources.ApplyResources(this.pictureBox1, "pictureBox1");
+			this.pictureBox1.BackgroundImage = null;
+			this.pictureBox1.Font = null;
+			this.pictureBox1.ImageLocation = null;
 			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(136, 139);
-			this.pictureBox1.TabIndex = 0;
 			this.pictureBox1.TabStop = false;
 			// 
 			// message
 			// 
-			this.message.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.message.AccessibleDescription = null;
+			this.message.AccessibleName = null;
+			resources.ApplyResources(this.message, "message");
 			this.message.ForeColor = System.Drawing.Color.DarkRed;
-			this.message.Location = new System.Drawing.Point(182, 9);
 			this.message.Name = "message";
-			this.message.Size = new System.Drawing.Size(303, 40);
-			this.message.TabIndex = 1;
 			// 
 			// label2
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(183, 68);
+			this.label2.AccessibleDescription = null;
+			this.label2.AccessibleName = null;
+			resources.ApplyResources(this.label2, "label2");
+			this.label2.Font = null;
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(89, 13);
-			this.label2.TabIndex = 2;
-			this.label2.Text = "Current password";
 			// 
 			// current
 			// 
-			this.current.Location = new System.Drawing.Point(278, 65);
+			this.current.AccessibleDescription = null;
+			this.current.AccessibleName = null;
+			resources.ApplyResources(this.current, "current");
+			this.current.BackgroundImage = null;
+			this.current.Font = null;
 			this.current.Name = "current";
-			this.current.Size = new System.Drawing.Size(207, 20);
-			this.current.TabIndex = 0;
 			this.current.UseSystemPasswordChar = true;
 			// 
 			// password
 			// 
-			this.password.Location = new System.Drawing.Point(278, 103);
+			this.password.AccessibleDescription = null;
+			this.password.AccessibleName = null;
+			resources.ApplyResources(this.password, "password");
+			this.password.BackgroundImage = null;
+			this.password.Font = null;
 			this.password.Name = "password";
-			this.password.Size = new System.Drawing.Size(207, 20);
-			this.password.TabIndex = 1;
 			this.password.UseSystemPasswordChar = true;
 			// 
 			// label3
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(183, 106);
+			this.label3.AccessibleDescription = null;
+			this.label3.AccessibleName = null;
+			resources.ApplyResources(this.label3, "label3");
+			this.label3.Font = null;
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(77, 13);
-			this.label3.TabIndex = 4;
-			this.label3.Text = "New password";
 			// 
 			// confirm
 			// 
-			this.confirm.Location = new System.Drawing.Point(278, 141);
+			this.confirm.AccessibleDescription = null;
+			this.confirm.AccessibleName = null;
+			resources.ApplyResources(this.confirm, "confirm");
+			this.confirm.BackgroundImage = null;
+			this.confirm.Font = null;
 			this.confirm.Name = "confirm";
-			this.confirm.Size = new System.Drawing.Size(207, 20);
-			this.confirm.TabIndex = 2;
 			this.confirm.UseSystemPasswordChar = true;
 			// 
 			// label4
 			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(182, 144);
+			this.label4.AccessibleDescription = null;
+			this.label4.AccessibleName = null;
+			resources.ApplyResources(this.label4, "label4");
+			this.label4.Font = null;
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(42, 13);
-			this.label4.TabIndex = 6;
-			this.label4.Text = "Confirm";
 			// 
 			// cancel
 			// 
+			this.cancel.AccessibleDescription = null;
+			this.cancel.AccessibleName = null;
+			resources.ApplyResources(this.cancel, "cancel");
+			this.cancel.BackgroundImage = null;
 			this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.cancel.Location = new System.Drawing.Point(396, 196);
+			this.cancel.Font = null;
 			this.cancel.Name = "cancel";
-			this.cancel.Size = new System.Drawing.Size(89, 23);
-			this.cancel.TabIndex = 4;
-			this.cancel.Text = "Cancel";
 			this.cancel.UseVisualStyleBackColor = true;
 			// 
 			// ChangePassword
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AccessibleDescription = null;
+			this.AccessibleName = null;
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackgroundImage = null;
 			this.CancelButton = this.cancel;
-			this.ClientSize = new System.Drawing.Size(511, 241);
 			this.Controls.Add(change);
 			this.Controls.Add(this.cancel);
 			this.Controls.Add(this.confirm);
@@ -148,15 +156,15 @@
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.message);
 			this.Controls.Add(this.pictureBox1);
+			this.Font = null;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.Icon = null;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "ChangePassword";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Change user password";
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
