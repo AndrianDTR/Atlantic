@@ -54,6 +54,8 @@
 			this.textBarcodesList.Location = new System.Drawing.Point(15, 25);
 			this.textBarcodesList.Multiline = true;
 			this.textBarcodesList.Name = "textBarcodesList";
+			this.textBarcodesList.ReadOnly = true;
+			this.textBarcodesList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBarcodesList.Size = new System.Drawing.Size(483, 207);
 			this.textBarcodesList.TabIndex = 0;
 			// 

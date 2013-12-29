@@ -145,6 +145,9 @@
   <data name="fileToolStripMenuItem.Text" xml:space="preserve">
     <value>Файл</value>
   </data>
+  <data name="paymentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
   <data name="paymentsToolStripMenuItem.Text" xml:space="preserve">
     <value>Платежі</value>
   </data>
@@ -190,6 +193,12 @@
   <data name="geterateBarcodesToolStripMenuItem.Text" xml:space="preserve">
     <value>Генерування штрихкодів</value>
   </data>
+  <data name="generateListOfBarcodesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>281, 22</value>
+  </data>
+  <data name="generateListOfBarcodesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Генерування списку штрихкодів</value>
+  </data>
   <data name="clientToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 20</value>
   </data>
@@ -201,6 +210,9 @@
   </data>
   <data name="manageTrainersToolStripMenuItem.Text" xml:space="preserve">
     <value>Управління тренерами</value>
+  </data>
+  <data name="toolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 6</value>
   </data>
   <data name="trainersScheduleToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>199, 22</value>

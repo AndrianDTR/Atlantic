@@ -1717,7 +1717,7 @@ namespace AY.db {
                 this.columnid.Unique = true;
                 this.columnname.AllowDBNull = false;
                 this.columnname.MaxLength = 2147483647;
-                this.columnphone.AllowDBNull = false;
+                this.columnphone.DefaultValue = ((string)(""));
                 this.columnphone.MaxLength = 2147483647;
                 this.columnextraInfo.MaxLength = 2147483647;
             }
@@ -5200,7 +5200,12 @@ namespace AY.db {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string phone {
                 get {
-                    return ((string)(this[this.tabletrainers.phoneColumn]));
+                    try {
+                        return ((string)(this[this.tabletrainers.phoneColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'phone\' in table \'trainers\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tabletrainers.phoneColumn] = value;
@@ -5220,6 +5225,16 @@ namespace AY.db {
                 set {
                     this[this.tabletrainers.extraInfoColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsphoneNull() {
+                return this.IsNull(this.tabletrainers.phoneColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetphoneNull() {
+                this[this.tabletrainers.phoneColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8679,7 +8694,7 @@ namespace AY.db.dbDataSetTableAdapters {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_name));
             }
             if ((Original_phone == null)) {
-                throw new global::System.ArgumentNullException("Original_phone");
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_phone));
@@ -8719,7 +8734,7 @@ namespace AY.db.dbDataSetTableAdapters {
                 this.Adapter.InsertCommand.Parameters[0].Value = ((string)(name));
             }
             if ((phone == null)) {
-                throw new global::System.ArgumentNullException("phone");
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((string)(phone));
@@ -8757,7 +8772,7 @@ namespace AY.db.dbDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(name));
             }
             if ((phone == null)) {
-                throw new global::System.ArgumentNullException("phone");
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(phone));
@@ -8776,7 +8791,7 @@ namespace AY.db.dbDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_name));
             }
             if ((Original_phone == null)) {
-                throw new global::System.ArgumentNullException("Original_phone");
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_phone));

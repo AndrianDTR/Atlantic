@@ -59,5 +59,12 @@ namespace AY.db {
                 resourceCulture = value;
             }
         }
+        
+        internal static byte[] client {
+            get {
+                object obj = ResourceManager.GetObject("client", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

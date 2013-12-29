@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManageTrainers));
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.gridTrainers = new System.Windows.Forms.DataGridView();
 			this.trainersBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -39,13 +40,11 @@
 			// 
 			// btnCancel
 			// 
-			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btnCancel.Location = new System.Drawing.Point(530, 242);
+			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			resources.ApplyResources(this.btnCancel, "btnCancel");
 			this.btnCancel.Name = "btnCancel";
-			this.btnCancel.Size = new System.Drawing.Size(75, 23);
-			this.btnCancel.TabIndex = 6;
-			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
+			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
 			// 
 			// gridTrainers
 			// 
@@ -53,13 +52,11 @@
 			this.gridTrainers.AutoGenerateColumns = false;
 			this.gridTrainers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridTrainers.DataSource = this.trainersBindingSource;
-			this.gridTrainers.Location = new System.Drawing.Point(12, 12);
+			resources.ApplyResources(this.gridTrainers, "gridTrainers");
 			this.gridTrainers.Name = "gridTrainers";
 			this.gridTrainers.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
 			this.gridTrainers.RowHeadersVisible = false;
 			this.gridTrainers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.gridTrainers.Size = new System.Drawing.Size(593, 220);
-			this.gridTrainers.TabIndex = 7;
 			this.gridTrainers.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OnError);
 			// 
 			// trainersBindingSource
@@ -69,19 +66,15 @@
 			// btnOK
 			// 
 			this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btnOK.Location = new System.Drawing.Point(449, 242);
+			resources.ApplyResources(this.btnOK, "btnOK");
 			this.btnOK.Name = "btnOK";
-			this.btnOK.Size = new System.Drawing.Size(75, 23);
-			this.btnOK.TabIndex = 8;
-			this.btnOK.Text = "OK";
 			this.btnOK.UseVisualStyleBackColor = true;
 			this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
 			// 
 			// ManageTrainers
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(617, 277);
 			this.Controls.Add(this.btnOK);
 			this.Controls.Add(this.gridTrainers);
 			this.Controls.Add(this.btnCancel);
@@ -92,8 +85,6 @@
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Manage trainers";
 			this.Load += new System.EventHandler(this.OnLoad);
 			((System.ComponentModel.ISupportInitialize)(this.gridTrainers)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trainersBindingSource)).EndInit();

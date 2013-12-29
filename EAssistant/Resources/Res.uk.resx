@@ -144,7 +144,8 @@
   </data>
   <data name="evaluation_end" xml:space="preserve">
     <value>Пробний період використання програми закінчився!
-Ви хочере зареєструвати програму?</value>
+Для подальшого використання програми Вам необхідно придбати ліцензію на її використання.
+Ввести реєстраційний код зараз?</value>
   </data>
   <data name="information" xml:space="preserve">
     <value>Інформація</value>
@@ -155,6 +156,9 @@
   <data name="invalid_barcode" xml:space="preserve">
     <value>Вказано невірний номер картки.
 Правильний номер складається з {0} цифр.</value>
+  </data>
+  <data name="MISSING_FIELD" xml:space="preserve">
+    <value>Поле '{0}' є обов'язковим, будь ласка заповніть його.</value>
   </data>
   <data name="not_implemented" xml:space="preserve">
     <value>Ця функція знаходиться в розробці і на даний час не реалізована.</value>
@@ -179,6 +183,15 @@
   </data>
   <data name="OTL_STATUS" xml:space="preserve">
     <value>Статус</value>
+  </data>
+  <data name="TL_COMMENT" xml:space="preserve">
+    <value>Примітка</value>
+  </data>
+  <data name="TL_NAME" xml:space="preserve">
+    <value>Імя</value>
+  </data>
+  <data name="TL_PHONE" xml:space="preserve">
+    <value>Телефон</value>
   </data>
   <data name="unregistered_client" xml:space="preserve">
     <value>Такого клієнта неіснує.</value>

@@ -153,7 +153,8 @@ If you want register your copy of the application now press "Yes".</value>
   </data>
   <data name="evaluation_end" xml:space="preserve">
     <value>Evaluation period has been expired!
-Do you wish register your copy of application?</value>
+You should purchase for registered copy of the application.
+Do you wish to purchase now?</value>
   </data>
   <data name="client_exist" xml:space="preserve">
     <value>This card already attached. Please use another one.</value>
@@ -164,6 +165,9 @@ Do you wish register your copy of application?</value>
   <data name="invalid_barcode" xml:space="preserve">
     <value>Invalid card number has been specified.
 Please use only digits and no more {0} characters.</value>
+  </data>
+  <data name="MISSING_FIELD" xml:space="preserve">
+    <value>Field '{0}' is required, please fill it.</value>
   </data>
   <data name="OTL_AVAILABLE_HOURS" xml:space="preserve">
     <value>Available</value>
@@ -185,5 +189,14 @@ Please use only digits and no more {0} characters.</value>
   </data>
   <data name="OTL_STATUS" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="TL_COMMENT" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="TL_NAME" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="TL_PHONE" xml:space="preserve">
+    <value>Phone</value>
   </data>
 </root>

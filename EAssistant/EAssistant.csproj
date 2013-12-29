@@ -247,6 +247,10 @@
       <DependentUpon>ClientInfo.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ManageTrainers.uk.resx">
+      <DependentUpon>ManageTrainers.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Prompt.uk.resx">
       <DependentUpon>Prompt.cs</DependentUpon>
       <SubType>Designer</SubType>

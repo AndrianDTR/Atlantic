@@ -48,19 +48,19 @@ namespace EAssistant
 			// 
 			colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			colName.DataPropertyName = "name";
-			colName.HeaderText = "Name";
+			colName.HeaderText = Session.GetResStr("TL_NAME");
 			colName.Name = "colName";
 			// 
 			// colPhone
 			// 
 			colPhone.DataPropertyName = "phone";
-			colPhone.HeaderText = "Phone";
+			colPhone.HeaderText = Session.GetResStr("TL_PHONE");
 			colPhone.Name = "colPhone";
 			// 
 			// colComment
 			// 
 			colComment.DataPropertyName = "extraInfo";
-			colComment.HeaderText = "Comment";
+			colComment.HeaderText = Session.GetResStr("TL_COMMENT");
 			colComment.Name = "colComment";
 			Logger.Leave();
 		}
@@ -83,8 +83,22 @@ namespace EAssistant
 		private void OnError(object sender, DataGridViewDataErrorEventArgs e)
 		{
 			Logger.Enter();
-			UIMessages.Error(e.Exception.Message);
+			try
+			{
+				throw e.Exception;
+			}
+			catch (System.Data.NoNullAllowedException ex)
+			{
+				String fmtMsg = Session.GetResStr("MISSING_FIELD");
+				UIMessages.Error(String.Format(fmtMsg
+					, gridTrainers.Columns[e.ColumnIndex].HeaderText));
+			}
 			Logger.Leave();
+		}
+
+		private void btnCancel_Click(object sender, EventArgs e)
+		{
+			gridTrainers.CancelEdit();
 		}
 	}
 }
