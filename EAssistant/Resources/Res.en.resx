@@ -199,4 +199,35 @@ Please use only digits and no more {0} characters.</value>
   <data name="TL_PHONE" xml:space="preserve">
     <value>Phone</value>
   </data>
+  <data name="AP_ADD_ERROR" xml:space="preserve">
+    <value>Payment could not been added.</value>
+  </data>
+  <data name="AP_INVALID_SUM_FORMAT" xml:space="preserve">
+    <value>Please specify sum value in the 'XX{0}YY' format.</value>
+  </data>
+  <data name="AP_SERVICE_NOT_SPECIFIED" xml:space="preserve">
+    <value>Please select one of service first.</value>
+  </data>
+  <data name="CP_CHANGE_ERROR" xml:space="preserve">
+    <value>Password has not been changed.</value>
+  </data>
+  <data name="CP_CHANGE_OK" xml:space="preserve">
+    <value>Password has been changed successfully.</value>
+  </data>
+  <data name="CP_INVALID_CONFIRMATION" xml:space="preserve">
+    <value>New password and confirm are different.</value>
+  </data>
+  <data name="CP_OLD_IS_SAME" xml:space="preserve">
+    <value>New password must be different than current.</value>
+  </data>
+  <data name="CP_PASSW_IS_TO_SHORT" xml:space="preserve">
+    <value>Password must be at least {0} characters length.</value>
+  </data>
+  <data name="LI_LOGIN_FAILED" xml:space="preserve">
+    <value>Login failed.
+Please check username and password.</value>
+  </data>
+  <data name="LI_NO_ACCESS_RIGHTS_RESOLVED" xml:space="preserve">
+    <value>Access rights could not be resolved for specified user.</value>
+  </data>
 </root>

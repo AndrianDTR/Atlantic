@@ -32,29 +32,30 @@ namespace EAssistant
 			{
 				if (password.Text != confirm.Text)
 				{
-					message.Text = "New password and confirm are different.";
+					message.Text = Session.GetResStr("CP_INVALID_CONFIRMATION");
 					break;
 				}
 
 				if (current.Text == password.Text)
 				{
-					message.Text = "New password must be different than current.";
+					message.Text = Session.GetResStr("CP_OLD_IS_SAME");
 					break;
 				}
 
 				if (password.Text.Length < Session.Instance.PassLen)
 				{
-					message.Text = String.Format("Password must be at least {0} characters length.", Session.Instance.PassLen);
+					message.Text = String.Format(Session.GetResStr("CP_PASSW_IS_TO_SHORT")
+						, Session.Instance.PassLen );
 					break;
 				}
 
 				if (!m_user.ChangePassword(current.Text, password.Text))
 				{
-					message.Text = "Password has not been changed.";
+					message.Text = Session.GetResStr("CP_CHANGE_ERROR");
 					break;
 				}
 
-				MessageBox.Show("Password has been changed successfully.");
+				MessageBox.Show(Session.GetResStr("CP_CHANGE_OK"));
 				this.DialogResult = DialogResult.OK;
 				this.Close();
 			} while (false);

@@ -58,7 +58,7 @@ namespace EAssistant
 			{
 				if (null == comboTypeOfService.SelectedItem)
 				{
-					UIMessages.Error("Please select one of service first.");
+					UIMessages.Error(Session.GetResStr("AP_SERVICE_NOT_SPECIFIED"));
 					break;
 				}
 
@@ -68,8 +68,10 @@ namespace EAssistant
 				}
 				catch
 				{
-					UIMessages.Error(String.Format("Please specify sum value in the 'XX{0}YY' format."
-						, CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator));
+					UIMessages.Error(
+						String.Format(
+							Session.GetResStr("AP_INVALID_SUM_FORMAT")
+							, CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator));
 					break;
 				}
 
@@ -105,7 +107,7 @@ namespace EAssistant
 
 				if (id != 1 | null == cr)
 				{
-					UIMessages.Error("Payment could not been added.");
+					UIMessages.Error(Session.GetResStr("AP_ADD_ERROR"));
 					break;
 				}
 

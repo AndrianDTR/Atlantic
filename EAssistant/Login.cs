@@ -32,14 +32,12 @@ namespace EAssistant
 				this.Close();
 			}
 
-			Logger.Debug("Try login, attempt left: " + m_loginAttempt.ToString());
-
 			dbDataSet.usersRow user = dbDataSet.usersRow.Authenticate(userName.Text, password.Text);
 			if (user != null && user.Role != null)
 			{
 				if (null == Db.Instance.dSet.userPrivileges.FindByid(user.privilege))
 				{
-					UIMessages.Error("Access rights could not be resolved for specified user.");
+					UIMessages.Error(Session.GetResStr("LI_NO_ACCESS_RIGHTS_RESOLVED"));
 					this.DialogResult = DialogResult.Cancel;
 					this.Close();
 				}
@@ -47,14 +45,13 @@ namespace EAssistant
 				Session.Instance.SetUserInfo(user.id, user.privilege);
 
 				Logger.Instance.User = user.name;
-				Logger.Info(String.Format("dbDataSet.usersRow {0} login.", user.name));
 				this.DialogResult = DialogResult.OK;
 				this.Close();
 			}
 			else
 			{
 				Logger.Warning("Login failed, user: " + userName.Text + " password: " + password.Text);
-				message.Text = "Login failed.\nPlease check username and password.";
+				message.Text = Session.GetResStr("LI_LOGIN_FAILED");
 				password.Text = "";
 			}
 

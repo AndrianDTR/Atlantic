@@ -199,4 +199,28 @@
   <data name="warning" xml:space="preserve">
     <value>Попередження</value>
   </data>
+  <data name="AP_ADD_ERROR" xml:space="preserve">
+    <value>Оплату не зараховано.</value>
+  </data>
+  <data name="AP_INVALID_SUM_FORMAT" xml:space="preserve">
+    <value>Вкажіть суму у форматі 'XX{0}YY'.</value>
+  </data>
+  <data name="AP_SERVICE_NOT_SPECIFIED" xml:space="preserve">
+    <value>Не вказано тип послуги.</value>
+  </data>
+  <data name="CP_CHANGE_ERROR" xml:space="preserve">
+    <value>Пароль не змінено.</value>
+  </data>
+  <data name="CP_CHANGE_OK" xml:space="preserve">
+    <value>Пароль успішно змінено.</value>
+  </data>
+  <data name="CP_INVALID_CONFIRMATION" xml:space="preserve">
+    <value>Пароль та його підтвердження не співпадають.</value>
+  </data>
+  <data name="CP_OLD_IS_SAME" xml:space="preserve">
+    <value>Новий пароль повинен відрізнятися від поточного.</value>
+  </data>
+  <data name="CP_PASSW_IS_TO_SHORT" xml:space="preserve">
+    <value>Довжина паролю повинна бути не меншою за {0} символів.</value>
+  </data>
 </root>

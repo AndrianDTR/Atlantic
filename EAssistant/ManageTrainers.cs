@@ -87,7 +87,7 @@ namespace EAssistant
 			{
 				throw e.Exception;
 			}
-			catch (System.Data.NoNullAllowedException ex)
+			catch (System.Data.NoNullAllowedException)
 			{
 				String fmtMsg = Session.GetResStr("MISSING_FIELD");
 				UIMessages.Error(String.Format(fmtMsg

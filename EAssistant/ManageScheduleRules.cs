@@ -93,7 +93,16 @@ namespace EAssistant
 		private void OnError(object sender, DataGridViewDataErrorEventArgs e)
 		{
 			Logger.Enter();
-			UIMessages.Error(e.Exception.Message);
+			try
+			{
+				throw e.Exception;
+			}
+			catch (System.Data.NoNullAllowedException)
+			{
+				String fmtMsg = Session.GetResStr("MISSING_FIELD");
+				UIMessages.Error(String.Format(fmtMsg
+					, gridRules.Columns[e.ColumnIndex].HeaderText));
+			}
 			Logger.Leave();
 		}
 	}
