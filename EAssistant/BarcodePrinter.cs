@@ -62,10 +62,14 @@ table td, table th {
 					, m_Style
 					, (int)numericFontSize.Value);
 
-				for (int nRow = 0; nRow < nRows; nRow++)
+				Int32 nCode = 0;
+				Int32 nCount = 0;
+				Int32.TryParse(textBCodesCount.Text, out nCount);
+				
+				for (int nRow = 0; nRow < nRows && nCode < nCount; nRow++)
 				{
 					html += "<tr>";
-					for (int nCol = 0; nCol < nCols; nCol++)
+					for (int nCol = 0; nCol < nCols && nCode < nCount; nCol++)
 					{
 						html += "<td style=\"padding:4px;\">";
 						html += String.Format("{0}", Barcode.EAN13(GetCode(++nMaxClientId)).ToString());
@@ -117,6 +121,13 @@ table td, table th {
 		{
 			Logger.Enter();
 			Init();
+			Logger.Leave();
+		}
+
+		private void btnGetLastRegiseredBCode_Click(object sender, EventArgs e)
+		{
+			Logger.Enter();
+			textFirstBCode.Text = (GetMaxClientCode() + 1).ToString();
 			Logger.Leave();
 		}
 	}
