@@ -130,6 +130,12 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Тип послуги</value>
   </data>
+  <data name="textSum.Location" type="System.Drawing.Point, System.Drawing">
+    <value>431, 120</value>
+  </data>
+  <data name="Sum.Location" type="System.Drawing.Point, System.Drawing">
+    <value>364, 123</value>
+  </data>
   <data name="Sum.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 24</value>
   </data>
@@ -147,6 +153,38 @@
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Примітка</value>
+  </data>
+  <data name="textCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>139, 120</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="textCount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 6, 6</value>
+  </data>
+  <data name="textCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 29</value>
+  </data>
+  <data name="textCount.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 123</value>
+  </data>
+  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 0, 6, 0</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 24</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Кількість</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Оплата послуг</value>

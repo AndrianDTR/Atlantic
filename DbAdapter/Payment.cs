@@ -13,11 +13,16 @@ namespace AY
 			{
 				private void UpdateClientInfo(dbDataSet.clientsRow client)
 				{
+					Logger.Enter();
+					Logger.Info("Deprecated.");
+					/*
 					dbDataSet.scheduleRulesRow hoursAdd = Db.Instance.dSet.scheduleRules.FindByid(client.plan);
 					
 					client.hoursLeft += hoursAdd.hoursAdd;
 					
 					Db.Instance.AcceptChanges();
+					*/
+					Logger.Leave();
 				}
 			}
 		}

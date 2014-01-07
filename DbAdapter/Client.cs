@@ -40,16 +40,11 @@ namespace AY
 					}
 				}
 
-				public dbDataSet.trainersRow Trainer
-				{
-					get
-					{
-						return Db.Instance.dSet.trainers.FindByid(trainer);
-					}
-				}
-				
 				public void ProcessEnter()
 				{
+					Logger.Enter();
+					Logger.Info("Deprecated.");
+					/*
 					dbDataSet.scheduleRulesRow sr = Db.Instance.dSet.scheduleRules.FindByid(plan);
 					if(sr.Equals(null))
 					{
@@ -65,6 +60,8 @@ namespace AY
 						Logger.Error(String.Format("Statistic record could not be added. Client: {0}.", id));
 						return;
 					}
+					*/
+					Logger.Leave();
 				}
 			}
 		}

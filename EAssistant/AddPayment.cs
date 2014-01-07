@@ -89,19 +89,22 @@ namespace EAssistant
 				if (!ValidateForm())
 					break;
 
+				Int32 nCount = 1;
+				Int32.TryParse(textCount.Text, out nCount);
+				
 				dbDataSet.scheduleRulesRow sc = (dbDataSet.scheduleRulesRow)comboTypeOfService.SelectedItem;
 
 				int id = Db.Instance.Adapters.paymentsTableAdapter.Insert(m_ClientId
 					, sc.id
 					, Session.Instance.UserId
 					, DateTime.Now
-					, decimal.Parse(textSum.Text.Trim())
+					, Decimal.Parse(textSum.Text.Trim())
 					, textComment.Text);
 
 				dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(m_ClientId);
 				if (null != cr)
 				{
-					cr.hoursLeft += sc.hoursAdd;
+					cr.hoursLeft += sc.hoursAdd * nCount;
 					cr.plan = sc.id;
 				}
 
@@ -119,6 +122,43 @@ namespace EAssistant
 				this.Close();
 			} while (false);
 			Logger.Leave();
+		}
+
+		private void textCount_TextChanged(object sender, EventArgs e)
+		{
+			Logger.Enter();
+
+			do
+			{
+				Int32 nCount = 1;
+				if (!Int32.TryParse(textCount.Text, out nCount))
+				{
+					textSum.Text = "Count error";
+					break;
+				}
+
+				if (comboTypeOfService.SelectedIndex < 0)
+					break;
+
+				dbDataSet.scheduleRulesRow sr = (dbDataSet.scheduleRulesRow)comboTypeOfService.SelectedItem;
+				textSum.Text = (sr.price * nCount).ToString();
+			} while (false);
+
+			Logger.Leave();
+		}
+
+		private void ValidateNumbers(object sender, KeyPressEventArgs e)
+		{
+			//accept only numbers and back space.
+			if ((e.KeyChar < '0' || e.KeyChar > '9') && (e.KeyChar != '\b'))
+			{
+				UIMessages.Error("Only numbers are allowed.");
+				e.Handled = true;
+			}
+			else
+			{
+				e.Handled = false;
+			}
 		}
 	}
 }
