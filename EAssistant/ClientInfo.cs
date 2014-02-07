@@ -38,8 +38,7 @@ namespace EAssistant
 				textCode.Text = BarcodePrinter.GetCode(cr.id);
 				textName.Text = cr.name;
 				textPhone.Text = cr.phone;
-				dateSchedTime.Text = cr.scheduleTime.ToShortTimeString();
-
+				
 				foreach (dbDataSet.trainersRow it in comboTrainer.Items)
 				{
 					if (it.id == cr.trainer)

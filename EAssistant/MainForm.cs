@@ -719,14 +719,16 @@ namespace EAssistant
 						&& st.TimeOfDay.TotalMinutes + hd * 60 < ct.TotalMinutes)
 					{
 						int id = (int)row.Cells["colOTId"].Value;
-						dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(id);
-						if (null == cr)
+						int serviceId = 0;
+						dbDataSet.clientServicesDataTable csr 
+							= Db.Instance.Adapters.clientServicesTableAdapter.FindRowsByPKeys(id, serviceId);
+						if (csr.Rows.Count == 0)
 						{
 							continue;
 						}
-						cr.lastEnter = cd.Add(st.TimeOfDay);
-						cr.lastLeave = cd.Add(st.TimeOfDay.Add(new TimeSpan((int)hd, 0, 0)));
-						cr.ProcessEnter();
+						csr[0].lastEnter = cd.Add(st.TimeOfDay);
+						csr[0].lastLeave = cd.Add(st.TimeOfDay.Add(new TimeSpan((int)hd, 0, 0)));
+						//csr[0].ProcessEnter();
 					}
 				}
 

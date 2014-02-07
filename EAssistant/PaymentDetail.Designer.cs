@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaymentDetail));
 			this.label1 = new System.Windows.Forms.Label();
 			this.textDate = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
@@ -41,127 +42,157 @@
 			this.textComment = new System.Windows.Forms.TextBox();
 			this.label6 = new System.Windows.Forms.Label();
 			this.btnClose = new System.Windows.Forms.Button();
+			this.textCount = new System.Windows.Forms.TextBox();
+			this.label7 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// label1
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 9);
+			this.label1.AccessibleDescription = null;
+			this.label1.AccessibleName = null;
+			resources.ApplyResources(this.label1, "label1");
+			this.label1.Font = null;
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(30, 13);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Date";
 			// 
 			// textDate
 			// 
-			this.textDate.Location = new System.Drawing.Point(69, 6);
+			this.textDate.AccessibleDescription = null;
+			this.textDate.AccessibleName = null;
+			resources.ApplyResources(this.textDate, "textDate");
+			this.textDate.BackgroundImage = null;
+			this.textDate.Font = null;
 			this.textDate.Name = "textDate";
 			this.textDate.ReadOnly = true;
-			this.textDate.Size = new System.Drawing.Size(176, 20);
-			this.textDate.TabIndex = 0;
 			// 
 			// label2
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(290, 9);
+			this.label2.AccessibleDescription = null;
+			this.label2.AccessibleName = null;
+			resources.ApplyResources(this.label2, "label2");
+			this.label2.Font = null;
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(28, 13);
-			this.label2.TabIndex = 2;
-			this.label2.Text = "Sum";
 			// 
 			// textSum
 			// 
-			this.textSum.Location = new System.Drawing.Point(336, 6);
+			this.textSum.AccessibleDescription = null;
+			this.textSum.AccessibleName = null;
+			resources.ApplyResources(this.textSum, "textSum");
+			this.textSum.BackgroundImage = null;
+			this.textSum.Font = null;
 			this.textSum.Name = "textSum";
 			this.textSum.ReadOnly = true;
-			this.textSum.Size = new System.Drawing.Size(126, 20);
-			this.textSum.TabIndex = 1;
 			// 
 			// label3
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(12, 35);
+			this.label3.AccessibleDescription = null;
+			this.label3.AccessibleName = null;
+			resources.ApplyResources(this.label3, "label3");
+			this.label3.Font = null;
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(33, 13);
-			this.label3.TabIndex = 4;
-			this.label3.Text = "Client";
 			// 
 			// textClient
 			// 
-			this.textClient.Location = new System.Drawing.Point(69, 32);
+			this.textClient.AccessibleDescription = null;
+			this.textClient.AccessibleName = null;
+			resources.ApplyResources(this.textClient, "textClient");
+			this.textClient.BackgroundImage = null;
+			this.textClient.Font = null;
 			this.textClient.Name = "textClient";
 			this.textClient.ReadOnly = true;
-			this.textClient.Size = new System.Drawing.Size(176, 20);
-			this.textClient.TabIndex = 2;
 			// 
 			// textUser
 			// 
-			this.textUser.Location = new System.Drawing.Point(336, 35);
+			this.textUser.AccessibleDescription = null;
+			this.textUser.AccessibleName = null;
+			resources.ApplyResources(this.textUser, "textUser");
+			this.textUser.BackgroundImage = null;
+			this.textUser.Font = null;
 			this.textUser.Name = "textUser";
 			this.textUser.ReadOnly = true;
-			this.textUser.Size = new System.Drawing.Size(126, 20);
-			this.textUser.TabIndex = 3;
 			// 
 			// label4
 			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(290, 38);
+			this.label4.AccessibleDescription = null;
+			this.label4.AccessibleName = null;
+			resources.ApplyResources(this.label4, "label4");
+			this.label4.Font = null;
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(40, 13);
-			this.label4.TabIndex = 6;
-			this.label4.Text = "Add by";
 			// 
 			// textService
 			// 
-			this.textService.Location = new System.Drawing.Point(69, 58);
+			this.textService.AccessibleDescription = null;
+			this.textService.AccessibleName = null;
+			resources.ApplyResources(this.textService, "textService");
+			this.textService.BackgroundImage = null;
+			this.textService.Font = null;
 			this.textService.Name = "textService";
 			this.textService.ReadOnly = true;
-			this.textService.Size = new System.Drawing.Size(393, 20);
-			this.textService.TabIndex = 4;
 			// 
 			// label5
 			// 
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(12, 61);
+			this.label5.AccessibleDescription = null;
+			this.label5.AccessibleName = null;
+			resources.ApplyResources(this.label5, "label5");
+			this.label5.Font = null;
 			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(43, 13);
-			this.label5.TabIndex = 8;
-			this.label5.Text = "Service";
 			// 
 			// textComment
 			// 
-			this.textComment.Location = new System.Drawing.Point(69, 84);
-			this.textComment.Multiline = true;
+			this.textComment.AccessibleDescription = null;
+			this.textComment.AccessibleName = null;
+			resources.ApplyResources(this.textComment, "textComment");
+			this.textComment.BackgroundImage = null;
+			this.textComment.Font = null;
 			this.textComment.Name = "textComment";
 			this.textComment.ReadOnly = true;
-			this.textComment.Size = new System.Drawing.Size(393, 64);
-			this.textComment.TabIndex = 5;
 			// 
 			// label6
 			// 
-			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(12, 87);
+			this.label6.AccessibleDescription = null;
+			this.label6.AccessibleName = null;
+			resources.ApplyResources(this.label6, "label6");
+			this.label6.Font = null;
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(51, 13);
-			this.label6.TabIndex = 10;
-			this.label6.Text = "Comment";
 			// 
 			// btnClose
 			// 
+			this.btnClose.AccessibleDescription = null;
+			this.btnClose.AccessibleName = null;
+			resources.ApplyResources(this.btnClose, "btnClose");
+			this.btnClose.BackgroundImage = null;
 			this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnClose.Location = new System.Drawing.Point(387, 163);
+			this.btnClose.Font = null;
 			this.btnClose.Name = "btnClose";
-			this.btnClose.Size = new System.Drawing.Size(75, 23);
-			this.btnClose.TabIndex = 6;
-			this.btnClose.Text = "Close";
 			this.btnClose.UseVisualStyleBackColor = true;
+			// 
+			// textCount
+			// 
+			this.textCount.AccessibleDescription = null;
+			this.textCount.AccessibleName = null;
+			resources.ApplyResources(this.textCount, "textCount");
+			this.textCount.BackgroundImage = null;
+			this.textCount.Font = null;
+			this.textCount.Name = "textCount";
+			this.textCount.ReadOnly = true;
+			// 
+			// label7
+			// 
+			this.label7.AccessibleDescription = null;
+			this.label7.AccessibleName = null;
+			resources.ApplyResources(this.label7, "label7");
+			this.label7.Font = null;
+			this.label7.Name = "label7";
 			// 
 			// PaymentDetail
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AccessibleDescription = null;
+			this.AccessibleName = null;
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackgroundImage = null;
 			this.CancelButton = this.btnClose;
-			this.ClientSize = new System.Drawing.Size(474, 199);
+			this.Controls.Add(this.textCount);
+			this.Controls.Add(this.label7);
 			this.Controls.Add(this.btnClose);
 			this.Controls.Add(this.textComment);
 			this.Controls.Add(this.label6);
@@ -175,14 +206,14 @@
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.textDate);
 			this.Controls.Add(this.label1);
+			this.Font = null;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.Icon = null;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "PaymentDetail";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Payment Detail";
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -203,5 +234,7 @@
 		private System.Windows.Forms.TextBox textComment;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Button btnClose;
+		private System.Windows.Forms.TextBox textCount;
+		private System.Windows.Forms.Label label7;
 	}
 }

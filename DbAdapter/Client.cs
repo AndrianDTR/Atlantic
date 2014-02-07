@@ -25,7 +25,7 @@ namespace AY
 						
 						if(id == 0)
 							return res;
-							
+						/*	
 						String where = String.Format("clientId={0}", id);
 						Db.Instance.Adapters.paymentsTableAdapter.Fill(Db.Instance.dSet.payments);
 						DataRow[] data = Db.Instance.dSet.payments.Select(where, "date desc");
@@ -35,7 +35,7 @@ namespace AY
 							res[0] = data[0]["sum"].ToString();
 							res[1] = data[0]["date"].ToString();
 						}
-
+						*/
 						return res;
 					}
 				}

@@ -98,17 +98,34 @@ namespace EAssistant
 					, sc.id
 					, Session.Instance.UserId
 					, DateTime.Now
+					, nCount
 					, Decimal.Parse(textSum.Text.Trim())
 					, textComment.Text);
 
-				dbDataSet.clientsRow cr = Db.Instance.dSet.clients.FindByid(m_ClientId);
-				if (null != cr)
+				int serviceId = 0;
+				dbDataSet.clientServicesDataTable csDt = Db.Instance.Adapters.
+						clientServicesTableAdapter.FindRowsByPKeys(m_ClientId, sc.id);
+				if (csDt.Rows.Count == 0)
 				{
-					cr.hoursLeft += sc.hoursAdd * nCount;
-					cr.plan = sc.id;
+					 serviceId = Db.Instance.Adapters.
+						clientServicesTableAdapter.Insert(
+							  m_ClientId
+							, nCount * sc.hoursAdd
+							, sc.id
+							, "_______"
+							, DateTime.Now
+							, new DateTime()
+							, new DateTime()
+							, new DateTime()
+							, 0
+							);
 				}
-
-				if (id != 1 | null == cr)
+				else
+				{
+					csDt[0].hours = nCount * sc.hoursAdd;
+				}
+				
+				if (id != 1 || serviceId != 1)
 				{
 					UIMessages.Error(Session.GetResStr("AP_ADD_ERROR"));
 					break;

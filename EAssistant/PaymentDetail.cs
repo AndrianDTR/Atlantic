@@ -19,7 +19,8 @@ namespace EAssistant
 			textClient.Text = BarcodePrinter.GetCode(pr.clientId);
 			textComment.Text = pr.comment;
 			textSum.Text = pr.sum.ToString();
-			textService.Text = (Db.Instance.dSet.scheduleRules.FindByid(pr.scheduleId)).name;
+			textCount.Text = pr.count.ToString();
+			textService.Text = (Db.Instance.dSet.scheduleRules.FindByid(pr.serviceId)).name;
 			Logger.Leave();
 		}
 	}

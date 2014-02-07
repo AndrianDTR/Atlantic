@@ -127,6 +127,12 @@
     <Compile Include="ClientInfo.Designer.cs">
       <DependentUpon>ClientInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClientServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientServices.Designer.cs">
+      <DependentUpon>ClientServices.cs</DependentUpon>
+    </Compile>
     <Compile Include="DayView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -247,8 +253,20 @@
       <DependentUpon>ClientInfo.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ClientServices.resx">
+      <DependentUpon>ClientServices.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageClients.uk.resx">
+      <DependentUpon>ManageClients.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ManageTrainers.uk.resx">
       <DependentUpon>ManageTrainers.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PaymentDetail.uk.resx">
+      <DependentUpon>PaymentDetail.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Prompt.uk.resx">
@@ -494,7 +512,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_AssemblyInfoFilename="" />
+      <UserProperties BuildVersion_AssemblyInfoFilename="" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.Increment.None" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
